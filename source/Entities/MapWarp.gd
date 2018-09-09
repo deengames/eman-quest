@@ -1,9 +1,14 @@
 extends Node2D
 
+const SceneManagement = preload("res://Scripts/SceneManagement.gd")
+const EntranceImageXPositions = {
+	"Dungeon": 0,
+	"Cave": 64,
+	"Forest": 128
+}
+
 # Map destination sprite
 export var map_type = "" # eg. Forest
-
-var SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
@@ -14,12 +19,8 @@ func set_type(map_type):
 	self.map_type = map_type
 	$Sprite.visible = true
 	
-	if map_type == "Forest":
-		$Sprite.region_rect.position.x = 128
-	elif map_type == "Cave":
-		$Sprite.region_rect.position.x = 64
-	elif map_type == "Dungeon":
-		$Sprite.region_rect.position.x = 0
+	if map_type in EntranceImageXPositions.keys():
+		$Sprite.region_rect.position.x = EntranceImageXPositions[map_type]
 	else:
 		# Not sure what this is. Prolly transition from map => world
 		$Sprite.visible = false
