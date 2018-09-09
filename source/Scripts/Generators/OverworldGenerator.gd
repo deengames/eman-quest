@@ -81,16 +81,36 @@ func _create_lake(map, lake_coordinates):
 
 func _place_area_entrances(map):
 	var placed_areas = []
-	var coordinates = self._find_empty_coordinates(map.tile_data[0], placed_areas)
+	var ground_tiles = map.tile_data[0]
+	
+	var coordinates = self._find_empty_area(ground_tiles, placed_areas)
+	
 	placed_areas.append(coordinates)
 	map.transitions.append(MapDestination.new("Forest", Vector2(coordinates[0], coordinates[1])))
 
-func _find_empty_coordinates(tile_data, placed_areas):
+func _find_empty_area(tile_data, placed_areas):
 	var x = Globals.randint(PADDING_FROM_SIDES_OF_MAP, map_width - 1 - PADDING_FROM_SIDES_OF_MAP)
 	var y = Globals.randint(PADDING_FROM_SIDES_OF_MAP, map_height - 1 - PADDING_FROM_SIDES_OF_MAP)
 	
-	while tile_data.get(x, y) != "Grass" or placed_areas.find([x, y]) > -1:
+	while not self._is_area_around_tile_valid_and_empty(tile_data, placed_areas, x, y):
 		x = Globals.randint(PADDING_FROM_SIDES_OF_MAP, map_width - 1 - PADDING_FROM_SIDES_OF_MAP)
 		y = Globals.randint(PADDING_FROM_SIDES_OF_MAP, map_height - 1 - PADDING_FROM_SIDES_OF_MAP)
 	
 	return [x, y]
+	
+func _is_area_around_tile_valid_and_empty(tile_data, placed_areas, x, y):
+	return (_is_tile_valid_and_empty(tile_data, placed_areas, x - 1, y - 1) and
+		_is_tile_valid_and_empty(tile_data, placed_areas, x, y - 1) and
+		_is_tile_valid_and_empty(tile_data, placed_areas, x + 1, y - 1) and
+		_is_tile_valid_and_empty(tile_data, placed_areas, x + 1, y) and
+		_is_tile_valid_and_empty(tile_data, placed_areas, x + 1, y + 1) and
+		_is_tile_valid_and_empty(tile_data, placed_areas, x, y + 1) and
+		_is_tile_valid_and_empty(tile_data, placed_areas, x - 1, y + 1) and
+		_is_tile_valid_and_empty(tile_data, placed_areas, x - 1, y) and
+		_is_tile_valid_and_empty(tile_data, placed_areas, x, y))
+
+func _is_tile_valid_and_empty(tile_data, placed_areas, x, y):
+	# Don't be on the border of the map
+	var is_on_map = x > 0 and x < map_width - 1 and y > 0 and y < map_height - 1
+	var is_empty = tile_data.get(x, y) == "Grass" and placed_areas.find([x, y]) == -1
+	return  is_on_map and is_empty
