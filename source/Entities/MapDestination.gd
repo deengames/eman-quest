@@ -1,5 +1,6 @@
 extends Node
 
+# Data class
 var map_type = "" # eg. Forest
 var position # Vector2
 

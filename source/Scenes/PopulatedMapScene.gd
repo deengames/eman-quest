@@ -54,7 +54,7 @@ func _populate_tiles(tilemap_data, tilemap, tile_ids):
 func _add_transitions():
 	for destination in map.transitions:
 		var transition = MapWarp.instance()
-		transition.map_type = destination.map_type
+		transition.set_type(destination.map_type)
 		transition.position.x = destination.position.x * Globals.TILE_WIDTH
 		transition.position.y = destination.position.y * Globals.TILE_HEIGHT
 		self.add_child(transition)
