@@ -6,7 +6,7 @@ extends Node2D
 ####
 
 var entrance_position = []
-var transitions = {} # warps to other maps. map type => map coordinates
+var transitions = [] # warps to other maps. List of MapDestination instances.
 var generate_monsters_callback # funcref / callback to a method in the generator class
 var tiles_wide = 0
 var tiles_high = 0

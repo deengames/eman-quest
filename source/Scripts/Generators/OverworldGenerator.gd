@@ -1,6 +1,7 @@
 extends Node
 
 var AreaMap = preload("res://Scenes/AreaMap.gd")
+var MapDestination = preload("res://Entities/MapDestination.gd")
 var TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 
 # Don't place things N tiles from the edges of the map
@@ -82,8 +83,7 @@ func _place_area_entrances(map):
 	var placed_areas = []
 	var coordinates = self._find_empty_coordinates(map.tile_data[0], placed_areas)
 	placed_areas.append(coordinates)
-	print("Forest is at " + str(coordinates))
-	map.transitions["Forest"] = coordinates
+	map.transitions.append(MapDestination.new("Forest", Vector2(coordinates[0], coordinates[1])))
 
 func _find_empty_coordinates(tile_data, placed_areas):
 	var x = Globals.randint(PADDING_FROM_SIDES_OF_MAP, map_width - 1 - PADDING_FROM_SIDES_OF_MAP)

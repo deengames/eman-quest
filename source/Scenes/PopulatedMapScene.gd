@@ -52,12 +52,11 @@ func _populate_tiles(tilemap_data, tilemap, tile_ids):
 				tilemap.set_cell(x, y, tile_ids[tile_name])
 
 func _add_transitions():
-	for map_type in map.transitions.keys():
-		var map_coordinates = map.transitions[map_type]
+	for destination in map.transitions:
 		var transition = MapWarp.instance()
-		transition.map_type = map_type
-		transition.position.x = map_coordinates[0] * Globals.TILE_WIDTH
-		transition.position.y = map_coordinates[1] * Globals.TILE_HEIGHT
+		transition.map_type = destination.map_type
+		transition.position.x = destination.position.x * Globals.TILE_WIDTH
+		transition.position.y = destination.position.y * Globals.TILE_HEIGHT
 		self.add_child(transition)
 
 func _add_monsters():

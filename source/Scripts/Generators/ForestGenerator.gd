@@ -17,14 +17,17 @@ var map_width = 2 * Globals.WORLD_WIDTH_IN_TILES
 var map_height = 3 * Globals.WORLD_HEIGHT_IN_TILES
 
 var entrance_position = [map_width / 2, map_height - 1]
+
 var _clearings_coordinates = []
 var _tree_map = []
 
 func generate():
-	# Assemble a new AreaMap instance at runtime
 	var map = AreaMap.new("Forest", preload("res://Tilesets/Overworld.tres"), self.entrance_position, map_width, map_height, funcref(self, "generate_monsters"))
 
 	var tile_data = self._generate_forest()
+	# Move entrance up a few tiles so we don't spawn on the exit tile
+	entrance_position[1] -= 3
+	
 	for data in tile_data:
 		map.add_tile_data(data)
 	
