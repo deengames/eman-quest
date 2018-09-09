@@ -1,6 +1,7 @@
 extends Node
 
 var AreaMap = preload("res://Scenes/AreaMap.gd")
+var MapDestination = preload("res://Entities/MapDestination.gd")
 var TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 
 # Construct a path made up of N points
@@ -17,6 +18,7 @@ var map_width = 2 * Globals.WORLD_WIDTH_IN_TILES
 var map_height = 3 * Globals.WORLD_HEIGHT_IN_TILES
 
 var entrance_position = [map_width / 2, map_height - 1]
+var _back_exit = [map_width / 2, 0]
 
 var _clearings_coordinates = []
 var _tree_map = []
@@ -24,14 +26,17 @@ var _tree_map = []
 func generate():
 	var map = AreaMap.new("Forest", preload("res://Tilesets/Overworld.tres"), self.entrance_position, map_width, map_height, funcref(self, "generate_monsters"))
 
-	var tile_data = self._generate_forest()
-	# Move entrance up a few tiles so we don't spawn on the exit tile
-	entrance_position[1] -= 3
+	var tile_data = self._generate_forest()	
+	map.transitions = self._generate_transitions()
 	
 	for data in tile_data:
 		map.add_tile_data(data)
 	
 	self._tree_map = tile_data[1]
+	
+	# Move entrance up a few tiles so we don't spawn on the exit tile
+	entrance_position[1] -= 3
+	
 	return map
 
 func generate_monsters():
@@ -59,7 +64,7 @@ func _generate_forest():
 
 	var path_points = self._generate_paths(dirt_map, tree_map)
 	self._generate_clearings(path_points, dirt_map, tree_map)
-		
+	
 	return to_return
 
 func _generate_paths(dirt_map, tree_map):
@@ -90,10 +95,9 @@ func _generate_paths(dirt_map, tree_map):
 		to_generate -= 1
 	
 	# Back entrance/exit
-	var back_exit = [entrance_position[0], 0]
-	var back_exit_connector = [back_exit[0], offset_y_up] # symmetrical to front
+	var back_exit_connector = [self._back_exit[0], offset_y_up] # symmetrical to front
 	self._generate_path(path_points[-1], back_exit_connector, dirt_map, tree_map)
-	self._generate_path(back_exit_connector, back_exit, dirt_map, tree_map)
+	self._generate_path(back_exit_connector, self._back_exit, dirt_map, tree_map)
 	
 	# Connect to closest node
 	var closest_node = path_points[-1]
@@ -107,6 +111,12 @@ func _generate_paths(dirt_map, tree_map):
 	self._generate_path(back_exit_connector, closest_node, dirt_map, tree_map)
 	
 	return path_points
+
+func _generate_transitions():
+	var transitions = []
+	transitions.append(MapDestination.new("Overworld", Vector2(self.entrance_position[0], self.entrance_position[1])))
+	transitions.append(MapDestination.new("Overworld", Vector2(self._back_exit[0], self._back_exit[1])))
+	return transitions
 
 func _generate_path(point1, point2, dirt_map, tree_map):
 	var from_x = point1[0]
