@@ -15,6 +15,8 @@ var maps = {} # eg. "forest" => forest (AreaMap/data class) instance
 
 var current_map # AreaMap instance
 var current_map_scene # PopulatedMapScene instance
+ # Vector2. come back to these coordinates after leaving the current dungeon. 
+var overworld_position
 
 ### State to persist on area map after battles
 # TODO: move into a separate autoload?

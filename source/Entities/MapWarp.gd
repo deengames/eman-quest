@@ -8,7 +8,7 @@ const EntranceImageXPositions = {
 }
 
 # Map destination sprite
-export var map_type = "" # eg. Forest
+var map_type = "" # eg. Forest
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
@@ -27,4 +27,13 @@ func set_type(map_type):
 
 func _on_Area2D_body_entered(body):
 	if body == Globals.player:
+		# Leaving overworld? Come back one tile under the current tile.
+		if Globals.current_map.map_type == "Overworld":
+			Globals.overworld_position = Vector2(self.position.x, self.position.y + Globals.TILE_HEIGHT)
+			
 		SceneManagement.change_map_to(get_tree(), map_type)
+		
+		# Come back to the overworld? Restore coordinates.
+		if Globals.current_map.map_type == "Overworld" and Globals.overworld_position != null:
+			Globals.player.position = Globals.overworld_position
+			Globals.overworld_position = null
