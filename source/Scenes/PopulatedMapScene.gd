@@ -4,7 +4,7 @@ extends Node2D
 # A class that takes an AreaMap and generates the scene (tiles, enemies, etc.)
 ###
 
-var DungeonEntrance = preload("res://Entities/DungeonEntrance.tscn")
+var MapWarp = preload("res://Entities/MapWarp.tscn")
 const Player = preload("res://Entities/Player.tscn")
 const TilesetMapper = preload("res://Scripts/TilesetMapper.gd")
 
@@ -54,7 +54,7 @@ func _populate_tiles(tilemap_data, tilemap, tile_ids):
 func _add_transitions():
 	for map_type in map.transitions.keys():
 		var map_coordinates = map.transitions[map_type]
-		var transition = DungeonEntrance.instance()
+		var transition = MapWarp.instance()
 		transition.map_type = map_type
 		transition.position.x = map_coordinates[0] * Globals.TILE_WIDTH
 		transition.position.y = map_coordinates[1] * Globals.TILE_HEIGHT
