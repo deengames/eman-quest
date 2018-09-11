@@ -25,11 +25,11 @@ var frames = {
 const Actions = {
 	"attack": 0,
 	"critical": 64,
-	"defend": 128
+	"heal": 192
 }
 
 const AdvancedActions = {
-	"heal": 192,
+	"defend": 128,
 	"vampire": 320,
 	"bash": 384
 }

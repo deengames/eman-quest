@@ -52,7 +52,7 @@ func _on_AdvancedBattleButton_pressed():
 		}
 	};
 	
-	battle_scene.player = BattlePlayer.new(600, 50, 30, 8, 4)
+	battle_scene.player = BattlePlayer.new(600, 50, 30, 8, 5)
 	battle_scene.go_turbo()
 	
 	SceneManagement.change_scene_to(get_tree(), battle_scene)
