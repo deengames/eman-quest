@@ -4,12 +4,14 @@ const ActionButton = preload("res://Scenes/Battle/ActionButton.tscn")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 const MAX_MESSAGES = 12 # with wrap, 15 lines max, 10 -11is safe
-
+# Pick N tiles to get a bonus for consecutive picks
 
 var monster_data = {}
-var player = preload("res://Entities//BattlePlayer.gd").new()
 
+var player = preload("res://Entities//BattlePlayer.gd").new()
 var _action_resolver = preload("res://Scripts/Battle/ActionResolver.gd").new()
+var _consecutive_checker = preload("res://Scripts/Battle/ConsecutiveActionsChecker.gd").new()
+
 var _action_buttons = []
 var _history_messages = []
 var _size = [5, 5]
@@ -19,6 +21,8 @@ var _actions_picked = 0
 func _ready():
 	$MemoryGrid.initialize(_size[0], _size[1], _advanced_mode, self.player.num_pickable_tiles)
 	$MemoryGrid.connect("all_tiles_picked", self, "_show_turn_options")
+	$MemoryGrid.connect("tile_picked", self, "_check_for_consecutive_picks_bonus")
+	self._consecutive_checker.connect("picked_consecutives", self, "_consecutive_tiles_bonus")
 	$History.text = ""
 	self._update_health_displays()
 
@@ -26,6 +30,12 @@ func go_turbo():
 	# Advanced mode ENABLED.
 	self._size = [8, 6]
 	self._advanced_mode = true
+
+func _check_for_consecutive_picks_bonus(action):
+	self._consecutive_checker.action_picked(action)
+
+func _consecutive_tiles_bonus(action):
+	print("BONUS => " + action)
 
 func _show_turn_options(tiles_picked):
 	if len(tiles_picked) == 0:

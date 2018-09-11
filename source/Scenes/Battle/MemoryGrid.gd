@@ -10,6 +10,7 @@ var _shocked_turns_left = 0
 var _tiles_picked = []
 
 signal all_tiles_picked
+signal tile_picked
 
 func initialize(tiles_wide, tiles_high, _advanced_mode = false, num_pickable_tiles = 5):
 	self.tiles_wide = tiles_wide
@@ -63,6 +64,8 @@ func _on_tile_selected(tile):
 			self._picked_all_tiles()
 	else:
 		self._picked_all_tiles()
+		
+	self.emit_signal("tile_picked", tile.contents)
 
 func _picked_all_tiles():
 	for tile in self._all_tiles:

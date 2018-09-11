@@ -15,7 +15,7 @@ var num_actions = 0
 var _defense = 0
 var _times_defending = 0
 
-func _init(health = 60, strength = 5, defense = 3, num_pickable_tiles = 5, num_actions = 3):
+func _init(health = 60, strength = 7, defense = 5, num_pickable_tiles = 5, num_actions = 3):
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	self.current_health = health
