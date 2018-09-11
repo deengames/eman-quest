@@ -34,8 +34,8 @@ func heal(amount = 0):
 		self.current_health = self.max_health
 	return amount
 
-func defend():
-	self._times_defending += 1
+func defend(multiplier):
+	self._times_defending += 1 * floor(multiplier)
 
 func reset():
 	self._times_defending = 0

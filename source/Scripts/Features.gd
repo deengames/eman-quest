@@ -1,7 +1,7 @@
 extends Node
 
 const FEATURE_MAP = {
-	"consecutive_picks_battle_bonus": false
+	"consecutive_picks_battle_bonus": true
 }
 
 func is_enabled(feature_name):

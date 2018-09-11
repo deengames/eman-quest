@@ -5,6 +5,7 @@ const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 const MAX_MESSAGES = 12 # with wrap, 15 lines max, 10 -11is safe
 # Pick N tiles to get a bonus for consecutive picks
+const _MULTIPLIER_BONUS = 0.25 # 0.1 means, multipliers are 1.0x => 1.1x => 1.2x ...
 
 var monster_data = {}
 
@@ -17,6 +18,7 @@ var _history_messages = []
 var _size = [5, 5]
 var _advanced_mode = false
 var _actions_picked = 0
+var _multipliers = 0
 
 func _ready():
 	$MemoryGrid.initialize(_size[0], _size[1], _advanced_mode, self.player.num_pickable_tiles)
@@ -38,7 +40,9 @@ func _check_for_consecutive_picks_bonus(action):
 	self._consecutive_checker.action_picked(action)
 
 func _consecutive_tiles_bonus(action):
-	print("BONUS => " + action)
+	self._multipliers += 1
+	var multiplier_effect = 1 + (self._multipliers * self._MULTIPLIER_BONUS)
+	$MultiplierLabel.text = "Multiplier: " + str(multiplier_effect) + "x"
 
 func _show_turn_options(tiles_picked):
 	if len(tiles_picked) == 0:
@@ -58,7 +62,8 @@ func _show_turn_options(tiles_picked):
 		self._action_buttons.append(action_button)
 
 func _on_action(action_button):
-	var message = self._action_resolver.resolve(action_button.action, self.player, self.monster_data)
+	var multiplier_effect = 1 + (self._multipliers * self._MULTIPLIER_BONUS)
+	var message = self._action_resolver.resolve(action_button.action, self.player, self.monster_data, multiplier_effect)
 	self._add_message(message)
 	self._actions_picked += 1
 	
@@ -82,6 +87,10 @@ func _update_health_displays():
 
 func _finish_turn():
 	self._actions_picked = 0
+	self._multipliers = 0
+	$MultiplierLabel.text = "Multiplier: 1x"
+	self._consecutive_checker.reset()
+	
 	for action_button in self._action_buttons:
 		self.remove_child(action_button)
 		action_button.queue_free()

@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/fonts/Lato-Black.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Scenes/Battle/MemoryGrid.tscn" type="PackedScene" id=3]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=1]
 
 size = 24
 use_mipmaps = false
@@ -12,7 +12,7 @@ use_filter = false
 font_data = ExtResource( 2 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 
 size = 36
 use_mipmaps = false
@@ -20,7 +20,7 @@ use_filter = false
 font_data = ExtResource( 2 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 
 size = 72
 use_mipmaps = false
@@ -48,7 +48,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 text = "Status goes here."
 align = 2
 valign = 2
@@ -59,12 +59,38 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Grow Direction", "Hint", "Rect", "Size Flags", "Theme", "custom_fonts" ]
 
-[node name="MemoryGrid" parent="." index="1" instance=ExtResource( 3 )]
+[node name="MultiplierLabel" type="Label" parent="." index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 6.0
+margin_top = 533.0
+margin_right = 197.0
+margin_bottom = 563.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 1 )
+text = "Multiplier: 1.0x"
+valign = 2
+autowrap = true
+clip_text = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Anchor", "Grow Direction", "Hint", "Rect", "Size Flags", "Theme", "custom_fonts" ]
+
+[node name="MemoryGrid" parent="." index="2" instance=ExtResource( 3 )]
 
 position = Vector2( 59.1532, 102.265 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="YourHpLabel" type="Label" parent="." index="2"]
+[node name="YourHpLabel" type="Label" parent="." index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -80,14 +106,14 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Hero: 0"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Size Flags", "custom_fonts" ]
 
-[node name="EnemyHpLabel" type="Label" parent="." index="3"]
+[node name="EnemyHpLabel" type="Label" parent="." index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -103,14 +129,14 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Monster: 0"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Size Flags", "custom_fonts" ]
 
-[node name="VictoryButton" type="Button" parent="." index="4"]
+[node name="VictoryButton" type="Button" parent="." index="5"]
 
 visible = false
 anchor_left = 0.0
@@ -128,7 +154,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null

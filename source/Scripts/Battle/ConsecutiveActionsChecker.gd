@@ -14,3 +14,6 @@ func action_picked(action):
 	
 		# all picks match
 		self.emit_signal("picked_consecutives", action)
+
+func reset():
+	self._actions_picked = []
