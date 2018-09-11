@@ -22,7 +22,10 @@ func _ready():
 	$MemoryGrid.initialize(_size[0], _size[1], _advanced_mode, self.player.num_pickable_tiles)
 	$MemoryGrid.connect("all_tiles_picked", self, "_show_turn_options")
 	$MemoryGrid.connect("tile_picked", self, "_check_for_consecutive_picks_bonus")
-	self._consecutive_checker.connect("picked_consecutives", self, "_consecutive_tiles_bonus")
+	
+	if Features.is_enabled("consecutive_picks_battle_bonus"):
+		self._consecutive_checker.connect("picked_consecutives", self, "_consecutive_tiles_bonus")
+		
 	$History.text = ""
 	self._update_health_displays()
 
