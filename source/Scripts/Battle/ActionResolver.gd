@@ -8,7 +8,8 @@ func _ready():
 
 # player actions
 func resolve(action, player, monster_data, multiplier):
-	if player.detract_energy(action):
+	if not Features.is_enabled("actions require energy") or (
+		Features.is_enabled("actions require energy") and player.detract_energy(action)):
 		# We had enough energy to do this action
 		if action == "attack":
 			var damage = player.strength - monster_data["defense"]

@@ -62,7 +62,7 @@ func _create_tiles(advanced_mode):
 			self._all_tiles.append(tile)
 
 func _generate_energy_tiles():
-	if Features.is_enabled("actions_require_energy"):
+	if Features.is_enabled("actions require energy"):
 		var num_tiles = ceil(_ENERGY_TILES_PERCENT * self.tiles_wide * self.tiles_high)
 		while num_tiles > 0:
 			var tx = randi() % self.tiles_wide

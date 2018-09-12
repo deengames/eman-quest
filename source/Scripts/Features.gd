@@ -1,8 +1,8 @@
 extends Node
 
 const FEATURE_MAP = {
-	"consecutive_picks_battle_bonus": true,
-	"actions_require_energy": true
+	"consecutive picks battle bonus": true,
+	"actions require energy": true
 }
 
 func is_enabled(feature_name):

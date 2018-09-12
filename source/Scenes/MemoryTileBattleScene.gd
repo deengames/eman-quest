@@ -25,9 +25,12 @@ func _ready():
 	$MemoryGrid.connect("all_tiles_picked", self, "_show_turn_options")
 	$MemoryGrid.connect("tile_picked", self, "_check_for_consecutive_picks_bonus")
 	
-	if Features.is_enabled("consecutive_picks_battle_bonus"):
+	if Features.is_enabled("consecutive picks battle bonus"):
 		self._consecutive_checker.connect("picked_consecutives", self, "_consecutive_tiles_bonus")
-		
+	
+	if not Features.is_enabled("actions require energy"):
+		$EnergyControls.visible = false
+	
 	$History.text = ""
 	self._update_health_displays()
 
@@ -87,8 +90,8 @@ func _on_action(action_button):
 func _update_health_displays():
 	$YourHpLabel.text = "Hero: " + str(self.player.current_health)
 	$EnemyHpLabel.text = self.monster_data["type"] + ": " + str(self.monster_data["health"])
-	$EnergyLabel.text = str(self.player.energy)
-	$EnergyBar.value = round(100 * self.player.energy / self.player.max_energy)
+	$EnergyControls/EnergyLabel.text = str(self.player	.energy)
+	$EnergyControls/EnergyBar.value = round(100 * self.player.energy / self.player.max_energy)
 
 func _finish_turn():
 	self._actions_picked = 0
