@@ -55,7 +55,7 @@ func _show_turn_options(tiles_picked):
 		self.add_child(action_button)
 		
 		action_button.position.x = $MemoryGrid.position.x + (80 * len(self._action_buttons))
-		action_button.position.y = $MemoryGrid.position.y + 16 + ($MemoryGrid.tiles_high * 64)
+		action_button.position.y = $MemoryGrid.position.y + ($MemoryGrid.tiles_high * 64)
 		
 		action_button.connect("action_selected", self, "_on_action")
 		
@@ -148,3 +148,7 @@ func _add_message(message):
 	
 	for message in self._history_messages:
 		$History.text += message + "\n"
+
+func _on_EndTurnButton_pressed():
+	self._finish_turn()
+	

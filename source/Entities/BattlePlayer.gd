@@ -4,7 +4,7 @@ signal died
 
 const HEAL_PERCENT = 0.2 # 0.2 = 20%
 const DEFEND_MULTIPLIER = 1.5 # 1.5 => defend multiplies defense by 1.5x per action
-const _ENERGY_PER_TURN = 1
+const _ENERGY_PER_TURN = 3
 const ENERGY_GAIN_PER_ACTION = 2
 
 const _ACTION_ENERGY_COST = {
