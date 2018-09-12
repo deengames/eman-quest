@@ -64,26 +64,31 @@ func _show_turn_options(tiles_picked):
 func _on_action(action_button):
 	var multiplier_effect = 1 + (self._multipliers * self._MULTIPLIER_BONUS)
 	var message = self._action_resolver.resolve(action_button.action, self.player, self.monster_data, multiplier_effect)
-	self._add_message(message)
-	self._actions_picked += 1
-	
-	self._update_health_displays()
-	
-	if self.monster_data["health"] <= 0:
-		self._show_battle_end(true)
-	
-	var index = self._action_buttons.find(action_button)
-	if index > -1: # guaranteed
-		self._action_buttons.remove(index)
-	self.remove_child(action_button)
-	action_button.queue_free()
-	
-	if len(self._action_buttons) == 0 or self._actions_picked == self.player.num_actions:
-		self._finish_turn()
-	
+	if message != null:
+		# Action went through. Had enough energy.
+		self._add_message(message)
+		self._actions_picked += 1
+		
+		self._update_health_displays()
+		
+		if self.monster_data["health"] <= 0:
+			self._show_battle_end(true)
+		
+		var index = self._action_buttons.find(action_button)
+		if index > -1: # guaranteed
+			self._action_buttons.remove(index)
+		self.remove_child(action_button)
+		action_button.queue_free()
+		
+		if len(self._action_buttons) == 0 or self._actions_picked == self.player.num_actions:
+			self._finish_turn()
+
+# health and energy
 func _update_health_displays():
 	$YourHpLabel.text = "Hero: " + str(self.player.current_health)
 	$EnemyHpLabel.text = self.monster_data["type"] + ": " + str(self.monster_data["health"])
+	$EnergyLabel.text = str(self.player.energy)
+	$EnergyBar.value = round(100 * self.player.energy / self.player.max_energy)
 
 func _finish_turn():
 	self._actions_picked = 0

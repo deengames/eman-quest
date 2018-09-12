@@ -1,5 +1,6 @@
 extends Node
 
+const BattlePlayer = preload("res://Entities/BattlePlayer.gd")
 const SHOCK_TURNS = 2
 
 func _ready():
@@ -7,35 +8,39 @@ func _ready():
 
 # player actions
 func resolve(action, player, monster_data, multiplier):
-	if action == "attack":
-		var damage = player.strength - monster_data["defense"]
-		damage = ceil(damage * multiplier)
-		monster_data["health"] -= damage
-		return "Hero attacks for " + str(damage) + " damage!"
-	elif action == "critical":
-		var damage = floor(1.5 * player.strength) - monster_data["defense"]
-		damage = ceil(damage * multiplier)
-		monster_data["health"] -= damage
-		return "CRITICAL hit for " + str(damage) + "!!!"
-	elif action == "heal":
-		var heal_amount = player.heal()
-		heal_amount = ceil(heal_amount * multiplier)
-		return "Healed " + str(heal_amount) + " health!"
-	elif action == "defend":
-		player.defend(multiplier)
-		return "Hero double-downs on defense!"
-	elif action == "vampire":
-		var damage = player.strength # ignores defense
-		damage = ceil(damage * multiplier)
-		monster_data["health"] -= damage
-		player.heal(damage)
-		return "Hero hits/absorbs " + str(damage) + "!"
-	elif action == "bash":
-		monster_data["next_round_turns"] -= 1
-		var damage = (player.strength * 2) - monster_data["defense"]
-		damage = ceil(damage * multiplier)
-		monster_data["health"] -= damage
-		return "Hero bashes for " + str(damage) + "!\nMonster loses a turn!"
+	if player.detract_energy(action):
+		# We had enough energy to do this action
+		if action == "attack":
+			var damage = player.strength - monster_data["defense"]
+			damage = ceil(damage * multiplier)
+			monster_data["health"] -= damage
+			return "Hero attacks for " + str(damage) + " damage!"
+		elif action == "critical":
+			var damage = floor(1.5 * player.strength) - monster_data["defense"]
+			damage = ceil(damage * multiplier)
+			monster_data["health"] -= damage
+			return "CRITICAL hit for " + str(damage) + "!!!"
+		elif action == "heal":
+			var heal_amount = player.heal()
+			heal_amount = ceil(heal_amount * multiplier)
+			return "Healed " + str(heal_amount) + " health!"
+		elif action == "defend":
+			player.defend(multiplier)
+			return "Hero double-downs on defense!"
+		elif action == "vampire":
+			var damage = player.strength # ignores defense
+			damage = ceil(damage * multiplier)
+			monster_data["health"] -= damage
+			player.heal(damage)
+			return "Hero hits/absorbs " + str(damage) + "!"
+		elif action == "bash":
+			monster_data["next_round_turns"] -= 1
+			var damage = (player.strength * 2) - monster_data["defense"]
+			damage = ceil(damage * multiplier)
+			monster_data["health"] -= damage
+			return "Hero bashes for " + str(damage) + "!\nMonster loses a turn!"
+		elif action == "energy":
+			return "Gained " + str(BattlePlayer.ENERGY_GAIN_PER_ACTION) + " energy!"
 		
 func monster_attacks(monster_data, player, memory_grid):
 	

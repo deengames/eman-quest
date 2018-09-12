@@ -6,10 +6,13 @@ var action = ""
 
 func initialize(action):
 	self.action = action
-	if action in GridTile.Actions.keys():
-		$Sprite.region_rect.position.x = GridTile.Actions[action]
+	if action == "energy":
+		$Sprite.region_rect.position.x = GridTile.ENERGY_X
 	else:
-		$Sprite.region_rect.position.x = GridTile.AdvancedActions[action]
+		if action in GridTile.Actions.keys():
+			$Sprite.region_rect.position.x = GridTile.Actions[action]
+		else:
+			$Sprite.region_rect.position.x = GridTile.AdvancedActions[action]
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
