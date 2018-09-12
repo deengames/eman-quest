@@ -140,6 +140,7 @@ func _show_battle_end(is_victory):
 		button.queue_free()
 	if not is_victory:
 		$VictoryButton.text = "Defeat!"
+	$EnergyControls.queue_free()
 
 func _add_message(message):
 	$History.text = ""
