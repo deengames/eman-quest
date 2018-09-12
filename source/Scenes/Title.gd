@@ -37,9 +37,9 @@ func _on_AdvancedBattleButton_pressed():
 	
 	battle_scene.monster_data = {
 		"type": "Volture",
-		"health": 450,
-		"strength": 80,
-		"defense": 40,
+		"health": 300,
+		"strength": 50,
+		"defense": 20,
 		"turns": 3,
 		"next_round_turns": 3,
 		
