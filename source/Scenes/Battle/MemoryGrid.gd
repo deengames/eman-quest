@@ -62,14 +62,15 @@ func _create_tiles(advanced_mode):
 			self._all_tiles.append(tile)
 
 func _generate_energy_tiles():
-	var num_tiles = ceil(_ENERGY_TILES_PERCENT * self.tiles_wide * self.tiles_high)
-	while num_tiles > 0:
-		var tx = randi() % self.tiles_wide
-		var ty = randi() % self.tiles_high
-		var tile = self._all_tiles[(ty * self.tiles_wide) + tx]
-		if tile.contents != "energy":
-			tile.convert_to_energy()
-			num_tiles -= 1
+	if Features.is_enabled("actions_require_energy"):
+		var num_tiles = ceil(_ENERGY_TILES_PERCENT * self.tiles_wide * self.tiles_high)
+		while num_tiles > 0:
+			var tx = randi() % self.tiles_wide
+			var ty = randi() % self.tiles_high
+			var tile = self._all_tiles[(ty * self.tiles_wide) + tx]
+			if tile.contents != "energy":
+				tile.convert_to_energy()
+				num_tiles -= 1
 
 func _on_tile_selected(tile):
 	if tile.contents != "wrong":
