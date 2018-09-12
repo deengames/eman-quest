@@ -1,7 +1,9 @@
 extends Node2D
 
 const SHOW_TIME_MILLISECONDS = 1500 # 1000 = 1s
-const WRONG_ACTION_PROBABILITY = 0.5 # 0.5 = 50%
+const WRONG_ACTION_PROBABILITY = 0.4 # 0.5 = 50% probability
+const _ENERGY_X = 448
+
 signal tile_selected
 
 var created_on = 0
@@ -61,7 +63,11 @@ func reset():
 	$Cover.region_rect.position.x = self.frames["open"]
 	self._pick_contents()
 	self._show_contents()
-	
+
+func convert_to_energy():
+	self.contents = "energy"
+	$Contents.region_rect.position.x = _ENERGY_X
+
 func _pick_contents():
 	if randf() <= WRONG_ACTION_PROBABILITY:
 		self.contents = "wrong"
