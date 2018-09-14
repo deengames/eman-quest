@@ -1,6 +1,6 @@
 extends Node
 
-var AreaMap = preload("res://Scenes/AreaMap.gd")
+var AreaMap = preload("res://Entities/AreaMap.gd")
 var MapDestination = preload("res://Entities/MapDestination.gd")
 var TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 

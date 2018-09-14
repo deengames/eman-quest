@@ -12,7 +12,7 @@ var map # area map
 var _monsters = {} # Type => pixel coordinates of actual monster scenes/entities
 var _restoring_state = false # restoring to previous state after battle
 
-func _init(map):
+func initialize(map):
 	self.map = map
 
 func _ready():

@@ -1,11 +1,12 @@
 extends Node
 
-const PopulatedMapScene = preload("res://Scenes/PopulatedMapScene.gd")
+const PopulatedMapScene = preload("res://Scenes/PopulatedMapScene.tscn")
 
 static func change_map_to(tree, map_type):
 	# Create map instance
 	var map_data = Globals.maps[map_type]
-	var populated_map = PopulatedMapScene.new(map_data)
+	var populated_map = PopulatedMapScene.instance()
+	populated_map.initialize(map_data)
 	
 	change_scene_to(tree, populated_map)
 	
