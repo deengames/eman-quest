@@ -1,15 +1,18 @@
 extends Node2D
 
+const PlayerData = preload("res://Entities/PlayerData.gd")
+
 const TILE_WIDTH = 64
 const TILE_HEIGHT = 64
 const WORLD_WIDTH_IN_TILES = 30 # 1920/64
 const WORLD_HEIGHT_IN_TILES = 17 # 1080/64
 
-var player
+var player # current player instance. Used for collision detection mostly.
 
 ####
 # Start: persist to save game. Set in world generator.
 var maps = {} # eg. "forest" => forest (AreaMap/data class) instance
+var player_data = PlayerData.new() # the actual player data.
 # End: persist
 ####
 

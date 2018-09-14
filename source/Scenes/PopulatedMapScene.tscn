@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/PopulatedMapScene.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/UI.gd" type="Script" id=2]
 
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -13,8 +14,9 @@ offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+script = ExtResource( 2 )
 
-[node name="Button" type="Button" parent="UI" index="0"]
+[node name="StatsButton" type="Button" parent="UI" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -39,5 +41,7 @@ text = "Stats"
 flat = false
 align = 1
 _sections_unfolded = [ "Margin" ]
+
+[connection signal="pressed" from="UI/StatsButton" to="UI" method="_on_StatsButton_pressed"]
 
 
