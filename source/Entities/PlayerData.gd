@@ -7,6 +7,13 @@ extends Node
 
 var level = 1
 var experience_points = 0
+var health = 10 # 60
+var strength = 7
+var defense = 5
+var num_pickable_tiles = 5
+var num_actions = 3
+var max_energy = 20
+
 
 func _ready():
 	# Called when the node is added to the scene for the first time.

@@ -29,16 +29,17 @@ var num_actions = 0
 var _defense = 0
 var _times_defending = 0
 
-func _init(health = 60, strength = 7, defense = 5, num_pickable_tiles = 5, num_actions = 3, max_energy = 20):
+func _init():
+	var player_data = Globals.player_data
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
-	self.current_health = health
-	self.strength = strength
-	self._defense = defense
+	self.current_health = player_data.health
+	self.strength = player_data.strength
+	self._defense = player_data.defense
 	self.max_health = self.current_health
-	self.num_pickable_tiles = num_pickable_tiles
-	self.num_actions = num_actions
-	self.max_energy = max_energy
+	self.num_pickable_tiles = player_data.num_pickable_tiles
+	self.num_actions = player_data.num_actions
+	self.max_energy = player_data.max_energy
 
 func heal(amount = 0):
 	if amount == 0:
