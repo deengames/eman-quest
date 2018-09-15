@@ -7,7 +7,7 @@ extends Node
 
 var level = 1
 var experience_points = 0
-var health = 10 # 60
+var health = 60
 var strength = 7
 var defense = 5
 var num_pickable_tiles = 5
