@@ -13,7 +13,11 @@ func _ready():
 	# Initialization here
 	pass
 
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+func gain_xp(xp):
+	var old_xp = self.experience_points
+	self.experience_points += xp
+	# TODO: Detect and note level up
+
+func get_next_level_xp():
+	# TODO: real formula please. Currently, 1000, 2000, 3000, ...
+	return 1000 * (ceil(self.experience_points / 1000) + 1)

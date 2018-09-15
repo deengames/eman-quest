@@ -54,7 +54,8 @@ func _consecutive_tiles_bonus(action):
 func _show_turn_options(tiles_picked):
 	if len(tiles_picked) == 0:
 		tiles_picked.append("attack")
-		tiles_picked.append("defend")
+		tiles_picked.append("energy")
+		tiles_picked.append("energy")
 	
 	for tile in tiles_picked:
 		var action_button = ActionButton.instance()
@@ -127,7 +128,7 @@ func _finish_turn():
 func _show_battle_end(is_victory):
 	$MemoryGrid.visible = false
 	Globals.won_battle = is_victory
-	self._add_message("Hero vanquished the monster!")
+	self._add_message("Hero vanquished the " + self._monster_data["type"] + "!")
 	
 	for button in self._action_buttons:
 		self.remove_child(button)
@@ -136,6 +137,7 @@ func _show_battle_end(is_victory):
 	$EnergyControls.queue_free()
 	
 	var battle_results = BattleResultsWindow.instance()
+	battle_results.initialize(self._monster_data)
 	self.add_child(battle_results)
 	battle_results.popup_centered()
 

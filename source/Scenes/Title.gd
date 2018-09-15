@@ -20,7 +20,7 @@ func _on_simplebattle_button_pressed():
 	"strength": 10,
 	"defense": 4,
 	"turns": 1,
-	
+	"experience points": 10,
 	"skill_probability": 40, # 40 = 40%
 	"skills": {
 		# These should add up to 100
@@ -40,7 +40,7 @@ func _on_AdvancedBattleButton_pressed():
 		"strength": 50,
 		"defense": 20,
 		"turns": 3,
-		
+		"experience points": 100,
 		"skill_probability": 60,
 		"skills": {
 			# These should add up to 100

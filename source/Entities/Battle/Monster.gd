@@ -6,13 +6,14 @@ const MemoryTileBattleScene = preload("res://Scenes/Battle/MemoryTileBattleScene
 const MOVE_SPEED = 100
 const CHANGE_DESTINATION_EVERY_N_SECONDS = 1
 
-# TODO: class?
+# TODO: class? Or, dictionary of name => data?
 const data = {
 	"type": "Slime",
 	"health": 30,
 	"strength": 10,
 	"defense": 4,
 	"turns": 1,
+	"experience points": 10,
 	
 	"skill_probability": 40, # 40 = 40%
 	"skills": {
@@ -60,5 +61,5 @@ func _on_Area2D_body_entered(body):
 		Globals.current_monster = [self.position.x, self.position.y]
 		
 		var battle_scene = MemoryTileBattleScene.instance()
-		battle_scene.set_monster_data(self.data)
+		battle_scene.set_monster_data(self.data.duplicate())
 		SceneManagement.change_scene_to(get_tree(), battle_scene)
