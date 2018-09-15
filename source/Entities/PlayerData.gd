@@ -5,6 +5,10 @@ extends Node
 # Anything persisted here is saved in save-games.
 ###
 
+const _STATS_POINTS_TO_RAISE_ENERGY = 5
+const _STATS_POINTS_TO_RAISE_PICKED_TILES = 10
+const _STATS_POINTS_TO_RAISE_ACTIONS = 20
+
 var level = 1
 var experience_points = 0
 var health = 60
@@ -14,6 +18,16 @@ var num_pickable_tiles = 5
 var num_actions = 3
 var max_energy = 20
 
+var unassigned_stats_points = 0
+
+var assigned_points = {
+	"health": 0,
+	"strength": 0,
+	"defense": 0,
+	"energy": 0, # require 3-5 points to raise it by 1
+	"num_pickable_tiles": 0, # require, say, 10 points to raise it by 1
+	"num_actions": 0 # require, say, 25 points to raise it by 1
+}
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
