@@ -25,19 +25,19 @@ func _move_to_keyboard():
 	var new_facing = self.previously_facing
 	var pressed_key = false
 	
-	if Input.is_key_pressed(KEY_RIGHT):
+	if Input.is_key_pressed(KEY_RIGHT) or Input.is_key_pressed(KEY_D):
 		velocity.x = 1
 		new_facing = "Right"
 		pressed_key = true
-	elif Input.is_key_pressed(KEY_LEFT):
+	elif Input.is_key_pressed(KEY_LEFT) or Input.is_key_pressed(KEY_A):
 		velocity.x = -1
 		new_facing = "Left"
 		pressed_key = true	
-	if Input.is_key_pressed(KEY_UP):
+	if Input.is_key_pressed(KEY_UP) or Input.is_key_pressed(KEY_W):
 		velocity.y = -1
 		new_facing = "Up"
 		pressed_key = true
-	elif Input.is_key_pressed(KEY_DOWN):
+	elif Input.is_key_pressed(KEY_DOWN) or Input.is_key_pressed(KEY_S):
 		velocity.y = 1
 		new_facing = "Down"
 		pressed_key = true
