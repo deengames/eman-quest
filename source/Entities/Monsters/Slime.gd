@@ -60,6 +60,5 @@ func _on_Area2D_body_entered(body):
 		Globals.current_monster = [self.position.x, self.position.y]
 		
 		var battle_scene = MemoryTileBattleScene.instance()
-		battle_scene.monster_data = self.data
-		battle_scene.monster_data["next_round_turns"] = battle_scene.monster_data["turns"]
+		battle_scene.set_monster_data(self.data)
 		SceneManagement.change_scene_to(get_tree(), battle_scene)

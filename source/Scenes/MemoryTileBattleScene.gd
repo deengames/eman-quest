@@ -7,7 +7,7 @@ const MAX_MESSAGES = 12 # with wrap, 15 lines max, 10 -11is safe
 # Pick N tiles to get a bonus for consecutive picks
 const _MULTIPLIER_BONUS = 0.25 # 0.1 means, multipliers are 1.0x => 1.1x => 1.2x ...
 
-var monster_data = {}
+var _monster_data = {}
 
 var player = preload("res://Entities//BattlePlayer.gd").new()
 var _action_resolver = preload("res://Scripts/Battle/ActionResolver.gd").new()
@@ -33,6 +33,10 @@ func _ready():
 	
 	$History.text = ""
 	self._update_health_displays()
+
+func set_monster_data(data):
+	self._monster_data = data
+	self._monster_data["next_round_turns"] = data["turns"]
 
 func go_turbo():
 	# Advanced mode ENABLED.
@@ -66,7 +70,7 @@ func _show_turn_options(tiles_picked):
 
 func _on_action(action_button):
 	var multiplier_effect = 1 + (self._multipliers * self._MULTIPLIER_BONUS)
-	var message = self._action_resolver.resolve(action_button.action, self.player, self.monster_data, multiplier_effect)
+	var message = self._action_resolver.resolve(action_button.action, self.player, self._monster_data, multiplier_effect)
 	if message != null:
 		# Action went through. Had enough energy.
 		self._add_message(message)
@@ -74,7 +78,7 @@ func _on_action(action_button):
 		
 		self._update_health_displays()
 		
-		if self.monster_data["health"] <= 0:
+		if self._monster_data["health"] <= 0:
 			self._show_battle_end(true)
 		
 		var index = self._action_buttons.find(action_button)
@@ -89,7 +93,7 @@ func _on_action(action_button):
 # health and energy
 func _update_health_displays():
 	$YourHpLabel.text = "Hero: " + str(self.player.current_health)
-	$EnemyHpLabel.text = self.monster_data["type"] + ": " + str(self.monster_data["health"])
+	$EnemyHpLabel.text = self._monster_data["type"] + ": " + str(self._monster_data["health"])
 	$EnergyControls/EnergyLabel.text = str(self.player	.energy)
 	$EnergyControls/EnergyBar.value = round(100 * self.player.energy / self.player.max_energy)
 
@@ -105,11 +109,11 @@ func _finish_turn():
 		
 	self._action_buttons = []
 	
-	for n in range(self.monster_data["next_round_turns"]):
-		var message = self._action_resolver.monster_attacks(self.monster_data, self.player, $MemoryGrid)
+	for n in range(self._monster_data["next_round_turns"]):
+		var message = self._action_resolver.monster_attacks(self._monster_data, self.player, $MemoryGrid)
 		self._add_message(message)
 	
-	self.monster_data["next_round_turns"] = self.monster_data["turns"]
+	self._monster_data["next_round_turns"] = self._monster_data["turns"]
 	
 	if self.player.current_health <= 0:
 		self._add_message("Hero dies!")
