@@ -19,5 +19,5 @@ func gain_xp(xp):
 	# TODO: Detect and note level up
 
 func get_next_level_xp():
-	# TODO: real formula please. Currently, 1000, 2000, 3000, ...
-	return 1000 * (ceil(self.experience_points / 1000) + 1)
+	# Doubles every level. 50, 100, 200, 400, ...
+	return pow(2, (level - 2)) * 100
