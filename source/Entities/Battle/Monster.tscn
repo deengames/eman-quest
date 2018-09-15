@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Entities/Monsters/Slime.gd" type="Script" id=1]
+[ext_resource path="res://Entities/Battle/Monster.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/monsters/slime.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -15,10 +15,6 @@ collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
-type = "Slime"
-health = 20
-strength = 10
-defense = 3
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 

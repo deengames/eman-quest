@@ -1,6 +1,6 @@
 extends Node
 
-const BattlePlayer = preload("res://Entities/BattlePlayer.gd")
+const BattlePlayer = preload("res://Entities/Battle/BattlePlayer.gd")
 const SHOCK_TURNS = 2
 
 func _ready():

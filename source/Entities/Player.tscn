@@ -9,7 +9,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 32, 16 )
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[node name="KinematicBody2D" type="KinematicBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 1
@@ -60,6 +60,6 @@ _sections_unfolded = [ "Transform", "Z Index" ]
 [node name="MoveToKeyboardComponent" type="Node2D" parent="." index="3"]
 
 script = ExtResource( 3 )
-speed = 400
+speed = 200
 
 

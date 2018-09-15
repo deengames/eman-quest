@@ -5,6 +5,7 @@ extends Node2D
 ###
 
 var MapWarp = preload("res://Entities/MapWarp.tscn")
+var Monster = preload("res://Entities/Battle/Monster.tscn")
 const Player = preload("res://Entities/Player.tscn")
 const TilesetMapper = preload("res://Scripts/TilesetMapper.gd")
 
@@ -78,13 +79,12 @@ func _add_monsters():
 		monster_data = map.generate_monsters()
 	
 	self._monsters = {}
-	for monster_type in monster_data.keys():
-		var class_type = load("res://Entities/Monsters/" + monster_type + ".tscn")
+	for monster_type in monster_data.keys():		
 		var coordinate_pairs = monster_data[monster_type]
 		var monsters = []
 		
 		for coordinates in coordinate_pairs:
-			var instance = class_type.instance()
+			var instance = Monster.instance()
 			instance.position.x = coordinates[0]
 			instance.position.y = coordinates[1]
 			self.add_child(instance)

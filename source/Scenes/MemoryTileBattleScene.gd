@@ -9,7 +9,7 @@ const _MULTIPLIER_BONUS = 0.25 # 0.1 means, multipliers are 1.0x => 1.1x => 1.2x
 
 var _monster_data = {}
 
-var player = preload("res://Entities//BattlePlayer.gd").new()
+var player = preload("res://Entities//Battle/BattlePlayer.gd").new()
 var _action_resolver = preload("res://Scripts/Battle/ActionResolver.gd").new()
 var _consecutive_checker = preload("res://Scripts/Battle/ConsecutiveActionsChecker.gd").new()
 
