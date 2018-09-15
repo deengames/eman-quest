@@ -31,7 +31,6 @@ const Actions = {
 }
 
 const AdvancedActions = {
-	"defend": 128,
 	"vampire": 320,
 	"bash": 384
 }
@@ -44,6 +43,9 @@ func _ready():
 	self.width = $Cover.region_rect.size.x
 	self.height = $Cover.region_rect.size.y
 	self.reset()
+	
+	if Features.is_enabled("defend action"):
+		AdvancedActions["defend"] = 128
 
 func _process(delta):
 	if self.state == "first showing":
