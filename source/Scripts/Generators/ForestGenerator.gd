@@ -14,6 +14,10 @@ const CLEARING_WIDTH = 7
 const CLEARING_HEIGHT = 8
 const NUM_MONSTERS = [5, 10]
 
+# Sometimes, paths generate right at the bottom of the map, obscuring the entrance
+# Add some buffer -- make sure we don't generate paths too low.
+const _PATHS_Y_BUFFER = 5
+
 var map_width = 2 * Globals.WORLD_WIDTH_IN_TILES
 var map_height = 3 * Globals.WORLD_HEIGHT_IN_TILES
 
@@ -76,10 +80,10 @@ func _generate_paths(dirt_map, tree_map):
 	var offset_y_up = Globals.randint(5, 10)
 	connect_to = [entrance_position[0], entrance_position[1] - offset_y_up]
 	self._generate_path(entrance_position, connect_to, dirt_map, tree_map)
-	
+
 	while to_generate > 0:
 		var x = Globals.randint(0, map_width - 1)
-		var y = Globals.randint(0, map_height - 1)
+		var y = Globals.randint(0, map_height - 1 - _PATHS_Y_BUFFER)
 		
 		if sqrt(pow(x - connect_to[0], 2) + pow(y - connect_to[1], 2)) <= MINIMUM_NODE_DISTANCE:
 			continue
