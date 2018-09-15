@@ -1,7 +1,7 @@
 extends Node2D
 
 const ActionButton = preload("res://Scenes/Battle/ActionButton.tscn")
-const SceneManagement = preload("res://Scripts/SceneManagement.gd")
+const BattleResultsWindow = preload("res://Scenes/Battle/BattleResultsWindow.tscn")
 
 const MAX_MESSAGES = 12 # with wrap, 15 lines max, 10 -11is safe
 # Pick N tiles to get a bonus for consecutive picks
@@ -124,17 +124,7 @@ func _finish_turn():
 	$MemoryGrid.reset()
 	self._update_health_displays()
 
-func _on_VictoryButton_pressed():
-	if Globals.current_map != null:
-		SceneManagement.change_map_to(get_tree(), Globals.current_map.map_type)
-		Globals.player.position.x = Globals.pre_battle_position[0]
-		Globals.player.position.y = Globals.pre_battle_position[1]
-	else:
-		# One-off battle
-		get_tree().change_scene('res://Scenes/Title.tscn')
-
 func _show_battle_end(is_victory):
-	$VictoryButton.visible = true
 	$MemoryGrid.visible = false
 	Globals.won_battle = is_victory
 	self._add_message("Hero vanquished the monster!")
@@ -142,9 +132,12 @@ func _show_battle_end(is_victory):
 	for button in self._action_buttons:
 		self.remove_child(button)
 		button.queue_free()
-	if not is_victory:
-		$VictoryButton.text = "Defeat!"
+	
 	$EnergyControls.queue_free()
+	
+	var battle_results = BattleResultsWindow.instance()
+	self.add_child(battle_results)
+	battle_results.popup_centered()
 
 func _add_message(message):
 	$History.text = ""

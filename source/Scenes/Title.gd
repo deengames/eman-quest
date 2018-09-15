@@ -1,7 +1,7 @@
 extends Node2D
 
 var BattlePlayer = preload("res://Entities/Battle/BattlePlayer.gd")
-var MemoryTileBattleScene = preload("res://Scenes/MemoryTileBattleScene.tscn")
+var MemoryTileBattleScene = preload("res://Scenes/Battle/MemoryTileBattleScene.tscn")
 var SceneManagement = preload("res://Scripts/SceneManagement.gd")
 var Slime = preload("res://Entities/Battle/Monster.tscn")
 

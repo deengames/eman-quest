@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
-const MemoryTileBattleScene = preload("res://Scenes/MemoryTileBattleScene.tscn")
+const MemoryTileBattleScene = preload("res://Scenes/Battle/MemoryTileBattleScene.tscn")
 
 const MOVE_SPEED = 100
 const CHANGE_DESTINATION_EVERY_N_SECONDS = 1
