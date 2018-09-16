@@ -5,29 +5,31 @@ extends Node
 # Anything persisted here is saved in save-games.
 ###
 
-const _STATS_POINTS_TO_RAISE_ENERGY = 5
-const _STATS_POINTS_TO_RAISE_PICKED_TILES = 10
-const _STATS_POINTS_TO_RAISE_ACTIONS = 20
+const STATS_POINTS_TO_RAISE_ENERGY = 5
+const STATS_POINTS_TO_RAISE_PICKED_TILES = 10
+const STATS_POINTS_TO_RAISE_ACTIONS = 20
 const _STATS_POINTS_PER_LEVEL = 5
 
 var level = 1
 var experience_points = 0
+
 var health = 60
 var strength = 7
 var defense = 5
+
+var max_energy = 20
 var num_pickable_tiles = 5
 var num_actions = 3
-var max_energy = 20
 
-var unassigned_stats_points = 0
+var unassigned_stats_points = 10
 
 var assigned_points = {
 	"health": 0,
 	"strength": 0,
 	"defense": 0,
-	"energy": 0, # requires ~5 points to raise it by 1
 	"num_pickable_tiles": 0, # requires ~10 points to raise it by 1
-	"num_actions": 0 # requires ~20 points to raise it by 1
+	"num_actions": 0, # requires ~20 points to raise it by 1
+	"energy": 0 # requires ~5 points to raise it by 1
 }
 
 func _ready():
