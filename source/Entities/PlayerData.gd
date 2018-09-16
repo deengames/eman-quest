@@ -8,6 +8,7 @@ extends Node
 const _STATS_POINTS_TO_RAISE_ENERGY = 5
 const _STATS_POINTS_TO_RAISE_PICKED_TILES = 10
 const _STATS_POINTS_TO_RAISE_ACTIONS = 20
+const _STATS_POINTS_PER_LEVEL = 5
 
 var level = 1
 var experience_points = 0
@@ -24,9 +25,9 @@ var assigned_points = {
 	"health": 0,
 	"strength": 0,
 	"defense": 0,
-	"energy": 0, # require 3-5 points to raise it by 1
-	"num_pickable_tiles": 0, # require, say, 10 points to raise it by 1
-	"num_actions": 0 # require, say, 25 points to raise it by 1
+	"energy": 0, # requires ~5 points to raise it by 1
+	"num_pickable_tiles": 0, # requires ~10 points to raise it by 1
+	"num_actions": 0 # requires ~20 points to raise it by 1
 }
 
 func _ready():
@@ -37,8 +38,10 @@ func _ready():
 func gain_xp(xp):
 	var old_xp = self.experience_points
 	self.experience_points += xp
-	# TODO: Detect and note level up
+	while self.experience_points >= get_next_level_xp():
+		self.level += 1
+		self.unassigned_stats_points += _STATS_POINTS_PER_LEVEL
 
 func get_next_level_xp():
 	# Doubles every level. 50, 100, 200, 400, ...
-	return pow(2, (level - 2)) * 100
+	return pow(2, (level - 2)) * 10
