@@ -163,7 +163,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 257.0
 margin_top = 154.0
-margin_right = 327.0
+margin_right = 299.0
 margin_bottom = 415.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -172,13 +172,14 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = SubResource( 3 )
-text = "0
+text = "000
 0
 0
 
 0
 0
 0"
+align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -219,10 +220,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 281.0
-margin_top = 154.0
-margin_right = 307.0
-margin_bottom = 190.0
+margin_left = 304.0
+margin_top = 153.0
+margin_right = 330.0
+margin_bottom = 189.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -273,10 +274,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 281.0
-margin_top = 185.0
-margin_right = 307.0
-margin_bottom = 221.0
+margin_left = 304.0
+margin_top = 184.0
+margin_right = 330.0
+margin_bottom = 220.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -327,10 +328,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 281.0
-margin_top = 215.0
-margin_right = 307.0
-margin_bottom = 251.0
+margin_left = 304.0
+margin_top = 214.0
+margin_right = 330.0
+margin_bottom = 250.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -381,10 +382,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 281.0
-margin_top = 284.0
-margin_right = 307.0
-margin_bottom = 320.0
+margin_left = 304.0
+margin_top = 283.0
+margin_right = 330.0
+margin_bottom = 319.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -435,9 +436,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 281.0
+margin_left = 304.0
 margin_top = 315.0
-margin_right = 307.0
+margin_right = 330.0
 margin_bottom = 351.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -489,9 +490,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 281.0
+margin_left = 304.0
 margin_top = 345.0
-margin_right = 307.0
+margin_right = 330.0
 margin_bottom = 381.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -513,5 +514,25 @@ _sections_unfolded = [ "Margin", "Rect", "custom_fonts" ]
 [connection signal="pressed" from="Buttons/UnassignHealthButton" to="." method="_on_UnassignHealthButton_pressed"]
 
 [connection signal="pressed" from="Buttons/AssignHealthButton" to="." method="_on_AssignHealthButton_pressed"]
+
+[connection signal="pressed" from="Buttons/UnassignStrengthButton" to="." method="_on_UnassignStrengthButton_pressed"]
+
+[connection signal="pressed" from="Buttons/AssignStrengthButton" to="." method="_on_AssignStrengthButton_pressed"]
+
+[connection signal="pressed" from="Buttons/UnassignDefenseButton" to="." method="_on_UnassignDefenseButton_pressed"]
+
+[connection signal="pressed" from="Buttons/AssignDefenseButton" to="." method="_on_AssignDefenseButton_pressed"]
+
+[connection signal="pressed" from="Buttons/UnassignEnergyButton" to="." method="_on_UnassignEnergyButton_pressed"]
+
+[connection signal="pressed" from="Buttons/AssignEnergyButton" to="." method="_on_AssignEnergyButton_pressed"]
+
+[connection signal="pressed" from="Buttons/UnassignTilesPickedButton" to="." method="_on_UnassignTilesPickedButton_pressed"]
+
+[connection signal="pressed" from="Buttons/AssignTilesPickedButton" to="." method="_on_AssignTilesPickedButton_pressed"]
+
+[connection signal="pressed" from="Buttons/UnassignActionsButton" to="." method="_on_UnassignActionsButton_pressed"]
+
+[connection signal="pressed" from="Buttons/AssignActionsButton" to="." method="_on_AssignActionsButton_pressed"]
 
 

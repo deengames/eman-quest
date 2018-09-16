@@ -27,9 +27,9 @@ var assigned_points = {
 	"health": 0,
 	"strength": 0,
 	"defense": 0,
+	"energy": 0, # requires ~5 points to raise it by 1
 	"num_pickable_tiles": 0, # requires ~10 points to raise it by 1
-	"num_actions": 0, # requires ~20 points to raise it by 1
-	"energy": 0 # requires ~5 points to raise it by 1
+	"num_actions": 0 # requires ~20 points to raise it by 1
 }
 
 func _ready():
