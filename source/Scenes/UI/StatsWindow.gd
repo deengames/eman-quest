@@ -53,9 +53,9 @@ func _assign_point(type):
 		if type == "health": Globals.player_data.health += 1
 		elif type == "strength": Globals.player_data.strength += 1
 		elif type == "defense": Globals.player_data.defense += 1
-		elif type == "energy": Globals.player_data.max_energy += 1
-		elif type == "num_pickable_tiles": Globals.player_data.num_pickable_tiles += 1
-		elif type == "num_actions": Globals.player_data.num_actions += 1
+		elif type == "energy": Globals.player_data.added_energy_point()
+		elif type == "num_pickable_tiles": Globals.player_data.added_pickable_tiles_point()
+		elif type == "num_actions": Globals.player_data.added_actions_point()
 	
 	self._update_stats_display()
 
@@ -67,17 +67,16 @@ func _unassign_point(type):
 		if type == "health": Globals.player_data.health -= 1
 		elif type == "strength": Globals.player_data.strength -= 1
 		elif type == "defense": Globals.player_data.defense -= 1
-		elif type == "energy": Globals.player_data.max_energy -= 1
-		elif type == "num_pickable_tiles": Globals.player_data.num_pickable_tiles -= 1
-		elif type == "num_actions": Globals.player_data.num_actions -= 1
+		elif type == "energy": Globals.player_data.removed_energy_point()
+		elif type == "num_pickable_tiles": Globals.player_data.removed_pickable_tiles_point()
+		elif type == "num_actions": Globals.player_data.removed_actions_point()
 	
 	self._update_stats_display()
 	
 func _update_stats_display():
-	if Globals.player_data.unassigned_stats_points > 0:
-		$StatsHeaderLabel.text = ("Stats                      Points Assigned" +
-		" (" + str(Globals.player_data.unassigned_stats_points) +
-		" unused)")
+	$StatsHeaderLabel.text = ("Stats                      Points Assigned" +
+	" (" + str(Globals.player_data.unassigned_stats_points) +
+	" unused)")
 	
 	$StatsLabel.text = ("Health: " + str(Globals.player_data.health) + "\n" +
 		"Strength: " + str(Globals.player_data.strength) + "\n" + 

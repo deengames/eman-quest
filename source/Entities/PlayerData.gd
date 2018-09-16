@@ -8,6 +8,8 @@ extends Node
 const STATS_POINTS_TO_RAISE_ENERGY = 5
 const STATS_POINTS_TO_RAISE_PICKED_TILES = 10
 const STATS_POINTS_TO_RAISE_ACTIONS = 20
+# TODO: cost doubles but points don't double, and stats gained
+# don't double. Consider increasing this per level or something.
 const _STATS_POINTS_PER_LEVEL = 5
 
 var level = 1
@@ -21,7 +23,7 @@ var max_energy = 20
 var num_pickable_tiles = 5
 var num_actions = 3
 
-var unassigned_stats_points = 10
+var unassigned_stats_points = 0
 
 var assigned_points = {
 	"health": 0,
@@ -47,3 +49,29 @@ func gain_xp(xp):
 func get_next_level_xp():
 	# Doubles every level. 50, 100, 200, 400, ...
 	return pow(2, (level - 2)) * 100
+
+# This whole section is super hacky.
+func added_energy_point():
+	if self.assigned_points["energy"] % STATS_POINTS_TO_RAISE_ENERGY == 0:
+		self.max_energy += 1
+
+func removed_energy_point():
+	# If we gain a point at 5, 10, ... we lose a point at 4, 9, ...
+	if self.assigned_points["energy"] % STATS_POINTS_TO_RAISE_ENERGY == STATS_POINTS_TO_RAISE_ENERGY - 1:
+		self.max_energy -= 1
+	
+func added_pickable_tiles_point():
+	if self.assigned_points["num_pickable_tiles"] % STATS_POINTS_TO_RAISE_PICKED_TILES == 0:
+		self.num_pickable_tiles += 1
+	
+func removed_pickable_tiles_point():
+	if self.assigned_points["num_pickable_tiles"] % STATS_POINTS_TO_RAISE_PICKED_TILES == STATS_POINTS_TO_RAISE_PICKED_TILES - 1:
+		self.num_pickable_tiles -= 1
+	
+func added_actions_point():
+	if self.assigned_points["num_actions"] % STATS_POINTS_TO_RAISE_ACTIONS == 0:
+		self.num_actions += 1
+
+func removed_actions_point():
+	if self.assigned_points["num_actions"] % STATS_POINTS_TO_RAISE_ACTIONS == STATS_POINTS_TO_RAISE_ACTIONS - 1:
+		self.num_actions -= 1
