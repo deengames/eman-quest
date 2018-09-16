@@ -44,4 +44,4 @@ func gain_xp(xp):
 
 func get_next_level_xp():
 	# Doubles every level. 50, 100, 200, 400, ...
-	return pow(2, (level - 2)) * 10
+	return pow(2, (level - 2)) * 100
