@@ -1,5 +1,8 @@
 extends Node
 
+const EquipmentGenerator = preload("res://Scripts/Generators/EquipmentGenerator.gd")
+const StatType = preload("res://Scripts/StatType.gd")
+
 ### 
 # PLAYER DATA! That persistent thing that represents our player across scenes.
 # Anything persisted here is saved in save-games.
@@ -34,10 +37,13 @@ var assigned_points = {
 	"num_actions": 0 # requires ~20 points to raise it by 1
 }
 
-func _ready():
-	# Called when the node is added to the scene for the first time.
-	# Initialization here
-	pass
+func _init():
+	randomize()
+	EquipmentGenerator.generate(StatType.Energy, 100)
+	EquipmentGenerator.generate(StatType.Energy, 100)
+	EquipmentGenerator.generate(StatType.Energy, 100)
+	EquipmentGenerator.generate(StatType.Energy, 100)
+	EquipmentGenerator.generate(StatType.Energy, 100)
 
 func gain_xp(xp):
 	var old_xp = self.experience_points
