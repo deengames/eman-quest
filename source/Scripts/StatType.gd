@@ -6,5 +6,5 @@ enum StatType {
 }
 
 static func to_string(stat_type):
-	var names = StatType.StatType.keys()
+	var names = StatType.keys()
 	return names[stat_type]

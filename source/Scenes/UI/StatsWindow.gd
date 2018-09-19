@@ -1,12 +1,25 @@
 extends WindowDialog
 
+const StatType = preload("res://Scripts/StatType.gd")
+
 func _ready():
 	self._update_stats_display()
 	
-	$LevelLabel.text = "Level: " + str(Globals.player_data.level)
+	$Stats/Labels/LevelLabel.text = "Level: " + str(Globals.player_data.level)
 	
-	$ExpLabel.text = "XP: " + (str(Globals.player_data.experience_points) +
+	$Stats/Labels/ExpLabel.text = "XP: " + (str(Globals.player_data.experience_points) +
 		"/" + str(Globals.player_data.get_next_level_xp()))
+		
+	var weapon = Globals.player_data.weapon
+	var armour = Globals.player_data.armour
+	
+	$Equipment/WeaponLabel.text = ("Current weapon:\n" + weapon.equipment_name + "\n" +
+		"+" + str(weapon.primary_stat_modifier) + " " + StatType.to_string(weapon.primary_stat) + "\n" +
+		"+" + str(weapon.secondary_stat_modifier) + " " + StatType.to_string(weapon.secondary_stat))
+
+	$Equipment/ArmourLabel.text = ("Current weapon:\n" + armour.equipment_name + "\n" +
+		"+" + str(armour.primary_stat_modifier) + " " + StatType.to_string(armour.primary_stat) + "\n" +
+		"+" + str(armour.secondary_stat_modifier) + " " + StatType.to_string(armour.secondary_stat))
 
 func _on_UnassignHealthButton_pressed():
 	self._unassign_point("health")
@@ -74,11 +87,11 @@ func _unassign_point(type):
 	self._update_stats_display()
 	
 func _update_stats_display():
-	$StatsHeaderLabel.text = ("Stats                      Points Assigned" +
+	$Stats/Labels/StatsHeaderLabel.text = ("Stats                      Points" +
 	" (" + str(Globals.player_data.unassigned_stats_points) +
 	" unused)")
 	
-	$StatsLabel.text = ("Health: " + str(Globals.player_data.health) + "\n" +
+	$Stats/Labels/StatsLabel.text = ("Health: " + str(Globals.player_data.health) + "\n" +
 		"Strength: " + str(Globals.player_data.strength) + "\n" + 
 		"Defense: " + str(Globals.player_data.defense) + "\n" +
 		"\n" +
@@ -87,7 +100,7 @@ func _update_stats_display():
 		"Actions: " + str(Globals.player_data.num_actions) + "\n"
 	)
 	
-	$PointsAssignedLabel.text = (str(Globals.player_data.assigned_points["health"]) + "\n" +
+	$Stats/Labels/PointsAssignedLabel.text = (str(Globals.player_data.assigned_points["health"]) + "\n" +
 		str(Globals.player_data.assigned_points["strength"]) + "\n" +
 		str(Globals.player_data.assigned_points["defense"]) + "\n" +
 		"\n" +

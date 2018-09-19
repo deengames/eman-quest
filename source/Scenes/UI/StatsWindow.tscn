@@ -42,7 +42,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 1.0
-margin_right = 601.0
+margin_right = 700.0
 margin_bottom = 400.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -56,7 +56,13 @@ resizable = false
 script = ExtResource( 1 )
 _sections_unfolded = [ "Margin" ]
 
-[node name="LevelLabel" type="Label" parent="." index="1"]
+[node name="Stats" type="Node2D" parent="." index="1"]
+
+editor/display_folded = true
+
+[node name="Labels" type="Node2D" parent="Stats" index="0"]
+
+[node name="LevelLabel" type="Label" parent="Stats/Labels" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -79,7 +85,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="ExpLabel" type="Label" parent="." index="2"]
+[node name="ExpLabel" type="Label" parent="Stats/Labels" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -102,7 +108,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="StatsHeaderLabel" type="Label" parent="." index="3"]
+[node name="StatsHeaderLabel" type="Label" parent="Stats/Labels" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -125,7 +131,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="StatsLabel" type="Label" parent="." index="4"]
+[node name="StatsLabel" type="Label" parent="Stats/Labels" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -155,7 +161,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Margin", "custom_fonts" ]
 
-[node name="PointsAssignedLabel" type="Label" parent="." index="5"]
+[node name="PointsAssignedLabel" type="Label" parent="Stats/Labels" index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -185,9 +191,11 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Margin", "custom_fonts" ]
 
-[node name="Buttons" type="Node2D" parent="." index="6"]
+[node name="Buttons" type="Node2D" parent="Stats" index="1"]
 
-[node name="UnassignHealthButton" type="Button" parent="Buttons" index="0"]
+editor/display_folded = true
+
+[node name="UnassignHealthButton" type="Button" parent="Stats/Buttons" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -214,7 +222,7 @@ flat = false
 align = 1
 _sections_unfolded = [ "Margin", "Rect", "custom_fonts" ]
 
-[node name="AssignHealthButton" type="Button" parent="Buttons" index="1"]
+[node name="AssignHealthButton" type="Button" parent="Stats/Buttons" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -241,7 +249,7 @@ flat = false
 align = 1
 _sections_unfolded = [ "Margin", "Rect", "custom_fonts" ]
 
-[node name="UnassignStrengthButton" type="Button" parent="Buttons" index="2"]
+[node name="UnassignStrengthButton" type="Button" parent="Stats/Buttons" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -268,7 +276,7 @@ flat = false
 align = 1
 _sections_unfolded = [ "Margin", "Rect", "custom_fonts" ]
 
-[node name="AssignStrengthButton" type="Button" parent="Buttons" index="3"]
+[node name="AssignStrengthButton" type="Button" parent="Stats/Buttons" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -295,7 +303,7 @@ flat = false
 align = 1
 _sections_unfolded = [ "Margin", "Rect", "custom_fonts" ]
 
-[node name="UnassignDefenseButton" type="Button" parent="Buttons" index="4"]
+[node name="UnassignDefenseButton" type="Button" parent="Stats/Buttons" index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -322,7 +330,7 @@ flat = false
 align = 1
 _sections_unfolded = [ "Margin", "Rect", "custom_fonts" ]
 
-[node name="AssignDefenseButton" type="Button" parent="Buttons" index="5"]
+[node name="AssignDefenseButton" type="Button" parent="Stats/Buttons" index="5"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -349,7 +357,7 @@ flat = false
 align = 1
 _sections_unfolded = [ "Margin", "Rect", "custom_fonts" ]
 
-[node name="UnassignEnergyButton" type="Button" parent="Buttons" index="6"]
+[node name="UnassignEnergyButton" type="Button" parent="Stats/Buttons" index="6"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -376,7 +384,7 @@ flat = false
 align = 1
 _sections_unfolded = [ "Margin", "Rect", "custom_fonts" ]
 
-[node name="AssignEnergyButton" type="Button" parent="Buttons" index="7"]
+[node name="AssignEnergyButton" type="Button" parent="Stats/Buttons" index="7"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -403,7 +411,7 @@ flat = false
 align = 1
 _sections_unfolded = [ "Margin", "Rect", "custom_fonts" ]
 
-[node name="UnassignTilesPickedButton" type="Button" parent="Buttons" index="8"]
+[node name="UnassignTilesPickedButton" type="Button" parent="Stats/Buttons" index="8"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -430,7 +438,7 @@ flat = false
 align = 1
 _sections_unfolded = [ "Margin", "Rect", "custom_fonts" ]
 
-[node name="AssignTilesPickedButton" type="Button" parent="Buttons" index="9"]
+[node name="AssignTilesPickedButton" type="Button" parent="Stats/Buttons" index="9"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -457,7 +465,7 @@ flat = false
 align = 1
 _sections_unfolded = [ "Margin", "Rect", "custom_fonts" ]
 
-[node name="UnassignActionsButton" type="Button" parent="Buttons" index="10"]
+[node name="UnassignActionsButton" type="Button" parent="Stats/Buttons" index="10"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -484,7 +492,7 @@ flat = false
 align = 1
 _sections_unfolded = [ "Margin", "Rect", "custom_fonts" ]
 
-[node name="AssignActionsButton" type="Button" parent="Buttons" index="11"]
+[node name="AssignActionsButton" type="Button" parent="Stats/Buttons" index="11"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -511,28 +519,82 @@ flat = false
 align = 1
 _sections_unfolded = [ "Margin", "Rect", "custom_fonts" ]
 
-[connection signal="pressed" from="Buttons/UnassignHealthButton" to="." method="_on_UnassignHealthButton_pressed"]
+[node name="Equipment" type="Node2D" parent="." index="2"]
 
-[connection signal="pressed" from="Buttons/AssignHealthButton" to="." method="_on_AssignHealthButton_pressed"]
+[node name="WeaponLabel" type="Label" parent="Equipment" index="0"]
 
-[connection signal="pressed" from="Buttons/UnassignStrengthButton" to="." method="_on_UnassignStrengthButton_pressed"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 450.0
+margin_top = 35.0
+margin_right = 650.0
+margin_bottom = 164.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 2 )
+text = "Current Weapon:
+Masamune
++5 strength
++4 defense"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_fonts" ]
 
-[connection signal="pressed" from="Buttons/AssignStrengthButton" to="." method="_on_AssignStrengthButton_pressed"]
+[node name="ArmourLabel" type="Label" parent="Equipment" index="1"]
 
-[connection signal="pressed" from="Buttons/UnassignDefenseButton" to="." method="_on_UnassignDefenseButton_pressed"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 450.0
+margin_top = 226.0
+margin_right = 650.0
+margin_bottom = 355.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 2 )
+text = "Current Armour:
+Masamune
++5 strength
++4 defense"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_fonts" ]
 
-[connection signal="pressed" from="Buttons/AssignDefenseButton" to="." method="_on_AssignDefenseButton_pressed"]
+[connection signal="pressed" from="Stats/Buttons/UnassignHealthButton" to="." method="_on_UnassignHealthButton_pressed"]
 
-[connection signal="pressed" from="Buttons/UnassignEnergyButton" to="." method="_on_UnassignEnergyButton_pressed"]
+[connection signal="pressed" from="Stats/Buttons/AssignHealthButton" to="." method="_on_AssignHealthButton_pressed"]
 
-[connection signal="pressed" from="Buttons/AssignEnergyButton" to="." method="_on_AssignEnergyButton_pressed"]
+[connection signal="pressed" from="Stats/Buttons/UnassignStrengthButton" to="." method="_on_UnassignStrengthButton_pressed"]
 
-[connection signal="pressed" from="Buttons/UnassignTilesPickedButton" to="." method="_on_UnassignTilesPickedButton_pressed"]
+[connection signal="pressed" from="Stats/Buttons/AssignStrengthButton" to="." method="_on_AssignStrengthButton_pressed"]
 
-[connection signal="pressed" from="Buttons/AssignTilesPickedButton" to="." method="_on_AssignTilesPickedButton_pressed"]
+[connection signal="pressed" from="Stats/Buttons/UnassignDefenseButton" to="." method="_on_UnassignDefenseButton_pressed"]
 
-[connection signal="pressed" from="Buttons/UnassignActionsButton" to="." method="_on_UnassignActionsButton_pressed"]
+[connection signal="pressed" from="Stats/Buttons/AssignDefenseButton" to="." method="_on_AssignDefenseButton_pressed"]
 
-[connection signal="pressed" from="Buttons/AssignActionsButton" to="." method="_on_AssignActionsButton_pressed"]
+[connection signal="pressed" from="Stats/Buttons/UnassignEnergyButton" to="." method="_on_UnassignEnergyButton_pressed"]
+
+[connection signal="pressed" from="Stats/Buttons/AssignEnergyButton" to="." method="_on_AssignEnergyButton_pressed"]
+
+[connection signal="pressed" from="Stats/Buttons/UnassignTilesPickedButton" to="." method="_on_UnassignTilesPickedButton_pressed"]
+
+[connection signal="pressed" from="Stats/Buttons/AssignTilesPickedButton" to="." method="_on_AssignTilesPickedButton_pressed"]
+
+[connection signal="pressed" from="Stats/Buttons/UnassignActionsButton" to="." method="_on_UnassignActionsButton_pressed"]
+
+[connection signal="pressed" from="Stats/Buttons/AssignActionsButton" to="." method="_on_AssignActionsButton_pressed"]
 
 

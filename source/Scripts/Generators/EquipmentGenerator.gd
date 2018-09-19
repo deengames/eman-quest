@@ -11,8 +11,8 @@ static func generate(primary_stat, power):
 	while secondary_stat == primary_stat:
 		secondary_stat = randi() % StatType.StatType.size()
 	
-	var primary_name = names[primary_stat]
-	var secondary_name = names[secondary_stat]
+	var primary_name = StatType.to_string(primary_stat)
+	var secondary_name = StatType.to_string(secondary_stat)
 	
 	# Not exactly what we want, but works well with small powers like 10
 	var secondary_power = ceil(power * 0.33)
