@@ -37,23 +37,14 @@ var assigned_points = {
 	"num_actions": 0 # requires ~20 points to raise it by 1
 }
 
+var weapon
+var armour
+
 func _init():
 	randomize()
-	EquipmentGenerator.generate(StatType.Strength, 100)
-	EquipmentGenerator.generate(StatType.Defense, 100)
-	EquipmentGenerator.generate(StatType.Strength, 100)
-	EquipmentGenerator.generate(StatType.Defense, 100)
-	EquipmentGenerator.generate(StatType.Strength, 100)
-	EquipmentGenerator.generate(StatType.Defense, 100)
-	print("==================================================")
-	EquipmentGenerator.generate(StatType.Health, 100)
-	EquipmentGenerator.generate(StatType.Energy, 100)
-	EquipmentGenerator.generate(StatType.Health, 100)
-	EquipmentGenerator.generate(StatType.Energy, 100)
-	EquipmentGenerator.generate(StatType.Health, 100)
-	EquipmentGenerator.generate(StatType.Energy, 100)
+	self.weapon = EquipmentGenerator.generate(StatType.Strength, 10)
+	self.armour = EquipmentGenerator.generate(StatType.Defense, 8)
 	
-
 func gain_xp(xp):
 	var old_xp = self.experience_points
 	self.experience_points += xp

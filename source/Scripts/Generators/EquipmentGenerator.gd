@@ -1,5 +1,6 @@
 extends Node
 
+const Equipment = preload("res://Entities/Equipment.gd")
 const StatType = preload("res://Scripts/StatType.gd")
 
 # primary_stat is a Stats. Power is a number that indicates relative power.
@@ -10,17 +11,15 @@ static func generate(primary_stat, power):
 	while secondary_stat == primary_stat:
 		secondary_stat = randi() % StatType.StatType.size()
 	
-	var names = StatType.StatType.keys()
 	var primary_name = names[primary_stat]
 	var secondary_name = names[secondary_stat]
 	
 	# Not exactly what we want, but works well with small powers like 10
 	var secondary_power = ceil(power * 0.33)
-	var name = _generate_name(primary_name, secondary_name)
+	var item_name = _generate_name(primary_name, secondary_name)
 	
-	print(("Name: " + name + " !!! " +  
-		"Powers: " + primary_name + " => " + str(_get_random_amount(primary_name, power)) + "  "
-		+ secondary_name + " => " + str(_get_random_amount(secondary_name, secondary_power))))
+	return Equipment.new(item_name, primary_stat, _get_random_amount(primary_name, power),
+		secondary_stat, _get_random_amount(secondary_name, secondary_power))
 	
 # We need to keep a power curve without too much variation. It would suck
 # to get a low-powered weapon/armour when you really need a high-power one.
