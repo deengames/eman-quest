@@ -39,11 +39,20 @@ var assigned_points = {
 
 func _init():
 	randomize()
+	EquipmentGenerator.generate(StatType.Strength, 100)
+	EquipmentGenerator.generate(StatType.Defense, 100)
+	EquipmentGenerator.generate(StatType.Strength, 100)
+	EquipmentGenerator.generate(StatType.Defense, 100)
+	EquipmentGenerator.generate(StatType.Strength, 100)
+	EquipmentGenerator.generate(StatType.Defense, 100)
+	print("==================================================")
+	EquipmentGenerator.generate(StatType.Health, 100)
 	EquipmentGenerator.generate(StatType.Energy, 100)
+	EquipmentGenerator.generate(StatType.Health, 100)
 	EquipmentGenerator.generate(StatType.Energy, 100)
+	EquipmentGenerator.generate(StatType.Health, 100)
 	EquipmentGenerator.generate(StatType.Energy, 100)
-	EquipmentGenerator.generate(StatType.Energy, 100)
-	EquipmentGenerator.generate(StatType.Energy, 100)
+	
 
 func gain_xp(xp):
 	var old_xp = self.experience_points
