@@ -11,7 +11,6 @@ func _ready():
 func _on_newgame_Button_pressed():
 	get_tree().change_scene("res://Scenes/GenerateWorldScene.tscn")
 
-
 func _on_simplebattle_button_pressed():
 	var battle_scene = MemoryTileBattleScene.instance()
 	battle_scene.set_monster_data({
@@ -50,7 +49,17 @@ func _on_AdvancedBattleButton_pressed():
 		}
 	});
 	
-	battle_scene.player = BattlePlayer.new(600, 50, 30, 8, 5, 40)
+	var battler = BattlePlayer.new()
+	battler.max_health = 600
+	battler.current_health = battler.max_health
+	battler.strength = 50
+	battler._defense = 30
+	battler.num_pickable_tiles = 8
+	battler.num_actions = 5
+	battler.max_energy = 40
+	battler.energy = battler.max_energy
+	
+	battle_scene.player = battler
 	battle_scene.go_turbo()
 	
 	SceneManagement.change_scene_to(get_tree(), battle_scene)
