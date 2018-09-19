@@ -3,7 +3,8 @@ extends Node
 const FEATURE_MAP = {
 	"consecutive picks battle bonus": true,
 	"actions require energy": true,
-	"defend action": false
+	"defend action": false,
+	"equipment generates tiles": true
 }
 
 func is_enabled(feature_name):

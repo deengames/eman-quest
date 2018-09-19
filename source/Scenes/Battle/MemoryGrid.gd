@@ -20,8 +20,7 @@ func initialize(tiles_wide, tiles_high, _advanced_mode = false, num_pickable_til
 	# Construct grid dynamically. We could alternatively show them in the
 	# editor as 8x8, but hide them if we don't want them.
 	self._create_tiles(_advanced_mode)
-	# Not the best approach: convert, say, 20% tiles into energy
-	self._generate_energy_tiles()
+	self.reset()
 
 func _ready():
 	# Just shown for UI editing/preview
@@ -65,8 +64,8 @@ func _create_tiles(advanced_mode):
 
 func _generate_guaranteed_tiles():
 	self._generate_energy_tiles()
-	#self._generate_weapon_tiles()
-	#self._generate_armour_tiles()
+	self._generate_weapon_tiles()
+	self._generate_armour_tiles()
 
 func _change_random_convertable_tile_to(contents):
 	var tx = randi() % self.tiles_wide
@@ -76,12 +75,33 @@ func _change_random_convertable_tile_to(contents):
 		tile.contents = contents
 		tile.refresh_display()
 		tile.do_not_change = true
+		tile.freeze()
 
 func _generate_energy_tiles():
 	if Features.is_enabled("actions require energy"):
 		var num_tiles = ceil(_ENERGY_TILES_PERCENT * self.tiles_wide * self.tiles_high)
 		while num_tiles > 0:
 			self._change_random_convertable_tile_to("energy")
+			num_tiles -= 1
+
+func _generate_weapon_tiles():
+	if Features.is_enabled("equipment generates tiles"):
+		# TODO: var num_tiles = Globals.player_data.weapon.grid_tiles.duplicate()
+		var num_tiles = 5
+		# TODO: var tile_type = Globals.player_data.weapon.tile_type
+		var tile_type = "attack"
+		while num_tiles > 0:
+			self._change_random_convertable_tile_to(tile_type)
+			num_tiles -= 1
+
+func _generate_armour_tiles():
+	if Features.is_enabled("equipment generates tiles"):
+		# TODO: var num_tiles = Globals.player_data.armour.grid_tiles.duplicate()
+		var num_tiles = 3
+		# TODO: var tile_type = Globals.player_data.armour.tile_type
+		var tile_type = "heal"
+		while num_tiles > 0:
+			self._change_random_convertable_tile_to(tile_type)
 			num_tiles -= 1
 
 func _on_tile_selected(tile):

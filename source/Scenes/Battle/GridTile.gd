@@ -71,7 +71,15 @@ func reset():
 	self._show_contents()
 
 func refresh_display():
-	$Contents.region_rect.position.x = ENERGY_X
+	var target_x = 0
+	if self.contents == "energy":
+		target_x = ENERGY_X
+	elif self.contents in Actions.keys():
+		target_x = Actions[self.contents]
+	elif self.contens in AdvancedActions:
+		target_x = AdvancedActions[self.contents]
+	
+	$Contents.region_rect.position.x = target_x
 
 func _pick_contents():
 	if randf() <= WRONG_ACTION_PROBABILITY:
