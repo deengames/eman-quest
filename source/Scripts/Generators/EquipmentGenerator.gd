@@ -16,8 +16,10 @@ static func generate(primary_stat, power):
 	
 	# Not exactly what we want, but works well with small powers like 10
 	var secondary_power = ceil(power * 0.33)
+	var name = _generate_name(primary_name, secondary_name)
 	
-	print(("Powers: " + primary_name + " => " + str(_get_random_amount(primary_name, power)) + "  "
+	print(("Name: " + name + " !!! " +  
+		"Powers: " + primary_name + " => " + str(_get_random_amount(primary_name, power)) + "  "
 		+ secondary_name + " => " + str(_get_random_amount(secondary_name, secondary_power))))
 	
 # We need to keep a power curve without too much variation. It would suck
@@ -37,3 +39,23 @@ static func _get_random_amount(stat_name, power):
 # Source: https://godotengine.org/qa/2539/how-would-i-go-about-picking-a-random-number
 static func randint(minimum, maximum):
 	return range(minimum, maximum + 1)[randi() % range(minimum, maximum + 1).size()]
+
+static func _generate_name(primary_stat, secondary_stat):
+	# TODO: grammar with all that jazz
+	# 8-10 letters. Start with primary_stat + vowel + secondary_stat + vowel
+	var vowels = ["a", "i", "o", "u", "oo"]
+	# NB: if secondary stat is energy ... we could get, like daee or haei
+	var name = ""#primary_stat[0] + vowels[randint(0, len(vowels) - 1)]
+	#if secondary_stat != "Energy":
+	#name += secondary_stat[0] + vowels[randint(0, len(vowels) - 1)]
+	#var sounds = ["r", "sn", "tr", "l", "ph", "f", "m", "n", "sh", "b", "g", "kh", "fr", "gh"]
+	var sounds = ["s", "sh", "ch", "b", "d", "n", "r", "z", "t", "m"]
+	while len(name) < 6:
+		name += sounds[randint(0, len(sounds) - 1)]
+		name += vowels[randint(0, len(vowels) - 1)]
+		
+	return name.to_lower().capitalize()
+	
+	
+	
+	
