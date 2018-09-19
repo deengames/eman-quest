@@ -18,6 +18,8 @@ var tile_y = 0
 
 var show_advanced_actions = false
 
+var do_not_change = false
+
 # open/close x coordinates
 var frames = {
 	"closed": 0,
@@ -27,6 +29,7 @@ var frames = {
 const Actions = {
 	"attack": 0,
 	"critical": 64,
+	#"defend": 128,
 	"heal": 192
 }
 
@@ -59,6 +62,7 @@ func freeze():
 
 func reset():
 	self.state = "first showing"
+	self.do_not_change = false
 	# Add a random value (in the future) so they pseudo-randomly hide
 	# Limit this to 200ms
 	self.created_on = OS.get_ticks_msec() + (randi() % 200)
@@ -66,8 +70,7 @@ func reset():
 	self._pick_contents()
 	self._show_contents()
 
-func convert_to_energy():
-	self.contents = "energy"
+func refresh_display():
 	$Contents.region_rect.position.x = ENERGY_X
 
 func _pick_contents():
