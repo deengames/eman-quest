@@ -15,7 +15,7 @@ static func generate(primary_stat, power):
 	var secondary_name = names[secondary_stat]
 	
 	# Not exactly what we want, but works well with small powers like 10
-	var secondary_power = ceil(power / 3)
+	var secondary_power = ceil(power * 0.33)
 	
 	print(("Powers: " + primary_name + " => " + str(_get_random_amount(primary_name, power)) + "  "
 		+ secondary_name + " => " + str(_get_random_amount(secondary_name, secondary_power))))
@@ -28,7 +28,7 @@ static func _get_random_amount(stat_name, power):
 		return randint(power * 2, power * 3)
 	elif stat_name == "Energy":
 		# to start, energy is ~1/3 of HP.
-		return randint(power * 2 / 3, ceil(power))
+		return randint(power * 0.7, ceil(power))
 	elif stat_name == "Strength" or stat_name == "Defense":
 		# strength or defense
 		return randint(ceil(power * 0.4), ceil(power * 0.6))
