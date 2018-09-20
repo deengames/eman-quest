@@ -7,6 +7,7 @@ extends Node2D
 var MapWarp = preload("res://Entities/MapWarp.tscn")
 var Monster = preload("res://Entities/Battle/Monster.tscn")
 const Player = preload("res://Entities/Player.tscn")
+const TreasureChest = preload("res://Entities/TreasureChest.tscn")
 const TilesetMapper = preload("res://Scripts/TilesetMapper.gd")
 
 var map # area map
@@ -35,6 +36,7 @@ func _ready():
 	
 	self._add_transitions()
 	self._add_monsters()
+	self._populate_treasure_chests()
 	
 	var player = Player.instance()
 	player.position.x = map.entrance_position[0] * Globals.TILE_WIDTH
@@ -79,7 +81,7 @@ func _add_monsters():
 		monster_data = map.generate_monsters()
 	
 	self._monsters = {}
-	for monster_type in monster_data.keys():		
+	for monster_type in monster_data.keys():
 		var coordinate_pairs = monster_data[monster_type]
 		var monsters = []
 		
@@ -91,6 +93,16 @@ func _add_monsters():
 			monsters.append(instance)
 		
 		self._monsters[monster_type] = monsters
+
+func _populate_treasure_chests():
+	for data in self.map.treasure_chests:
+		var instance = TreasureChest.instance()
+		instance.contents = "hi"#data.contents
+		if data.is_open:
+			instance.consume()
+		instance.position.x = data.tile_x * Globals.TILE_WIDTH
+		instance.position.y = data.tile_y * Globals.TILE_WIDTH
+		self.add_child(instance)
 
 func get_monsters():
 	# Return pixel coordinates for all live instances
