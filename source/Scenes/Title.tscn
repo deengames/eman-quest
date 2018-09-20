@@ -1,11 +1,19 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Title.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/Lato-Black.ttf" type="DynamicFontData" id=2]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=3]
 
 size = 36
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 2 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=1]
+
+size = 24
 use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 2 )
@@ -40,7 +48,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -56,10 +64,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 260.0
-margin_top = 307.0
-margin_right = 713.0
-margin_bottom = 401.0
+margin_left = 375.0
+margin_top = 325.0
+margin_right = 628.0
+margin_bottom = 369.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -75,7 +83,7 @@ group = null
 text = "Simple Battle"
 flat = false
 align = 1
-_sections_unfolded = [ "custom_fonts" ]
+_sections_unfolded = [ "Margin", "custom_fonts" ]
 
 [node name="Button3" type="Button" parent="." index="2"]
 
@@ -83,10 +91,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 268.0
-margin_top = 435.0
-margin_right = 721.0
-margin_bottom = 529.0
+margin_left = 380.0
+margin_top = 398.0
+margin_right = 633.0
+margin_bottom = 442.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -102,7 +110,7 @@ group = null
 text = "Advanced Battle"
 flat = false
 align = 1
-_sections_unfolded = [ "custom_fonts" ]
+_sections_unfolded = [ "Margin", "custom_fonts" ]
 
 [node name="Label" type="Label" parent="." index="3"]
 
