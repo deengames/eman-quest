@@ -41,8 +41,6 @@ static func generate(type, primary_stat, power):
 		var types = ["attack", "heal"] # TODO: add vampire
 		tile_type = types[randi() % len(types)]
 	
-	print("Created a " + type + ": " + str(num_tiles) + "x " + tile_type)
-	
 	return Equipment.new(item_name, primary_stat, _get_random_amount(primary_name, power),
 		secondary_stat, _get_random_amount(secondary_name, secondary_power),
 		num_tiles, tile_type)

@@ -1,8 +1,11 @@
 extends Node
 
-var AreaMap = preload("res://Entities/AreaMap.gd")
-var MapDestination = preload("res://Entities/MapDestination.gd")
-var TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
+const AreaMap = preload("res://Entities/AreaMap.gd")
+const EquipmentGenerator = preload("res://Scripts/Generators/EquipmentGenerator.gd")
+const MapDestination = preload("res://Entities/MapDestination.gd")
+const StatType = preload("res://Scripts/StatType.gd")
+const TreasureChest = preload("res://Entities/TreasureChest.gd")
+const TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 
 # Construct a path made up of N points
 const NUM_PATH_NODES = 10
@@ -16,7 +19,11 @@ const NUM_MONSTERS = [5, 10]
 
 # Sometimes, paths generate right at the bottom of the map, obscuring the entrance
 # Add some buffer -- make sure we don't generate paths too low.
-const _PATHS_Y_BUFFER = 5
+const _PATHS_BUFFER_FROM_EDGE = 5
+const _MIN_CHESTS = 2
+const _MAX_CHESTS = 3
+const _MIN_ITEM_POWER = 15
+const _MAX_ITEM_POWER = 30
 
 var map_width = 2 * Globals.WORLD_WIDTH_IN_TILES
 var map_height = 3 * Globals.WORLD_HEIGHT_IN_TILES
@@ -30,13 +37,14 @@ var _tree_map = []
 func generate():
 	var map = AreaMap.new("Forest", preload("res://Tilesets/Overworld.tres"), self.entrance_position, map_width, map_height, funcref(self, "generate_monsters"))
 
-	var tile_data = self._generate_forest()	
+	var tile_data = self._generate_forest() # generates paths too
+	self._tree_map = tile_data[1]
+	
 	map.transitions = self._generate_transitions()
+	map.treasure_chests = self._generate_treasure_chests()
 	
 	for data in tile_data:
 		map.add_tile_data(data)
-	
-	self._tree_map = tile_data[1]
 	
 	# Move entrance up a few tiles so we don't spawn on the exit tile
 	entrance_position[1] -= 3
@@ -82,8 +90,8 @@ func _generate_paths(dirt_map, tree_map):
 	self._generate_path(entrance_position, connect_to, dirt_map, tree_map)
 
 	while to_generate > 0:
-		var x = Globals.randint(0, map_width - 1)
-		var y = Globals.randint(0, map_height - 1 - _PATHS_Y_BUFFER)
+		var x = Globals.randint(_PATHS_BUFFER_FROM_EDGE, map_width - _PATHS_BUFFER_FROM_EDGE - 1)
+		var y = Globals.randint(_PATHS_BUFFER_FROM_EDGE, map_height - _PATHS_BUFFER_FROM_EDGE - 1)
 		
 		if sqrt(pow(x - connect_to[0], 2) + pow(y - connect_to[1], 2)) <= MINIMUM_NODE_DISTANCE:
 			continue
@@ -161,7 +169,25 @@ func _generate_clearings(path_points, dirt_map, tree_map):
 					self._convert_to_grass([x, y], dirt_map, tree_map)
 		
 		clearings_left -= 1
-		
+
+func _generate_treasure_chests():
+	var num_chests = Globals.randint(_MIN_CHESTS, _MAX_CHESTS)
+	var chests = []
+	var types = ["weapon", "armour"]
+	var stats = {"weapon": StatType.Strength, "armour": StatType.Defense}
+	
+	while num_chests > 0:
+		var spot = self._find_empty_spot(chests)
+		var type = types[randi() % len(types)]
+		var power = Globals.randint(_MIN_ITEM_POWER, _MAX_ITEM_POWER)
+		var stat = stats[type]
+		var item = EquipmentGenerator.generate(type, stat, power)
+		var treasure = TreasureChest.new(spot[0], spot[1], item)
+		chests.append(treasure)
+		num_chests -= 1
+	
+	return chests
+
 # Almost common with OverworldGenerator
 func _fill_with(tile_name, map_array):
 	for y in range(0, map_height):
@@ -203,11 +229,11 @@ func _clear_if_tree(tree_map, x, y):
 			if tree_map.get(x, y) != null:
 				tree_map.set(x, y, null)
 
-func _find_empty_spot(monsters):
+func _find_empty_spot(occupied_spots):
 	var x = Globals.randint(0, map_width - 1)
 	var y = Globals.randint(0, map_height - 1)
 	
-	while self._tree_map.get(x, y) == "Tree" or [x, y] == self.entrance_position or monsters.find([x, y]) > -1:
+	while self._tree_map.get(x, y) == "Tree" or [x, y] == self.entrance_position or occupied_spots.find([x, y]) > -1:
 		x = Globals.randint(0, map_width - 1)
 		y = Globals.randint(0, map_height - 1)
 	
