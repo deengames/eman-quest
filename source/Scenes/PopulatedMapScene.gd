@@ -97,8 +97,8 @@ func _add_monsters():
 func _populate_treasure_chests():
 	for data in self.map.treasure_chests:
 		var instance = TreasureChest.instance()
-		instance.contents = "hi"#data.contents
-		if data.is_open:
+		instance.contents = data.contents
+		if data.is_opened:
 			instance.consume()
 		instance.position.x = data.tile_x * Globals.TILE_WIDTH
 		instance.position.y = data.tile_y * Globals.TILE_WIDTH

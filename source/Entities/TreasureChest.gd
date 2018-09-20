@@ -7,9 +7,12 @@ var contents # equipment instance
 var tile_x = 0
 var tile_y = 0
 
-func _init(x, y, contents):
+### DO NOT USE _INIT HERE! This will break when you create this with .instance()
+# For details, see: https://github.com/godotengine/godot/issues/15866
+func set_values(x, y, contents):
 	self.tile_x = x
 	self.tile_y = y
+	self.contents = contents
 
 func open():
 	if not self.is_opened:
