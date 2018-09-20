@@ -3,9 +3,15 @@ extends Node
 const Equipment = preload("res://Entities/Equipment.gd")
 const StatType = preload("res://Scripts/StatType.gd")
 
+# Biggest grid is probably 7x7 (~50 tiles). If 50% is dominated by fixed tiles,
+# energy takes up ~10 tiles, so that leaves ~40 tiles for equipment actions.
+# Divide by two, gives us ~20 tiles each.
+const _MAX_TILES_MODIFIED_BY_EQUIPMENT = 20
+
+# type = weapon or armour
 # primary_stat is a Stats. Power is a number that indicates relative power.
 # Something that's power 20 should be roughly 2x as strong as something power 10.
-static func generate(primary_stat, power):
+static func generate(type, primary_stat, power):
 	var secondary_stat = randi() % StatType.StatType.size()
 	
 	while secondary_stat == primary_stat:
@@ -18,8 +24,28 @@ static func generate(primary_stat, power):
 	var secondary_power = ceil(power * 0.33)
 	var item_name = _generate_name(primary_name, secondary_name)
 	
+	# For power 10, affect 2-3 tiles
+	# For power 100, affect 8-12 tiles
+	# For each 25, add 1x to multiplier
+	# cap out at 20
+	var min_tiles = 2 * ceil(power * 0.04)
+	var max_tiles = 3 * ceil(power * 0.04)
+	var num_tiles = randint(min_tiles, max_tiles)
+	num_tiles = min(num_tiles, _MAX_TILES_MODIFIED_BY_EQUIPMENT)
+	var tile_type = ""
+	
+	if type == "weapon":
+		var types = ["attack", "critical"] # TODO: add bash
+		tile_type = types[randi() % len(types)]
+	else: # armour
+		var types = ["attack", "heal"] # TODO: add vampire
+		tile_type = types[randi() % len(types)]
+	
+	print("Created a " + type + ": " + str(num_tiles) + "x " + tile_type)
+	
 	return Equipment.new(item_name, primary_stat, _get_random_amount(primary_name, power),
-		secondary_stat, _get_random_amount(secondary_name, secondary_power))
+		secondary_stat, _get_random_amount(secondary_name, secondary_power),
+		num_tiles, tile_type)
 	
 # We need to keep a power curve without too much variation. It would suck
 # to get a low-powered weapon/armour when you really need a high-power one.

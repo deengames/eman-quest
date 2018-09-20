@@ -86,20 +86,16 @@ func _generate_energy_tiles():
 
 func _generate_weapon_tiles():
 	if Features.is_enabled("equipment generates tiles"):
-		# TODO: var num_tiles = Globals.player_data.weapon.grid_tiles.duplicate()
-		var num_tiles = 5
-		# TODO: var tile_type = Globals.player_data.weapon.tile_type
-		var tile_type = "attack"
+		var num_tiles = Globals.player_data.weapon.grid_tiles.duplicate()
+		var tile_type = Globals.player_data.weapon.tile_type
 		while num_tiles > 0:
 			self._change_random_convertable_tile_to(tile_type)
 			num_tiles -= 1
 
 func _generate_armour_tiles():
 	if Features.is_enabled("equipment generates tiles"):
-		# TODO: var num_tiles = Globals.player_data.armour.grid_tiles.duplicate()
-		var num_tiles = 3
-		# TODO: var tile_type = Globals.player_data.armour.tile_type
-		var tile_type = "heal"
+		var num_tiles = Globals.player_data.armour.grid_tiles.duplicate()
+		var tile_type = Globals.player_data.armour.tile_type
 		while num_tiles > 0:
 			self._change_random_convertable_tile_to(tile_type)
 			num_tiles -= 1

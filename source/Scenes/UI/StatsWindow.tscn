@@ -530,7 +530,7 @@ anchor_bottom = 0.0
 margin_left = 450.0
 margin_top = 35.0
 margin_right = 650.0
-margin_bottom = 164.0
+margin_bottom = 197.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -541,7 +541,8 @@ custom_fonts/font = SubResource( 2 )
 text = "Current Weapon:
 Masamune
 +5 strength
-+4 defense"
++4 defense
+Adds 3 critical tiles"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -567,7 +568,8 @@ custom_fonts/font = SubResource( 2 )
 text = "Current Armour:
 Masamune
 +5 strength
-+4 defense"
++4 defense
+Adds 3 heal tiles"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1

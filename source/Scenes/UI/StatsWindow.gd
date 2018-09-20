@@ -15,11 +15,13 @@ func _ready():
 	
 	$Equipment/WeaponLabel.text = ("Current weapon:\n" + weapon.equipment_name + "\n" +
 		"+" + str(weapon.primary_stat_modifier) + " " + StatType.to_string(weapon.primary_stat) + "\n" +
-		"+" + str(weapon.secondary_stat_modifier) + " " + StatType.to_string(weapon.secondary_stat))
+		"+" + str(weapon.secondary_stat_modifier) + " " + StatType.to_string(weapon.secondary_stat) + "\n" +
+		"Adds " + str(weapon.grid_tiles) + " " + weapon.tile_type + " tiles")
 
 	$Equipment/ArmourLabel.text = ("Current weapon:\n" + armour.equipment_name + "\n" +
 		"+" + str(armour.primary_stat_modifier) + " " + StatType.to_string(armour.primary_stat) + "\n" +
-		"+" + str(armour.secondary_stat_modifier) + " " + StatType.to_string(armour.secondary_stat))
+		"+" + str(armour.secondary_stat_modifier) + " " + StatType.to_string(armour.secondary_stat) + "\n" +
+		"Adds " + str(armour.grid_tiles) + " " + armour.tile_type + " tiles")
 
 func _on_UnassignHealthButton_pressed():
 	self._unassign_point("health")

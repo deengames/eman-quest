@@ -42,8 +42,8 @@ var armour
 
 func _init():
 	randomize()
-	self.weapon = EquipmentGenerator.generate(StatType.Strength, 10)
-	self.armour = EquipmentGenerator.generate(StatType.Defense, 8)
+	self.weapon = EquipmentGenerator.generate("weapon", StatType.Strength, 10)
+	self.armour = EquipmentGenerator.generate("armour", StatType.Defense, 8)
 	
 func gain_xp(xp):
 	var old_xp = self.experience_points
