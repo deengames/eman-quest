@@ -75,7 +75,6 @@ func _change_random_convertable_tile_to(contents):
 		tile.contents = contents
 		tile.refresh_display()
 		tile.do_not_change = true
-		tile.freeze()
 
 func _generate_energy_tiles():
 	if Features.is_enabled("actions require energy"):
@@ -86,7 +85,7 @@ func _generate_energy_tiles():
 
 func _generate_weapon_tiles():
 	if Features.is_enabled("equipment generates tiles"):
-		var num_tiles = Globals.player_data.weapon.grid_tiles.duplicate()
+		var num_tiles = Globals.player_data.weapon.grid_tiles
 		var tile_type = Globals.player_data.weapon.tile_type
 		while num_tiles > 0:
 			self._change_random_convertable_tile_to(tile_type)
@@ -94,7 +93,7 @@ func _generate_weapon_tiles():
 
 func _generate_armour_tiles():
 	if Features.is_enabled("equipment generates tiles"):
-		var num_tiles = Globals.player_data.armour.grid_tiles.duplicate()
+		var num_tiles = Globals.player_data.armour.grid_tiles
 		var tile_type = Globals.player_data.armour.tile_type
 		while num_tiles > 0:
 			self._change_random_convertable_tile_to(tile_type)

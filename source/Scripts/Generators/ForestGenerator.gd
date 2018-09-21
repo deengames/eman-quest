@@ -183,7 +183,7 @@ func _generate_treasure_chests():
 		var stat = stats[type]
 		var item = EquipmentGenerator.generate(type, stat, power)
 		var treasure = TreasureChest.new()
-		treasure.set_values(spot[0], spot[1], item)
+		treasure.initialize(spot[0], spot[1], item)
 		chests.append(treasure)
 		num_chests -= 1
 	

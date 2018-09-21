@@ -10,6 +10,12 @@ static func change_map_to(tree, map_type):
 	
 	change_scene_to(tree, populated_map)
 	
+	if map_type == "Overworld":
+		var camera = Globals.player.get_node("Camera2D")
+		# zoom of 2 = 50%
+		camera.zoom.x = 2
+		camera.zoom.y = 2
+	
 # Make it the current scene. Necessary to keep the type.
 # If we use change_scene, it becomes a Node2D, not an AreaMap.
 static func change_scene_to(tree, scene_instance):
