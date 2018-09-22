@@ -1,5 +1,7 @@
 extends Node
 
+const StatType = preload("res://Scripts/StatType.gd")
+
 var equipment_name
 var primary_stat
 var primary_stat_modifier
@@ -21,3 +23,9 @@ func _init(equipment_name, primary_stat, primary_modifier,
 	self.secondary_stat_modifier = secondary_modifier
 	self.grid_tiles = grid_tiles
 	self.tile_type = tile_type
+
+func str():
+	return (self.equipment_name + "\n" +
+		"+" + str(self.primary_stat_modifier) + " " + StatType.to_string(self.primary_stat) + "\n" +
+		"+" + str(self.secondary_stat_modifier) + " " + StatType.to_string(self.secondary_stat) + "\n" +
+		"Adds " + str(self.grid_tiles) + " " + self.tile_type + " tiles")

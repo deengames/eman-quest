@@ -1,7 +1,5 @@
 extends WindowDialog
 
-const StatType = preload("res://Scripts/StatType.gd")
-
 func _ready():
 	self._update_stats_display()
 	
@@ -13,15 +11,8 @@ func _ready():
 	var weapon = Globals.player_data.weapon
 	var armour = Globals.player_data.armour
 	
-	$Equipment/WeaponLabel.text = ("Current weapon:\n" + weapon.equipment_name + "\n" +
-		"+" + str(weapon.primary_stat_modifier) + " " + StatType.to_string(weapon.primary_stat) + "\n" +
-		"+" + str(weapon.secondary_stat_modifier) + " " + StatType.to_string(weapon.secondary_stat) + "\n" +
-		"Adds " + str(weapon.grid_tiles) + " " + weapon.tile_type + " tiles")
-
-	$Equipment/ArmourLabel.text = ("Current weapon:\n" + armour.equipment_name + "\n" +
-		"+" + str(armour.primary_stat_modifier) + " " + StatType.to_string(armour.primary_stat) + "\n" +
-		"+" + str(armour.secondary_stat_modifier) + " " + StatType.to_string(armour.secondary_stat) + "\n" +
-		"Adds " + str(armour.grid_tiles) + " " + armour.tile_type + " tiles")
+	$Equipment/WeaponLabel.text = "Current weapon:\n" + weapon.str()
+	$Equipment/ArmourLabel.text = "Current armour:\n" + armour.str()
 
 func _on_UnassignHealthButton_pressed():
 	self._unassign_point("health")
