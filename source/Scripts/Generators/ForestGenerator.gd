@@ -250,8 +250,16 @@ func _find_empty_spot(occupied_spots):
 	var x = Globals.randint(0, map_width - 1)
 	var y = Globals.randint(0, map_height - 1)
 	
-	while self._tree_map.get(x, y) == "Bush" or [x, y] == self.entrance_position or occupied_spots.find([x, y]) > -1:
-		x = Globals.randint(0, map_width - 1)
-		y = Globals.randint(0, map_height - 1)
+	while (self._tree_map.get(x, y) == "Bush" or
+		[x, y] == self.entrance_position or
+		occupied_spots.find([x, y]) > -1 or
+		# Trees technically have empty space around them, so make sure
+		# we're not in one of those tiles.
+		self._tree_map.get(x, y) == "Tree" or
+		self._tree_map.get(x - 1, y) == "Tree" or
+		self._tree_map.get(x, y - 1) == "Tree" or
+		self._tree_map.get(x - 1, y - 1) == "Tree"):
+			x = Globals.randint(0, map_width - 1)
+			y = Globals.randint(0, map_height - 1)
 	
 	return [x, y]
