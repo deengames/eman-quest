@@ -194,14 +194,15 @@ func _generate_treasure_chests():
 func _turn_2x2_bushes_into_trees(tree_map):
 	for y in range(0, map_height - 1):
 		for x in range(0, map_width - 1):
-			if (tree_map.get(x, y) == "Bush" and 
-			tree_map.get(x + 1, y) == "Bush" and
-			tree_map.get(x, y + 1) == "Bush" and
-			tree_map.get(x + 1, y + 1) == "Bush"):
-				tree_map.set(x, y, "Tree")
-				tree_map.set(x + 1, y, null)
-				tree_map.set(x, y + 1, null)
-				tree_map.set(x + 1, y + 1, null)
+			if x % 2 == 0 and y % 2 == 0:
+				if (tree_map.get(x, y) == "Bush" and 
+				tree_map.get(x + 1, y) == "Bush" and
+				tree_map.get(x, y + 1) == "Bush" and
+				tree_map.get(x + 1, y + 1) == "Bush"):
+					tree_map.set(x, y, "Tree")
+					tree_map.set(x + 1, y, null)
+					tree_map.set(x, y + 1, null)
+					tree_map.set(x + 1, y + 1, null)
 				
 
 # Almost common with OverworldGenerator
