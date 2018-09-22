@@ -76,16 +76,16 @@ region_enabled = true
 region_rect = Rect2( 64, 64, 64, 64 )
 _sections_unfolded = [ "Region", "Transform" ]
 
-[node name="Bush" type="Sprite" parent="." index="5"]
+[node name="Tree" type="Sprite" parent="." index="5"]
 
-position = Vector2( 284, 0 )
+position = Vector2( 192, 96 )
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 128, 64, 64, 64 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Region", "Transform" ]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Bush" index="0"]
+[node name="StaticBody2D" type="StaticBody2D" parent="Tree" index="0"]
 
 input_pickable = false
 collision_layer = 1
@@ -95,7 +95,7 @@ constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bush/StaticBody2D" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tree/StaticBody2D" index="0"]
 
 position = Vector2( 32, 32 )
 shape = SubResource( 2 )
