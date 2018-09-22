@@ -3,7 +3,7 @@
 [ext_resource path="res://Scenes/PopulatedMapScene.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/UI.gd" type="Script" id=2]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -25,7 +25,7 @@ anchor_bottom = 0.0
 margin_left = 16.0
 margin_top = 540.0
 margin_right = 60.0
-margin_bottom = 550.0
+margin_bottom = 560.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -42,6 +42,34 @@ flat = false
 align = 1
 _sections_unfolded = [ "Margin" ]
 
+[node name="InventoryButton" type="Button" parent="UI" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 76.0
+margin_top = 540.0
+margin_right = 120.0
+margin_bottom = 560.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Inventory"
+flat = false
+align = 1
+_sections_unfolded = [ "Margin" ]
+
 [connection signal="pressed" from="UI/StatsButton" to="UI" method="_on_StatsButton_pressed"]
+
+[connection signal="pressed" from="UI/InventoryButton" to="UI" method="_on_InventoryButton_pressed"]
 
 

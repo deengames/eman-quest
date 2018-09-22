@@ -7,7 +7,8 @@ extends WindowDialog
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
-	pass
+	$Equipment/SelectedWeapon.text = ""
+	$Equipment/SelectedArmour.text = ""
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
