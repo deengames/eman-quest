@@ -72,10 +72,12 @@ func _generate_forest():
 
 	var tree_map = TwoDimensionalArray.new(self.map_width, self.map_height)
 	to_return.append(tree_map)
-	self._fill_with("Tree", tree_map)
+	self._fill_with("Bush", tree_map)
 
 	var path_points = self._generate_paths(dirt_map, tree_map)
 	self._generate_clearings(path_points, dirt_map, tree_map)
+	
+	self._turn_2x2_bushes_into_trees(tree_map)
 	
 	return to_return
 
@@ -188,6 +190,20 @@ func _generate_treasure_chests():
 		num_chests -= 1
 	
 	return chests
+	
+func _turn_2x2_bushes_into_trees(tree_map):
+	for y in range(0, map_height - 1):
+		for x in range(0, map_width - 1):
+			if x % 2 == 0 and y % 2 == 0:
+				if (tree_map.get(x, y) == "Bush" and 
+				tree_map.get(x + 1, y) == "Bush" and
+				tree_map.get(x, y + 1) == "Bush" and
+				tree_map.get(x + 1, y + 1) == "Bush"):
+					tree_map.set(x, y, "Tree")
+					tree_map.set(x + 1, y, null)
+					tree_map.set(x, y + 1, null)
+					tree_map.set(x + 1, y + 1, null)
+				
 
 # Almost common with OverworldGenerator
 func _fill_with(tile_name, map_array):
@@ -234,7 +250,7 @@ func _find_empty_spot(occupied_spots):
 	var x = Globals.randint(0, map_width - 1)
 	var y = Globals.randint(0, map_height - 1)
 	
-	while self._tree_map.get(x, y) == "Tree" or [x, y] == self.entrance_position or occupied_spots.find([x, y]) > -1:
+	while self._tree_map.get(x, y) == "Bush" or [x, y] == self.entrance_position or occupied_spots.find([x, y]) > -1:
 		x = Globals.randint(0, map_width - 1)
 		y = Globals.randint(0, map_height - 1)
 	

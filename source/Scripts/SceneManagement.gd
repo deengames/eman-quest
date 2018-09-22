@@ -13,6 +13,7 @@ static func change_map_to(tree, map_type):
 	if map_type == "Overworld":
 		var camera = Globals.player.get_node("Camera2D")
 		# zoom of 2 = 50%
+		# TODO: tween
 		camera.zoom.x = 2
 		camera.zoom.y = 2
 	
