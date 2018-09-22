@@ -41,7 +41,7 @@ static func generate(type, primary_stat, power):
 		var types = ["attack", "heal"] # TODO: add vampire
 		tile_type = types[randi() % len(types)]
 	
-	return Equipment.new(item_name, primary_stat, _get_random_amount(primary_name, power),
+	return Equipment.new(type, item_name, primary_stat, _get_random_amount(primary_name, power),
 		secondary_stat, _get_random_amount(secondary_name, secondary_power),
 		num_tiles, tile_type)
 	
@@ -49,7 +49,7 @@ static func generate(type, primary_stat, power):
 # to get a low-powered weapon/armour when you really need a high-power one.
 # Basic equipment starts with power=10
 static func _get_random_amount(stat_name, power):
-	if stat_name == "Health":		
+	if stat_name == "Health":
 		return randint(power * 2, power * 3)
 	elif stat_name == "Energy":
 		# to start, energy is ~1/3 of HP.

@@ -266,4 +266,8 @@ icon_mode = 1
 fixed_icon_size = Vector2( 0, 0 )
 _sections_unfolded = [ "Columns", "Icon", "custom_fonts" ]
 
+[connection signal="item_selected" from="ItemList" to="." method="_on_ItemList_item_selected"]
+
+[connection signal="nothing_selected" from="ItemList" to="." method="_on_ItemList_nothing_selected"]
+
 
