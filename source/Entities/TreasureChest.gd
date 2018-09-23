@@ -6,6 +6,8 @@ var is_opened = false
 var contents # equipment instance
 var tile_x = 0
 var tile_y = 0
+# reference to the map instance; another TreasureChest, created by .new
+var data = null
 
 var _player_is_in_range = false
 
@@ -16,14 +18,25 @@ func initialize(x, y, contents):
 	self.tile_y = y
 	self.contents = contents
 
+func initialize_from(data):
+	self.data = data
+	self.contents = data.contents
+	self.is_opened = data.is_opened
+	self.position.x = data.tile_x * Globals.TILE_WIDTH
+	self.position.y = data.tile_y * Globals.TILE_HEIGHT
+	if data.is_opened:
+		self._consume()
+
 func open():
 	if not self.is_opened:
 		# Grant item
 		Globals.player_data.inventory.append(self.contents)
-		self.consume()
+		self._consume()
 
-func consume():
+func _consume():
 	self.is_opened = true
+	if self.data != null:
+		self.data.is_opened = true
 	self._appear_open()
 
 func _appear_open():
