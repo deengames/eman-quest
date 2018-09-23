@@ -2,12 +2,13 @@ extends WindowDialog
 
 # List just takes strings. Keep references to items.
 var _all_items = []
+var _selected_item = null
 
 func _ready():
 	self._update_equipped_display()
-	$Equipment/SelectedWeapon.text = ""
-	$Equipment/SelectedArmour.text = ""
+	self._clear_selected_display()
 	self._populate_item_list()
+	$EquipButton.disabled = true
 
 func _update_equipped_display():
 	$Equipment/CurrentWeapon.text = Globals.player_data.weapon.str()
@@ -32,13 +33,42 @@ func _add_item(equipment):
 
 func _on_ItemList_nothing_selected():
 	$ItemList.clear()
-
+	$EquipButton.disabled = true
+	self._selected_item = null
 
 func _on_ItemList_item_selected(index):
 	var item = self._all_items[index]
+	
 	if item.type == "weapon":
 		$Equipment/SelectedWeapon.text = item.str()
 		$Equipment/SelectedArmour.text = ""
-	else: # armour
+	elif item.type == "armour":
 		$Equipment/SelectedWeapon.text = ""
 		$Equipment/SelectedArmour.text = item.str()
+	
+	$EquipButton.disabled = false
+	self._selected_item = item
+	
+func _on_EquipButton_pressed():
+	if self._selected_item != null: # redundant but safer
+		if self._selected_item.type == "weapon":
+			var old_weapon = Globals.player_data.weapon
+			Globals.player_data.inventory.append(old_weapon)
+			Globals.player_data.weapon = self._selected_item
+		elif self._selected_item.type == "armour":
+			var old_armour = Globals.player_data.armour
+			Globals.player_data.inventory.append(old_armour)
+			Globals.player_data.armour = self._selected_item
+		
+		var index = Globals.player_data.inventory.find(self._selected_item)
+		Globals.player_data.inventory.remove(index)
+		self._selected_item = null
+		
+		$EquipButton.disabled = true
+		self._clear_selected_display()
+		self._update_equipped_display()
+		self._populate_item_list()
+
+func _clear_selected_display():
+	$Equipment/SelectedWeapon.text = ""
+	$Equipment/SelectedArmour.text = ""
