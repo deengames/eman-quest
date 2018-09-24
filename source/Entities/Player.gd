@@ -18,3 +18,10 @@ func _process(delta):
 
 func can_fight():
 	return self._cant_fight_from == null
+
+func _change_animation():
+	$AnimationPlayer.play("Walk " + self.facing)
+
+func _on_facing_new_direction(new_direction):
+	self.facing = new_direction
+	self._change_animation()
