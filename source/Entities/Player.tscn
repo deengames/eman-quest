@@ -28,7 +28,7 @@ tracks/0/keys = {
 "values": [ Rect2( 0, 0, 64, 125 ), Rect2( 64, 0, 64, 125 ), Rect2( 128, 0, 64, 125 ), Rect2( 192, 0, 64, 125 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 
 resource_name = "Walk Left"
 length = 0.8
@@ -47,9 +47,8 @@ tracks/0/keys = {
 "values": [ Rect2( 0, 375, 64, 125 ), Rect2( 64, 375, 64, 125 ), Rect2( 128, 375, 64, 125 ), Rect2( 192, 375, 64, 125 ) ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 
-resource_name = "Walk Right"
 length = 0.8
 loop = true
 step = 0.2
@@ -66,9 +65,8 @@ tracks/0/keys = {
 "values": [ Rect2( 0, 125, 64, 125 ), Rect2( 64, 125, 64, 125 ), Rect2( 128, 125, 64, 125 ), Rect2( 192, 125, 64, 125 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 
-resource_name = "Walk Up"
 length = 0.8
 loop = true
 step = 0.2
@@ -124,7 +122,7 @@ _sections_unfolded = [ "Editor", "Limit", "Offset", "Smoothing" ]
 texture = ExtResource( 2 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 192, 375, 64, 125 )
+region_rect = Rect2( 0, 0, 64, 125 )
 _sections_unfolded = [ "Offset", "Region" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
@@ -146,9 +144,9 @@ playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
 "anims/Walk Down" = SubResource( 2 )
-"anims/Walk Left" = SubResource( 5 )
-"anims/Walk Right" = SubResource( 3 )
-"anims/Walk Up" = SubResource( 4 )
+"anims/Walk Left" = SubResource( 3 )
+"anims/Walk Right" = SubResource( 4 )
+"anims/Walk Up" = SubResource( 5 )
 blend_times = [  ]
 
 [connection signal="facing_new_direction" from="MoveToKeyboardComponent" to="." method="_on_facing_new_direction"]
