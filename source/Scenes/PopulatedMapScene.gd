@@ -4,6 +4,7 @@ extends Node2D
 # A class that takes an AreaMap and generates the scene (tiles, enemies, etc.)
 ###
 
+var Boss = preload("res://Entities/Battle/Boss.tscn")
 var MapWarp = preload("res://Entities/MapWarp.tscn")
 var Monster = preload("res://Entities/Battle/Monster.tscn")
 const Player = preload("res://Entities/Player.tscn")
@@ -74,6 +75,10 @@ func _add_monsters():
 		if Globals.won_battle:
 			var monsters = monster_data[Globals.current_monster_type]
 			monsters.remove(monsters.find(Globals.current_monster))
+			if Globals.current_monster.IS_BOSS:
+				pass # TODO: set is_alive to false
+				# TODO that: change SceneManagement to set the current_monster
+				# to the monster data, not coordinates?
 			
 		Globals.current_monster = null
 		Globals.previous_monsters = null
@@ -93,6 +98,18 @@ func _add_monsters():
 			monsters.append(instance)
 		
 		self._monsters[monster_type] = monsters
+	
+	for boss_type in map.bosses.keys():
+		var bosses = []
+		for boss in map.bosses[boss_type]:
+			if boss.is_alive:
+				var instance = Boss.instance()
+				instance.position.x = boss.x
+				instance.position.y = boss.y
+				self.add_child(instance)
+				bosses.append(instance)
+				print("Boss at " + str(instance.position))
+		self._monsters[boss_type] = bosses
 
 func _populate_treasure_chests():
 	for data in self.map.treasure_chests:
@@ -107,5 +124,10 @@ func get_monsters():
 		to_return[type] = []
 		for monster in self._monsters[type]:
 			to_return[type].append([monster.position.x, monster.position.y])
+	
+	for boss_type in self.map.bosses.keys():
+		for boss in self.map.bosses[boss_type]:
+			if boss.is_alive:
+				to_return[boss.data.type] = [boss.x, boss.y]
 	
 	return to_return

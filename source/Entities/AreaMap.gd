@@ -16,6 +16,7 @@ var boss_killed = false
 var tileset
 var monsters = {} # Type => list of coordinates. Kept so we know what to restore when coming back after battle.
 var treasure_chests = [] # instances of TreasureChest (class, not the scene)
+var bosses = {} # Type => Boss instances created with .new
 
 func _init(map_type, tileset, entrance_position, tiles_wide, tiles_high, generate_monsters_callback):
 	self.tileset = tileset

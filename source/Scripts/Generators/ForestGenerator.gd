@@ -1,6 +1,7 @@
 extends Node
 
 const AreaMap = preload("res://Entities/AreaMap.gd")
+const Boss = preload("res://Entities/Battle/Boss.gd")
 const EquipmentGenerator = preload("res://Scripts/Generators/EquipmentGenerator.gd")
 const MapDestination = preload("res://Entities/MapDestination.gd")
 const StatType = preload("res://Scripts/StatType.gd")
@@ -31,9 +32,11 @@ var map_height = 3 * Globals.WORLD_HEIGHT_IN_TILES
 var entrance_position = [map_width / 2, map_height - 1]
 var _back_exit = [map_width / 2, 0]
 
+var _bosses = {}
 var _clearings_coordinates = []
 var _tree_map = []
 
+# Called once per game
 func generate():
 	var map = AreaMap.new("Forest", preload("res://Tilesets/Overworld.tres"), self.entrance_position, map_width, map_height, funcref(self, "generate_monsters"))
 
@@ -42,6 +45,8 @@ func generate():
 	
 	map.transitions = self._generate_transitions()
 	map.treasure_chests = self._generate_treasure_chests()
+	map.bosses = self._generate_boss()
+	self._bosses = map.bosses
 	
 	for data in tile_data:
 		map.add_tile_data(data)
@@ -52,16 +57,17 @@ func generate():
 	return map
 
 func generate_monsters():
-	var coordinates = self._clearings_coordinates[0]
-	# Map of type => array of coordinates (one pair per entity)
-	var monsters = [coordinates]
+	var monsters = []
 	
 	for n in Globals.randint(NUM_MONSTERS[0], NUM_MONSTERS[1]) - 1:
-		coordinates = self._find_empty_spot(monsters)
+		var coordinates = self._find_empty_spot(monsters)
 		var pixel_coordinates = [coordinates[0] * Globals.TILE_WIDTH, coordinates[1] * Globals.TILE_HEIGHT]
 		monsters.append(pixel_coordinates)
-		
-	return { "Slime": monsters }
+	
+	# Map of type => array of coordinates (one pair per entity)
+	# TODO: return instances of some data type instead. Monster.new()?
+	var to_return = { "Slime": monsters }
+	return to_return
 
 func _generate_forest():
 	var to_return = []
@@ -190,7 +196,14 @@ func _generate_treasure_chests():
 		num_chests -= 1
 	
 	return chests
-	
+
+func _generate_boss():
+	var coordinates = self._clearings_coordinates[0]
+	var pixel_coordinates = [coordinates[0] * Globals.TILE_WIDTH, coordinates[1] * Globals.TILE_HEIGHT]
+	var boss = Boss.new() # TODO: pass in data
+	boss.initialize(pixel_coordinates[0], pixel_coordinates[1])
+	return { boss.data.type: [boss] }
+
 func _turn_2x2_bushes_into_trees(tree_map):
 	for y in range(0, map_height - 1):
 		for x in range(0, map_width - 1):

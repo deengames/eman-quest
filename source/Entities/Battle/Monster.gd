@@ -4,8 +4,8 @@ const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 const MOVE_SPEED = 100
 const CHANGE_DESTINATION_EVERY_N_SECONDS = 1
+const IS_BOSS = false
 
-# TODO: class? Or, dictionary of name => data?
 const data = {
 	"type": "Slime",
 	"health": 30,
@@ -26,7 +26,6 @@ var _destination_last_changed = OS.get_ticks_msec()
 
 func _ready():
 	self._pick_destination()
-	var root = get_tree().get_root()
 
 func _process(delta):
 	var now = OS.get_ticks_msec()
