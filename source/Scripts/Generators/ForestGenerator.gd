@@ -4,6 +4,7 @@ const AreaMap = preload("res://Entities/AreaMap.gd")
 const Boss = preload("res://Entities/Battle/Boss.gd")
 const EquipmentGenerator = preload("res://Scripts/Generators/EquipmentGenerator.gd")
 const MapDestination = preload("res://Entities/MapDestination.gd")
+const Monster = preload("res://Entities/Battle/Monster.gd")
 const StatType = preload("res://Scripts/StatType.gd")
 const TreasureChest = preload("res://Entities/TreasureChest.gd")
 const TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
@@ -62,12 +63,24 @@ func generate_monsters():
 	for n in Globals.randint(NUM_MONSTERS[0], NUM_MONSTERS[1]) - 1:
 		var coordinates = self._find_empty_spot(monsters)
 		var pixel_coordinates = [coordinates[0] * Globals.TILE_WIDTH, coordinates[1] * Globals.TILE_HEIGHT]
-		monsters.append(pixel_coordinates)
+		var monster = Monster.new()
+		monster.initialize(pixel_coordinates[0], pixel_coordinates[1])
+		monsters.append(monster)
 	
 	# Map of type => array of coordinates (one pair per entity)
 	# TODO: return instances of some data type instead. Monster.new()?
 	var to_return = { "Slime": monsters }
 	return to_return
+
+
+func _generate_boss():
+	var coordinates = self._clearings_coordinates[0]
+	var pixel_coordinates = [coordinates[0] * Globals.TILE_WIDTH, coordinates[1] * Globals.TILE_HEIGHT]
+	var boss = Boss.new() # TODO: pass in data
+	boss.x = pixel_coordinates[0]
+	boss.y = pixel_coordinates[1]
+	boss.initialize(boss)
+	return { boss.data.type: [boss] }
 
 func _generate_forest():
 	var to_return = []
@@ -196,13 +209,6 @@ func _generate_treasure_chests():
 		num_chests -= 1
 	
 	return chests
-
-func _generate_boss():
-	var coordinates = self._clearings_coordinates[0]
-	var pixel_coordinates = [coordinates[0] * Globals.TILE_WIDTH, coordinates[1] * Globals.TILE_HEIGHT]
-	var boss = Boss.new() # TODO: pass in data
-	boss.initialize(pixel_coordinates[0], pixel_coordinates[1])
-	return { boss.data.type: [boss] }
 
 func _turn_2x2_bushes_into_trees(tree_map):
 	for y in range(0, map_height - 1):

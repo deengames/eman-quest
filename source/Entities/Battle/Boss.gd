@@ -22,15 +22,17 @@ const IS_BOSS = true
 var x = 0
 var y = 0
 var is_alive = true
+var data_object = null # Boss.new() instance
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	pass
 
-func initialize(x, y):
-	self.x = x
-	self.y = y
+func initialize(data_object):
+	self.data_object = data_object
+	self.position.x = data_object.x
+	self.position.y = data_object.y
 
 func _on_Area2D_body_entered(body):
 	SceneManagement.switch_to_battle_if_touched_player(self, body)

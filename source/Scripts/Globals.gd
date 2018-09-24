@@ -27,7 +27,7 @@ var pre_battle_position = [0, 0]
 var won_battle = false
 # Coordinates of monsters on-map before battle
 var previous_monsters = {} # type => pixel positions
-var current_monster = null
+var current_monster = null # monster.data_object
 var current_monster_type = ""
 
 func _ready():

@@ -21,11 +21,25 @@ const data = {
 	}
 }
 
+# pixel coordinates
+var x = 0
+var y = 0
+var data_object = null # Monster.new() instance
+
 var _destination = Vector2(0, 0)
 var _destination_last_changed = OS.get_ticks_msec()
 
 func _ready():
 	self._pick_destination()
+
+func initialize(x, y):
+	self.x = x
+	self.y = y
+	
+func initialize_from(monster):
+	self.data_object = monster
+	self.position.x = monster.x
+	self.position.y = monster.y
 
 func _process(delta):
 	var now = OS.get_ticks_msec()

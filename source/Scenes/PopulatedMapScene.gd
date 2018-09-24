@@ -76,9 +76,7 @@ func _add_monsters():
 			var monsters = monster_data[Globals.current_monster_type]
 			monsters.remove(monsters.find(Globals.current_monster))
 			if Globals.current_monster.IS_BOSS:
-				pass # TODO: set is_alive to false
-				# TODO that: change SceneManagement to set the current_monster
-				# to the monster data, not coordinates?
+				Globals.current_monster.is_alive = false
 			
 		Globals.current_monster = null
 		Globals.previous_monsters = null
@@ -87,28 +85,26 @@ func _add_monsters():
 	
 	self._monsters = {}
 	for monster_type in monster_data.keys():
-		var coordinate_pairs = monster_data[monster_type]
-		var monsters = []
+		var monsters = monster_data[monster_type]
+		var instances = []
 		
-		for coordinates in coordinate_pairs:
+		for monster in monsters:
 			var instance = Monster.instance()
-			instance.position.x = coordinates[0]
-			instance.position.y = coordinates[1]
+			instance.initialize_from(monster)
 			self.add_child(instance)
-			monsters.append(instance)
+			instances.append(instance)
 		
-		self._monsters[monster_type] = monsters
+		self._monsters[monster_type] = instances
 	
 	for boss_type in map.bosses.keys():
 		var bosses = []
 		for boss in map.bosses[boss_type]:
 			if boss.is_alive:
 				var instance = Boss.instance()
-				instance.position.x = boss.x
-				instance.position.y = boss.y
+				instance.initialize(boss)
 				self.add_child(instance)
 				bosses.append(instance)
-				print("Boss at " + str(instance.position))
+				
 		self._monsters[boss_type] = bosses
 
 func _populate_treasure_chests():
@@ -118,16 +114,20 @@ func _populate_treasure_chests():
 		self.add_child(instance)
 
 func get_monsters():
-	# Return pixel coordinates for all live instances
 	var to_return = {}
 	for type in self._monsters.keys():
 		to_return[type] = []
 		for monster in self._monsters[type]:
-			to_return[type].append([monster.position.x, monster.position.y])
-	
+			monster.data_object.x = monster.position.x
+			monster.data_object.y = monster.position.y
+			to_return[type].append(monster.data_object)
+		
 	for boss_type in self.map.bosses.keys():
+		to_return[boss_type] = []
 		for boss in self.map.bosses[boss_type]:
 			if boss.is_alive:
-				to_return[boss.data.type] = [boss.x, boss.y]
-	
+				boss.data_object.x = boss.position.x
+				boss.data_object.y = boss.position.y
+				to_return[boss_type].append(boss.data_object)
+				
 	return to_return

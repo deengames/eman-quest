@@ -42,7 +42,7 @@ static func switch_to_battle_if_touched_player(monster, body):
 		Globals.previous_monsters = Globals.current_map_scene.get_monsters()
 		# Keep track of who to remove if we won
 		Globals.current_monster_type = monster.data["type"]
-		Globals.current_monster = [monster.position.x, monster.position.y]
+		Globals.current_monster = monster.data_object
 		
 		var battle_scene = MemoryTileBattleScene.instance()
 		battle_scene.set_monster_data(monster.data.duplicate())
