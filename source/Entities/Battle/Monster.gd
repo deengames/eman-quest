@@ -1,7 +1,6 @@
 extends KinematicBody2D
 
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
-const MemoryTileBattleScene = preload("res://Scenes/Battle/MemoryTileBattleScene.tscn")
 
 const MOVE_SPEED = 100
 const CHANGE_DESTINATION_EVERY_N_SECONDS = 1
@@ -48,18 +47,4 @@ func _physics_process(delta):
 		move_and_slide(velocity) 
 
 func _on_Area2D_body_entered(body):
-	if body == Globals.player and Globals.player.can_fight():
-		
-		# Reset state of last battle's results
-		Globals.pre_battle_position = [Globals.player.position.x, Globals.player.position.y]
-		Globals.won_battle = false
-		
-		# Keep a list of monsters to restore after battle
-		Globals.previous_monsters = Globals.current_map_scene.get_monsters()
-		# Keep track of who to remove if we won
-		Globals.current_monster_type = self.data["type"]
-		Globals.current_monster = [self.position.x, self.position.y]
-		
-		var battle_scene = MemoryTileBattleScene.instance()
-		battle_scene.set_monster_data(self.data.duplicate())
-		SceneManagement.change_scene_to(get_tree(), battle_scene)
+	SceneManagement.switch_to_battle_if_touched_player(self, body)
