@@ -153,4 +153,6 @@ blend_times = [  ]
 
 [connection signal="facing_new_direction" from="MoveToKeyboardComponent" to="." method="_on_facing_new_direction"]
 
+[connection signal="reached_destination" from="MoveToKeyboardComponent" to="." method="_on_reached_destination"]
+
 

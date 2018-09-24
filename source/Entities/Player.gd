@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 var _cant_fight_from = null
 var CANT_FIGHT_FOR_SECONDS = 5
+var facing = "down"
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
@@ -25,3 +26,6 @@ func _change_animation():
 func _on_facing_new_direction(new_direction):
 	self.facing = new_direction
 	self._change_animation()
+
+func _on_reached_destination():
+	$AnimationPlayer.stop()
