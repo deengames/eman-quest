@@ -3,6 +3,7 @@ extends Node
 const AreaMap = preload("res://Entities/AreaMap.gd")
 const Boss = preload("res://Entities/Battle/Boss.gd")
 const EquipmentGenerator = preload("res://Scripts/Generators/EquipmentGenerator.gd")
+const KeyItem = preload("res://Entities/KeyItem.gd")
 const MapDestination = preload("res://Entities/MapDestination.gd")
 const Monster = preload("res://Entities/Battle/Monster.gd")
 const StatType = preload("res://Scripts/StatType.gd")
@@ -76,10 +77,12 @@ func generate_monsters():
 func _generate_boss():
 	var coordinates = self._clearings_coordinates[0]
 	var pixel_coordinates = [coordinates[0] * Globals.TILE_WIDTH, coordinates[1] * Globals.TILE_HEIGHT]
-	var boss = Boss.new() # TODO: pass in data
-	boss.x = pixel_coordinates[0]
-	boss.y = pixel_coordinates[1]
-	boss.initialize(boss)
+	
+	var kufi = KeyItem.new()
+	kufi.initialize("Bloody Kufi", "A white kufi (skull-cap) stained with blood ...")
+	
+	var boss = Boss.new()
+	boss.initialize(pixel_coordinates[0], pixel_coordinates[1], kufi)
 	return { boss.data.type: [boss] }
 
 func _generate_forest():
