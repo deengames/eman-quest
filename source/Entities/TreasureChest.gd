@@ -30,7 +30,7 @@ func initialize_from(data):
 func open():
 	if not self.is_opened:
 		# Grant item
-		Globals.player_data.inventory.append(self.contents)
+		Globals.player_data.equipment.append(self.contents)
 		self._consume()
 
 func _consume():

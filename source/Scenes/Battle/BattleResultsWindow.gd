@@ -19,7 +19,7 @@ func initialize(monster_data):
 		if Globals.battle_spoils != null:
 			$SpoilsText.text = "Found a " + Globals.battle_spoils.item_name
 			$SpoilsText.visible = true
-			Globals.player_data.inventory.append(Globals.battle_spoils)
+			Globals.player_data.equipment.append(Globals.battle_spoils)
 			Globals.battle_spoils = null
 			
 func _on_CloseButton_pressed():

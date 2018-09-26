@@ -21,7 +21,7 @@ func _populate_item_list():
 	_add_item(Globals.player_data.weapon)
 	_add_item(Globals.player_data.armour)
 	
-	for item in Globals.player_data.inventory:
+	for item in Globals.player_data.equipment:
 		self._add_item(item)
 
 func _add_item(equipment):
@@ -53,15 +53,15 @@ func _on_EquipButton_pressed():
 	if self._selected_item != null: # redundant but safer
 		if self._selected_item.type == "weapon":
 			var old_weapon = Globals.player_data.weapon
-			Globals.player_data.inventory.append(old_weapon)
+			Globals.player_data.equipment.append(old_weapon)
 			Globals.player_data.weapon = self._selected_item
 		elif self._selected_item.type == "armour":
 			var old_armour = Globals.player_data.armour
-			Globals.player_data.inventory.append(old_armour)
+			Globals.player_data.equipment.append(old_armour)
 			Globals.player_data.armour = self._selected_item
 		
-		var index = Globals.player_data.inventory.find(self._selected_item)
-		Globals.player_data.inventory.remove(index)
+		var index = Globals.player_data.equipment.find(self._selected_item)
+		Globals.player_data.equipment.remove(index)
 		self._selected_item = null
 		
 		$EquipButton.disabled = true

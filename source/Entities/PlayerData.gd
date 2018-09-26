@@ -39,7 +39,7 @@ var assigned_points = {
 
 var weapon
 var armour
-var inventory = []
+var equipment = []
 
 func _init():
 	randomize()
