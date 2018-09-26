@@ -16,10 +16,11 @@ func initialize(monster_data):
 		$LevelText.text = "Level: " + str(Globals.player_data.level)
 		$LevelText.text += "\n" + (str(Globals.player_data.experience_points) +
 			"/" + str(Globals.player_data.get_next_level_xp()) + " XP")
+			
 		if Globals.battle_spoils != null:
 			$SpoilsText.text = "Found a " + Globals.battle_spoils.item_name
 			$SpoilsText.visible = true
-			Globals.player_data.equipment.append(Globals.battle_spoils)
+			Globals.player_data.key_items.append(Globals.battle_spoils)
 			Globals.battle_spoils = null
 			
 func _on_CloseButton_pressed():
