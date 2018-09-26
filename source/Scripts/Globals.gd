@@ -13,6 +13,7 @@ var player # current player instance. Used for collision detection mostly.
 # Start: persist to save game. Set in world generator.
 var maps = {} # eg. "forest" => forest (AreaMap/data class) instance
 var player_data = PlayerData.new() # the actual player data.
+var story_data = {} # set in GenerateWorldScene; boss type, village name, etc.
 # End: persist
 ####
 
