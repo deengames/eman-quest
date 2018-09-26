@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 const StatsWindow = preload("res://Scenes/UI/StatsWindow.tscn")
-const InventoryWindow = preload("res://Scenes/UI/InventoryWindow.tscn")
+const EquipmentWindow = preload("res://Scenes/UI/EquipmentWindow.tscn")
 
 func _ready():
 	pass
@@ -11,8 +11,7 @@ func _on_StatsButton_pressed():
 	self.add_child(stats_window)
 	stats_window.popup_centered()
 
-
-func _on_InventoryButton_pressed():
-	var inventory_window = InventoryWindow.instance()
-	self.add_child(inventory_window)
-	inventory_window.popup_centered()
+func _on_EquipmentButton_pressed():
+	var equipment_window = EquipmentWindow.instance()
+	self.add_child(equipment_window)
+	equipment_window.popup_centered()
