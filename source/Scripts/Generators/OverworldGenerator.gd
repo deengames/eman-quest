@@ -5,7 +5,9 @@ var MapDestination = preload("res://Entities/MapDestination.gd")
 var TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 
 # Don't place things N tiles from the edges of the map
-const PADDING_FROM_SIDES_OF_MAP = 4
+const _PADDING_FROM_SIDES_OF_MAP = 4
+const _TRANSITION_DESTINATIONS = ["Forest", "Final"]
+
 var map_width = Globals.WORLD_WIDTH_IN_TILES
 var map_height = Globals.WORLD_HEIGHT_IN_TILES
 
@@ -83,18 +85,18 @@ func _place_area_entrances(map):
 	var placed_areas = []
 	var ground_tiles = map.tile_data[0]
 	
-	var coordinates = self._find_empty_area(ground_tiles, placed_areas)
-	
-	placed_areas.append(coordinates)
-	map.transitions.append(MapDestination.new("Forest", Vector2(coordinates[0], coordinates[1])))
+	for destination in self._TRANSITION_DESTINATIONS:
+		var coordinates = self._find_empty_area(ground_tiles, placed_areas)
+		placed_areas.append(coordinates)
+		map.transitions.append(MapDestination.new(destination, Vector2(coordinates[0], coordinates[1])))
 
 func _find_empty_area(tile_data, placed_areas):
-	var x = Globals.randint(PADDING_FROM_SIDES_OF_MAP, map_width - 1 - PADDING_FROM_SIDES_OF_MAP)
-	var y = Globals.randint(PADDING_FROM_SIDES_OF_MAP, map_height - 1 - PADDING_FROM_SIDES_OF_MAP)
+	var x = Globals.randint(_PADDING_FROM_SIDES_OF_MAP, map_width - 1 - _PADDING_FROM_SIDES_OF_MAP)
+	var y = Globals.randint(_PADDING_FROM_SIDES_OF_MAP, map_height - 1 - _PADDING_FROM_SIDES_OF_MAP)
 	
 	while not self._is_area_around_tile_valid_and_empty(tile_data, placed_areas, x, y):
-		x = Globals.randint(PADDING_FROM_SIDES_OF_MAP, map_width - 1 - PADDING_FROM_SIDES_OF_MAP)
-		y = Globals.randint(PADDING_FROM_SIDES_OF_MAP, map_height - 1 - PADDING_FROM_SIDES_OF_MAP)
+		x = Globals.randint(_PADDING_FROM_SIDES_OF_MAP, map_width - 1 - _PADDING_FROM_SIDES_OF_MAP)
+		y = Globals.randint(_PADDING_FROM_SIDES_OF_MAP, map_height - 1 - _PADDING_FROM_SIDES_OF_MAP)
 	
 	return [x, y]
 	

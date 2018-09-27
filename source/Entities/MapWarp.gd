@@ -1,10 +1,13 @@
 extends Node2D
 
+const EndGameMap = preload("res://Scenes/Maps/EndGameMap.tscn")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
+
 const EntranceImageXPositions = {
 	"Dungeon": 0,
 	"Cave": 64,
-	"Forest": 128
+	"Forest": 128,
+	"Final": 320
 }
 
 # Map destination sprite
@@ -30,8 +33,11 @@ func _on_Area2D_body_entered(body):
 		# Leaving overworld? Come back one tile under the current tile.
 		if Globals.current_map.map_type == "Overworld":
 			Globals.overworld_position = Vector2(self.position.x, self.position.y + Globals.TILE_HEIGHT)
-			
-		SceneManagement.change_map_to(get_tree(), map_type)
+		
+		if map_type != "Final":
+			SceneManagement.change_map_to(get_tree(), map_type)
+		else:
+			SceneManagement.change_scene_to(get_tree(), EndGameMap.instance())
 		
 		# Come back to the overworld? Restore coordinates.
 		if Globals.current_map.map_type == "Overworld" and Globals.overworld_position != null:
