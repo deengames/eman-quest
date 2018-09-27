@@ -54,6 +54,8 @@ func _pick_destination():
 	self._destination.x = Globals.randint(0, (current_map.tiles_wide - 1) * Globals.TILE_WIDTH)
 	self._destination.y = Globals.randint(0, (current_map.tiles_high - 1) * Globals.TILE_HEIGHT)
 
+	self._face_current_direction()
+
 func _physics_process(delta):
 	if self._destination != null:
 		var velocity = (self._destination - self.position).normalized() * self.MOVE_SPEED
@@ -61,3 +63,19 @@ func _physics_process(delta):
 
 func _on_Area2D_body_entered(body):
 	SceneManagement.switch_to_battle_if_touched_player(self, body)
+
+func _face_current_direction():
+	var delta = (self._destination - self.position).normalized()
+	if abs(delta.x) >= abs(delta.y):
+		if delta.x <= 0:
+			self._face("Left")
+		else:
+			self._face("Right")
+	else:
+		if delta.y <= 0:
+			self._face("Up")
+		else:
+			self._face("Down")
+
+func _face(direction):
+	$AnimationPlayer.play("Walk " + direction) 

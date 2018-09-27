@@ -83,7 +83,7 @@ tracks/0/keys = {
 "values": [ Rect2( 0, 250, 64, 125 ), Rect2( 64, 250, 64, 125 ), Rect2( 128, 250, 64, 125 ), Rect2( 192, 250, 64, 125 ) ]
 }
 
-[node name="KinematicBody2D" type="KinematicBody2D" index="0"]
+[node name="KinematicBody2D" type="KinematicBody2D"]
 
 input_pickable = false
 collision_layer = 1
@@ -122,7 +122,7 @@ _sections_unfolded = [ "Editor", "Limit", "Offset", "Smoothing" ]
 texture = ExtResource( 2 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 0, 0, 64, 125 )
+region_rect = Rect2( 192, 0, 64, 125 )
 _sections_unfolded = [ "Offset", "Region" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
