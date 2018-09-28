@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Maps/EndGameMap.gd" type="Script" id=1]
 [ext_resource path="res://Tilesets/Overworld.tres" type="TileSet" id=2]
 [ext_resource path="res://Entities/MapWarp.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Entities/EndGameTrigger.tscn" type="PackedScene" id=4]
 
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -78,6 +79,11 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Exit2" parent="Locations" index="2" instance=ExtResource( 3 )]
 
-position = Vector2( 448, 512 )
+position = Vector2( 448, 544 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="EndGameNpc" parent="." index="3" instance=ExtResource( 4 )]
+
+position = Vector2( 453.401, 79.5765 )
 
 
