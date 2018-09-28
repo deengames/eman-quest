@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/Maps/EndGameMap.gd" type="Script" id=1]
 [ext_resource path="res://Tilesets/Overworld.tres" type="TileSet" id=2]
+[ext_resource path="res://Entities/MapWarp.tscn" type="PackedScene" id=3]
 
 [node name="Node2D" type="Node2D" index="0"]
 
@@ -46,7 +47,37 @@ collision_layer = 1
 collision_mask = 1
 occluder_light_mask = 1
 format = 1
-tile_data = PoolIntArray( 0, 6, 0, 2, 6, 0, 4, 5, 0, 5, 6, 0, 8, 6, 0, 10, 6, 0, 13, 6, 0, 65540, 5, 0, 131072, 6, 0, 131074, 6, 0, 131076, 6, 0, 131080, 5, 0, 131083, 5, 0, 131085, 6, 0, 196616, 6, 0, 262144, 6, 0, 262146, 5, 0, 262147, 6, 0, 262154, 6, 0, 262157, 6, 0, 327682, 5, 0, 327688, 6, 0, 393216, 5, 0, 393217, 6, 0, 393226, 5, 0, 393227, 5, 0, 458752, 5, 0, 458761, 6, 0, 458763, 6, 0, 458765, 6, 0, 524288, 5, 0, 524289, 5, 0 )
+tile_data = PoolIntArray( 0, 6, 0, 2, 6, 0, 4, 6, 0, 6, 5, 0, 8, 6, 0, 10, 6, 0, 13, 6, 0, 65542, 5, 0, 131072, 6, 0, 131074, 6, 0, 131076, 6, 0, 131080, 5, 0, 131083, 5, 0, 131085, 6, 0, 196616, 6, 0, 262144, 6, 0, 262146, 5, 0, 262147, 6, 0, 262154, 6, 0, 262157, 6, 0, 327682, 5, 0, 327688, 6, 0, 393216, 5, 0, 393217, 6, 0, 393226, 5, 0, 393227, 5, 0, 458752, 5, 0, 458761, 6, 0, 458763, 6, 0, 458765, 6, 0, 524288, 5, 0, 524289, 5, 0 )
 _sections_unfolded = [ "Transform" ]
+
+[node name="Locations" type="Node2D" parent="." index="2"]
+
+[node name="Entrance" type="ColorRect" parent="Locations" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 448.0
+margin_top = 416.0
+margin_right = 512.0
+margin_bottom = 480.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 1, 1, 1, 1 )
+_sections_unfolded = [ "Margin", "Transform" ]
+
+[node name="Exit1" parent="Locations" index="1" instance=ExtResource( 3 )]
+
+position = Vector2( 448, 0 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Exit2" parent="Locations" index="2" instance=ExtResource( 3 )]
+
+position = Vector2( 448, 512 )
 
 
