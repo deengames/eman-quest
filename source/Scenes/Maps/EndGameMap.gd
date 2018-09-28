@@ -16,3 +16,6 @@ func _ready():
 	$Locations/Exit1.set_type("Overworld")
 	$Locations/Exit2.set_type("Overworld")
 	
+	if len(Globals.player_data.key_items) < 1:
+		self.remove_child($EndGameNpc)
+	
