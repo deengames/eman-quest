@@ -37,8 +37,10 @@ func _on_Area2D_body_entered(body):
 		if map_type != "Final":
 			SceneManagement.change_map_to(get_tree(), map_type)
 		else:
-			SceneManagement.change_scene_to(get_tree(), EndGameMap.instance())
-		
+			# Final map is a special case. In many ways.
+			var endgame_map = EndGameMap.instance()
+			SceneManagement.change_scene_to(get_tree(), endgame_map)
+			
 		# Come back to the overworld? Restore coordinates.
 		if Globals.current_map.map_type == "Overworld" and Globals.overworld_position != null:
 			Globals.player.position = Globals.overworld_position

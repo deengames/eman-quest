@@ -11,6 +11,8 @@ static func change_map_to(tree, map_type):
 	
 	change_scene_to(tree, populated_map)
 	
+	Globals.current_map_scene = populated_map
+	
 	if map_type == "Overworld":
 		var camera = Globals.player.get_node("Camera2D")
 		# zoom of 2 = 50%
