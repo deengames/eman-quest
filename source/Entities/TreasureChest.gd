@@ -1,6 +1,7 @@
 extends StaticBody2D
 
 const _CHEST_OPEN_X = 64
+const StatusWindow = preload("res://Scenes/UI/StatusWindow.tscn")
 
 var is_opened = false
 var contents # equipment instance
@@ -32,6 +33,11 @@ func open():
 		# Grant item
 		Globals.player_data.equipment.append(self.contents)
 		self._consume()
+		
+		var window = StatusWindow.instance()
+		window.set_text("Found a(n) " + self.contents.equipment_name)
+		get_tree().current_scene.get_node("UI").add_child(window)
+		window.popup_centered()
 
 func _consume():
 	self.is_opened = true
