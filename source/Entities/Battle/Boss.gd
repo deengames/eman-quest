@@ -4,10 +4,10 @@ const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 const data = {
 	"type": "SlimeBoss",
-	"health": 90,
-	"strength": 20,
-	"defense": 12,
-	"turns": 2,
+	"health": 100,
+	"strength": 13,
+	"defense": 4,
+	"turns": 1,
 	"experience points": 150,
 	
 	"skill_probability": 60, # 40 = 40%
@@ -43,4 +43,3 @@ func initialize_from(data_object):
 
 func _on_Area2D_body_entered(body):
 	SceneManagement.switch_to_battle_if_touched_player(self, body)
-	Globals.battle_spoils = self.key_item

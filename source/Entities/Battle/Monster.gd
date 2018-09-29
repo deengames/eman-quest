@@ -10,7 +10,7 @@ const data = {
 	"type": "Slime",
 	"health": 30,
 	"strength": 10,
-	"defense": 4,
+	"defense": 2,
 	"turns": 1,
 	"experience points": 10,
 	

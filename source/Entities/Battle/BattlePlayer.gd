@@ -40,6 +40,7 @@ func _init():
 	self.num_pickable_tiles = player_data.num_pickable_tiles
 	self.num_actions = player_data.num_actions
 	self.max_energy = player_data.max_energy
+	self.energy = self.max_energy / 2
 
 func heal(amount = 0):
 	if amount == 0:
