@@ -12,6 +12,7 @@ var tiles_wide = 0
 var tiles_high = 0
 var map_type = "" # eg. forest
 var tile_data = [] # 2D arrays of tile names
+var boss_killed = false
 var tileset
 var monsters = {} # Type => list of coordinates. Kept so we know what to restore when coming back after battle.
 var treasure_chests = [] # instances of TreasureChest (class, not the scene)
@@ -31,10 +32,6 @@ func add_tile_data(tile_data):
 func generate_monsters():
 	if self.generate_monsters_callback != null:
 		self.monsters = self.generate_monsters_callback.call_func()
-		
-		for boss_type in self.bosses.keys():
-			self.monsters[boss_type] = self.bosses[boss_type]
-			
 		return self.monsters
 	else:
 		return {}

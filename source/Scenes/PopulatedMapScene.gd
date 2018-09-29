@@ -89,16 +89,23 @@ func _add_monsters():
 		var instances = []
 		
 		for monster in monsters:
-			var instance = null
-			if monster_type.find("Boss") > -1:
-				instance = Boss.instance()
-			else:
-				instance = Monster.instance()
+			var instance = Monster.instance()
 			instance.initialize_from(monster)
 			self.add_child(instance)
 			instances.append(instance)
 		
 		self._monsters[monster_type] = instances
+	
+	for boss_type in map.bosses.keys():
+		var bosses = []
+		for boss in map.bosses[boss_type]:
+			if boss.is_alive:
+				var instance = Boss.instance()
+				instance.initialize_from(boss)
+				self.add_child(instance)
+				bosses.append(instance)
+				
+		self._monsters[boss_type] = bosses
 
 func _populate_treasure_chests():
 	for data in self.map.treasure_chests:
@@ -114,5 +121,5 @@ func get_monsters():
 			monster.data_object.x = monster.position.x
 			monster.data_object.y = monster.position.y
 			to_return[type].append(monster.data_object)
-	
+			
 	return to_return
