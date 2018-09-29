@@ -1,5 +1,6 @@
 extends Node
 
+const Boss = preload("res://Entities/Battle/Boss.gd")
 const MemoryTileBattleScene = preload("res://Scenes/Battle/MemoryTileBattleScene.tscn")
 const PopulatedMapScene = preload("res://Scenes/PopulatedMapScene.tscn")
 
@@ -45,6 +46,9 @@ static func switch_to_battle_if_touched_player(monster, body):
 		# Keep track of who to remove if we won
 		Globals.current_monster_type = monster.data["type"]
 		Globals.current_monster = monster.data_object
+		
+		if monster.data_object is Boss:
+			Globals.battle_spoils = Globals.current_monster.key_item
 		
 		var battle_scene = MemoryTileBattleScene.instance()
 		battle_scene.set_monster_data(monster.data.duplicate())
