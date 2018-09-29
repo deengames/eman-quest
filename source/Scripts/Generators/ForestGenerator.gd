@@ -34,7 +34,6 @@ var map_height = 3 * Globals.WORLD_HEIGHT_IN_TILES
 var entrance_position = [map_width / 2, map_height - 1]
 var _back_exit = [map_width / 2, 0]
 
-var _bosses = {}
 var _clearings_coordinates = []
 var _tree_map = []
 
@@ -48,7 +47,6 @@ func generate():
 	map.transitions = self._generate_transitions()
 	map.treasure_chests = self._generate_treasure_chests()
 	map.bosses = self._generate_boss()
-	self._bosses = map.bosses
 	
 	for data in tile_data:
 		map.add_tile_data(data)
