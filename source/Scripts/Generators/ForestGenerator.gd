@@ -18,6 +18,8 @@ const MINIMUM_NODE_DISTANCE = 5
 const NUM_CLEARINGS = 2
 const CLEARING_WIDTH = 7
 const CLEARING_HEIGHT = 8
+
+# Should be at least 5 so player can level up once
 const NUM_MONSTERS = [5, 10]
 
 # Sometimes, paths generate right at the bottom of the map, obscuring the entrance

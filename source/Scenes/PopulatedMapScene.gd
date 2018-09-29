@@ -13,6 +13,7 @@ const TilesetMapper = preload("res://Scripts/TilesetMapper.gd")
 
 var map # area map
 var _monsters = {} # Type => pixel coordinates of actual monster scenes/entities
+var _bosses = {} # Type => pixel coordinates of actual boss scenes/entities
 var _restoring_state = false # restoring to previous state after battle
 
 func initialize(map):
@@ -47,7 +48,26 @@ func _ready():
 	self.add_child(player)
 	
 	Globals.current_map_scene = self
-	
+
+func get_monsters():
+	var to_return = {}
+	for type in self._monsters.keys():
+		to_return[type] = []
+		for monster in self._monsters[type]:
+			monster.data_object.x = monster.position.x
+			monster.data_object.y = monster.position.y
+			to_return[type].append(monster.data_object)
+#
+#	for boss_type in self._bosses.keys():
+#		to_return[boss_type] = []
+#		for boss in self._bosses[boss_type]:
+#			if boss.is_alive:
+#				boss.data_object.x = boss.position.x
+#				boss.data_object.y = boss.position.y
+#				to_return[boss_type].append(boss.data_object)
+				
+	return to_return
+
 func _populate_tiles(tilemap_data, tilemap, tile_ids):
 	for y in range(0, tilemap_data.height):
 		for x in range(0, tilemap_data.width):
@@ -73,9 +93,11 @@ func _add_monsters():
 		
 		# Remove the monster we just vanquished
 		if Globals.won_battle:
-			var monsters = monster_data[Globals.current_monster_type]
-			monsters.remove(monsters.find(Globals.current_monster))
-			if Globals.current_monster.IS_BOSS:
+			# Monsters, not bosses, go in monster_data
+			if Globals.current_monster_type in monster_data:
+				var monsters = monster_data[Globals.current_monster_type]
+				monsters.remove(monsters.find(Globals.current_monster))
+			elif Globals.current_monster.IS_BOSS:
 				Globals.current_monster.is_alive = false
 			
 		Globals.current_monster = null
@@ -84,6 +106,8 @@ func _add_monsters():
 		monster_data = map.generate_monsters()
 	
 	self._monsters = {}
+	self._bosses = {}
+	
 	for monster_type in monster_data.keys():
 		var monsters = monster_data[monster_type]
 		var instances = []
@@ -105,21 +129,10 @@ func _add_monsters():
 				self.add_child(instance)
 				bosses.append(instance)
 				
-		self._monsters[boss_type] = bosses
+		self._bosses[boss_type] = bosses
 
 func _populate_treasure_chests():
 	for data in self.map.treasure_chests:
 		var instance = TreasureChest.instance()
 		instance.initialize_from(data)
 		self.add_child(instance)
-
-func get_monsters():
-	var to_return = {}
-	for type in self._monsters.keys():
-		to_return[type] = []
-		for monster in self._monsters[type]:
-			monster.data_object.x = monster.position.x
-			monster.data_object.y = monster.position.y
-			to_return[type].append(monster.data_object)
-			
-	return to_return

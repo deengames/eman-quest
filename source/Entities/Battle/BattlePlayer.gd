@@ -19,7 +19,7 @@ const _ACTION_ENERGY_COST = {
 
 var current_health = 0
 var max_health = 0
-var energy = 3
+var energy = 0
 var max_energy = 0
 var strength = 0
 # max number of tiles to pick from the grid

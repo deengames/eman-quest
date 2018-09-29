@@ -128,7 +128,6 @@ func _finish_turn():
 func _show_battle_end(is_victory):
 	$MemoryGrid.visible = false
 	Globals.won_battle = is_victory
-	self._add_message("Hero vanquished the " + self._monster_data["type"] + "!")
 	
 	for button in self._action_buttons:
 		self.remove_child(button)
