@@ -46,6 +46,24 @@ func _init():
 	randomize()
 	self.weapon = EquipmentGenerator.generate("weapon", StatType.Strength, 10)
 	self.armour = EquipmentGenerator.generate("armour", StatType.Defense, 8)
+
+func save():
+	return {
+		"level" : self.level,
+		"experience_points" : self.experience_points,
+		"health" : self.health,
+		"strength" : self.strength,
+		"defense " : self.defense,
+		"max_energy" : self.max_energy,
+		"num_pickable_tiles" : self.num_pickable_tiles,
+		"num_actions" : self.num_actions,
+		"unassigned_stats_points" : self.unassigned_stats_points,
+		"assigned_points" : self.assigned_points,
+		"weapon" : self.weapon,
+		"armour" : self.armour,
+		"equipment" : self.equipment,
+		"key_items" : self.key_items
+	}
 	
 func gain_xp(xp):
 	var old_xp = self.experience_points
