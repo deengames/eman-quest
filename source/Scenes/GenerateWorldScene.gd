@@ -3,19 +3,12 @@ extends Node2D
 const OverworldGenerator = preload("res://Scripts/Generators/OverworldGenerator.gd")
 const ForestGenerator = preload("res://Scripts/Generators/ForestGenerator.gd")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
-const StoryWindow = preload("res://Scenes/UI/StoryWindow.tscn")
 
-func _ready():
-	
+func _ready():	
 	self.generate_world()
+	SceneManagement.change_map_to(get_tree(), "Overworld")
+	get_tree().current_scene.get_node("UI").show_intro_story()
 	
-	$Status.visible = false
-	
-	var story_window = StoryWindow.instance()
-	story_window.show_intro_story()
-	get_tree().get_root().add_child(story_window)
-	story_window.popup_centered()
-
 func generate_world():
 	
 	# return a dictionary, eg. "forest" => forest map
