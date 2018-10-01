@@ -57,14 +57,6 @@ func get_monsters():
 			monster.data_object.x = monster.position.x
 			monster.data_object.y = monster.position.y
 			to_return[type].append(monster.data_object)
-#
-#	for boss_type in self._bosses.keys():
-#		to_return[boss_type] = []
-#		for boss in self._bosses[boss_type]:
-#			if boss.is_alive:
-#				boss.data_object.x = boss.position.x
-#				boss.data_object.y = boss.position.y
-#				to_return[boss_type].append(boss.data_object)
 				
 	return to_return
 

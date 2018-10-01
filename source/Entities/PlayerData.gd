@@ -48,7 +48,8 @@ func _init():
 	self.armour = EquipmentGenerator.generate("armour", StatType.Defense, 8)
 
 func save():
-	return {
+	return to_json({
+		"filename": self.filename(),
 		"level" : self.level,
 		"experience_points" : self.experience_points,
 		"health" : self.health,
@@ -63,7 +64,7 @@ func save():
 		"armour" : self.armour,
 		"equipment" : self.equipment,
 		"key_items" : self.key_items
-	}
+	})
 	
 func gain_xp(xp):
 	var old_xp = self.experience_points

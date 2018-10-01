@@ -5,6 +5,15 @@ var _all_items = []
 var _selected_item = null
 
 func _ready():
+	var SaveManager = load("res://Scripts/Save/SaveManager.gd")
+	var SaveData = load("res://Scripts/Save/SaveData.gd")
+	
+	###### SAVE
+	var data = SaveData.new(Globals.player_data, Globals.maps, Globals.story_data)
+	SaveManager.save_game(data, "1")
+	pass
+
+
 	self._update_equipped_display()
 	self._clear_selected_display()
 	self._populate_item_list()

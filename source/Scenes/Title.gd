@@ -63,3 +63,15 @@ func _on_AdvancedBattleButton_pressed():
 	battle_scene.go_turbo()
 	
 	SceneManagement.change_scene_to(get_tree(), battle_scene)
+
+
+func _on_LoadGameButton_pressed():
+	var SaveManager = load("res://Scripts/Save/SaveManager.gd")
+	var SaveData = load("res://Scripts/Save/SaveData.gd")
+	
+	############ LOAD
+	var data = SaveManager.load_game("1")
+	Globals.player_data = data.player_data
+	Globals.maps = data.maps
+	Globals.story_data = data.story_data
+	pass
