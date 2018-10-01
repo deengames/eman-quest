@@ -27,6 +27,27 @@ func _init(type, equipment_name, primary_stat, primary_modifier,
 	self.grid_tiles = grid_tiles
 	self.tile_type = tile_type
 
+func to_dict():
+	return ({
+		"filename": "res://Entities/Equipment.gd",
+		"type": self.type,
+		"equipment_name": self.equipment_name,
+		"primary_stat": self.primary_stat,
+		"primary_stat_modifier": self.primary_stat_modifier,
+		"secondary_stat": self.secondary_stat,
+		"secondary_stat_modifier": self.secondary_stat_modifier,
+		"grid_tiles": self.grid_tiles,
+		"tile_type": self.tile_type
+	})
+
+static func from_dict(dictionary):
+	var equipment = new(dictionary["type"], dictionary["equipment_name"],
+		dictionary["primary_stat"], dictionary["primary_stat_modifier"],
+		dictionary["secondary_stat"], dictionary["secondary_stat_modifier"],
+		dictionary["grid_tiles"], dictionary["tile_type"])
+		
+	return equipment
+
 func str():
 	return (self.equipment_name + "\n" +
 		"+" + str(self.primary_stat_modifier) + " " + StatType.to_string(self.primary_stat) + "\n" +

@@ -47,9 +47,13 @@ func _init():
 	self.weapon = EquipmentGenerator.generate("weapon", StatType.Strength, 10)
 	self.armour = EquipmentGenerator.generate("armour", StatType.Defense, 8)
 
-func save():
+func serialize():
+	var equipment_data = []
+	for item in self.equipment:
+		equipment_data.append(item.to_dict())
+		
 	return to_json({
-		"filename": self.filename(),
+		"filename": "res://Entities/PlayerData.gd",
 		"level" : self.level,
 		"experience_points" : self.experience_points,
 		"health" : self.health,
@@ -60,9 +64,9 @@ func save():
 		"num_actions" : self.num_actions,
 		"unassigned_stats_points" : self.unassigned_stats_points,
 		"assigned_points" : self.assigned_points,
-		"weapon" : self.weapon,
-		"armour" : self.armour,
-		"equipment" : self.equipment,
+		"weapon" : self.weapon.to_dict(),
+		"armour" : self.armour.to_dict(),
+		"equipment" : equipment_data,
 		"key_items" : self.key_items
 	})
 	
