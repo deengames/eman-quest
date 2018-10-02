@@ -9,7 +9,6 @@ const DictionaryHelper = preload("res://Scripts/DictionaryHelper.gd")
 
 var entrance_position = []
 var transitions = [] # warps to other maps. List of MapDestination instances.
-var generate_monsters_callback # funcref / callback to a method in the generator class
 var tiles_wide = 0
 var tiles_high = 0
 var map_type = "" # eg. forest
@@ -19,13 +18,12 @@ var monsters = {} # Type => list of coordinates. Kept so we know what to restore
 var treasure_chests = [] # instances of TreasureChest (class, not the scene)
 var bosses = {} # Type => Boss instances created with .new
 
-func _init(map_type, tileset_path, entrance_position, tiles_wide, tiles_high, generate_monsters_callback):	
+func _init(map_type, tileset_path, entrance_position, tiles_wide, tiles_high):	
 	self.tileset_path = tileset_path
 	self.map_type = map_type
 	self.entrance_position = entrance_position
 	self.tiles_wide = tiles_wide
 	self.tiles_high = tiles_high
-	self.generate_monsters_callback = generate_monsters_callback
 
 func to_dict():
 	return {
@@ -39,18 +37,9 @@ func to_dict():
 		"monsters": DictionaryHelper.dictionary_values_to_dictionary(self.monsters),
 		"treasure_chests": DictionaryHelper.array_to_dictionary(self.treasure_chests),
 		"bosses": DictionaryHelper.dictionary_values_to_dictionary(self.bosses),
-		"tileset_path": self.tileset_path,
-		
-		# troublemakers
-		"generate_monsters_callback": self.generate_monsters_callback # funcref
+		"tileset_path": self.tileset_path
 	}
 
 func add_tile_data(tile_data):
 	self.tile_data.append(tile_data)
 
-func generate_monsters():
-	if self.generate_monsters_callback != null:
-		self.monsters = self.generate_monsters_callback.call_func()
-		return self.monsters
-	else:
-		return {}

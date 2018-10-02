@@ -5,7 +5,7 @@ const Boss = preload("res://Entities/Battle/Boss.gd")
 const EquipmentGenerator = preload("res://Scripts/Generators/EquipmentGenerator.gd")
 const KeyItem = preload("res://Entities/KeyItem.gd")
 const MapDestination = preload("res://Entities/MapDestination.gd")
-const Monster = preload("res://Entities/Battle/Monster.gd")
+const SpotFinder = preload("res://Scripts/Maps/SpotFinder.gd")
 const StatType = preload("res://Scripts/StatType.gd")
 const TreasureChest = preload("res://Entities/TreasureChest.gd")
 const TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
@@ -18,9 +18,6 @@ const MINIMUM_NODE_DISTANCE = 5
 const NUM_CLEARINGS = 2
 const CLEARING_WIDTH = 7
 const CLEARING_HEIGHT = 8
-
-# Should be at least 5 so player can level up once
-const NUM_MONSTERS = [5, 10]
 
 # Sometimes, paths generate right at the bottom of the map, obscuring the entrance
 # Add some buffer -- make sure we don't generate paths too low.
@@ -41,7 +38,7 @@ var _tree_map = []
 
 # Called once per game
 func generate():
-	var map = AreaMap.new("Forest", "res://Tilesets/Overworld.tres", self.entrance_position, map_width, map_height, funcref(self, "generate_monsters"))
+	var map = AreaMap.new("Forest", "res://Tilesets/Overworld.tres", self.entrance_position, map_width, map_height)
 
 	var tile_data = self._generate_forest() # generates paths too
 	self._tree_map = tile_data[1]
@@ -57,23 +54,6 @@ func generate():
 	entrance_position[1] -= 3
 	
 	return map
-
-func generate_monsters():
-	var monsters = []
-	var num_monsters = Globals.randint(NUM_MONSTERS[0], NUM_MONSTERS[1])
-	
-	for n in num_monsters:
-		var coordinates = self._find_empty_spot(monsters)
-		var pixel_coordinates = [coordinates[0] * Globals.TILE_WIDTH, coordinates[1] * Globals.TILE_HEIGHT]
-		var monster = Monster.new()
-		monster.initialize(pixel_coordinates[0], pixel_coordinates[1])
-		monsters.append(monster)
-	
-	# Map of type => array of coordinates (one pair per entity)
-	# TODO: return instances of some data type instead. Monster.new()?
-	var to_return = { "Slime": monsters }
-	return to_return
-
 
 func _generate_boss():
 	var coordinates = self._clearings_coordinates[0]
@@ -202,7 +182,9 @@ func _generate_treasure_chests():
 	var stats = {"weapon": StatType.Strength, "armour": StatType.Defense}
 	
 	while num_chests > 0:
-		var spot = self._find_empty_spot(chests)
+		var spot = SpotFinder.find_empty_spot(map_width, map_height,
+			self._tree_map, chests, [entrance_position])
+			
 		var type = types[randi() % len(types)]
 		var power = Globals.randint(_MIN_ITEM_POWER, _MAX_ITEM_POWER)
 		var stat = stats[type]
@@ -269,20 +251,3 @@ func _clear_if_tree(tree_map, x, y):
 			if tree_map.get(x, y) != null:
 				tree_map.set(x, y, null)
 
-func _find_empty_spot(occupied_spots):
-	var x = Globals.randint(0, map_width - 1)
-	var y = Globals.randint(0, map_height - 1)
-	
-	while (self._tree_map.get(x, y) == "Bush" or
-		[x, y] == self.entrance_position or
-		occupied_spots.find([x, y]) > -1 or
-		# Trees technically have empty space around them, so make sure
-		# we're not in one of those tiles.
-		self._tree_map.get(x, y) == "Tree" or
-		self._tree_map.get(x - 1, y) == "Tree" or
-		self._tree_map.get(x, y - 1) == "Tree" or
-		self._tree_map.get(x - 1, y - 1) == "Tree"):
-			x = Globals.randint(0, map_width - 1)
-			y = Globals.randint(0, map_height - 1)
-	
-	return [x, y]

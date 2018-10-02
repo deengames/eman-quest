@@ -95,7 +95,13 @@ func _add_monsters():
 		Globals.current_monster = null
 		Globals.previous_monsters = null
 	else:
-		monster_data = map.generate_monsters()
+		var generator_path = "res://Scripts/Generators/" + self.map.map_type + "MonsterGenerator.gd"
+		if File.new().file_exists(generator_path):
+			var type = load(generator_path)
+			var generator = type.new()
+			monster_data = generator.generate_monsters(self.map)
+		else:
+			monster_data = {}
 	
 	self._monsters = {}
 	self._bosses = {}
