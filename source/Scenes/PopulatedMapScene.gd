@@ -23,7 +23,7 @@ func _ready():
 	Globals.current_map = map
 	self._restoring_state = Globals.previous_monsters != null
 	
-	var tileset = map.tileset
+	var tileset = load(map.tileset_path)
 	var tile_ids = TilesetMapper.new().load_tileset_mapping(tileset)
 	
 	var i = 0

@@ -34,9 +34,6 @@ var current_monster_type = ""
 
 func _ready():
 	randomize()
-	var json = self.player_data.serialize()
-	print(json)
-	pass
 	
 # Returns integer value from min to max inclusive
 # Source: https://godotengine.org/qa/2539/how-would-i-go-about-picking-a-random-number

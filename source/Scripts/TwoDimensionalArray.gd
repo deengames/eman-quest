@@ -12,6 +12,13 @@ func _init(width, height):
 	# Initialize array with nulls
 	for i in range(self.width * self.height):
 		self._data.append(null)
+
+func to_dict():
+	return {
+		"width": self.width,
+		"height": self.height,
+		"data": self._data
+	}
 	
 func load_from(rows):
 	self.height = rows.size()

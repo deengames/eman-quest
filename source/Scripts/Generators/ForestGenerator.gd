@@ -41,7 +41,7 @@ var _tree_map = []
 
 # Called once per game
 func generate():
-	var map = AreaMap.new("Forest", preload("res://Tilesets/Overworld.tres"), self.entrance_position, map_width, map_height, funcref(self, "generate_monsters"))
+	var map = AreaMap.new("Forest", "res://Tilesets/Overworld.tres", self.entrance_position, map_width, map_height, funcref(self, "generate_monsters"))
 
 	var tile_data = self._generate_forest() # generates paths too
 	self._tree_map = tile_data[1]
@@ -60,8 +60,9 @@ func generate():
 
 func generate_monsters():
 	var monsters = []
+	var num_monsters = Globals.randint(NUM_MONSTERS[0], NUM_MONSTERS[1])
 	
-	for n in Globals.randint(NUM_MONSTERS[0], NUM_MONSTERS[1]) - 1:
+	for n in num_monsters:
 		var coordinates = self._find_empty_spot(monsters)
 		var pixel_coordinates = [coordinates[0] * Globals.TILE_WIDTH, coordinates[1] * Globals.TILE_HEIGHT]
 		var monster = Monster.new()

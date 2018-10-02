@@ -13,11 +13,6 @@ const EntranceImageXPositions = {
 # Map destination sprite
 var map_type = "" # eg. Forest
 
-func _ready():
-	# Called when the node is added to the scene for the first time.
-	# Initialization here
-	pass
-
 func set_type(map_type):
 	self.map_type = map_type
 	$Sprite.visible = true

@@ -28,6 +28,14 @@ func initialize_from(data):
 	if data.is_opened:
 		self._consume()
 
+func to_dict():
+	return {
+		"is_opened": self.is_opened,
+		"contents": self.contents.to_dict(),
+		"tile_x": self.tile_x,
+		"tile_y": self.tile_y		
+	}
+
 func open():
 	if not self.is_opened:
 		# Grant item

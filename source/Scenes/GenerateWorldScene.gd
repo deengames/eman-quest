@@ -4,10 +4,20 @@ const OverworldGenerator = preload("res://Scripts/Generators/OverworldGenerator.
 const ForestGenerator = preload("res://Scripts/Generators/ForestGenerator.gd")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
-func _ready():	
+func _ready():
 	self.generate_world()
 	SceneManagement.change_map_to(get_tree(), "Overworld")
 	get_tree().current_scene.get_node("UI").show_intro_story()
+	
+		
+	print(Globals.player_data.to_dict())
+	print("============================")
+	var m = {}
+	for key in Globals.maps.keys():
+		m[key] = Globals.maps[key].to_dict()
+	print(to_json(m))
+	print("============================")
+	print(to_json(Globals.story_data))
 	
 func generate_world():
 	

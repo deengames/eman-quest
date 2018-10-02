@@ -1,5 +1,6 @@
 extends Node
 
+const DictionaryHelper = preload("res://Scripts/DictionaryHelper.gd")
 const EquipmentGenerator = preload("res://Scripts/Generators/EquipmentGenerator.gd")
 const StatType = preload("res://Scripts/StatType.gd")
 
@@ -47,12 +48,8 @@ func _init():
 	self.weapon = EquipmentGenerator.generate("weapon", StatType.Strength, 10)
 	self.armour = EquipmentGenerator.generate("armour", StatType.Defense, 8)
 
-func serialize():
-	var equipment_data = []
-	for item in self.equipment:
-		equipment_data.append(item.to_dict())
-		
-	return to_json({
+func to_dict():
+	return {
 		"filename": "res://Entities/PlayerData.gd",
 		"level" : self.level,
 		"experience_points" : self.experience_points,
@@ -66,9 +63,9 @@ func serialize():
 		"assigned_points" : self.assigned_points,
 		"weapon" : self.weapon.to_dict(),
 		"armour" : self.armour.to_dict(),
-		"equipment" : equipment_data,
+		"equipment" : DictionaryHelper.array_to_dictionary(self.equipment),
 		"key_items" : self.key_items
-	})
+	}
 	
 func gain_xp(xp):
 	var old_xp = self.experience_points
