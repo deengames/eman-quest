@@ -30,11 +30,18 @@ func initialize_from(data):
 
 func to_dict():
 	return {
+		"filename": "res://Entities/TreasureChest.gd",
 		"is_opened": self.is_opened,
 		"contents": self.contents.to_dict(),
 		"tile_x": self.tile_x,
-		"tile_y": self.tile_y		
+		"tile_y": self.tile_y
 	}
+
+static func from_dict(dict):
+	var to_return = new()
+	to_return.initialize(dict["tile_x"], dict["tile_y"], dict["contents"])
+	to_return.is_opened = dict["is_opened"]
+	return to_return
 
 func open():
 	if not self.is_opened:

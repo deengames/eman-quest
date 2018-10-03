@@ -18,7 +18,7 @@ var monsters = {} # Type => list of coordinates. Kept so we know what to restore
 var treasure_chests = [] # instances of TreasureChest (class, not the scene)
 var bosses = {} # Type => Boss instances created with .new
 
-func _init(map_type, tileset_path, entrance_position, tiles_wide, tiles_high):	
+func _init(map_type, tileset_path, entrance_position, tiles_wide, tiles_high):
 	self.tileset_path = tileset_path
 	self.map_type = map_type
 	self.entrance_position = entrance_position
@@ -39,6 +39,23 @@ func to_dict():
 		"bosses": DictionaryHelper.dictionary_values_to_dictionary(self.bosses),
 		"tileset_path": self.tileset_path
 	}
+
+static func from_dict(dict):
+	var map = new(dict["map_type"], dict["tileset_path"], dict["entrance_position"],
+		dict["tiles_wide"], dict["tiles_high"])
+	
+	map.entrance_position = dict["entrance_position"]
+	map.transitions = DictionaryHelper.array_from_dictionary(dict["transitions"])
+	map.tiles_wide = dict["tiles_wide"]
+	map.tiles_high = dict["tiles_high"]
+	map.map_type = dict["map_type"]
+	map.tile_data = DictionaryHelper.array_from_dictionary(dict["tile_data"])
+	map.monsters = DictionaryHelper.dictionary_values_from_dictionary(dict["monsters"])
+	map.treasure_chests = DictionaryHelper.array_from_dictionary(dict["treasure_chests"])
+	map.bosses = DictionaryHelper.dictionary_values_from_dictionary(dict["bosses"])
+	map.tileset_path = dict["tileset_path"]
+
+	return map
 
 func add_tile_data(tile_data):
 	self.tile_data.append(tile_data)

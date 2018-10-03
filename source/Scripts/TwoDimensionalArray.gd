@@ -15,10 +15,16 @@ func _init(width, height):
 
 func to_dict():
 	return {
+		"filename": "res://Scripts/TwoDimensionalArray.gd",
 		"width": self.width,
 		"height": self.height,
 		"data": self._data
 	}
+
+static func from_dict(dict):
+	var to_return = new(dict["width"], dict["height"])
+	to_return._data = dict["data"]
+	return to_return
 	
 func load_from(rows):
 	self.height = rows.size()

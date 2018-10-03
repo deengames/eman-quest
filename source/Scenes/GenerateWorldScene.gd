@@ -1,7 +1,8 @@
 extends Node2D
 
-const OverworldGenerator = preload("res://Scripts/Generators/OverworldGenerator.gd")
+const AreaMap = preload("res://Entities/AreaMap.gd")
 const ForestGenerator = preload("res://Scripts/Generators/ForestGenerator.gd")
+const OverworldGenerator = preload("res://Scripts/Generators/OverworldGenerator.gd")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 func _ready():
@@ -13,9 +14,12 @@ func _ready():
 	print(Globals.player_data.to_dict())
 	print("============================")
 	var m = {}
+	
 	for key in Globals.maps.keys():
-		m[key] = Globals.maps[key].to_dict()
-	print(to_json(m))
+		m[key] = to_json(Globals.maps[key].to_dict())
+	
+	for key in Globals.maps.keys():
+		Globals.maps[key] = AreaMap.from_dict(parse_json(m[key]))
 	print("============================")
 	print(to_json(Globals.story_data))
 	

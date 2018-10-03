@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+const KeyItem = preload("res://Entities/KeyItem.gd")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 const data = {
@@ -43,12 +44,20 @@ func initialize_from(data_object):
 	
 func to_dict():
 	return {
-		"data": self.data,
+		"filename": "res://Entities/Battle/Boss.gd",
+		#"data": self.data,
 		"x": self.x,
 		"y": self.y,
 		"is_alive": self.is_alive,
 		"key_item": self.key_item.to_dict(),
 	}
+
+static func from_dict(dict):
+	var to_return = new()
+	to_return.initialize(dict["x"], dict["y"], KeyItem.from_dict(dict["key_item"]))
+	#to_return.data = dict["data"]
+	to_return.is_alive = dict["is_alive"]
+	return to_return
 
 func _on_Area2D_body_entered(body):
 	SceneManagement.switch_to_battle_if_touched_player(self, body)
