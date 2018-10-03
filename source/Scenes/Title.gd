@@ -2,6 +2,7 @@ extends Node2D
 
 var BattlePlayer = preload("res://Entities/Battle/BattlePlayer.gd")
 var MemoryTileBattleScene = preload("res://Scenes/Battle/MemoryTileBattleScene.tscn")
+var SaveManager = preload("res://Scripts/SaveManager.gd")
 var SceneManagement = preload("res://Scripts/SceneManagement.gd")
 var Slime = preload("res://Entities/Battle/Monster.tscn")
 
@@ -66,16 +67,5 @@ func _on_AdvancedBattleButton_pressed():
 
 
 func _on_LoadGameButton_pressed():
-	var data = '{"armour":{"equipment_name":"Chumoo","filename":"res://Entities/Equipment.gd","grid_tiles":2,"primary_stat":2,"primary_stat_modifier":5,"secondary_stat":1,"secondary_stat_modifier":2,"tile_type":"attack","type":"armour"},"assigned_points":{"defense":0,"energy":0,"health":0,"num_actions":0,"num_pickable_tiles":0,"strength":0},"defense ":5,"equipment":[],"experience_points":0,"filename":"res://Entities/PlayerData.gd","health":60,"key_items":[],"level":1,"max_energy":20,"num_actions":3,"num_pickable_tiles":5,"strength":7,"unassigned_stats_points":0,"weapon":{"equipment_name":"Mabudi","filename":"res://Entities/Equipment.gd","grid_tiles":3,"primary_stat":1,"primary_stat_modifier":6,"secondary_stat":0,"secondary_stat_modifier":8,"tile_type":"attack","type":"weapon"}}'
-	var current_line = parse_json(data)
-	var filename = current_line["filename"]
-	var new_object = load(filename).new()
-	for i in current_line.keys():
-		var value = current_line[i]
-		print(i + " => " + str(typeof(value)))
-		if typeof(value) == TYPE_DICTIONARY and value.has("filename"):
-			var type = load(value["filename"])
-			value = type.from_dict(value)
-		
-		new_object.set(i, value)
-	pass
+	SaveManager.load("test")
+	SceneManagement.change_map_to(get_tree(), "Overworld")

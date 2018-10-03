@@ -2,6 +2,7 @@ extends CanvasLayer
 
 const EquipmentWindow = preload("res://Scenes/UI/EquipmentWindow.tscn")
 const KeyItemsWindow = preload("res://Scenes/UI/KeyItemsWindow.tscn")
+const SaveManager = preload("res://Scripts/SaveManager.gd")
 const StatsWindow = preload("res://Scenes/UI/StatsWindow.tscn")
 const StoryWindow = preload("res://Scenes/UI/StoryWindow.tscn")
 
@@ -30,3 +31,6 @@ func _on_KeyItemsButton_pressed():
 func _show_popup(instance):
 	self.add_child(instance)
 	instance.popup_centered()
+
+func _on_SaveButton_pressed():
+	SaveManager.save("test")
