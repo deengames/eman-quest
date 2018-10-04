@@ -33,7 +33,9 @@ var current_monster = null # monster.data_object
 var current_monster_type = ""
 
 func _ready():
-	randomize()
+	#randomize()
+	seed("Hard-coded seed".hash())
+	
 	
 # Returns integer value from min to max inclusive
 # Source: https://godotengine.org/qa/2539/how-would-i-go-about-picking-a-random-number
