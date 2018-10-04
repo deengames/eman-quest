@@ -1,6 +1,7 @@
 extends StaticBody2D
 
 const _CHEST_OPEN_X = 64
+const Equipment = preload("res://Entities/Equipment.gd")
 const StatusWindow = preload("res://Scenes/UI/StatusWindow.tscn")
 
 var is_opened = false
@@ -39,7 +40,8 @@ func to_dict():
 
 static func from_dict(dict):
 	var to_return = new()
-	to_return.initialize(dict["tile_x"], dict["tile_y"], dict["contents"])
+	var contents = Equipment.from_dict(dict["contents"])
+	to_return.initialize(dict["tile_x"], dict["tile_y"], contents)
 	to_return.is_opened = dict["is_opened"]
 	return to_return
 
