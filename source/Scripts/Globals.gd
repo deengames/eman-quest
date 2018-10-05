@@ -1,6 +1,7 @@
 extends Node2D
 
 const PlayerData = preload("res://Entities/PlayerData.gd")
+const MapLayoutGenerator = preload("res://Scripts/Generators/MapLayoutGenerator.gd")
 
 const TILE_WIDTH = 64
 const TILE_HEIGHT = 64
@@ -33,9 +34,11 @@ var current_monster = null # monster.data_object
 var current_monster_type = ""
 
 func _ready():
-	#randomize()
-	seed("Hard-coded seed".hash())
-	
+	randomize()
+	#seed("Hard-coded seed".hash())
+	for i in range(3):
+		print("==========================")
+		MapLayoutGenerator.generate_layout(3)
 	
 # Returns integer value from min to max inclusive
 # Source: https://godotengine.org/qa/2539/how-would-i-go-about-picking-a-random-number

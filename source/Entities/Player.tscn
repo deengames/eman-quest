@@ -83,7 +83,7 @@ tracks/0/keys = {
 "values": [ Rect2( 0, 250, 64, 125 ), Rect2( 64, 250, 64, 125 ), Rect2( 128, 250, 64, 125 ), Rect2( 192, 250, 64, 125 ) ]
 }
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[node name="KinematicBody2D" type="KinematicBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 1
@@ -96,7 +96,7 @@ script = ExtResource( 1 )
 anchor_mode = 1
 rotating = false
 current = true
-zoom = Vector2( 1, 1 )
+zoom = Vector2( 4, 4 )
 limit_left = -10000000
 limit_top = -10000000
 limit_right = 10000000
