@@ -1,5 +1,6 @@
 extends Node
 
+const Room = preload("res://Entities/Room.gd")
 const TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 
 ###
@@ -14,25 +15,26 @@ const TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 static func generate_layout(num_rooms):
 	# Overkill but easy to code
 	var to_return = TwoDimensionalArray.new(num_rooms, num_rooms)
-	var middle = floor(num_rooms / 2)
-
 	var left_to_generate = num_rooms
-	var current = Vector2(randi() % num_rooms, randi() % num_rooms)
-	to_return.set(current.x, current.y, true)
+	
+	var x = randi() % to_return.width
+	var y = randi() % to_return.height
+	var current = Room.new(x, y)
+	to_return.set(x, y, current)
 	var rooms = [current]
 
 	while left_to_generate > 0:
 		var next = _pick_unexplored_adjacent(current, to_return)
-		if next != current:
-			# TODO: we know they're adjacent. Note the connection ya3ne.
-			to_return.set(next.x, next.y, true)
-			rooms.append(next)
+		if next != null:
+			var room = Room.new(next.x, next.y)
+			to_return.set(next.x, next.y, room)
+			current.connect(room)
+			rooms.append(room)
 			left_to_generate -= 1
-			current = next
+			current = room
 		else:
 			# Nothing available; pick random room
 			current = rooms[randi() % len(rooms)]
-			print("!")
 
 	var final = ""
 	for y in range(num_rooms):
@@ -51,21 +53,21 @@ static func generate_layout(num_rooms):
 static func _pick_unexplored_adjacent(current, grid):
 	var possibilities = []
 
-	if current.x > 0 and not grid.has(current.x - 1, current.y):
-		possibilities.append(Vector2(current.x - 1, current.y))
+	if current.grid_x > 0 and not grid.has(current.grid_x - 1, current.grid_y):
+		possibilities.append(Vector2(current.grid_x - 1, current.grid_y))
 
-	if current.x < grid.width - 1 and not grid.has(current.x + 1, current.y):
-		possibilities.append(Vector2(current.x + 1, current.y))
+	if current.grid_x < grid.width - 1 and not grid.has(current.grid_x + 1, current.grid_y):
+		possibilities.append(Vector2(current.grid_x + 1, current.grid_y))
 
-	if current.y > 0 and not grid.has(current.x, current.y - 1):
-		possibilities.append(Vector2(current.x, current.y - 1))
+	if current.grid_y > 0 and not grid.has(current.grid_x, current.grid_y - 1):
+		possibilities.append(Vector2(current.grid_x, current.grid_y - 1))
 
-	if current.y < grid.height - 1 and not grid.has(current.x, current.y + 1):
-		possibilities.append(Vector2(current.x, current.y + 1))
+	if current.grid_y < grid.height - 1 and not grid.has(current.grid_x, current.grid_y + 1):
+		possibilities.append(Vector2(current.grid_x, current.grid_y + 1))
 
 	if len(possibilities) > 0:
 		var to_return = possibilities[randi() % len(possibilities)]
 		return to_return
 	else:
-		return current
+		return null
 		
