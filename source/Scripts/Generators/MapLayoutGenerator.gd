@@ -17,8 +17,19 @@ static func generate_layout(num_rooms):
 	var to_return = TwoDimensionalArray.new(num_rooms, num_rooms)
 	var left_to_generate = num_rooms
 	
-	var x = randi() % to_return.width
-	var y = randi() % to_return.height
+	# Start on one of the edges
+	var potential_starts = []
+	for x in range(to_return.width):
+		potential_starts.append([x, 0])
+		potential_starts.append([x, to_return.height - 1])
+	for y in range(to_return.height):
+		potential_starts.append([0, y])
+		potential_starts.append([to_return.width - 1, y])
+		
+	var coordinates = potential_starts[randi() % len(potential_starts)]
+	var x = coordinates[0]
+	var y = coordinates[1]
+	
 	var current = Room.new(x, y)
 	to_return.set(x, y, current)
 	var rooms = [current]
@@ -36,6 +47,7 @@ static func generate_layout(num_rooms):
 			# Nothing available; pick random room
 			current = rooms[randi() % len(rooms)]
 
+	######## TODO: print connections
 	var final = ""
 	for y in range(num_rooms):
 		var string = ""
