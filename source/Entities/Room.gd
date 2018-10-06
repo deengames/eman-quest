@@ -3,6 +3,7 @@ extends Node
 var grid_x
 var grid_y
 var connections = {} # direction => room
+var designation = "normal"
 
 func _init(grid_x, grid_y):
 	self.grid_x = grid_x

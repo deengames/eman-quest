@@ -36,9 +36,9 @@ var current_monster_type = ""
 func _ready():
 	randomize()
 	#seed("Hard-coded seed".hash())
-	for i in range(3):
+	for i in range(10):
 		print("==========================")
-		MapLayoutGenerator.generate_layout(3)
+		MapLayoutGenerator.generate_layout(8)
 	
 # Returns integer value from min to max inclusive
 # Source: https://godotengine.org/qa/2539/how-would-i-go-about-picking-a-random-number

@@ -8,14 +8,14 @@ const TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 # Forget all that crazy grid stuff we had. Just random walk and make rooms.
 # Then do a depth-first search for the longest path; this is entrance => boss.
 #
-# Mutliple paths may mean we find a short route to boss. That's ok. Maybe
-# some players want that challenge.
+# This typically generates linear dungeons with no branching-off. That's okay.
+# Around a third of the dungeons double back or have adjacent rooms/paths.
 ###
 
 static func generate_layout(num_rooms):
 	# Overkill but easy to code
 	var to_return = TwoDimensionalArray.new(num_rooms, num_rooms)
-	var left_to_generate = num_rooms
+	var left_to_generate = num_rooms - 1
 	
 	# Start on one of the edges
 	var potential_starts = []
@@ -31,6 +31,7 @@ static func generate_layout(num_rooms):
 	var y = coordinates[1]
 	
 	var current = Room.new(x, y)
+	current.designation = "start"
 	to_return.set(x, y, current)
 	var rooms = [current]
 
@@ -46,21 +47,28 @@ static func generate_layout(num_rooms):
 		else:
 			# Nothing available; pick random room
 			current = rooms[randi() % len(rooms)]
-
+	
+	rooms[-1].designation = "boss"
 	######## TODO: print connections
 	var final = ""
 	for y in range(num_rooms):
 		var string = ""
 		for x in range(num_rooms):
 			if to_return.has(x, y):
-				string += "."
+				var room = to_return.get(x, y)
+				if room.designation == "start":
+					string += "s"
+				elif room.designation == "boss":
+					string += "B"
+				else:
+					string += "."
 			else:
 				string += " "
 		final += string + "\n"
 
 	print(final)
 
-	return to_return
+	return rooms[0]
 
 static func _pick_unexplored_adjacent(current, grid):
 	var possibilities = []
