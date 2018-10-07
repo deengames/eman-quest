@@ -23,7 +23,7 @@ func _ready():
 	Globals.current_map = map
 	self._restoring_state = Globals.previous_monsters != null
 	
-	var tileset = map.tileset
+	var tileset = load(map.tileset_path)
 	var tile_ids = TilesetMapper.new().load_tileset_mapping(tileset)
 	
 	var i = 0
@@ -41,8 +41,13 @@ func _ready():
 	self._populate_treasure_chests()
 	
 	var player = Player.instance()
-	player.position.x = map.entrance_position[0] * Globals.TILE_WIDTH
-	player.position.y = map.entrance_position[1] * Globals.TILE_HEIGHT
+	if map.map_type == "Overworld":
+		player.position = Vector2(0, 0)
+	else:
+		#player.position.x = map.entrance_position[0] * Globals.TILE_WIDTH
+		#player.position.y = map.entrance_position[1] * Globals.TILE_HEIGHT
+		pass #?????
+		
 	if self._restoring_state == true and not Globals.won_battle:
 		player.temporarily_no_battles()
 	self.add_child(player)
@@ -57,14 +62,6 @@ func get_monsters():
 			monster.data_object.x = monster.position.x
 			monster.data_object.y = monster.position.y
 			to_return[type].append(monster.data_object)
-#
-#	for boss_type in self._bosses.keys():
-#		to_return[boss_type] = []
-#		for boss in self._bosses[boss_type]:
-#			if boss.is_alive:
-#				boss.data_object.x = boss.position.x
-#				boss.data_object.y = boss.position.y
-#				to_return[boss_type].append(boss.data_object)
 				
 	return to_return
 
@@ -78,9 +75,9 @@ func _populate_tiles(tilemap_data, tilemap, tile_ids):
 func _add_transitions():
 	for destination in map.transitions:
 		var transition = MapWarp.instance()
-		transition.set_type(destination.map_type)
-		transition.position.x = destination.position.x * Globals.TILE_WIDTH
-		transition.position.y = destination.position.y * Globals.TILE_HEIGHT
+		transition.set_type(destination.target_map)
+		transition.position.x = destination.my_position.x * Globals.TILE_WIDTH
+		transition.position.y = destination.my_position.y * Globals.TILE_HEIGHT
 		self.add_child(transition)
 
 func _add_monsters():
@@ -103,7 +100,13 @@ func _add_monsters():
 		Globals.current_monster = null
 		Globals.previous_monsters = null
 	else:
-		monster_data = map.generate_monsters()
+		var generator_path = "res://Scripts/Generators/" + self.map.map_type + "MonsterGenerator.gd"
+		if File.new().file_exists(generator_path):
+			var type = load(generator_path)
+			var generator = type.new()
+			monster_data = generator.generate_monsters(self.map)
+		else:
+			monster_data = {}
 	
 	self._monsters = {}
 	self._bosses = {}

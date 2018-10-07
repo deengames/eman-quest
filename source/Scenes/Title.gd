@@ -2,6 +2,7 @@ extends Node2D
 
 var BattlePlayer = preload("res://Entities/Battle/BattlePlayer.gd")
 var MemoryTileBattleScene = preload("res://Scenes/Battle/MemoryTileBattleScene.tscn")
+var SaveManager = preload("res://Scripts/SaveManager.gd")
 var SceneManagement = preload("res://Scripts/SceneManagement.gd")
 var Slime = preload("res://Entities/Battle/Monster.tscn")
 
@@ -63,3 +64,8 @@ func _on_AdvancedBattleButton_pressed():
 	battle_scene.go_turbo()
 	
 	SceneManagement.change_scene_to(get_tree(), battle_scene)
+
+
+func _on_LoadGameButton_pressed():
+	SaveManager.load("test")
+	SceneManagement.change_map_to(get_tree(), "Overworld")

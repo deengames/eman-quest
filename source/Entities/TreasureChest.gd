@@ -1,6 +1,7 @@
 extends StaticBody2D
 
 const _CHEST_OPEN_X = 64
+const Equipment = preload("res://Entities/Equipment.gd")
 const StatusWindow = preload("res://Scenes/UI/StatusWindow.tscn")
 
 var is_opened = false
@@ -27,6 +28,22 @@ func initialize_from(data):
 	self.position.y = data.tile_y * Globals.TILE_HEIGHT
 	if data.is_opened:
 		self._consume()
+
+func to_dict():
+	return {
+		"filename": "res://Entities/TreasureChest.gd",
+		"is_opened": self.is_opened,
+		"contents": self.contents.to_dict(),
+		"tile_x": self.tile_x,
+		"tile_y": self.tile_y
+	}
+
+static func from_dict(dict):
+	var to_return = new()
+	var contents = Equipment.from_dict(dict["contents"])
+	to_return.initialize(dict["tile_x"], dict["tile_y"], contents)
+	to_return.is_opened = dict["is_opened"]
+	return to_return
 
 func open():
 	if not self.is_opened:

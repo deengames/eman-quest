@@ -1,5 +1,7 @@
 extends Node
 
+const DictionaryHelper = preload("res://Scripts/DictionaryHelper.gd")
+const Equipment = preload("res://Entities/Equipment.gd")
 const EquipmentGenerator = preload("res://Scripts/Generators/EquipmentGenerator.gd")
 const StatType = preload("res://Scripts/StatType.gd")
 
@@ -47,23 +49,42 @@ func _init():
 	self.weapon = EquipmentGenerator.generate("weapon", StatType.Strength, 10)
 	self.armour = EquipmentGenerator.generate("armour", StatType.Defense, 8)
 
-func save():
+func to_dict():
 	return {
-		"level" : self.level,
-		"experience_points" : self.experience_points,
-		"health" : self.health,
-		"strength" : self.strength,
-		"defense " : self.defense,
-		"max_energy" : self.max_energy,
-		"num_pickable_tiles" : self.num_pickable_tiles,
-		"num_actions" : self.num_actions,
-		"unassigned_stats_points" : self.unassigned_stats_points,
-		"assigned_points" : self.assigned_points,
-		"weapon" : self.weapon,
-		"armour" : self.armour,
-		"equipment" : self.equipment,
-		"key_items" : self.key_items
+		"filename": "res://Entities/PlayerData.gd",
+		"level": self.level,
+		"experience_points": self.experience_points,
+		"health": self.health,
+		"strength": self.strength,
+		"defense": self.defense,
+		"max_energy": self.max_energy,
+		"num_pickable_tiles": self.num_pickable_tiles,
+		"num_actions": self.num_actions,
+		"unassigned_stats_points": self.unassigned_stats_points,
+		"assigned_points": self.assigned_points,
+		"weapon": self.weapon.to_dict(),
+		"armour": self.armour.to_dict(),
+		"equipment": DictionaryHelper.array_to_dictionary(self.equipment),
+		"key_items": DictionaryHelper.array_to_dictionary(self.key_items)
 	}
+
+static func from_dict(dict):
+	var to_return = new()
+	to_return.level = dict["level"]
+	to_return.experience_points = dict["experience_points"]
+	to_return.health = dict["health"]
+	to_return.strength = dict["strength"]
+	to_return.defense = dict["defense"]
+	to_return.max_energy = dict["max_energy"]
+	to_return.num_pickable_tiles = dict["num_pickable_tiles"]
+	to_return.num_actions = dict["num_actions"]
+	to_return.unassigned_stats_points = dict["unassigned_stats_points"]
+	to_return.assigned_points = dict["assigned_points"]
+	to_return.weapon = Equipment.from_dict(dict["weapon"])
+	to_return.armour = Equipment.from_dict(dict["armour"])
+	to_return.equipment = DictionaryHelper.array_from_dictionary(dict["equipment"])
+	to_return.key_items = DictionaryHelper.array_from_dictionary(dict["key_items"])
+	return to_return
 	
 func gain_xp(xp):
 	var old_xp = self.experience_points

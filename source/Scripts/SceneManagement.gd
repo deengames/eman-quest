@@ -1,5 +1,6 @@
 extends Node
 
+const AreaType = preload("res://Scripts/Enums/AreaType.gd")
 const Boss = preload("res://Entities/Battle/Boss.gd")
 const MemoryTileBattleScene = preload("res://Scenes/Battle/MemoryTileBattleScene.tscn")
 const PopulatedMapScene = preload("res://Scenes/PopulatedMapScene.tscn")
@@ -7,8 +8,15 @@ const PopulatedMapScene = preload("res://Scenes/PopulatedMapScene.tscn")
 static func change_map_to(tree, map_type):
 	# Create map instance
 	var map_data = Globals.maps[map_type]
+	var start_map = map_data
+	
+	if typeof(map_data) == TYPE_ARRAY:
+		for map in map_data:
+			if map.area_type == AreaType.ENTRANCE:
+				start_map = map
+				
 	var populated_map = PopulatedMapScene.instance()
-	populated_map.initialize(map_data)
+	populated_map.initialize(start_map)
 	
 	change_scene_to(tree, populated_map)
 	

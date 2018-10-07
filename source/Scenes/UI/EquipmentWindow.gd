@@ -5,6 +5,7 @@ var _all_items = []
 var _selected_item = null
 
 func _ready():
+
 	self._update_equipped_display()
 	self._clear_selected_display()
 	self._populate_item_list()

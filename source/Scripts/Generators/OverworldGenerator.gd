@@ -12,7 +12,7 @@ var map_width = Globals.WORLD_WIDTH_IN_TILES
 var map_height = Globals.WORLD_HEIGHT_IN_TILES
 
 func generate():
-	var map = AreaMap.new("Overworld", preload("res://Tilesets/Overworld.tres"), [0, 0], map_width, map_height, null)
+	var map = AreaMap.new("Overworld", "res://Tilesets/Overworld.tres", map_width, map_height, null)
 	
 	var tile_data = self._generate_world_map()
 	map.add_tile_data(tile_data)
@@ -88,7 +88,9 @@ func _place_area_entrances(map):
 	for destination in self._TRANSITION_DESTINATIONS:
 		var coordinates = self._find_empty_area(ground_tiles, placed_areas)
 		placed_areas.append(coordinates)
-		map.transitions.append(MapDestination.new(destination, Vector2(coordinates[0], coordinates[1])))
+		# ??????
+		var target_destination = Vector2(0, 0)
+		map.transitions.append(MapDestination.new(coordinates, destination, target_destination))
 
 func _find_empty_area(tile_data, placed_areas):
 	var x = Globals.randint(_PADDING_FROM_SIDES_OF_MAP, map_width - 1 - _PADDING_FROM_SIDES_OF_MAP)
@@ -98,7 +100,7 @@ func _find_empty_area(tile_data, placed_areas):
 		x = Globals.randint(_PADDING_FROM_SIDES_OF_MAP, map_width - 1 - _PADDING_FROM_SIDES_OF_MAP)
 		y = Globals.randint(_PADDING_FROM_SIDES_OF_MAP, map_height - 1 - _PADDING_FROM_SIDES_OF_MAP)
 	
-	return [x, y]
+	return Vector2(x, y)
 	
 func _is_area_around_tile_valid_and_empty(tile_data, placed_areas, x, y):
 	return (_is_tile_valid_and_empty(tile_data, placed_areas, x - 1, y - 1) and
