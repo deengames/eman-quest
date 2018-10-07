@@ -49,3 +49,17 @@ static func dictionary_values_from_dictionary(dict):
 		to_return[key] = a
 	
 	return to_return
+	
+static func vector2_to_dict(v):
+	if v == null: return null
+	
+	return {
+		"x": v.x,
+		"y": v.y
+	}
+
+static func dict_to_vector2(dict):
+	if not dict.has["x"] or not dict.has["y"]:
+		return null
+		
+	return Vector2(dict["x"], dict["y"])

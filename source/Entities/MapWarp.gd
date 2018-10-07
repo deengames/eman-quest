@@ -10,26 +10,30 @@ const EntranceImageXPositions = {
 	"Final": 320
 }
 
-# Map destination sprite
-var map_type = "" # eg. Forest
+var map_destination
 
-func set_type(map_type):
-	self.map_type = map_type
+func initialize_from(map_destination):
+	self.map_destination = map_destination
 	$Sprite.visible = true
 	
+	var map_type = map_destination.target_map
 	if map_type in EntranceImageXPositions.keys():
 		$Sprite.region_rect.position.x = EntranceImageXPositions[map_type]
 	else:
-		# Not sure what this is. Prolly transition from map => world
+		# Transition from map => world or map => map eg. in-forest maps
 		$Sprite.visible = false
 
 func _on_Area2D_body_entered(body):
 	if body == Globals.player:
+		var map_type = self.map_destination.target_map
+		
 		# Leaving overworld? Come back one tile under the current tile.
 		if Globals.current_map.map_type == "Overworld":
 			Globals.overworld_position = Vector2(self.position.x, self.position.y + Globals.TILE_HEIGHT)
-		
+			Globals.transition_used = null
+			
 		if map_type != "Final":
+			Globals.transition_used = self.map_destination
 			SceneManagement.change_map_to(get_tree(), map_type)
 		else:
 			# Final map is a special case. In many ways.

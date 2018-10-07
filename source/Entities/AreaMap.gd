@@ -17,6 +17,7 @@ var monsters = {} # Type => list of coordinates. Kept so we know what to restore
 var treasure_chests = [] # instances of TreasureChest (class, not the scene)
 var bosses = {} # Type => Boss instances created with .new
 var area_type # eg. Entrance, Normal, Boss
+var entrance_from_overworld # Vector2, only for area_type == ENTRANCE # Vector2, only for area_type == ENTRANCE
 
 func _init(map_type, tileset_path, tiles_wide, tiles_high, area_type):
 	self.tileset_path = tileset_path
@@ -37,7 +38,8 @@ func to_dict():
 		"treasure_chests": DictionaryHelper.array_to_dictionary(self.treasure_chests),
 		"bosses": DictionaryHelper.dictionary_values_to_dictionary(self.bosses),
 		"tileset_path": self.tileset_path,
-		"area_type": self.area_type
+		"area_type": self.area_type,
+		"entrance_from_overworld": DictionaryHelper.vector2_to_dict(self.entrance_from_overworld)
 	}
 
 static func from_dict(dict):
@@ -53,6 +55,7 @@ static func from_dict(dict):
 	map.treasure_chests = DictionaryHelper.array_from_dictionary(dict["treasure_chests"])
 	map.bosses = DictionaryHelper.dictionary_values_from_dictionary(dict["bosses"])
 	map.tileset_path = dict["tileset_path"]
+	map.entrance_from_overworld = DictionaryHelper.dict_to_vector2(dict["entrance_from_overworld"])
 
 	return map
 

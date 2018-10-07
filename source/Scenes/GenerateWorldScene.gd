@@ -14,24 +14,30 @@ func _ready():
 	get_tree().current_scene.get_node("UI").show_intro_story()
 	
 func generate_world():
-	var overworld = OverworldGenerator.new().generate()
-	
 	var forest_generator = ForestGenerator.new()
 	var forest_layout = MapLayoutGenerator.generate_layout(4)
 	var forest_maps = []
 	
 	for submap in forest_layout:
 		# Generate transitions here, used for path generation
-		var transitions = self._generate_transitions(submap, forest_generator.map_width, forest_generator.map_height, overworld)
+		var data = self._generate_transitions(submap, forest_generator.map_width, forest_generator.map_height)
+		var transitions = data["transitions"]
+		var entrance = data["entrance"]
+		
 		var map = forest_generator.generate(submap, transitions)
+		map.entrance_from_overworld = entrance
+		
 		forest_maps.append(map)
 	
 	# return a dictionary, eg. "forest" => forest map
-	Globals.maps = {
-		"Overworld": overworld,
-		# TODO: delegate to the MapLayoutGenerator or another generator
+	Globals.maps = {		
 		"Forest": forest_maps
 	}
+	
+	# Generate last; generating the entrance into the first sub-map
+	# of each dungeon eg. the forest, requires Globals.maps.
+	var overworld = OverworldGenerator.new().generate()
+	Globals.maps["Overworld"] = overworld
 	
 	Globals.story_data = {
 		"village_name": self._generate_village_name(),
@@ -46,8 +52,9 @@ func _generate_boss_type():
 	var options = ['snake', 'black dog', 'gargoyle']
 	return options[randi() % len(options)]
 	
-func _generate_transitions(submap, map_width, map_height, overworld):
+func _generate_transitions(submap, map_width, map_height):
 	var transitions = []
+	var entrance_from_overworld = null
 	
 	if submap.area_type == AreaType.ENTRANCE:
 		var position = Vector2(0, 0)
@@ -65,8 +72,8 @@ func _generate_transitions(submap, map_width, map_height, overworld):
 				# Left side is already taken, generate entrance on RHS
 				position.x = map_height - 1
 		
-		# Null => uses previous position on overworld when we entered the map
-		transitions.append(MapDestination.new(position, overworld, null))
+		transitions.append(MapDestination.new(position, "Overworld", null, null))
+		entrance_from_overworld = position
 	
 	for direction in submap.connections.keys():
 		var destination = submap.connections[direction]
@@ -86,6 +93,6 @@ func _generate_transitions(submap, map_width, map_height, overworld):
 			my_position = Vector2(floor(map_width / 2), map_height - 1)
 			target_position = Vector2(floor(map_width / 2), 0)
 			
-		transitions.append(MapDestination.new(my_position, destination, target_position))
+		transitions.append(MapDestination.new(my_position, destination, target_position, direction))
 	
-	return transitions
+	return { "transitions": transitions, "entrance": entrance_from_overworld }

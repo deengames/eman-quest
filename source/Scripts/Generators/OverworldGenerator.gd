@@ -1,6 +1,7 @@
 extends Node
 
 var AreaMap = preload("res://Entities/AreaMap.gd")
+var AreaType = preload("res://Scripts/Enums/AreaType.gd")
 var MapDestination = preload("res://Entities/MapDestination.gd")
 var TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 
@@ -88,9 +89,18 @@ func _place_area_entrances(map):
 	for destination in self._TRANSITION_DESTINATIONS:
 		var coordinates = self._find_empty_area(ground_tiles, placed_areas)
 		placed_areas.append(coordinates)
-		# ??????
+		
 		var target_destination = Vector2(0, 0)
-		map.transitions.append(MapDestination.new(coordinates, destination, target_destination))
+		
+		# Not true for Final map
+		if Globals.maps.has(destination):
+			var maps = Globals.maps[destination]
+			for submap in maps:
+				if submap.area_type == AreaType.ENTRANCE:
+					target_destination = submap.entrance_from_overworld
+					break
+					
+		map.transitions.append(MapDestination.new(coordinates, destination, target_destination, null))
 
 func _find_empty_area(tile_data, placed_areas):
 	var x = Globals.randint(_PADDING_FROM_SIDES_OF_MAP, map_width - 1 - _PADDING_FROM_SIDES_OF_MAP)

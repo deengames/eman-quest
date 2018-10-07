@@ -42,11 +42,13 @@ func _ready():
 	
 	var player = Player.instance()
 	if map.map_type == "Overworld":
+		# ????
 		player.position = Vector2(0, 0)
 	else:
-		#player.position.x = map.entrance_position[0] * Globals.TILE_WIDTH
-		#player.position.y = map.entrance_position[1] * Globals.TILE_HEIGHT
-		pass #?????
+		var from = Globals.transition_used
+		player.position = Vector2(
+			from.target_position.x * Globals.TILE_WIDTH,
+			from.target_position.y * Globals.TILE_HEIGHT)
 		
 	if self._restoring_state == true and not Globals.won_battle:
 		player.temporarily_no_battles()
@@ -75,7 +77,7 @@ func _populate_tiles(tilemap_data, tilemap, tile_ids):
 func _add_transitions():
 	for destination in map.transitions:
 		var transition = MapWarp.instance()
-		transition.set_type(destination.target_map)
+		transition.initialize_from(destination)
 		transition.position.x = destination.my_position.x * Globals.TILE_WIDTH
 		transition.position.y = destination.my_position.y * Globals.TILE_HEIGHT
 		self.add_child(transition)
