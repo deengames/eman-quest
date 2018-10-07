@@ -69,7 +69,7 @@ static func generate_layout(num_rooms):
 
 	print(final)
 
-	return rooms[0]
+	return rooms
 
 static func _pick_unexplored_adjacent(current, grid):
 	var possibilities = []

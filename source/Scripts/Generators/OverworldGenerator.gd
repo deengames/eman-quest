@@ -12,7 +12,7 @@ var map_width = Globals.WORLD_WIDTH_IN_TILES
 var map_height = Globals.WORLD_HEIGHT_IN_TILES
 
 func generate():
-	var map = AreaMap.new("Overworld", "res://Tilesets/Overworld.tres", [0, 0], map_width, map_height)
+	var map = AreaMap.new("Overworld", "res://Tilesets/Overworld.tres", [0, 0], map_width, map_height, null)
 	
 	var tile_data = self._generate_world_map()
 	map.add_tile_data(tile_data)

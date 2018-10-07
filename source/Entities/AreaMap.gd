@@ -17,13 +17,15 @@ var tileset_path
 var monsters = {} # Type => list of coordinates. Kept so we know what to restore when coming back after battle.
 var treasure_chests = [] # instances of TreasureChest (class, not the scene)
 var bosses = {} # Type => Boss instances created with .new
+var area_type # eg. Entrance, Normal, Boss
 
-func _init(map_type, tileset_path, entrance_position, tiles_wide, tiles_high):
+func _init(map_type, tileset_path, entrance_position, tiles_wide, tiles_high, area_type):
 	self.tileset_path = tileset_path
 	self.map_type = map_type
 	self.entrance_position = entrance_position
 	self.tiles_wide = tiles_wide
 	self.tiles_high = tiles_high
+	self.area_type = area_type
 
 func to_dict():
 	return {
@@ -37,12 +39,13 @@ func to_dict():
 		"monsters": DictionaryHelper.dictionary_values_to_dictionary(self.monsters),
 		"treasure_chests": DictionaryHelper.array_to_dictionary(self.treasure_chests),
 		"bosses": DictionaryHelper.dictionary_values_to_dictionary(self.bosses),
-		"tileset_path": self.tileset_path
+		"tileset_path": self.tileset_path,
+		"area_type": self.area_type
 	}
 
 static func from_dict(dict):
 	var map = new(dict["map_type"], dict["tileset_path"], dict["entrance_position"],
-		dict["tiles_wide"], dict["tiles_high"])
+		dict["tiles_wide"], dict["tiles_high"], dict["area_type"])
 	
 	map.entrance_position = dict["entrance_position"]
 	map.transitions = DictionaryHelper.array_from_dictionary(dict["transitions"])

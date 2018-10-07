@@ -1,13 +1,20 @@
 extends Node
 
 const AreaMap = preload("res://Entities/AreaMap.gd")
+const DictionaryHelper = preload("res://Scripts/DictionaryHelper.gd")
 const PlayerData = preload("res://Entities/PlayerData.gd")
 
 static func save(save_id):
 	var maps = {}
 	for map_type in Globals.maps.keys():
 		var source_map = Globals.maps[map_type]
-		var map_data = source_map.to_dict()
+		var map_data
+		
+		if typeof(source_map) == TYPE_ARRAY:
+			map_data = DictionaryHelper.array_to_dictionary(source_map)
+		else:
+			map_data = source_map.to_dict()
+			
 		maps[map_type] = map_data
 	
 	maps = to_json(maps)
@@ -42,7 +49,13 @@ static func load(save_id):
 	save_game.close()
 	
 	for key in maps_data.keys():
-		Globals.maps[key] = AreaMap.from_dict(maps_data[key])
+		# Derp
+		if key == "Overworld":
+			Globals.maps[key] = AreaMap.from_dict(maps_data[key])
+		else:
+			Globals.maps[key] = []
+			for data in maps_data[key]:
+				Globals.maps[key].append(AreaMap.from_dict(data))
 	
 	Globals.player_data = PlayerData.from_dict(player_data)
 	Globals.story_data = story_data
