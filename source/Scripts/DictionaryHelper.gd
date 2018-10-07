@@ -49,7 +49,8 @@ static func dictionary_values_from_dictionary(dict):
 		to_return[key] = a
 	
 	return to_return
-	
+
+# Converts a nullable Vector2 to a dictionary
 static func vector2_to_dict(v):
 	if v == null: return null
 	
@@ -59,7 +60,7 @@ static func vector2_to_dict(v):
 	}
 
 static func dict_to_vector2(dict):
-	if not dict.has["x"] or not dict.has["y"]:
+	if dict == null or not dict.has("x") or not dict.has("y"):
 		return null
 		
 	return Vector2(dict["x"], dict["y"])

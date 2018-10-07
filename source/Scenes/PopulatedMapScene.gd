@@ -41,10 +41,8 @@ func _ready():
 	self._populate_treasure_chests()
 	
 	var player = Player.instance()
-	if map.map_type == "Overworld":
-		# ????
-		player.position = Vector2(0, 0)
-	else:
+	# SceneManagement sets player position correct if back to overworld
+	if map.map_type != "Overworld":
 		var from = Globals.transition_used
 		player.position = Vector2(
 			from.target_position.x * Globals.TILE_WIDTH,
