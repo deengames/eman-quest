@@ -47,6 +47,12 @@ func _ready():
 		player.position = Vector2(
 			from.target_position.x * Globals.TILE_WIDTH,
 			from.target_position.y * Globals.TILE_HEIGHT)
+	
+		# Offset so we don't spawn directly on a transition
+		if from.direction == "up":
+			player.position.y -= 2 * Globals.TILE_HEIGHT
+		elif from.direction == "left":
+			player.position.x -= 2 * Globals.TILE_WIDTH
 		
 	if self._restoring_state == true and not Globals.won_battle:
 		player.temporarily_no_battles()
