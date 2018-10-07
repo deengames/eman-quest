@@ -182,12 +182,13 @@ func _generate_clearings(path_points, dirt_map, tree_map):
 func _generate_treasure_chests():
 	var num_chests = Globals.randint(_MIN_CHESTS, _MAX_CHESTS)
 	var chests = []
+	var chests_coordinates = []
 	var types = ["weapon", "armour"]
 	var stats = {"weapon": StatType.Strength, "armour": StatType.Defense}
 	
 	while num_chests > 0:
 		var spot = SpotFinder.find_empty_spot(map_width, map_height,
-			self._tree_map, chests)
+			self._tree_map, chests_coordinates)
 			
 		var type = types[randi() % len(types)]
 		var power = Globals.randint(_MIN_ITEM_POWER, _MAX_ITEM_POWER)
@@ -196,6 +197,7 @@ func _generate_treasure_chests():
 		var treasure = TreasureChest.new()
 		treasure.initialize(spot[0], spot[1], item)
 		chests.append(treasure)
+		chests_coordinates.append(spot)
 		num_chests -= 1
 	
 	return chests
