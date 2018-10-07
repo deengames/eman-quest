@@ -25,6 +25,8 @@ func generate_world():
 		var entrance = data["entrance"]
 		
 		var map = forest_generator.generate(submap, transitions)
+		map.grid_x = submap.grid_x
+		map.grid_y = submap.grid_y
 		map.entrance_from_overworld = entrance
 		
 		forest_maps.append(map)
@@ -59,14 +61,18 @@ func _generate_transitions(submap, map_width, map_height):
 	if submap.area_type == AreaType.ENTRANCE:
 		var position = Vector2(0, 0)
 		
+		###
+		# NB: maps are generated independently. The only way we get both sides of a
+		# transition to line up (eg. bottom of map (0, 0) connects to top of map (0,1)
+		# is to hard-code the center x/y appropriately.
 		if submap.connections.has("right") or submap.connections.has("left"):
-			position.y = randi() % map_height
+			position.y = floor(map_height / 2)
 			position.x = 0
 			if submap.connections.has("left"):
 				# Left side is already taken, generate entrance on RHS
 				position.x = map_width - 1
 		elif submap.connections.has("up") or submap.connections.has("down"):
-			position.x = randi() % map_width
+			position.x = floor(map_width / 2)
 			position.y = 0
 			if submap.connections.has("up"):
 				# Left side is already taken, generate entrance on RHS

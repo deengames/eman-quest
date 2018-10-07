@@ -18,6 +18,8 @@ var treasure_chests = [] # instances of TreasureChest (class, not the scene)
 var bosses = {} # Type => Boss instances created with .new
 var area_type # eg. Entrance, Normal, Boss
 var entrance_from_overworld # Vector2, only for area_type == ENTRANCE # Vector2, only for area_type == ENTRANCE
+var grid_x
+var grid_y
 
 func _init(map_type, tileset_path, tiles_wide, tiles_high, area_type):
 	self.tileset_path = tileset_path
@@ -39,7 +41,9 @@ func to_dict():
 		"bosses": DictionaryHelper.dictionary_values_to_dictionary(self.bosses),
 		"tileset_path": self.tileset_path,
 		"area_type": self.area_type,
-		"entrance_from_overworld": DictionaryHelper.vector2_to_dict(self.entrance_from_overworld)
+		"entrance_from_overworld": DictionaryHelper.vector2_to_dict(self.entrance_from_overworld),
+		"grid_x": self.grid_x,
+		"grid_y": self.grid_y
 	}
 
 static func from_dict(dict):
@@ -56,6 +60,8 @@ static func from_dict(dict):
 	map.bosses = DictionaryHelper.dictionary_values_from_dictionary(dict["bosses"])
 	map.tileset_path = dict["tileset_path"]
 	map.entrance_from_overworld = DictionaryHelper.dict_to_vector2(dict["entrance_from_overworld"])
+	map.grid_x = dict["grid_x"]
+	map.grid_y = dict["grid_y"]
 
 	return map
 

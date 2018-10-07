@@ -96,7 +96,7 @@ script = ExtResource( 1 )
 anchor_mode = 1
 rotating = false
 current = true
-zoom = Vector2( 10, 10 )
+zoom = Vector2( 6, 6 )
 limit_left = -10000000
 limit_top = -10000000
 limit_right = 10000000
@@ -115,7 +115,7 @@ drag_margin_bottom = 0.2
 editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
-_sections_unfolded = [ "Editor", "Limit", "Offset", "Smoothing" ]
+_sections_unfolded = [ "Editor" ]
 
 [node name="Sprite" type="Sprite" parent="." index="1"]
 
