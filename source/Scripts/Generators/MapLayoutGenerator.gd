@@ -1,6 +1,7 @@
 extends Node
 
 const Room = preload("res://Entities/Room.gd")
+const AreaType = preload("res://Scripts/Enums/AreaType.gd")
 const TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 
 ###
@@ -31,7 +32,7 @@ static func generate_layout(num_rooms):
 	var y = coordinates[1]
 	
 	var current = Room.new(x, y)
-	current.designation = "start"
+	current.room_type = AreaType.ENTRANCE
 	to_return.set(x, y, current)
 	var rooms = [current]
 
@@ -48,7 +49,7 @@ static func generate_layout(num_rooms):
 			# Nothing available; pick random room
 			current = rooms[randi() % len(rooms)]
 	
-	rooms[-1].designation = "boss"
+	rooms[-1].room_type = AreaType.BOSS
 	######## TODO: print connections
 	var final = ""
 	for y in range(num_rooms):
@@ -56,9 +57,9 @@ static func generate_layout(num_rooms):
 		for x in range(num_rooms):
 			if to_return.has(x, y):
 				var room = to_return.get(x, y)
-				if room.designation == "start":
+				if room.room_type == AreaType.ENTRANCE:
 					string += "s"
-				elif room.designation == "boss":
+				elif room.room_type == AreaType.BOSS:
 					string += "B"
 				else:
 					string += "."

@@ -5,6 +5,7 @@ const Boss = preload("res://Entities/Battle/Boss.gd")
 const EquipmentGenerator = preload("res://Scripts/Generators/EquipmentGenerator.gd")
 const KeyItem = preload("res://Entities/KeyItem.gd")
 const MapDestination = preload("res://Entities/MapDestination.gd")
+const AreaType = preload("res://Scripts/Enums/AreaType.gd")
 const SpotFinder = preload("res://Scripts/Maps/SpotFinder.gd")
 const StatType = preload("res://Scripts/StatType.gd")
 const TreasureChest = preload("res://Entities/TreasureChest.gd")
@@ -37,15 +38,17 @@ var _clearings_coordinates = []
 var _tree_map = []
 
 # Called once per game
-func generate():
+func generate(area_type):
 	var map = AreaMap.new("Forest", "res://Tilesets/Overworld.tres", self.entrance_position, map_width, map_height)
 
-	var tile_data = self._generate_forest() # generates paths too
+	var tile_data = self._generate_forest(area_type) # generates paths too
 	self._tree_map = tile_data[1]
 	
 	map.transitions = self._generate_transitions()
 	map.treasure_chests = self._generate_treasure_chests()
-	map.bosses = self._generate_boss()
+	
+	if area_type == AreaType.BOSS:
+		map.bosses = self._generate_boss()
 	
 	for data in tile_data:
 		map.add_tile_data(data)
@@ -66,7 +69,7 @@ func _generate_boss():
 	boss.initialize(pixel_coordinates[0], pixel_coordinates[1], kufi)
 	return { boss.data.type: [boss] }
 
-func _generate_forest():
+func _generate_forest(area_type):
 	var to_return = []
 	
 	var dirt_map = TwoDimensionalArray.new(self.map_width, self.map_height)
@@ -110,23 +113,7 @@ func _generate_paths(dirt_map, tree_map):
 		connect_to = current_node
 		path_points.append(current_node)
 		to_generate -= 1
-	
-	# Back entrance/exit
-	var back_exit_connector = [self._back_exit[0], offset_y_up] # symmetrical to front
-	self._generate_path(path_points[-1], back_exit_connector, dirt_map, tree_map)
-	self._generate_path(back_exit_connector, self._back_exit, dirt_map, tree_map)
-	
-	# Connect to closest node
-	var closest_node = path_points[-1]
-	var min_distance = sqrt(pow(back_exit_connector[0] - closest_node[0], 2) + pow(back_exit_connector[1] - closest_node[1], 2))
-	for node in path_points:
-		var distance =  sqrt(pow(back_exit_connector[0] - node[0], 2) + pow(node[1] - closest_node[1], 2))
-		if distance < min_distance:
-			min_distance = distance
-			closest_node = node
-	
-	self._generate_path(back_exit_connector, closest_node, dirt_map, tree_map)
-	
+		
 	return path_points
 
 func _generate_transitions():

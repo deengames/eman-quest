@@ -1,6 +1,7 @@
 extends Node2D
 
 const AreaMap = preload("res://Entities/AreaMap.gd")
+const AreaType = preload("res://Scripts/Enums/AreaType.gd")
 const ForestGenerator = preload("res://Scripts/Generators/ForestGenerator.gd")
 const OverworldGenerator = preload("res://Scripts/Generators/OverworldGenerator.gd")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
@@ -15,7 +16,8 @@ func generate_world():
 	# return a dictionary, eg. "forest" => forest map
 	Globals.maps = {
 		"Overworld": OverworldGenerator.new().generate(),
-		"Forest": ForestGenerator.new().generate()
+		# TODO: delegate to the MapLayoutGenerator or another generator
+		"Forest": ForestGenerator.new().generate(AreaType.BOSS)
 	}
 	
 	Globals.story_data = {

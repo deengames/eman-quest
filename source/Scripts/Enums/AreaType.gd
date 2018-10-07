@@ -1,0 +1,5 @@
+enum AREA_TYPE {
+	NORMAL,
+	BOSS,
+	ENTRANCE
+}
