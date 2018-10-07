@@ -7,7 +7,6 @@ const DictionaryHelper = preload("res://Scripts/DictionaryHelper.gd")
 # Pure data, no object (eg. player, slime, etc.) scenes
 ####
 
-var entrance_position = []
 var transitions = [] # warps to other maps. List of MapDestination instances.
 var tiles_wide = 0
 var tiles_high = 0
@@ -19,10 +18,9 @@ var treasure_chests = [] # instances of TreasureChest (class, not the scene)
 var bosses = {} # Type => Boss instances created with .new
 var area_type # eg. Entrance, Normal, Boss
 
-func _init(map_type, tileset_path, entrance_position, tiles_wide, tiles_high, area_type):
+func _init(map_type, tileset_path, tiles_wide, tiles_high, area_type):
 	self.tileset_path = tileset_path
 	self.map_type = map_type
-	self.entrance_position = entrance_position
 	self.tiles_wide = tiles_wide
 	self.tiles_high = tiles_high
 	self.area_type = area_type
@@ -30,7 +28,6 @@ func _init(map_type, tileset_path, entrance_position, tiles_wide, tiles_high, ar
 func to_dict():
 	return {
 		"filename": "res://Entities/AreaMap.gd",
-		"entrance_position": self.entrance_position,
 		"transitions": DictionaryHelper.array_to_dictionary(self.transitions),
 		"tiles_wide": self.tiles_wide,
 		"tiles_high": self.tiles_high,
@@ -44,10 +41,9 @@ func to_dict():
 	}
 
 static func from_dict(dict):
-	var map = new(dict["map_type"], dict["tileset_path"], dict["entrance_position"],
-		dict["tiles_wide"], dict["tiles_high"], dict["area_type"])
+	var map = new(dict["map_type"], dict["tileset_path"], dict["tiles_wide"],
+		dict["tiles_high"], dict["area_type"])
 	
-	map.entrance_position = dict["entrance_position"]
 	map.transitions = DictionaryHelper.array_from_dictionary(dict["transitions"])
 	map.tiles_wide = dict["tiles_wide"]
 	map.tiles_high = dict["tiles_high"]

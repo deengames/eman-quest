@@ -5,7 +5,7 @@ const AreaType = preload("res://Scripts/Enums/AreaType.gd")
 var grid_x
 var grid_y
 var connections = {} # direction => room
-var room_type = AreaType.NORMAL
+var area_type = AreaType.NORMAL
 
 func _init(grid_x, grid_y):
 	self.grid_x = grid_x

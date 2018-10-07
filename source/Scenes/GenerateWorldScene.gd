@@ -3,6 +3,7 @@ extends Node2D
 const AreaMap = preload("res://Entities/AreaMap.gd")
 const AreaType = preload("res://Scripts/Enums/AreaType.gd")
 const ForestGenerator = preload("res://Scripts/Generators/ForestGenerator.gd")
+const MapDestination = preload("res://Entities/MapDestination.gd")
 const MapLayoutGenerator = preload("res://Scripts/Generators/MapLayoutGenerator.gd")
 const OverworldGenerator = preload("res://Scripts/Generators/OverworldGenerator.gd")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
@@ -13,18 +14,21 @@ func _ready():
 	get_tree().current_scene.get_node("UI").show_intro_story()
 	
 func generate_world():
+	var overworld = OverworldGenerator.new().generate()
 	
 	var forest_generator = ForestGenerator.new()
 	var forest_layout = MapLayoutGenerator.generate_layout(4)
 	var forest_maps = []
 	
 	for submap in forest_layout:
-		var map = forest_generator.generate(submap.room_type)
+		# Generate transitions here, used for path generation
+		var transitions = self._generate_transitions(submap, forest_generator.map_width, forest_generator.map_height, overworld)
+		var map = forest_generator.generate(submap, transitions)
 		forest_maps.append(map)
 	
 	# return a dictionary, eg. "forest" => forest map
 	Globals.maps = {
-		"Overworld": OverworldGenerator.new().generate(),
+		"Overworld": overworld,
 		# TODO: delegate to the MapLayoutGenerator or another generator
 		"Forest": forest_maps
 	}
@@ -42,3 +46,46 @@ func _generate_boss_type():
 	var options = ['snake', 'black dog', 'gargoyle']
 	return options[randi() % len(options)]
 	
+func _generate_transitions(submap, map_width, map_height, overworld):
+	var transitions = []
+	
+	if submap.area_type == AreaType.ENTRANCE:
+		var position = Vector2(0, 0)
+		
+		if submap.connections.has("right") or submap.connections.has("left"):
+			position.y = randi() % map_height
+			position.x = 0
+			if submap.connections.has("left"):
+				# Left side is already taken, generate entrance on RHS
+				position.x = map_width - 1
+		elif submap.connections.has("up") or submap.connections.has("down"):
+			position.x = randi() % map_width
+			position.y = 0
+			if submap.connections.has("up"):
+				# Left side is already taken, generate entrance on RHS
+				position.x = map_height - 1
+		
+		# Null => uses previous position on overworld when we entered the map
+		transitions.append(MapDestination.new(position, overworld, null))
+	
+	for direction in submap.connections.keys():
+		var destination = submap.connections[direction]
+		var my_position = Vector2(0, 0)
+		var target_position = Vector2(0, 0)
+		
+		if direction == "left":
+			my_position = Vector2(0, floor(map_height / 2))
+			target_position = Vector2(map_width - 1, floor(map_height / 2))
+		elif direction == "right":
+			my_position = Vector2(map_width - 1, floor(map_height / 2))
+			target_position = Vector2(0, floor(map_height / 2))
+		elif direction == "up":
+			my_position = Vector2(floor(map_width / 2), 0)
+			target_position = Vector2(floor(map_width / 2), map_height - 1)
+		elif direction == "down":
+			my_position = Vector2(floor(map_width / 2), map_height - 1)
+			target_position = Vector2(floor(map_width / 2), 0)
+			
+		transitions.append(MapDestination.new(my_position, destination, target_position))
+	
+	return transitions

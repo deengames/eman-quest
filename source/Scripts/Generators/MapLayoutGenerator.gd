@@ -32,7 +32,7 @@ static func generate_layout(num_rooms):
 	var y = coordinates[1]
 	
 	var current = Room.new(x, y)
-	current.room_type = AreaType.ENTRANCE
+	current.area_type = AreaType.ENTRANCE
 	to_return.set(x, y, current)
 	var rooms = [current]
 
@@ -49,7 +49,7 @@ static func generate_layout(num_rooms):
 			# Nothing available; pick random room
 			current = rooms[randi() % len(rooms)]
 	
-	rooms[-1].room_type = AreaType.BOSS
+	rooms[-1].area_type = AreaType.BOSS
 	######## TODO: print connections
 	var final = ""
 	for y in range(num_rooms):
@@ -57,9 +57,9 @@ static func generate_layout(num_rooms):
 		for x in range(num_rooms):
 			if to_return.has(x, y):
 				var room = to_return.get(x, y)
-				if room.room_type == AreaType.ENTRANCE:
+				if room.area_type == AreaType.ENTRANCE:
 					string += "s"
-				elif room.room_type == AreaType.BOSS:
+				elif room.area_type == AreaType.BOSS:
 					string += "B"
 				else:
 					string += "."

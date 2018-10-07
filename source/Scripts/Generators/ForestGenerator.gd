@@ -31,30 +31,24 @@ const _MAX_ITEM_POWER = 30
 var map_width = 2 * Globals.WORLD_WIDTH_IN_TILES
 var map_height = 3 * Globals.WORLD_HEIGHT_IN_TILES
 
-var entrance_position = [map_width / 2, map_height - 1]
-var _back_exit = [map_width / 2, 0]
-
 var _clearings_coordinates = []
 var _tree_map = []
 
 # Called once per game
-func generate(area_type):
-	var map = AreaMap.new("Forest", "res://Tilesets/Overworld.tres", self.entrance_position, map_width, map_height, area_type)
+func generate(submap, transitions):
+	var map = AreaMap.new("Forest", "res://Tilesets/Overworld.tres", map_width, map_height, submap.area_type)
 
-	var tile_data = self._generate_forest(area_type) # generates paths too
+	var tile_data = self._generate_forest(submap.area_type, transitions) # generates paths too
 	self._tree_map = tile_data[1]
 	
-	map.transitions = self._generate_transitions()
+	map.transitions = transitions
 	map.treasure_chests = self._generate_treasure_chests()
 	
-	if area_type == AreaType.BOSS:
+	if submap.area_type == AreaType.BOSS:
 		map.bosses = self._generate_boss()
 	
 	for data in tile_data:
 		map.add_tile_data(data)
-	
-	# Move entrance up a few tiles so we don't spawn on the exit tile
-	entrance_position[1] -= 3
 	
 	return map
 
@@ -69,7 +63,7 @@ func _generate_boss():
 	boss.initialize(pixel_coordinates[0], pixel_coordinates[1], kufi)
 	return { boss.data.type: [boss] }
 
-func _generate_forest(area_type):
+func _generate_forest(area_type, transitions):
 	var to_return = []
 	
 	var dirt_map = TwoDimensionalArray.new(self.map_width, self.map_height)
@@ -80,28 +74,23 @@ func _generate_forest(area_type):
 	to_return.append(tree_map)
 	self._fill_with("Bush", tree_map)
 
-	var path_points = self._generate_paths(dirt_map, tree_map)
+	var path_points = self._generate_paths(transitions, dirt_map, tree_map)
 	self._generate_clearings(path_points, dirt_map, tree_map)
 	
 	self._turn_2x2_bushes_into_trees(tree_map)
 	
 	return to_return
 
-func _generate_paths(dirt_map, tree_map):
+func _generate_paths(transitions, dirt_map, tree_map):
 	var to_generate = NUM_PATH_NODES
-	var connect_to = entrance_position
-	var path_points = [entrance_position]
+	var path_points = []
+	var previous = null
 	
-	# Path goes straight up
-	var offset_y_up = Globals.randint(5, 10)
-	connect_to = [entrance_position[0], entrance_position[1] - offset_y_up]
-	self._generate_path(entrance_position, connect_to, dirt_map, tree_map)
-
 	while to_generate > 0:
 		var x = Globals.randint(_PATHS_BUFFER_FROM_EDGE, map_width - _PATHS_BUFFER_FROM_EDGE - 1)
 		var y = Globals.randint(_PATHS_BUFFER_FROM_EDGE, map_height - _PATHS_BUFFER_FROM_EDGE - 1)
 		
-		if sqrt(pow(x - connect_to[0], 2) + pow(y - connect_to[1], 2)) <= MINIMUM_NODE_DISTANCE:
+		if previous != null and sqrt(pow(x - previous[0], 2) + pow(y - previous[1], 2)) <= MINIMUM_NODE_DISTANCE:
 			continue
 			
 		for node in path_points:
@@ -109,18 +98,46 @@ func _generate_paths(dirt_map, tree_map):
 				continue
 		
 		var current_node = [x, y]
-		self._generate_path(connect_to, current_node, dirt_map, tree_map)
-		connect_to = current_node
 		path_points.append(current_node)
+		if previous != null:
+			self._generate_path(previous, current_node, dirt_map, tree_map)
+		previous = current_node
 		to_generate -= 1
+	
+	# Generate a node close to entrances (5-10 tiles "in" from the entrance).
+	# Then, connect entrance => new node => closest path node
+	for transition in transitions:
+		
+		var entrance = [transition.my_position.x, transition.my_position.y]
+		var destination = [transition.my_position.x, transition.my_position.y]
+		var offset = Globals.randint(5, 10)
+		
+		if entrance[0] == 0:
+			# left entrance
+			destination[0] += offset
+		elif entrance[0] == map_width - 1:
+			# right entrance
+			destination[0] -= offset
+		elif entrance[1] == 0:
+			# top entrance
+			destination[1] += offset
+		elif entrance[1] == map_height - 1:
+			# bottom entrance
+			destination[1] -= offset
+		
+		self._generate_path(entrance, destination, dirt_map, tree_map)
+		var closest_node = path_points[0]
+		var closest_distance = pow(closest_node[0] - destination[0], 2) + pow(closest_node[1] - destination[1], 2)
+		
+		for point in path_points:
+			var distance = pow(point[0] - destination[0], 2) + pow(point[1] - destination[1], 2)
+			if distance < closest_distance:
+				closest_node = point
+				closest_distance = distance
+		
+		self._generate_path(destination, closest_node, dirt_map, tree_map)
 		
 	return path_points
-
-func _generate_transitions():
-	var transitions = []
-	transitions.append(MapDestination.new("Overworld", Vector2(self.entrance_position[0], self.entrance_position[1])))
-	transitions.append(MapDestination.new("Overworld", Vector2(self._back_exit[0], self._back_exit[1])))
-	return transitions
 
 func _generate_path(point1, point2, dirt_map, tree_map):
 	var from_x = point1[0]
@@ -170,7 +187,7 @@ func _generate_treasure_chests():
 	
 	while num_chests > 0:
 		var spot = SpotFinder.find_empty_spot(map_width, map_height,
-			self._tree_map, chests, [entrance_position])
+			self._tree_map, chests)
 			
 		var type = types[randi() % len(types)]
 		var power = Globals.randint(_MIN_ITEM_POWER, _MAX_ITEM_POWER)
