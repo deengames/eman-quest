@@ -16,12 +16,13 @@ var player_data = PlayerData.new() # the actual player data.
 var story_data = {} # set in GenerateWorldScene; boss type, village name, etc.
 # Vector2. come back to these coordinates after leaving the current dungeon. 
 var overworld_position
-
-# Used for positioning when changing maps
-var transition_used
-
 # End: persist
 ####
+
+# Used for positioning when changing maps. Probably does not need to be persisted
+# because the value is only set very momentarily when the player steps on a
+# transition to change rooms/maps.
+var transition_used # MapDestination instance
 
 var current_map # AreaMap instance
 var current_map_scene # PopulatedMapScene instance
