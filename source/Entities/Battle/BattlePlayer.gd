@@ -34,7 +34,7 @@ func _init():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	self.current_health = player_data.health
-	self.strength = player_data.strength * 1000
+	self.strength = player_data.strength
 	self._defense = player_data.defense
 	self.max_health = self.current_health
 	self.num_pickable_tiles = player_data.num_pickable_tiles
