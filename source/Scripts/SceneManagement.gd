@@ -68,14 +68,14 @@ static func switch_to_battle_if_touched_player(monster, body):
 		# Keep a list of monsters to restore after battle
 		Globals.previous_monsters = Globals.current_map_scene.get_monsters()
 		# Keep track of who to remove if we won
-		Globals.current_monster_type = monster.data["type"]
+		Globals.current_monster_type = monster.data_object["data"]["type"]
 		Globals.current_monster = monster.data_object
 		
 		if monster.data_object is Boss:
 			Globals.battle_spoils = Globals.current_monster.key_item
 		
 		var battle_scene = MemoryTileBattleScene.instance()
-		battle_scene.set_monster_data(monster.data.duplicate())
+		battle_scene.set_monster_data(monster.data_object["data"].duplicate())
 		change_scene_to(monster.get_tree(), battle_scene)
 
 static func _free_current_scene(scene):

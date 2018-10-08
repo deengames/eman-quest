@@ -6,20 +6,7 @@ const MOVE_SPEED = 100
 const CHANGE_DESTINATION_EVERY_N_SECONDS = 1
 const IS_BOSS = false
 
-const data = {
-	"type": "Slime",
-	"health": 30,
-	"strength": 10,
-	"defense": 2,
-	"turns": 1,
-	"experience points": 10,
-	
-	"skill_probability": 40, # 40 = 40%
-	"skills": {
-		# These should add up to 100
-		"chomp": 100 # 20%,
-	}
-}
+var data = {}
 
 # pixel coordinates
 var x = 0
@@ -40,6 +27,8 @@ func initialize_from(monster):
 	self.data_object = monster
 	self.position.x = monster.x
 	self.position.y = monster.y
+	var type = monster.data["type"].to_lower()
+	$Sprite.texture = load("res://assets/images/monsters/" + type + ".png")
 
 func _process(delta):
 	var now = OS.get_ticks_msec()

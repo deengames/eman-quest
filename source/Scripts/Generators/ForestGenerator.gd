@@ -23,8 +23,8 @@ const CLEARING_HEIGHT = 8
 # Sometimes, paths generate right at the bottom of the map, obscuring the entrance
 # Add some buffer -- make sure we don't generate paths too low.
 const _PATHS_BUFFER_FROM_EDGE = 5
-const _MIN_CHESTS = 2
-const _MAX_CHESTS = 3
+const _MIN_CHESTS = 0
+const _MAX_CHESTS = 1
 const _MIN_ITEM_POWER = 15
 const _MAX_ITEM_POWER = 30
 
