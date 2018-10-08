@@ -4,7 +4,7 @@ const DictionaryHelper = preload("res://Scripts/DictionaryHelper.gd")
 
 # Data class
 var my_position
-var target_map # Vector2
+var target_map # string (eg. Overworld) or Room
 var target_position # Vector2
 var direction # eg. left
 
