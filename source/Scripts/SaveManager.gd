@@ -21,6 +21,7 @@ static func save(save_id):
 	var player_data = to_json(Globals.player_data.to_dict())
 	var story_data = to_json(Globals.story_data)
 	var overworld_position = to_json(DictionaryHelper.vector2_to_dict(Globals.overworld_position))
+	var player_position = to_json(DictionaryHelper.vector2_to_dict(Globals.player.position))
 	
 	var save_game = File.new()
 	save_game.open(_get_path(save_id), File.WRITE)
@@ -29,6 +30,7 @@ static func save(save_id):
 	save_game.store_line(player_data)
 	save_game.store_line(story_data)
 	save_game.store_line(overworld_position)
+	save_game.store_line(player_position)
 	
 	save_game.close()
 
@@ -45,6 +47,7 @@ static func load(save_id):
 	var player_data = parse_json(save_game.get_line())
 	var story_data = parse_json(save_game.get_line())
 	var overworld_position_data = parse_json(save_game.get_line())
+	var player_position_data = parse_json(save_game.get_line())
 	
 	save_game.close()
 	
@@ -60,6 +63,8 @@ static func load(save_id):
 	Globals.player_data = PlayerData.from_dict(player_data)
 	Globals.story_data = story_data
 	Globals.overworld_position = DictionaryHelper.dict_to_vector2(overworld_position_data)
+	
+	return {"player position": DictionaryHelper.dict_to_vector2(player_position_data)}
 
 static func _get_path(save_id):
 	return "user://save-" + str(save_id) + ".save"
