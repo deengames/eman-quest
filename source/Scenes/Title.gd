@@ -67,6 +67,4 @@ func _on_AdvancedBattleButton_pressed():
 
 
 func _on_LoadGameButton_pressed():
-	var extra_data = SaveManager.load("test")
-	SceneManagement.change_map_to(get_tree(), "Overworld")
-	Globals.player.position = extra_data["player position"]
+	var extra_data = SaveManager.load("test", get_tree())

@@ -5,7 +5,7 @@ const Boss = preload("res://Entities/Battle/Boss.gd")
 const MemoryTileBattleScene = preload("res://Scenes/Battle/MemoryTileBattleScene.tscn")
 const PopulatedMapScene = preload("res://Scenes/PopulatedMapScene.tscn")
 
-# Polymorphic. Target can be a type (eg. "ForesT") or a submap.
+# Polymorphic. Target can be a type (eg. "Forest") or a submap.
 static func change_map_to(tree, target):
 	# Create map instance
 	var map_type = target
@@ -25,11 +25,14 @@ static func change_map_to(tree, target):
 					target_areamap = map
 					break
 	else:
-		# submap
-		for map in map_data:
-			if map.grid_x == target.grid_x and map.grid_y == target.grid_y:
-				target_areamap = map
-				break
+		# probably an array of submap(s). Or if loading, could be the overworld.
+		if typeof(map_data) == TYPE_ARRAY:
+			for map in map_data:
+				if map.grid_x == target.grid_x and map.grid_y == target.grid_y:
+					target_areamap = map
+					break
+		else:
+			target_areamap = map_data
 				
 	var populated_map = PopulatedMapScene.instance()
 	populated_map.initialize(target_areamap)
