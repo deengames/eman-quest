@@ -36,7 +36,7 @@ var _tree_map = []
 
 # Called once per game
 func generate(submap, transitions):
-	var map = AreaMap.new("Forest", "res://Tilesets/Overworld.tres", map_width, map_height, submap.area_type)
+	var map = AreaMap.new("Forest", "res://Tilesets/IceForest.tres", map_width, map_height, submap.area_type)
 
 	var tile_data = self._generate_forest(submap.area_type, transitions) # generates paths too
 	self._tree_map = tile_data[1]
