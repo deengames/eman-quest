@@ -75,8 +75,8 @@ func _generate_transitions(submap, map_width, map_height):
 			position.x = floor(map_width / 2)
 			position.y = 0
 			if submap.connections.has("up"):
-				# Left side is already taken, generate entrance on RHS
-				position.x = map_height - 1
+				# Top side is already taken, generate entrance on RHS
+				position.y = map_height - 1
 		
 		transitions.append(MapDestination.new(position, "Overworld", null, null))
 		entrance_from_overworld = position

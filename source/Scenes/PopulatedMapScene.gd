@@ -49,13 +49,14 @@ func _ready():
 			from.target_position.y * Globals.TILE_HEIGHT)
 	
 		# Offset so we don't spawn directly on a transition
-		if from.direction == "up":
+		if from.direction == "up" or from.target_position.y >= self.map.tiles_high - 1:
 			player.position.y -= 2 * Globals.TILE_HEIGHT
-		elif from.direction == "left":
+		elif from.direction == "left" or from.target_position.x >= self.map.tiles_wide - 1:
 			player.position.x -= 2 * Globals.TILE_WIDTH
 		
 	if self._restoring_state == true and not Globals.won_battle:
 		player.temporarily_no_battles()
+		
 	self.add_child(player)
 	
 	Globals.current_map_scene = self
