@@ -28,3 +28,33 @@ func connect(room):
 		else: # room is to the right of us
 			self.connections["right"] = room
 			room.connections["left"] = self
+
+func to_dict():
+	# I don't know if this is correct. It only saves the current reference, not
+	# the whole tree. Does it hurt reconstituting it? Area2D has persisted transitions.
+	var connections = {}
+	for direction in self.connections.keys():
+		var node = self.connections[direction]
+		# Don't recursively store connections
+		connections[direction] = {
+			"grid_x": node.grid_x,
+			"grid_y": node.grid_y,
+			"area_type": node.area_type
+		}
+	return {
+		"grid_x": self.grid_x,
+		"grid_y": self.grid_y,
+		"area_type": self.area_type,
+		"connections": connections
+	}
+
+static func from_dict(dict):
+	var to_return = new(dict["grid_x"], dict["grid_y"])
+	to_return.area_type = dict["area_type"]
+	
+	if dict.has("connections"):
+		for direction in dict["connections"]:
+			var obj = dict["connections"][direction]
+			to_return["connections"][direction] = from_dict(obj)
+		
+	return to_return

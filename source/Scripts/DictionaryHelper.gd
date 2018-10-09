@@ -64,3 +64,11 @@ static func dict_to_vector2(dict):
 		return null
 		
 	return Vector2(dict["x"], dict["y"])
+
+# item is a string or object. If string, return it; if item, call to_dict
+static func str_or_obj_to_dict(item):
+	if typeof(item) == TYPE_STRING:
+		return item
+	else:
+		return item.to_dict()
+		

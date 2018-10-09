@@ -2,6 +2,7 @@ extends Node
 
 const AreaMap = preload("res://Entities/AreaMap.gd")
 const DictionaryHelper = preload("res://Scripts/DictionaryHelper.gd")
+const MapDestination = preload("res://Entities/MapDestination.gd")
 const PlayerData = preload("res://Entities/PlayerData.gd")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
@@ -24,6 +25,9 @@ static func save(save_id):
 	var overworld_position = to_json(DictionaryHelper.vector2_to_dict(Globals.overworld_position))
 	var current_map_data = to_json(Globals.current_map.to_dict())
 	var player_position = to_json(DictionaryHelper.vector2_to_dict(Globals.player.position))
+	var transition = to_json(null)
+	if Globals.transition_used != null:
+		transition = to_json(Globals.transition_used.to_dict())
 	
 	var save_game = File.new()
 	save_game.open(_get_path(save_id), File.WRITE)
@@ -34,6 +38,7 @@ static func save(save_id):
 	save_game.store_line(overworld_position)
 	save_game.store_line(current_map_data)
 	save_game.store_line(player_position)
+	save_game.store_line(transition)
 	
 	save_game.close()
 
@@ -52,6 +57,7 @@ static func load(save_id, tree):
 	var overworld_position_data = parse_json(save_game.get_line())
 	var current_map_data = parse_json(save_game.get_line())
 	var player_position_data = parse_json(save_game.get_line())
+	var transition_data = parse_json(save_game.get_line())
 	
 	save_game.close()
 	
@@ -67,6 +73,7 @@ static func load(save_id, tree):
 	Globals.player_data = PlayerData.from_dict(player_data)
 	Globals.story_data = story_data
 	Globals.overworld_position = DictionaryHelper.dict_to_vector2(overworld_position_data)
+	Globals.transition_used = MapDestination.from_dict(transition_data)
 	
 	var current_map =  AreaMap.from_dict(current_map_data)
 	Globals.current_map = current_map # Required to correctly load
