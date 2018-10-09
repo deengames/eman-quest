@@ -9,7 +9,6 @@ func show_intro_story():
 	var village_name = Globals.story_data["village_name"]
 	var final_boss_type = Globals.story_data["boss_type"]
 	$Contents.text = "A young boy from the village of " + village_name + " wakes up one day to find an enourmous " + final_boss_type + " emerge and kidnap the village imam. The " + final_boss_type + " flees toward the forest."
-	self._on_close_callback = funcref(self, "_change_to_overworld_map")
 
 func show_ending_story():
 	self.window_title = "An Adventure Ends!"
