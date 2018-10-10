@@ -8,13 +8,16 @@ const MapLayoutGenerator = preload("res://Scripts/Generators/MapLayoutGenerator.
 const OverworldGenerator = preload("res://Scripts/Generators/OverworldGenerator.gd")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
+const ForestVariations = ["Overworld", "FrostForest"]
+
 func _ready():
 	self.generate_world()
 	SceneManagement.change_map_to(get_tree(), "Overworld")
 	get_tree().current_scene.get_node("UI").show_intro_story()
 	
 func generate_world():
-	var forest_generator = ForestGenerator.new()
+	var forest_variation = ForestVariations[randi() % len(ForestVariations)]
+	var forest_generator = ForestGenerator.new(forest_variation)
 	var forest_layout = MapLayoutGenerator.generate_layout(4)
 	var forest_maps = []
 	

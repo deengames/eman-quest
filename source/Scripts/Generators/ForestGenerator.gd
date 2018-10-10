@@ -33,10 +33,14 @@ var map_height = 3 * Globals.WORLD_HEIGHT_IN_TILES
 
 var _clearings_coordinates = []
 var _tree_map = []
+var _variation = "" # eg. frost forest
+
+func _init(variation):
+	self._variation = variation
 
 # Called once per game
 func generate(submap, transitions):
-	var map = AreaMap.new("Forest", "res://Tilesets/IceForest.tres", map_width, map_height, submap.area_type)
+	var map = AreaMap.new("Forest", "res://Tilesets/" + self._variation + ".tres", map_width, map_height, submap.area_type)
 
 	var tile_data = self._generate_forest(submap.area_type, transitions) # generates paths too
 	self._tree_map = tile_data[1]
