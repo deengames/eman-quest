@@ -34,6 +34,23 @@ const MONSTER_VARIANT_DATA = {
 				# These should add up to 100
 				"vampire": 100 # 20%,
 			}
+		} 
+	},
+	"Frost": {
+		"FrostWolf": {
+			"type": "FrostWolf",
+			"weight": 100,
+			"health": 60,
+			"strength": 15,
+			"defense": 0,
+			"turns": 2,
+			"experience points": 15,
+			
+			"skill_probability": 0, # 40 = 40%
+			"skills": {
+				# These should add up to 100
+				#"chomp": 100 # 20%,
+			}
 		}
 	}
 }

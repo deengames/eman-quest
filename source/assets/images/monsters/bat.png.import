@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bat.png-a519b7802ec8b11399e798b70784d879.stex"
+path="res://.import/Bat.png-6821c90e99f2bbe96d93274888901c0d.stex"
 
 [deps]
 
-source_file="res://assets/images/monsters/bat.png"
-dest_files=[ "res://.import/bat.png-a519b7802ec8b11399e798b70784d879.stex" ]
+source_file="res://assets/images/monsters/Bat.png"
+dest_files=[ "res://.import/Bat.png-6821c90e99f2bbe96d93274888901c0d.stex" ]
 
 [params]
 
