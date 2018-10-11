@@ -20,10 +20,12 @@ var area_type # eg. Entrance, Normal, Boss
 var entrance_from_overworld # Vector2, only for area_type == ENTRANCE # Vector2, only for area_type == ENTRANCE
 var grid_x
 var grid_y
+var variation # eg. Normal, Frost
 
-func _init(map_type, tileset_path, tiles_wide, tiles_high, area_type):
-	self.tileset_path = tileset_path
+func _init(map_type, variation, tileset_path, tiles_wide, tiles_high, area_type):
 	self.map_type = map_type
+	self.variation = variation
+	self.tileset_path = tileset_path
 	self.tiles_wide = tiles_wide
 	self.tiles_high = tiles_high
 	self.area_type = area_type
@@ -43,12 +45,13 @@ func to_dict():
 		"area_type": self.area_type,
 		"entrance_from_overworld": DictionaryHelper.vector2_to_dict(self.entrance_from_overworld),
 		"grid_x": self.grid_x,
-		"grid_y": self.grid_y
+		"grid_y": self.grid_y,
+		"variation": self.variation
 	}
 
 static func from_dict(dict):
-	var map = new(dict["map_type"], dict["tileset_path"], dict["tiles_wide"],
-		dict["tiles_high"], dict["area_type"])
+	var map = new(dict["map_type"], dict["variation"], dict["tileset_path"],
+		dict["tiles_wide"], dict["tiles_high"], dict["area_type"])
 	
 	map.transitions = DictionaryHelper.array_from_dictionary(dict["transitions"])
 	map.tiles_wide = dict["tiles_wide"]

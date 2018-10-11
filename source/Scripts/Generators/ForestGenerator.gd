@@ -20,6 +20,11 @@ const NUM_CLEARINGS = 2
 const CLEARING_WIDTH = 7
 const CLEARING_HEIGHT = 8
 
+const _VARIANT_TILESETS = {
+	"Normal": "res://Tilesets/Overworld.tres",
+	"Frost": "res://Tilesets/FrostForest.tres"
+}
+
 # Sometimes, paths generate right at the bottom of the map, obscuring the entrance
 # Add some buffer -- make sure we don't generate paths too low.
 const _PATHS_BUFFER_FROM_EDGE = 5
@@ -33,14 +38,11 @@ var map_height = 3 * Globals.WORLD_HEIGHT_IN_TILES
 
 var _clearings_coordinates = []
 var _tree_map = []
-var _variation = "" # eg. frost forest
-
-func _init(variation):
-	self._variation = variation
 
 # Called once per game
-func generate(submap, transitions):
-	var map = AreaMap.new("Forest", "res://Tilesets/" + self._variation + ".tres", map_width, map_height, submap.area_type)
+func generate(submap, transitions, variation_name):
+	var tileset = _VARIANT_TILESETS[variation_name]
+	var map = AreaMap.new("Forest", variation_name, tileset, map_width, map_height, submap.area_type)
 
 	var tile_data = self._generate_forest(submap.area_type, transitions) # generates paths too
 	self._tree_map = tile_data[1]

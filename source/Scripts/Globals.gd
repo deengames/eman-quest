@@ -39,7 +39,8 @@ var current_monster_type = ""
 
 func _ready():
 	randomize()
-	seed("abc".hash())
+	# abc gives frost forest
+	seed("abcdef".hash())
 	
 # Returns integer value from min to max inclusive
 # Source: https://godotengine.org/qa/2539/how-would-i-go-about-picking-a-random-number
