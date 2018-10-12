@@ -30,6 +30,32 @@ func initialize_from(monster):
 	var type = monster.data["type"].to_lower()
 	$Sprite.texture = load("res://assets/images/monsters/" + type + ".png")
 
+func to_dict():
+	var data = null
+	if self.data_object != null:
+		data = self.data_object.data
+		
+	var to_return = {
+		"filename": "res://Entities/Battle/Monster.gd",
+		"x": self.position.x,
+		"y": self.position.y,
+		"data": data
+	}
+	return to_return
+
+static func from_dict(dict):
+	if dict == null:
+		return null
+		
+	var to_return = new()
+	var data = dict["data"]
+	to_return.initialize(dict["x"], dict["y"])
+	# needed for loading and re-instantiating on map
+	#to_return.data_object = data
+	to_return.data = data
+	return to_return
+
+
 func _process(delta):
 	var now = OS.get_ticks_msec()
 	

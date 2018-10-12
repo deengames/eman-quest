@@ -33,7 +33,7 @@ var pre_battle_position = [0, 0]
 var won_battle = false
 var battle_spoils = null # KeyItem
 # Coordinates of monsters on-map before battle
-var previous_monsters = {} # type => pixel positions
+var previous_monsters = null # type => pixel positions
 var current_monster = null # monster.data_object
 var current_monster_type = ""
 

@@ -106,6 +106,9 @@ func _add_monsters():
 			
 		Globals.current_monster = null
 		Globals.previous_monsters = null
+	elif self.map.monsters.size() > 0:
+		# We loaded a save game. Load those exact same monsters.
+		monster_data = self.map.monsters
 	else:
 		var generator_path = "res://Scripts/Generators/" + self.map.map_type + "MonsterGenerator.gd"
 		if File.new().file_exists(generator_path):
@@ -140,6 +143,10 @@ func _add_monsters():
 				bosses.append(instance)
 				
 		self._bosses[boss_type] = bosses
+	
+	# Persist on save
+	map.monsters = self._monsters
+	map.bosses = self._bosses
 
 func _populate_treasure_chests():
 	for data in self.map.treasure_chests:
