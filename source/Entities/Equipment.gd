@@ -1,6 +1,6 @@
 extends Node
 
-const StatType = preload("res://Scripts/StatType.gd")
+const StatType = preload("res://Scripts/Enums/StatType.gd")
 
 var type # weapon, armour, cloak, etc.
 var equipment_name

@@ -7,6 +7,7 @@ var tiles_high = 0
 var _all_tiles = []
 var _max_pickable_tiles = 0
 var _shocked_turns_left = 0
+var _tiles_to_freeze # null if shock (50% of tiles on RHS), else number to randomly freeze
 var _tiles_picked = []
 
 signal all_tiles_picked
@@ -36,15 +37,28 @@ func reset():
 	self._generate_guaranteed_tiles()
 	
 	if self._shocked_turns_left > 0:
-		for tile in self._all_tiles:
-			if tile.tile_x >= floor(self.tiles_wide / 2):
-				tile.hide_contents()
-				tile.freeze()
+		var tiles_to_freeze = self._tiles_to_freeze
+		if tiles_to_freeze == null:
+			# Freeze RHS, it's a shock attack
+			for tile in self._all_tiles:
+				if tile.tile_x >= floor(self.tiles_wide / 2):
+					tile.hide_contents()
+					tile.freeze()
+		else:
+			for tile in self._all_tiles:
+				if tiles_to_freeze > 0 and randi() % 100 <= 30:
+						tile.hide_contents()
+						tile.freeze()
+						tiles_to_freeze -= 1
 				
 		self._shocked_turns_left -= 1
 
 func shock(turns):
 	self._shocked_turns_left += turns
+
+func freeze(turns, tiles_to_freeze):
+	self._shocked_turns_left += turns
+	self._tiles_to_freeze = tiles_to_freeze
 
 func _create_tiles(advanced_mode):
 	for y in range(0, self.tiles_high):

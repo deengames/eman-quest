@@ -7,7 +7,7 @@ const KeyItem = preload("res://Entities/KeyItem.gd")
 const MapDestination = preload("res://Entities/MapDestination.gd")
 const AreaType = preload("res://Scripts/Enums/AreaType.gd")
 const SpotFinder = preload("res://Scripts/Maps/SpotFinder.gd")
-const StatType = preload("res://Scripts/StatType.gd")
+const StatType = preload("res://Scripts/Enums/StatType.gd")
 const TreasureChest = preload("res://Entities/TreasureChest.gd")
 const TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 

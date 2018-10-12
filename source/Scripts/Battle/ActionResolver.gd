@@ -12,12 +12,12 @@ func resolve(action, player, monster_data, multiplier):
 		Features.is_enabled("actions require energy") and player.detract_energy(action)):
 		# We had enough energy to do this action
 		if action == "attack":
-			var damage = player.strength - monster_data["defense"]
+			var damage = max(0, player.total_strength() - monster_data["defense"])
 			damage = ceil(damage * multiplier)
 			monster_data["health"] -= damage
 			return "Hero attacks for " + str(damage) + " damage!"
 		elif action == "critical":
-			var damage = floor(1.5 * player.strength) - monster_data["defense"]
+			var damage = max(0, floor(1.5 * player.total_strength()) - monster_data["defense"])
 			damage = ceil(damage * multiplier)
 			monster_data["health"] -= damage
 			return "CRITICAL hit for " + str(damage) + "!!!"
@@ -29,14 +29,14 @@ func resolve(action, player, monster_data, multiplier):
 			player.defend(multiplier)
 			return "Hero double-downs on defense!"
 		elif action == "vampire":
-			var damage = player.strength # ignores defense
+			var damage = max(0, player.total_strength()) # ignores defense
 			damage = ceil(damage * multiplier)
 			monster_data["health"] -= damage
 			player.heal(damage)
 			return "Hero hits/absorbs " + str(damage) + "!"
 		elif action == "bash":
 			monster_data["next_round_turns"] -= 1
-			var damage = (player.strength * 2) - monster_data["defense"]
+			var damage = max(0, (player.total_strength() * 2) - monster_data["defense"])
 			damage = ceil(damage * multiplier)
 			monster_data["health"] -= damage
 			return "Hero bashes for " + str(damage) + "!\nMonster loses a turn!"
@@ -83,6 +83,11 @@ func _process_attack(action, monster_data, player, memory_grid):
 		damage = monster_data["strength"] # pierces defense
 		message = "Monster shocks you! " + str(damage)
 		memory_grid.shock(SHOCK_TURNS)
+	elif action == "freeze":
+		# Shock, but a few tiles only
+		damage = monster_data["strength"] # pierces defense
+		message = "Monster freezes you! " + str(damage)
+		memory_grid.freeze(SHOCK_TURNS, 5)
 	elif action == "vampire":
 		damage = floor(monster_data["strength"] * 1.5)
 		message = "Monster hits/absorbs " + str(damage) + " HP!"

@@ -1,7 +1,7 @@
 extends Node
 
 const Equipment = preload("res://Entities/Equipment.gd")
-const StatType = preload("res://Scripts/StatType.gd")
+const StatType = preload("res://Scripts/Enums/StatType.gd")
 
 # Biggest grid is probably 7x7 (~50 tiles). If 50% is dominated by fixed tiles,
 # energy takes up ~10 tiles, so that leaves ~40 tiles for equipment actions.

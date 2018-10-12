@@ -3,7 +3,7 @@ extends Node
 const DictionaryHelper = preload("res://Scripts/DictionaryHelper.gd")
 const Equipment = preload("res://Entities/Equipment.gd")
 const EquipmentGenerator = preload("res://Scripts/Generators/EquipmentGenerator.gd")
-const StatType = preload("res://Scripts/StatType.gd")
+const StatType = preload("res://Scripts/Enums/StatType.gd")
 
 ### 
 # PLAYER DATA! That persistent thing that represents our player across scenes.

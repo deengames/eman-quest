@@ -1,5 +1,7 @@
 extends Node
 
+const StatType = preload("res://Scripts/Enums/StatType.gd")
+
 signal died
 
 const HEAL_PERCENT = 0.2 # 0.2 = 20%
@@ -59,8 +61,17 @@ func reset():
 	self.energy = min(self.energy, self.max_energy)
 	self._times_defending = 0
 
+func total_strength():
+	var total = self.strength
+	total += _get_equipment_modifier(Globals.player_data.weapon, StatType.Strength)
+	total += _get_equipment_modifier(Globals.player_data.armour, StatType.Strength)
+	return total
+	
 func total_defense():
-	return floor(self._defense * pow(DEFEND_MULTIPLIER, self._times_defending))
+	var total = self._defense
+	total += _get_equipment_modifier(Globals.player_data.weapon, StatType.Defense)
+	total += _get_equipment_modifier(Globals.player_data.armour, StatType.Defense)
+	return floor(total * pow(DEFEND_MULTIPLIER, self._times_defending))
 
 func damage(damage):
 	if damage > 0:
@@ -75,3 +86,14 @@ func detract_energy(action):
 		return true
 	else:
 		return false
+
+func _get_equipment_modifier(equipment, stat_type):
+	var total = 0
+	
+	if equipment != null:
+		if equipment.primary_stat == stat_type:
+			total += equipment.primary_stat_modifier
+		if equipment.secondary_stat == stat_type:
+			total += equipment.secondary_stat_modifier
+	
+	return total

@@ -39,9 +39,9 @@ const MONSTER_VARIANT_DATA = {
 	"Frost": {
 		"FrostWolf": {
 			"type": "FrostWolf",
-			"weight": 100,
+			"weight": 30,
 			"health": 60,
-			"strength": 15,
+			"strength": 20,
 			"defense": 0,
 			"turns": 2,
 			"experience points": 15,
@@ -50,6 +50,21 @@ const MONSTER_VARIANT_DATA = {
 			"skills": {
 				# These should add up to 100
 				#"chomp": 100 # 20%,
+			}
+		},
+		"IceTerrapin": {
+			"type": "IceTerrapin",
+			"weight": 60,
+			"health": 20,
+			"strength": 15,
+			"defense": 11,
+			"turns": 1,
+			"experience points": 12,
+			
+			"skill_probability": 50, # 40 = 40%
+			"skills": {
+				# These should add up to 100
+				"freeze": 100 # 20%,
 			}
 		}
 	}

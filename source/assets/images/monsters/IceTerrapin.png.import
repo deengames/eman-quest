@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/FrostTurtle.png-583e1dfd437022d0ba9a5c30137d7de4.stex"
+path="res://.import/IceTerrapin.png-7250d5b2d1ce2f10abe62a7b0497a250.stex"
 
 [deps]
 
-source_file="res://assets/images/monsters/FrostTurtle.png"
-dest_files=[ "res://.import/FrostTurtle.png-583e1dfd437022d0ba9a5c30137d7de4.stex" ]
+source_file="res://assets/images/monsters/IceTerrapin.png"
+dest_files=[ "res://.import/IceTerrapin.png-7250d5b2d1ce2f10abe62a7b0497a250.stex" ]
 
 [params]
 
