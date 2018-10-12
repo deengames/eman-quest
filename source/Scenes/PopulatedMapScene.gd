@@ -146,7 +146,6 @@ func _add_monsters():
 	
 	# Persist on save
 	map.monsters = self._monsters
-	map.bosses = self._bosses
 
 func _populate_treasure_chests():
 	for data in self.map.treasure_chests:

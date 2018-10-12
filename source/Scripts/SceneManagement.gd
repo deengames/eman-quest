@@ -94,4 +94,3 @@ static func _remove_monster_instances():
 		# time you save (iterate all maps/submaps and save objects), you
 		# run into [deleted, deleted, ...] which crashes.
 		Globals.current_map.monsters = {}
-		Globals.current_map.bosses = {}
