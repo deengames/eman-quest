@@ -7,6 +7,8 @@ const PopulatedMapScene = preload("res://Scenes/PopulatedMapScene.tscn")
 
 # Polymorphic. Target can be a type (eg. "Forest") or a submap.
 static func change_map_to(tree, target):
+	_remove_monster_instances()
+	
 	# Create map instance
 	var map_type = target
 	
@@ -51,6 +53,8 @@ static func change_map_to(tree, target):
 # Make it the current scene. Necessary to keep the type.
 # If we use change_scene, it becomes a Node2D, not an AreaMap.
 static func change_scene_to(tree, scene_instance):
+	_remove_monster_instances()
+	
 	# http://docs.godotengine.org/en/3.0/getting_started/step_by_step/singletons_autoload.html?highlight=change_scene
 	var root = tree.get_root()
 	var current_scene = root.get_child(root.get_child_count() - 1)
@@ -83,3 +87,10 @@ static func switch_to_battle_if_touched_player(monster, body):
 
 static func _free_current_scene(scene):
 	scene.free()
+
+static func _remove_monster_instances():
+	if Globals.current_map != null:
+		# GCed. Don't leave deleted objects around. If you do, the next
+		# time you save (iterate all maps/submaps and save objects), you
+		# run into [deleted, deleted, ...] which crashes.
+		Globals.current_map.monsters = {}
