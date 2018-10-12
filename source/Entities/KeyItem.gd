@@ -9,6 +9,7 @@ func initialize(item_name, description):
 
 func to_dict():
 	return {
+		"filename": "res://Entities/KeyItem.gd",
 		"item_name": self.item_name,
 		"description": self.description
 	}
