@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Bat.png-6821c90e99f2bbe96d93274888901c0d.stex"
+path="res://.import/GoldSlime.png-1ca2959b9414a5a04547577ba7dcec6b.stex"
 
 [deps]
 
-source_file="res://assets/images/monsters/Bat.png"
-dest_files=[ "res://.import/Bat.png-6821c90e99f2bbe96d93274888901c0d.stex" ]
+source_file="res://assets/images/monsters/GoldSlime.png"
+dest_files=[ "res://.import/GoldSlime.png-1ca2959b9414a5a04547577ba7dcec6b.stex" ]
 
 [params]
 

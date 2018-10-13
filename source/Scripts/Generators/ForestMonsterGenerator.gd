@@ -5,8 +5,8 @@ const SpotFinder = preload("res://Scripts/Maps/SpotFinder.gd")
 
 const MONSTER_VARIANT_DATA = {
 	"Normal": {
-		"Slime": {
-			"type": "Slime",
+		"Gold Slime": {
+			"type": "Gold Slime",
 			"weight": 70,
 			"health": 30,
 			"strength": 10,
@@ -20,8 +20,8 @@ const MONSTER_VARIANT_DATA = {
 				"chomp": 100 # 20%,
 			}
 		},
-		"Bat": {
-			"type": "Bat",
+		"Vampire Bat": {
+			"type": "Vampire Bat",
 			"weight": 30,
 			"health": 40,
 			"strength": 8,
@@ -37,8 +37,8 @@ const MONSTER_VARIANT_DATA = {
 		} 
 	},
 	"Frost": {
-		"FrostWolf": {
-			"type": "FrostWolf",
+		"Howler": {
+			"type": "Howler",
 			"weight": 30,
 			"health": 60,
 			"strength": 20,
@@ -52,8 +52,8 @@ const MONSTER_VARIANT_DATA = {
 				#"chomp": 100 # 20%,
 			}
 		},
-		"IceTerrapin": {
-			"type": "IceTerrapin",
+		"Ice Terrapin": {
+			"type": "Ice Terrapin",
 			"weight": 60,
 			"health": 20,
 			"strength": 15,

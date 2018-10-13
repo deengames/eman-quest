@@ -4,7 +4,7 @@ const KeyItem = preload("res://Entities/KeyItem.gd")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 const data = {
-	"type": "SlimeBoss",
+	"type": "Queen Slime",
 	"health": 100,
 	"strength": 13,
 	"defense": 4,

@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Slime.png-21d0f8e4802f17e9d192f8dadf900436.stex"
+path="res://.import/VampireBat.png-39f82f3a7e86acf39eede6e3a8cba515.stex"
 
 [deps]
 
-source_file="res://assets/images/monsters/Slime.png"
-dest_files=[ "res://.import/Slime.png-21d0f8e4802f17e9d192f8dadf900436.stex" ]
+source_file="res://assets/images/monsters/VampireBat.png"
+dest_files=[ "res://.import/VampireBat.png-39f82f3a7e86acf39eede6e3a8cba515.stex" ]
 
 [params]
 

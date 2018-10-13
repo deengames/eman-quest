@@ -27,7 +27,7 @@ func initialize_from(monster):
 	self.data_object = monster
 	self.position.x = monster.x
 	self.position.y = monster.y
-	var type = monster.data["type"].to_lower()
+	var type = monster.data["type"].replace(' ', '')
 	$Sprite.texture = load("res://assets/images/monsters/" + type + ".png")
 
 func to_dict():

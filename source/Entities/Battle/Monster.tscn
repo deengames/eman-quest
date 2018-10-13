@@ -1,8 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Entities/Battle/Monster.gd" type="Script" id=1]
-[ext_resource path="res://assets/images/monsters/Slime.png" type="Texture" id=2]
-
+[ext_resource path="res://assets/images/monsters/GoldSlime.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -85,7 +84,7 @@ tracks/0/keys = {
 "values": [ Rect2( 0, 192, 64, 64 ), Rect2( 64, 192, 64, 64 ), Rect2( 128, 192, 64, 64 ), Rect2( 64, 192, 64, 64 ) ]
 }
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[node name="KinematicBody2D" type="KinematicBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 1
@@ -100,18 +99,16 @@ centered = false
 vframes = 4
 hframes = 3
 region_enabled = true
-region_rect = Rect2( 64, 192, 64, 64 )
+region_rect = Rect2( 0, 0, 64, 64 )
 _sections_unfolded = [ "Animation", "Offset", "Region", "Transform" ]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
 
-visible = false
 build_mode = 0
 polygon = PoolVector2Array( 44, 14, 64, 48, 48, 56, 16, 56, 0, 48, 20, 14 )
 
 [node name="Area2D" type="Area2D" parent="." index="2"]
 
-visible = false
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -122,7 +119,6 @@ audio_bus_name = "Master"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
 
-visible = false
 position = Vector2( 32, 38 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]

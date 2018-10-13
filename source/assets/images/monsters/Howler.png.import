@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/FrostWolf.png-c3834bc3996e117fed72c5959669e495.stex"
+path="res://.import/Howler.png-b1fa4164f7c9fd0f7b64ced868fc0c6a.stex"
 
 [deps]
 
-source_file="res://assets/images/monsters/FrostWolf.png"
-dest_files=[ "res://.import/FrostWolf.png-c3834bc3996e117fed72c5959669e495.stex" ]
+source_file="res://assets/images/monsters/Howler.png"
+dest_files=[ "res://.import/Howler.png-b1fa4164f7c9fd0f7b64ced868fc0c6a.stex" ]
 
 [params]
 
