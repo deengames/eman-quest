@@ -41,7 +41,7 @@ func _ready():
 	randomize()
 	# abc gives frost forest
 	# abcdef gives forest
-	#seed("abc".hash())
+	seed("abc".hash())
 	
 # Returns integer value from min to max inclusive
 # Source: https://godotengine.org/qa/2539/how-would-i-go-about-picking-a-random-number
