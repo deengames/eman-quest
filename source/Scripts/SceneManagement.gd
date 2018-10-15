@@ -51,6 +51,7 @@ static func change_map_to(tree, target):
 	
 	if show_map_name:
 		var map_name_label = MapNameLabel.instance()
+		map_name_label.show_map_name(target_areamap)
 		var container = CenterContainer.new()
 		container.set_anchors_and_margins_preset(Control.PRESET_CENTER_TOP)
 		container.margin_top += 100
