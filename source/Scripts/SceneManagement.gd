@@ -2,6 +2,7 @@ extends Node
 
 const AreaType = preload("res://Scripts/Enums/AreaType.gd")
 const Boss = preload("res://Entities/Battle/Boss.gd")
+const MapNameLabel = preload("res://Scenes/UI/MapNameLabel.tscn")
 const MemoryTileBattleScene = preload("res://Scenes/Battle/MemoryTileBattleScene.tscn")
 const PopulatedMapScene = preload("res://Scenes/PopulatedMapScene.tscn")
 
@@ -35,13 +36,29 @@ static func change_map_to(tree, target):
 					break
 		else:
 			target_areamap = map_data
-				
+	
+	var show_map_name = (
+		# Globals.current_map is ull on new game
+		Globals.current_map == null or 
+		# change map type, not change to submap of the same type
+		Globals.current_map.map_type != target_areamap.map_type)
+		
 	var populated_map = PopulatedMapScene.instance()
 	populated_map.initialize(target_areamap)
 	
 	change_scene_to(tree, populated_map)
-	
 	Globals.current_map_scene = populated_map
+	
+	if show_map_name:
+		var map_name_label = MapNameLabel.instance()
+		var container = CenterContainer.new()
+		container.set_anchors_and_margins_preset(Control.PRESET_CENTER_TOP)
+		container.margin_top += 100
+		var root = tree.get_root()
+		var current_scene = root.get_child(root.get_child_count() - 1)
+		var ui = current_scene.get_node("UI")
+		ui.add_child(container)
+		container.add_child(map_name_label)
 	
 	if map_type == "Overworld":
 		var camera = Globals.player.get_node("Camera2D")

@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Spider.png-f311a52c559af3da242261587bcb6162.stex"
+path="res://.import/map-nameplate.png-928534e215ba9f7378cad50a849d7778.stex"
 
 [deps]
 
-source_file="res://assets/images/monsters/Spider.png"
-dest_files=[ "res://.import/Spider.png-f311a52c559af3da242261587bcb6162.stex" ]
+source_file="res://assets/images/gui/map-nameplate.png"
+dest_files=[ "res://.import/map-nameplate.png-928534e215ba9f7378cad50a849d7778.stex" ]
 
 [params]
 
