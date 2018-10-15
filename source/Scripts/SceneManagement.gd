@@ -5,6 +5,7 @@ const Boss = preload("res://Entities/Battle/Boss.gd")
 const MapNameLabel = preload("res://Scenes/UI/MapNameLabel.tscn")
 const MemoryTileBattleScene = preload("res://Scenes/Battle/MemoryTileBattleScene.tscn")
 const PopulatedMapScene = preload("res://Scenes/PopulatedMapScene.tscn")
+const TweenHelper = preload("res://Scripts/TweenHelper.gd")
 
 # Polymorphic. Target can be a type (eg. "Forest") or a submap.
 static func change_map_to(tree, target):
@@ -52,14 +53,27 @@ static func change_map_to(tree, target):
 	if show_map_name:
 		var map_name_label = MapNameLabel.instance()
 		map_name_label.show_map_name(target_areamap)
+		
+		# Center, 100px from top
 		var container = CenterContainer.new()
+		container.name = "Fade Container"
 		container.set_anchors_and_margins_preset(Control.PRESET_CENTER_TOP)
 		container.margin_top += 100
+		
+		# Add to scene
 		var root = tree.get_root()
 		var current_scene = root.get_child(root.get_child_count() - 1)
 		var ui = current_scene.get_node("UI")
 		ui.add_child(container)
 		container.add_child(map_name_label)
+		
+		# Wait 3s, then fade over 1s
+		var tween_helper = TweenHelper.new(current_scene, container, 1)
+		var timer = Timer.new()
+		timer.wait_time = 3.0
+		timer.connect("timeout", tween_helper, "start")
+		timer.start()
+		current_scene.add_child(timer)
 	
 	if map_type == "Overworld":
 		var camera = Globals.player.get_node("Camera2D")
