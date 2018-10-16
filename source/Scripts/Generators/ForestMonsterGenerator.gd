@@ -4,7 +4,7 @@ const Monster = preload("res://Entities/Battle/Monster.gd")
 const SpotFinder = preload("res://Scripts/Maps/SpotFinder.gd")
 
 const MONSTER_VARIANT_DATA = {
-	"Normal": {
+	"Slime": {
 		"Gold Slime": {
 			"type": "Gold Slime",
 			"weight": 70,

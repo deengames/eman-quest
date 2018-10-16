@@ -21,22 +21,38 @@ const CLEARING_WIDTH = 7
 const CLEARING_HEIGHT = 8
 
 const _BOSS_DATA = {
-	"type": "Queen Slime",
-	"health": 100,
-	"strength": 13,
-	"defense": 4,
-	"turns": 1,
-	"experience points": 150,
-	
-	"skill_probability": 60, # 40 = 40%
-	"skills": {
-		# These should add up to 100
-		"chomp": 100 # 20%,
+	"Slime": {
+		"type": "Queen Slime",
+		"health": 100,
+		"strength": 13,
+		"defense": 4,
+		"turns": 1,
+		"experience points": 150,
+		
+		"skill_probability": 60, # 40 = 40%
+		"skills": {
+			# These should add up to 100
+			"chomp": 100 # 20%,
+		},
+	},
+	"Frost": {
+		"type": "Queen Slime",
+		"health": 100,
+		"strength": 13,
+		"defense": 4,
+		"turns": 1,
+		"experience points": 150,
+		
+		"skill_probability": 60, # 40 = 40%
+		"skills": {
+			# These should add up to 100
+			"chomp": 100 # 20%,
+		}
 	}
 }
 
 const _VARIANT_TILESETS = {
-	"Normal": "res://Tilesets/Overworld.tres",
+	"Slime": "res://Tilesets/Overworld.tres",
 	"Frost": "res://Tilesets/FrostForest.tres"
 }
 
@@ -66,14 +82,14 @@ func generate(submap, transitions, variation_name):
 	map.treasure_chests = self._generate_treasure_chests()
 	
 	if submap.area_type == AreaType.BOSS:
-		map.bosses = self._generate_boss()
+		map.bosses = self._generate_boss(variation_name)
 	
 	for data in tile_data:
 		map.add_tile_data(data)
 	
 	return map
 
-func _generate_boss():
+func _generate_boss(variation_name):
 	var coordinates = self._clearings_coordinates[0]
 	var pixel_coordinates = [coordinates[0] * Globals.TILE_WIDTH, coordinates[1] * Globals.TILE_HEIGHT]
 	
@@ -81,7 +97,7 @@ func _generate_boss():
 	kufi.initialize("Bloody Kufi", "A white kufi (skull-cap) stained with blood ...")
 	
 	var boss = Boss.new()
-	boss.initialize(pixel_coordinates[0], pixel_coordinates[1], _BOSS_DATA, kufi)
+	boss.initialize(pixel_coordinates[0], pixel_coordinates[1], _BOSS_DATA[variation_name], kufi)
 	return { boss.data.type: [boss] }
 
 func _generate_forest(area_type, transitions):

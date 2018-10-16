@@ -8,7 +8,7 @@ const MapLayoutGenerator = preload("res://Scripts/Generators/MapLayoutGenerator.
 const OverworldGenerator = preload("res://Scripts/Generators/OverworldGenerator.gd")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
-const ForestVariations = ["Normal", "Frost"]
+const ForestVariations = ["Slime", "Frost"]
 
 func _ready():
 	self.generate_world()
