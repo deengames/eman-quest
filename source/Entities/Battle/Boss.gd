@@ -29,6 +29,8 @@ func initialize_from(data_object):
 	self.position.x = data_object.x
 	self.position.y = data_object.y
 	self.key_item = data_object.key_item
+	var type = data_object.data["type"].replace(' ', '')
+	$Sprite.texture = load("res://assets/images/monsters/" + type + ".png")
 	
 func to_dict():
 	return {
@@ -42,7 +44,7 @@ func to_dict():
 
 static func from_dict(dict):
 	var to_return = new()
-	to_return.initialize(dict["x"], dict["y"], KeyItem.from_dict(dict["key_item"]))
+	to_return.initialize(dict["x"], dict["y"], dict["data"], KeyItem.from_dict(dict["key_item"]))
 	to_return.is_alive = dict["is_alive"]
 	to_return.data_object = dict["data"]
 	return to_return
