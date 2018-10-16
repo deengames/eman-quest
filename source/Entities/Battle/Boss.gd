@@ -3,20 +3,7 @@ extends KinematicBody2D
 const KeyItem = preload("res://Entities/KeyItem.gd")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
-const data = {
-	"type": "Queen Slime",
-	"health": 100,
-	"strength": 13,
-	"defense": 4,
-	"turns": 1,
-	"experience points": 150,
-	
-	"skill_probability": 60, # 40 = 40%
-	"skills": {
-		# These should add up to 100
-		"chomp": 100 # 20%,
-	}
-}
+var data = {}
 
 const IS_BOSS = true
 
@@ -31,9 +18,10 @@ func _ready():
 	# Initialization here
 	pass
 
-func initialize(x, y, key_item):
+func initialize(x, y, data, key_item):
 	self.x = x
 	self.y = y
+	self.data = data
 	self.key_item = key_item
 
 func initialize_from(data_object):

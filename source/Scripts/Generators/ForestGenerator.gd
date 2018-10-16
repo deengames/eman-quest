@@ -20,6 +20,21 @@ const NUM_CLEARINGS = 2
 const CLEARING_WIDTH = 7
 const CLEARING_HEIGHT = 8
 
+const _BOSS_DATA = {
+	"type": "Queen Slime",
+	"health": 100,
+	"strength": 13,
+	"defense": 4,
+	"turns": 1,
+	"experience points": 150,
+	
+	"skill_probability": 60, # 40 = 40%
+	"skills": {
+		# These should add up to 100
+		"chomp": 100 # 20%,
+	}
+}
+
 const _VARIANT_TILESETS = {
 	"Normal": "res://Tilesets/Overworld.tres",
 	"Frost": "res://Tilesets/FrostForest.tres"
@@ -66,7 +81,7 @@ func _generate_boss():
 	kufi.initialize("Bloody Kufi", "A white kufi (skull-cap) stained with blood ...")
 	
 	var boss = Boss.new()
-	boss.initialize(pixel_coordinates[0], pixel_coordinates[1], kufi)
+	boss.initialize(pixel_coordinates[0], pixel_coordinates[1], _BOSS_DATA, kufi)
 	return { boss.data.type: [boss] }
 
 func _generate_forest(area_type, transitions):
