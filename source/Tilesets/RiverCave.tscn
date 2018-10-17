@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 32, 32 )
+extents = Vector2( 30, 30 )
 
 [node name="Node2D" type="Node2D" index="0"]
 
@@ -23,7 +23,7 @@ position = Vector2( 70, 0 )
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 128, 256, 64, 64 )
+region_rect = Rect2( 64, 512, 64, 64 )
 _sections_unfolded = [ "Offset", "Region" ]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Wall" index="0"]
@@ -38,6 +38,7 @@ bounce = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall/StaticBody2D" index="0"]
 
+visible = false
 position = Vector2( 32, 32 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]

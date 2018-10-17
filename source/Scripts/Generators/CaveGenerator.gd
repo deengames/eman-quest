@@ -21,9 +21,9 @@ const _VARIANT_TILESETS = {
 }
 
 const _PATHS_BUFFER_FROM_EDGE = 5
-const _NUM_ROOMS = [20, 30] # number of circular rooms
+const _NUM_ROOMS = [30, 50] # number of circular rooms
 const _NUM_CHESTS = [0, 1]
-const _ROOM_RADIUS = [5, 8] # tiles
+const _ROOM_RADIUS = [4, 6] # tiles
 const _ITEM_POWER = [30, 50]
 
 var map_width = 3 * Globals.WORLD_WIDTH_IN_TILES
@@ -74,15 +74,15 @@ func _generate_cave(area_type, transitions):
 	to_return.append(wall_map)
 	self._fill_with("Wall", wall_map)
 
-	var path_points = self._generate_paths(transitions, ground_map, wall_map)
+	self._generate_rooms(transitions, ground_map, wall_map)
 
 	return to_return
 
-func _generate_paths(transitions, ground_map, wall_map):
+func _generate_rooms(transitions, ground_map, wall_map):
 	
 	var to_generate = Globals.randint(_NUM_ROOMS[0], _NUM_ROOMS[1])
 	var min_room_distance = 2 * _ROOM_RADIUS[1] # max radius = min distance
-	var path_points = []
+	var unconnected_rooms = []
 	var previous = null
 
 	while to_generate > 0:
@@ -92,14 +92,15 @@ func _generate_paths(transitions, ground_map, wall_map):
 		if previous != null and sqrt(pow(x - previous[0], 2) + pow(y - previous[1], 2)) <= min_room_distance:
 			continue
 
-		for node in path_points:
+		for node in unconnected_rooms:
 			if sqrt(pow(x - node[0], 2) + pow(y - node[1], 2)) <= min_room_distance:
 				continue
 
 		var current_node = [x, y]
-		path_points.append(current_node)
-		if previous != null:
-			self._generate_path(previous, current_node, ground_map, wall_map)
+		self._generate_room(x, y, ground_map, wall_map)
+		unconnected_rooms.append(current_node)
+		#if previous != null:
+		#	self._generate_path(previous, current_node, ground_map, wall_map)
 		previous = current_node
 		to_generate -= 1
 
@@ -125,19 +126,39 @@ func _generate_paths(transitions, ground_map, wall_map):
 			destination[1] -= offset
 
 		self._generate_path(entrance, destination, ground_map, wall_map)
-		var closest_node = path_points[0]
-		var closest_distance = pow(closest_node[0] - destination[0], 2) + pow(closest_node[1] - destination[1], 2)
-
-		for point in path_points:
-			var distance = pow(point[0] - destination[0], 2) + pow(point[1] - destination[1], 2)
-			if distance < closest_distance:
-				closest_node = point
-				closest_distance = distance
-
+		var closest_node = self._find_closest_room_to(destination, unconnected_rooms)
 		self._generate_path(destination, closest_node, ground_map, wall_map)
+		
+		var connected_rooms = [closest_node]
+		# Connect all rooms to the closest unconnected room. Minimum span tree.
+		# This guarantees the entire thing is connected.
+		for room in unconnected_rooms:
+			destination = _find_closest_room_to(room, connected_rooms)
+			self._generate_path(destination, room, ground_map, wall_map)
+			connected_rooms.append(room)
 
-	return path_points
+func _find_closest_room_to(room, rooms_to_pick_from):
+	var closest_node = rooms_to_pick_from[0]
+	var closest_distance = pow(closest_node[0] - room[0], 2) + pow(closest_node[1] - room[1], 2)
 
+	for candidate in rooms_to_pick_from:
+		var distance = pow(candidate[0] - room[0], 2) + pow(candidate[1] - room[1], 2)
+		if distance < closest_distance:
+			closest_node = candidate
+			closest_distance = distance
+	
+	return closest_node
+	
+func _generate_room(center_x, center_y, ground_map, wall_map):
+	var radius = Globals.randint(_ROOM_RADIUS[0], _ROOM_RADIUS[1])
+	# from (center_x - radius) to (center_x + radius)
+	for v in range(2 * radius):
+		for u in range(2 * radius):
+			var x = center_x - radius + u
+			var y = center_y - radius + v
+			if pow(x - center_x, 2) + pow(y - center_y, 2) <= radius * radius:
+				self._convert_to_dirt([x, y], ground_map, wall_map)
+		
 func _generate_path(point1, point2, ground_map, wall_map):
 	var from_x = point1[0]
 	var from_y = point1[1]
@@ -195,8 +216,9 @@ func _convert_to(position, ground_map, wall_map):
 	var x = position[0]
 	var y = position[1]
 
-	ground_map.set(x, y, "Ground")
-	wall_map.set(x, y, null) # remove wall
+	if x >= 0 and x < map_width and y >= 0 and y < map_height:
+		ground_map.set(x, y, "Ground")
+		wall_map.set(x, y, null) # remove wall
 
 func _clear_if_wall(wall_map, x, y):
 	if x >= 0 and x < map_width:
