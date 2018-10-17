@@ -2,6 +2,7 @@ extends Node2D
 
 const AreaMap = preload("res://Entities/AreaMap.gd")
 const AreaType = preload("res://Scripts/Enums/AreaType.gd")
+const CaveGenerator = preload("res://Scripts/Generators/CaveGenerator.gd")
 const ForestGenerator = preload("res://Scripts/Generators/ForestGenerator.gd")
 const MapDestination = preload("res://Entities/MapDestination.gd")
 const MapLayoutGenerator = preload("res://Scripts/Generators/MapLayoutGenerator.gd")
@@ -9,6 +10,7 @@ const OverworldGenerator = preload("res://Scripts/Generators/OverworldGenerator.
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 const ForestVariations = ["Slime", "Frost"]
+const CaveVariations = ["River"]
 
 func _ready():
 	self.generate_world()
@@ -16,11 +18,13 @@ func _ready():
 	get_tree().current_scene.get_node("UI").show_intro_story()
 	
 func generate_world():
-	var forest_maps = _generate_subarea_maps(ForestGenerator.new(), 4)
+	var forest_maps = _generate_subarea_maps(ForestVariations, ForestGenerator.new(), 4)
+	var cave_maps = _generate_subarea_maps(CaveVariations, CaveGenerator.new(), 6)
 	
-	# return a dictionary, eg. "forest" => forest map
+	# return a dictionary, eg. "forest" => forest maps
 	Globals.maps = {
-		"Forest": forest_maps
+		"Forest": forest_maps,
+		"Cave": cave_maps
 	}
 	
 	# Generate last; generating the entrance into the first sub-map
@@ -33,8 +37,8 @@ func generate_world():
 		"boss_type": self._generate_boss_type()
 	}
 
-func _generate_subarea_maps(generator, num_submaps):
-	var variation = ForestVariations[randi() % len(ForestVariations)]
+func _generate_subarea_maps(variations, generator, num_submaps):
+	var variation = variations[randi() % len(variations)]
 	var layout = MapLayoutGenerator.generate_layout(num_submaps)
 	var submaps = []
 	
