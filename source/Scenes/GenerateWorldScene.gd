@@ -16,26 +16,10 @@ func _ready():
 	get_tree().current_scene.get_node("UI").show_intro_story()
 	
 func generate_world():
-	var forest_variation = ForestVariations[randi() % len(ForestVariations)]
-	var forest_generator = ForestGenerator.new()
-	var forest_layout = MapLayoutGenerator.generate_layout(4)
-	var forest_maps = []
-	
-	for submap in forest_layout:
-		# Generate transitions here, used for path generation
-		var data = self._generate_transitions(submap, forest_generator.map_width, forest_generator.map_height)
-		var transitions = data["transitions"]
-		var entrance = data["entrance"]
-		
-		var map = forest_generator.generate(submap, transitions, forest_variation)
-		map.grid_x = submap.grid_x
-		map.grid_y = submap.grid_y
-		map.entrance_from_overworld = entrance
-		
-		forest_maps.append(map)
+	var forest_maps = _generate_subarea_maps(ForestGenerator.new(), 4)
 	
 	# return a dictionary, eg. "forest" => forest map
-	Globals.maps = {		
+	Globals.maps = {
 		"Forest": forest_maps
 	}
 	
@@ -48,6 +32,26 @@ func generate_world():
 		"village_name": self._generate_village_name(),
 		"boss_type": self._generate_boss_type()
 	}
+
+func _generate_subarea_maps(generator, num_submaps):
+	var variation = ForestVariations[randi() % len(ForestVariations)]
+	var layout = MapLayoutGenerator.generate_layout(num_submaps)
+	var submaps = []
+	
+	for submap in layout:
+		# Generate transitions here, used for path generation
+		var data = self._generate_transitions(submap, generator.map_width, generator.map_height)
+		var transitions = data["transitions"]
+		var entrance = data["entrance"]
+		
+		var map = generator.generate(submap, transitions, variation)
+		map.grid_x = submap.grid_x
+		map.grid_y = submap.grid_y
+		map.entrance_from_overworld = entrance
+		
+		submaps.append(map)
+	
+	return submaps
 
 func _generate_village_name():
 	var options = ['Nahr', 'Bahr', 'Shajar', 'Aqram', 'Hira']
