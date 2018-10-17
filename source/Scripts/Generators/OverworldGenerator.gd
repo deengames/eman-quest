@@ -7,7 +7,7 @@ var TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 
 # Don't place things N tiles from the edges of the map
 const _PADDING_FROM_SIDES_OF_MAP = 4
-const _TRANSITION_DESTINATIONS = ["Forest", "Final"]
+const _TRANSITION_DESTINATIONS = ["Forest", "Cave", "Final"]
 
 var map_width = Globals.WORLD_WIDTH_IN_TILES
 var map_height = Globals.WORLD_HEIGHT_IN_TILES
@@ -88,11 +88,12 @@ func _place_area_entrances(map):
 	
 	for destination in self._TRANSITION_DESTINATIONS:
 		var coordinates = self._find_empty_area(ground_tiles, placed_areas)
+		# TODO: make sure it's not near any other placed areas
 		placed_areas.append(coordinates)
 		
+		 # Maps have a start map with an entrance. Find it.
 		var target_destination = Vector2(0, 0)
-		
-		# Not true for Final map
+		# Not true for Final map, which has a hard-coded entrance.
 		if Globals.maps.has(destination):
 			var maps = Globals.maps[destination]
 			for submap in maps:
