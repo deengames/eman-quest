@@ -17,7 +17,7 @@ const _BOSS_DATA = {
 }
 
 const _VARIANT_TILESETS = {
-	"Dark": "res://Tilesets/RiverCave.tres",
+	"Dark": "res://Tilesets/DarkDungeon.tres",
 }
 
 const _PATHS_BUFFER_FROM_EDGE = 5
@@ -34,7 +34,7 @@ var _wall_map = []
 # Called once per game
 func generate(submap, transitions, variation_name):
 	var tileset = _VARIANT_TILESETS[variation_name]
-	var map = AreaMap.new("Cave", variation_name, tileset, map_width, map_height, submap.area_type)
+	var map = AreaMap.new("Dungeon", variation_name, tileset, map_width, map_height, submap.area_type)
 
 	var tile_data = self._generate_cave(submap.area_type, transitions) # generates paths too
 	self._wall_map = tile_data[1]
