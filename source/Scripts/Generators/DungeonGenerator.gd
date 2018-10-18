@@ -12,12 +12,12 @@ const TreasureChest = preload("res://Entities/TreasureChest.gd")
 const TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 
 const _BOSS_DATA = {
-	"Dark": {
+	"Castle": {
 	}
 }
 
 const _VARIANT_TILESETS = {
-	"Dark": "res://Tilesets/DarkDungeon.tres",
+	"Castle": "res://Tilesets/CastleDungeon.tres",
 }
 
 const _PATHS_BUFFER_FROM_EDGE = 5

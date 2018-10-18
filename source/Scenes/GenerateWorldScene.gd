@@ -12,7 +12,7 @@ const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 const ForestVariations = ["Slime", "Frost"] # Death
 const CaveVariations = ["River"] # Lava, Crystal
-const DungeonVariations = ["Dark"] # Skeleton, Minotaur
+const DungeonVariations = ["Castle"] # Skeleton, Minotaur
 
 func _ready():
 	self.generate_world()
