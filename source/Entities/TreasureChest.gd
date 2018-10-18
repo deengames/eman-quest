@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends Sprite
 
 const _CHEST_OPEN_X = 64
 const Equipment = preload("res://Entities/Equipment.gd")
@@ -63,7 +63,7 @@ func _consume():
 	self._appear_open()
 
 func _appear_open():
-	$Sprite.region_rect.position.x = _CHEST_OPEN_X
+	self.region_rect.position.x = _CHEST_OPEN_X
 
 func _on_Area2D_body_entered(body):
 	if not self.is_opened and body == Globals.player:

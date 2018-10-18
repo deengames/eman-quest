@@ -7,7 +7,7 @@ var TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 
 # Don't place things N tiles from the edges of the map
 const _PADDING_FROM_SIDES_OF_MAP = 4
-const _TRANSITION_DESTINATIONS = ["Forest", "Cave", "Final"]
+const _TRANSITION_DESTINATIONS = ["Forest", "Cave", "Dungeon", "Final"]
 
 var map_width = Globals.WORLD_WIDTH_IN_TILES
 var map_height = Globals.WORLD_HEIGHT_IN_TILES

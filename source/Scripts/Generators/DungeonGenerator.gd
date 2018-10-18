@@ -12,22 +12,22 @@ const TreasureChest = preload("res://Entities/TreasureChest.gd")
 const TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 
 const _BOSS_DATA = {
-	"River": {
+	"Dark": {
 	}
 }
 
 const _VARIANT_TILESETS = {
-	"River": "res://Tilesets/RiverCave.tres",
+	"Dark": "res://Tilesets/RiverCave.tres",
 }
 
 const _PATHS_BUFFER_FROM_EDGE = 5
-const _NUM_ROOMS = [30, 50] # number of circular rooms
+const _NUM_ROOMS = [15, 20]
 const _NUM_CHESTS = [0, 1]
-const _ROOM_RADIUS = [4, 6] # tiles
+const _ROOM_SIZE = [8, 12] # tiles
 const _ITEM_POWER = [30, 50]
 
-var map_width = 3 * Globals.WORLD_WIDTH_IN_TILES
-var map_height = 4 * Globals.WORLD_HEIGHT_IN_TILES
+var map_width = 4 * Globals.WORLD_WIDTH_IN_TILES
+var map_height = 5 * Globals.WORLD_HEIGHT_IN_TILES
 
 var _wall_map = []
 
@@ -81,29 +81,37 @@ func _generate_cave(area_type, transitions):
 func _generate_rooms(transitions, ground_map, wall_map):
 	
 	var to_generate = Globals.randint(_NUM_ROOMS[0], _NUM_ROOMS[1])
-	var min_room_distance = 2 * _ROOM_RADIUS[1] # max radius = min distance
-	var unconnected_rooms = []
+	var min_room_distance = 3 * _ROOM_SIZE[1] # max size = min distance
+	var rooms = [] # Array of Rect2s
 	var previous = null
 
 	while to_generate > 0:
-		var x = Globals.randint(_PATHS_BUFFER_FROM_EDGE, map_width - _PATHS_BUFFER_FROM_EDGE - 1)
-		var y = Globals.randint(_PATHS_BUFFER_FROM_EDGE, map_height - _PATHS_BUFFER_FROM_EDGE - 1)
-
-		if previous != null and sqrt(pow(x - previous[0], 2) + pow(y - previous[1], 2)) <= min_room_distance:
+		var width = Globals.randint(_ROOM_SIZE[0], _ROOM_SIZE[1])
+		var height = Globals.randint(_ROOM_SIZE[0], _ROOM_SIZE[1])
+		var x = Globals.randint(_PATHS_BUFFER_FROM_EDGE, map_width - width - _PATHS_BUFFER_FROM_EDGE - 1)
+		var y = Globals.randint(_PATHS_BUFFER_FROM_EDGE, map_height - height - _PATHS_BUFFER_FROM_EDGE - 1)
+		
+		if previous != null and sqrt(pow(x - previous.position.x, 2) + pow(y - previous.position.y, 2)) <= min_room_distance:
 			continue
+			
+		var current_room = Rect2(x, y, width, height)
 
-		for node in unconnected_rooms:
-			if sqrt(pow(x - node[0], 2) + pow(y - node[1], 2)) <= min_room_distance:
+		for node in rooms:
+			# Not too close to previous rooms. Implicitly, doesn't overlap.
+			if sqrt(pow(x - node.position.x, 2) + pow(y - node.position.y, 2)) <= min_room_distance:
 				continue
-		
-		###### TODO: make sure it doesn't overlap any previous rooms!!!
-		
-		var current_node = [x, y]
-		self._generate_room(x, y, ground_map, wall_map)
-		unconnected_rooms.append(current_node)
-		#if previous != null:
-		#	self._generate_path(previous, current_node, ground_map, wall_map)
-		previous = current_node
+			
+			# Doesn't overlap previous rooms
+			if current_room.intersects(node):
+				continue
+			
+		self._generate_room(current_room, ground_map, wall_map)
+		rooms.append(current_room)
+		if previous != null:
+			var source = _center_of(previous)
+			var target = _center_of(current_room)
+			self._generate_straight_path(source, target, ground_map, wall_map)
+		previous = current_room
 		to_generate -= 1
 
 	# Generate a node close to entrances (5-10 tiles "in" from the entrance).
@@ -126,39 +134,51 @@ func _generate_rooms(transitions, ground_map, wall_map):
 		elif entrance[1] == map_height - 1:
 			# bottom entrance
 			destination[1] -= offset
-
-		self._generate_path(entrance, destination, ground_map, wall_map)
-		var closest_node = self._find_closest_room_to(destination, unconnected_rooms)
-		self._generate_path(destination, closest_node, ground_map, wall_map)
 		
-		var connected_rooms = [closest_node]
-		# Connect all rooms to the closest unconnected room. Minimum span tree.
-		# This guarantees the entire thing is connected.
-		for room in unconnected_rooms:
-			destination = _find_closest_room_to(room, connected_rooms)
-			self._generate_path(destination, room, ground_map, wall_map)
-			connected_rooms.append(room)
+		self._generate_straight_path(entrance, destination, ground_map, wall_map)
+		var closest_node = self._find_closest_room_to(destination, rooms)
+		self._generate_straight_path(destination, _center_of(closest_node), ground_map, wall_map)
 
-func _find_closest_room_to(room, rooms_to_pick_from):
-	var closest_node = rooms_to_pick_from[0]
-	var closest_distance = pow(closest_node[0] - room[0], 2) + pow(closest_node[1] - room[1], 2)
+func _center_of(room):
+	var x = room.position.x + floor(room.size.x / 2)
+	var y = room.position.y + floor(room.size.y / 2)
+	return [x, y]
 
-	for candidate in rooms_to_pick_from:
-		var distance = pow(candidate[0] - room[0], 2) + pow(candidate[1] - room[1], 2)
+func _generate_straight_path(point1, point2, ground_map, wall_map):
+	var start_x = point1[0]
+	var start_y = point1[1]
+	var stop_x = point2[0]
+	var stop_y = point2[1]
+	
+	var dx = stop_x - start_x
+	var dy = stop_y - start_y
+	
+	if randi() % 100 <= 50:
+		# horizontal, then vertical
+		self._generate_path([start_x, start_y], [stop_x, start_y], ground_map, wall_map)
+		self._generate_path([stop_x, start_y], [stop_x, stop_y], ground_map, wall_map)
+	else:
+		# vertical, then horizontal
+		self._generate_path([start_x, start_y], [start_x, stop_y], ground_map, wall_map)
+		self._generate_path([start_x, stop_y], [stop_x, stop_y], ground_map, wall_map)
+
+func _find_closest_room_to(room, rooms):
+	var closest_node = rooms[0]
+	var closest_distance = pow(closest_node.position.x - room[0], 2) + pow(closest_node.position.y - room[1], 2)
+
+	for candidate in rooms:
+		var distance = pow(candidate.position.x - room[0], 2) + pow(candidate.position.y - room[1], 2)
 		if distance < closest_distance:
 			closest_node = candidate
 			closest_distance = distance
 	
 	return closest_node
-	
-func _generate_room(center_x, center_y, ground_map, wall_map):
-	# TODO: generate rectangles instead
-	var radius = Globals.randint(_ROOM_RADIUS[0], _ROOM_RADIUS[1])
-	# from (center_x - radius) to (center_x + radius)
-	for v in range(2 * radius):
-		for u in range(2 * radius):
-			var x = center_x - radius + u
-			var y = center_y - radius + v
+
+func _generate_room(room_rect, ground_map, wall_map):
+	for v in range(room_rect.size.y):
+		for u in range(room_rect.size.x):
+			var x = room_rect.position.x + u
+			var y = room_rect.position.y + v
 			self._convert_to_dirt([x, y], ground_map, wall_map)
 		
 func _generate_path(point1, point2, ground_map, wall_map):

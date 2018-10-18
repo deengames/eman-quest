@@ -3,14 +3,16 @@ extends Node2D
 const AreaMap = preload("res://Entities/AreaMap.gd")
 const AreaType = preload("res://Scripts/Enums/AreaType.gd")
 const CaveGenerator = preload("res://Scripts/Generators/CaveGenerator.gd")
+const DungeonGenerator = preload("res://Scripts/Generators/DungeonGenerator.gd")
 const ForestGenerator = preload("res://Scripts/Generators/ForestGenerator.gd")
 const MapDestination = preload("res://Entities/MapDestination.gd")
 const MapLayoutGenerator = preload("res://Scripts/Generators/MapLayoutGenerator.gd")
 const OverworldGenerator = preload("res://Scripts/Generators/OverworldGenerator.gd")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
-const ForestVariations = ["Slime", "Frost"]
-const CaveVariations = ["River"]
+const ForestVariations = ["Slime", "Frost"] # Death
+const CaveVariations = ["River"] # Lava, Crystal
+const DungeonVariations = ["Dark"] # Skeleton, Minotaur
 
 func _ready():
 	self.generate_world()
@@ -20,11 +22,13 @@ func _ready():
 func generate_world():
 	var forest_maps = _generate_subarea_maps(ForestVariations, ForestGenerator.new(), 4)
 	var cave_maps = _generate_subarea_maps(CaveVariations, CaveGenerator.new(), 6)
+	var dungeon_maps = _generate_subarea_maps(DungeonVariations, DungeonGenerator.new(), 6)
 	
 	# return a dictionary, eg. "forest" => forest maps
 	Globals.maps = {
 		"Forest": forest_maps,
-		"Cave": cave_maps
+		"Cave": cave_maps,
+		"Dungeon": dungeon_maps
 	}
 	
 	# Generate last; generating the entrance into the first sub-map
