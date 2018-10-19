@@ -20,12 +20,15 @@ const _VARIANT_TILESETS = {
 	"River": "res://Tilesets/RiverCave.tres",
 }
 
+const _WATER_ROCKS = ["WaterRock1", "WaterRock2", "WaterRock3", "WaterRock4"]
+
 # Number of "open" floor cells as a percentage of our area
 const _FLOOR_TILES_PERCENTAGE = 50
 
 const _PATHS_BUFFER_FROM_EDGE = 3
 const _NUM_CHESTS = [0, 1]
 const _ITEM_POWER = [30, 50]
+const _NUM_SUPERFICIAL_TILES = 300
 
 var map_width = 3 * Globals.WORLD_WIDTH_IN_TILES
 var map_height = 4 * Globals.WORLD_HEIGHT_IN_TILES
@@ -76,6 +79,7 @@ func _generate_cave(area_type, transitions):
 	self._fill_with("Wall", wall_map)
 
 	self._generate_tiles(transitions, ground_map, wall_map)
+	self._generate_superficial_tiles(ground_map, wall_map)
 
 	return to_return
 
@@ -192,6 +196,24 @@ func _pick_random_adjacent_tile(x, y):
 		
 	return to_return[randi() % len(to_return)]
 
+
+func _generate_superficial_tiles(ground_map, wall_map):
+	for i in range(_NUM_SUPERFICIAL_TILES):
+		var x = Globals.randint(_PATHS_BUFFER_FROM_EDGE, map_width - _PATHS_BUFFER_FROM_EDGE - 1)
+		var y = Globals.randint(_PATHS_BUFFER_FROM_EDGE, map_height - _PATHS_BUFFER_FROM_EDGE - 1)
+		
+		# 3x3 square
+		if (wall_map.get(x, y) == "Wall" and wall_map.get(x, y - 1) == "Wall" and
+			wall_map.get(x + 1, y - 1) == "Wall" and wall_map.get(x + 1, y) == "Wall" and
+			wall_map.get(x + 1, y + 1) == "Wall" and wall_map.get(x, y + 1) == "Wall" and
+			wall_map.get(x - 1, y + 1) == "Wall" and wall_map.get(x - 1, y) == "Wall" and
+			wall_map.get(x - 1, y - 1) == "Wall"):
+				
+				ground_map.set(x, y, "Wall") # Water
+				var tile = _WATER_ROCKS[randi() % len(_WATER_ROCKS)]
+				wall_map.set(x, y, tile)
+
+############# TODO: DRY
 # Almost common with OverworldGenerator
 func _fill_with(tile_name, map_array):
 	for y in range(0, map_height):
@@ -217,4 +239,3 @@ func _clear_if_wall(wall_map, x, y):
 		if y >= 0 and y < map_height:
 			if wall_map.get(x, y) != null:
 				wall_map.set(x, y, null)
-
