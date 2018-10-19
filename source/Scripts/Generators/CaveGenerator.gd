@@ -21,7 +21,7 @@ const _VARIANT_TILESETS = {
 }
 
 const _WATER_DECORATION_TILE_CHOICES = ["WaterRock1", "WaterRock2", "WaterRock3", "WaterRock4"]
-const _GROUND_DECORATION_TILE_CHOICES = ["GroundDecoration1", "GroundDecoration2"]
+const _GROUND_DECORATION_TILE_CHOICES = ["GroundDecoration1", "GroundDecoration2", "GroundDecoration3", "GroundDecoration4"]
 
 # Number of "open" floor cells as a percentage of our area
 const _FLOOR_TILES_PERCENTAGE = 50
