@@ -17,9 +17,27 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 64, 64 )
 _sections_unfolded = [ "Offset", "Region" ]
 
-[node name="Wall" type="Sprite" parent="." index="1"]
+[node name="GroundDecoration1" type="Sprite" parent="." index="1"]
 
 position = Vector2( 70, 0 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 384, 192, 64, 64 )
+_sections_unfolded = [ "Offset", "Region" ]
+
+[node name="GroundDecoration2" type="Sprite" parent="." index="2"]
+
+position = Vector2( 140, 0 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 320, 384, 64, 64 )
+_sections_unfolded = [ "Offset", "Region" ]
+
+[node name="Wall" type="Sprite" parent="." index="3"]
+
+position = Vector2( 210, 0 )
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
@@ -43,7 +61,7 @@ position = Vector2( 32, 32 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="WaterRock1" type="Sprite" parent="." index="2"]
+[node name="WaterRock1" type="Sprite" parent="." index="4"]
 
 position = Vector2( 0, 70 )
 texture = ExtResource( 1 )
@@ -69,7 +87,7 @@ position = Vector2( 32, 32 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="WaterRock2" type="Sprite" parent="." index="3"]
+[node name="WaterRock2" type="Sprite" parent="." index="5"]
 
 position = Vector2( 73, 70 )
 texture = ExtResource( 1 )
@@ -95,7 +113,7 @@ position = Vector2( 32, 32 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="WaterRock3" type="Sprite" parent="." index="4"]
+[node name="WaterRock3" type="Sprite" parent="." index="6"]
 
 position = Vector2( 143, 70 )
 texture = ExtResource( 1 )
@@ -121,7 +139,7 @@ position = Vector2( 32, 32 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="WaterRock4" type="Sprite" parent="." index="5"]
+[node name="WaterRock4" type="Sprite" parent="." index="7"]
 
 position = Vector2( 213, 70 )
 texture = ExtResource( 1 )

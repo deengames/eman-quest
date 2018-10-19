@@ -20,7 +20,8 @@ const _VARIANT_TILESETS = {
 	"River": "res://Tilesets/RiverCave.tres",
 }
 
-const _WATER_ROCKS = ["WaterRock1", "WaterRock2", "WaterRock3", "WaterRock4"]
+const _WATER_DECORATION_TILE_CHOICES = ["WaterRock1", "WaterRock2", "WaterRock3", "WaterRock4"]
+const _GROUND_DECORATION_TILE_CHOICES = ["GroundDecoration1", "GroundDecoration2"]
 
 # Number of "open" floor cells as a percentage of our area
 const _FLOOR_TILES_PERCENTAGE = 50
@@ -28,7 +29,8 @@ const _FLOOR_TILES_PERCENTAGE = 50
 const _PATHS_BUFFER_FROM_EDGE = 3
 const _NUM_CHESTS = [0, 1]
 const _ITEM_POWER = [30, 50]
-const _NUM_SUPERFICIAL_TILES = 300
+const _WALL_DECORATION_TILES = 300
+const _GROUND_DECORATION_TILES_PERCENT = 5 # X% of floor tiles are decoration
 
 var map_width = 3 * Globals.WORLD_WIDTH_IN_TILES
 var map_height = 4 * Globals.WORLD_HEIGHT_IN_TILES
@@ -79,7 +81,7 @@ func _generate_cave(area_type, transitions):
 	self._fill_with("Wall", wall_map)
 
 	self._generate_tiles(transitions, ground_map, wall_map)
-	self._generate_superficial_tiles(ground_map, wall_map)
+	self._generate_decoration_tiles(ground_map, wall_map)
 
 	return to_return
 
@@ -197,8 +199,12 @@ func _pick_random_adjacent_tile(x, y):
 	return to_return[randi() % len(to_return)]
 
 
-func _generate_superficial_tiles(ground_map, wall_map):
-	for i in range(_NUM_SUPERFICIAL_TILES):
+func _generate_decoration_tiles(ground_map, wall_map):
+	self._decorate_walls(ground_map, wall_map)
+	self._decorate_floor(ground_map, wall_map)
+
+func _decorate_walls(ground_map, wall_map):
+	for i in range(_WALL_DECORATION_TILES):
 		var x = Globals.randint(_PATHS_BUFFER_FROM_EDGE, map_width - _PATHS_BUFFER_FROM_EDGE - 1)
 		var y = Globals.randint(_PATHS_BUFFER_FROM_EDGE, map_height - _PATHS_BUFFER_FROM_EDGE - 1)
 		
@@ -210,9 +216,19 @@ func _generate_superficial_tiles(ground_map, wall_map):
 			wall_map.get(x - 1, y - 1) == "Wall"):
 				
 				ground_map.set(x, y, "Wall") # Water
-				var tile = _WATER_ROCKS[randi() % len(_WATER_ROCKS)]
+				var tile = _WATER_DECORATION_TILE_CHOICES[randi() % len(_WATER_DECORATION_TILE_CHOICES)]
 				wall_map.set(x, y, tile)
 
+func _decorate_floor(ground_map, wall_map):
+	var num_tiles = floor(map_width * map_height * _GROUND_DECORATION_TILES_PERCENT / 100)
+	while num_tiles > 0:
+		var x = randi() % map_width
+		var y = randi() % map_height
+		if ground_map.get(x, y) == "Ground" and wall_map.get(x, y) == null:
+			var decoration = _GROUND_DECORATION_TILE_CHOICES[randi() % len(_GROUND_DECORATION_TILE_CHOICES)]
+			wall_map.set(x, y, decoration)
+			num_tiles -= 1
+		
 ############# TODO: DRY
 # Almost common with OverworldGenerator
 func _fill_with(tile_name, map_array):
