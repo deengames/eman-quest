@@ -21,7 +21,7 @@ const _VARIANT_TILESETS = {
 }
 
 const _WATER_DECORATION_TILE_CHOICES = ["WaterRock1", "WaterRock2", "WaterRock3", "WaterRock4"]
-const _GROUND_DECORATION_TILE_CHOICES = ["GroundDecoration1", "GroundDecoration2", "GroundDecoration3", "GroundDecoration4"]
+const _GROUND_DECORATION_TILE_CHOICES = ["Pebbles1", "Pebbles2", "Pebbles3"]
 
 # Number of "open" floor cells as a percentage of our area
 const _FLOOR_TILES_PERCENTAGE = 50
@@ -200,6 +200,7 @@ func _pick_random_adjacent_tile(x, y):
 
 func _generate_decoration_tiles(ground_map, water_map):
 	self._decorate_water(ground_map, water_map)
+	self._decorate_ground(water_map)
 
 # Adds random rocks into the river
 func _decorate_water(ground_map, water_map):
@@ -217,7 +218,23 @@ func _decorate_water(ground_map, water_map):
 				ground_map.set(x, y, "Water") # Water
 				var tile = _WATER_DECORATION_TILE_CHOICES[randi() % len(_WATER_DECORATION_TILE_CHOICES)]
 				water_map.set(x, y, tile)
+
+# Adds random rocks into the river
+func _decorate_ground(water_map):
+	for i in range(_WALL_DECORATION_TILES):
+		var x = Globals.randint(_PATHS_BUFFER_FROM_EDGE, map_width - _PATHS_BUFFER_FROM_EDGE - 1)
+		var y = Globals.randint(_PATHS_BUFFER_FROM_EDGE, map_height - _PATHS_BUFFER_FROM_EDGE - 1)
 		
+		# Add the rock to a center of a 3x3 square of ground. This plays nicely with autotiles.
+		if (water_map.get(x, y) == null and water_map.get(x, y - 1) == null and
+			water_map.get(x + 1, y - 1) == null and water_map.get(x + 1, y) == null and
+			water_map.get(x + 1, y + 1) == null and water_map.get(x, y + 1) == null and
+			water_map.get(x - 1, y + 1) == null and water_map.get(x - 1, y) == null and
+			water_map.get(x - 1, y - 1) == null):
+				
+				var tile = _GROUND_DECORATION_TILE_CHOICES[randi() % len(_GROUND_DECORATION_TILE_CHOICES)]
+				water_map.set(x, y, tile)
+
 ############# TODO: DRY
 # Almost common with OverworldGenerator
 func _fill_with(tile_name, map_array):
