@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/images/cave-tiles.png" type="Texture" id=1]
+[ext_resource path="res://assets/images/cave-full-tiles.png" type="Texture" id=1]
+[ext_resource path="res://assets/images/cave-tiles.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -13,56 +14,19 @@ extents = Vector2( 30, 30 )
 
 texture = ExtResource( 1 )
 centered = false
-region_enabled = true
 region_rect = Rect2( 0, 0, 64, 64 )
 _sections_unfolded = [ "Offset", "Region" ]
 
-[node name="GroundDecoration1" type="Sprite" parent="." index="1"]
-
-position = Vector2( 0, 150 )
-texture = ExtResource( 1 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 128, 64, 64 )
-_sections_unfolded = [ "Offset", "Region" ]
-
-[node name="GroundDecoration2" type="Sprite" parent="." index="2"]
-
-position = Vector2( 70, 150 )
-texture = ExtResource( 1 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 64, 128, 64, 64 )
-_sections_unfolded = [ "Offset", "Region" ]
-
-[node name="GroundDecoration3" type="Sprite" parent="." index="3"]
-
-position = Vector2( 130, 150 )
-texture = ExtResource( 1 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 128, 128, 64, 64 )
-_sections_unfolded = [ "Offset", "Region" ]
-
-[node name="GroundDecoration4" type="Sprite" parent="." index="4"]
-
-position = Vector2( 190, 150 )
-texture = ExtResource( 1 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 192, 128, 64, 64 )
-_sections_unfolded = [ "Offset", "Region" ]
-
-[node name="Wall" type="Sprite" parent="." index="5"]
+[node name="Water" type="Sprite" parent="." index="1"]
 
 position = Vector2( 70, 0 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 64, 0, 64, 64 )
 _sections_unfolded = [ "Offset", "Region" ]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Wall" index="0"]
+[node name="StaticBody2D" type="StaticBody2D" parent="Water" index="0"]
 
 input_pickable = false
 collision_layer = 1
@@ -72,17 +36,17 @@ constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall/StaticBody2D" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Water/StaticBody2D" index="0"]
 
 visible = false
 position = Vector2( 32, 32 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="WaterRock1" type="Sprite" parent="." index="6"]
+[node name="WaterRock1" type="Sprite" parent="." index="2"]
 
 position = Vector2( 0, 70 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 64, 64, 64 )
@@ -105,10 +69,10 @@ position = Vector2( 32, 32 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="WaterRock2" type="Sprite" parent="." index="7"]
+[node name="WaterRock2" type="Sprite" parent="." index="3"]
 
 position = Vector2( 73, 70 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 64, 64, 64, 64 )
@@ -131,10 +95,10 @@ position = Vector2( 32, 32 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="WaterRock3" type="Sprite" parent="." index="8"]
+[node name="WaterRock3" type="Sprite" parent="." index="4"]
 
 position = Vector2( 143, 70 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 128, 64, 64, 64 )
@@ -157,10 +121,10 @@ position = Vector2( 32, 32 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="WaterRock4" type="Sprite" parent="." index="9"]
+[node name="WaterRock4" type="Sprite" parent="." index="5"]
 
 position = Vector2( 213, 70 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 192, 64, 64, 64 )

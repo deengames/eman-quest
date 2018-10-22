@@ -17,7 +17,7 @@ const _BOSS_DATA = {
 }
 
 const _VARIANT_TILESETS = {
-	"River": "res://Tilesets/RiverCave.tres",
+	"River": "auto:RiverCave",
 }
 
 const _WATER_DECORATION_TILE_CHOICES = ["WaterRock1", "WaterRock2", "WaterRock3", "WaterRock4"]
@@ -35,7 +35,7 @@ const _GROUND_DECORATION_TILES_PERCENT = 5 # X% of floor tiles are decoration
 var map_width = 3 * Globals.WORLD_WIDTH_IN_TILES
 var map_height = 4 * Globals.WORLD_HEIGHT_IN_TILES
 
-var _wall_map = []
+var _water_map = []
 
 # Called once per game
 func generate(submap, transitions, variation_name):
@@ -43,7 +43,7 @@ func generate(submap, transitions, variation_name):
 	var map = AreaMap.new("Cave", variation_name, tileset, map_width, map_height, submap.area_type)
 
 	var tile_data = self._generate_cave(submap.area_type, transitions) # generates paths too
-	self._wall_map = tile_data[1]
+	self._water_map = tile_data[1]
 
 	map.transitions = transitions
 	map.treasure_chests = self._generate_treasure_chests()
@@ -76,16 +76,16 @@ func _generate_cave(area_type, transitions):
 	to_return.append(ground_map)
 	self._fill_with("Ground", ground_map)
 
-	var wall_map = TwoDimensionalArray.new(self.map_width, self.map_height)
-	to_return.append(wall_map)
-	self._fill_with("Wall", wall_map)
+	var water_map = TwoDimensionalArray.new(self.map_width, self.map_height)
+	to_return.append(water_map)
+	self._fill_with("Water", water_map)
 
-	self._generate_tiles(transitions, ground_map, wall_map)
-	self._generate_decoration_tiles(ground_map, wall_map)
+	self._generate_tiles(transitions, ground_map, water_map)
+	self._generate_decoration_tiles(ground_map, water_map)
 
 	return to_return
 
-func _generate_tiles(transitions, ground_map, wall_map):
+func _generate_tiles(transitions, ground_map, water_map):
 	
 	var floors_to_create = floor(self.map_width * self.map_height * _FLOOR_TILES_PERCENTAGE / 100)
 	
@@ -94,8 +94,8 @@ func _generate_tiles(transitions, ground_map, wall_map):
 	var created_ground = []
 	
 	while floors_to_create > 0:
-		if wall_map.get(current_x, current_y) != null:
-			self._convert_to_dirt([current_x, current_y], ground_map, wall_map)
+		if water_map.get(current_x, current_y) != null:
+			self._convert_to_dirt([current_x, current_y], ground_map, water_map)
 			created_ground.append([current_x, current_y])
 			floors_to_create -= 1
 			
@@ -124,9 +124,9 @@ func _generate_tiles(transitions, ground_map, wall_map):
 			# bottom entrance
 			destination[1] -= offset
 
-		self._generate_path(entrance, destination, ground_map, wall_map)
+		self._generate_path(entrance, destination, ground_map, water_map)
 		var closest_node = self._find_closest_cell_to(destination, created_ground)
-		self._generate_path(destination, closest_node, ground_map, wall_map)
+		self._generate_path(destination, closest_node, ground_map, water_map)
 
 func _find_closest_cell_to(point, candidates):
 	var closest_cell = null
@@ -143,14 +143,14 @@ func _find_closest_cell_to(point, candidates):
 		
 	return closest_cell
 	
-func _generate_path(point1, point2, ground_map, wall_map):
+func _generate_path(point1, point2, ground_map, water_map):
 	var from_x = point1[0]
 	var from_y = point1[1]
 
 	var to_x = point2[0]
 	var to_y = point2[1]
 
-	self._convert_to_dirt([from_x, from_y], ground_map, wall_map)
+	self._convert_to_dirt([from_x, from_y], ground_map, water_map)
 
 	while from_x != to_x or from_y != to_y:
 		# If we're farther away on x-axis, move horizontally.
@@ -159,7 +159,7 @@ func _generate_path(point1, point2, ground_map, wall_map):
 		else:
 			from_y += sign(to_y - from_y)
 
-		self._convert_to_dirt([from_x, from_y], ground_map, wall_map)
+		self._convert_to_dirt([from_x, from_y], ground_map, water_map)
 
 func _generate_treasure_chests():
 	var num_chests = Globals.randint(_NUM_CHESTS[0], _NUM_CHESTS[1])
@@ -170,7 +170,7 @@ func _generate_treasure_chests():
 
 	while num_chests > 0:
 		var spot = SpotFinder.find_empty_spot(map_width, map_height,
-			self._wall_map, chests_coordinates)
+			self._water_map, chests_coordinates)
 
 		var type = types[randi() % len(types)]
 		var power = Globals.randint(_ITEM_POWER[0], _ITEM_POWER[1])
@@ -198,36 +198,25 @@ func _pick_random_adjacent_tile(x, y):
 		
 	return to_return[randi() % len(to_return)]
 
+func _generate_decoration_tiles(ground_map, water_map):
+	self._decorate_water(ground_map, water_map)
 
-func _generate_decoration_tiles(ground_map, wall_map):
-	self._decorate_walls(ground_map, wall_map)
-	self._decorate_floor(ground_map, wall_map)
-
-func _decorate_walls(ground_map, wall_map):
+# Adds random rocks into the river
+func _decorate_water(ground_map, water_map):
 	for i in range(_WALL_DECORATION_TILES):
 		var x = Globals.randint(_PATHS_BUFFER_FROM_EDGE, map_width - _PATHS_BUFFER_FROM_EDGE - 1)
 		var y = Globals.randint(_PATHS_BUFFER_FROM_EDGE, map_height - _PATHS_BUFFER_FROM_EDGE - 1)
 		
-		# 3x3 square
-		if (wall_map.get(x, y) == "Wall" and wall_map.get(x, y - 1) == "Wall" and
-			wall_map.get(x + 1, y - 1) == "Wall" and wall_map.get(x + 1, y) == "Wall" and
-			wall_map.get(x + 1, y + 1) == "Wall" and wall_map.get(x, y + 1) == "Wall" and
-			wall_map.get(x - 1, y + 1) == "Wall" and wall_map.get(x - 1, y) == "Wall" and
-			wall_map.get(x - 1, y - 1) == "Wall"):
+		# Add the rock to a center of a 3x3 square of water. This plays nicely with autotiles.
+		if (water_map.get(x, y) == "Water" and water_map.get(x, y - 1) == "Water" and
+			water_map.get(x + 1, y - 1) == "Water" and water_map.get(x + 1, y) == "Water" and
+			water_map.get(x + 1, y + 1) == "Water" and water_map.get(x, y + 1) == "Water" and
+			water_map.get(x - 1, y + 1) == "Water" and water_map.get(x - 1, y) == "Water" and
+			water_map.get(x - 1, y - 1) == "Water"):
 				
-				ground_map.set(x, y, "Wall") # Water
+				ground_map.set(x, y, "Water") # Water
 				var tile = _WATER_DECORATION_TILE_CHOICES[randi() % len(_WATER_DECORATION_TILE_CHOICES)]
-				wall_map.set(x, y, tile)
-
-func _decorate_floor(ground_map, wall_map):
-	var num_tiles = floor(map_width * map_height * _GROUND_DECORATION_TILES_PERCENT / 100)
-	while num_tiles > 0:
-		var x = randi() % map_width
-		var y = randi() % map_height
-		if ground_map.get(x, y) == "Ground" and wall_map.get(x, y) == null:
-			var decoration = _GROUND_DECORATION_TILE_CHOICES[randi() % len(_GROUND_DECORATION_TILE_CHOICES)]
-			wall_map.set(x, y, decoration)
-			num_tiles -= 1
+				water_map.set(x, y, tile)
 		
 ############# TODO: DRY
 # Almost common with OverworldGenerator
@@ -236,10 +225,10 @@ func _fill_with(tile_name, map_array):
 		for x in range(0, map_width):
 			map_array.set(x, y, tile_name)
 
-func _convert_to_dirt(position, ground_map, wall_map):
-	self._convert_to(position, ground_map, wall_map)
+func _convert_to_dirt(position, ground_map, water_map):
+	self._convert_to(position, ground_map, water_map)
 
-func _convert_to(position, ground_map, wall_map):
+func _convert_to(position, ground_map, water_map):
 	# Draws dirt at the specified position. Also clears trees for
 	# one tile in all directions surrounding the dirt (kind of like
 	# drawing with a 3x3 grass brush around the dirt).
@@ -248,10 +237,10 @@ func _convert_to(position, ground_map, wall_map):
 
 	if x >= 0 and x < map_width and y >= 0 and y < map_height:
 		ground_map.set(x, y, "Ground")
-		wall_map.set(x, y, null) # remove wall
+		water_map.set(x, y, null) # remove wall
 
-func _clear_if_wall(wall_map, x, y):
+func _clear_if_wall(water_map, x, y):
 	if x >= 0 and x < map_width:
 		if y >= 0 and y < map_height:
-			if wall_map.get(x, y) != null:
-				wall_map.set(x, y, null)
+			if water_map.get(x, y) != null:
+				water_map.set(x, y, null)

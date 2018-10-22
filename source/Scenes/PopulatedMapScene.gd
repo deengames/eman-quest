@@ -4,9 +4,10 @@ extends Node2D
 # A class that takes an AreaMap and generates the scene (tiles, enemies, etc.)
 ###
 
-var Boss = preload("res://Entities/Battle/Boss.tscn")
-var MapWarp = preload("res://Entities/MapWarp.tscn")
-var Monster = preload("res://Entities/Battle/Monster.tscn")
+const AutoTileTilesets = preload("res://Tilesets/AutoTileTilesets.tscn")
+const Boss = preload("res://Entities/Battle/Boss.tscn")
+const MapWarp = preload("res://Entities/MapWarp.tscn")
+const Monster = preload("res://Entities/Battle/Monster.tscn")
 const Player = preload("res://Entities/Player.tscn")
 const TreasureChest = preload("res://Entities/TreasureChest.tscn")
 const TilesetMapper = preload("res://Scripts/TilesetMapper.gd")
@@ -23,7 +24,7 @@ func _ready():
 	Globals.current_map = map
 	self._restoring_state = Globals.previous_monsters != null
 	
-	var tileset = load(map.tileset_path)
+	var tileset = self._load_tileset_or_auto_tileset(map.tileset_path)
 	var tile_ids = TilesetMapper.new().load_tileset_mapping(tileset)
 	
 	var i = 0
@@ -114,7 +115,7 @@ func _add_monsters():
 		if File.new().file_exists(generator_path):
 			var type = load(generator_path)
 			var generator = type.new()
-			monster_data = generator.generate_monsters(self.map)
+			monster_data = {}#generator.generate_monsters(self.map)
 		else:
 			monster_data = {}
 	
@@ -152,3 +153,20 @@ func _populate_treasure_chests():
 		var instance = TreasureChest.instance()
 		instance.initialize_from(data)
 		self.add_child(instance)
+
+# Returns a tileset.
+# Given a path, it may be a regular tileset resource path,
+# eg. res://Tilesets/FrostForest.tres
+# OR, it may be our custom-made auto-tileset path, eg. auto:RiverCave.
+# If it's the latter, load the AutoTileTilesets scene; this scene has
+# one tilemap per tileset (named with the tileset, eg. RiverCave).
+# Take the tileset from this tilemap, because it's configured with autotiles.
+func _load_tileset_or_auto_tileset(tileset_path):
+	if "auto:" in tileset_path:
+		var layer_name = tileset_path.replace("auto:", "")
+		var auto_tilesets = AutoTileTilesets.instance()
+		var tilemap = auto_tilesets.get_node(layer_name)
+		var tileset = tilemap.tile_set
+		return tileset
+	else:
+		return load(tileset_path)

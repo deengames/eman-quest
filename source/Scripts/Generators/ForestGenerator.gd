@@ -50,12 +50,16 @@ const _BOSS_DATA = {
 			"chomp": 60, # 20%,
 			"freeze": 40
 		}
+	},
+	"Death": {
+		"type": "Freeze Fang"
 	}
 }
 
 const _VARIANT_TILESETS = {
 	"Slime": "res://Tilesets/Overworld.tres",
-	"Frost": "res://Tilesets/FrostForest.tres"
+	"Frost": "res://Tilesets/FrostForest.tres",
+	"Death": "res://Tilesets/DeathForest.tres"
 }
 
 # Sometimes, paths generate right at the bottom of the map, obscuring the entrance
