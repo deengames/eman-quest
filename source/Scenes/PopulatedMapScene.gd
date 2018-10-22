@@ -28,18 +28,17 @@ func _ready():
 	var tileset = self._load_tileset_or_auto_tileset(map.tileset_path)
 	var tile_ids = TilesetMapper.new().load_tileset_mapping(tileset)
 	
-	var i = 0
-	
 	for tilemap_data in map.tile_data:
 		# TODO: where does this block go?
 		var tilemap = TileMap.new()
 		tilemap.tile_set = tileset
-		tilemap.z_index = i - len(map.tile_data) # draw under player		
+		tilemap.z_index = -1 # draw under player
 		self._populate_tiles(tilemap_data, tilemap, tile_ids)
 	
-		self.add_child(tilemap)
-		if is_autotiling: tilemap.update_bitmask_region()
+		if is_autotiling:
+			tilemap.update_bitmask_region(Vector2(0, 0), Vector2(300, 300))
 		
+		self.add_child(tilemap)
 	
 	self._add_transitions()
 	self._add_monsters()
