@@ -36,7 +36,7 @@ func _ready():
 		self._populate_tiles(tilemap_data, tilemap, tile_ids)
 	
 		if is_autotiling:
-			tilemap.update_bitmask_region(Vector2(0, 0), Vector2(300, 300))
+			tilemap.update_bitmask_region()
 		
 		self.add_child(tilemap)
 	
