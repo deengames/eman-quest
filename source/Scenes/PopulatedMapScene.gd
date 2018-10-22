@@ -24,6 +24,7 @@ func _ready():
 	Globals.current_map = map
 	self._restoring_state = Globals.previous_monsters != null
 	
+	var is_autotiling = "auto:" in map.tileset_path
 	var tileset = self._load_tileset_or_auto_tileset(map.tileset_path)
 	var tile_ids = TilesetMapper.new().load_tileset_mapping(tileset)
 	
@@ -33,9 +34,12 @@ func _ready():
 		# TODO: where does this block go?
 		var tilemap = TileMap.new()
 		tilemap.tile_set = tileset
-		tilemap.z_index = i - len(map.tile_data) # draw under player
+		tilemap.z_index = i - len(map.tile_data) # draw under player		
 		self._populate_tiles(tilemap_data, tilemap, tile_ids)
+	
 		self.add_child(tilemap)
+		if is_autotiling: tilemap.update_bitmask_region()
+		
 	
 	self._add_transitions()
 	self._add_monsters()
