@@ -70,7 +70,7 @@ static func change_map_to(tree, target):
 		# Wait 3s, then fade over 1s
 		var tween_helper = TweenHelper.new(current_scene, container, 1)
 		var timer = Timer.new()
-		timer.wait_time = 3.0
+		timer.wait_time = 30.0
 		timer.connect("timeout", tween_helper, "start")
 		timer.start()
 		current_scene.add_child(timer)
