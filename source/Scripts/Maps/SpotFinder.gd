@@ -6,6 +6,7 @@ static func find_empty_spot(map_width, map_height, object_map, occupied_spots):
 	var x = Globals.randint(PADDING_FROM_MAP_EDGES, map_width - PADDING_FROM_MAP_EDGES - 1)
 	var y = Globals.randint(PADDING_FROM_MAP_EDGES, map_height - PADDING_FROM_MAP_EDGES - 1)
 	
+	###### TODO: work for other types of tiles/maps. Maybe parametrize bush/tree values?
 	while (object_map.get(x, y) == "Bush" or
 		occupied_spots.find([x, y]) > -1 or
 		# Trees technically have empty space around them, so make sure
