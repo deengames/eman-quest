@@ -1,3 +1,8 @@
+# Artists
+- @mr_dude_III
+- @legendiguess
+- @bhagat
+
 # Art
 
 - [LPC Colourful Sand + Deep Water!](https://opengameart.org/content/lpc-colorful-sand-deep-water) by Nushio
