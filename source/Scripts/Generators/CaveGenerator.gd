@@ -24,12 +24,12 @@ const _WATER_DECORATION_TILE_CHOICES = ["WaterRock1", "WaterRock2", "WaterRock3"
 const _GROUND_DECORATION_TILE_CHOICES = ["Pebbles1", "Pebbles2", "Pebbles3"]
 
 # Number of "open" floor cells as a percentage of our area
-const _FLOOR_TILES_PERCENTAGE = 50
+const _FLOOR_TILES_PERCENTAGE = 25
 
 const _PATHS_BUFFER_FROM_EDGE = 3
 const _NUM_CHESTS = [0, 1]
 const _ITEM_POWER = [30, 50]
-const _WALL_DECORATION_TILES = 300
+const _WALL_DECORATION_TILES = 150
 const _GROUND_DECORATION_TILES_PERCENT = 5 # X% of floor tiles are decoration
 
 var map_width = 3 * Globals.WORLD_WIDTH_IN_TILES
@@ -200,11 +200,11 @@ func _pick_random_adjacent_tile(x, y):
 	return to_return[randi() % len(to_return)]
 
 func _generate_decoration_tiles(decoration_tilemap):
-	self._decorate_water()
+	self._decorate_water(decoration_tilemap)
 	self._decorate_ground(decoration_tilemap)
 
 # Adds random rocks into the river
-func _decorate_water():
+func _decorate_water(decoration_tilemap):
 	for i in range(_WALL_DECORATION_TILES):
 		var x = Globals.randint(_PATHS_BUFFER_FROM_EDGE, map_width - _PATHS_BUFFER_FROM_EDGE - 1)
 		var y = Globals.randint(_PATHS_BUFFER_FROM_EDGE, map_height - _PATHS_BUFFER_FROM_EDGE - 1)
@@ -216,9 +216,8 @@ func _decorate_water():
 			self._ground_tilemap.get(x - 1, y + 1) == "Water" and self._ground_tilemap.get(x - 1, y) == "Water" and
 			self._ground_tilemap.get(x - 1, y - 1) == "Water"):
 				
-				self._ground_tilemap.set(x, y, "Water") # Water
 				var tile = _WATER_DECORATION_TILE_CHOICES[randi() % len(_WATER_DECORATION_TILE_CHOICES)]
-				self._ground_tilemap.set(x, y, tile)
+				decoration_tilemap.set(x, y, tile)
 
 # Adds random rocks into the river
 func _decorate_ground(decoration_tilemap):
@@ -245,6 +244,9 @@ func _fill_with(tile_name, map_array):
 
 func _convert_to_dirt(position):
 	self._convert_to(position)
+	self._convert_to([position[0] + 1, position[1]])
+	self._convert_to([position[0], position[1] + 1])
+	self._convert_to([position[0] + 1, position[1] + 1])
 
 func _convert_to(position):
 	# Draws dirt at the specified position. Also clears trees for
