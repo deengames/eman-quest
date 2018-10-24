@@ -26,8 +26,8 @@ const _NUM_CHESTS = [0, 1]
 const _ROOM_SIZE = [8, 12] # tiles
 const _ITEM_POWER = [30, 50]
 
-var map_width = 4 * Globals.WORLD_WIDTH_IN_TILES
-var map_height = 5 * Globals.WORLD_HEIGHT_IN_TILES
+var map_width = 4 * Globals.SUBMAP_WIDTH_IN_TILES
+var map_height = 5 * Globals.SUBMAP_HEIGHT_IN_TILES
 
 var _wall_map = []
 

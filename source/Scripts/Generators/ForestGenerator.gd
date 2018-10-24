@@ -70,8 +70,8 @@ const _MAX_CHESTS = 1
 const _MIN_ITEM_POWER = 15
 const _MAX_ITEM_POWER = 30
 
-var map_width = 2 * Globals.WORLD_WIDTH_IN_TILES
-var map_height = 3 * Globals.WORLD_HEIGHT_IN_TILES
+var map_width = Globals.SUBMAP_WIDTH_IN_TILES
+var map_height = 3 * Globals.SUBMAP_HEIGHT_IN_TILES
 
 var _clearings_coordinates = []
 var _tree_map = []

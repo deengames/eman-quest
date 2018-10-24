@@ -32,8 +32,8 @@ const _ITEM_POWER = [30, 50]
 const _WALL_DECORATION_TILES = 150
 const _GROUND_DECORATION_TILES_PERCENT = 5 # X% of floor tiles are decoration
 
-var map_width = 3 * Globals.WORLD_WIDTH_IN_TILES
-var map_height = 4 * Globals.WORLD_HEIGHT_IN_TILES
+var map_width = Globals.SUBMAP_WIDTH_IN_TILES
+var map_height = 4 * Globals.SUBMAP_HEIGHT_IN_TILES
 
 # Mostly a SINGLE TILEMAP. You can't have an autotiled ground, and superimpose
 # a non-autotiled water map on top. It shows the ground through, which
