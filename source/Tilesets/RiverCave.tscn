@@ -7,7 +7,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 30, 30 )
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" index="0"]
 
 [node name="Ground" type="Sprite" parent="." index="0"]
 
@@ -19,6 +19,7 @@ _sections_unfolded = [ "Offset", "Region" ]
 
 [node name="Water" type="Sprite" parent="." index="1"]
 
+editor/display_folded = true
 position = Vector2( 70, 0 )
 texture = ExtResource( 1 )
 centered = false
@@ -45,6 +46,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="WaterRock1" type="Sprite" parent="." index="2"]
 
+editor/display_folded = true
 position = Vector2( 0, 70 )
 texture = ExtResource( 1 )
 centered = false
@@ -71,6 +73,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="WaterRock2" type="Sprite" parent="." index="3"]
 
+editor/display_folded = true
 position = Vector2( 73, 70 )
 texture = ExtResource( 1 )
 centered = false
@@ -97,6 +100,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="WaterRock3" type="Sprite" parent="." index="4"]
 
+editor/display_folded = true
 position = Vector2( 143, 70 )
 texture = ExtResource( 1 )
 centered = false
@@ -123,6 +127,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="WaterRock4" type="Sprite" parent="." index="5"]
 
+editor/display_folded = true
 position = Vector2( 213, 70 )
 texture = ExtResource( 1 )
 centered = false
@@ -172,6 +177,42 @@ texture = ExtResource( 1 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 320, 384, 64, 64 )
+_sections_unfolded = [ "Offset", "Region" ]
+
+[node name="ExitDown" type="Sprite" parent="." index="9"]
+
+position = Vector2( 0, 200 )
+texture = ExtResource( 1 )
+centered = false
+region_rect = Rect2( 0, 64, 64, 64 )
+_sections_unfolded = [ "Offset", "Region" ]
+
+[node name="ExitRight" type="Sprite" parent="." index="10"]
+
+position = Vector2( 70, 200 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 128, 64, 64 )
+_sections_unfolded = [ "Offset", "Region" ]
+
+[node name="ExitLeft" type="Sprite" parent="." index="11"]
+
+position = Vector2( 140, 200 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 192, 64, 64 )
+_sections_unfolded = [ "Offset", "Region" ]
+
+[node name="ExitUp" type="Sprite" parent="." index="12"]
+
+position = Vector2( 210, 200 )
+texture = ExtResource( 1 )
+centered = false
+flip_v = true
+region_enabled = true
+region_rect = Rect2( 0, 64, 64, 64 )
 _sections_unfolded = [ "Offset", "Region" ]
 
 

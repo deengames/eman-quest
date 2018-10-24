@@ -75,6 +75,8 @@ func _generate_transitions(submap, map_width, map_height):
 	
 	if submap.area_type == AreaType.ENTRANCE:
 		var position = Vector2(0, 0)
+		# Used to, erm, draw light on the entrance tile back to the world, in caves.
+		var direction_back = null
 		
 		###
 		# NB: maps are generated independently. The only way we get both sides of a
@@ -83,17 +85,22 @@ func _generate_transitions(submap, map_width, map_height):
 		if submap.connections.has("right") or submap.connections.has("left"):
 			position.y = floor(map_height / 2)
 			position.x = 0
+			direction_back = "left"
 			if submap.connections.has("left"):
 				# Left side is already taken, generate entrance on RHS
 				position.x = map_width - 1
+				direction_back = "right"
+				
 		elif submap.connections.has("up") or submap.connections.has("down"):
 			position.x = floor(map_width / 2)
 			position.y = 0
+			direction_back = "up"
 			if submap.connections.has("up"):
 				# Top side is already taken, generate entrance on RHS
 				position.y = map_height - 1
+				direction_back = "down"
 		
-		transitions.append(MapDestination.new(position, "Overworld", null, null))
+		transitions.append(MapDestination.new(position, "Overworld", null, direction_back))
 		entrance_from_overworld = position
 	
 	for direction in submap.connections.keys():

@@ -209,7 +209,6 @@ func _generate_decoration_tiles(decoration_tilemap):
 # Adds random rocks into the river
 func _decorate_water(decoration_tilemap):
 	var num_left = floor(_WATER_DECORATION_TILES_PERCENT * self.map_width * self.map_height / 100)
-	print("W=" + str(num_left))
 	
 	while num_left > 0:
 		var x = Globals.randint(_PATHS_BUFFER_FROM_EDGE, map_width - _PATHS_BUFFER_FROM_EDGE - 1)
@@ -225,7 +224,6 @@ func _decorate_water(decoration_tilemap):
 # Adds random rocks into the river
 func _decorate_ground(decoration_tilemap):
 	var num_left = floor(_GROUND_DECORATION_TILES_PERCENT * self.map_width * self.map_height / 100)
-	print("G=" + str(num_left))
 	
 	while num_left > 0:
 		var x = Globals.randint(_PATHS_BUFFER_FROM_EDGE, map_width - _PATHS_BUFFER_FROM_EDGE - 1)
@@ -274,7 +272,7 @@ func _convert_to_dirt(position):
 	self._convert_to([x - 1, y + 1])
 	
 
-func _convert_to(position):
+func _convert_to(position, type = "Ground"):
 	# Draws dirt at the specified position. Also clears trees for
 	# one tile in all directions surrounding the dirt (kind of like
 	# drawing with a 3x3 grass brush around the dirt).
@@ -282,4 +280,4 @@ func _convert_to(position):
 	var y = position[1]
 
 	if x >= 0 and x < map_width and y >= 0 and y < map_height:
-		self._ground_tilemap.set(x, y, "Ground")
+		self._ground_tilemap.set(x, y, type)

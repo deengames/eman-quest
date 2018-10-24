@@ -27,10 +27,12 @@ func _ready():
 	var is_autotiling = "auto:" in map.tileset_path
 	var tileset = self._load_tileset_or_auto_tileset(map.tileset_path)
 	var tile_ids = TilesetMapper.new().load_tileset_mapping(tileset)
+	var tilemaps = []
 	
 	for tilemap_data in map.tile_data:
 		# TODO: where does this block go?
 		var tilemap = TileMap.new()
+		tilemaps.append(tilemap)
 		tilemap.tile_set = tileset
 		tilemap.z_index = -1 # draw under player
 		self._populate_tiles(tilemap_data, tilemap, tile_ids)
@@ -40,7 +42,7 @@ func _ready():
 		
 		self.add_child(tilemap)
 	
-	self._add_transitions()
+	self._add_transitions(tilemaps[0], tile_ids)
 	self._add_monsters()
 	self._populate_treasure_chests()
 	
@@ -83,10 +85,18 @@ func _populate_tiles(tilemap_data, tilemap, tile_ids):
 			if tile_name != null:
 				tilemap.set_cell(x, y, tile_ids[tile_name])
 
-func _add_transitions():
+func _add_transitions(tilemap, tile_ids):
 	for destination in map.transitions:
 		var transition = MapWarp.instance()
 		transition.initialize_from(destination)
+		
+		if destination.direction != null: # exit to overworld
+			var direction = destination.direction
+			var coordinates = destination.my_position
+			var exit_type = "Exit" + direction.capitalize()
+			print(exit_type)
+			tilemap.set_cell(coordinates.x, coordinates.y, tile_ids[exit_type])
+
 		transition.position.x = destination.my_position.x * Globals.TILE_WIDTH
 		transition.position.y = destination.my_position.y * Globals.TILE_HEIGHT
 		self.add_child(transition)
