@@ -29,11 +29,13 @@ const _FLOOR_TILES_PERCENTAGE = 50
 const _PATHS_BUFFER_FROM_EDGE = 3
 const _NUM_CHESTS = [0, 1]
 const _ITEM_POWER = [30, 50]
-const _WALL_DECORATION_TILES = 150
-const _GROUND_DECORATION_TILES_PERCENT = 5 # X% of floor tiles are decoration
+const _WATER_DECORATION_TILES_PERCENT = 2 # 1 = 1%
+const _GROUND_DECORATION_TILES_PERCENT = 1
 
-var map_width = Globals.SUBMAP_WIDTH_IN_TILES
-var map_height = 4 * Globals.SUBMAP_HEIGHT_IN_TILES
+# Has to be bigger because paths are more trivial to traverse
+# i.e. without this, you can zip through the maps quickly
+var map_width = 2 * Globals.SUBMAP_WIDTH_IN_TILES
+var map_height = 2 * Globals.SUBMAP_HEIGHT_IN_TILES
 
 # Mostly a SINGLE TILEMAP. You can't have an autotiled ground, and superimpose
 # a non-autotiled water map on top. It shows the ground through, which
@@ -90,8 +92,9 @@ func _generate_tiles(transitions):
 	
 	var floors_to_create = floor(self.map_width * self.map_height * _FLOOR_TILES_PERCENTAGE / 100)
 	
-	var current_x = Globals.randint(_PATHS_BUFFER_FROM_EDGE, map_width - _PATHS_BUFFER_FROM_EDGE - 1)
-	var current_y = Globals.randint(_PATHS_BUFFER_FROM_EDGE, map_height - _PATHS_BUFFER_FROM_EDGE - 1)
+	var start = transitions[-1]
+	var current_x = start.my_position.x
+	var current_y = start.my_position.y
 	var created_ground = []
 	
 	while floors_to_create > 0:
@@ -205,35 +208,43 @@ func _generate_decoration_tiles(decoration_tilemap):
 
 # Adds random rocks into the river
 func _decorate_water(decoration_tilemap):
-	for i in range(_WALL_DECORATION_TILES):
+	var num_left = floor(_WATER_DECORATION_TILES_PERCENT * self.map_width * self.map_height / 100)
+	print("W=" + str(num_left))
+	
+	while num_left > 0:
 		var x = Globals.randint(_PATHS_BUFFER_FROM_EDGE, map_width - _PATHS_BUFFER_FROM_EDGE - 1)
 		var y = Globals.randint(_PATHS_BUFFER_FROM_EDGE, map_height - _PATHS_BUFFER_FROM_EDGE - 1)
 		
 		# Add the rock to a center of a 3x3 square of water. This plays nicely with autotiles.
-		if (self._ground_tilemap.get(x, y) == "Water" and self._ground_tilemap.get(x, y - 1) == "Water" and
-			self._ground_tilemap.get(x + 1, y - 1) == "Water" and self._ground_tilemap.get(x + 1, y) == "Water" and
-			self._ground_tilemap.get(x + 1, y + 1) == "Water" and self._ground_tilemap.get(x, y + 1) == "Water" and
-			self._ground_tilemap.get(x - 1, y + 1) == "Water" and self._ground_tilemap.get(x - 1, y) == "Water" and
-			self._ground_tilemap.get(x - 1, y - 1) == "Water"):
-				
+		if (self._is_clear_around(self._ground_tilemap, x, y, "Water") and
+			self._is_clear_around(decoration_tilemap, x, y, null)):
 				var tile = _WATER_DECORATION_TILE_CHOICES[randi() % len(_WATER_DECORATION_TILE_CHOICES)]
 				decoration_tilemap.set(x, y, tile)
+				num_left -= 1
 
 # Adds random rocks into the river
 func _decorate_ground(decoration_tilemap):
-	for i in range(_WALL_DECORATION_TILES):
+	var num_left = floor(_GROUND_DECORATION_TILES_PERCENT * self.map_width * self.map_height / 100)
+	print("G=" + str(num_left))
+	
+	while num_left > 0:
 		var x = Globals.randint(_PATHS_BUFFER_FROM_EDGE, map_width - _PATHS_BUFFER_FROM_EDGE - 1)
 		var y = Globals.randint(_PATHS_BUFFER_FROM_EDGE, map_height - _PATHS_BUFFER_FROM_EDGE - 1)
 		
 		# Add the rock to a center of a 3x3 square of ground. This plays nicely with autotiles.
-		if (self._ground_tilemap.get(x, y) == "Ground" and self._ground_tilemap.get(x, y - 1) == "Ground" and
-			self._ground_tilemap.get(x + 1, y - 1) == "Ground" and self._ground_tilemap.get(x + 1, y) == "Ground" and
-			self._ground_tilemap.get(x + 1, y + 1) == "Ground" and self._ground_tilemap.get(x, y + 1) == "Ground" and
-			self._ground_tilemap.get(x - 1, y + 1) == "Ground" and self._ground_tilemap.get(x - 1, y) == "Ground" and
-			self._ground_tilemap.get(x - 1, y - 1) == "Ground"):
+		if (self._is_clear_around(self._ground_tilemap, x, y, "Ground") and
+			self._is_clear_around(decoration_tilemap, x, y, null)):
 				
 				var tile = _GROUND_DECORATION_TILE_CHOICES[randi() % len(_GROUND_DECORATION_TILE_CHOICES)]
 				decoration_tilemap.set(x, y, tile)
+				num_left -= 1
+
+func _is_clear_around(tilemap, x, y, empty_tile_definition):
+	return (tilemap.get(x, y) == empty_tile_definition and tilemap.get(x, y - 1) == empty_tile_definition and
+		tilemap.get(x + 1, y - 1) == empty_tile_definition and tilemap.get(x + 1, y) == empty_tile_definition and
+		tilemap.get(x + 1, y + 1) == empty_tile_definition and tilemap.get(x, y + 1) == empty_tile_definition and
+		tilemap.get(x - 1, y + 1) == empty_tile_definition and tilemap.get(x - 1, y) == empty_tile_definition and
+		tilemap.get(x - 1, y - 1) == empty_tile_definition)
 
 ############# TODO: DRY
 # Almost common with OverworldGenerator
