@@ -10,16 +10,21 @@ const MapLayoutGenerator = preload("res://Scripts/Generators/MapLayoutGenerator.
 const OverworldGenerator = preload("res://Scripts/Generators/OverworldGenerator.gd")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
-const ForestVariations = ["Death"] #["Slime", "Frost"] # Death
+const ForestVariations = ["Slime", "Frost"] # Death
 const CaveVariations = ["River"] # Lava, Crystal
 const DungeonVariations = ["Castle"] # Skeleton, Minotaur
 
 func _ready():
-	self.generate_world()
+	# Wait just long enough for the scene to display, then generate
+	yield(get_tree().create_timer(0.25), 'timeout')
+	self._generate()
+
+func _generate():
+	self._generate_world()
 	SceneManagement.change_map_to(get_tree(), "Overworld")
 	get_tree().current_scene.get_node("UI").show_intro_story()
 	
-func generate_world():
+func _generate_world():
 	var forest_maps = _generate_subarea_maps(ForestVariations, ForestGenerator.new(), 4)
 	var cave_maps = _generate_subarea_maps(CaveVariations, CaveGenerator.new(), 6)
 	var dungeon_maps = _generate_subarea_maps(DungeonVariations, DungeonGenerator.new(), 6)
@@ -43,6 +48,7 @@ func generate_world():
 
 func _generate_subarea_maps(variations, generator, num_submaps):
 	var variation = variations[randi() % len(variations)]
+	print(variation)
 	var layout = MapLayoutGenerator.generate_layout(num_submaps)
 	var submaps = []
 	
