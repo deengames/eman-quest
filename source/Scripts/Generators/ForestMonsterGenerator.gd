@@ -8,9 +8,9 @@ const MONSTER_VARIANT_DATA = {
 		"Gold Slime": {
 			"type": "Gold Slime",
 			"weight": 70,
-			"health": 30,
+			"health": 35,
 			"strength": 10,
-			"defense": 2,
+			"defense": 5,
 			"turns": 1,
 			"experience points": 10,
 			
@@ -25,7 +25,7 @@ const MONSTER_VARIANT_DATA = {
 			"weight": 30,
 			"health": 40,
 			"strength": 8,
-			"defense": 0,
+			"defense": 2,
 			"turns": 1,
 			"experience points": 15,
 			
