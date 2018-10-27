@@ -35,7 +35,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 popup_exclusive = false
 window_title = "Title goes here"
-resizable = false
+resizable = true
 script = ExtResource( 1 )
 _sections_unfolded = [ "Anchor", "Focus", "Hint", "Margin", "Mouse", "Rect", "Size Flags", "Theme", "custom_fonts", "custom_icons", "custom_styles" ]
 
