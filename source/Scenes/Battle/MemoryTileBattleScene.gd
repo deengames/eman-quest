@@ -32,6 +32,11 @@ func _ready():
 		$EnergyControls.visible = false
 	
 	$History.text = ""
+	
+	# Monster health bar max + monster sprite
+	var image_name = self._monster_data["type"].replace(' ', '')
+	$MonsterControls/MonsterHealth.max_value = self._monster_data["health"]
+	$MonsterControls/MonsterSprite.texture = load("res://assets/images/monsters/" + image_name + ".png")
 	self._update_health_displays()
 
 func set_monster_data(data):
@@ -93,10 +98,18 @@ func _on_action(action_button):
 
 # health and energy
 func _update_health_displays():
+	self._update_player_health_displays()
+	self._update_monster_health_displays()
+
+func _update_player_health_displays():
 	$YourHpLabel.text = "Hero: " + str(self.player.current_health)
-	$EnemyHpLabel.text = self._monster_data["type"] + ": " + str(self._monster_data["health"])
-	$EnergyControls/EnergyLabel.text = str(self.player	.energy)
+	$EnergyControls/EnergyLabel.text = str(self.player.energy)
 	$EnergyControls/EnergyBar.value = round(100 * self.player.energy / self.player.max_energy)
+
+func _update_monster_health_displays():
+	var monster_health = self._monster_data["health"]
+	$MonsterControls/MonsterHealth.value = monster_health
+	$MonsterControls/MonsterHealth/Label.text = str(monster_health)
 
 func _finish_turn():
 	self._actions_picked = 0
