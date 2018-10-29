@@ -34,8 +34,6 @@ _sections_unfolded = [ "Margin", "Popup" ]
 
 [node name="MonsterChoices" type="Node2D" parent="." index="1"]
 
-editor/display_folded = true
-
 [node name="Target1" type="Sprite" parent="MonsterChoices" index="0"]
 
 position = Vector2( 60, 118 )

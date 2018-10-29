@@ -9,6 +9,9 @@ const _FINAL_DISPLAY_TIME_EXTRA = 0.5 # seconds
 var _correct = []
 var _selected = []
 
+var num_correct = 0
+var num_total = _CONTROLS_TO_SHOW
+
 func _ready():
 	
 	$React.visible = false
@@ -64,6 +67,19 @@ func _user_chooses(choice):
 	target_node.visible = true
 	react_control.visible = true
 	react_control.rotation_degrees = _rotation_from(choice)
+	
+	if is_match(target_node, react_control):
+		num_correct += 1
+	
+	if len(_correct) == len(_selected):
+		self._finish()
+	
+func _finish():
+	$Controls.visible = false
+	print("Correct: " + str(num_correct) + "/" + str(num_total))
+
+func is_match(target, choice):
+	return target.rotation_degrees == choice.rotation_degrees
 
 func _rotation_from(choice):
 	if choice == "up": return 0
