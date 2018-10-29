@@ -2,6 +2,7 @@ extends Node2D
 
 const ActionButton = preload("res://Scenes/Battle/ActionButton.tscn")
 const BattleResultsWindow = preload("res://Scenes/Battle/BattleResultsWindow.tscn")
+const NBackWindow = preload("res://Scenes/Battle/NBackWindow.tscn")
 
 const MAX_MESSAGES = 12 # with wrap, 15 lines max, 10 -11is safe
 # Pick N tiles to get a bonus for consecutive picks
@@ -124,6 +125,11 @@ func _finish_turn():
 	self._action_buttons = []
 	
 	for n in range(self._monster_data["next_round_turns"]):
+		var popup = NBackWindow.instance()
+		self.add_child(popup)
+		popup.popup_centered()
+		yield(popup, "popup_hide")
+		
 		var message = self._action_resolver.monster_attacks(self._monster_data, self.player, $MemoryGrid)
 		self._add_message(message)
 	

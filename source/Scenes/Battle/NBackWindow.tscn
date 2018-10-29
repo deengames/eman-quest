@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://assets/images/gui/arrow.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Battle/NBackWindow.gd" type="Script" id=1]
+[ext_resource path="res://assets/images/gui/arrow.png" type="Texture" id=2]
 
 [node name="WindowDialog" type="WindowDialog" index="0"]
 
@@ -19,50 +20,51 @@ size_flags_vertical = 1
 popup_exclusive = true
 window_title = ""
 resizable = false
+script = ExtResource( 1 )
 _sections_unfolded = [ "Margin", "Popup" ]
 
 [node name="MonsterChoices" type="Node2D" parent="." index="1"]
 
-[node name="Arrow1" type="Sprite" parent="MonsterChoices" index="0"]
+[node name="Target1" type="Sprite" parent="MonsterChoices" index="0"]
 
 position = Vector2( 180, 128 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 _sections_unfolded = [ "Offset", "Transform" ]
 
-[node name="Arrow2" type="Sprite" parent="MonsterChoices" index="1"]
+[node name="Target2" type="Sprite" parent="MonsterChoices" index="1"]
 
 position = Vector2( 260, 128 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 _sections_unfolded = [ "Offset", "Transform" ]
 
-[node name="Arrow3" type="Sprite" parent="MonsterChoices" index="2"]
+[node name="Target3" type="Sprite" parent="MonsterChoices" index="2"]
 
 position = Vector2( 340, 128 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 _sections_unfolded = [ "Offset", "Transform" ]
 
-[node name="Arrow4" type="Sprite" parent="MonsterChoices" index="3"]
+[node name="Target4" type="Sprite" parent="MonsterChoices" index="3"]
 
 position = Vector2( 420, 128 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 _sections_unfolded = [ "Offset", "Transform" ]
 
-[node name="Arrow5" type="Sprite" parent="MonsterChoices" index="4"]
+[node name="Target5" type="Sprite" parent="MonsterChoices" index="4"]
 
 position = Vector2( 500, 128 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 _sections_unfolded = [ "Offset", "Transform" ]
 
-[node name="Arrow6" type="Sprite" parent="MonsterChoices" index="5"]
+[node name="Target6" type="Sprite" parent="MonsterChoices" index="5"]
 
 position = Vector2( 580, 128 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 _sections_unfolded = [ "Offset", "Transform" ]
 
-[node name="Arrow7" type="Sprite" parent="MonsterChoices" index="6"]
+[node name="Target7" type="Sprite" parent="MonsterChoices" index="6"]
 
 position = Vector2( 660, 128 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 _sections_unfolded = [ "Offset", "Transform" ]
 
 
