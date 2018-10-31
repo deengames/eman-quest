@@ -6,7 +6,8 @@ var FEATURE_MAP = {
 	"actions require energy": true,
 	"defend action": false,
 	"equipment generates tiles": true,
-	"sequence battle triggers": true
+	"sequence battle triggers": true,
+	"unlimited battle choices": false
 }
 
 func is_enabled(feature_name):

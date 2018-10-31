@@ -79,3 +79,6 @@ func _on_XButton_pressed():
 
 func _on_SequenceBattleCheckButton_toggled(button_pressed):
 	Features.FEATURE_MAP["sequence battle triggers"] = button_pressed
+
+func _on_UnlimitedBattleChoicesToggle_toggled(button_pressed):
+	Features.FEATURE_MAP["unlimited battle choices"] = button_pressed
