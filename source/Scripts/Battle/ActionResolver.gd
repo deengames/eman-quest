@@ -45,7 +45,7 @@ func resolve(action, player, monster_data, multiplier):
 		elif action == "energy":
 			return "Gained " + str(BattlePlayer.ENERGY_GAIN_PER_ACTION) + " energy!"
 		
-func monster_attacks(monster_data, player, memory_grid):
+func monster_attacks(monster_data, player, boost_amount, memory_grid):
 	
 	var num_turns = Globals.randint(1, 3)
 	for turn in num_turns:
@@ -61,8 +61,11 @@ func monster_attacks(monster_data, player, memory_grid):
 					to_use = skill
 					break
 		
-		var result = self._process_attack(to_use, monster_data, player, memory_grid)
-		var damage = result["damage"]
+		var result = self._process_attack(to_use, monster_data, player, boost_amount, memory_grid)
+		var pre_boost_damage = result["damage"]
+		# Reduce damage by 10% per successful boost
+		var boost_block_percent = max(0, 1 - (0.1 * boost_amount))
+		var damage = floor(pre_boost_damage * boost_block_percent)
 		var message = result["message"]
 		
 		if damage > 0:
@@ -70,7 +73,7 @@ func monster_attacks(monster_data, player, memory_grid):
 			
 		return message
 		
-func _process_attack(action, monster_data, player, memory_grid):
+func _process_attack(action, monster_data, player, boost_amount, memory_grid):
 	var damage = 0
 	var message = ""
 	var monster_name = monster_data["type"]

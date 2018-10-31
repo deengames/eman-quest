@@ -76,7 +76,8 @@ func _user_chooses(choice):
 	
 func _finish():
 	$Controls.visible = false
-	print("Correct: " + str(num_correct) + "/" + str(num_total))
+	self.emit_signal("popup_hide")
+	self.queue_free()
 
 func is_match(target, choice):
 	return target.rotation_degrees == choice.rotation_degrees

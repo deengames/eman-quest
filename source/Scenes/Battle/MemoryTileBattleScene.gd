@@ -128,9 +128,11 @@ func _finish_turn():
 		var popup = NBackWindow.instance()
 		self.add_child(popup)
 		popup.popup_centered()
-		yield(popup, "popup_hide")
 		
-		var message = self._action_resolver.monster_attacks(self._monster_data, self.player, $MemoryGrid)
+		yield(popup, "popup_hide")
+		var boost_amount = popup.num_correct
+		
+		var message = self._action_resolver.monster_attacks(self._monster_data, self.player, boost_amount, $MemoryGrid)
 		self._add_message(message)
 	
 	self._monster_data["next_round_turns"] = self._monster_data["turns"]
