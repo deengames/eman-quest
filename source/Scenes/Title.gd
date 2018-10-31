@@ -68,3 +68,14 @@ func _on_AdvancedBattleButton_pressed():
 
 func _on_LoadGameButton_pressed():
 	var extra_data = SaveManager.load("test", get_tree())
+
+func _on_DebugButton_pressed():
+	$DebugPanel.visible = true
+
+
+func _on_XButton_pressed():
+	$DebugPanel.visible = false
+
+
+func _on_SequenceBattleCheckButton_toggled(button_pressed):
+	Features.FEATURE_MAP["sequence battle triggers"] = button_pressed

@@ -125,12 +125,15 @@ func _finish_turn():
 	self._action_buttons = []
 	
 	for n in range(self._monster_data["next_round_turns"]):
-		var popup = SequenceTriggerPopup.instance()
-		self.add_child(popup)
-		popup.popup_centered()
 		
-		yield(popup, "popup_hide")
-		var boost_amount = popup.num_correct
+		var boost_amount = 0
+		if Features.FEATURE_MAP["sequence battle triggers"] == true:
+			var popup = SequenceTriggerPopup.instance()
+			self.add_child(popup)
+			popup.popup_centered()
+			
+			yield(popup, "popup_hide")
+			boost_amount = popup.num_correct
 		
 		var message = self._action_resolver.monster_attacks(self._monster_data, self.player, boost_amount, $MemoryGrid)
 		self._add_message(message)

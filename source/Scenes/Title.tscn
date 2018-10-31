@@ -171,6 +171,103 @@ flat = false
 align = 1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
+[node name="DebugButton" type="Button" parent="." index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 813.0
+margin_top = 486.0
+margin_right = 933.0
+margin_bottom = 536.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 4 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Debug"
+flat = false
+align = 1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
+
+[node name="DebugPanel" type="Panel" parent="." index="6"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 60.0
+margin_top = 60.0
+margin_right = 900.0
+margin_bottom = 520.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Margin" ]
+
+[node name="XButton" type="Button" parent="DebugPanel" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 808.0
+margin_top = 14.0
+margin_right = 828.0
+margin_bottom = 34.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "X"
+flat = false
+align = 1
+
+[node name="SequenceBattleCheckButton" type="CheckButton" parent="DebugPanel" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 25.0
+margin_top = 21.0
+margin_right = 260.0
+margin_bottom = 61.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = true
+pressed = true
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Sequence battle triggers"
+flat = false
+align = 0
+
 [connection signal="pressed" from="Button" to="." method="_on_newgame_Button_pressed"]
 
 [connection signal="pressed" from="Button2" to="." method="_on_simplebattle_button_pressed"]
@@ -178,5 +275,11 @@ _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 [connection signal="pressed" from="Button3" to="." method="_on_AdvancedBattleButton_pressed"]
 
 [connection signal="pressed" from="LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
+
+[connection signal="pressed" from="DebugButton" to="." method="_on_DebugButton_pressed"]
+
+[connection signal="pressed" from="DebugPanel/XButton" to="." method="_on_XButton_pressed"]
+
+[connection signal="toggled" from="DebugPanel/SequenceBattleCheckButton" to="." method="_on_SequenceBattleCheckButton_toggled"]
 
 
