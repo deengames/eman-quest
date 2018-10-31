@@ -1,7 +1,6 @@
 extends WindowDialog
 
 const _NUM_SYMBOL_CONTROLS = 9
-const _CONTROLS_TO_SHOW = 4 # TODO: adaptive difficulty
 const _TARGET_OPTIONS = [0, 90, 180, 270]
 const _DISPLAY_TIME_SECONDS = 1 # seconds
 const _FINAL_DISPLAY_TIME_EXTRA = 0.5 # seconds
@@ -9,18 +8,20 @@ const _FINAL_DISPLAY_TIME_EXTRA = 0.5 # seconds
 var _correct = []
 var _selected = []
 
+var _controls_to_show = 0
 var num_correct = 0
-var num_total = _CONTROLS_TO_SHOW
+var num_total = _controls_to_show
 
 func _ready():
 	
+	self._controls_to_show = min(Globals.sequence_trigger_difficulty, _NUM_SYMBOL_CONTROLS)
 	$React.visible = false
 	$Controls.visible = false
 	
 	self._hide_all_targets()
 	yield(get_tree().create_timer(1), 'timeout')
 	
-	for i in range(1, _CONTROLS_TO_SHOW + 1):
+	for i in range(1, _controls_to_show + 1):
 		var target = _TARGET_OPTIONS[randi() % len(_TARGET_OPTIONS)]
 		var node = self.get_node("MonsterChoices/Target" + str(i))
 		node.rotation_degrees = target
@@ -75,9 +76,18 @@ func _user_chooses(choice):
 		self._finish()
 	
 func _finish():
+	self._adjust_difficulty()
 	$Controls.visible = false
 	self.emit_signal("popup_hide")
 	self.queue_free()
+
+func _adjust_difficulty():
+	# 100% right? Make it harder
+	if self.num_correct == self._controls_to_show:
+		Globals.sequence_trigger_difficulty += 1
+	# Less than 50% right? Make it easier. Don't drop below 2.
+	elif self.num_correct <= self._controls_to_show / 2 and self._controls_to_show > 2:
+		Globals.sequence_trigger_difficulty -= 1
 
 func is_match(target, choice):
 	return target.rotation_degrees == choice.rotation_degrees
