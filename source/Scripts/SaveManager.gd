@@ -6,6 +6,14 @@ const MapDestination = preload("res://Entities/MapDestination.gd")
 const PlayerData = preload("res://Entities/PlayerData.gd")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
+# When I implemented this, as saves were then, this is what we got:
+# Uncompressed:	7120kb
+# Deflate:		 131kb
+# ZSTD:			 150kb
+# GZIP:			 152kb
+# FastLZ:		 206kb
+const _SAVE_COMPRESSION_MODE = File.COMPRESSION_DEFLATE  
+
 static func save(save_id):
 	var maps = {}
 	for map_type in Globals.maps.keys():
@@ -33,7 +41,8 @@ static func save(save_id):
 	var sequence_difficulty = str(Globals.sequence_trigger_difficulty)
 	
 	var save_game = File.new()
-	save_game.open(_get_path(save_id), File.WRITE)
+	# Use gzip because 2D arrays of ["Grass", "Grass", ...] will compres well
+	save_game.open_compressed(_get_path(save_id), File.WRITE, _SAVE_COMPRESSION_MODE)
 	
 	save_game.store_line(maps)
 	save_game.store_line(player_data)
@@ -53,7 +62,7 @@ static func load(save_id, tree):
 	if not save_game.file_exists(path):
 		return # Error! We don't have a save to load.
 	
-	save_game.open(path, File.READ)
+	save_game.open_compressed(path, File.READ, _SAVE_COMPRESSION_MODE)
 	
 	var maps_data = parse_json(save_game.get_line())
 	var player_data = parse_json(save_game.get_line())
