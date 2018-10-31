@@ -1,6 +1,6 @@
 extends WindowDialog
 
-const _NUM_SYMBOL_CONTROLS = 7
+const _NUM_SYMBOL_CONTROLS = 9
 const _CONTROLS_TO_SHOW = 4 # TODO: adaptive difficulty
 const _TARGET_OPTIONS = [0, 90, 180, 270]
 const _DISPLAY_TIME_SECONDS = 1 # seconds

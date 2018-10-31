@@ -18,7 +18,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 900.0
+margin_right = 930.0
 margin_bottom = 450.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -42,41 +42,53 @@ _sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="Target2" type="Sprite" parent="MonsterChoices" index="1"]
 
-position = Vector2( 140, 118 )
+position = Vector2( 130, 118 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="Target3" type="Sprite" parent="MonsterChoices" index="2"]
 
-position = Vector2( 220, 118 )
+position = Vector2( 200, 118 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="Target4" type="Sprite" parent="MonsterChoices" index="3"]
 
-position = Vector2( 300, 118 )
+position = Vector2( 270, 118 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="Target5" type="Sprite" parent="MonsterChoices" index="4"]
 
-position = Vector2( 380, 118 )
+position = Vector2( 340, 118 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="Target6" type="Sprite" parent="MonsterChoices" index="5"]
 
-position = Vector2( 460, 118 )
+position = Vector2( 410, 118 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="Target7" type="Sprite" parent="MonsterChoices" index="6"]
 
-position = Vector2( 540, 118 )
+position = Vector2( 480, 118 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Offset", "Transform" ]
 
-[node name="Label" type="Label" parent="MonsterChoices" index="7"]
+[node name="Target8" type="Sprite" parent="MonsterChoices" index="7"]
+
+position = Vector2( 550, 118 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Offset", "Transform" ]
+
+[node name="Target9" type="Sprite" parent="MonsterChoices" index="8"]
+
+position = Vector2( 620, 118 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Offset", "Transform" ]
+
+[node name="Label" type="Label" parent="MonsterChoices" index="9"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -100,8 +112,6 @@ max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
 [node name="React" type="Node2D" parent="." index="2"]
-
-editor/display_folded = true
 
 [node name="Label2" type="Label" parent="React" index="0"]
 
@@ -134,37 +144,49 @@ _sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="Picked2" type="Sprite" parent="React" index="2"]
 
-position = Vector2( 140, 298 )
+position = Vector2( 130, 298 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="Picked3" type="Sprite" parent="React" index="3"]
 
-position = Vector2( 220, 298 )
+position = Vector2( 200, 298 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="Picked4" type="Sprite" parent="React" index="4"]
 
-position = Vector2( 300, 298 )
+position = Vector2( 270, 298 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="Picked5" type="Sprite" parent="React" index="5"]
 
-position = Vector2( 380, 298 )
+position = Vector2( 340, 298 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="Picked6" type="Sprite" parent="React" index="6"]
 
-position = Vector2( 460, 298 )
+position = Vector2( 410, 298 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="Picked7" type="Sprite" parent="React" index="7"]
 
-position = Vector2( 540, 298 )
+position = Vector2( 480, 298 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Offset", "Transform" ]
+
+[node name="Picked8" type="Sprite" parent="React" index="8"]
+
+position = Vector2( 550, 298 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Offset", "Transform" ]
+
+[node name="Picked9" type="Sprite" parent="React" index="9"]
+
+position = Vector2( 620, 298 )
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Offset", "Transform" ]
 
@@ -176,8 +198,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 600.0
-margin_right = 900.0
+margin_left = 670.0
+margin_right = 930.0
 margin_bottom = 450.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -193,9 +215,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 655.0
+margin_left = 705.0
 margin_top = 71.0
-margin_right = 869.0
+margin_right = 919.0
 margin_bottom = 115.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -217,9 +239,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 712.0
+margin_left = 762.0
 margin_top = 139.0
-margin_right = 788.0
+margin_right = 838.0
 margin_bottom = 209.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -243,9 +265,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 864.0
+margin_left = 914.0
 margin_top = 219.0
-margin_right = 940.0
+margin_right = 990.0
 margin_bottom = 289.0
 rect_rotation = 90.0
 rect_pivot_offset = Vector2( 0, 0 )
@@ -270,9 +292,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 788.0
+margin_left = 838.0
 margin_top = 376.0
-margin_right = 864.0
+margin_right = 914.0
 margin_bottom = 446.0
 rect_rotation = 180.0
 rect_pivot_offset = Vector2( 0, 0 )
@@ -297,9 +319,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 635.0
+margin_left = 685.0
 margin_top = 287.0
-margin_right = 711.0
+margin_right = 761.0
 margin_bottom = 357.0
 rect_rotation = 270.0
 rect_pivot_offset = Vector2( 0, 0 )
