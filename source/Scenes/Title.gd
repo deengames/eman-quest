@@ -7,7 +7,7 @@ var SceneManagement = preload("res://Scripts/SceneManagement.gd")
 var Slime = preload("res://Entities/Battle/Monster.tscn")
 
 func _ready():
-	pass
+	$DebugPanel.visible = false
 
 func _on_newgame_Button_pressed():
 	get_tree().change_scene("res://Scenes/GenerateWorldScene.tscn")
@@ -79,6 +79,15 @@ func _on_XButton_pressed():
 
 func _on_SequenceBattleCheckButton_toggled(button_pressed):
 	Features.FEATURE_MAP["sequence battle triggers"] = button_pressed
+	if button_pressed:
+			Features.FEATURE_MAP["n-back battle triggers"] = false
+			$DebugPanel/NBackTriggerToggle.pressed = false
+			
+func _on_NBackTriggerToggle_toggled(button_pressed):
+		Features.FEATURE_MAP["n-back battle triggers"] = button_pressed
+		if button_pressed:
+			Features.FEATURE_MAP["sequence battle triggers"] = false
+			$DebugPanel/SequenceBattleToggle.pressed = false
 
 func _on_UnlimitedBattleChoicesToggle_toggled(button_pressed):
 	Features.FEATURE_MAP["unlimited battle choices"] = button_pressed

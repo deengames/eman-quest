@@ -2,6 +2,7 @@ extends Node2D
 
 const ActionButton = preload("res://Scenes/Battle/ActionButton.tscn")
 const BattleResultsWindow = preload("res://Scenes/Battle/BattleResultsWindow.tscn")
+const NBackTriggerPopup = preload("res://Scenes/Battle/NBackTriggerPopup.tscn")
 const SequenceTriggerPopup = preload("res://Scenes/Battle/SequenceTriggerPopup.tscn")
 
 const MAX_MESSAGES = 12 # with wrap, 15 lines max, 10 -11is safe
@@ -127,14 +128,20 @@ func _finish_turn():
 	for n in range(self._monster_data["next_round_turns"]):
 		
 		var boost_amount = 0
-		if Features.FEATURE_MAP["sequence battle triggers"] == true:
-			var popup = SequenceTriggerPopup.instance()
+		if Features.FEATURE_MAP["sequence battle triggers"] == true or Features.FEATURE_MAP["n-back battle triggers"] == true:
+			var popup = null
+			
+			if Features.FEATURE_MAP["sequence battle triggers"] == true:
+				popup = SequenceTriggerPopup.instance()
+			elif Features.FEATURE_MAP["n-back battle triggers"] == true:
+				popup = NBackTriggerPopup.instance()
+				
 			self.add_child(popup)
 			popup.popup_centered()
 			
 			yield(popup, "popup_hide")
 			boost_amount = popup.num_correct
-		
+			
 		var message = self._action_resolver.monster_attacks(self._monster_data, self.player, boost_amount, $MemoryGrid)
 		self._add_message(message)
 	

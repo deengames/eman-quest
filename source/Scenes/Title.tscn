@@ -43,7 +43,7 @@ use_filter = false
 font_data = ExtResource( 2 )
 _sections_unfolded = [ "Font", "Font/fallback", "Settings" ]
 
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -208,7 +208,6 @@ _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
 [node name="DebugPanel" type="Panel" parent="." index="6"]
 
-visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -269,7 +268,6 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 custom_fonts/font = SubResource( 5 )
 toggle_mode = true
-pressed = true
 enabled_focus_mode = 2
 shortcut = null
 group = null
@@ -278,7 +276,7 @@ flat = false
 align = 0
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="UnlimitedBattleChoicesToggle" type="CheckButton" parent="DebugPanel" index="2"]
+[node name="NBackTriggerToggle" type="CheckButton" parent="DebugPanel" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -288,6 +286,34 @@ margin_left = 25.0
 margin_top = 81.0
 margin_right = 571.0
 margin_bottom = 133.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 5 )
+toggle_mode = true
+pressed = true
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "N-Back battle triggers"
+flat = false
+align = 0
+_sections_unfolded = [ "custom_fonts" ]
+
+[node name="UnlimitedBattleChoicesToggle" type="CheckButton" parent="DebugPanel" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 25.0
+margin_top = 141.0
+margin_right = 571.0
+margin_bottom = 193.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -318,6 +344,8 @@ _sections_unfolded = [ "custom_fonts" ]
 [connection signal="pressed" from="DebugPanel/XButton" to="." method="_on_XButton_pressed"]
 
 [connection signal="toggled" from="DebugPanel/SequenceBattleToggle" to="." method="_on_SequenceBattleCheckButton_toggled"]
+
+[connection signal="toggled" from="DebugPanel/NBackTriggerToggle" to="." method="_on_NBackTriggerToggle_toggled"]
 
 [connection signal="toggled" from="DebugPanel/UnlimitedBattleChoicesToggle" to="." method="_on_UnlimitedBattleChoicesToggle_toggled"]
 

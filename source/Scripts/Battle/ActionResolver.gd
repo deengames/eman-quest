@@ -66,7 +66,7 @@ func monster_attacks(monster_data, player, boost_amount, memory_grid):
 		# Reduce damage by 10% per successful boost
 		var boost_block_percent = max(0, 1 - (0.1 * boost_amount))
 		var damage = floor(pre_boost_damage * boost_block_percent)
-		var message = result["message"]
+		var message = result["message"] + str(damage) + " damage!"
 		
 		if damage > 0:
 			player.damage(damage)
@@ -80,23 +80,23 @@ func _process_attack(action, monster_data, player, boost_amount, memory_grid):
 	
 	if action == "attack":
 		damage = max(0, monster_data["strength"] - player.total_defense())
-		message = monster_name + " attacks for " + str(damage) + " damage!"
+		message = monster_name + " attacks for "
 		return { "damage": damage, "message": message }
 	elif action == "chomp":
 		damage = max(0, (2 * monster_data["strength"]) - player.total_defense())
-		message = monster_name + " CHOMPS! " + str(damage) + " damage!"
+		message = monster_name + " CHOMPS! "
 	elif action == "shock":
 		damage = monster_data["strength"] # pierces defense
-		message = monster_name + " shocks you for " + str(damage) + " damage!"
+		message = monster_name + " shocks you for "
 		memory_grid.shock(SHOCK_TURNS)
 	elif action == "freeze":
 		# Shock, but a few tiles only
 		damage = monster_data["strength"] # pierces defense
-		message = monster_name + " freezes you! " + str(damage) + " damage!"
+		message = monster_name + " freezes you! "
 		memory_grid.freeze(SHOCK_TURNS, 5)
 	elif action == "vampire":
 		damage = floor(monster_data["strength"] * 1.5)
-		message = monster_name + " hits/absorbs " + str(damage) + " HP!"
+		message = monster_name + " hits/absorbs "
 		monster_data["health"] += damage
 	
 	return { "damage": damage, "message": message }
