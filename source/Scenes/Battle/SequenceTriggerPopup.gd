@@ -71,6 +71,7 @@ func _user_chooses(choice):
 	
 	if is_match(target_node, react_control):
 		num_correct += 1
+		$CorrectLabel.text = "Correct: " + str(num_correct)
 	
 	if len(_correct) == len(_selected):
 		self._finish()
@@ -78,8 +79,6 @@ func _user_chooses(choice):
 func _finish():
 	self._adjust_difficulty()
 	$Controls.visible = false
-	self.emit_signal("popup_hide")
-	self.queue_free()
 
 func _adjust_difficulty():
 	# 100% right? Make it harder

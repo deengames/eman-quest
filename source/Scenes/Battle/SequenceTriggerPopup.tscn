@@ -34,6 +34,8 @@ _sections_unfolded = [ "Margin", "Popup" ]
 
 [node name="MonsterChoices" type="Node2D" parent="." index="1"]
 
+editor/display_folded = true
+
 [node name="Target1" type="Sprite" parent="MonsterChoices" index="0"]
 
 position = Vector2( 60, 118 )
@@ -113,6 +115,8 @@ _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
 [node name="React" type="Node2D" parent="." index="2"]
 
+editor/display_folded = true
+
 [node name="Label2" type="Label" parent="React" index="0"]
 
 anchor_left = 0.0
@@ -191,6 +195,8 @@ texture = ExtResource( 2 )
 _sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="Controls" type="Node2D" parent="." index="3"]
+
+editor/display_folded = true
 
 [node name="Panel" type="Panel" parent="Controls" index="0"]
 
@@ -339,6 +345,30 @@ icon = ExtResource( 2 )
 flat = false
 align = 1
 _sections_unfolded = [ "Offset", "Rect", "Transform" ]
+
+[node name="CorrectLabel" type="Label" parent="." index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 248.0
+margin_top = 362.0
+margin_right = 462.0
+margin_bottom = 406.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 1 )
+text = "Correct: 0"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
 [connection signal="pressed" from="Controls/Up" to="." method="_on_Up_pressed"]
 
