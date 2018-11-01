@@ -128,28 +128,30 @@ func _finish_turn():
 		
 	self._action_buttons = []
 	
-	for n in range(self._monster_data["next_round_turns"]):
+	if self._monster_data["health"] > 0:
 		
-		var boost_amount = 0
-		if Features.FEATURE_MAP["sequence battle triggers"] == true or Features.FEATURE_MAP["n-back battle triggers"] == true:
-			var popup = null
+		for n in range(self._monster_data["next_round_turns"]):
 			
-			if Features.FEATURE_MAP["sequence battle triggers"] == true:
-				popup = SequenceTriggerPopup.instance()
-			elif Features.FEATURE_MAP["n-back battle triggers"] == true:
-				popup = NBackTriggerPopup.instance()
+			var boost_amount = 0
+			if Features.FEATURE_MAP["sequence battle triggers"] == true or Features.FEATURE_MAP["n-back battle triggers"] == true:
+				var popup = null
 				
-			self.add_child(popup)
-			popup.popup_centered()
-			
-			yield(popup, "popup_hide")
-			boost_amount = popup.num_correct
-			
-		var message = self._action_resolver.monster_attacks(self._monster_data, self.player, boost_amount, $MemoryGrid)
-		self._add_message(message)
-	
-	self._monster_data["next_round_turns"] = self._monster_data["turns"]
-	
+				if Features.FEATURE_MAP["sequence battle triggers"] == true:
+					popup = SequenceTriggerPopup.instance()
+				elif Features.FEATURE_MAP["n-back battle triggers"] == true:
+					popup = NBackTriggerPopup.instance()
+					
+				self.add_child(popup)
+				popup.popup_centered()
+				
+				yield(popup, "popup_hide")
+				boost_amount = popup.num_correct
+				
+			var message = self._action_resolver.monster_attacks(self._monster_data, self.player, boost_amount, $MemoryGrid)
+			self._add_message(message)
+		
+		self._monster_data["next_round_turns"] = self._monster_data["turns"]
+		
 	if self.player.current_health <= 0:
 		self._add_message("Hero dies!")
 		self._show_battle_end(false)
