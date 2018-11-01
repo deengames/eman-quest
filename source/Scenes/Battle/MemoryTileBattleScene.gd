@@ -2,6 +2,7 @@ extends Node2D
 
 const ActionButton = preload("res://Scenes/Battle/ActionButton.tscn")
 const BattleResultsWindow = preload("res://Scenes/Battle/BattleResultsWindow.tscn")
+const MonsterScaler = preload("res://Scripts/Battle/MonsterScaler.gd")
 const NBackTriggerPopup = preload("res://Scenes/Battle/NBackTriggerPopup.tscn")
 const SequenceTriggerPopup = preload("res://Scenes/Battle/SequenceTriggerPopup.tscn")
 
@@ -42,8 +43,10 @@ func _ready():
 	self._update_health_displays()
 
 func set_monster_data(data):
+	MonsterScaler.scale_monster_data(data)
+	data["next_round_turns"] = data["turns"]
 	self._monster_data = data
-	self._monster_data["next_round_turns"] = data["turns"]
+	
 
 func go_turbo():
 	# Advanced mode ENABLED.
