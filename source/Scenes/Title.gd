@@ -2,7 +2,6 @@ extends Node2D
 
 var BattlePlayer = preload("res://Entities/Battle/BattlePlayer.gd")
 var MemoryTileBattleScene = preload("res://Scenes/Battle/MemoryTileBattleScene.tscn")
-var SaveManager = preload("res://Scripts/SaveManager.gd")
 var SceneManagement = preload("res://Scripts/SceneManagement.gd")
 var Slime = preload("res://Entities/Battle/Monster.tscn")
 
@@ -67,7 +66,7 @@ func _on_AdvancedBattleButton_pressed():
 
 
 func _on_LoadGameButton_pressed():
-	var extra_data = SaveManager.load("test", get_tree())
+	get_tree().change_scene("res://Scenes/LoadingScene.tscn")
 
 func _on_DebugButton_pressed():
 	$DebugPanel.visible = true
