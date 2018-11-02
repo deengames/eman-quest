@@ -17,7 +17,7 @@ extends Node
 # Note the "shape" (high health, moderate attack, crap defense) stays the same.
 ###
 
-const _GROWTH_PERCENT_PER_LEVEL = 0.2 # 0.2 = 20%
+const _GROWTH_PERCENT_PER_LEVEL = 0.1 # 0.2 = 20%
 
 static func scale_monster_data(monster_data):
 	var level_scale = Globals.player_data.level - 1 # no growth at level 1
@@ -36,4 +36,5 @@ static func scale_monster_data(monster_data):
 	monster_data["defense"] = floor(base_defense * (total_points / base_points))
 	
 	var base_exp = monster_data["experience points"]
-	monster_data["experience points"] = base_exp + floor(_GROWTH_PERCENT_PER_LEVEL * level_scale * base_exp)
+	var total_exp = base_exp + floor(_GROWTH_PERCENT_PER_LEVEL * level_scale * base_exp)
+	monster_data["experience points"] = total_exp
