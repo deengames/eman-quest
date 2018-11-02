@@ -30,10 +30,10 @@ static func scale_monster_data(monster_data):
 	var num_levels = level_scale
 	var total_points = base_points + (points_per_level * num_levels)
 	
-	# TODO: round elsewhere, like damage calculations
-	monster_data["health"] = floor((base_health / base_points) * total_points)
-	monster_data["strength"] = floor((base_strength / base_points) * total_points)
-	monster_data["defense"] = floor((base_defense / base_points) * total_points)
+	# TODO: keep precision here and round elsewhere, like damage calculations
+	monster_data["health"] = floor(base_health * (total_points / base_points))
+	monster_data["strength"] = floor(base_strength * (total_points / base_points))
+	monster_data["defense"] = floor(base_defense * (total_points / base_points))
 	
 	var base_exp = monster_data["experience points"]
 	monster_data["experience points"] = base_exp + floor(_GROWTH_PERCENT_PER_LEVEL * level_scale * base_exp)
