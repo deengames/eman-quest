@@ -24,8 +24,8 @@ const MONSTER_VARIANT_DATA = {
 			"type": "Vampire Bat",
 			"weight": 30,
 			"health": 40,
-			"strength": 8,
-			"defense": 2,
+			"strength": 25,
+			"defense": 5,
 			"turns": 1,
 			"experience points": 15,
 			
