@@ -8,9 +8,9 @@ const MONSTER_VARIANT_DATA = {
 		"Gold Slime": {
 			"type": "Gold Slime",
 			"weight": 70,
-			"health": 35,
-			"strength": 10,
-			"defense": 5,
+			"health": 40,
+			"strength": 20,
+			"defense": 10,
 			"turns": 1,
 			"experience points": 10,
 			
@@ -70,7 +70,7 @@ const MONSTER_VARIANT_DATA = {
 }
 
 # Number per screen. Forest is 3-4 guaranteed screens.
-const NUM_MONSTERS = [5, 10]
+const NUM_MONSTERS = [20, 40]
 
 func generate_monsters(forest_map):
 	var variation = forest_map.variation
