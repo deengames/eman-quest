@@ -76,3 +76,9 @@ func _on_Area2D_body_exited(body):
 func _process(delta):
 	if not self.is_opened and self._player_is_in_range and Input.is_key_pressed(KEY_SPACE):
 		self.open()
+
+func _on_Area2D_input_event(viewport, event, shape_idx):
+	if (not self.is_opened and self._player_is_in_range and 
+	(event is InputEventMouseButton and event.pressed) or
+	(OS.has_feature("Android") and event is InputEventMouseMotion)):
+		self.open()

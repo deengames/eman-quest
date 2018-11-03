@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 40, 40 )
 
-[node name="Sprite" type="Sprite"]
+[node name="Sprite" type="Sprite" index="0"]
 
 texture = ExtResource( 1 )
 centered = false
@@ -37,5 +37,7 @@ _sections_unfolded = [ "Transform" ]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
+
+[connection signal="input_event" from="Area2D" to="." method="_on_Area2D_input_event"]
 
 

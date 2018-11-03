@@ -84,7 +84,7 @@ tracks/0/keys = {
 "values": [ Rect2( 0, 250, 64, 125 ), Rect2( 64, 250, 64, 125 ), Rect2( 128, 250, 64, 125 ), Rect2( 192, 250, 64, 125 ) ]
 }
 
-[node name="KinematicBody2D" type="KinematicBody2D" index="0"]
+[node name="KinematicBody2D" type="KinematicBody2D"]
 
 input_pickable = false
 collision_layer = 1
@@ -154,6 +154,8 @@ playback_speed = 1.0
 "anims/Walk Right" = SubResource( 4 )
 "anims/Walk Up" = SubResource( 5 )
 blend_times = [  ]
+
+[connection signal="cancel_destination" from="MoveToKeyboardComponent" to="." method="_on_cancel_destination"]
 
 [connection signal="facing_new_direction" from="MoveToKeyboardComponent" to="." method="_on_facing_new_direction"]
 
