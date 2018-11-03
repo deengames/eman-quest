@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Entities/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/protagonist.png" type="Texture" id=2]
 [ext_resource path="res://Components/MoveToKeyboard.gd" type="Script" id=3]
+[ext_resource path="res://Components/MoveToClick.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -83,7 +84,7 @@ tracks/0/keys = {
 "values": [ Rect2( 0, 250, 64, 125 ), Rect2( 64, 250, 64, 125 ), Rect2( 128, 250, 64, 125 ), Rect2( 192, 250, 64, 125 ) ]
 }
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[node name="KinematicBody2D" type="KinematicBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 1
@@ -136,7 +137,12 @@ _sections_unfolded = [ "Transform", "Z Index" ]
 script = ExtResource( 3 )
 speed = 200
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+[node name="MoveToClick" type="Node2D" parent="." index="4"]
+
+script = ExtResource( 4 )
+speed = 200
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
 
 root_node = NodePath("..")
 autoplay = ""
@@ -152,5 +158,9 @@ blend_times = [  ]
 [connection signal="facing_new_direction" from="MoveToKeyboardComponent" to="." method="_on_facing_new_direction"]
 
 [connection signal="reached_destination" from="MoveToKeyboardComponent" to="." method="_on_reached_destination"]
+
+[connection signal="facing_new_direction" from="MoveToClick" to="." method="_on_facing_new_direction"]
+
+[connection signal="reached_destination" from="MoveToClick" to="." method="_on_reached_destination"]
 
 

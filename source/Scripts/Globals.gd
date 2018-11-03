@@ -9,6 +9,8 @@ const SUBMAP_HEIGHT_IN_TILES = 51
 const WORLD_WIDTH_IN_TILES = 30 # 1920/64
 const WORLD_HEIGHT_IN_TILES = 17 # 1080/64
 
+signal clicked_on_map(position)
+
 var player # current player instance. Used for collision detection mostly.
 
 ####

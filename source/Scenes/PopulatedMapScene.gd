@@ -12,6 +12,8 @@ const Player = preload("res://Entities/Player.tscn")
 const TreasureChest = preload("res://Entities/TreasureChest.tscn")
 const TilesetMapper = preload("res://Scripts/TilesetMapper.gd")
 
+signal clicked_on_map(position)
+
 var map # area map
 var _monsters = {} # Type => pixel coordinates of actual monster scenes/entities
 var _bosses = {} # Type => pixel coordinates of actual boss scenes/entities
@@ -186,3 +188,10 @@ func _load_tileset_or_auto_tileset(tileset_path):
 		return tileset
 	else:
 		return load(tileset_path)
+
+# https://docs.godotengine.org/en/3.0/tutorials/inputs/inputevent.html#how-does-it-work
+# Fires if nothing else handled the event, it seems.
+func _unhandled_input(event):
+	if (event is InputEventMouseButton and event.pressed) or (OS.has_feature("Android") and event is InputEventMouseMotion):
+		var position = get_global_mouse_position()
+		Globals.emit_signal("clicked_on_map", position)
