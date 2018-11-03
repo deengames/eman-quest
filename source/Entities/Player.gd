@@ -29,3 +29,6 @@ func _on_facing_new_direction(new_direction):
 
 func _on_reached_destination():
 	$AnimationPlayer.stop()
+
+func _on_cancel_destination():
+	$MoveToClick.cancel_destination()
