@@ -69,8 +69,9 @@ const MONSTER_VARIANT_DATA = {
 	}
 }
 
-# Number per screen. Forest is 3-4 guaranteed screens.
-const NUM_MONSTERS = [20, 40]
+# Number per screen. Any more than this, and we won't be able to find empty spots
+# in which to drop monsters so they're not close to any other adjacent monsters.
+const NUM_MONSTERS = [15, 25]
 
 func generate_monsters(forest_map):
 	var variation = forest_map.variation
@@ -89,19 +90,19 @@ func generate_monsters(forest_map):
 			weighted_monsters_array.append(type)
 	
 	var num_monsters = Globals.randint(NUM_MONSTERS[0], NUM_MONSTERS[1])
-	
+	print('n='+str(num_monsters))
 	var occupied_spots = []
 	for t in forest_map.transitions:
 		occupied_spots.append([t.my_position[0], t.my_position[1]])
 	
 	for n in num_monsters:
-		var coordinates = SpotFinder.find_empty_spot(forest_map.tiles_wide,
+		var coordinates = SpotFinder.find_empty_isolated_spot(forest_map.tiles_wide,
 			forest_map.tiles_high, forest_map.tile_data[1], occupied_spots)
 			
 		var pixel_coordinates = [coordinates[0] * Globals.TILE_WIDTH, coordinates[1] * Globals.TILE_HEIGHT]
 		var monster = Monster.new()
 		monster.initialize(pixel_coordinates[0], pixel_coordinates[1])
-		occupied_spots.append(pixel_coordinates)
+		occupied_spots.append(coordinates)
 		
 		var type = weighted_monsters_array[randi() % len(weighted_monsters_array)]
 		monster.data = monsters_data[type]

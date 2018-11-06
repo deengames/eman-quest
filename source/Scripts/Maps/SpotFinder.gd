@@ -1,10 +1,11 @@
 extends Node
 
-const PADDING_FROM_MAP_EDGES = 5
+const _PADDING_FROM_MAP_EDGES = 5
+const _ISOLATION_DISTANCE_TILES = 10 # n-tile radius
 
 static func find_empty_spot(map_width, map_height, object_map, occupied_spots):
-	var x = Globals.randint(PADDING_FROM_MAP_EDGES, map_width - PADDING_FROM_MAP_EDGES - 1)
-	var y = Globals.randint(PADDING_FROM_MAP_EDGES, map_height - PADDING_FROM_MAP_EDGES - 1)
+	var x = Globals.randint(_PADDING_FROM_MAP_EDGES, map_width - _PADDING_FROM_MAP_EDGES - 1)
+	var y = Globals.randint(_PADDING_FROM_MAP_EDGES, map_height - _PADDING_FROM_MAP_EDGES - 1)
 	
 	###### TODO: work for other types of tiles/maps. Maybe parametrize bush/tree values?
 	while (object_map.get(x, y) == "Bush" or
@@ -19,3 +20,20 @@ static func find_empty_spot(map_width, map_height, object_map, occupied_spots):
 			y = Globals.randint(0, map_height - 1)
 	
 	return [x, y]
+
+static func find_empty_isolated_spot(map_width, map_height, object_map, occupied_spots):
+	var candidate = null
+	var iterations = 0
+	
+	while true: # returns on success
+		candidate = find_empty_spot(map_width, map_height, object_map, occupied_spots)
+		var found_spot = true
+		
+		for item in occupied_spots:
+			var distance = sqrt(pow(item[0] - candidate[0], 2) + pow(item[1] - candidate[1], 2))
+			if distance < _ISOLATION_DISTANCE_TILES:
+				found_spot = false
+				break
+		
+		if found_spot:
+			return candidate
