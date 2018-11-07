@@ -12,6 +12,10 @@ const Player = preload("res://Entities/Player.tscn")
 const TreasureChest = preload("res://Entities/TreasureChest.tscn")
 const TilesetMapper = preload("res://Scripts/TilesetMapper.gd")
 
+const _GENERATORS = {
+	"Forest": preload("res://Scripts/Generators/ForestMonsterGenerator.gd")
+}
+
 signal clicked_on_map(position)
 
 var map # area map
@@ -108,7 +112,6 @@ func _add_transitions(tilemap, tile_ids):
 
 func _add_monsters():
 	var monster_data = {}
-	
 	# We came back to this map after battle. Restore monster state.
 	if self._restoring_state:
 		# Usual array of monster_type => list of pixel coordianates.
@@ -129,14 +132,14 @@ func _add_monsters():
 		# We loaded a save game. Load those exact same monsters.
 		monster_data = self.map.monsters
 	else:
-		var generator_path = "res://Scripts/Generators/" + self.map.map_type + "MonsterGenerator.gd"
-		if File.new().file_exists(generator_path):
-			var type = load(generator_path)
+		var generator_type = self.map.map_type
+		if generator_type in self._GENERATORS:
+			var type = self._GENERATORS[generator_type]
 			var generator = type.new()
 			monster_data = generator.generate_monsters(self.map)
 		else:
 			monster_data = {}
-	
+
 	self._monsters = {}
 	self._bosses = {}
 	
