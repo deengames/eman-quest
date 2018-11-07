@@ -125,7 +125,8 @@ func _is_area_around_tile_valid_and_empty(tile_data, placed_areas, x, y):
 		_is_tile_valid_and_empty(tile_data, placed_areas, x, y))
 
 func _is_tile_valid_and_empty(tile_data, placed_areas, x, y):
+	var coordinates = Vector2(x, y)
 	# Don't be on the border of the map
 	var is_on_map = x > 0 and x < map_width - 1 and y > 0 and y < map_height - 1
-	var is_empty = tile_data.get(x, y) == "Grass" and placed_areas.find([x, y]) == -1
+	var is_empty = tile_data.get(x, y) == "Grass" and placed_areas.find(coordinates) == -1
 	return  is_on_map and is_empty
