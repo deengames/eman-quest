@@ -43,7 +43,7 @@ use_filter = false
 font_data = ExtResource( 2 )
 _sections_unfolded = [ "Font", "Font/fallback", "Settings" ]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -331,6 +331,33 @@ flat = false
 align = 0
 _sections_unfolded = [ "custom_fonts" ]
 
+[node name="ZoomOutToggle" type="CheckButton" parent="DebugPanel" index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 25.0
+margin_top = 201.0
+margin_right = 571.0
+margin_bottom = 253.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 5 )
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Zoom-out maps"
+flat = false
+align = 0
+_sections_unfolded = [ "custom_fonts" ]
+
 [connection signal="pressed" from="Button" to="." method="_on_newgame_Button_pressed"]
 
 [connection signal="pressed" from="Button2" to="." method="_on_simplebattle_button_pressed"]
@@ -348,5 +375,7 @@ _sections_unfolded = [ "custom_fonts" ]
 [connection signal="toggled" from="DebugPanel/NBackTriggerToggle" to="." method="_on_NBackTriggerToggle_toggled"]
 
 [connection signal="toggled" from="DebugPanel/UnlimitedBattleChoicesToggle" to="." method="_on_UnlimitedBattleChoicesToggle_toggled"]
+
+[connection signal="toggled" from="DebugPanel/ZoomOutToggle" to="." method="_on_ZoomOutToggle_toggled"]
 
 

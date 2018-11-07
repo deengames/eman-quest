@@ -118,7 +118,7 @@ func _on_tile_selected(tile):
 		self._tiles_picked.append(tile.contents)
 		# If this feature is off, we check if you picked "enough" choices. If on,
 		# ignore this (turn ends when you pick a wrong choice).
-		if not Features.FEATURE_MAP["unlimited battle choices"] and len(self._tiles_picked) == _max_pickable_tiles:
+		if not Features.is_enabled("unlimited battle choices") and len(self._tiles_picked) == _max_pickable_tiles:
 			self._picked_all_tiles()
 	else:
 		self._picked_all_tiles()

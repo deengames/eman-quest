@@ -133,12 +133,12 @@ func _finish_turn():
 		for n in range(self._monster_data["next_round_turns"]):
 			
 			var boost_amount = 0
-			if Features.FEATURE_MAP["sequence battle triggers"] == true or Features.FEATURE_MAP["n-back battle triggers"] == true:
+			if Features.is_enabled("sequence battle triggers") or Features.is_enabled("n-back battle triggers"):
 				var popup = null
 				
-				if Features.FEATURE_MAP["sequence battle triggers"] == true:
+				if Features.is_enabled("sequence battle triggers"):
 					popup = SequenceTriggerPopup.instance()
-				elif Features.FEATURE_MAP["n-back battle triggers"] == true:
+				elif Features.is_enabled("n-back battle triggers"):
 					popup = NBackTriggerPopup.instance()
 					
 				self.add_child(popup)

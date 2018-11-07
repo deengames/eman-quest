@@ -8,6 +8,8 @@ func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	Globals.player = self
+	if Features.is_enabled("zoom-out maps"):
+		$Camera2D.zoom = Vector2(4, 4)
 
 func temporarily_no_battles():
 	self._cant_fight_from = OS.get_ticks_msec()

@@ -77,16 +77,19 @@ func _on_XButton_pressed():
 
 
 func _on_SequenceBattleCheckButton_toggled(button_pressed):
-	Features.FEATURE_MAP["sequence battle triggers"] = button_pressed
+	Features.set("sequence battle triggers", button_pressed)
 	if button_pressed:
-			Features.FEATURE_MAP["n-back battle triggers"] = false
+			Features.set("n-back battle triggers", false)
 			$DebugPanel/NBackTriggerToggle.pressed = false
 			
 func _on_NBackTriggerToggle_toggled(button_pressed):
-		Features.FEATURE_MAP["n-back battle triggers"] = button_pressed
+		Features.set("n-back battle triggers", button_pressed)
 		if button_pressed:
-			Features.FEATURE_MAP["sequence battle triggers"] = false
+			Features.set("sequence battle triggers", false)
 			$DebugPanel/SequenceBattleToggle.pressed = false
 
 func _on_UnlimitedBattleChoicesToggle_toggled(button_pressed):
-	Features.FEATURE_MAP["unlimited battle choices"] = button_pressed
+	Features.set("unlimited battle choices", button_pressed)
+
+func _on_ZoomOutToggle_toggled(button_pressed):
+	Features.set("zoom-out maps", button_pressed)

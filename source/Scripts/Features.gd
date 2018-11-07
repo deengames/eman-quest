@@ -1,15 +1,21 @@
 extends Node
 
-# TODO: back to const when done testing battle variations
-var FEATURE_MAP = {
+var _feature_map = {
 	"consecutive picks battle bonus": true,
 	"actions require energy": true,
 	"defend action": false,
 	"equipment generates tiles": true,
 	"sequence battle triggers": false,
 	"n-back battle triggers": true,
-	"unlimited battle choices": false
+	"unlimited battle choices": false,
+	"zoom-out maps": true
 }
 
+func set(feature, enabled):
+	if feature in self._feature_map:
+		_feature_map[feature] = enabled
+	else:
+		print("Trying to set feature " + feature + " which doesn't exist!")
+		
 func is_enabled(feature_name):
-	return feature_name in FEATURE_MAP.keys() and FEATURE_MAP[feature_name] == true
+	return feature_name in self._feature_map.keys() and self._feature_map[feature_name] == true
