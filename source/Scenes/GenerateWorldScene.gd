@@ -81,7 +81,8 @@ func _generate_transitions(submap, map_width, map_height):
 	
 	if submap.area_type == AreaType.ENTRANCE:
 		var position = Vector2(0, 0)
-		# Used to, erm, draw light on the entrance tile back to the world, in caves.
+		
+		# Caves use this to paint the tile with the correct light-showing tile
 		var direction_back = null
 		
 		###
@@ -92,22 +93,30 @@ func _generate_transitions(submap, map_width, map_height):
 			position.y = floor(map_height / 2)
 			position.x = 0
 			direction_back = "left"
+			
+			# Offset y by 1 to correctly enter on the right position
+			entrance_from_overworld = Vector2(1, position.y - 1)
+			
 			if submap.connections.has("left"):
 				# Left side is already taken, generate entrance on RHS
 				position.x = map_width - 1
 				direction_back = "right"
+				entrance_from_overworld = Vector2(position.x - 1, position.y - 1)
 				
 		elif submap.connections.has("up") or submap.connections.has("down"):
 			position.x = floor(map_width / 2)
 			position.y = 0
 			direction_back = "up"
+			entrance_from_overworld = Vector2(position.x, 1)
+			
 			if submap.connections.has("up"):
 				# Top side is already taken, generate entrance on RHS
 				position.y = map_height - 1
 				direction_back = "down"
-		
+				entrance_from_overworld = Vector2(position.x, position.y - 1)
+				
+			entrance_from_overworld = Vector2(position.x, position.y)
 		transitions.append(MapDestination.new(position, "Overworld", null, direction_back))
-		entrance_from_overworld = position
 	
 	for direction in submap.connections.keys():
 		var destination = submap.connections[direction]
