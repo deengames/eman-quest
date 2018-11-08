@@ -9,6 +9,7 @@ var _current = 'up'
 var _previously_seen = [] # limited to _NUM_PREVIOUS items
 
 func _ready():
+	self.popup_exclusive = true
 	self._pick_another_item()
 
 func _pick_another_item():

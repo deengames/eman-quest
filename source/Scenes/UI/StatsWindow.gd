@@ -1,6 +1,7 @@
 extends WindowDialog
 
 func _ready():
+	self.popup_exclusive = true
 	self._update_stats_display()
 	
 	$Stats/Labels/LevelLabel.text = "Level: " + str(Globals.player_data.level)

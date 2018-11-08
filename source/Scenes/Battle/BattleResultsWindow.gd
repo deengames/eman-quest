@@ -3,6 +3,7 @@ extends WindowDialog
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 func _ready():
+	self.popup_exclusive = true
 	if not Globals.won_battle:
 		$ResultBanner.text = "Defeat!"
 		$ExpGainBanner.visible = false

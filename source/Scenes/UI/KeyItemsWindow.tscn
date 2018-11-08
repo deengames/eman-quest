@@ -59,7 +59,7 @@ flags = 4
 gradient = SubResource( 4 )
 width = 64
 
-[node name="WindowDialog" type="WindowDialog" index="0"]
+[node name="WindowDialog" type="WindowDialog"]
 
 anchor_left = 0.0
 anchor_top = 0.0

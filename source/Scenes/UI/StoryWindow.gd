@@ -4,6 +4,9 @@ const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 var _on_close_callback = null
 
+func _ready():
+	self.popup_exclusive = true
+	
 func show_intro_story():
 	self.window_title = "A New Adventure Begins!"
 	var village_name = Globals.story_data["village_name"]

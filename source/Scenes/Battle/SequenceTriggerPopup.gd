@@ -13,7 +13,7 @@ var num_correct = 0
 var num_total = _controls_to_show
 
 func _ready():
-	
+	self.popup_exclusive = true
 	self._controls_to_show = min(Globals.sequence_trigger_difficulty, _NUM_SYMBOL_CONTROLS)
 	$React.visible = false
 	$Controls.visible = false
