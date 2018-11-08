@@ -71,7 +71,7 @@ const MONSTER_VARIANT_DATA = {
 
 # Number per screen. Any more than this, and we won't be able to find empty spots
 # in which to drop monsters so they're not close to any other adjacent monsters.
-const NUM_MONSTERS = [15, 25]
+const NUM_MONSTERS = [15, 22]
 
 func generate_monsters(forest_map):
 	var variation = forest_map.variation
