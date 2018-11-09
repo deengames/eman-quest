@@ -69,9 +69,8 @@ const MONSTER_VARIANT_DATA = {
 	}
 }
 
-# Number per screen. Any more than this, and we won't be able to find empty spots
-# in which to drop monsters so they're not close to any other adjacent monsters.
-const NUM_MONSTERS = [15, 22]
+const NUM_MONSTERS = [20, 25] # May not get this much if we can't find empty spots
+const _MAX_EMPTY_SPOT_CHECKS = 1000 # Try 1000 times to find an empty spot. Don't freeze, move on.
 
 func generate_monsters(forest_map):
 	var variation = forest_map.variation
@@ -97,16 +96,17 @@ func generate_monsters(forest_map):
 	
 	for n in num_monsters:
 		var coordinates = SpotFinder.find_empty_isolated_spot(forest_map.tiles_wide,
-			forest_map.tiles_high, forest_map.tile_data[1], occupied_spots)
-			
-		var pixel_coordinates = [coordinates[0] * Globals.TILE_WIDTH, coordinates[1] * Globals.TILE_HEIGHT]
-		var monster = Monster.new()
-		monster.initialize(pixel_coordinates[0], pixel_coordinates[1])
-		occupied_spots.append(coordinates)
+			forest_map.tiles_high, forest_map.tile_data[1], occupied_spots, _MAX_EMPTY_SPOT_CHECKS)
 		
-		var type = weighted_monsters_array[randi() % len(weighted_monsters_array)]
-		monster.data = monsters_data[type]
-		monsters[type].append(monster)
+		if coordinates != null: # found a spot?
+			var pixel_coordinates = [coordinates[0] * Globals.TILE_WIDTH, coordinates[1] * Globals.TILE_HEIGHT]
+			var monster = Monster.new()
+			monster.initialize(pixel_coordinates[0], pixel_coordinates[1])
+			occupied_spots.append(coordinates)
+			
+			var type = weighted_monsters_array[randi() % len(weighted_monsters_array)]
+			monster.data = monsters_data[type]
+			monsters[type].append(monster)
 	
 	# Map of type => array of coordinates (one pair per entity)
 	# TODO: return instances of some data type instead. Monster.new()?

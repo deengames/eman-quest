@@ -21,12 +21,14 @@ static func find_empty_spot(map_width, map_height, object_map, occupied_spots):
 	
 	return [x, y]
 
-static func find_empty_isolated_spot(map_width, map_height, object_map, occupied_spots):
+static func find_empty_isolated_spot(map_width, map_height, object_map, occupied_spots, max_tries = 99999999):
 	var candidate = null
 	var iterations = 0
 	
-	while true: # returns on success
+	while iterations < max_tries: # returns on success
 		candidate = find_empty_spot(map_width, map_height, object_map, occupied_spots)
+
+		iterations += 1
 		var found_spot = true
 		
 		for item in occupied_spots:
