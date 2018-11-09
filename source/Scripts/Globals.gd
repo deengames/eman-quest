@@ -5,7 +5,7 @@ const PlayerData = preload("res://Entities/PlayerData.gd")
 const TILE_WIDTH = 64
 const TILE_HEIGHT = 64
 const SUBMAP_WIDTH_IN_TILES = 60
-const SUBMAP_HEIGHT_IN_TILES = 51
+const SUBMAP_HEIGHT_IN_TILES = 50
 const WORLD_WIDTH_IN_TILES = 30 # 1920/64
 const WORLD_HEIGHT_IN_TILES = 17 # 1080/64
 
@@ -44,6 +44,7 @@ var current_monster_type = ""
 
 func _ready():
 	randomize()
+	#seed(9999)
 	# abc gives frost forest
 	# abcdef gives forest
 	#seed("abcdef".hash())

@@ -110,12 +110,11 @@ func _generate_transitions(submap, map_width, map_height):
 			entrance_from_overworld = Vector2(position.x, 1)
 			
 			if submap.connections.has("up"):
-				# Top side is already taken, generate entrance on RHS
+				# Top side is already taken, generate entrance on bottom
 				position.y = map_height - 1
 				direction_back = "down"
-				entrance_from_overworld = Vector2(position.x, position.y - 1)
+				entrance_from_overworld = Vector2(position.x, position.y - 2)
 				
-			entrance_from_overworld = Vector2(position.x, position.y)
 		transitions.append(MapDestination.new(position, "Overworld", null, direction_back))
 	
 	for direction in submap.connections.keys():
@@ -124,7 +123,7 @@ func _generate_transitions(submap, map_width, map_height):
 		var target_position = Vector2(0, 0)
 		
 		if direction == "left":
-			my_position = Vector2(0, floor(map_height / 2))
+			my_position = Vector2(0, floor(map_height / 2)) 
 			target_position = Vector2(map_width - 1, floor(map_height / 2))
 		elif direction == "right":
 			my_position = Vector2(map_width - 1, floor(map_height / 2))

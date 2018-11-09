@@ -101,7 +101,7 @@ func _generate_tiles(transitions):
 		if self._ground_tilemap.get(current_x, current_y) != "Ground":
 			self._convert_to_dirt([current_x, current_y])
 			created_ground.append([current_x, current_y])
-			floors_to_create -= 9
+			floors_to_create -= 9 # created a 3x3 block
 			
 		var new_coordinates = self._pick_random_adjacent_tile(current_x, current_y)
 		current_x = new_coordinates[0]
