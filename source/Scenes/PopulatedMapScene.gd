@@ -195,3 +195,4 @@ func _unhandled_input(event):
 		# Clicks seem ... off for some reason. Not sure why. Adjust manually.
 		position.x -= Globals.TILE_WIDTH / 2
 		position.y -= Globals.TILE_HEIGHT
+		Globals.emit_signal("clicked_on_map", position)
