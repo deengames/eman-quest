@@ -184,6 +184,7 @@ _sections_unfolded = [ "Offset", "Region" ]
 position = Vector2( 0, 200 )
 texture = ExtResource( 1 )
 centered = false
+region_enabled = true
 region_rect = Rect2( 0, 64, 64, 64 )
 _sections_unfolded = [ "Offset", "Region" ]
 
