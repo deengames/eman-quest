@@ -25,6 +25,10 @@ func initialize(monster_data):
 			Globals.battle_spoils = null
 			
 func _on_CloseButton_pressed():
+	self.emit_signal("popup_hide")
+
+func _on_WindowDialog_popup_hide():
+	# On close
 	if Globals.current_map != null:
 		SceneManagement.change_map_to(get_tree(), Globals.current_map)
 		var restore_position = Globals.pre_battle_position
