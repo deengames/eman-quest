@@ -5,8 +5,8 @@ var _feature_map = {
 	"actions require energy": true,
 	"defend action": false,
 	"equipment generates tiles": true,
-	"sequence battle triggers": false,
-	"n-back battle triggers": true,
+	"sequence battle triggers": true,
+	"n-back battle triggers": false,
 	"unlimited battle choices": false,
 	"zoom-out maps": false
 }
