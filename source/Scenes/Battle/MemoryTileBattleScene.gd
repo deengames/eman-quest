@@ -38,13 +38,14 @@ func _ready():
 	
 	# Monster health bar max + monster sprite
 	var image_name = self._monster_data["type"].replace(' ', '')
-	$MonsterControls/MonsterHealth.max_value = self._monster_data["health"]
+	$MonsterControls/MonsterHealth.max_value = self._monster_data["max_health"]
 	$MonsterControls/MonsterSprite.texture = load("res://assets/images/monsters/" + image_name + ".png")
 	self._update_health_displays()
 
 func set_monster_data(data):
 	MonsterScaler.scale_monster_data(data)
 	data["next_round_turns"] = data["turns"]
+	data["max_health"] = data["health"]
 	self._monster_data = data
 	
 

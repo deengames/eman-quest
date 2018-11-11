@@ -98,5 +98,7 @@ func _process_attack(action, monster_data, player, boost_amount, memory_grid):
 		damage = floor(monster_data["strength"] * 1.5)
 		message = monster_name + " hits/absorbs "
 		monster_data["health"] += damage
+		# Don't allow overhealing. Bats are nigh unto impossible to kill otherwise.
+		monster_data["health"] = min(monster_data["health"], monster_data["max_health"])
 	
 	return { "damage": damage, "message": message }
