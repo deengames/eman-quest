@@ -8,7 +8,8 @@ var _feature_map = {
 	"sequence battle triggers": true,
 	"n-back battle triggers": false,
 	"unlimited battle choices": false,
-	"zoom-out maps": false
+	"zoom-out maps": false,
+	"instant actions": true
 }
 
 func set(feature, enabled):

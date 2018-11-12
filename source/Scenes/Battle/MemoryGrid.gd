@@ -12,6 +12,7 @@ var _tiles_picked = []
 
 signal all_tiles_picked
 signal tile_picked
+signal instant_action
 
 func initialize(tiles_wide, tiles_high, _advanced_mode = false, num_pickable_tiles = 5):
 	self.tiles_wide = tiles_wide
@@ -114,9 +115,14 @@ func _generate_armour_tiles():
 			num_tiles -= 1
 
 func _on_tile_selected(tile):
+	# Emit even if wrong, that ends turn on instant mode
+	if Features.is_enabled("instant actions"):
+		self.emit_signal("instant_action", tile.contents)
+			
 	if tile.contents != "wrong":
 		self._tiles_picked.append(tile.contents)
-		# If this feature is off, we check if you picked "enough" choices. If on,
+			
+		# If unlimited picks is off, we check if you picked "enough" choices. If on,
 		# ignore this (turn ends when you pick a wrong choice).
 		if not Features.is_enabled("unlimited battle choices") and len(self._tiles_picked) == _max_pickable_tiles:
 			self._picked_all_tiles()

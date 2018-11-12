@@ -1,8 +1,9 @@
 extends Node2D
 
-const SHOW_TIME_MILLISECONDS = 1500 # 1000 = 1s
-const WRONG_ACTION_PROBABILITY = 0.4 # 0.5 = 50% probability
+const _SHOW_TIME_MILLISECONDS = 1500 # 1000 = 1s
+const _WRONG_ACTION_PROBABILITY = 0.4 # 0.5 = 50% probability
 const ENERGY_X = 448
+const _PROBABILITY_OF_ADVANCED_TILE = 25 # 25 = 25%
 
 signal tile_selected
 
@@ -54,7 +55,7 @@ func _process(delta):
 	if self.state == "first showing":
 		# after one second elapses, hide/close again
 		var now = OS.get_ticks_msec()
-		if now - self.created_on >= SHOW_TIME_MILLISECONDS:
+		if now - self.created_on >= _SHOW_TIME_MILLISECONDS:
 			self.hide_contents()
 
 func freeze():
@@ -65,7 +66,7 @@ func reset():
 	self.do_not_change = false
 	# Add a random value (in the future) so they pseudo-randomly hide
 	# Limit this to 200ms
-	self.created_on = OS.get_ticks_msec() + (randi() % 200)
+	self.created_on = OS.get_ticks_msec() + (randi() % 500)
 	$Cover.region_rect.position.x = self.frames["open"]
 	self._pick_contents()
 	self._show_contents()
@@ -82,14 +83,14 @@ func refresh_display():
 	$Contents.region_rect.position.x = target_x
 
 func _pick_contents():
-	if randf() <= WRONG_ACTION_PROBABILITY:
+	if randf() <= _WRONG_ACTION_PROBABILITY:
 		self.contents = "wrong"
 		$Contents.region_rect.position.x = WRONG_IMAGE_X
 	else:
 		self.contents = null
 		if self.show_advanced_actions == true:
 			# % probability of advanced action
-			if randi() % 100 <= 25:
+			if randi() % 100 <= _PROBABILITY_OF_ADVANCED_TILE:
 				self.contents = self.AdvancedActions.keys()[randi() % AdvancedActions.keys().size()]
 				$Contents.region_rect.position.x = self.AdvancedActions[self.contents]
 		

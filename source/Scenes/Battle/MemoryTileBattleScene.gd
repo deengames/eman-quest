@@ -34,6 +34,9 @@ func _ready():
 	if not Features.is_enabled("actions require energy"):
 		$EnergyControls.visible = false
 	
+	if Features.is_enabled("instant actions"):
+		$MemoryGrid.connect("instant_action", self, "_on_instant_action")
+	
 	$History.text = ""
 	
 	# Monster health bar max + monster sprite
@@ -68,9 +71,9 @@ func _show_turn_options(tiles_picked):
 		tiles_picked.append("energy")
 		tiles_picked.append("energy")
 	
-	for tile in tiles_picked:
+	for action in tiles_picked:
 		var action_button = ActionButton.instance()
-		action_button.initialize(tile)
+		action_button.initialize(action)
 		self.add_child(action_button)
 		
 		action_button.position.x = $MemoryGrid.position.x + (64 * len(self._action_buttons))
@@ -79,6 +82,16 @@ func _show_turn_options(tiles_picked):
 		action_button.connect("action_selected", self, "_on_action")
 		
 		self._action_buttons.append(action_button)
+
+func _on_instant_action(action):
+	if action == "wrong":
+		self._finish_turn()
+	else:
+		var action_button = ActionButton.instance()
+		action_button.initialize(action)
+		# Glorious hack: create an action button and it gets removed immediatley
+		# There's no other easy way to refactor this code though, so ... :/
+		self._on_action(action_button)
 
 func _on_action(action_button):
 	var multiplier_effect = 1 + (self._multipliers * self._MULTIPLIER_BONUS)
@@ -99,7 +112,12 @@ func _on_action(action_button):
 		self.remove_child(action_button)
 		action_button.queue_free()
 		
-		if len(self._action_buttons) == 0 or self._actions_picked == self.player.num_actions:
+		
+		if (
+			(Features.is_enabled("instant actions") and self._actions_picked == self.player.num_actions) or
+			# If non-instant actions, zero action buttons means picked wrong-only
+			(not Features.is_enabled("instant actions") and (len(self._action_buttons) == 0 or self._actions_picked == self.player.num_actions))
+		):
 			self._finish_turn()
 
 # health and energy
