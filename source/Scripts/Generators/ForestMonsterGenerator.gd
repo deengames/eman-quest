@@ -89,7 +89,7 @@ func generate_monsters(forest_map):
 			weighted_monsters_array.append(type)
 	
 	var num_monsters = Globals.randint(NUM_MONSTERS[0], NUM_MONSTERS[1])
-	print('n='+str(num_monsters))
+	
 	var occupied_spots = []
 	for t in forest_map.transitions:
 		occupied_spots.append([t.my_position[0], t.my_position[1]])

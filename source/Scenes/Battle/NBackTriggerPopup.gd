@@ -44,4 +44,3 @@ func _user_chooses(user_says_item_repeats):
 func _finish():
 	$YesButton.visible = false
 	$NoButton.visible = false
-	print(self.num_correct)
