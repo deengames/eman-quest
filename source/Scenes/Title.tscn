@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Title.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/Lato-Black.ttf" type="DynamicFontData" id=2]
@@ -13,7 +13,7 @@ _sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="DynamicFont" id=2]
 
-size = 24
+size = 72
 use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 2 )
@@ -21,7 +21,7 @@ _sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="DynamicFont" id=3]
 
-size = 72
+size = 36
 use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 2 )
@@ -29,21 +29,29 @@ _sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="DynamicFont" id=4]
 
-size = 36
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 2 )
-_sections_unfolded = [ "Font", "Settings" ]
-
-[sub_resource type="DynamicFont" id=5]
-
 size = 30
 use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 2 )
 _sections_unfolded = [ "Font", "Font/fallback", "Settings" ]
 
-[node name="Node2D" type="Node2D" index="0"]
+[sub_resource type="DynamicFont" id=5]
+
+size = 32
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 2 )
+_sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=6]
+
+size = 24
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 2 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[node name="Node2D" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -74,61 +82,7 @@ flat = false
 align = 1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="Button2" type="Button" parent="." index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 375.0
-margin_top = 325.0
-margin_right = 628.0
-margin_bottom = 369.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/font = SubResource( 2 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Simple Battle"
-flat = false
-align = 1
-_sections_unfolded = [ "Margin", "custom_fonts" ]
-
-[node name="Button3" type="Button" parent="." index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 380.0
-margin_top = 398.0
-margin_right = 633.0
-margin_bottom = 442.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/font = SubResource( 2 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Advanced Battle"
-flat = false
-align = 1
-_sections_unfolded = [ "Margin", "custom_fonts" ]
-
-[node name="Label" type="Label" parent="." index="3"]
+[node name="Label" type="Label" parent="." index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -144,7 +98,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "Eman Quest"
 align = 1
 percent_visible = 1.0
@@ -152,7 +106,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="LoadGameButton" type="Button" parent="." index="4"]
+[node name="LoadGameButton" type="Button" parent="." index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -169,7 +123,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -179,7 +133,7 @@ flat = false
 align = 1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="DebugButton" type="Button" parent="." index="5"]
+[node name="DebugButton" type="Button" parent="." index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -196,7 +150,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -206,7 +160,7 @@ flat = false
 align = 1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="DebugPanel" type="Panel" parent="." index="6"]
+[node name="DebugPanel" type="Panel" parent="." index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -266,7 +220,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 toggle_mode = true
 pressed = true
 enabled_focus_mode = 2
@@ -294,7 +248,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 toggle_mode = true
 enabled_focus_mode = 2
 shortcut = null
@@ -321,7 +275,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 toggle_mode = true
 enabled_focus_mode = 2
 shortcut = null
@@ -348,7 +302,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 toggle_mode = true
 enabled_focus_mode = 2
 shortcut = null
@@ -358,11 +312,88 @@ flat = false
 align = 0
 _sections_unfolded = [ "custom_fonts" ]
 
+[node name="AlternateBattleButton" type="Button" parent="DebugPanel" index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 730.0
+margin_top = 392.0
+margin_right = 822.0
+margin_bottom = 437.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 5 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "plzno"
+flat = false
+align = 1
+_sections_unfolded = [ "custom_fonts" ]
+
+[node name="Button2" type="Button" parent="DebugPanel" index="6"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 661.0
+margin_top = 269.0
+margin_right = 822.0
+margin_bottom = 313.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 6 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Simple Battle"
+flat = false
+align = 1
+_sections_unfolded = [ "Margin", "custom_fonts" ]
+
+[node name="Button3" type="Button" parent="DebugPanel" index="7"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 629.0
+margin_top = 329.0
+margin_right = 826.0
+margin_bottom = 373.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 6 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Advanced Battle"
+flat = false
+align = 1
+_sections_unfolded = [ "Margin", "custom_fonts" ]
+
 [connection signal="pressed" from="Button" to="." method="_on_newgame_Button_pressed"]
-
-[connection signal="pressed" from="Button2" to="." method="_on_simplebattle_button_pressed"]
-
-[connection signal="pressed" from="Button3" to="." method="_on_AdvancedBattleButton_pressed"]
 
 [connection signal="pressed" from="LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
 
@@ -377,5 +408,11 @@ _sections_unfolded = [ "custom_fonts" ]
 [connection signal="toggled" from="DebugPanel/UnlimitedBattleChoicesToggle" to="." method="_on_UnlimitedBattleChoicesToggle_toggled"]
 
 [connection signal="toggled" from="DebugPanel/ZoomOutToggle" to="." method="_on_ZoomOutToggle_toggled"]
+
+[connection signal="pressed" from="DebugPanel/AlternateBattleButton" to="." method="_on_AlternateBattleButton_pressed"]
+
+[connection signal="pressed" from="DebugPanel/Button2" to="." method="_on_simplebattle_button_pressed"]
+
+[connection signal="pressed" from="DebugPanel/Button3" to="." method="_on_AdvancedBattleButton_pressed"]
 
 

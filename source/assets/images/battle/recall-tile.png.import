@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Spider.png-f311a52c559af3da242261587bcb6162.stex"
+path="res://.import/recall-tile.png-35688ab197d3473e48835533abc03275.stex"
 
 [deps]
 
-source_file="res://assets/images/monsters/Spider.png"
-dest_files=[ "res://.import/Spider.png-f311a52c559af3da242261587bcb6162.stex" ]
+source_file="res://assets/images/battle/recall-tile.png"
+dest_files=[ "res://.import/recall-tile.png-35688ab197d3473e48835533abc03275.stex" ]
 
 [params]
 

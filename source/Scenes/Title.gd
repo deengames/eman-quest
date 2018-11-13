@@ -1,6 +1,7 @@
 extends Node2D
 
 var BattlePlayer = preload("res://Entities/Battle/BattlePlayer.gd")
+var FastPacedMemoryBattleScene = preload("res://Scenes/Battle/FastPacedMemoryBattleScene.tscn")
 var MemoryTileBattleScene = preload("res://Scenes/Battle/MemoryTileBattleScene.tscn")
 var SceneManagement = preload("res://Scripts/SceneManagement.gd")
 var Slime = preload("res://Entities/Battle/Monster.tscn")
@@ -93,3 +94,26 @@ func _on_UnlimitedBattleChoicesToggle_toggled(button_pressed):
 
 func _on_ZoomOutToggle_toggled(button_pressed):
 	Features.set("zoom-out maps", button_pressed)
+
+
+func _on_AlternateBattleButton_pressed():
+	var battle_scene = FastPacedMemoryBattleScene.instance()
+	
+	var monster = {
+		"type": "Slime",
+		"health": 30,
+		"strength": 10,
+		"defense": 4,
+		"turns": 1,
+		"experience points": 10,
+		"skill_probability": 40, # 40 = 40%
+		"skills": {
+			# These should add up to 100
+			"chomp": 100 # 20%,
+		}
+	}
+	
+	var battler = BattlePlayer.new()
+	
+	battle_scene.set_combatants(battler, monster)
+	SceneManagement.change_scene_to(get_tree(), battle_scene)
