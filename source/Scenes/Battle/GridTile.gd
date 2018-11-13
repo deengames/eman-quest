@@ -96,7 +96,7 @@ func _pick_contents():
 		
 		if self.contents == null: # advanced but not picked; or basic choices only
 			self.contents = self.Actions.keys()[randi() % self.Actions.keys().size()]
-			$Contents.region_rect.position.x = self.Actions[self.contents]	
+			$Contents.region_rect.position.x = self.Actions[self.contents]
 		
 
 func _on_Area2D_input_event(viewport, event, shape_idx):

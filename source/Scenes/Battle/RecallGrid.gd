@@ -8,11 +8,6 @@ const _TILE_WIDTH = 48
 const _TILE_HEIGHT = 48
 const _ACTIVE_TILES = 7
 
-const _TILE_IMAGE_X = {
-	"inactive": 0,
-	"active": 48
-}
-
 func _ready():
 	for y in range(_HEIGHT_IN_TILES):
 		for x in range(_WIDTH_IN_TILES):
@@ -36,4 +31,4 @@ func pick_tiles(difficulty):
 func show_tiles(tiles):
 	for tile in tiles:
 		var sprite = self.get_node("Tile" + str(tile.x) + "-" + str(tile.y))
-		sprite.region_rect.position.x = _TILE_IMAGE_X["active"]
+		sprite.show_then_hide()
