@@ -250,35 +250,6 @@ flat = false
 align = 1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="StartTurnButton" type="Button" parent="." index="6"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 57.0
-margin_top = 238.0
-margin_right = 217.0
-margin_bottom = 283.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/font = SubResource( 3 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Start Turn"
-flat = false
-align = 1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
 [connection signal="pressed" from="NextTurnButton" to="." method="_on_NextTurnButton_pressed"]
-
-[connection signal="pressed" from="StartTurnButton" to="." method="_on_StartTurnButton_pressed"]
 
 

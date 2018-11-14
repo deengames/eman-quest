@@ -18,8 +18,9 @@ var _should_be_selected = false
 func show_then_hide():
 	yield(get_tree().create_timer(_DISPLAY_SECONDS), 'timeout')
 	$Contents.region_rect.position.x = _TILE_IMAGE_X["active"]
-	var random_offset = randf() * 0.25
-	yield(get_tree().create_timer(_DISPLAY_SECONDS + random_offset), 'timeout')
+	#var random_offset = randf() * 0.25
+	# Add random_offset to _DISPLAY_SECONDS to get random/cool fade
+	yield(get_tree().create_timer(_DISPLAY_SECONDS), 'timeout')
 	$Contents.region_rect.position.x = _TILE_IMAGE_X["inactive"]
 	self._should_be_selected = true
 	self.emit_signal("done_hiding")

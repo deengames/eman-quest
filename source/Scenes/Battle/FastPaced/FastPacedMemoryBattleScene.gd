@@ -7,7 +7,7 @@ var _action_resolver = preload("res://Scripts/Battle/ActionResolver.gd").new()
 var _player # BattlePlayer.new
 var _monster_data = {}
 
-var _is_players_turn = true
+var _is_players_turn = false
 
 func set_combatants(player, monster_data):
 	self._player = player
@@ -26,20 +26,7 @@ func _ready():
 	self._update_health_displays()
 	$StatusLabel.text = ""
 	$NextTurnButton.visible = false
-
-func _show_next_turn():
-	var num_tiles = 0
-	
-	if self._is_players_turn:
-		num_tiles = self._player.num_actions
-	else:
-		num_tiles = _MONSTER_NUM_TILES
-	
-	var tiles = $RecallGrid.pick_tiles(num_tiles)
-	$RecallGrid.show_tiles(tiles)
-	
-	$NextTurnButton.visible = false
-	$StartTurnButton.visible = false
+	self._start_next_turn()
 
 # health and energy
 func _update_health_displays():
@@ -61,9 +48,8 @@ func _on_picked_all_tiles():
 	else:
 		self._resolve_monster_turn(multiplier)
 		
-	$NextTurnButton.visible = true
-	$StartTurnButton.visible = false
 	self._update_health_displays()
+	$NextTurnButton.visible = true
 
 func _resolve_players_turn(action, multiplier):
 	var message = self._action_resolver.resolve(action, self._player, self._monster_data, multiplier)
@@ -74,17 +60,25 @@ func _resolve_monster_turn(multiplier):
 	$StatusLabel.text = message
 
 func _on_NextTurnButton_pressed():
+	self._start_next_turn()
+
+func _start_next_turn():
+	# Set up next turn
+	var num_tiles = 0
+	
 	self._is_players_turn = not self._is_players_turn
 	$StatusLabel.text = ""
 	$RecallGrid.reset()
 	
 	if self._is_players_turn:
 		$TurnLabel.text = "Player attacks!"
+		num_tiles = self._player.num_actions
 	else:
 		$TurnLabel.text = self._monster_data["type"] + " attacks!"
+		num_tiles = _MONSTER_NUM_TILES
 	
 	$NextTurnButton.visible = false
-	$StartTurnButton.visible = true
-
-func _on_StartTurnButton_pressed():
-	self._show_next_turn()
+	
+	# Execute
+	var tiles = $RecallGrid.pick_tiles(num_tiles)
+	$RecallGrid.show_tiles(tiles)
