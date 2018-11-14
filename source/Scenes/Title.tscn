@@ -162,6 +162,7 @@ _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
 [node name="DebugPanel" type="Panel" parent="." index="4"]
 
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0

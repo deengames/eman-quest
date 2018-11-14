@@ -63,6 +63,7 @@ func _on_picked_all_tiles():
 		
 	$NextTurnButton.visible = true
 	$StartTurnButton.visible = false
+	self._update_health_displays()
 
 func _resolve_players_turn(action, multiplier):
 	var message = self._action_resolver.resolve(action, self._player, self._monster_data, multiplier)

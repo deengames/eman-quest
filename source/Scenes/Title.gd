@@ -101,9 +101,9 @@ func _on_AlternateBattleButton_pressed():
 	
 	var monster = {
 		"type": "Slime",
-		"health": 30,
-		"strength": 10,
-		"defense": 4,
+		"health": 40,
+		"strength": 15,
+		"defense": 6,
 		"turns": 1,
 		"experience points": 10,
 		"skill_probability": 40, # 40 = 40%
