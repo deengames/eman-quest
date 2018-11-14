@@ -32,4 +32,4 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 		else:
 			$Contents.region_rect.position.x = _TILE_IMAGE_X["incorrect"]
 			self.emit_signal("incorrect_selected")
-
+		self.is_selectable = false

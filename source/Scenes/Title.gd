@@ -1,7 +1,7 @@
 extends Node2D
 
 var BattlePlayer = preload("res://Entities/Battle/BattlePlayer.gd")
-var FastPacedMemoryBattleScene = preload("res://Scenes/Battle/FastPacedMemoryBattleScene.tscn")
+var FastPacedMemoryBattleScene = preload("res://Scenes/Battle/FastPaced/FastPacedMemoryBattleScene.tscn")
 var MemoryTileBattleScene = preload("res://Scenes/Battle/MemoryTileBattleScene.tscn")
 var SceneManagement = preload("res://Scripts/SceneManagement.gd")
 var Slime = preload("res://Entities/Battle/Monster.tscn")
@@ -15,18 +15,18 @@ func _on_newgame_Button_pressed():
 func _on_simplebattle_button_pressed():
 	var battle_scene = MemoryTileBattleScene.instance()
 	battle_scene.set_monster_data({
-	"type": "Slime",
-	"health": 30,
-	"strength": 10,
-	"defense": 4,
-	"turns": 1,
-	"experience points": 10,
-	"skill_probability": 40, # 40 = 40%
-	"skills": {
-		# These should add up to 100
-		"chomp": 100 # 20%,
-	}
-})
+		"type": "Slime",
+		"health": 30,
+		"strength": 10,
+		"defense": 4,
+		"turns": 1,
+		"experience points": 10,
+		"skill_probability": 40, # 40 = 40%
+		"skills": {
+			# These should add up to 100
+			"chomp": 100 # 20%,
+		}
+	})
 	
 	SceneManagement.change_scene_to(get_tree(), battle_scene)
 
@@ -48,7 +48,7 @@ func _on_AdvancedBattleButton_pressed():
 			"vampire": 40,
 			"shock": 30
 		}
-	});
+	})
 	
 	var battler = BattlePlayer.new()
 	battler.max_health = 600
@@ -114,6 +114,7 @@ func _on_AlternateBattleButton_pressed():
 	}
 	
 	var battler = BattlePlayer.new()
+	battler.num_actions = 5
 	
 	battle_scene.set_combatants(battler, monster)
 	SceneManagement.change_scene_to(get_tree(), battle_scene)

@@ -1,12 +1,14 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Scenes/Battle/FastPacedMemoryBattleScene.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Battle/FastPaced/FastPacedMemoryBattleScene.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/monsters/GoldSlime.png" type="Texture" id=2]
 [ext_resource path="res://assets/images/gui/healthbar-bg.png" type="Texture" id=3]
 [ext_resource path="res://assets/images/gui/healthbar-fill.png" type="Texture" id=4]
 [ext_resource path="res://assets/fonts/Lato-Black.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://assets/images/protagonist.png" type="Texture" id=6]
-[ext_resource path="res://Scenes/Battle/RecallGrid.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Battle/FastPaced/RecallGrid.tscn" type="PackedScene" id=7]
+
+
 
 [sub_resource type="DynamicFont" id=1]
 
