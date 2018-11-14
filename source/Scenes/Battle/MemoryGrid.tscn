@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/Battle/MemoryGrid.gd" type="Script" id=1]
 
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -16,11 +16,11 @@ margin_right = 384.0
 margin_bottom = 384.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 0
+mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 0, 0, 0, 1 )
-_sections_unfolded = [ "Rect" ]
+_sections_unfolded = [ "Mouse", "Rect" ]
 
 

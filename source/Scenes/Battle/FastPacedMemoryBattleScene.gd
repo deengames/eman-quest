@@ -29,7 +29,7 @@ func _show_next_turn():
 	var num_tiles = 7 # typically, memory is 7 +- 2 items
 	var tiles = $RecallGrid.pick_tiles(difficulty)
 	$RecallGrid.show_tiles(tiles)
-		
+
 # health and energy
 func _update_health_displays():
 	var player_health = self._player.current_health

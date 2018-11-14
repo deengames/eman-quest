@@ -213,7 +213,6 @@ _sections_unfolded = [ "custom_fonts" ]
 
 [node name="RecallGrid" parent="." index="4" instance=ExtResource( 7 )]
 
-position = Vector2( 260, 20 )
-_sections_unfolded = [ "Transform" ]
+position = Vector2( 270, 30 )
 
 

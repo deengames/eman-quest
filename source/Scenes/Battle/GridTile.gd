@@ -66,6 +66,7 @@ func reset():
 	self.do_not_change = false
 	# Add a random value (in the future) so they pseudo-randomly hide
 	# Limit this to 200ms
+	# TODO: replace with yield, similar to RecallTile.gd
 	self.created_on = OS.get_ticks_msec() + (randi() % 500)
 	$Cover.region_rect.position.x = self.frames["open"]
 	self._pick_contents()

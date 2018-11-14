@@ -41,6 +41,7 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
+_sections_unfolded = [ "Collision", "Pickable" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
 

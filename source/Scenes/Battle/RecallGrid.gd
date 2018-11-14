@@ -4,9 +4,13 @@ const RecallTile = preload("res://Scenes/Battle/RecallTile.tscn")
 
 const _WIDTH_IN_TILES = 7 # please extend width, not height
 const _HEIGHT_IN_TILES = 7
-const _TILE_WIDTH = 48
-const _TILE_HEIGHT = 48
+const _TILE_WIDTH = 64
+const _TILE_HEIGHT = 64
 const _ACTIVE_TILES = 7
+
+var num_tiles = 0
+var ready_tiles = 0
+var _tile_controls = []
 
 func _ready():
 	for y in range(_HEIGHT_IN_TILES):
@@ -15,9 +19,11 @@ func _ready():
 			tile.position = Vector2(x * _TILE_WIDTH, y * _TILE_HEIGHT)
 			tile.name = "Tile" + str(x) + "-" + str(y)
 			self.add_child(tile)
+			self._tile_controls.append(tile)
 
 func pick_tiles(difficulty):
 	var tiles_left = 7
+	self.num_tiles = tiles_left
 	var tiles = []
 	
 	while tiles_left > 0:
@@ -32,3 +38,11 @@ func show_tiles(tiles):
 	for tile in tiles:
 		var sprite = self.get_node("Tile" + str(tile.x) + "-" + str(tile.y))
 		sprite.show_then_hide()
+		sprite.connect("done_hiding", self, "_tile_done_hiding")
+
+func _tile_done_hiding():
+	ready_tiles += 1
+	if ready_tiles == self.num_tiles:
+		for tile in self._tile_controls:
+			tile.is_selectable = true
+	
