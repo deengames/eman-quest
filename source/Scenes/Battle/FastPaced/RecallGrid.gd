@@ -34,8 +34,8 @@ func _ready():
 	
 	self.reset()
 
-func pick_tiles(difficulty):
-	var tiles_left = 7
+func pick_tiles(num_tiles):
+	var tiles_left = num_tiles
 	self.num_tiles = tiles_left
 	var tiles = []
 	
@@ -79,5 +79,5 @@ func _on_incorrect_tile_selected():
 	self._emit_if_done()
 
 func _emit_if_done():
-	if self.selected_wrong + self.selected_right == battle_player.num_actions:
+	if self.selected_wrong + self.selected_right == self.num_tiles:
 		self.emit_signal("picked_all_tiles")

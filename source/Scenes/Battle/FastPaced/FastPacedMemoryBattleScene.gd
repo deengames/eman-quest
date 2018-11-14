@@ -1,14 +1,12 @@
 extends Node2D
 
-const _MULTIPLIER_BASE = 1.1 # 1.1^7 = ~2x, double if perfect...
+const _MULTIPLIER_BASE = 1.1 # For attacks, 1.1^7 = ~2x, double if perfect pick...
+const _MONSTER_NUM_TILES = 4
 
 var _action_resolver = preload("res://Scripts/Battle/ActionResolver.gd").new()
 var _player # BattlePlayer.new
 var _monster_data = {}
 
-# TODO: as difficulty increases, increase number of tiles to find, and how
-# spread out they are from each other.
-var difficulty = 1
 var _is_players_turn = false
 
 func set_combatants(player, monster_data):
@@ -30,15 +28,18 @@ func _ready():
 
 func _show_next_turn():
 	self._is_players_turn = not self._is_players_turn
+	var num_tiles = 0
 	
 	if self._is_players_turn:
 		$TurnLabel.text = "Player attacks!"
+		num_tiles = self._player.num_actions
 	else:
 		$TurnLabel.text = self._monster_data["type"] + " attacks!"
-
+		num_tiles = _MONSTER_NUM_TILES
+		
 	$StatusLabel.text = ""
 	
-	var tiles = $RecallGrid.pick_tiles(difficulty)
+	var tiles = $RecallGrid.pick_tiles(num_tiles)
 	$RecallGrid.reset()
 	$RecallGrid.show_tiles(tiles)
 	$NextTurnButton.visible = false
@@ -70,7 +71,8 @@ func _resolve_players_turn(action, multiplier):
 	$StatusLabel.text = message
 
 func _resolve_monster_turn(multiplier):
-	pass
+	var message = self._action_resolver.monster_attacks(self._monster_data, self._player, multiplier, null)
+	$StatusLabel.text = message
 
 func _on_NextTurnButton_pressed():
 	self._show_next_turn()
