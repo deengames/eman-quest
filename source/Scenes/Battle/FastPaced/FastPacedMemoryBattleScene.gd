@@ -26,15 +26,22 @@ func _ready():
 	$RecallGrid.connect("picked_all_tiles", self, "_on_picked_all_tiles")
 	
 	self._update_health_displays()
-	$StatusLabel.text = ""
-
 	self._show_next_turn()
 
 func _show_next_turn():
 	self._is_players_turn = not self._is_players_turn
+	
+	if self._is_players_turn:
+		$TurnLabel.text = "Player attacks!"
+	else:
+		$TurnLabel.text = self._monster_data["type"] + " attacks!"
+
+	$StatusLabel.text = ""
+	
 	var tiles = $RecallGrid.pick_tiles(difficulty)
 	$RecallGrid.reset()
 	$RecallGrid.show_tiles(tiles)
+	$NextTurnButton.visible = false
 
 # health and energy
 func _update_health_displays():
@@ -50,10 +57,13 @@ func _on_picked_all_tiles():
 	var num_right = $RecallGrid.selected_right
 	var multiplier = pow(_MULTIPLIER_BASE, num_right)
 	$RecallGrid.make_unselectable()
+	
 	if self._is_players_turn:
 		self._resolve_players_turn("attack", multiplier)
 	else:
-		self.resolve_monster_turn(multiplier)
+		self._resolve_monster_turn(multiplier)
+		
+	$NextTurnButton.visible = true
 
 func _resolve_players_turn(action, multiplier):
 	var message = self._action_resolver.resolve(action, self._player, self._monster_data, multiplier)
@@ -61,3 +71,6 @@ func _resolve_players_turn(action, multiplier):
 
 func _resolve_monster_turn(multiplier):
 	pass
+
+func _on_NextTurnButton_pressed():
+	self._show_next_turn()

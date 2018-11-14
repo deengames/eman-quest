@@ -24,6 +24,10 @@ func show_then_hide():
 	self._should_be_selected = true
 	self.emit_signal("done_hiding")
 
+func reset():
+	self._should_be_selected = false
+	$Contents.region_rect.position.x = _TILE_IMAGE_X["inactive"]
+
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if (self.is_selectable and event is InputEventMouseButton and event.pressed) or (OS.has_feature("Android") and event is InputEventMouseMotion):
 		if self._should_be_selected:

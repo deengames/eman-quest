@@ -57,10 +57,12 @@ func reset():
 	self.ready_tiles = 0
 	self.selected_wrong = 0
 	self.selected_right = 0
+	for tile in self._tile_controls:
+		tile.reset()
 
 func make_unselectable():
-	for control in self._tile_controls:
-		control.is_selectable = false
+	for tile in self._tile_controls:
+		tile.is_selectable = false
 
 func _tile_done_hiding():
 	ready_tiles += 1
