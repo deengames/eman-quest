@@ -114,7 +114,7 @@ func _on_AlternateBattleButton_pressed():
 	}
 	
 	var battler = BattlePlayer.new()
-	battler.num_actions = 5
+	battler.num_actions = 7
 	
 	battle_scene.set_combatants(battler, monster)
 	SceneManagement.change_scene_to(get_tree(), battle_scene)

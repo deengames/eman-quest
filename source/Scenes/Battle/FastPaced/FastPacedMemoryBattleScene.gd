@@ -1,5 +1,8 @@
 extends Node2D
 
+const _MULTIPLIER_BASE = 1.1 # 1.1^7 = ~2x, double if perfect...
+
+var _action_resolver = preload("res://Scripts/Battle/ActionResolver.gd").new()
 var _player # BattlePlayer.new
 var _monster_data = {}
 
@@ -45,4 +48,16 @@ func _update_health_displays():
 
 func _on_picked_all_tiles():
 	var num_right = $RecallGrid.selected_right
+	var multiplier = pow(_MULTIPLIER_BASE, num_right)
 	$RecallGrid.make_unselectable()
+	if self._is_players_turn:
+		self._resolve_players_turn("attack", multiplier)
+	else:
+		self.resolve_monster_turn(multiplier)
+
+func _resolve_players_turn(action, multiplier):
+	var message = self._action_resolver.resolve(action, self._player, self._monster_data, multiplier)
+	$StatusLabel.text = message
+
+func _resolve_monster_turn(multiplier):
+	pass
