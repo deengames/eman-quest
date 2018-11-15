@@ -1,7 +1,7 @@
 extends Node2D
 
 const ActionButton = preload("res://Scenes/Battle/ActionButton.tscn")
-const BattleResultsWindow = preload("res://Scenes/Battle/BattleResultsWindow.tscn")
+const BattleResolution = preload("res://Scripts/Battle/BattleResolution.gd")
 const MonsterScaler = preload("res://Scripts/Battle/MonsterScaler.gd")
 const NBackTriggerPopup = preload("res://Scenes/Battle/NBackTriggerPopup.tscn")
 const SequenceTriggerPopup = preload("res://Scenes/Battle/SequenceTriggerPopup.tscn")
@@ -182,18 +182,16 @@ func _finish_turn():
 
 func _show_battle_end(is_victory):
 	$MemoryGrid.visible = false
-	Globals.won_battle = is_victory
 	
 	for button in self._action_buttons:
 		self.remove_child(button)
 		button.queue_free()
 	
 	$EnergyControls.queue_free()
-	
-	var battle_results = BattleResultsWindow.instance()
-	battle_results.initialize(self._monster_data)
-	self.add_child(battle_results)
-	battle_results.popup_centered()
+
+	var popup = BattleResolution.end_battle(is_victory, self._monster_data)
+	self.add_child(popup)
+	popup.popup_centered()
 
 func _add_message(message):
 	$History.text = ""

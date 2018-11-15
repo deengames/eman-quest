@@ -65,6 +65,28 @@ func _on_AdvancedBattleButton_pressed():
 	
 	SceneManagement.change_scene_to(get_tree(), battle_scene)
 
+func _on_AlternateBattleButton_pressed():
+	var battle_scene = FastPacedMemoryBattleScene.instance()
+	
+	var monster = {
+		"type": "Slime",
+		"health": 40,
+		"strength": 15,
+		"defense": 6,
+		"turns": 1,
+		"experience points": 10,
+		"skill_probability": 40, # 40 = 40%
+		"skills": {
+			# These should add up to 100
+			"chomp": 100 # 20%,
+		}
+	}
+	
+	var battler = BattlePlayer.new()
+	battler.num_actions = 7
+	
+	battle_scene.set_combatants(battler, monster)
+	SceneManagement.change_scene_to(get_tree(), battle_scene)
 
 func _on_LoadGameButton_pressed():
 	get_tree().change_scene("res://Scenes/LoadingScene.tscn")
@@ -94,27 +116,3 @@ func _on_UnlimitedBattleChoicesToggle_toggled(button_pressed):
 
 func _on_ZoomOutToggle_toggled(button_pressed):
 	Features.set("zoom-out maps", button_pressed)
-
-
-func _on_AlternateBattleButton_pressed():
-	var battle_scene = FastPacedMemoryBattleScene.instance()
-	
-	var monster = {
-		"type": "Slime",
-		"health": 40,
-		"strength": 15,
-		"defense": 6,
-		"turns": 1,
-		"experience points": 10,
-		"skill_probability": 40, # 40 = 40%
-		"skills": {
-			# These should add up to 100
-			"chomp": 100 # 20%,
-		}
-	}
-	
-	var battler = BattlePlayer.new()
-	battler.num_actions = 7
-	
-	battle_scene.set_combatants(battler, monster)
-	SceneManagement.change_scene_to(get_tree(), battle_scene)
