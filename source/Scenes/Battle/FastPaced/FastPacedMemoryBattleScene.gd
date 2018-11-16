@@ -9,6 +9,7 @@ var _action_resolver = preload("res://Scripts/Battle/ActionResolver.gd").new()
 var _player # BattlePlayer.new
 var _monster_data = {}
 var _multiplier = 0
+var _actions_left = 0
 
 var _is_players_turn = false
 
@@ -25,6 +26,7 @@ func _ready():
 	$PlayerControls/PlayerHealth.max_value = self._player.max_health
 	
 	$RecallGrid.connect("picked_all_tiles", self, "_on_picked_all_tiles")
+	$RecallGrid.connect("correct_selected", self, "_on_correct_selected")
 	
 	self._update_health_displays()
 	$StatusLabel.text = ""
@@ -40,6 +42,8 @@ func _update_health_displays():
 	var monster_health = self._monster_data["health"]
 	$MonsterControls/MonsterHealth.value = monster_health
 	$MonsterControls/MonsterHealth/Label.text = str(monster_health)
+	
+	$ActionsLabel.text = "Actions: " + str(_actions_left)
 
 func _on_picked_all_tiles():
 	var num_right = $RecallGrid.selected_right
@@ -48,7 +52,6 @@ func _on_picked_all_tiles():
 	
 	if self._is_players_turn:
 		$ActionsPanel.visible = true
-		#self._resolve_players_turn("attack", multiplier)
 	else:
 		self._resolve_monster_turn()
 
@@ -60,14 +63,15 @@ func _show_battle_end(is_victory):
 func _resolve_players_turn(action):
 	var message = self._action_resolver.resolve(action, self._player, self._monster_data, self._multiplier)
 	$StatusLabel.text = message
-
-	$ActionsPanel.visible = false
-
+	self._actions_left -= 1
 	self._update_health_displays()
-	$NextTurnButton.visible = true
 	
 	if self._monster_data["health"] <= 0:
 		self._show_battle_end(true)
+	
+	if self._actions_left == 0:
+		$ActionsPanel.visible = false
+		$NextTurnButton.visible = true
 
 func _resolve_monster_turn():
 	var message = self._action_resolver.monster_attacks(self._monster_data, self._player, self._multiplier, null)
@@ -111,6 +115,11 @@ func _start_next_turn():
 		self._resolve_monster_turn()
 		# Avoid having to click Next Turn for nothing
 		self._start_next_turn()
+
+func _on_correct_selected():
+	self._actions_left += 1
+	# Updates actions-left
+	self._update_health_displays()
 
 func _on_AttackButton_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton and event.pressed) or (OS.has_feature("Android") and event is InputEventMouseMotion):

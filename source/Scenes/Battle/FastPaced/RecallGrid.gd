@@ -3,6 +3,7 @@ extends Node2D
 const RecallTile = preload("res://Scenes/Battle/FastPaced/RecallTile.tscn")
 
 signal picked_all_tiles
+signal correct_selected
 
 const _WIDTH_IN_TILES = 7 # please extend width, not height
 const _HEIGHT_IN_TILES = 7
@@ -72,6 +73,7 @@ func _tile_done_hiding():
 
 func _on_correct_tile_selected():
 	self.selected_right += 1
+	self.emit_signal("correct_selected")
 	self._emit_if_done()
 	
 func _on_incorrect_tile_selected():
