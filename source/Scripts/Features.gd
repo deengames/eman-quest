@@ -9,7 +9,8 @@ var _feature_map = {
 	"n-back battle triggers": false,
 	"unlimited battle choices": false,
 	"zoom-out maps": false,
-	"instant actions": true
+	"instant actions": true,
+	"streamlined battles: enemy triggers": false
 }
 
 func set(feature, enabled):

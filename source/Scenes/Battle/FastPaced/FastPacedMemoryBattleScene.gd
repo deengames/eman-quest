@@ -8,7 +8,7 @@ const _MONSTER_NUM_TILES = 4
 var _action_resolver = preload("res://Scripts/Battle/ActionResolver.gd").new()
 var _player # BattlePlayer.new
 var _monster_data = {}
-var _multiplier
+var _multiplier = 0
 
 var _is_players_turn = false
 
@@ -87,7 +87,6 @@ func _start_next_turn():
 	var num_tiles = 0
 	
 	self._is_players_turn = not self._is_players_turn
-	$StatusLabel.text = ""
 	$RecallGrid.reset()
 	
 	if self._is_players_turn:
@@ -99,10 +98,19 @@ func _start_next_turn():
 	
 	$NextTurnButton.visible = false
 	$ActionsPanel.visible = false
-	
-	# Execute
-	var tiles = $RecallGrid.pick_tiles(num_tiles)
-	$RecallGrid.show_tiles(tiles)
+
+	# Players turn? Monsters turn and streamlined triggers = on?
+	if (self._is_players_turn or
+		(not self._is_players_turn and Features.is_enabled("streamlined battles: enemy triggers"))
+	):
+		# Execute
+		var tiles = $RecallGrid.pick_tiles(num_tiles)
+		$RecallGrid.show_tiles(tiles)
+	# Monsters turn and streamlined triggers = off
+	elif not self._is_players_turn and not Features.is_enabled("streamlined battles: enemy triggers"):
+		self._resolve_monster_turn()
+		# Avoid having to click Next Turn for nothing
+		self._start_next_turn()
 
 func _on_AttackButton_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton and event.pressed) or (OS.has_feature("Android") and event is InputEventMouseMotion):

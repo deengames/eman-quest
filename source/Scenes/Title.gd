@@ -116,3 +116,6 @@ func _on_UnlimitedBattleChoicesToggle_toggled(button_pressed):
 
 func _on_ZoomOutToggle_toggled(button_pressed):
 	Features.set("zoom-out maps", button_pressed)
+
+func _on_StreamlinedBattleEnemyTriggersToggle_toggled(button_pressed):
+	Features.set("streamlined battles: enemy triggers", button_pressed)
