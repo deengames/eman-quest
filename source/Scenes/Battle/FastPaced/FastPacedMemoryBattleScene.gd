@@ -4,7 +4,7 @@ const BattleResolution = preload("res://Scripts/Battle/BattleResolution.gd")
 
 const _MULTIPLIER_BASE = 1.1 # For attacks, 1.1^7 = ~2x, double if perfect pick...
 const _MONSTER_NUM_TILES = 4
-const _MONSTER_TURN_DISPLAY_SECONDS = 1
+const _MONSTER_TURN_DISPLAY_SECONDS = 2
 
 var _action_resolver = preload("res://Scripts/Battle/ActionResolver.gd").new()
 var _player # BattlePlayer.new
@@ -79,10 +79,13 @@ func _resolve_monster_turn():
 	$StatusLabel.text = message
 	
 	self._update_health_displays()
-	yield(get_tree().create_timer(_MONSTER_TURN_DISPLAY_SECONDS), 'timeout')
 	
 	if self._player.current_health <= 0:
 		self._show_battle_end(false)
+
+	yield(get_tree().create_timer(_MONSTER_TURN_DISPLAY_SECONDS), 'timeout')
+	# Avoid having to click Next Turn for nothing
+	self._start_next_turn()
 
 func _on_NextTurnButton_pressed():
 	self._start_next_turn()
@@ -114,8 +117,7 @@ func _start_next_turn():
 	# Monsters turn and streamlined triggers = off
 	elif not self._is_players_turn and not Features.is_enabled("streamlined battles: enemy triggers"):
 		self._resolve_monster_turn()
-		# Avoid having to click Next Turn for nothing
-		self._start_next_turn()
+
 
 func _on_correct_selected():
 	self._actions_left += 1
