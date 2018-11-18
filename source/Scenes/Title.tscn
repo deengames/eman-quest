@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/Title.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/Lato-Black.ttf" type="DynamicFontData" id=2]
@@ -35,14 +35,6 @@ use_filter = false
 font_data = ExtResource( 2 )
 _sections_unfolded = [ "Font", "Font/fallback", "Settings" ]
 
-[sub_resource type="DynamicFont" id=5]
-
-size = 32
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 2 )
-_sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
-
 [sub_resource type="DynamicFont" id=6]
 
 size = 24
@@ -51,7 +43,7 @@ use_filter = false
 font_data = ExtResource( 2 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -176,7 +168,6 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-_sections_unfolded = [ "Margin" ]
 
 [node name="XButton" type="Button" parent="DebugPanel" index="0"]
 
@@ -319,9 +310,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 25.0
-margin_top = 261.0
+margin_top = 321.0
 margin_right = 571.0
-margin_bottom = 313.0
+margin_bottom = 373.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -339,16 +330,16 @@ flat = false
 align = 0
 _sections_unfolded = [ "Margin", "custom_fonts" ]
 
-[node name="AlternateBattleButton" type="Button" parent="DebugPanel" index="6"]
+[node name="StreamlinedBattlesToggle" type="CheckButton" parent="DebugPanel" index="6"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 730.0
-margin_top = 392.0
-margin_right = 822.0
-margin_bottom = 437.0
+margin_left = 25.0
+margin_top = 261.0
+margin_right = 571.0
+margin_bottom = 313.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -356,15 +347,16 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 5 )
-toggle_mode = false
+custom_fonts/font = SubResource( 4 )
+toggle_mode = true
+pressed = true
 enabled_focus_mode = 2
 shortcut = null
 group = null
-text = "plzno"
+text = "Streamlined: enemy triggers"
 flat = false
-align = 1
-_sections_unfolded = [ "custom_fonts" ]
+align = 0
+_sections_unfolded = [ "Margin", "custom_fonts" ]
 
 [node name="Button2" type="Button" parent="DebugPanel" index="7"]
 
@@ -373,9 +365,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 661.0
-margin_top = 269.0
+margin_top = 279.0
 margin_right = 822.0
-margin_bottom = 313.0
+margin_bottom = 323.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -400,9 +392,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 629.0
-margin_top = 329.0
+margin_top = 339.0
 margin_right = 826.0
-margin_bottom = 373.0
+margin_bottom = 383.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -438,7 +430,7 @@ _sections_unfolded = [ "Margin", "custom_fonts" ]
 
 [connection signal="toggled" from="DebugPanel/StreamlinedBattleEnemyTriggersToggle" to="." method="_on_StreamlinedBattleEnemyTriggersToggle_toggled"]
 
-[connection signal="pressed" from="DebugPanel/AlternateBattleButton" to="." method="_on_AlternateBattleButton_pressed"]
+[connection signal="toggled" from="DebugPanel/StreamlinedBattlesToggle" to="." method="_on_StreamlinedBattlesToggle_toggled"]
 
 [connection signal="pressed" from="DebugPanel/Button2" to="." method="_on_simplebattle_button_pressed"]
 

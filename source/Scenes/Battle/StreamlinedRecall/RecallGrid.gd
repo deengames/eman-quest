@@ -1,6 +1,6 @@
 extends Node2D
 
-const RecallTile = preload("res://Scenes/Battle/FastPaced/RecallTile.tscn")
+const RecallTile = preload("res://Scenes/Battle/StreamlinedRecall/RecallTile.tscn")
 
 signal picked_all_tiles
 signal correct_selected

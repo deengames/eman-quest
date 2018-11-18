@@ -50,7 +50,6 @@ func set_monster_data(data):
 	data["next_round_turns"] = data["turns"]
 	data["max_health"] = data["health"]
 	self._monster_data = data
-	
 
 func go_turbo():
 	# Advanced mode ENABLED.

@@ -10,6 +10,7 @@ var _feature_map = {
 	"unlimited battle choices": false,
 	"zoom-out maps": false,
 	"instant actions": true,
+	"streamlined battles": true,
 	"streamlined battles: enemy triggers": false
 }
 

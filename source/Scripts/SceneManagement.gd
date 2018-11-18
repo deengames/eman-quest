@@ -4,6 +4,7 @@ const AreaType = preload("res://Scripts/Enums/AreaType.gd")
 const Boss = preload("res://Entities/Battle/Boss.gd")
 const MapNameLabel = preload("res://Scenes/UI/MapNameLabel.tscn")
 const MemoryTileBattleScene = preload("res://Scenes/Battle/MemoryTileBattleScene.tscn")
+const StreamlinedRecallBattleScene = preload("res://Scenes/Battle/StreamlinedRecall/StreamlinedRecallBattleScene.tscn")
 const PopulatedMapScene = preload("res://Scenes/PopulatedMapScene.tscn")
 const TweenHelper = preload("res://Scripts/TweenHelper.gd")
 
@@ -113,7 +114,12 @@ static func switch_to_battle_if_touched_player(monster, body):
 		if monster.data_object is Boss:
 			Globals.battle_spoils = Globals.current_monster.key_item
 		
-		var battle_scene = MemoryTileBattleScene.instance()
+		var battle_scene = null
+		if Features.is_enabled("streamlined battles"):
+			battle_scene = StreamlinedRecallBattleScene.instance()
+		else:
+			battle_scene = MemoryTileBattleScene.instance()
+			
 		battle_scene.set_monster_data(monster.data_object["data"].duplicate())
 		change_scene_to(monster.get_tree(), battle_scene)
 

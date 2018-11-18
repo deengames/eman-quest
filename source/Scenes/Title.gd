@@ -1,7 +1,6 @@
 extends Node2D
 
 var BattlePlayer = preload("res://Entities/Battle/BattlePlayer.gd")
-var FastPacedMemoryBattleScene = preload("res://Scenes/Battle/FastPaced/FastPacedMemoryBattleScene.tscn")
 var MemoryTileBattleScene = preload("res://Scenes/Battle/MemoryTileBattleScene.tscn")
 var SceneManagement = preload("res://Scripts/SceneManagement.gd")
 var Slime = preload("res://Entities/Battle/Monster.tscn")
@@ -65,36 +64,11 @@ func _on_AdvancedBattleButton_pressed():
 	
 	SceneManagement.change_scene_to(get_tree(), battle_scene)
 
-func _on_AlternateBattleButton_pressed():
-	var battle_scene = FastPacedMemoryBattleScene.instance()
-	
-	var monster = {
-		"type": "Slime",
-		"health": 40,
-		"strength": 15,
-		"defense": 6,
-		"turns": 1,
-		"experience points": 10,
-		"skill_probability": 40, # 40 = 40%
-		"skills": {
-			# These should add up to 100
-			"chomp": 100 # 20%,
-		}
-	}
-	
-	var battler = BattlePlayer.new()
-	battler.strength = 3
-	battler.num_actions = 5
-	
-	battle_scene.set_combatants(battler, monster)
-	SceneManagement.change_scene_to(get_tree(), battle_scene)
-
 func _on_LoadGameButton_pressed():
 	get_tree().change_scene("res://Scenes/LoadingScene.tscn")
 
 func _on_DebugButton_pressed():
 	$DebugPanel.visible = true
-
 
 func _on_XButton_pressed():
 	$DebugPanel.visible = false
@@ -120,3 +94,7 @@ func _on_ZoomOutToggle_toggled(button_pressed):
 
 func _on_StreamlinedBattleEnemyTriggersToggle_toggled(button_pressed):
 	Features.set("streamlined battles: enemy triggers", button_pressed)
+
+
+func _on_StreamlinedBattlesToggle_toggled(button_pressed):
+		Features.set("streamlined battles", button_pressed)

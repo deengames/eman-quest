@@ -1,24 +1,25 @@
 extends Node2D
 
 const BattleResolution = preload("res://Scripts/Battle/BattleResolution.gd")
+const MonsterScaler = preload("res://Scripts/Battle/MonsterScaler.gd")
 
 const _MULTIPLIER_BASE = 1.1 # For attacks, 1.1^7 = ~2x, double if perfect pick...
 const _MONSTER_NUM_TILES = 4
 const _MONSTER_TURN_DISPLAY_SECONDS = 2
 
 var _action_resolver = preload("res://Scripts/Battle/ActionResolver.gd").new()
-var _player # BattlePlayer.new
+var _player = preload("res://Entities//Battle/BattlePlayer.gd").new()
 var _monster_data = {}
 var _multiplier = 0
 var _actions_left = 0
 
 var _is_players_turn = false
 
-func set_combatants(player, monster_data):
-	self._player = player
-	self._monster_data = monster_data
-	self._monster_data["max_health"] = self._monster_data["health"]
-	$RecallGrid.battle_player = player
+func set_monster_data(data):
+	MonsterScaler.scale_monster_data(data)
+	data["next_round_turns"] = data["turns"]
+	data["max_health"] = data["health"]
+	self._monster_data = data
 
 func _ready():
 	var image_name = self._monster_data["type"].replace(' ', '')
@@ -26,6 +27,7 @@ func _ready():
 	$MonsterControls/MonsterSprite.texture = load("res://assets/images/monsters/" + image_name + ".png")
 	$PlayerControls/PlayerHealth.max_value = self._player.max_health
 	
+	$RecallGrid.battle_player = self._player
 	$RecallGrid.connect("picked_all_tiles", self, "_on_picked_all_tiles")
 	$RecallGrid.connect("correct_selected", self, "_on_correct_selected")
 	
