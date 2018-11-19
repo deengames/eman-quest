@@ -268,7 +268,7 @@ anchor_bottom = 0.0
 margin_left = 24.0
 margin_top = 316.0
 margin_right = 244.0
-margin_bottom = 496.0
+margin_bottom = 508.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -279,8 +279,11 @@ _sections_unfolded = [ "Mouse" ]
 
 [node name="Controls" type="Node2D" parent="ActionsPanel" index="0"]
 
+position = Vector2( 0, 40 )
+
 [node name="AttackButton" type="Button" parent="ActionsPanel/Controls" index="0"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -314,6 +317,7 @@ _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [node name="CriticalButton" type="Button" parent="ActionsPanel/Controls" index="1"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -347,6 +351,7 @@ _sections_unfolded = [ "Offset", "Region", "Transform", "Visibility" ]
 
 [node name="PotionButton" type="Button" parent="ActionsPanel/Controls" index="2"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -378,6 +383,39 @@ region_enabled = true
 region_rect = Rect2( 192, 0, 64, 64 )
 _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
+[node name="DefendButton" type="Button" parent="ActionsPanel/Controls" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 8.0
+margin_top = 80.0
+margin_right = 72.0
+margin_bottom = 144.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+flat = false
+align = 1
+_sections_unfolded = [ "Margin" ]
+
+[node name="Sprite" type="Sprite" parent="ActionsPanel/Controls/DefendButton" index="0"]
+
+texture = ExtResource( 8 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 128, 0, 64, 64 )
+_sections_unfolded = [ "Offset", "Region", "Transform" ]
+
 [node name="ActionsLabel" type="Label" parent="." index="7"]
 
 anchor_left = 0.0
@@ -385,9 +423,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 47.0
-margin_top = 419.0
+margin_top = 319.0
 margin_right = 212.0
-margin_bottom = 463.0
+margin_bottom = 363.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -408,5 +446,7 @@ _sections_unfolded = [ "custom_fonts" ]
 [connection signal="pressed" from="ActionsPanel/Controls/CriticalButton" to="." method="_on_CriticalButton_pressed"]
 
 [connection signal="pressed" from="ActionsPanel/Controls/PotionButton" to="." method="_on_PotionButton_pressed"]
+
+[connection signal="pressed" from="ActionsPanel/Controls/DefendButton" to="." method="_on_DefendButton_pressed"]
 
 

@@ -3,7 +3,7 @@ extends Node
 var _feature_map = {
 	"consecutive picks battle bonus": true,
 	"actions require energy": false,
-	"defend action": false,
+	"defend action": true,
 	"equipment generates tiles": true,
 	"sequence battle triggers": true,
 	"n-back battle triggers": false,

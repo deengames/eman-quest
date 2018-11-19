@@ -31,6 +31,9 @@ func _ready():
 	$RecallGrid.connect("picked_all_tiles", self, "_on_picked_all_tiles")
 	$RecallGrid.connect("correct_selected", self, "_on_correct_selected")
 	
+	if not Features.is_enabled("defend action"):
+		$ActionsPanel/Controls/DefendButton.visible = false
+	
 	self._update_health_displays()
 	$StatusLabel.text = ""
 	$NextTurnButton.visible = false
@@ -87,8 +90,11 @@ func _resolve_monster_turn():
 	
 	if self._player.current_health <= 0:
 		self._show_battle_end(false)
+	
+	self._player.reset() # times defended
 
 	yield(get_tree().create_timer(_MONSTER_TURN_DISPLAY_SECONDS), 'timeout')
+	
 	# Avoid having to click Next Turn for nothing
 	self._start_next_turn()
 
@@ -141,3 +147,5 @@ func _on_CriticalButton_pressed():
 	# Fade out 50% so hopefully the user can tell that it's disabled
 	$ActionsPanel/Controls/CriticalButton/Sprite.modulate.a = 0.5
 
+func _on_DefendButton_pressed():
+	self._resolve_players_turn("defend")
