@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/Battle/StreamlinedRecall/StreamlinedRecallBattleScene.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/monsters/GoldSlime.png" type="Texture" id=2]
@@ -32,11 +32,6 @@ use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 5 )
 _sections_unfolded = [ "Font", "Settings" ]
-
-[sub_resource type="RectangleShape2D" id=4]
-
-custom_solver_bias = 0.0
-extents = Vector2( 32, 32 )
 
 [sub_resource type="DynamicFont" id=5]
 
@@ -282,84 +277,106 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Mouse" ]
 
-[node name="AttackButton" type="Sprite" parent="ActionsPanel" index="0"]
+[node name="Controls" type="Node2D" parent="ActionsPanel" index="0"]
 
-editor/display_folded = true
-position = Vector2( 8, 10 )
+[node name="AttackButton" type="Button" parent="ActionsPanel/Controls" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 8.0
+margin_top = 10.0
+margin_right = 72.0
+margin_bottom = 74.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+flat = false
+align = 1
+_sections_unfolded = [ "Margin" ]
+
+[node name="Sprite" type="Sprite" parent="ActionsPanel/Controls/AttackButton" index="0"]
+
 texture = ExtResource( 8 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 64, 64 )
-_sections_unfolded = [ "Offset", "Region" ]
+_sections_unfolded = [ "Offset", "Region", "Transform" ]
 
-[node name="Area2D" type="Area2D" parent="ActionsPanel/AttackButton" index="0"]
+[node name="CriticalButton" type="Button" parent="ActionsPanel/Controls" index="1"]
 
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
-_sections_unfolded = [ "Collision", "Pickable", "Transform", "Visibility" ]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 78.0
+margin_top = 10.0
+margin_right = 142.0
+margin_bottom = 74.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+flat = false
+align = 1
+_sections_unfolded = [ "Margin" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionsPanel/AttackButton/Area2D" index="0"]
+[node name="Sprite" type="Sprite" parent="ActionsPanel/Controls/CriticalButton" index="0"]
 
-position = Vector2( 32, 32 )
-shape = SubResource( 4 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="CriticalButton" type="Sprite" parent="ActionsPanel" index="1"]
-
-editor/display_folded = true
-position = Vector2( 78, 10 )
 texture = ExtResource( 8 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 64, 0, 64, 64 )
-_sections_unfolded = [ "Offset", "Region" ]
+_sections_unfolded = [ "Offset", "Region", "Transform", "Visibility" ]
 
-[node name="Area2D" type="Area2D" parent="ActionsPanel/CriticalButton" index="0"]
+[node name="PotionButton" type="Button" parent="ActionsPanel/Controls" index="2"]
 
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 148.0
+margin_top = 10.0
+margin_right = 212.0
+margin_bottom = 74.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+flat = false
+align = 1
+_sections_unfolded = [ "Margin" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionsPanel/CriticalButton/Area2D" index="0"]
+[node name="Sprite" type="Sprite" parent="ActionsPanel/Controls/PotionButton" index="0"]
 
-position = Vector2( 32, 32 )
-shape = SubResource( 4 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="PotionButton" type="Sprite" parent="ActionsPanel" index="2"]
-
-editor/display_folded = true
-position = Vector2( 148, 10 )
 texture = ExtResource( 8 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 192, 0, 64, 64 )
-_sections_unfolded = [ "Offset", "Region" ]
-
-[node name="Area2D" type="Area2D" parent="ActionsPanel/PotionButton" index="0"]
-
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ActionsPanel/PotionButton/Area2D" index="0"]
-
-position = Vector2( 32, 32 )
-shape = SubResource( 4 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [node name="ActionsLabel" type="Label" parent="." index="7"]
 
@@ -386,10 +403,10 @@ _sections_unfolded = [ "custom_fonts" ]
 
 [connection signal="pressed" from="NextTurnButton" to="." method="_on_NextTurnButton_pressed"]
 
-[connection signal="input_event" from="ActionsPanel/AttackButton/Area2D" to="." method="_on_AttackButton_input_event"]
+[connection signal="pressed" from="ActionsPanel/Controls/AttackButton" to="." method="_on_AttackButton_pressed"]
 
-[connection signal="input_event" from="ActionsPanel/CriticalButton/Area2D" to="." method="_on_CriticalButton_input_event"]
+[connection signal="pressed" from="ActionsPanel/Controls/CriticalButton" to="." method="_on_CriticalButton_pressed"]
 
-[connection signal="input_event" from="ActionsPanel/PotionButton/Area2D" to="." method="_on_PotionButton_input_event"]
+[connection signal="pressed" from="ActionsPanel/Controls/PotionButton" to="." method="_on_PotionButton_pressed"]
 
 

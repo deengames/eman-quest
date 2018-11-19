@@ -54,7 +54,10 @@ func _on_picked_all_tiles():
 	$RecallGrid.make_unselectable()
 	
 	if self._is_players_turn:
-		$ActionsPanel.visible = true
+		$ActionsPanel/Controls.visible = true
+		# Reset crit button if it's set
+		$ActionsPanel/Controls/CriticalButton.disabled = false
+		$ActionsPanel/Controls/CriticalButton/Sprite.modulate.a = 1
 	else:
 		self._resolve_monster_turn()
 
@@ -73,7 +76,7 @@ func _resolve_players_turn(action):
 		self._show_battle_end(true)
 	
 	if self._actions_left == 0: 
-		$ActionsPanel.visible = false
+		$ActionsPanel/Controls.visible = false
 		$NextTurnButton.visible = true
 
 func _resolve_monster_turn():
@@ -107,7 +110,7 @@ func _start_next_turn():
 		num_tiles = _MONSTER_NUM_TILES
 	
 	$NextTurnButton.visible = false
-	$ActionsPanel.visible = false
+	$ActionsPanel/Controls.visible = false
 
 	# Players turn? Monsters turn and streamlined triggers = on?
 	if (self._is_players_turn or
@@ -120,20 +123,21 @@ func _start_next_turn():
 	elif not self._is_players_turn and not Features.is_enabled("streamlined battles: enemy triggers"):
 		self._resolve_monster_turn()
 
-
 func _on_correct_selected():
 	self._actions_left += 1
 	# Updates actions-left
 	self._update_health_displays()
 
-func _on_AttackButton_input_event(viewport, event, shape_idx):
-	if (event is InputEventMouseButton and event.pressed) or (OS.has_feature("Android") and event is InputEventMouseMotion):
-		self._resolve_players_turn("attack")
+func _on_AttackButton_pressed():
+	self._resolve_players_turn("attack")
 
-func _on_CriticalButton_input_event(viewport, event, shape_idx):
-	if (event is InputEventMouseButton and event.pressed) or (OS.has_feature("Android") and event is InputEventMouseMotion):
-		self._resolve_players_turn("critical")
+func _on_PotionButton_pressed():
+	self._resolve_players_turn("heal")
 
-func _on_PotionButton_input_event(viewport, event, shape_idx):
-	if (event is InputEventMouseButton and event.pressed) or (OS.has_feature("Android") and event is InputEventMouseMotion):
-		self._resolve_players_turn("heal")
+func _on_CriticalButton_pressed():
+	self._resolve_players_turn("critical")
+	# Can only hit once.
+	$ActionsPanel/Controls/CriticalButton.disabled = true
+	# Fade out 50% so hopefully the user can tell that it's disabled
+	$ActionsPanel/Controls/CriticalButton/Sprite.modulate.a = 0.5
+
