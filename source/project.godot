@@ -24,6 +24,10 @@ Features="*res://Scripts/Features.gd"
 window/size/width=960
 window/size/height=576
 
+[editor_plugins]
+
+enabled=PoolStringArray( "paulloz.colorblindness" )
+
 [rendering]
 
 quality/2d/use_pixel_snap=true
