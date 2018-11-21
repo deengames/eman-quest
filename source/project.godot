@@ -16,17 +16,13 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Globals="*res://Scripts/Globals.gd"
 Features="*res://Scripts/Features.gd"
+Globals="*res://Scripts/Globals.gd"
 
 [display]
 
 window/size/width=960
 window/size/height=576
-
-[editor_plugins]
-
-enabled=PoolStringArray( "paulloz.colorblindness" )
 
 [rendering]
 
