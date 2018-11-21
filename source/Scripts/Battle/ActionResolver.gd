@@ -97,7 +97,10 @@ func _process_attack(action, monster_data, player, boost_amount, memory_grid):
 		if memory_grid != null: # null on fast-paced battle grid
 			memory_grid.freeze(SHOCK_TURNS, 5)
 	elif action == "vampire":
-		damage = floor(monster_data["strength"] * 1.5)
+		var multiplier = 1.5
+		if "vampire multiplier" in monster_data:
+			multiplier = monster_data["vampire multiplier"]
+		damage = floor(monster_data["strength"] * multiplier)
 		message = monster_name + " hits/absorbs "
 		monster_data["health"] += damage
 		# Don't allow overhealing. Bats are nigh unto impossible to kill otherwise.

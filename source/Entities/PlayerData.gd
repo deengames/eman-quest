@@ -48,6 +48,12 @@ func _init():
 	randomize()
 	self.weapon = EquipmentGenerator.generate("weapon", StatType.Strength, 10)
 	self.armour = EquipmentGenerator.generate("armour", StatType.Defense, 8)
+	
+	if Features.is_enabled("streamlined battles"):
+		# Different set of balancing
+		self.health = 30
+		self.strength = 5
+		self.defense = 4
 
 func to_dict():
 	return {

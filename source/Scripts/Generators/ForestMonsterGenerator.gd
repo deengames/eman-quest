@@ -3,13 +3,14 @@ extends Node
 const Monster = preload("res://Entities/Battle/Monster.gd")
 const SpotFinder = preload("res://Scripts/Maps/SpotFinder.gd")
 
+# Map type => monster => data
 const MONSTER_VARIANT_DATA = {
 	"Slime": {
 		"Gold Slime": {
 			"type": "Gold Slime",
 			"weight": 70,
 			"health": 40,
-			"strength": 20,
+			"strength": 15, # was 20
 			"defense": 10,
 			"turns": 1,
 			"experience points": 10,
@@ -23,11 +24,12 @@ const MONSTER_VARIANT_DATA = {
 		"Vampire Bat": {
 			"type": "Vampire Bat",
 			"weight": 30,
-			"health": 38,
-			"strength": 24,
+			"health": 48, # was 38
+			"strength": 24, # was 24
 			"defense": 8,
 			"turns": 1,
 			"experience points": 15,
+			"vampire multiplier": 1.1, # normal is 1.5
 			
 			"skill_probability": 20,
 			"skills": {
