@@ -21,13 +21,13 @@ const _VARIANT_TILESETS = {
 }
 
 const _PATHS_BUFFER_FROM_EDGE = 5
-const _NUM_ROOMS = [15, 20]
+const _NUM_ROOMS = [10, 15]
 const _NUM_CHESTS = [0, 1]
-const _ROOM_SIZE = [8, 12] # tiles
+const _ROOM_SIZE = [6, 8] # tiles
 const _ITEM_POWER = [30, 50]
 
-var map_width = 4 * Globals.SUBMAP_WIDTH_IN_TILES
-var map_height = 5 * Globals.SUBMAP_HEIGHT_IN_TILES
+var map_width = Globals.SUBMAP_WIDTH_IN_TILES
+var map_height = Globals.SUBMAP_HEIGHT_IN_TILES
 
 var _wall_map = []
 
@@ -81,11 +81,13 @@ func _generate_cave(area_type, transitions):
 func _generate_rooms(transitions, ground_map, wall_map):
 	
 	var to_generate = Globals.randint(_NUM_ROOMS[0], _NUM_ROOMS[1])
-	var min_room_distance = 3 * _ROOM_SIZE[1] # max size = min distance
+	var min_room_distance = _ROOM_SIZE[1] + _PATHS_BUFFER_FROM_EDGE # max size = min distance
 	var rooms = [] # Array of Rect2s
 	var previous = null
+	var tries = 0
 
-	while to_generate > 0:
+	while to_generate > 0 and tries < 1000:
+		tries += 1
 		var width = Globals.randint(_ROOM_SIZE[0], _ROOM_SIZE[1])
 		var height = Globals.randint(_ROOM_SIZE[0], _ROOM_SIZE[1])
 		var x = Globals.randint(_PATHS_BUFFER_FROM_EDGE, map_width - width - _PATHS_BUFFER_FROM_EDGE - 1)
@@ -95,24 +97,28 @@ func _generate_rooms(transitions, ground_map, wall_map):
 			continue
 			
 		var current_room = Rect2(x, y, width, height)
+		var generate = true
 
 		for node in rooms:
 			# Not too close to previous rooms. Implicitly, doesn't overlap.
 			if sqrt(pow(x - node.position.x, 2) + pow(y - node.position.y, 2)) <= min_room_distance:
+				generate = false
 				continue
 			
 			# Doesn't overlap previous rooms
 			if current_room.intersects(node):
+				generate = false
 				continue
-			
-		self._generate_room(current_room, ground_map, wall_map)
-		rooms.append(current_room)
-		if previous != null:
-			var source = _center_of(previous)
-			var target = _center_of(current_room)
-			self._generate_straight_path(source, target, ground_map, wall_map)
-		previous = current_room
-		to_generate -= 1
+		
+		if generate:
+			self._generate_room(current_room, ground_map, wall_map)
+			rooms.append(current_room)
+			if previous != null:
+				var source = _center_of(previous)
+				var target = _center_of(current_room)
+				self._generate_straight_path(source, target, ground_map, wall_map)
+			previous = current_room
+			to_generate -= 1
 
 	# Generate a node close to entrances (5-10 tiles "in" from the entrance).
 	# Then, connect entrance => new node => closest path node
