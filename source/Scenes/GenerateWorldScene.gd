@@ -10,8 +10,8 @@ const MapLayoutGenerator = preload("res://Scripts/Generators/MapLayoutGenerator.
 const OverworldGenerator = preload("res://Scripts/Generators/OverworldGenerator.gd")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
-const ForestVariations = ["Slime"]#, "Frost"] # Death
-const CaveVariations = ["River"] # Lava, Crystal
+const ForestVariations = ["Slime", "Frost"] # Death
+const CaveVariations = ["Lava"]#["River"] # Lava, Crystal
 const DungeonVariations = ["Castle"] # Skeleton, Minotaur
 
 func _ready():

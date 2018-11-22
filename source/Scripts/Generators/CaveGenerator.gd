@@ -17,7 +17,8 @@ const _BOSS_DATA = {
 }
 
 const _VARIANT_TILESETS = {
-	"River": "auto:RiverCave",
+	#"River": "auto:RiverCave",
+	"Lava": "auto:LavaCave",
 }
 
 const _WATER_DECORATION_TILE_CHOICES = ["WaterRock1", "WaterRock2", "WaterRock3", "WaterRock4"]
