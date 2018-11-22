@@ -6,7 +6,7 @@
 [ext_resource path="res://addons/paulloz.colorblindness/colorblindness.gd" type="Script" id=4]
 [ext_resource path="res://addons/paulloz.colorblindness/icon.svg" type="Texture" id=5]
 
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -168,16 +168,17 @@ margin_bottom = 576.0
 rect_min_size = Vector2( 960, 576 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 0
+mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 1, 1, 1, 1 )
 script = ExtResource( 4 )
+_sections_unfolded = [ "Mouse" ]
 __meta__ = {
 "_editor_icon": ExtResource( 5 )
 }
-Type = 2
+Type = 0
 
 [connection signal="pressed" from="UI/StatsButton" to="UI" method="_on_StatsButton_pressed"]
 
