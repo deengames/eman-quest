@@ -74,6 +74,7 @@ var map_width = Globals.SUBMAP_WIDTH_IN_TILES
 var map_height = 3 * Globals.SUBMAP_HEIGHT_IN_TILES
 
 var _clearings_coordinates = []
+var _ground_map = []
 var _tree_map = []
 
 # Called once per game
@@ -82,6 +83,7 @@ func generate(submap, transitions, variation_name):
 	var map = AreaMap.new("Forest", variation_name, tileset, map_width, map_height, submap.area_type)
 
 	var tile_data = self._generate_forest(submap.area_type, transitions) # generates paths too
+	self._ground_map = tile_data[0]
 	self._tree_map = tile_data[1]
 	
 	map.transitions = transitions
@@ -231,7 +233,7 @@ func _generate_treasure_chests():
 	
 	while num_chests > 0:
 		var spot = SpotFinder.find_empty_spot(map_width, map_height,
-			self._tree_map, chests_coordinates)
+			self._ground_map, self._tree_map, ["Grass", "Dirt"], chests_coordinates)
 			
 		var type = types[randi() % len(types)]
 		var power = Globals.randint(_MIN_ITEM_POWER, _MAX_ITEM_POWER)

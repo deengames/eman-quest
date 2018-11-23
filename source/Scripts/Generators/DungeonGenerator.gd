@@ -33,6 +33,7 @@ const _MAX_TORCHES_PER_ROOM = 2 # inclusive
 var map_width = Globals.SUBMAP_WIDTH_IN_TILES
 var map_height = Globals.SUBMAP_HEIGHT_IN_TILES
 
+var _ground_map = []
 var _wall_map = []
 
 # Called once per game
@@ -41,6 +42,7 @@ func generate(submap, transitions, variation_name):
 	var map = AreaMap.new("Dungeon", variation_name, tileset, map_width, map_height, submap.area_type)
 
 	var tile_data = self._generate_cave(submap.area_type, transitions) # generates paths too
+	self._ground_map = tile_data[0]
 	self._wall_map = tile_data[1]
 
 	map.transitions = transitions
@@ -284,7 +286,7 @@ func _generate_treasure_chests():
 
 	while num_chests > 0:
 		var spot = SpotFinder.find_empty_spot(map_width, map_height,
-			self._wall_map, chests_coordinates)
+			self._ground_map, self._wall_map, ["Ground"], chests_coordinates)
 
 		var type = types[randi() % len(types)]
 		var power = Globals.randint(_ITEM_POWER[0], _ITEM_POWER[1])

@@ -172,10 +172,14 @@ func _generate_treasure_chests():
 	var chests_coordinates = []
 	var types = ["weapon", "armour"]
 	var stats = {"weapon": StatType.Strength, "armour": StatType.Defense}
+	
+	# Sigh, refactoring. This map has no separate object/wall map. So pass
+	# an empty map in here.
+	var empty_map = TwoDimensionalArray.new(map_width, map_height)
 
 	while num_chests > 0:
 		var spot = SpotFinder.find_empty_spot(map_width, map_height,
-			self._ground_tilemap, chests_coordinates)
+			self._ground_tilemap, empty_map, ["Ground"], chests_coordinates)
 
 		var type = types[randi() % len(types)]
 		var power = Globals.randint(_ITEM_POWER[0], _ITEM_POWER[1])
