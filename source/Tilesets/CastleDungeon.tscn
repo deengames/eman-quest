@@ -17,16 +17,17 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 64, 64 )
 _sections_unfolded = [ "Offset", "Region" ]
 
-[node name="Wall" type="Sprite" parent="." index="1"]
+[node name="OldWall" type="Sprite" parent="." index="1"]
 
+editor/display_folded = true
 position = Vector2( 80, 0 )
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 64, 0, 64, 64 )
+region_rect = Rect2( 0, 128, 64, 64 )
 _sections_unfolded = [ "Offset", "Region" ]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Wall" index="0"]
+[node name="StaticBody2D" type="StaticBody2D" parent="OldWall" index="0"]
 
 input_pickable = false
 collision_layer = 1
@@ -36,10 +37,24 @@ constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall/StaticBody2D" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OldWall/StaticBody2D" index="0"]
 
 position = Vector2( 32, 32 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
+
+[node name="Ceiling" type="Sprite" parent="." index="2"]
+
+position = Vector2( 160, 0 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset", "Transform" ]
+
+[node name="Wall" type="Sprite" parent="." index="3"]
+
+position = Vector2( 244, 0 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset", "Transform" ]
 
 
