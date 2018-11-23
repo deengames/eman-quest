@@ -53,7 +53,10 @@ func has(x, y):
 	
 func get(x, y):
 	var index = self._get_index(x, y)
-	return self._data[index]
+	if index < len(self._data):
+		return self._data[index]
+	else:
+		return null
 
 func set(x, y, item):
 	var index = self._get_index(x, y)

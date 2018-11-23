@@ -165,15 +165,17 @@ func _generate_straight_path(point1, point2, ground_map, wall_map):
 	
 	var dx = stop_x - start_x
 	var dy = stop_y - start_y
-	
+		
 	if randi() % 100 <= 50:
 		# horizontal, then vertical
 		self._generate_path([start_x, start_y], [stop_x, start_y], ground_map, wall_map)
 		self._generate_path([stop_x, start_y], [stop_x, stop_y], ground_map, wall_map)
+		self._generate_door(start_x + ((stop_x - start_x) / 2), start_y, wall_map)
 	else:
 		# vertical, then horizontal
 		self._generate_path([start_x, start_y], [start_x, stop_y], ground_map, wall_map)
 		self._generate_path([start_x, stop_y], [stop_x, stop_y], ground_map, wall_map)
+		self._generate_door(start_x, start_y + ((stop_y - start_y) / 2), wall_map)
 
 func _find_closest_room_to(room, rooms):
 	var closest_node = rooms[0]
@@ -186,6 +188,30 @@ func _find_closest_room_to(room, rooms):
 			closest_distance = distance
 	
 	return closest_node
+
+func _generate_door(x, y, wall_map):
+	var adjacent_ground = 0
+	
+	if wall_map.get(x - 1, y - 1) == null:
+		adjacent_ground += 1
+	if wall_map.get(x, y - 1) == null:
+		adjacent_ground += 1
+	if wall_map.get(x + 1, y - 1) == null:
+		adjacent_ground += 1
+	if wall_map.get(x - 1, y) == null:
+		adjacent_ground += 1
+	if wall_map.get(x + 1, y) == null:
+		adjacent_ground += 1
+	if wall_map.get(x - 1, y + 1) == null:
+		adjacent_ground += 1
+	if wall_map.get(x, y + 1) == null:
+		adjacent_ground += 1
+	if wall_map.get(x + 1, y + 1) == null:
+		adjacent_ground += 1
+	
+	# Must have two adjacent wall tiles
+	if adjacent_ground == 2:
+		self._set_tile([x, y], "Door", wall_map)
 
 func _generate_room(room_rect, ground_map, wall_map):
 	for v in range(room_rect.size.y):
