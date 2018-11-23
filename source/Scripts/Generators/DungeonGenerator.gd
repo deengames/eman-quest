@@ -17,7 +17,7 @@ const _BOSS_DATA = {
 }
 
 const _VARIANT_TILESETS = {
-	"Castle": "res://Tilesets/CastleDungeon.tres",
+	"Castle": "auto:CastleDungeon",
 }
 
 const _PATHS_BUFFER_FROM_EDGE = 5
@@ -72,7 +72,7 @@ func _generate_cave(area_type, transitions):
 
 	var wall_map = TwoDimensionalArray.new(self.map_width, self.map_height)
 	to_return.append(wall_map)
-	self._fill_with("Wall", wall_map)
+	self._fill_with("Ceiling", wall_map)
 
 	self._generate_rooms(transitions, ground_map, wall_map)
 
@@ -85,6 +85,7 @@ func _generate_rooms(transitions, ground_map, wall_map):
 	var rooms = [] # Array of Rect2s
 	var previous = null
 	var tries = 0
+	var paths_to_generate = [] # Array of [source, target] pairs
 
 	while to_generate > 0 and tries < 1000:
 		tries += 1
@@ -116,10 +117,16 @@ func _generate_rooms(transitions, ground_map, wall_map):
 			if previous != null:
 				var source = _center_of(previous)
 				var target = _center_of(current_room)
-				self._generate_straight_path(source, target, ground_map, wall_map)
+				paths_to_generate.append([source, target])
 			previous = current_room
 			to_generate -= 1
 
+	# Generate paths later so they don't add 2x2 walls over the floor
+	for data in paths_to_generate:
+		var source = data[0]
+		var target = data[1]
+		self._generate_straight_path(source, target, ground_map, wall_map)
+	
 	# Generate a node close to entrances (5-10 tiles "in" from the entrance).
 	# Then, connect entrance => new node => closest path node
 	for transition in transitions:
@@ -185,7 +192,18 @@ func _generate_room(room_rect, ground_map, wall_map):
 		for u in range(room_rect.size.x):
 			var x = room_rect.position.x + u
 			var y = room_rect.position.y + v
-			self._convert_to_dirt([x, y], ground_map, wall_map)
+			self._convert_to_ground([x, y], ground_map, wall_map)
+	
+	for v in range(0, 5): # five tiles tall
+		for u in range(room_rect.size.x):
+			var x = room_rect.position.x + u
+			var y = room_rect.position.y - 4 + v
+			var type = "Wall"
+			# Three rows ceiling, then two of wall
+			if v < 3:
+				type = "Ceiling"
+			self._set_tile([x, y], type, wall_map)
+	
 		
 func _generate_path(point1, point2, ground_map, wall_map):
 	var from_x = point1[0]
@@ -194,7 +212,7 @@ func _generate_path(point1, point2, ground_map, wall_map):
 	var to_x = point2[0]
 	var to_y = point2[1]
 
-	self._convert_to_dirt([from_x, from_y], ground_map, wall_map)
+	self._convert_to_ground([from_x, from_y], ground_map, wall_map)
 
 	while from_x != to_x or from_y != to_y:
 		# If we're farther away on x-axis, move horizontally.
@@ -203,7 +221,14 @@ func _generate_path(point1, point2, ground_map, wall_map):
 		else:
 			from_y += sign(to_y - from_y)
 
-		self._convert_to_dirt([from_x, from_y], ground_map, wall_map)
+		self._convert_to_ground([from_x, from_y], ground_map, wall_map)
+		# Decorate any paths with 2-tile high walls
+		# This shortens ceilings and shows awesome walls instead
+		
+		if wall_map.get(from_x, from_y - 1) == "Ceiling":
+			self._set_tile([from_x, from_y - 1], "Wall", wall_map)
+		if wall_map.get(from_x, from_y - 2) == "Ceiling":
+			self._set_tile([from_x, from_y - 2], "Wall", wall_map)
 
 func _generate_treasure_chests():
 	var num_chests = Globals.randint(_NUM_CHESTS[0], _NUM_CHESTS[1])
@@ -234,10 +259,10 @@ func _fill_with(tile_name, map_array):
 		for x in range(0, map_width):
 			map_array.set(x, y, tile_name)
 
-func _convert_to_dirt(position, ground_map, wall_map):
-	self._convert_to(position, ground_map, wall_map)
+func _convert_to_ground(position, ground_map, wall_map):
+	self._convert_to(position, "Ground", ground_map, wall_map)
 
-func _convert_to(position, ground_map, wall_map):
+func _convert_to(position, type, ground_map, wall_map):
 	# Draws dirt at the specified position. Also clears trees for
 	# one tile in all directions surrounding the dirt (kind of like
 	# drawing with a 3x3 grass brush around the dirt).
@@ -245,8 +270,18 @@ func _convert_to(position, ground_map, wall_map):
 	var y = position[1]
 
 	if x >= 0 and x < map_width and y >= 0 and y < map_height:
-		ground_map.set(x, y, "Ground")
+		ground_map.set(x, y, type)
 		wall_map.set(x, y, null) # remove wall
+
+func _set_tile(position, type, map):
+	# Draws dirt at the specified position. Also clears trees for
+	# one tile in all directions surrounding the dirt (kind of like
+	# drawing with a 3x3 grass brush around the dirt).
+	var x = position[0]
+	var y = position[1]
+
+	if x >= 0 and x < map_width and y >= 0 and y < map_height:
+		map.set(x, y, type)
 
 func _clear_if_wall(wall_map, x, y):
 	if x >= 0 and x < map_width:
