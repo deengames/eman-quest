@@ -32,7 +32,11 @@ func _ready():
 	
 	var is_autotiling = "auto:" in map.tileset_path
 	var tileset = self._load_tileset_or_auto_tileset(map.tileset_path)
-	var tile_ids = TilesetMapper.new().load_tileset_mapping(tileset)
+	
+	var mapper = TilesetMapper.new(tileset)
+	var tile_ids = mapper.load_tileset_mapping()
+	var entity_tiles = mapper.get_entity_tiles(map.map_type)
+	
 	var tilemaps = []
 	
 	for tilemap_data in map.tile_data:
@@ -41,8 +45,11 @@ func _ready():
 		tilemaps.append(tilemap)
 		tilemap.tile_set = tileset
 		tilemap.z_index = -1 # draw under player
-		self._populate_tiles(tilemap_data, tilemap, tile_ids)
+		self._populate_tiles(tilemap_data, tilemap, tile_ids, entity_tiles)
 	
+		# For cases like the cave entrances, where we draw ground autotile first,
+		# then after the tile is masked, draw the entrance on top of the mask so that
+		# it takes the shape of the underlying tile.
 		if is_autotiling:
 			tilemap.update_bitmask_region()
 		
@@ -59,7 +66,6 @@ func _ready():
 		player.position = Vector2(
 			from.target_position.x * Globals.TILE_WIDTH,
 			from.target_position.y * Globals.TILE_HEIGHT)
-	
 		
 	if self._restoring_state == true and not Globals.won_battle:
 		player.temporarily_no_battles()
@@ -79,12 +85,33 @@ func get_monsters():
 				
 	return to_return
 
-func _populate_tiles(tilemap_data, tilemap, tile_ids):
+func _populate_tiles(tilemap_data, tilemap, tile_ids, entity_tiles):
 	for y in range(0, tilemap_data.height):
 		for x in range(0, tilemap_data.width):
 			var tile_name = tilemap_data.get(x, y)
+			
 			if tile_name != null:
 				tilemap.set_cell(x, y, tile_ids[tile_name])
+		
+	self._populate_tile_entities(tilemap, entity_tiles)
+
+# Find entities on the map (eg. trees). Remove them and replace them with
+# real entities (scenes) so that we can have logic (attach scripts) to them.
+func _populate_tile_entities(tile_map, entity_tiles):
+	var tile_set = tile_map.tile_set
+	for cell in tile_map.get_used_cells():
+		var tile_id = tile_map.get_cellv(cell)
+		var tile_name = tile_set.tile_get_name(tile_id)
+		if entity_tiles.has(tile_name):
+			# Spawn + replace with entity of the same name
+			var scene = entity_tiles[tile_name]
+			var instance = scene.instance()
+			tile_map.add_child(instance)
+			instance.position.x = cell.x * Globals.TILE_WIDTH
+			instance.position.y = cell.y * Globals.TILE_HEIGHT
+			# Remove tile
+			tile_map.set_cellv(cell, -1)
+			print("Replaced " + tile_name + " with " + str(instance))
 
 func _add_transitions(tilemap, tile_ids):
 	for destination in map.transitions:

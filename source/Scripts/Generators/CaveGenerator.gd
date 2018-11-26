@@ -33,6 +33,8 @@ const _ITEM_POWER = [30, 50]
 const _WATER_DECORATION_TILES_PERCENT = 2 # 1 = 1%
 const _GROUND_DECORATION_TILES_PERCENT = 1
 
+const ENTITY_TILES = {} # name => preload("...")
+
 # Has to be bigger because paths are more trivial to traverse
 # i.e. without this, you can zip through the maps quickly
 var map_width = 2 * Globals.SUBMAP_WIDTH_IN_TILES

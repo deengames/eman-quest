@@ -29,6 +29,9 @@ const _ROOM_WALL_HEIGHT = 5 # in tiles
 const _NUM_CEILING_TILES = 3 # in tiles
 const _MAX_TORCHES_PER_ROOM = 2 # inclusive
 
+const ENTITY_TILES = {
+	"Door": preload("res://Entities/MapEntities/Door.tscn")
+}
 
 var map_width = Globals.SUBMAP_WIDTH_IN_TILES
 var map_height = Globals.SUBMAP_HEIGHT_IN_TILES
