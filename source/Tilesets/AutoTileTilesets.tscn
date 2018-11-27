@@ -4,7 +4,7 @@
 [ext_resource path="res://Tilesets/LavaCave.tres" type="TileSet" id=2]
 [ext_resource path="res://Tilesets/CastleDungeon.tres" type="TileSet" id=3]
 
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 [node name="RiverCave" type="TileMap" parent="." index="0"]
 
