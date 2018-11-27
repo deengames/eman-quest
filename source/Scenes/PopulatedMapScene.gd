@@ -40,16 +40,13 @@ func _ready():
 	var tilemaps = []
 	
 	for tilemap_data in map.tile_data:
-		# TODO: where does this block go?
 		var tilemap = TileMap.new()
 		tilemaps.append(tilemap)
 		tilemap.tile_set = tileset
 		tilemap.z_index = -1 # draw under player
 		self._populate_tiles(tilemap_data, tilemap, tile_ids, entity_tiles)
 	
-		# For cases like the cave entrances, where we draw ground autotile first,
-		# then after the tile is masked, draw the entrance on top of the mask so that
-		# it takes the shape of the underlying tile.
+		# Allow autotiling to take effect
 		if is_autotiling:
 			tilemap.update_bitmask_region()
 		

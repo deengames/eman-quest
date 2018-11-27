@@ -44,6 +44,7 @@ var current_monster_type = ""
 
 func _ready():
 	randomize()
+	seed(9999)
 	# abc gives frost forest
 	# abcdef gives forest
 	#seed("abcdef".hash())

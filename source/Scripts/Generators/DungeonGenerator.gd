@@ -44,7 +44,7 @@ func generate(submap, transitions, variation_name):
 	var tileset = _VARIANT_TILESETS[variation_name]
 	var map = AreaMap.new("Dungeon", variation_name, tileset, map_width, map_height, submap.area_type)
 
-	var tile_data = self._generate_cave(submap.area_type, transitions) # generates paths too
+	var tile_data = self._generate_dungeon(submap.area_type, transitions) # generates paths too
 	self._ground_map = tile_data[0]
 	self._wall_map = tile_data[1]
 
@@ -72,7 +72,7 @@ func _generate_boss(variation_name):
 	boss.initialize(pixel_coordinates[0], pixel_coordinates[1], _BOSS_DATA[variation_name], null)
 	return { boss.data.type: [boss] }
 
-func _generate_cave(area_type, transitions):
+func _generate_dungeon(area_type, transitions):
 	var to_return = []
 
 	var ground_map = TwoDimensionalArray.new(self.map_width, self.map_height)
@@ -272,9 +272,9 @@ func _generate_path(point1, point2, ground_map, wall_map, decoration_map):
 			from_y += sign(to_y - from_y)
 
 		self._convert_to_ground([from_x, from_y], ground_map, wall_map, decoration_map)
+		
 		# Decorate any paths with 2-tile high walls
 		# This shortens ceilings and shows awesome walls instead
-		
 		if wall_map.get(from_x, from_y - 1) == "Ceiling":
 			self._set_tile([from_x, from_y - 1], "Wall", wall_map)
 		if wall_map.get(from_x, from_y - 2) == "Ceiling":
