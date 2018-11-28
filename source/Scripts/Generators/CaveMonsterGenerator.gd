@@ -6,11 +6,26 @@ const SpotFinder = preload("res://Scripts/Maps/SpotFinder.gd")
 # Map type => monster => data
 const MONSTER_VARIANT_DATA = {
 	"River": {
-		"Crab": {
-			"type": "Crab",
-			"weight": 70,
+		"Clawomatic": {
+			"type": "Clawomatic",
+			"weight": 100,
 			"health": 40,
-			"strength": 15, # was 20
+			"strength": 15, 
+			"defense": 10,
+			"turns": 1,
+			"experience points": 10,
+			
+			"skill_probability": 40, # 40 = 40%
+			"skills": {
+				# These should add up to 100
+				"chomp": 100 # 20%,
+			}
+		},
+		"WingClaw": {
+			"type": "WingClaw",
+			"weight": 100,
+			"health": 40,
+			"strength": 15, 
 			"defense": 10,
 			"turns": 1,
 			"experience points": 10,
@@ -24,7 +39,7 @@ const MONSTER_VARIANT_DATA = {
 	}
 }
 
-const NUM_MONSTERS = [20, 25] # May not get this much if we can't find empty spots
+const NUM_MONSTERS = [45, 60] # May not get this much if we can't find empty spots
 const _MAX_EMPTY_SPOT_CHECKS = 1000 # Try 1000 times to find an empty spot. Don't freeze, move on.
 
 func generate_monsters(forest_map):

@@ -13,7 +13,8 @@ const TreasureChest = preload("res://Entities/TreasureChest.tscn")
 const TilesetMapper = preload("res://Scripts/TilesetMapper.gd")
 
 const _GENERATORS = {
-	"Forest": preload("res://Scripts/Generators/ForestMonsterGenerator.gd")
+	"Forest": preload("res://Scripts/Generators/ForestMonsterGenerator.gd"),
+	"Cave": preload("res://Scripts/Generators/CaveMonsterGenerator.gd")
 }
 
 signal clicked_on_map(position)
