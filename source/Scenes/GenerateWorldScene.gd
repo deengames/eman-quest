@@ -11,7 +11,7 @@ const OverworldGenerator = preload("res://Scripts/Generators/OverworldGenerator.
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 const ForestVariations = ["Slime", "Frost"] # Death
-const CaveVariations = ["Lava"]#["River"] # Lava, Crystal
+const CaveVariations = ["River", "Lava"] # Crystal
 const DungeonVariations = ["Castle"] # Skeleton, Minotaur
 
 func _ready():

@@ -50,7 +50,7 @@ func generate(submap, transitions, variation_name):
 	var tileset = _VARIANT_TILESETS[variation_name]
 	var map = AreaMap.new("Cave", variation_name, tileset, map_width, map_height, submap.area_type)
 
-	var tile_data = self._generate_cave(submap.area_type, transitions) # generates paths too
+	var tile_data = self._generate_cave(submap.area_type, transitions, variation_name)
 
 	map.transitions = transitions
 	map.treasure_chests = self._generate_treasure_chests()
@@ -76,7 +76,7 @@ func _generate_boss(variation_name):
 	boss.initialize(pixel_coordinates[0], pixel_coordinates[1], _BOSS_DATA[variation_name], null)
 	return { boss.data.type: [boss] }
 
-func _generate_cave(area_type, transitions):
+func _generate_cave(area_type, transitions, variation_name):
 	var to_return = []
 
 	self._ground_tilemap = TwoDimensionalArray.new(self.map_width, self.map_height)
@@ -87,7 +87,9 @@ func _generate_cave(area_type, transitions):
 	to_return.append(decoration_tilemap)
 	
 	self._generate_tiles(transitions)
-	self._generate_decoration_tiles(decoration_tilemap)
+	
+	if variation_name != "Lava":
+		self._generate_decoration_tiles(decoration_tilemap)
 
 	return to_return
 
