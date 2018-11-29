@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/WingClaw.png-1296e48ed7fd1b7781586c29be80a6db.stex"
+path="res://.import/WingBeak.png-79cfd3255e8bd2dd9ff9198c1eacf66a.stex"
 
 [deps]
 
-source_file="res://assets/images/monsters/WingClaw.png"
-dest_files=[ "res://.import/WingClaw.png-1296e48ed7fd1b7781586c29be80a6db.stex" ]
+source_file="res://assets/images/monsters/WingBeak.png"
+dest_files=[ "res://.import/WingBeak.png-79cfd3255e8bd2dd9ff9198c1eacf66a.stex" ]
 
 [params]
 
