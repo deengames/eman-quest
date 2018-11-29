@@ -9,31 +9,30 @@ const MONSTER_VARIANT_DATA = {
 		"Clawomatic": {
 			"type": "Clawomatic",
 			"weight": 100,
-			"health": 40,
-			"strength": 15, 
-			"defense": 10,
+			"health": 100,
+			"strength": 1, 
+			"defense": 4,
 			"turns": 1,
-			"experience points": 10,
+			"experience points": 1,
 			
-			"skill_probability": 40, # 40 = 40%
+			"skill_probability": 100, # 40 = 40%
 			"skills": {
 				# These should add up to 100
-				"chomp": 100 # 20%,
+				"harden": 100 # 20%,
 			}
 		},
-		"WingClaw": {
-			"type": "WingClaw",
-			"weight": 100,
-			"health": 40,
-			"strength": 15, 
-			"defense": 10,
+		"WingBeak": {
+			"type": "WingBeak",
+			"weight": 1,
+			"health": 1,
+			"strength": 1, 
+			"defense": 1,
 			"turns": 1,
-			"experience points": 10,
+			"experience points": 1,
 			
-			"skill_probability": 40, # 40 = 40%
+			"skill_probability": 0, # 40 = 40%
 			"skills": {
 				# These should add up to 100
-				"chomp": 100 # 20%,
 			}
 		}
 	}

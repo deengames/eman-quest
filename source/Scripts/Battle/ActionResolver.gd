@@ -105,5 +105,11 @@ func _process_attack(action, monster_data, player, boost_amount, memory_grid):
 		monster_data["health"] += damage
 		# Don't allow overhealing. Bats are nigh unto impossible to kill otherwise.
 		monster_data["health"] = min(monster_data["health"], monster_data["max_health"])
+	elif action == "harden":
+		# Hard to balance without knowing monster profile. This is easy: boost by a small percentage.
+		# If used enough times, has a good effect. Yet, doesn't drastically change it's toughness.
+		monster_data["defense"] *= 1.2
+		print("Monster def up to " + str(monster_data["defense"]))
+		message = monster_name + " hardens! Defense up! "
 	
 	return { "damage": damage, "message": message }
