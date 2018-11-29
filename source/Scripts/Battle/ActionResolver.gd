@@ -120,5 +120,8 @@ func _process_attack(action, monster_data, player, boost_amount, memory_grid):
 	elif action == "roar":
 		monster_data["strength"] += _ROAR_BOOST_AMOUNT
 		message += "roars! Attack up by " + str(_ROAR_BOOST_AMOUNT) + "!"
+	elif action == "disable critical":
+		message += " strikes! Critical attack disabled!"
+		player.disable("critical")
 		
 	return { "damage": damage, "message": message }

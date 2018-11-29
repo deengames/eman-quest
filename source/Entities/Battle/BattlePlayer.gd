@@ -28,6 +28,8 @@ var strength = 0
 var num_pickable_tiles = 0
 # max number of actions to pick from picked tiles
 var num_actions = 0
+var disabled_actions = []
+
 var _defense = 0
 var _times_defending = 0
 
@@ -61,6 +63,9 @@ func reset():
 	self.energy = min(self.energy, self.max_energy)
 	self._times_defending = 0
 
+func reset_disabled_actions():
+	self.disabled_actions = []	
+
 func total_strength():
 	var total = self.strength
 	total += _get_equipment_modifier(Globals.player_data.weapon, StatType.Strength)
@@ -86,6 +91,9 @@ func detract_energy(action):
 		return true
 	else:
 		return false
+
+func disable(what):
+	self.disabled_actions.append(what)
 
 func _get_equipment_modifier(equipment, stat_type):
 	var total = 0

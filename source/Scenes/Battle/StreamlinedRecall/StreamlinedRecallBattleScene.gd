@@ -60,6 +60,10 @@ func _on_picked_all_tiles():
 		$ActionsPanel/Controls.visible = true
 		# Reset crit button if it's set
 		$ActionsPanel/Controls/CriticalButton.disabled = false
+		
+		if "critical" in self._player.disabled_actions:
+			$ActionsPanel/Controls/CriticalButton.disabled = true
+		
 		$ActionsPanel/Controls/CriticalButton/Sprite.modulate.a = 1
 	else:
 		self._resolve_monster_turn()
@@ -114,6 +118,7 @@ func _start_next_turn():
 	else:
 		$TurnLabel.text = self._monster_data["type"] + " attacks!"
 		num_tiles = _MONSTER_NUM_TILES
+		self._player.reset_disabled_actions()
 	
 	$NextTurnButton.visible = false
 	$ActionsPanel/Controls.visible = false
