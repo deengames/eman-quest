@@ -17,7 +17,6 @@ const MONSTER_VARIANT_DATA = {
 			
 			"skill_probability": 40, # 40 = 40%
 			"skills": {
-				# These should add up to 100
 				"chomp": 100 # 20%,
 			}
 		},
@@ -33,7 +32,6 @@ const MONSTER_VARIANT_DATA = {
 			
 			"skill_probability": 20,
 			"skills": {
-				# These should add up to 100
 				"vampire": 100 # 20%,
 			}
 		} 
@@ -50,7 +48,6 @@ const MONSTER_VARIANT_DATA = {
 			
 			"skill_probability": 0, # 40 = 40%
 			"skills": {
-				# These should add up to 100
 			}
 		},
 		"Ice Terrapin": {
@@ -64,7 +61,6 @@ const MONSTER_VARIANT_DATA = {
 			
 			"skill_probability": 50, # 40 = 40%
 			"skills": {
-				# These should add up to 100
 				"freeze": 100 # 20%,
 			}
 		}

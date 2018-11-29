@@ -57,13 +57,35 @@ func monster_attacks(monster_data, player, boost_amount, memory_grid):
 		var to_use = "attack"
 		
 		if use_skill:
+			
+			# Culmulative check. If we have three skills, with probability 50, 25, 25,
+			# then rolling 0-49 uses the first one, 50-74 the second, 75-100 the third.
+			# If we do three independent checks, the probability of the third or subsequent
+			# skill becomes vanishingly small, because the first two skill checks both
+			# have to fail.
+			var skill_range = {} # skill => [lower, upper] bounds
+			var total = 0
+			
+			# Calculate the total, eg. if skills are 30/20/10, total is 60
+			for skill_probability in monster_data.skills.values():
+				total += skill_probability
+			
+			var skill_roll = randi() % int(total)
+			
+			# Calculate upper/lower bounds for each skill
+			total = 0
 			for skill in monster_data.skills.keys():
 				var probability = monster_data.skills[skill]
-				var skill_roll = randi() % 100
-				if skill_roll <= probability:
+				var lower_bound = total
+				var upper_bound = total + probability
+				total += probability
+				skill_range[skill] = [lower_bound, upper_bound]
+				
+				if skill_roll >= lower_bound and skill_roll < upper_bound:
 					to_use = skill
 					break
-		
+				
+		 
 		var result = self._process_attack(to_use, monster_data, player, boost_amount, memory_grid)
 		var pre_boost_damage = result["damage"]
 		# Reduce damage by 10% per successful boost
@@ -116,12 +138,18 @@ func _process_attack(action, monster_data, player, boost_amount, memory_grid):
 		var heal_amount = round(_HEAL_PERCENT * monster_data["max_health"])
 		heal_amount = min(monster_data["max_health"] - monster_data["health"], heal_amount)
 		monster_data["health"] += heal_amount
-		message += " heals " + str(heal_amount) + " health."
+		message += "heals " + str(heal_amount) + " health."
 	elif action == "roar":
 		monster_data["strength"] += _ROAR_BOOST_AMOUNT
 		message += "roars! Attack up by " + str(_ROAR_BOOST_AMOUNT) + "!"
 	elif action == "disable critical":
-		message += " strikes! Critical attack disabled!"
+		message += "strikes! Critical attack disabled!"
 		player.disable("critical")
+	elif action == "disable attack":
+		message += "strikes! Attack disabled!"
+		player.disable("attack")
+	elif action == "disable items":
+		message += "strikes! Items disabled!"
+		player.disable("items")
 		
 	return { "damage": damage, "message": message }

@@ -64,6 +64,16 @@ func _on_picked_all_tiles():
 		if "critical" in self._player.disabled_actions:
 			$ActionsPanel/Controls/CriticalButton.disabled = true
 		
+		if "attack" in self._player.disabled_actions:
+			$ActionsPanel/Controls/AttackButton.disabled = true
+		else:
+			$ActionsPanel/Controls/AttackButton.disabled = false
+		if "items" in self._player.disabled_actions:
+			$ActionsPanel/Controls/PotionButton.disabled = true
+		else:
+			$ActionsPanel/Controls/PotionButton.disabled = false
+		
+		# Alpha => 100%
 		$ActionsPanel/Controls/CriticalButton/Sprite.modulate.a = 1
 	else:
 		self._resolve_monster_turn()
