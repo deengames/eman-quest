@@ -3,6 +3,7 @@ extends Node
 const BattlePlayer = preload("res://Entities/Battle/BattlePlayer.gd")
 const _SHOCK_TURNS = 2
 const _HARDEN_MULTIPLIER = 1.2 # harden => defense *= Nx eg. 1.2x
+const _HEAL_PERCENT = 0.2 # 0.2 = 20% of max health
 
 func _ready():
 	pass
@@ -67,7 +68,7 @@ func monster_attacks(monster_data, player, boost_amount, memory_grid):
 		# Reduce damage by 10% per successful boost
 		var boost_block_percent = max(0, 1 - (0.1 * boost_amount))
 		var damage = floor(pre_boost_damage * boost_block_percent)
-		var message = result["message"] + str(damage) + " damage!"
+		var message = result["message"]
 		
 		if damage > 0:
 			player.damage(damage)
@@ -76,25 +77,24 @@ func monster_attacks(monster_data, player, boost_amount, memory_grid):
 		
 func _process_attack(action, monster_data, player, boost_amount, memory_grid):
 	var damage = 0
-	var message = ""
 	var monster_name = monster_data["type"]
+	var message = monster_name + " "
 	
 	if action == "attack":
 		damage = max(0, monster_data["strength"] - player.total_defense())
-		message = monster_name + " attacks for "
-		return { "damage": damage, "message": message }
+		message += "attacks for " + str(damage) + " damage."
 	elif action == "chomp":
 		damage = max(0, (2 * monster_data["strength"]) - player.total_defense())
-		message = monster_name + " CHOMPS! "
+		message += "CHOMPS! " + str(damage) + " damage!"
 	elif action == "shock":
 		damage = monster_data["strength"] # pierces defense
-		message = monster_name + " shocks you for "
+		message += "shocks you for " + str(damage) + "!"
 		if memory_grid != null: # null on fast-paced battle grid
 			memory_grid.shock(_SHOCK_TURNS)
 	elif action == "freeze":
 		# Shock, but a few tiles only
 		damage = monster_data["strength"] # pierces defense
-		message = monster_name + " freezes you! "
+		message += "freezes you! " + str(damage) + " damage!"
 		if memory_grid != null: # null on fast-paced battle grid
 			memory_grid.freeze(_SHOCK_TURNS, 5)
 	elif action == "vampire":
@@ -102,7 +102,7 @@ func _process_attack(action, monster_data, player, boost_amount, memory_grid):
 		if "vampire multiplier" in monster_data:
 			multiplier = monster_data["vampire multiplier"]
 		damage = floor(monster_data["strength"] * multiplier)
-		message = monster_name + " hits/absorbs "
+		message += "hits/absorbs " + str(damage) + " health!"
 		monster_data["health"] += damage
 		# Don't allow overhealing. Bats are nigh unto impossible to kill otherwise.
 		monster_data["health"] = min(monster_data["health"], monster_data["max_health"])
@@ -110,7 +110,11 @@ func _process_attack(action, monster_data, player, boost_amount, memory_grid):
 		# Hard to balance without knowing monster profile. This is easy: boost by a small percentage.
 		# If used enough times, has a good effect. Yet, doesn't drastically change it's toughness.
 		monster_data["defense"] *= _HARDEN_MULTIPLIER
-		print("Monster def up to " + str(monster_data["defense"]))
-		message = monster_name + " hardens! Defense up! "
-	
+		message += "hardens! Defense up!"
+	elif action == "heal":
+		var heal_amount = round(_HEAL_PERCENT * monster_data["max_health"])
+		heal_amount = min(monster_data["max_health"] - monster_data["health"], heal_amount)
+		monster_data["health"] += heal_amount
+		message += " heals " + str(heal_amount) + " health."
+		
 	return { "damage": damage, "message": message }
