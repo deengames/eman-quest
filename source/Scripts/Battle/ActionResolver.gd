@@ -1,7 +1,8 @@
 extends Node
 
 const BattlePlayer = preload("res://Entities/Battle/BattlePlayer.gd")
-const SHOCK_TURNS = 2
+const _SHOCK_TURNS = 2
+const _HARDEN_MULTIPLIER = 1.2 # harden => defense *= Nx eg. 1.2x
 
 func _ready():
 	pass
@@ -89,13 +90,13 @@ func _process_attack(action, monster_data, player, boost_amount, memory_grid):
 		damage = monster_data["strength"] # pierces defense
 		message = monster_name + " shocks you for "
 		if memory_grid != null: # null on fast-paced battle grid
-			memory_grid.shock(SHOCK_TURNS)
+			memory_grid.shock(_SHOCK_TURNS)
 	elif action == "freeze":
 		# Shock, but a few tiles only
 		damage = monster_data["strength"] # pierces defense
 		message = monster_name + " freezes you! "
 		if memory_grid != null: # null on fast-paced battle grid
-			memory_grid.freeze(SHOCK_TURNS, 5)
+			memory_grid.freeze(_SHOCK_TURNS, 5)
 	elif action == "vampire":
 		var multiplier = 1.5
 		if "vampire multiplier" in monster_data:
@@ -108,7 +109,7 @@ func _process_attack(action, monster_data, player, boost_amount, memory_grid):
 	elif action == "harden":
 		# Hard to balance without knowing monster profile. This is easy: boost by a small percentage.
 		# If used enough times, has a good effect. Yet, doesn't drastically change it's toughness.
-		monster_data["defense"] *= 1.2
+		monster_data["defense"] *= _HARDEN_MULTIPLIER
 		print("Monster def up to " + str(monster_data["defense"]))
 		message = monster_name + " hardens! Defense up! "
 	
