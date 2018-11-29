@@ -2,7 +2,8 @@ extends Node
 
 const BattlePlayer = preload("res://Entities/Battle/BattlePlayer.gd")
 const _SHOCK_TURNS = 2
-const _HARDEN_MULTIPLIER = 1.2 # harden => defense *= Nx eg. 1.2x
+const _HARDEN_DEFENSE_MULTIPLIER = 1.2 # harden => defense *= Nx eg. 1.2x
+const _ROAR_BOOST_AMOUNT = 5 # roar => attack up by this amount
 const _HEAL_PERCENT = 0.2 # 0.2 = 20% of max health
 
 func _ready():
@@ -109,12 +110,15 @@ func _process_attack(action, monster_data, player, boost_amount, memory_grid):
 	elif action == "harden":
 		# Hard to balance without knowing monster profile. This is easy: boost by a small percentage.
 		# If used enough times, has a good effect. Yet, doesn't drastically change it's toughness.
-		monster_data["defense"] *= _HARDEN_MULTIPLIER
+		monster_data["defense"] *= _HARDEN_DEFENSE_MULTIPLIER
 		message += "hardens! Defense up!"
 	elif action == "heal":
 		var heal_amount = round(_HEAL_PERCENT * monster_data["max_health"])
 		heal_amount = min(monster_data["max_health"] - monster_data["health"], heal_amount)
 		monster_data["health"] += heal_amount
 		message += " heals " + str(heal_amount) + " health."
+	elif action == "roar":
+		monster_data["strength"] += _ROAR_BOOST_AMOUNT
+		message += "roars! Attack up by " + str(_ROAR_BOOST_AMOUNT) + "!"
 		
 	return { "damage": damage, "message": message }
