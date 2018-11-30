@@ -151,5 +151,8 @@ func _process_attack(action, monster_data, player, boost_amount, memory_grid):
 	elif action == "disable items":
 		message += "strikes! Items disabled!"
 		player.disable("items")
+	elif action == "sleep":
+		message += "puts you to sleep!"
+		player.is_asleep = true
 		
 	return { "damage": damage, "message": message }

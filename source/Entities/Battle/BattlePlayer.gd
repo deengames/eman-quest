@@ -29,6 +29,7 @@ var num_pickable_tiles = 0
 # max number of actions to pick from picked tiles
 var num_actions = 0
 var disabled_actions = []
+var is_asleep = false
 
 var _defense = 0
 var _times_defending = 0
@@ -64,7 +65,7 @@ func reset():
 	self._times_defending = 0
 
 func reset_disabled_actions():
-	self.disabled_actions = []	
+	self.disabled_actions = []
 
 func total_strength():
 	var total = self.strength

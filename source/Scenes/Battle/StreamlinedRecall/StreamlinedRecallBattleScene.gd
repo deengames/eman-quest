@@ -138,8 +138,13 @@ func _start_next_turn():
 	$NextTurnButton.visible = false
 	$ActionsPanel/Controls.visible = false
 
+	if self._player.is_asleep:
+		$StatusLabel.text = "You snore!"
+		self._player.is_asleep = false
+		yield(get_tree().create_timer(_MONSTER_TURN_DISPLAY_SECONDS), 'timeout')
+		self._start_next_turn()
 	# Players turn? Monsters turn and streamlined triggers = on?
-	if (self._is_players_turn or
+	elif (self._is_players_turn or
 		(not self._is_players_turn and Features.is_enabled("streamlined battles: enemy triggers"))
 	):
 		# Execute
