@@ -57,24 +57,29 @@ func _on_picked_all_tiles():
 	$RecallGrid.make_unselectable()
 	
 	if self._is_players_turn:
-		$ActionsPanel/Controls.visible = true
-		# Reset crit button if it's set
-		$ActionsPanel/Controls/CriticalButton.disabled = false
-		
-		if "critical" in self._player.disabled_actions:
-			$ActionsPanel/Controls/CriticalButton.disabled = true
-		
-		if "attack" in self._player.disabled_actions:
-			$ActionsPanel/Controls/AttackButton.disabled = true
+		if num_right > 0:
+			$ActionsPanel/Controls.visible = true
+			# Reset crit button if it's set
+			$ActionsPanel/Controls/CriticalButton.disabled = false
+			
+			if "critical" in self._player.disabled_actions:
+				$ActionsPanel/Controls/CriticalButton.disabled = true
+			
+			if "attack" in self._player.disabled_actions:
+				$ActionsPanel/Controls/AttackButton.disabled = true
+			else:
+				$ActionsPanel/Controls/AttackButton.disabled = false
+			if "items" in self._player.disabled_actions:
+				$ActionsPanel/Controls/PotionButton.disabled = true
+			else:
+				$ActionsPanel/Controls/PotionButton.disabled = false
+			
+			# Alpha => 100%
+			$ActionsPanel/Controls/CriticalButton/Sprite.modulate.a = 1
 		else:
-			$ActionsPanel/Controls/AttackButton.disabled = false
-		if "items" in self._player.disabled_actions:
-			$ActionsPanel/Controls/PotionButton.disabled = true
-		else:
-			$ActionsPanel/Controls/PotionButton.disabled = false
-		
-		# Alpha => 100%
-		$ActionsPanel/Controls/CriticalButton/Sprite.modulate.a = 1
+			$StatusLabel.text = "Missed a turn!"
+			yield(get_tree().create_timer(_MONSTER_TURN_DISPLAY_SECONDS), 'timeout')
+			self._start_next_turn()
 	else:
 		self._resolve_monster_turn()
 
