@@ -10,15 +10,16 @@ const MONSTER_VARIANT_DATA = {
 			"type": "Clawomatic",
 			"weight": 100,
 			"health": 100,
-			"strength": 1, 
+			"strength": 10, 
 			"defense": 4,
 			"turns": 1,
 			"experience points": 1,
 			
 			"skill_probability": 100, # 40 = 40%
 			"skills": {
-				# These should add up to 100
-				"harden": 100 # 20%,
+				"disable attack": 30,
+				"disable critical": 5,
+				"disable items": 30
 			}
 		},
 		"WingBeak": {
@@ -32,7 +33,6 @@ const MONSTER_VARIANT_DATA = {
 			
 			"skill_probability": 0, # 40 = 40%
 			"skills": {
-				# These should add up to 100
 			}
 		}
 	}
