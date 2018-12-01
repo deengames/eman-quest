@@ -9,7 +9,9 @@ const HEAL_PERCENT = 0.2 # 0.2 = 20%
 const DEFEND_MULTIPLIER = 1.5 # 1.5 => defend multiplies defense by 1.5x per action
 const _ENERGY_PER_TURN = 3
 const ENERGY_GAIN_PER_ACTION = 2
+
 const _POISON_DAMAGE_PER_TURN_PERCENT = 10 # 10 = 10%
+const _ARMOUR_BREAK_LOSS = 3 # 5 means -5 def per break
 
 const _ACTION_ENERGY_COST = {
 	"attack": 1,
@@ -76,8 +78,13 @@ func reset():
 func reset_disabled_actions():
 	self.disabled_actions = []
 
+### Start: battle action/reactions
 func poison(turns):
 	self._turns_poisoned += turns
+	
+func lower_defense():
+	self._defense -= _ARMOUR_BREAK_LOSS
+### End battle action/reactions
 
 func total_strength():
 	var total = self.strength

@@ -158,5 +158,8 @@ func _process_attack(action, monster_data, player, boost_amount, memory_grid):
 	elif action == "poison":
 		player.poison(_POISONED_TURNS)
 		message += "poisons you!"
+	elif action == "armour break":
+		message += "hits your armour, damaging it!"
+		player.lower_defense()
 		
 	return { "damage": damage, "message": message }

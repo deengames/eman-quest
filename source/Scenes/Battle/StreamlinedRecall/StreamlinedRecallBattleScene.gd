@@ -108,10 +108,13 @@ func _resolve_players_turn(action):
 func _resolve_monster_turn():
 	var message = self._action_resolver.monster_attacks(self._monster_data, self._player, self._multiplier, null)
 	$StatusLabel.text = message
+	self._update_health_displays() # show health decrease
 	yield(get_tree().create_timer(_MONSTER_TURN_DISPLAY_SECONDS), 'timeout')
 	
-	self._player.reset() # times defended, apply poison damage, etc.
-	
+	 # times defended, apply poison damage, etc. Emits a signal that shows
+	# a message about poison damage.
+	self._player.reset()
+	# We may have been poisoned, update again.
 	self._update_health_displays()
 	
 	if self._player.current_health <= 0:
