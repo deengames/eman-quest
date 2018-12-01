@@ -48,7 +48,7 @@ func _generate_world():
 
 func _generate_subarea_maps(variations, generator, num_submaps):
 	var variation = variations[randi() % len(variations)]
-	print(variation)
+	print("*******************************" + variation)
 	var layout = MapLayoutGenerator.generate_layout(num_submaps)
 	var submaps = []
 	

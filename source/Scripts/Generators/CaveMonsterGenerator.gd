@@ -23,7 +23,7 @@ const MONSTER_VARIANT_DATA = {
 		"WingBeak": {
 			"type": "WingBeak",
 			"weight": 50,
-			"health": 70,
+			"health": 110,
 			"strength": 20,
 			"defense": 16,
 			"turns": 1,
@@ -45,7 +45,7 @@ const MONSTER_VARIANT_DATA = {
 			"turns": 1,
 			"experience points": 13,
 			
-			"skill_probability": 25, # 40 = 40%
+			"skill_probability": 30, # 40 = 40%
 			"skills": {
 				"poison": 100 
 			}
