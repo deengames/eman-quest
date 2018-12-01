@@ -5,6 +5,7 @@ const _SHOCK_TURNS = 2
 const _HARDEN_DEFENSE_MULTIPLIER = 1.2 # harden => defense *= Nx eg. 1.2x
 const _ROAR_BOOST_AMOUNT = 5 # roar => attack up by this amount
 const _HEAL_PERCENT = 0.2 # 0.2 = 20% of max health
+const _POISONED_TURNS = 3
 
 func _ready():
 	pass
@@ -154,5 +155,8 @@ func _process_attack(action, monster_data, player, boost_amount, memory_grid):
 	elif action == "sleep":
 		message += "puts you to sleep!"
 		player.is_asleep = true
+	elif action == "poison":
+		player.poison(_POISONED_TURNS)
+		message += "poisons you!"
 		
 	return { "damage": damage, "message": message }

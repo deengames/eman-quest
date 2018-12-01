@@ -38,12 +38,16 @@ func _ready():
 	$StatusLabel.text = ""
 	$NextTurnButton.visible = false
 	self._start_next_turn()
+	
+	_player.connect("poison_damaged", self, "_on_poison_damaged")
 
 # health and energy
 func _update_health_displays():
 	var player_health = self._player.current_health
 	$PlayerControls/PlayerHealth.value = player_health
 	$PlayerControls/PlayerHealth/Label.text = str(player_health)
+	if _player.is_poisoned():
+		$PlayerControls/PlayerHealth/Label.text += " (p)"
 	
 	var monster_health = self._monster_data["health"]
 	$MonsterControls/MonsterHealth.value = monster_health
@@ -104,15 +108,14 @@ func _resolve_players_turn(action):
 func _resolve_monster_turn():
 	var message = self._action_resolver.monster_attacks(self._monster_data, self._player, self._multiplier, null)
 	$StatusLabel.text = message
+	yield(get_tree().create_timer(_MONSTER_TURN_DISPLAY_SECONDS), 'timeout')
+	
+	self._player.reset() # times defended, apply poison damage, etc.
 	
 	self._update_health_displays()
 	
 	if self._player.current_health <= 0:
 		self._show_battle_end(false)
-	
-	self._player.reset() # times defended
-
-	yield(get_tree().create_timer(_MONSTER_TURN_DISPLAY_SECONDS), 'timeout')
 	
 	# Avoid having to click Next Turn for nothing
 	self._start_next_turn()
@@ -174,3 +177,7 @@ func _on_CriticalButton_pressed():
 
 func _on_DefendButton_pressed():
 	self._resolve_players_turn("defend")
+	
+func _on_poison_damaged(damage):
+	$StatusLabel.text = "Posioned for " + str(damage) + " damage!"
+	yield(get_tree().create_timer(_MONSTER_TURN_DISPLAY_SECONDS), 'timeout')

@@ -3,11 +3,13 @@ extends Node
 const StatType = preload("res://Scripts/Enums/StatType.gd")
 
 signal died
+signal poison_damaged
 
 const HEAL_PERCENT = 0.2 # 0.2 = 20%
 const DEFEND_MULTIPLIER = 1.5 # 1.5 => defend multiplies defense by 1.5x per action
 const _ENERGY_PER_TURN = 3
 const ENERGY_GAIN_PER_ACTION = 2
+const _POISON_DAMAGE_PER_TURN_PERCENT = 10 # 10 = 10%
 
 const _ACTION_ENERGY_COST = {
 	"attack": 1,
@@ -33,6 +35,7 @@ var is_asleep = false
 
 var _defense = 0
 var _times_defending = 0
+var _turns_poisoned = 0
 
 func _init():
 	var player_data = Globals.player_data
@@ -63,9 +66,18 @@ func reset():
 	self.energy += _ENERGY_PER_TURN
 	self.energy = min(self.energy, self.max_energy)
 	self._times_defending = 0
+	
+	if self._turns_poisoned > 0:
+		var poison_damage = floor(self.max_health * _POISON_DAMAGE_PER_TURN_PERCENT / 100)
+		self.current_health -= poison_damage
+		self._turns_poisoned -= 1
+		self.emit_signal("poison_damaged", poison_damage)
 
 func reset_disabled_actions():
 	self.disabled_actions = []
+
+func poison(turns):
+	self._turns_poisoned += turns
 
 func total_strength():
 	var total = self.strength
@@ -95,6 +107,9 @@ func detract_energy(action):
 
 func disable(what):
 	self.disabled_actions.append(what)
+
+func is_poisoned():
+	return self._turns_poisoned > 0
 
 func _get_equipment_modifier(equipment, stat_type):
 	var total = 0
