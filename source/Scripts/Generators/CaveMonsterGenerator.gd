@@ -8,29 +8,30 @@ const MONSTER_VARIANT_DATA = {
 	"River": {
 		"Clawomatic": {
 			"type": "Clawomatic",
-			"weight": 100,
-			"health": 100,
-			"strength": 10, 
-			"defense": 4,
+			"weight": 50,
+			"health": 150,
+			"strength": 30,
+			"defense": 10,
 			"turns": 1,
-			"experience points": 1,
+			"experience points": 18,
 			
-			"skill_probability": 20, # 40 = 40%
+			"skill_probability": 50, # 40 = 40%
 			"skills": {
-				"armour break": 100
+				"harden": 100 
 			}
 		},
 		"WingBeak": {
 			"type": "WingBeak",
-			"weight": 1,
-			"health": 1,
-			"strength": 1, 
-			"defense": 1,
+			"weight": 50,
+			"health": 70,
+			"strength": 20,
+			"defense": 16,
 			"turns": 1,
-			"experience points": 1,
+			"experience points": 16,
 			
-			"skill_probability": 0, # 40 = 40%
+			"skill_probability": 50, # 40 = 40%
 			"skills": {
+				"roar": 100 
 			}
 		}
 	},
