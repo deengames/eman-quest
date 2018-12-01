@@ -1,10 +1,10 @@
 extends Node2D
 
-const ActionButton = preload("res://Scenes/Battle/ActionButton.tscn")
+const ActionButton = preload("res://Scenes/Battle/MemoryTile/ActionButton.tscn")
 const BattleResolution = preload("res://Scripts/Battle/BattleResolution.gd")
 const MonsterScaler = preload("res://Scripts/Battle/MonsterScaler.gd")
-const NBackTriggerPopup = preload("res://Scenes/Battle/NBackTriggerPopup.tscn")
-const SequenceTriggerPopup = preload("res://Scenes/Battle/SequenceTriggerPopup.tscn")
+const NBackTriggerPopup = preload("res://Scenes/Battle/MemoryTile/NBackTriggerPopup.tscn")
+const SequenceTriggerPopup = preload("res://Scenes/Battle/MemoryTile/SequenceTriggerPopup.tscn")
 
 const MAX_MESSAGES = 12 # with wrap, 15 lines max, 10 -11is safe
 # Pick N tiles to get a bonus for consecutive picks

@@ -1,17 +1,19 @@
 extends Node
 
 var _feature_map = {
+	"streamlined battles: enemy triggers": false,
+	
+	"defend action": true, # Old and new battle engine
+	"zoom-out maps": false,
+	
+	# Old/defunct battle engine
 	"consecutive picks battle bonus": true,
 	"actions require energy": false,
-	"defend action": true,
 	"equipment generates tiles": true,
 	"sequence battle triggers": true,
 	"n-back battle triggers": false,
 	"unlimited battle choices": false,
-	"zoom-out maps": false,
-	"instant actions": true,
-	"streamlined battles": true,
-	"streamlined battles: enemy triggers": false
+	"instant actions": true
 }
 
 func set(feature, enabled):

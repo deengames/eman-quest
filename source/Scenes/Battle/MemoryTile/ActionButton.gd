@@ -1,6 +1,6 @@
 extends Area2D
 
-const GridTile = preload("res://Scenes/Battle/GridTile.gd")
+const GridTile = preload("res://Scenes/Battle/MemoryTile/GridTile.gd")
 signal action_selected
 var action = ""
 

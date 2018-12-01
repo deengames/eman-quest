@@ -1,6 +1,6 @@
 extends Node2D
 
-const GridTile = preload("res://Scenes/Battle/GridTile.tscn")
+const GridTile = preload("res://Scenes/Battle/MemoryTile/GridTile.tscn")
 const _ENERGY_TILES_PERCENT = 0.2 # 0.2 = 20%
 var tiles_wide = 0
 var tiles_high = 0

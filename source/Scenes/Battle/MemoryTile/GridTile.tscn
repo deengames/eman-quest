@@ -1,8 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Scenes/Battle/GridTile.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Battle/MemoryTile/GridTile.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/battle/grid-tile.png" type="Texture" id=2]
 [ext_resource path="res://assets/images/battle/actions.png" type="Texture" id=3]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 
