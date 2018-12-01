@@ -146,7 +146,6 @@ _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
 [node name="DebugPanel" type="Panel" parent="." index="4"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -187,7 +186,7 @@ text = "X"
 flat = false
 align = 1
 
-[node name="SequenceBattleToggle" type="CheckButton" parent="DebugPanel" index="1"]
+[node name="ZoomOutToggle" type="CheckButton" parent="DebugPanel" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -206,147 +205,10 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 custom_fonts/font = SubResource( 4 )
 toggle_mode = true
-pressed = true
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Sequence battle triggers"
-flat = false
-align = 0
-_sections_unfolded = [ "custom_fonts" ]
-
-[node name="NBackTriggerToggle" type="CheckButton" parent="DebugPanel" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 25.0
-margin_top = 81.0
-margin_right = 571.0
-margin_bottom = 133.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/font = SubResource( 4 )
-toggle_mode = true
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "N-Back battle triggers"
-flat = false
-align = 0
-_sections_unfolded = [ "custom_fonts" ]
-
-[node name="UnlimitedBattleChoicesToggle" type="CheckButton" parent="DebugPanel" index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 25.0
-margin_top = 141.0
-margin_right = 571.0
-margin_bottom = 193.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/font = SubResource( 4 )
-toggle_mode = true
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Unlimited battle choices"
-flat = false
-align = 0
-_sections_unfolded = [ "custom_fonts" ]
-
-[node name="ZoomOutToggle" type="CheckButton" parent="DebugPanel" index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 25.0
-margin_top = 201.0
-margin_right = 571.0
-margin_bottom = 253.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/font = SubResource( 4 )
-toggle_mode = true
 enabled_focus_mode = 2
 shortcut = null
 group = null
 text = "Zoom-out maps"
-flat = false
-align = 0
-_sections_unfolded = [ "Margin", "custom_fonts" ]
-
-[node name="StreamlinedBattleEnemyTriggersToggle" type="CheckButton" parent="DebugPanel" index="5"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 25.0
-margin_top = 321.0
-margin_right = 571.0
-margin_bottom = 373.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/font = SubResource( 4 )
-toggle_mode = true
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Streamlined: enemy triggers"
-flat = false
-align = 0
-_sections_unfolded = [ "Margin", "custom_fonts" ]
-
-[node name="StreamlinedBattlesToggle" type="CheckButton" parent="DebugPanel" index="6"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 25.0
-margin_top = 261.0
-margin_right = 571.0
-margin_bottom = 313.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/font = SubResource( 4 )
-toggle_mode = true
-pressed = true
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Streamlined Battles"
 flat = false
 align = 0
 _sections_unfolded = [ "Margin", "custom_fonts" ]
@@ -359,16 +221,6 @@ _sections_unfolded = [ "Margin", "custom_fonts" ]
 
 [connection signal="pressed" from="DebugPanel/XButton" to="." method="_on_XButton_pressed"]
 
-[connection signal="toggled" from="DebugPanel/SequenceBattleToggle" to="." method="_on_SequenceBattleCheckButton_toggled"]
-
-[connection signal="toggled" from="DebugPanel/NBackTriggerToggle" to="." method="_on_NBackTriggerToggle_toggled"]
-
-[connection signal="toggled" from="DebugPanel/UnlimitedBattleChoicesToggle" to="." method="_on_UnlimitedBattleChoicesToggle_toggled"]
-
 [connection signal="toggled" from="DebugPanel/ZoomOutToggle" to="." method="_on_ZoomOutToggle_toggled"]
-
-[connection signal="toggled" from="DebugPanel/StreamlinedBattleEnemyTriggersToggle" to="." method="_on_StreamlinedBattleEnemyTriggersToggle_toggled"]
-
-[connection signal="toggled" from="DebugPanel/StreamlinedBattlesToggle" to="." method="_on_StreamlinedBattlesToggle_toggled"]
 
 

@@ -19,27 +19,5 @@ func _on_DebugButton_pressed():
 func _on_XButton_pressed():
 	$DebugPanel.visible = false
 
-func _on_SequenceBattleCheckButton_toggled(button_pressed):
-	Features.set("sequence battle triggers", button_pressed)
-	if button_pressed:
-			Features.set("n-back battle triggers", false)
-			$DebugPanel/NBackTriggerToggle.pressed = false
-			
-func _on_NBackTriggerToggle_toggled(button_pressed):
-		Features.set("n-back battle triggers", button_pressed)
-		if button_pressed:
-			Features.set("sequence battle triggers", false)
-			$DebugPanel/SequenceBattleToggle.pressed = false
-
-func _on_UnlimitedBattleChoicesToggle_toggled(button_pressed):
-	Features.set("unlimited battle choices", button_pressed)
-
 func _on_ZoomOutToggle_toggled(button_pressed):
 	Features.set("zoom-out maps", button_pressed)
-
-func _on_StreamlinedBattleEnemyTriggersToggle_toggled(button_pressed):
-	Features.set("streamlined battles: enemy triggers", button_pressed)
-
-
-func _on_StreamlinedBattlesToggle_toggled(button_pressed):
-		Features.set("streamlined battles", button_pressed)
