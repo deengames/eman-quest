@@ -15,11 +15,9 @@ const MONSTER_VARIANT_DATA = {
 			"turns": 1,
 			"experience points": 1,
 			
-			"skill_probability": 100, # 40 = 40%
+			"skill_probability": 20, # 40 = 40%
 			"skills": {
-				"disable attack": 30,
-				"disable critical": 5,
-				"disable items": 30
+				"armour break": 100
 			}
 		},
 		"WingBeak": {
@@ -33,6 +31,36 @@ const MONSTER_VARIANT_DATA = {
 			
 			"skill_probability": 0, # 40 = 40%
 			"skills": {
+			}
+		}
+	},
+	"Lava": {
+		"Flame Tail": {
+			"type": "Flame Tail",
+			"weight": 60,
+			"health": 110,
+			"strength": 35,
+			"defense": 10,
+			"turns": 1,
+			"experience points": 13,
+			
+			"skill_probability": 25, # 40 = 40%
+			"skills": {
+				"poison": 100 
+			}
+		},
+		"Red Scorpion": {
+			"type": "Red Scorpion",
+			"weight": 40,
+			"health": 80,
+			"strength": 25,
+			"defense": 17,
+			"turns": 1,
+			"experience points": 13,
+			
+			"skill_probability": 25,
+			"skills": {
+				"armour break": 100
 			}
 		}
 	}

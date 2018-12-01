@@ -21,7 +21,7 @@ var level = 1
 var experience_points = 0
 
 var health = 60
-var strength = 8
+var strength = 15
 var defense = 5
 
 var max_energy = 20
