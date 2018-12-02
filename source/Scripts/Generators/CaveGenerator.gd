@@ -13,6 +13,33 @@ const TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 
 const _BOSS_DATA = {
 	"River": {
+		"type": "Freeze Fang",
+		"health": 300,
+		"strength": 30,
+		"defense": 5,
+		"turns": 1,
+		"experience points": 170,
+		
+		"skill_probability": 50, # 40 = 40%
+		"skills": {
+			# These should add up to 100
+			"chomp": 60, # 20%,
+			"freeze": 40
+		}
+	},
+	"Lava": {
+		"type": "StingTail",
+		"health": 250,
+		"strength": 30,
+		"defense": 15,
+		"turns": 1,
+		"experience points": 13,
+		
+		"skill_probability": 30, # 40 = 40%
+		"skills": {
+			"roar": 20,
+			"poison": 80
+		}
 	}
 }
 
@@ -55,25 +82,41 @@ func generate(submap, transitions, variation_name):
 	map.transitions = transitions
 	map.treasure_chests = self._generate_treasure_chests()
 
-	# TODO: generate boss
-	#if submap.area_type == AreaType.BOSS:
-	#	map.bosses = self._generate_boss(variation_name)
+	if submap.area_type == AreaType.BOSS:
+		# Brute-force: find the farthest land tile from the entrance. But, only if the
+		# distance is within N tiles. Wandering the entire breadth of the dungeon is madness.
+		var max_distance = 5 * 5
+		
+		var entrance_transition = transitions[0]
+		var entrance = [entrance_transition.my_position.x, entrance_transition.my_position.y]
+		var farthest = [entrance_transition.my_position.x, entrance_transition.my_position.y]
+		var distance = 0
+		
+		for y in range(self.map_height):
+			for x in range(self.map_width):
+				if self._ground_tilemap.get(x, y) == "Ground":
+					var current_distance = sqrt(pow(x - entrance[0], 2) + pow(y - entrance[1], 2))
+					if current_distance > distance and current_distance <= max_distance:
+						farthest = [x, y]
+						distance = current_distance
+						print("F="+str(farthest)+" d="+str(distance))
+		
+		map.bosses = self._generate_boss(variation_name, farthest)
 
 	for data in tile_data:
 		map.add_tile_data(data)
 
 	return map
 
-func _generate_boss(variation_name):
+func _generate_boss(variation_name, coordinates):
 	# TODO: place boss
-	var coordinates = [0, 0] # self._clearings_coordinates[0]
 	var pixel_coordinates = [coordinates[0] * Globals.TILE_WIDTH, coordinates[1] * Globals.TILE_HEIGHT]
 
-	#var kufi = KeyItem.new()
-	#kufi.initialize("Bloody Kufi", "A white kufi (skull-cap) stained with blood ...")
+	var key_item = KeyItem.new()
+	key_item.initialize("???", "TBD")
 
 	var boss = Boss.new()
-	boss.initialize(pixel_coordinates[0], pixel_coordinates[1], _BOSS_DATA[variation_name], null)
+	boss.initialize(pixel_coordinates[0], pixel_coordinates[1], _BOSS_DATA[variation_name], key_item)
 	return { boss.data.type: [boss] }
 
 func _generate_cave(area_type, transitions, variation_name):

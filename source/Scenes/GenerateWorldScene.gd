@@ -26,7 +26,7 @@ func _generate():
 	
 func _generate_world():
 	var forest_maps = _generate_subarea_maps(ForestVariations, ForestGenerator.new(), 4)
-	var cave_maps = _generate_subarea_maps(CaveVariations, CaveGenerator.new(), 6)
+	var cave_maps = _generate_subarea_maps(CaveVariations, CaveGenerator.new(), 4)
 	var dungeon_maps = _generate_subarea_maps(DungeonVariations, DungeonGenerator.new(), 6)
 	
 	# return a dictionary, eg. "forest" => forest maps

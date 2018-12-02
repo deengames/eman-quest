@@ -4,8 +4,8 @@ const PlayerData = preload("res://Entities/PlayerData.gd")
 
 const TILE_WIDTH = 64
 const TILE_HEIGHT = 64
-const SUBMAP_WIDTH_IN_TILES = 60
-const SUBMAP_HEIGHT_IN_TILES = 50
+const SUBMAP_WIDTH_IN_TILES = 30
+const SUBMAP_HEIGHT_IN_TILES = 25
 const WORLD_WIDTH_IN_TILES = 30 # 1920/64
 const WORLD_HEIGHT_IN_TILES = 17 # 1080/64
 
@@ -44,9 +44,11 @@ var current_monster_type = ""
 
 func _ready():
 	randomize()
-	seed(9999) # 9999 => all dungeons are close to start
-	# abc gives frost forest
-	# abcdef gives forest
+	seed(321) # 9999 => all dungeons are close to start
+	# forest => abcdef
+	# frost forest => abc
+	# river cave => 9, 99, 999, 999
+	# lava cave => 321
 	#seed("abcdef".hash())
 	
 # Returns integer value from min to max inclusive
