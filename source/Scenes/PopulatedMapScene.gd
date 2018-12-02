@@ -68,9 +68,9 @@ func _ready():
 	if self._restoring_state == true and not Globals.won_battle:
 		player.temporarily_no_battles()
 		
-	self.add_child(player)
-	
 	Globals.current_map_scene = self
+		
+	self.add_child(player)
 
 func get_monsters():
 	var to_return = {}
