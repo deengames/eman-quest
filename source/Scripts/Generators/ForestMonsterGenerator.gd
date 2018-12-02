@@ -67,7 +67,7 @@ const MONSTER_VARIANT_DATA = {
 	}
 }
 
-const NUM_MONSTERS = [20, 25] # May not get this much if we can't find empty spots
+const NUM_MONSTERS = [4, 5] # May not get this much if we can't find empty spots
 const _MAX_EMPTY_SPOT_CHECKS = 1000 # Try 1000 times to find an empty spot. Don't freeze, move on.
 
 func generate_monsters(forest_map):
