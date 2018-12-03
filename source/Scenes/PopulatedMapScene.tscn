@@ -15,7 +15,7 @@ use_filter = false
 font_data = ExtResource( 3 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -191,7 +191,7 @@ _sections_unfolded = [ "Mouse" ]
 __meta__ = {
 "_editor_icon": ExtResource( 6 )
 }
-Type = 0
+Type = 2
 
 [connection signal="pressed" from="UI/StatsButton" to="UI" method="_on_StatsButton_pressed"]
 
