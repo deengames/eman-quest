@@ -72,7 +72,7 @@ const _MAX_ITEM_POWER = 30
 const ENTITY_TILES = {} # name => preload("...")
 
 var map_width = Globals.SUBMAP_WIDTH_IN_TILES
-var map_height = 3 * Globals.SUBMAP_HEIGHT_IN_TILES
+var map_height = Globals.SUBMAP_HEIGHT_IN_TILES
 
 var _clearings_coordinates = []
 var _ground_map = []

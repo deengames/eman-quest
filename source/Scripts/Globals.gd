@@ -5,8 +5,8 @@ const PlayerData = preload("res://Entities/PlayerData.gd")
 const TILE_WIDTH = 64
 const TILE_HEIGHT = 64
 # 1920x1080 / 64x64 => 30/17
-const SUBMAP_WIDTH_IN_TILES = 40
-const SUBMAP_HEIGHT_IN_TILES = 25
+const SUBMAP_WIDTH_IN_TILES = 60
+const SUBMAP_HEIGHT_IN_TILES = 40
 const WORLD_WIDTH_IN_TILES = 30 # 1920/64
 const WORLD_HEIGHT_IN_TILES = 18 # 1080/64
 
@@ -45,7 +45,7 @@ var current_monster_type = ""
 
 func _ready():
 	randomize()
-	seed(3219) # 9999 => all dungeons are close to start
+	seed("abc".hash()) # 9999 => all dungeons are close to start
 	# forest => abcdef
 	# frost forest => abc
 	# river cave => 9, 99, 999, 999
