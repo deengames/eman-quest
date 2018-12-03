@@ -13,18 +13,18 @@ const TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 
 const _BOSS_DATA = {
 	"River": {
-		"type": "Freeze Fang",
+		"type": "Neon Pincer",
 		"health": 300,
-		"strength": 30,
-		"defense": 5,
+		"strength": 20,
+		"defense": 15,
 		"turns": 1,
 		"experience points": 170,
 		
-		"skill_probability": 50, # 40 = 40%
+		"skill_probability": 30, # 40 = 40%
 		"skills": {
 			# These should add up to 100
-			"chomp": 60, # 20%,
-			"freeze": 40
+			"chomp": 70, # 20%,
+			"roar": 35
 		}
 	},
 	"Lava": {
@@ -33,7 +33,7 @@ const _BOSS_DATA = {
 		"strength": 30,
 		"defense": 15,
 		"turns": 1,
-		"experience points": 13,
+		"experience points": 170,
 		
 		"skill_probability": 30, # 40 = 40%
 		"skills": {
