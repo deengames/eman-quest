@@ -13,7 +13,7 @@ const MONSTER_VARIANT_DATA = {
 			"strength": 15,
 			"defense": 17,
 			"turns": 1,
-			"experience points": 10,
+			"experience points": 14,
 			
 			"skill_probability": 40, # 40 = 40%
 			"skills": {
@@ -27,7 +27,7 @@ const MONSTER_VARIANT_DATA = {
 			"strength": 24,
 			"defense": 15,
 			"turns": 1,
-			"experience points": 15,
+			"experience points": 11,
 			"vampire multiplier": 1.1, # normal is 1.5
 			
 			"skill_probability": 20,
@@ -40,28 +40,29 @@ const MONSTER_VARIANT_DATA = {
 		"Howler": {
 			"type": "Howler",
 			"weight": 30,
-			"health": 60,
-			"strength": 20,
-			"defense": 0,
+			"health": 90,
+			"strength": 28,
+			"defense": 16,
 			"turns": 2,
-			"experience points": 15,
+			"experience points": 17,
 			
-			"skill_probability": 0, # 40 = 40%
+			"skill_probability": 40, # 40 = 40%
 			"skills": {
+				"roar": 100
 			}
 		},
 		"Ice Terrapin": {
 			"type": "Ice Terrapin",
 			"weight": 60,
-			"health": 20,
-			"strength": 15,
-			"defense": 11,
-			"turns": 1,
-			"experience points": 12,
+			"health": 65,
+			"strength": 20,
+			"defense": 20,
+			"turns": 2,
+			"experience points": 13,
 			
 			"skill_probability": 50, # 40 = 40%
 			"skills": {
-				"freeze": 100 # 20%,
+				"freeze": 100
 			}
 		}
 	}
