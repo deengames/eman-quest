@@ -216,6 +216,7 @@ func _generate_clearings(path_points, dirt_map, tree_map):
 			continue
 			
 		self._clearings_coordinates.append(point)
+		print("Clearing at " + str(point))
 		
 		for y in range (center_y - CLEARING_HEIGHT / 2, center_y + CLEARING_HEIGHT / 2):
 			for x in range (center_x - CLEARING_WIDTH / 2, center_x + CLEARING_WIDTH / 2):

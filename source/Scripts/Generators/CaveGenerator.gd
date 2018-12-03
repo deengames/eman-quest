@@ -99,7 +99,6 @@ func generate(submap, transitions, variation_name):
 					if current_distance > distance and current_distance <= max_distance:
 						farthest = [x, y]
 						distance = current_distance
-						print("F="+str(farthest)+" d="+str(distance))
 		
 		map.bosses = self._generate_boss(variation_name, farthest)
 

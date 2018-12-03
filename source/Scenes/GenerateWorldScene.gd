@@ -25,9 +25,9 @@ func _generate():
 	get_tree().current_scene.get_node("UI").show_intro_story()
 	
 func _generate_world():
-	var forest_maps = _generate_subarea_maps(ForestVariations, ForestGenerator.new(), 2)
-	var cave_maps = _generate_subarea_maps(CaveVariations, CaveGenerator.new(), 4)
-	var dungeon_maps = _generate_subarea_maps(DungeonVariations, DungeonGenerator.new(), 6)
+	var forest_maps = _generate_subarea_maps(ForestVariations, ForestGenerator, 4)
+	var cave_maps = _generate_subarea_maps(CaveVariations, CaveGenerator, 4)
+	var dungeon_maps = _generate_subarea_maps(DungeonVariations, DungeonGenerator, 6)
 	
 	# return a dictionary, eg. "forest" => forest maps
 	Globals.maps = {
@@ -46,14 +46,17 @@ func _generate_world():
 		"boss_type": self._generate_boss_type()
 	}
 
-func _generate_subarea_maps(variations, generator, num_submaps):
+func _generate_subarea_maps(variations, generator_class, num_submaps):
 	var variation = variations[randi() % len(variations)]
-	print("*******************************" + variation)
 	var layout = MapLayoutGenerator.generate_layout(num_submaps)
 	var submaps = []
 	
 	for submap in layout:
-		# Generate transitions here, used for path generation
+		# Generate transitions here, used for path generation. Reusing generators leads
+		# to weird stateful business, like forest map 1 having clearings and the boss
+		# being generated at those clearing coordinates in forest map 2. Erp.
+		# I don't think generators were ever supposed to be reused.
+		var generator = generator_class.new()
 		var data = self._generate_transitions(submap, generator.map_width, generator.map_height)
 		var transitions = data["transitions"]
 		var entrance = data["entrance"]
