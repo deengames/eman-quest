@@ -23,18 +23,17 @@ const CLEARING_HEIGHT = 8
 const _BOSS_DATA = {
 	"Slime": {
 		"type": "Queen Slime",
-		"health": 100,
-		"strength": 13,
-		"defense": 4,
+		"health": 250,
+		"strength": 20,
+		"defense": 15,
 		"turns": 1,
-		"experience points": 150,
+		"experience points": 170,
 		
-		"skill_probability": 60, # 40 = 40%
+		"skill_probability": 50, # 40 = 40%
 		"skills": {
-			# These should add up to 100
-			"chomp": 80,
-			"vampire": 20
-		},
+			"chomp": 50,
+			"vampire": 50
+		}
 	},
 	"Frost": {
 		"type": "Freeze Fang",

@@ -9,30 +9,30 @@ const MONSTER_VARIANT_DATA = {
 		"Gold Slime": {
 			"type": "Gold Slime",
 			"weight": 70,
-			"health": 40,
-			"strength": 15, # was 20
-			"defense": 10,
+			"health": 70,
+			"strength": 15,
+			"defense": 17,
 			"turns": 1,
 			"experience points": 10,
 			
 			"skill_probability": 40, # 40 = 40%
 			"skills": {
-				"chomp": 100 # 20%,
+				"chomp": 100
 			}
 		},
 		"Vampire Bat": {
 			"type": "Vampire Bat",
 			"weight": 30,
-			"health": 48, # was 38
-			"strength": 24, # was 24
-			"defense": 8,
+			"health": 85,
+			"strength": 24,
+			"defense": 15,
 			"turns": 1,
 			"experience points": 15,
 			"vampire multiplier": 1.1, # normal is 1.5
 			
 			"skill_probability": 20,
 			"skills": {
-				"vampire": 100 # 20%,
+				"vampire": 100 
 			}
 		} 
 	},
