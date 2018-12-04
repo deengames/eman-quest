@@ -102,23 +102,25 @@ func monster_attacks(monster_data, player, boost_amount, memory_grid):
 func _process_attack(action, monster_data, player, boost_amount, memory_grid):
 	var damage = 0
 	var monster_name = monster_data["type"]
-	var message = monster_name + " "
+	# For custom messages
+	var message # empty-string, soon to be the message suffix
+	var amount # amount to place in custom message token {amount}
 	
 	if action == "attack":
 		damage = max(0, monster_data["strength"] - player.total_defense())
-		message += "attacks for " + str(damage) + " damage."
+		message = "attacks for " + str(damage) + " damage."
 	elif action == "chomp":
 		damage = max(0, (2 * monster_data["strength"]) - player.total_defense())
-		message += "CHOMPS! " + str(damage) + " damage!"
+		message = "CHOMPS! " + str(damage) + " damage!"
 	elif action == "shock":
 		damage = monster_data["strength"] # pierces defense
-		message += "shocks you for " + str(damage) + "!"
+		message = "shocks you for " + str(damage) + "!"
 		if memory_grid != null: # null on fast-paced battle grid
 			memory_grid.shock(_SHOCK_TURNS)
 	elif action == "freeze":
 		# Shock, but a few tiles only
 		damage = monster_data["strength"] # pierces defense
-		message += "freezes you! " + str(damage) + " damage!"
+		message = "freezes you! " + str(damage) + " damage!"
 		if memory_grid != null: # null on fast-paced battle grid
 			memory_grid.freeze(_SHOCK_TURNS, 5)
 	elif action == "vampire":
@@ -126,7 +128,7 @@ func _process_attack(action, monster_data, player, boost_amount, memory_grid):
 		if "vampire multiplier" in monster_data:
 			multiplier = monster_data["vampire multiplier"]
 		damage = floor(monster_data["strength"] * multiplier)
-		message += "hits/absorbs " + str(damage) + " health!"
+		message = "hits/absorbs " + str(damage) + " health!"
 		monster_data["health"] += damage
 		# Don't allow overhealing. Bats are nigh unto impossible to kill otherwise.
 		monster_data["health"] = min(monster_data["health"], monster_data["max_health"])
@@ -134,32 +136,43 @@ func _process_attack(action, monster_data, player, boost_amount, memory_grid):
 		# Hard to balance without knowing monster profile. This is easy: boost by a small percentage.
 		# If used enough times, has a good effect. Yet, doesn't drastically change it's toughness.
 		monster_data["defense"] *= _HARDEN_DEFENSE_MULTIPLIER
-		message += "hardens! Defense up!"
+		message = "hardens! Defense up!"
 	elif action == "heal":
 		var heal_amount = round(_HEAL_PERCENT * monster_data["max_health"])
 		heal_amount = min(monster_data["max_health"] - monster_data["health"], heal_amount)
 		monster_data["health"] += heal_amount
-		message += "heals " + str(heal_amount) + " health."
+		message = "heals " + str(heal_amount) + " health."
 	elif action == "roar":
 		monster_data["strength"] += _ROAR_BOOST_AMOUNT
-		message += "roars! Attack up by " + str(_ROAR_BOOST_AMOUNT) + "!"
+		message = "roars! Attack up by " + str(_ROAR_BOOST_AMOUNT) + "!"
+		amount = str(_ROAR_BOOST_AMOUNT)
 	elif action == "disable critical":
-		message += "strikes! Critical attack disabled!"
+		message = "strikes! Critical attack disabled!"
 		player.disable("critical")
 	elif action == "disable attack":
-		message += "strikes! Attack disabled!"
+		message = "strikes! Attack disabled!"
 		player.disable("attack")
 	elif action == "disable items":
-		message += "strikes! Items disabled!"
+		message = "strikes! Items disabled!"
 		player.disable("items")
 	elif action == "sleep":
-		message += "puts you to sleep!"
+		message = "puts you to sleep!"
 		player.is_asleep = true
 	elif action == "poison":
 		player.poison(_POISONED_TURNS)
-		message += "poisons you!"
+		message = "poisons you!"
 	elif action == "armour break":
-		message += "hits your armour, damaging it!"
+		message = "hits your armour, damaging it!"
 		player.lower_defense()
 		
+	# Apply custom/override message if it exists
+	if monster_data.has("skill_messages"):
+		var override_messages = monster_data["skill_messages"]
+		if override_messages.has(action):
+			message = override_messages[action]
+			# Replace tokens with values
+			message = message.replace("{amount}", amount)
+			
+	message = monster_name + " " + message
+	
 	return { "damage": damage, "message": message }

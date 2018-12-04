@@ -49,6 +49,10 @@ const MONSTER_VARIANT_DATA = {
 			"skill_probability": 40, # 40 = 40%
 			"skills": {
 				"roar": 100
+			},
+			# Override skill messages with custom values
+			"skill_messages": {
+				"roar": "howls! Attack up by {amount}!"
 			}
 		},
 		"Ice Terrapin": {
