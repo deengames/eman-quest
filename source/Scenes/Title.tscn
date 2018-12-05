@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Title.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/Lato-Black.ttf" type="DynamicFontData" id=2]
@@ -27,15 +27,7 @@ use_filter = false
 font_data = ExtResource( 2 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[sub_resource type="DynamicFont" id=4]
-
-size = 30
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 2 )
-_sections_unfolded = [ "Font", "Font/fallback", "Settings" ]
-
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -96,10 +88,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 33.0
-margin_top = 486.0
-margin_right = 125.0
-margin_bottom = 536.0
+margin_left = 25.0
+margin_top = 504.0
+margin_right = 117.0
+margin_bottom = 554.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -117,16 +109,16 @@ flat = false
 align = 1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="DebugButton" type="Button" parent="." index="3"]
+[node name="Options" type="Button" parent="." index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 813.0
-margin_top = 486.0
-margin_right = 933.0
-margin_bottom = 536.0
+margin_left = 797.0
+margin_top = 499.0
+margin_right = 941.0
+margin_bottom = 549.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -139,88 +131,15 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-text = "Debug"
+text = "Options"
 flat = false
 align = 1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="DebugPanel" type="Panel" parent="." index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 60.0
-margin_top = 60.0
-margin_right = 525.0
-margin_bottom = 139.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-
-[node name="XButton" type="Button" parent="DebugPanel" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 432.0
-margin_top = 13.0
-margin_right = 452.0
-margin_bottom = 33.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "X"
-flat = false
-align = 1
-
-[node name="ZoomOutToggle" type="CheckButton" parent="DebugPanel" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 25.0
-margin_top = 21.0
-margin_right = 398.0
-margin_bottom = 73.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/font = SubResource( 4 )
-toggle_mode = true
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Zoom-out maps"
-flat = false
-align = 0
-_sections_unfolded = [ "Margin", "custom_fonts" ]
 
 [connection signal="pressed" from="Button" to="." method="_on_newgame_Button_pressed"]
 
 [connection signal="pressed" from="LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
 
-[connection signal="pressed" from="DebugButton" to="." method="_on_DebugButton_pressed"]
-
-[connection signal="pressed" from="DebugPanel/XButton" to="." method="_on_XButton_pressed"]
-
-[connection signal="toggled" from="DebugPanel/ZoomOutToggle" to="." method="_on_ZoomOutToggle_toggled"]
+[connection signal="pressed" from="Options" to="." method="_on_Options_pressed"]
 
 
