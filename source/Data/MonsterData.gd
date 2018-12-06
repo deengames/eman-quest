@@ -130,5 +130,26 @@ const MONSTER_DATA = {
 		        }
 		    }
 		}
+	},
+	"Dungeon": {
+		"Castle": {
+			"FootSoldier": {
+				"type": "FootSoldier",
+		        "weight": 70,
+		        "health": 90,
+		        "strength": 19,
+		        "defense": 14,
+		        "turns": 1,
+		        "experience points": 17,
+		        
+		        "skill_probability": 65, # 40 = 40%
+		        "skills": {
+		            "chomp": 100,
+		        },
+		        "skill_messages": {
+		            "chomp": "bashes you with his shield! {damage} damage!"
+		        }
+			}
+		}
 	}
 }

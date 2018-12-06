@@ -171,7 +171,9 @@ func _process_attack(action, monster_data, player, boost_amount, memory_grid):
 		if override_messages.has(action):
 			message = override_messages[action]
 			# Replace tokens with values
-			message = message.replace("{amount}", amount)
+			if amount != null:
+				message = message.replace("{amount}", amount)
+			message = message.replace("{damage}", damage)
 			
 	message = monster_name + " " + message
 	
