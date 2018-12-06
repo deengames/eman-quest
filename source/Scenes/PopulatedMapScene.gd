@@ -11,11 +11,7 @@ const Monster = preload("res://Entities/Battle/Monster.tscn")
 const Player = preload("res://Entities/Player.tscn")
 const TreasureChest = preload("res://Entities/TreasureChest.tscn")
 const TilesetMapper = preload("res://Scripts/TilesetMapper.gd")
-
-const _GENERATORS = {
-	"Forest": preload("res://Scripts/Generators/ForestMonsterGenerator.gd"),
-	"Cave": preload("res://Scripts/Generators/CaveMonsterGenerator.gd")
-}
+const MonsterGenerator = preload("res://Scripts/Generators/MonsterGenerator.gd")
 
 signal clicked_on_map(position)
 
@@ -152,13 +148,7 @@ func _add_monsters():
 		# We loaded a save game. Load those exact same monsters.
 		monster_data = self.map.monsters
 	else:
-		var generator_type = self.map.map_type
-		if generator_type in self._GENERATORS:
-			var type = self._GENERATORS[generator_type]
-			var generator = type.new()
-			monster_data = generator.generate_monsters(self.map)
-		else:
-			monster_data = {}
+		monster_data = MonsterGenerator.new().generate_monsters(self.map)
 
 	self._monsters = {}
 	self._bosses = {}
