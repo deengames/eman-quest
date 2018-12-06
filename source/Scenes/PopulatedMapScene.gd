@@ -105,7 +105,6 @@ func _populate_tile_entities(tile_map, entity_tiles):
 			instance.position.y = cell.y * Globals.TILE_HEIGHT
 			# Remove tile
 			tile_map.set_cellv(cell, -1)
-			print("Replaced " + tile_name + " with " + str(instance))
 
 func _add_transitions(tilemap, tile_ids):
 	for destination in map.transitions:
