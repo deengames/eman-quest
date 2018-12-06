@@ -133,7 +133,7 @@ const MONSTER_DATA = {
 	},
 	"Dungeon": {
 		"Castle": {
-			"FootSoldier": {
+			"Foot Soldier": {
 				"type": "FootSoldier",
 		        "weight": 70,
 		        "health": 90,
@@ -148,6 +148,23 @@ const MONSTER_DATA = {
 		        },
 		        "skill_messages": {
 		            "chomp": "bashes you with his shield! {damage} damage!"
+		        }
+			},
+			"Skelly": {
+				"type": "Skelly",
+		        "weight": 30,
+		        "health": 110,
+		        "strength": 24,
+		        "defense": 13,
+		        "turns": 1,
+		        "experience points": 20,
+		        
+		        "skill_probability": 50,
+		        "skills": {
+		            "heal": 100
+		        },
+		        "skill_messages": {
+		            "heal": "regenerates its bones! Healed {amount} health!"
 		        }
 			}
 		}

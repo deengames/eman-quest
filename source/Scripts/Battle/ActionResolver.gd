@@ -138,10 +138,10 @@ func _process_attack(action, monster_data, player, boost_amount, memory_grid):
 		monster_data["defense"] *= _HARDEN_DEFENSE_MULTIPLIER
 		message = "hardens! Defense up!"
 	elif action == "heal":
-		var heal_amount = round(_HEAL_PERCENT * monster_data["max_health"])
-		heal_amount = min(monster_data["max_health"] - monster_data["health"], heal_amount)
-		monster_data["health"] += heal_amount
-		message = "heals " + str(heal_amount) + " health."
+		amount = round(_HEAL_PERCENT * monster_data["max_health"])
+		amount = min(monster_data["max_health"] - monster_data["health"], amount)
+		monster_data["health"] += amount
+		message = "heals " + str(amount) + " health."
 	elif action == "roar":
 		monster_data["strength"] += _ROAR_BOOST_AMOUNT
 		message = "roars! Attack up by " + str(_ROAR_BOOST_AMOUNT) + "!"
