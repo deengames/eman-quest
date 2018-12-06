@@ -13,6 +13,21 @@ const TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 
 const _BOSS_DATA = {
 	"Castle": {
+		"type": "Humerus",
+		"health": 220,
+		"strength": 22,
+		"defense": 14,
+		"turns": 2,
+		"experience points": 200,
+		
+		"skill_probability": 50,
+		"skills": {
+			"roar": 50,
+			"heal": 50
+		},
+		"skill_messages": {
+            "heal": "regrows damaged bones! Healed {amount} health!"
+        }
 	}
 }
 
@@ -38,6 +53,7 @@ var map_height = Globals.SUBMAP_HEIGHT_IN_TILES
 
 var _ground_map = []
 var _wall_map = []
+var _rooms = [] # Array of Rect2s
 
 # Called once per game
 func generate(submap, transitions, variation_name):
@@ -51,9 +67,8 @@ func generate(submap, transitions, variation_name):
 	map.transitions = transitions
 	map.treasure_chests = self._generate_treasure_chests()
 
-	# TODO: generate boss
-	#if submap.area_type == AreaType.BOSS:
-	#	map.bosses = self._generate_boss(variation_name)
+	if submap.area_type == AreaType.BOSS:
+		map.bosses = self._generate_boss(variation_name)
 
 	for data in tile_data:
 		map.add_tile_data(data)
@@ -61,15 +76,18 @@ func generate(submap, transitions, variation_name):
 	return map
 
 func _generate_boss(variation_name):
-	# TODO: place boss
-	var coordinates = [0, 0] # self._clearings_coordinates[0]
+	var room = self._rooms[randi() % len(self._rooms)]
+	var center_x = room.position.x + floor(room.size.x / 2)
+	var center_y = room.position.y + floor(room.size.y / 2)
+	var coordinates = [center_x, center_y]
 	var pixel_coordinates = [coordinates[0] * Globals.TILE_WIDTH, coordinates[1] * Globals.TILE_HEIGHT]
 
-	#var kufi = KeyItem.new()
-	#kufi.initialize("Bloody Kufi", "A white kufi (skull-cap) stained with blood ...")
+	var key_item = KeyItem.new()
+	# TODO: depends on the boss
+	key_item.initialize("Bone Shard", "A gigantic shard of bone")
 
 	var boss = Boss.new()
-	boss.initialize(pixel_coordinates[0], pixel_coordinates[1], _BOSS_DATA[variation_name], null)
+	boss.initialize(pixel_coordinates[0], pixel_coordinates[1], _BOSS_DATA[variation_name], key_item)
 	return { boss.data.type: [boss] }
 
 func _generate_dungeon(area_type, transitions):
@@ -94,7 +112,7 @@ func _generate_rooms(transitions, ground_map, wall_map, decoration_map):
 	
 	var to_generate = Globals.randint(_NUM_ROOMS[0], _NUM_ROOMS[1])
 	var min_room_distance = _ROOM_SIZE[1] + _PATHS_BUFFER_FROM_EDGE # max size = min distance
-	var rooms = [] # Array of Rect2s
+	_rooms = []
 	var previous = null
 	var tries = 0
 	var paths_to_generate = [] # Array of [source, target] pairs
@@ -112,7 +130,7 @@ func _generate_rooms(transitions, ground_map, wall_map, decoration_map):
 		var current_room = Rect2(x, y, width, height)
 		var generate = true
 
-		for node in rooms:
+		for node in _rooms:
 			# Not too close to previous rooms. Implicitly, doesn't overlap.
 			if sqrt(pow(x - node.position.x, 2) + pow(y - node.position.y, 2)) <= min_room_distance:
 				generate = false
@@ -125,7 +143,7 @@ func _generate_rooms(transitions, ground_map, wall_map, decoration_map):
 		
 		if generate:
 			self._generate_room(current_room, ground_map, wall_map, decoration_map)
-			rooms.append(current_room)
+			_rooms.append(current_room)
 			if previous != null:
 				var source = _center_of(previous)
 				var target = _center_of(current_room)
@@ -161,7 +179,7 @@ func _generate_rooms(transitions, ground_map, wall_map, decoration_map):
 			destination[1] -= offset
 		
 		self._generate_straight_path(entrance, destination, ground_map, wall_map, decoration_map)
-		var closest_node = self._find_closest_room_to(destination, rooms)
+		var closest_node = self._find_closest_room_to(destination, _rooms)
 		self._generate_straight_path(destination, _center_of(closest_node), ground_map, wall_map, decoration_map)
 
 func _center_of(room):
