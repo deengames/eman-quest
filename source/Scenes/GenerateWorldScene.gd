@@ -10,6 +10,11 @@ const MapLayoutGenerator = preload("res://Scripts/Generators/MapLayoutGenerator.
 const OverworldGenerator = preload("res://Scripts/Generators/OverworldGenerator.gd")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
+# Moving to (map.width / 2, map.height - 1) takes us below the bottom-most tile.
+# Moving up one tile takes us directly on the transition; two tiles, now we're talking.
+# Now we're one tile above the transition back down.
+const _TRANSITION_UP_BUFFER_TILES = 2
+
 const ForestVariations = ["Slime", "Frost"] # Death
 const CaveVariations = ["River", "Lava"] # Crystal
 const DungeonVariations = ["Castle"] # Skeleton, Minotaur
@@ -125,15 +130,16 @@ func _generate_transitions(submap, map_width, map_height):
 		var my_position = Vector2(0, 0)
 		var target_position = Vector2(0, 0)
 		
+		# Lots of magic numbers here, +- 1 to position correctly when transitioning
 		if direction == "left":
 			my_position = Vector2(0, floor(map_height / 2)) 
-			target_position = Vector2(map_width - 1, floor(map_height / 2))
+			target_position = Vector2(map_width - 2, floor(map_height / 2) - 1)
 		elif direction == "right":
 			my_position = Vector2(map_width - 1, floor(map_height / 2))
-			target_position = Vector2(0, floor(map_height / 2))
+			target_position = Vector2(1, floor(map_height / 2) - 1)
 		elif direction == "up":
 			my_position = Vector2(floor(map_width / 2), 0)
-			target_position = Vector2(floor(map_width / 2), map_height - 1)
+			target_position = Vector2(floor(map_width / 2), map_height - 1 - _TRANSITION_UP_BUFFER_TILES)
 		elif direction == "down":
 			my_position = Vector2(floor(map_width / 2), map_height - 1)
 			target_position = Vector2(floor(map_width / 2), 0)
