@@ -17,7 +17,7 @@ const _TRANSITION_UP_BUFFER_TILES = 2
 
 const ForestVariations = ["Slime", "Frost"] # Death
 const CaveVariations = ["River", "Lava"] # Crystal
-const DungeonVariations = ["Castle"] # Desert
+const DungeonVariations = ["Castle", "Desert"]
 
 func _ready():
 	# Wait just long enough for the scene to display, then generate
@@ -32,7 +32,7 @@ func _generate():
 func _generate_world():
 	var forest_maps = _generate_subarea_maps(ForestVariations, ForestGenerator, 4)
 	var cave_maps = _generate_subarea_maps(CaveVariations, CaveGenerator, 4)
-	var dungeon_maps = _generate_subarea_maps(DungeonVariations, DungeonGenerator, 2)
+	var dungeon_maps = _generate_subarea_maps(DungeonVariations, DungeonGenerator, 4)
 	
 	# return a dictionary, eg. "forest" => forest maps
 	Globals.maps = {
@@ -53,6 +53,7 @@ func _generate_world():
 
 func _generate_subarea_maps(variations, generator_class, num_submaps):
 	var variation = variations[randi() % len(variations)]
+	print("*****" + variation)
 	var layout = MapLayoutGenerator.generate_layout(num_submaps)
 	var submaps = []
 	

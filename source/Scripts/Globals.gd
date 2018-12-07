@@ -45,11 +45,13 @@ var current_monster_type = ""
 
 func _ready():
 	randomize()
-	seed("abc".hash()) # 9999 => all dungeons are close to start
-	# forest => abcdef
+	seed(123321) # 9999 => all dungeons are close to start
+	# slime forest => abcdef
 	# frost forest => abc
 	# river cave => 9, 99, 999, 999
 	# lava cave => 321
+	# castle dungeon => 999, 9999
+	# desert dungeon => 123321
 	#seed("abcdef".hash())
 	
 # Returns integer value from min to max inclusive

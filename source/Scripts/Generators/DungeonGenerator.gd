@@ -28,11 +28,29 @@ const _BOSS_DATA = {
 		"skill_messages": {
             "heal": "regrows damaged bones! Healed {amount} health!"
         }
+	},
+	"Desert": {
+		"type": "Humerus",
+		"health": 220,
+		"strength": 22,
+		"defense": 14,
+		"turns": 2,
+		"experience points": 200,
+		
+		"skill_probability": 50,
+		"skills": {
+			"roar": 50,
+			"heal": 50
+		},
+		"skill_messages": {
+            "heal": "regrows damaged bones! Healed {amount} health!"
+        }
 	}
 }
 
 const _VARIANT_TILESETS = {
 	"Castle": "auto:CastleDungeon",
+	"Desert": "auto:DesertDungeon"
 }
 
 const _PATHS_BUFFER_FROM_EDGE = 5
