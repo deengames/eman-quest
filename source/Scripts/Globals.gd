@@ -45,7 +45,7 @@ var current_monster_type = ""
 
 func _ready():
 	randomize()
-	seed(123321) # 9999 => all dungeons are close to start
+	seed(123321) 
 	# slime forest => abcdef
 	# frost forest => abc
 	# river cave => 9, 99, 999, 999
