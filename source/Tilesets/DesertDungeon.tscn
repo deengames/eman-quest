@@ -1,13 +1,66 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://assets/images/dungeon-tiles.png" type="Texture" id=1]
+[ext_resource path="res://assets/images/castle-tiles.png" type="Texture" id=1]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+
+custom_solver_bias = 0.0
+points = PoolVector2Array( 0, 64, 0, 16, 16, 0, 48, 0, 64, 16, 64, 64 )
 
 [node name="Node2D" type="Node2D" index="0"]
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
+[node name="Ground" type="Sprite" parent="." index="0"]
 
 texture = ExtResource( 1 )
 centered = false
-_sections_unfolded = [ "Offset" ]
+region_enabled = true
+region_rect = Rect2( 0, 0, 64, 64 )
+_sections_unfolded = [ "Offset", "Region" ]
+
+[node name="Door" type="Sprite" parent="." index="1"]
+
+position = Vector2( 0, 80 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 256, 128, 64, 64 )
+_sections_unfolded = [ "Offset", "Region" ]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Door" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Door/StaticBody2D" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="Torch" type="Sprite" parent="." index="2"]
+
+position = Vector2( 0, 160 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 256, 988, 64, 64 )
+_sections_unfolded = [ "Offset", "Region" ]
+
+[node name="Ceiling" type="Sprite" parent="." index="3"]
+
+position = Vector2( 160, 0 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset", "Transform" ]
+
+[node name="Wall" type="Sprite" parent="." index="4"]
+
+position = Vector2( 244, 0 )
+texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Offset", "Transform" ]
 
 
