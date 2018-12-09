@@ -15,7 +15,7 @@ const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 # Now we're one tile above the transition back down.
 const _TRANSITION_UP_BUFFER_TILES = 2
 
-const ForestVariations = ["Slime", "Frost"] # Death
+const ForestVariations = ["Death"]#["Slime", "Frost", "Death"]
 const CaveVariations = ["River", "Lava"] # Crystal
 const DungeonVariations = ["Castle", "Desert"]
 
