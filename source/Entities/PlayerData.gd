@@ -17,25 +17,23 @@ const _STATS_POINTS_PER_LEVEL = 5
 var level = 1
 var experience_points = 0
 
-var health = 30
-var strength = 5
-var defense = 4
+var health = 60
+var strength = 15
+var defense = 5
 
 var num_actions = 3
 
-var unassigned_stats_points = 0
+var unassigned_stats_points = 10
 
 var assigned_points = {
-	"health": 0,
-	"strength": 0,
-	"defense": 0,
-	"energy": 0, # requires ~5 points to raise it by 1
-	"num_pickable_tiles": 0, # requires ~10 points to raise it by 1
-	"num_actions": 0 # requires ~20 points to raise it by 1
+	"health": int(0),
+	"strength": int(0),
+	"defense": int(0),
+	"num_actions": int(0) # requires ~20 points to raise it by 1
 }
 
-var weapon = Equipment.new("weapon", "Dagger", StatType.Strength, 6, StatType.Defense, 1)
-var armour = Equipment.new("armour", "Tunic", StatType.Defense, 5, StatType.Health, 5)
+var weapon = Equipment.new("weapon", "Dagger", StatType.Strength, 7, StatType.Defense, 2)
+var armour = Equipment.new("armour", "Tunic", StatType.Defense, 5, StatType.Health, 7)
 var equipment = []
 var key_items = []
 
