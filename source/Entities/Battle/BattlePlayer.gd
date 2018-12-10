@@ -47,9 +47,7 @@ func _init():
 	self.strength = player_data.strength
 	self._defense = player_data.defense
 	self.max_health = self.current_health
-	self.num_pickable_tiles = player_data.num_pickable_tiles
 	self.num_actions = player_data.num_actions
-	self.max_energy = player_data.max_energy
 	self.energy = self.max_energy / 2
 
 func heal(amount = 0):

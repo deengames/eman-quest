@@ -1,8 +1,7 @@
 enum StatType {
 	Health,
 	Strength,
-	Defense,
-	Energy
+	Defense
 }
 
 static func to_string(stat_type):
