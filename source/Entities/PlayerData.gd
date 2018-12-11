@@ -23,7 +23,7 @@ var defense = 5
 
 var num_actions = 3
 
-var unassigned_stats_points = 10
+var unassigned_stats_points = 0
 
 var assigned_points = {
 	"health": int(0),
