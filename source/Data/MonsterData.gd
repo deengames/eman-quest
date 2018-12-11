@@ -171,7 +171,7 @@ const MONSTER_DATA = {
 		"Desert": {
 			"Scarab": {
 				"type": "Scarab",
-				"weight": 70,
+				"weight": 50,
 				"health": 110,
 				"strength": 21,
 				"defense": 15,
@@ -180,8 +180,25 @@ const MONSTER_DATA = {
 				
 				"skill_probability": 80,
 				"skills": {
-					"harden": 20,
-					"chomp": 70
+					"harden": 40,
+					"chomp": 60
+				}
+			},
+			"Cactrot": {
+				"type": "Cactrot",
+				"weight": 50,
+				"health": 110,
+				"strength": 24,
+				"defense": 13,
+				"turns": 1,
+				"experience points": 20,
+				
+				"skill_probability": 50,
+				"skills": {
+					"chomp": 100,
+				},
+				"skill_messages": {
+					"chomp": "stabs you with a hundred needles! {damage} damage!"
 				}
 			}
 		}
