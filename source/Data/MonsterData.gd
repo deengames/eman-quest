@@ -67,6 +67,25 @@ const MONSTER_DATA = {
 					"freeze": 100
 				}
 			}
+		},
+		"Death": {
+			"Skelly": {
+				"type": "Skelly",
+				"weight": 30,
+				"health": 110,
+				"strength": 24,
+				"defense": 13,
+				"turns": 1,
+				"experience points": 20,
+				
+				"skill_probability": 50,
+				"skills": {
+					"heal": 100
+				},
+				"skill_messages": {
+					"heal": "regenerates its bones! Healed {amount} health!"
+				}
+			}
 		}
 	},
 	"Cave": {
@@ -134,9 +153,9 @@ const MONSTER_DATA = {
 	"Dungeon": {
 		"Castle": {
 			"Foot Soldier": {
-				"type": "FootSoldier",
+				"type": "Foot Soldier",
 				"weight": 70,
-				"health": 90,
+				"health": 110,
 				"strength": 19,
 				"defense": 14,
 				"turns": 1,
@@ -150,21 +169,22 @@ const MONSTER_DATA = {
 					"chomp": "bashes you with his shield! {damage} damage!"
 				}
 			},
-			"Skelly": {
-				"type": "Skelly",
+			"Antipode Mage": {
+				"type": "Antipode Mage",
 				"weight": 30,
 				"health": 110,
-				"strength": 24,
-				"defense": 13,
+				"strength": 20,
+				"defense": 15,
 				"turns": 1,
-				"experience points": 20,
+				"experience points": 18,
 				
-				"skill_probability": 50,
+				"skill_probability": 100,
 				"skills": {
-					"heal": 100
+					"chomp": 50,
+					"freeze": 50
 				},
 				"skill_messages": {
-					"heal": "regenerates its bones! Healed {amount} health!"
+					"chomp": "hurls a fireball at you! {damage} damage!"
 				}
 			}
 		},

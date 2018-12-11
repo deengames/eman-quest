@@ -120,7 +120,7 @@ func _process_attack(action, monster_data, player, boost_amount, memory_grid):
 	elif action == "freeze":
 		# Shock, but a few tiles only
 		damage = monster_data["strength"] # pierces defense
-		message = "freezes you! " + str(damage) + " damage!"
+		message = "freezes you, piercing your armour! " + str(damage) + " damage!"
 		if memory_grid != null: # null on fast-paced battle grid
 			memory_grid.freeze(_SHOCK_TURNS, 5)
 	elif action == "vampire":

@@ -45,12 +45,12 @@ var current_monster_type = ""
 
 func _ready():
 	randomize()
-	seed(123321) 
+	seed(4864) 
 	# slime forest => abcdef
 	# frost forest => abc
 	# river cave => 9, 99, 999, 999
 	# lava cave => 321
-	# castle dungeon => 999, 9999
+	# castle dungeon => 4864
 	# desert dungeon => 123321
 	#seed("abcdef".hash())
 	
