@@ -30,21 +30,18 @@ const _BOSS_DATA = {
         }
 	},
 	"Desert": {
-		"type": "Humerus",
-		"health": 220,
-		"strength": 22,
-		"defense": 14,
+		"type": "Sand Golem",
+		"health": 250,
+		"strength": 28,
+		"defense": 16,
 		"turns": 2,
 		"experience points": 200,
 		
-		"skill_probability": 50,
+		"skill_probability": 40,
 		"skills": {
-			"roar": 50,
-			"heal": 50
-		},
-		"skill_messages": {
-            "heal": "regrows damaged bones! Healed {amount} health!"
-        }
+			"roar": 60,
+			"armour break": 30
+		}
 	}
 }
 
