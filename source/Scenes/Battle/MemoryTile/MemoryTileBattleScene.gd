@@ -3,8 +3,6 @@ extends Node2D
 const ActionButton = preload("res://Scenes/Battle/MemoryTile/ActionButton.tscn")
 const BattleResolution = preload("res://Scripts/Battle/BattleResolution.gd")
 const MonsterScaler = preload("res://Scripts/Battle/MonsterScaler.gd")
-const NBackTriggerPopup = preload("res://Scenes/Battle/MemoryTile/NBackTriggerPopup.tscn")
-const SequenceTriggerPopup = preload("res://Scenes/Battle/MemoryTile/SequenceTriggerPopup.tscn")
 
 const MAX_MESSAGES = 12 # with wrap, 15 lines max, 10 -11is safe
 # Pick N tiles to get a bonus for consecutive picks
@@ -154,11 +152,6 @@ func _finish_turn():
 			if Features.is_enabled("sequence battle triggers") or Features.is_enabled("n-back battle triggers"):
 				var popup = null
 				
-				if Features.is_enabled("sequence battle triggers"):
-					popup = SequenceTriggerPopup.instance()
-				elif Features.is_enabled("n-back battle triggers"):
-					popup = NBackTriggerPopup.instance()
-					
 				self.add_child(popup)
 				popup.popup_centered()
 				

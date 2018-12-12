@@ -3,7 +3,6 @@ extends Node
 const AreaType = preload("res://Scripts/Enums/AreaType.gd")
 const Boss = preload("res://Entities/Battle/Boss.gd")
 const MapNameLabel = preload("res://Scenes/UI/MapNameLabel.tscn")
-const MemoryTileBattleScene = preload("res://Scenes/Battle/MemoryTile/MemoryTileBattleScene.tscn")
 const StreamlinedRecallBattleScene = preload("res://Scenes/Battle/StreamlinedRecall/StreamlinedRecallBattleScene.tscn")
 const PopulatedMapScene = preload("res://Scenes/PopulatedMapScene.tscn")
 const TweenHelper = preload("res://Scripts/TweenHelper.gd")
