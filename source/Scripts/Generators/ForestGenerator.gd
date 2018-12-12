@@ -51,7 +51,21 @@ const _BOSS_DATA = {
 		}
 	},
 	"Death": {
-		"type": "Freeze Fang"
+		"type": "Humerus",
+		"health": 220,
+		"strength": 22,
+		"defense": 14,
+		"turns": 2,
+		"experience points": 200,
+		
+		"skill_probability": 50,
+		"skills": {
+			"roar": 50,
+			"heal": 50
+		},
+		"skill_messages": {
+            "heal": "regrows damaged bones! Healed {amount} health!"
+        }
 	}
 }
 
