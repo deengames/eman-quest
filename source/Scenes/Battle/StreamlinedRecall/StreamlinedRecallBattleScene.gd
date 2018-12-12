@@ -22,6 +22,7 @@ func set_monster_data(data):
 	self._monster_data = data
 
 func _ready():
+	randomize()
 	var image_name = self._monster_data["type"].replace(' ', '')
 	$MonsterControls/MonsterHealth.max_value = self._monster_data["max_health"]
 	$MonsterControls/MonsterSprite.texture = load("res://assets/images/monsters/" + image_name + ".png")
