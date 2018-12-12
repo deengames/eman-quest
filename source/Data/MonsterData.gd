@@ -69,9 +69,27 @@ const MONSTER_DATA = {
 			}
 		},
 		"Death": {
+			"Toxitail": {
+				"type": "Toxitail",
+				"weight": 60,
+				"health": 80,
+				"strength": 17,
+				"defense": 20,
+				"turns": 1,
+				"experience points": 17,
+				
+				"skill_probability": 50, # 40 = 40%
+				"skills": {
+					"poison": 50,
+					"chomp": 50
+				},
+				"skill_messages": {
+					"chomp": "pierces you with its fangs! {damage} damage!"
+				}
+			},
 			"Skelly": {
 				"type": "Skelly",
-				"weight": 30,
+				"weight": 40,
 				"health": 110,
 				"strength": 24,
 				"defense": 13,
