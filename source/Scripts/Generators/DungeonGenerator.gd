@@ -13,21 +13,22 @@ const TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 
 const _BOSS_DATA = {
 	"Castle": {
-		"type": "Humerus",
-		"health": 220,
+		"type": "ArchMage",
+		"health": 270,
 		"strength": 22,
-		"defense": 14,
-		"turns": 2,
-		"experience points": 200,
-		
-		"skill_probability": 50,
+		"defense": 13,
+		"turns": 1,
+		"experience points": 220,
+		"vampire multiplier": 1.2, # normal is 1.5
+		"skill_probability": 80,
 		"skills": {
-			"roar": 50,
-			"heal": 50
+			"chomp": 30,
+			"freeze": 30,
+			"vampire": 10
 		},
 		"skill_messages": {
-            "heal": "regrows damaged bones! Healed {amount} health!"
-        }
+			"chomp": "hurls a fireball at you! {damage} damage!"
+		}
 	},
 	"Desert": {
 		"type": "Sand Golem",
