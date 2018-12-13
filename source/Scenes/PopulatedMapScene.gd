@@ -108,8 +108,8 @@ func _populate_tile_entities(tile_map, entity_tiles):
 
 func _add_transitions(tilemap, tile_ids):
 	for destination in map.transitions:
-		var transition = MapWarp.instance()
-		transition.initialize_from(destination)
+		var warp = MapWarp.instance()
+		warp.initialize_from(destination)
 		
 		# In cases like the Cave, we have special tiles that indicate the exit.
 		# If the tileset has such tiles, apply them (after autotiling).
@@ -121,9 +121,9 @@ func _add_transitions(tilemap, tile_ids):
 			if tile_ids.has(exit_type):
 				tilemap.set_cell(coordinates.x, coordinates.y, tile_ids[exit_type])
 
-		transition.position.x = destination.my_position.x * Globals.TILE_WIDTH
-		transition.position.y = destination.my_position.y * Globals.TILE_HEIGHT
-		self.add_child(transition)
+		warp.position.x = destination.my_position.x * Globals.TILE_WIDTH
+		warp.position.y = destination.my_position.y * Globals.TILE_HEIGHT
+		self.add_child(warp)
 
 func _add_monsters():
 	var monster_data = {}

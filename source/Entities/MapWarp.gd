@@ -15,11 +15,18 @@ var map_destination
 
 func initialize_from(map_destination):
 	self.map_destination = map_destination
-	$Sprite.visible = true
+	$Sprite.visible = false
 
 	var target_map = map_destination.target_map
-	if typeof(target_map) == TYPE_STRING and target_map in EntranceImageXPositions.keys():
+	if typeof(target_map) == TYPE_STRING:
+		var divider = target_map.find('/')
+		if divider > -1:
+			# forest/slime => forest
+			target_map = target_map.substr(0, divider)
+		
+	if target_map in EntranceImageXPositions.keys():
 		$Sprite.region_rect.position.x = EntranceImageXPositions[target_map]
+		$Sprite.visible = true
 	else:
 		# Transition from map => world or map => map eg. in-forest maps
 		$Sprite.visible = false

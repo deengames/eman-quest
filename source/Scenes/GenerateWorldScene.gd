@@ -14,8 +14,17 @@ const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 # Moving up one tile takes us directly on the transition; two tiles, now we're talking.
 # Now we're one tile above the transition back down.
 const _TRANSITION_UP_BUFFER_TILES = 2
+# Three areas per game
+const _NUM_AREAS = 3
+const _SUBMAPS_PER_AREA = 4
 
-const ForestVariations = ["Death"]#["Slime", "Frost", "Death"]
+const _GENERATOR_CLASSES = {
+	"Forest": ForestGenerator,
+	"Cave": CaveGenerator,
+	"Dungeon": DungeonGenerator
+}
+
+const ForestVariations = ["Slime", "Frost", "Death"]
 const CaveVariations = ["River", "Lava"] # Crystal
 const DungeonVariations = ["Castle", "Desert"]
 
@@ -30,20 +39,19 @@ func _generate():
 	get_tree().current_scene.get_node("UI").show_intro_story()
 	
 func _generate_world():
-	var forest_maps = _generate_subarea_maps(ForestVariations, ForestGenerator, 4)
-	var cave_maps = _generate_subarea_maps(CaveVariations, CaveGenerator, 4)
-	var dungeon_maps = _generate_subarea_maps(DungeonVariations, DungeonGenerator, 4)
-	
-	# return a dictionary, eg. "forest" => forest maps
-	Globals.maps = {
-		"Forest": forest_maps,
-		"Cave": cave_maps,
-		"Dungeon": dungeon_maps
-	}
+	var world_areas = _pick_dungeons_and_variations()
+#
+	for area in world_areas:
+		var divider_index = area.find('/')
+		var map_type = area.substr(0, divider_index)
+		var variation = area.substr(divider_index + 1, len(area))
+		var generator_class = _GENERATOR_CLASSES[map_type]
+		var maps = _generate_subarea_maps(variation, generator_class, _SUBMAPS_PER_AREA)
+		Globals.maps[map_type + "/" + variation] = maps
 	
 	# Generate last; generating the entrance into the first sub-map
 	# of each dungeon eg. the forest, requires Globals.maps.
-	var overworld = OverworldGenerator.new().generate()
+	var overworld = OverworldGenerator.new().generate(Globals.maps.keys())
 	Globals.maps["Overworld"] = overworld
 	
 	Globals.story_data = {
@@ -51,9 +59,7 @@ func _generate_world():
 		"boss_type": self._generate_boss_type()
 	}
 
-func _generate_subarea_maps(variations, generator_class, num_submaps):
-	var variation = variations[randi() % len(variations)]
-	print("*****" + variation)
+func _generate_subarea_maps(variation, generator_class, num_submaps):
 	var layout = MapLayoutGenerator.generate_layout(num_submaps)
 	var submaps = []
 	
@@ -148,3 +154,35 @@ func _generate_transitions(submap, map_width, map_height):
 		transitions.append(MapDestination.new(my_position, destination, target_position, direction))
 	
 	return { "transitions": transitions, "entrance": entrance_from_overworld }
+
+# Given: slime/forest, frost/forest, death/forest, lava/cave, river/cave, castle/dungeon, desert/dungeon
+# Return a list of three of these, but no two adjacent ones can be the same type
+# eg. slime/forest, river/cave, frost/forest is valid, but
+# slime/forest, frost/forest, river?cave is not.
+func _pick_dungeons_and_variations():
+	# Man, this is inefficient and ugly, but it does the job.	
+	var all_types = []
+	
+	for variation in ForestVariations:
+		all_types.append(["Forest", variation])
+	for variation in CaveVariations:
+		all_types.append(["Cave", variation])
+	for variation in DungeonVariations:
+		all_types.append(["Dungeon", variation])
+			
+	var previous = all_types[randi() % len(all_types)]
+	var picked = [previous]
+	
+	while len(picked) < _NUM_AREAS:
+		var next = all_types[randi() % len(all_types)]
+		# Not already picked and not the same type as the previous one
+		if not next in picked and next[0] != previous[0]:
+			picked.append(next)
+			previous = next
+	
+	var to_return = []
+	for map_and_variation in picked:
+		# ["Forest", "Death"] => "Forest/Death"
+		to_return.append(map_and_variation[0] + "/" + map_and_variation[1])
+	print(to_return)
+	return to_return

@@ -22,6 +22,10 @@ func load_tileset_mapping():
 	return to_return
 
 func get_entity_tiles(map_type):
+	var divider = map_type.find('/')
+	if divider > -1:
+		map_type = map_type.substr(0, divider)
+		
 	if map_type in _GENERATORS:
 		var generator = _GENERATORS[map_type]
 		return generator.ENTITY_TILES

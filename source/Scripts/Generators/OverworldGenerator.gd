@@ -7,18 +7,17 @@ var TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 
 # Don't place things N tiles from the edges of the map
 const _PADDING_FROM_SIDES_OF_MAP = 4
-const _TRANSITION_DESTINATIONS = ["Forest", "Cave", "Dungeon", "Final"]
 
 var map_width = Globals.WORLD_WIDTH_IN_TILES
 var map_height = Globals.WORLD_HEIGHT_IN_TILES
 
-func generate():
+func generate(areas_in_world):
 	var map = AreaMap.new("Overworld", null, "res://Tilesets/Overworld.tres", map_width, map_height, null)
 	
 	var tile_data = self._generate_world_map()
 	map.add_tile_data(tile_data)
 	
-	self._place_area_entrances(map)
+	self._place_area_entrances(map, areas_in_world)
 	return map
 
 func _generate_world_map():
@@ -82,11 +81,11 @@ func _create_lake(map, lake_coordinates):
 		for x in range (lake_x - 1, lake_x + 2):
 			map.set(x, y, "Water")
 
-func _place_area_entrances(map):
+func _place_area_entrances(map, areas_in_world):
 	var placed_areas = []
 	var ground_tiles = map.tile_data[0]
 	
-	for destination in self._TRANSITION_DESTINATIONS:
+	for destination in areas_in_world:
 		var coordinates = self._find_empty_area(ground_tiles, placed_areas)
 		# TODO: make sure it's not near any other placed areas
 		placed_areas.append(coordinates)
