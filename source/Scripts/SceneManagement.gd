@@ -16,7 +16,8 @@ static func change_map_to(tree, target):
 	if typeof(target) != TYPE_STRING:
 		map_type = Globals.current_map.map_type
 		var map_variation = Globals.current_map.variation
-		map_type = map_type + "/" + map_variation
+		if map_variation != null:
+			map_type = map_type + "/" + map_variation
 		
 	var map_data = Globals.maps[map_type]
 	var target_areamap
