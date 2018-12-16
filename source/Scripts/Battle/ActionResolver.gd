@@ -88,10 +88,7 @@ func monster_attacks(monster_data, player, boost_amount, memory_grid):
 				
 		 
 		var result = self._process_attack(to_use, monster_data, player, boost_amount, memory_grid)
-		var pre_boost_damage = result["damage"]
-		# Reduce damage by 10% per successful boost
-		var boost_block_percent = max(0, 1 - (0.1 * boost_amount))
-		var damage = floor(pre_boost_damage * boost_block_percent)
+		var damage = result["damage"]
 		var message = result["message"]
 		
 		if damage > 0:

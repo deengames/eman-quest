@@ -107,7 +107,7 @@ func _resolve_players_turn(action):
 		$NextTurnButton.visible = true
 
 func _resolve_monster_turn():
-	var message = self._action_resolver.monster_attacks(self._monster_data, self._player, self._multiplier, null)
+	var message = self._action_resolver.monster_attacks(self._monster_data, self._player, 0, null)
 	$StatusLabel.text = message
 	self._update_health_displays() # show health decrease
 	yield(get_tree().create_timer(_MONSTER_TURN_DISPLAY_SECONDS), 'timeout')
