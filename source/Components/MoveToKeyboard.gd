@@ -8,6 +8,7 @@ signal reached_destination
 signal facing_new_direction
 
 export var speed = 0 # set by owning component
+const ZERO_VECTOR = Vector2(0, 0)
 
 var previously_facing = ""
 var previously_pressed_key = false
@@ -17,10 +18,10 @@ func _ready():
 	# Initialization here
 	pass
 
-func _process(delta):
+func _physics_process(delta):
 	self._move_to_keyboard()
 
-func _move_to_keyboard():	
+func _move_to_keyboard():
 	var velocity = Vector2(0, 0)
 	var new_facing = self.previously_facing
 	var pressed_key = false
@@ -48,7 +49,7 @@ func _move_to_keyboard():
 	
 	if velocity.x != 0 or velocity.y != 0:
 		velocity = velocity.normalized() * self.speed
-		self.get_parent().move_and_slide(velocity)
+		velocity = self.get_parent().move_and_slide(velocity, ZERO_VECTOR)
 		self.emit_signal("cancel_destination") # if clicked, cancel that destination
 	elif not pressed_key and previously_pressed_key:
 		self.previously_facing = null

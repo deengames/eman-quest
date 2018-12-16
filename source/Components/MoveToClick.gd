@@ -16,7 +16,7 @@ var destination = null # Vector2
 func _ready():
 	Globals.connect("clicked_on_map", self, "_clicked_on_map")
 
-func _process(delta):
+func _physics_process(delta):
 	# Called every frame. Delta is time since last frame.
 	# Update game logic here.
 	self._move_parent_to_clicked_destintion()
@@ -52,7 +52,6 @@ func _move_parent_to_clicked_destintion():
 	
 	if destination != null:
 		var velocity = (destination - position).normalized() * self.speed
-		# rotation = velocity.angle() # rotate towards target
 		if (destination - position).length() > MINIMUM_MOVE_DISTANCE:
 			self.get_parent().move_and_slide(velocity)
 		else:
