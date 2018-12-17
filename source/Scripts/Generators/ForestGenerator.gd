@@ -80,8 +80,6 @@ const _VARIANT_TILESETS = {
 const _PATHS_BUFFER_FROM_EDGE = 5
 const _MIN_CHESTS = 0
 const _MAX_CHESTS = 1
-const _MIN_ITEM_POWER = 15
-const _MAX_ITEM_POWER = 30
 
 const ENTITY_TILES = {} # name => preload("...")
 
@@ -251,9 +249,8 @@ func _generate_treasure_chests():
 			self._ground_map, self._tree_map, ["Grass", "Dirt"], chests_coordinates)
 			
 		var type = types[randi() % len(types)]
-		var power = Globals.randint(_MIN_ITEM_POWER, _MAX_ITEM_POWER)
 		var stat = stats[type]
-		var item = EquipmentGenerator.generate(type, stat, power)
+		var item = EquipmentGenerator.generate(type, stat)
 		var treasure = TreasureChest.new()
 		treasure.initialize(spot[0], spot[1], item)
 		chests.append(treasure)

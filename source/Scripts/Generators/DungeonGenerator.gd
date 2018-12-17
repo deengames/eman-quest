@@ -55,7 +55,6 @@ const _PATHS_BUFFER_FROM_EDGE = 5
 const _NUM_ROOMS = [10, 15]
 const _NUM_CHESTS = [0, 1]
 const _ROOM_SIZE = [4, 5] # tiles
-const _ITEM_POWER = [30, 50]
 const _ROOM_WALL_HEIGHT = 5 # in tiles
 const _NUM_CEILING_TILES = 3 # in tiles
 const _MAX_TORCHES_PER_ROOM = 2 # inclusive
@@ -326,9 +325,8 @@ func _generate_treasure_chests():
 			self._ground_map, self._wall_map, ["Ground"], chests_coordinates)
 
 		var type = types[randi() % len(types)]
-		var power = Globals.randint(_ITEM_POWER[0], _ITEM_POWER[1])
 		var stat = stats[type]
-		var item = EquipmentGenerator.generate(type, stat, power)
+		var item = EquipmentGenerator.generate(type, stat)
 		var treasure = TreasureChest.new()
 		treasure.initialize(spot[0], spot[1], item)
 		chests.append(treasure)

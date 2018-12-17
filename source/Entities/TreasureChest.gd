@@ -49,6 +49,7 @@ func open():
 	if not self.is_opened:
 		# Grant item
 		Globals.player_data.equipment.append(self.contents)
+		self.contents.roll_modifiers()
 		self._consume()
 		
 		var window = StatusWindow.instance()

@@ -32,10 +32,16 @@ var assigned_points = {
 	"num_actions": int(0) # requires ~20 points to raise it by 1
 }
 
-var weapon = Equipment.new("weapon", "Dagger", StatType.Strength, 7, StatType.Defense, 2)
-var armour = Equipment.new("armour", "Tunic", StatType.Defense, 5, StatType.Health, 7)
+var weapon = Equipment.new("weapon", "Dagger", StatType.Strength, StatType.Defense)
+var armour = Equipment.new("armour", "Tunic", StatType.Defense, StatType.Health)
 var equipment = []
 var key_items = []
+
+func _init():
+	weapon.primary_stat_modifier = 7
+	weapon.secondary_stat_modifier = 2
+	armour.primary_stat_modifier = 5
+	armour.secondary_stat_modifier = 7
 
 func to_dict():
 	return {

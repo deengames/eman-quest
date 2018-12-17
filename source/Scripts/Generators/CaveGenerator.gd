@@ -56,7 +56,6 @@ const _FLOOR_TILES_PERCENTAGE = 50
 
 const _PATHS_BUFFER_FROM_EDGE = 3
 const _NUM_CHESTS = [0, 1]
-const _ITEM_POWER = [30, 50]
 const _WATER_DECORATION_TILES_PERCENT = 2 # 1 = 1%
 const _GROUND_DECORATION_TILES_PERCENT = 1
 
@@ -226,9 +225,8 @@ func _generate_treasure_chests():
 			self._ground_tilemap, empty_map, ["Ground"], chests_coordinates)
 
 		var type = types[randi() % len(types)]
-		var power = Globals.randint(_ITEM_POWER[0], _ITEM_POWER[1])
 		var stat = stats[type]
-		var item = EquipmentGenerator.generate(type, stat, power)
+		var item = EquipmentGenerator.generate(type, stat)
 		var treasure = TreasureChest.new()
 		treasure.initialize(spot[0], spot[1], item)
 		chests.append(treasure)
