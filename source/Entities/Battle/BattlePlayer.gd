@@ -46,13 +46,12 @@ func _init():
 	self.current_health = player_data.health
 	self.strength = player_data.strength
 	self._defense = player_data.defense
-	self.max_health = self.current_health
+	self.max_health = player_data.health
 	self.num_actions = player_data.num_actions
 	self.energy = self.max_energy / 2
 
-func heal(amount = 0):
-	if amount == 0:
-		amount = floor(self.max_health * HEAL_PERCENT)
+func heal():
+	var amount = floor(self.max_health * HEAL_PERCENT)
 	amount = min(amount, self.max_health - self.current_health)
 	self.current_health += amount
 	if self.current_health > self.max_health:

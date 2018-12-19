@@ -29,7 +29,6 @@ func resolve(action, player, monster_data, multiplier):
 			return "CRITICAL hit for " + str(damage) + "!!!"
 		elif action == "heal":
 			var heal_amount = player.heal()
-			heal_amount = ceil(heal_amount * multiplier)
 			return "Healed " + str(heal_amount) + " health!"
 		elif action == "defend":
 			player.defend(multiplier)
