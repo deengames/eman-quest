@@ -18,4 +18,10 @@ func _ready():
 	
 	if len(Globals.player_data.key_items) < 1:
 		self.remove_child($EndGameNpc)
-	
+
+func get_tiles_wide():
+	return $Ground.get_used_rect().size.x
+
+func get_tiles_high():
+	print("H="+str($Ground.get_used_rect().size.y))
+	return $Ground.get_used_rect().size.y

@@ -4,6 +4,7 @@ const AreaMap = preload("res://Entities/AreaMap.gd")
 const AreaType = preload("res://Scripts/Enums/AreaType.gd")
 const CaveGenerator = preload("res://Scripts/Generators/CaveGenerator.gd")
 const DungeonGenerator = preload("res://Scripts/Generators/DungeonGenerator.gd")
+const EndGameMap = preload("res://Scenes/Maps/EndGameMap.gd")
 const ForestGenerator = preload("res://Scripts/Generators/ForestGenerator.gd")
 const MapDestination = preload("res://Entities/MapDestination.gd")
 const MapLayoutGenerator = preload("res://Scripts/Generators/MapLayoutGenerator.gd")
@@ -48,6 +49,8 @@ func _generate_world():
 		var generator_class = _GENERATOR_CLASSES[map_type]
 		var maps = _generate_subarea_maps(variation, generator_class, _SUBMAPS_PER_AREA)
 		Globals.maps[map_type + "/" + variation] = maps
+	
+	Globals.maps[EndGameMap.map_type] = EndGameMap.new()
 	
 	# Generate last; generating the entrance into the first sub-map
 	# of each dungeon eg. the forest, requires Globals.maps.

@@ -11,11 +11,16 @@ func _ready():
 	
 	if Features.is_enabled("zoom-out maps"):
 		$Camera2D.zoom = Vector2(4, 4)
+	
+	
+	# Set camera bounds. Hand-crafted maps don't have these variables.
+	if Globals.current_map.map_type != "Final":
+		$Camera2D.limit_right = Globals.current_map.tiles_wide * Globals.TILE_WIDTH
+		$Camera2D.limit_bottom = Globals.current_map.tiles_high * Globals.TILE_HEIGHT
+	else:
+		$Camera2D.limit_right = Globals.current_map.get_tiles_wide() * Globals.TILE_WIDTH
+		$Camera2D.limit_bottom = Globals.current_map.get_tiles_high() * Globals.TILE_HEIGHT
 		
-	# Set camera bounds
-	$Camera2D.limit_right = Globals.current_map.tiles_wide * Globals.TILE_WIDTH
-	$Camera2D.limit_bottom = Globals.current_map.tiles_high * Globals.TILE_HEIGHT
-
 func temporarily_no_battles():
 	self._cant_fight_from = OS.get_ticks_msec()
 
