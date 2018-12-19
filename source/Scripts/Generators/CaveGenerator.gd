@@ -25,6 +25,10 @@ const _BOSS_DATA = {
 			# These should add up to 100
 			"chomp": 70, # 20%,
 			"roar": 35
+		},
+		"drops": {
+			"name": "Neon Shard",
+			"description": "A neon-coloured shard of giant crab shell"
 		}
 	},
 	"Lava": {
@@ -39,6 +43,10 @@ const _BOSS_DATA = {
 		"skills": {
 			"roar": 20,
 			"poison": 80
+		},
+		"drops": {
+			"name": "Golden Stinger",
+			"description": "A golden-coloured stinger tip, it glows with an inner light"
 		}
 	}
 }

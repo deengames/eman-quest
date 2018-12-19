@@ -28,6 +28,10 @@ const _BOSS_DATA = {
 		},
 		"skill_messages": {
 			"chomp": "hurls a fireball at you! {damage} damage!"
+		},
+		"drops": {
+			"name": "Cloak Scrap",
+			"description": "A scrap of a mage's cloak, it bends in odd ways"
 		}
 	},
 	"Desert": {
@@ -42,6 +46,10 @@ const _BOSS_DATA = {
 		"skills": {
 			"roar": 60,
 			"armour break": 30
+		},
+		"drops": {
+			"name": "Golem Crystal",
+			"description": "A spherical, sand-coloured crystal, warm to the touch"
 		}
 	}
 }

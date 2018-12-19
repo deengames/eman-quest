@@ -33,6 +33,10 @@ const _BOSS_DATA = {
 		"skills": {
 			"chomp": 50,
 			"vampire": 50
+		},
+		"drops": {
+			"name": "Coronet",
+			"description": "A glittering golden coronet with embedded gemstones"
 		}
 	},
 	"Frost": {
@@ -48,6 +52,10 @@ const _BOSS_DATA = {
 			# These should add up to 100
 			"chomp": 60, # 20%,
 			"freeze": 40
+		},
+		"drops": {
+			"name": "Wolf Talon",
+			"description": "A long, hard, steel-grey, fist-sized talon"
 		}
 	},
 	"Death": {
@@ -64,8 +72,12 @@ const _BOSS_DATA = {
 			"heal": 50
 		},
 		"skill_messages": {
-            "heal": "regrows damaged bones! Healed {amount} health!"
-        }
+			"heal": "regrows damaged bones! Healed {amount} health!"
+		},
+		"drops": {
+			"name": "Femur",
+			"description": "A long, hard bone bleached brownish-white with age"
+		}
 	}
 }
 
