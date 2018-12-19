@@ -2,11 +2,12 @@ extends KinematicBody2D
 
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
-const MOVE_SPEED = 100
-const CHANGE_DESTINATION_EVERY_N_SECONDS = 1
+const _MOVE_SPEED = 100
+const _CHANGE_DESTINATION_EVERY_N_SECONDS = [1, 2]
 const IS_BOSS = false
 
 var data = {}
+var _change_after_seconds = 0
 
 # pixel coordinates
 var x = 0
@@ -17,6 +18,13 @@ var _destination = Vector2(0, 0)
 var _destination_last_changed = OS.get_ticks_msec()
 
 func _ready():
+	# Random float the range specified
+	var min_time = _CHANGE_DESTINATION_EVERY_N_SECONDS[0]
+	var max_time = _CHANGE_DESTINATION_EVERY_N_SECONDS[1]
+	var time_range = max_time - min_time
+	self._change_after_seconds = (randf() * time_range) + min_time
+	
+	print("C="+str(self._change_after_seconds))
 	self._pick_destination()
 
 func initialize(x, y):
@@ -59,7 +67,7 @@ static func from_dict(dict):
 func _process(delta):
 	var now = OS.get_ticks_msec()
 	
-	if now - self._destination_last_changed > CHANGE_DESTINATION_EVERY_N_SECONDS * 1000:
+	if now - self._destination_last_changed > self._change_after_seconds * 1000:
 		self._pick_destination()
 		_destination_last_changed = now
 
@@ -73,7 +81,7 @@ func _pick_destination():
 
 func _physics_process(delta):
 	if self._destination != null:
-		var velocity = (self._destination - self.position).normalized() * self.MOVE_SPEED
+		var velocity = (self._destination - self.position).normalized() * self._MOVE_SPEED
 		move_and_slide(velocity) 
 
 func _on_Area2D_body_entered(body):
