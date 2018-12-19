@@ -126,11 +126,12 @@ func _generate_boss(variation_name):
 	var coordinates = self._clearings_coordinates[0]
 	var pixel_coordinates = [coordinates[0] * Globals.TILE_WIDTH, coordinates[1] * Globals.TILE_HEIGHT]
 	
-	var kufi = KeyItem.new()
-	kufi.initialize("Bloody Kufi", "A white kufi (skull-cap) stained with blood ...")
+	var item_data = _BOSS_DATA[variation_name]["drops"]
+	var key_item = KeyItem.new()
+	key_item.initialize(item_data["name"], item_data["description"])
 	
 	var boss = Boss.new()
-	boss.initialize(pixel_coordinates[0], pixel_coordinates[1], _BOSS_DATA[variation_name], kufi)
+	boss.initialize(pixel_coordinates[0], pixel_coordinates[1], _BOSS_DATA[variation_name], key_item)
 	return { boss.data.type: [boss] }
 
 func _generate_forest(area_type, transitions):

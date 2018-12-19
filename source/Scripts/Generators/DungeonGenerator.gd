@@ -105,9 +105,9 @@ func _generate_boss(variation_name):
 	var coordinates = [center_x, center_y]
 	var pixel_coordinates = [coordinates[0] * Globals.TILE_WIDTH, coordinates[1] * Globals.TILE_HEIGHT]
 
+	var item_data = _BOSS_DATA[variation_name]["drops"]
 	var key_item = KeyItem.new()
-	# TODO: depends on the boss
-	key_item.initialize("Bone Shard", "A gigantic shard of bone")
+	key_item.initialize(item_data["name"], item_data["description"])
 
 	var boss = Boss.new()
 	boss.initialize(pixel_coordinates[0], pixel_coordinates[1], _BOSS_DATA[variation_name], key_item)
