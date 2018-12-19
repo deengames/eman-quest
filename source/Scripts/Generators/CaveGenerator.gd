@@ -130,11 +130,28 @@ func _generate_cave(area_type, transitions, variation_name):
 	self._ground_tilemap = TwoDimensionalArray.new(self.map_width, self.map_height)
 	to_return.append(self._ground_tilemap)
 	self._fill_with("Water", self._ground_tilemap)
+
+	### Super glorious hack for monsters appearing on cave water/lava.
+	# SpotFinder assumes map.tile_data[1] is the map with walls on it.
+	# If it sees a non-null tile, it assumes it's solid, and keeps looking.
+	# For the cave, because of autotiles, that's not true. Instead of adding a new
+	# variable for this (which changes persistence etc. and is redundant), for
+	# caves, we add a duplicate tilemap with the water tiles on it ... sad.
+	### This is not going to end well.
+	
+	var solid_tiles_map = TwoDimensionalArray.new(self.map_width, self.map_height)
+	to_return.append(solid_tiles_map)
 	
 	var decoration_tilemap = TwoDimensionalArray.new(self.map_width, self.map_height)
 	to_return.append(decoration_tilemap)
 	
 	self._generate_tiles(transitions)
+	
+	for y in range(0, self.map_height):
+		for x in range(0, self.map_width):
+			var tile = self._ground_tilemap.get(x, y)
+			if tile != "Ground":
+				solid_tiles_map.set(x, y, tile)
 	
 	if variation_name != "Lava":
 		self._generate_decoration_tiles(decoration_tilemap)
