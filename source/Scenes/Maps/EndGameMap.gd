@@ -13,8 +13,12 @@ func _ready():
 	self.add_child(player)
 	
 	$Locations/Entrance.visible = false
-	$Locations/Exit1.set_type("Overworld")
-	$Locations/Exit2.set_type("Overworld")
+	
+	# Defunct as of October 7. TODO: send in a MapDestination.
+	# But, what are the overworld target coordinates to get out?
+	# Should we set those into here from GenerateWorldScene/OverworldGenerator?
+	#$Locations/Exit1.initialize_from("Overworld")
+	#$Locations/Exit2.initialize_from("Overworld")
 	
 	if len(Globals.player_data.key_items) < 1:
 		self.remove_child($EndGameNpc)
