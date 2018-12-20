@@ -1,0 +1,60 @@
+[gd_resource type="TileSet" load_steps=2 format=2]
+
+[ext_resource path="res://assets/images/castle-tiles.png" type="Texture" id=1]
+
+[resource]
+
+0/name = "Floor"
+0/texture = ExtResource( 1 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 64, 64, 64 )
+0/is_autotile = false
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shapes = [  ]
+1/name = "Carpet"
+1/texture = ExtResource( 1 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 0, 1408, 1152 )
+1/is_autotile = true
+1/autotile/bitmask_mode = 0
+1/autotile/icon_coordinate = Vector2( 1, 8 )
+1/autotile/tile_size = Vector2( 64, 64 )
+1/autotile/spacing = 0
+1/autotile/bitmask_flags = [ Vector2( 0, 7 ), 69, Vector2( 0, 8 ), 65, Vector2( 0, 9 ), 321, Vector2( 1, 7 ), 5, Vector2( 1, 8 ), 325, Vector2( 1, 9 ), 320, Vector2( 2, 7 ), 261, Vector2( 2, 8 ), 260, Vector2( 2, 9 ), 324 ]
+1/autotile/occluder_map = [  ]
+1/autotile/navpoly_map = [  ]
+1/autotile/priority_map = [  ]
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shapes = [  ]
+2/name = "Wall"
+2/texture = ExtResource( 1 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 0, 0, 1408, 1152 )
+2/is_autotile = true
+2/autotile/bitmask_mode = 0
+2/autotile/icon_coordinate = Vector2( 2, 4 )
+2/autotile/tile_size = Vector2( 64, 64 )
+2/autotile/spacing = 0
+2/autotile/bitmask_flags = [ Vector2( 1, 3 ), 69, Vector2( 1, 4 ), 65, Vector2( 1, 5 ), 321, Vector2( 2, 3 ), 5, Vector2( 2, 4 ), 325, Vector2( 2, 5 ), 320, Vector2( 3, 3 ), 261, Vector2( 3, 4 ), 260, Vector2( 3, 5 ), 324 ]
+2/autotile/occluder_map = [  ]
+2/autotile/navpoly_map = [  ]
+2/autotile/priority_map = [  ]
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shapes = [  ]
+3/name = "YellowDoubleBed"
+3/texture = ExtResource( 1 )
+3/tex_offset = Vector2( 0, 0 )
+3/modulate = Color( 1, 1, 1, 1 )
+3/region = Rect2( 1088, 64, 128, 192 )
+3/is_autotile = false
+3/occluder_offset = Vector2( 0, 0 )
+3/navigation_offset = Vector2( 0, 0 )
+3/shapes = [  ]
+_sections_unfolded = [ "1", "2", "3" ]
+
