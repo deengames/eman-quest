@@ -9,30 +9,46 @@
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 0, 64, 64, 64 )
+region_rect = Rect2( 0, 128, 64, 64 )
 _sections_unfolded = [ "Offset", "Region" ]
 
-[node name="Carpet" type="Sprite" parent="." index="1"]
+[node name="Ceiling" type="Sprite" parent="." index="1"]
+
+texture = ExtResource( 1 )
+centered = false
+region_rect = Rect2( 128, 64, 64, 64 )
+_sections_unfolded = [ "Offset", "Region" ]
+
+[node name="Carpet" type="Sprite" parent="." index="2"]
 
 position = Vector2( 80, 0 )
 texture = ExtResource( 1 )
 centered = false
 _sections_unfolded = [ "Offset", "Region" ]
 
-[node name="Wall" type="Sprite" parent="." index="2"]
+[node name="Wall" type="Sprite" parent="." index="3"]
 
 position = Vector2( 160, 0 )
 texture = ExtResource( 1 )
 centered = false
 _sections_unfolded = [ "Offset", "Region" ]
 
-[node name="YellowDoubleBed" type="Sprite" parent="." index="3"]
+[node name="YellowDoubleBed" type="Sprite" parent="." index="4"]
 
 position = Vector2( 240, 0 )
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 1088, 64, 128, 192 )
+_sections_unfolded = [ "Offset", "Region" ]
+
+[node name="StairsUp" type="Sprite" parent="." index="5"]
+
+position = Vector2( 400, 0 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 128, 1024, 128, 128 )
 _sections_unfolded = [ "Offset", "Region" ]
 
 
