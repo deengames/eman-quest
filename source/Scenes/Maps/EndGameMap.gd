@@ -27,5 +27,4 @@ func get_tiles_wide():
 	return $Ground.get_used_rect().size.x
 
 func get_tiles_high():
-	print("H="+str($Ground.get_used_rect().size.y))
 	return $Ground.get_used_rect().size.y

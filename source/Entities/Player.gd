@@ -14,7 +14,7 @@ func _ready():
 	
 	
 	# Set camera bounds. Hand-crafted maps don't have these variables.
-	if Globals.current_map.map_type != "Final":
+	if Globals.current_map.map_type != "Final" and Globals.current_map.map_type != "Home":
 		$Camera2D.limit_right = Globals.current_map.tiles_wide * Globals.TILE_WIDTH
 		$Camera2D.limit_bottom = Globals.current_map.tiles_high * Globals.TILE_HEIGHT
 	else:

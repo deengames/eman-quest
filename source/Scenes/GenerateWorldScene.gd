@@ -6,9 +6,11 @@ const CaveGenerator = preload("res://Scripts/Generators/CaveGenerator.gd")
 const DungeonGenerator = preload("res://Scripts/Generators/DungeonGenerator.gd")
 const EndGameMap = preload("res://Scenes/Maps/EndGameMap.gd")
 const ForestGenerator = preload("res://Scripts/Generators/ForestGenerator.gd")
+const HomeMap = preload("res://Scenes/Maps/Home.tscn")
 const MapDestination = preload("res://Entities/MapDestination.gd")
 const MapLayoutGenerator = preload("res://Scripts/Generators/MapLayoutGenerator.gd")
 const OverworldGenerator = preload("res://Scripts/Generators/OverworldGenerator.gd")
+const Player = preload("res://Entities/Player.tscn")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 # Moving to (map.width / 2, map.height - 1) takes us below the bottom-most tile.
@@ -36,8 +38,10 @@ func _ready():
 
 func _generate():
 	self._generate_world()
-	SceneManagement.change_map_to(get_tree(), "Overworld")
-	get_tree().current_scene.get_node("UI").show_intro_story()
+	SceneManagement.change_scene_to(get_tree(), Globals.maps["Home"])
+	get_tree().current_scene.add_child(Player.instance())
+	get_tree().current_scene.show_intro_events()
+	#get_tree().current_scene.get_node("UI").show_intro_story()
 	
 func _generate_world():
 	var world_areas = _pick_dungeons_and_variations()
@@ -50,7 +54,9 @@ func _generate_world():
 		var maps = _generate_subarea_maps(variation, generator_class, _SUBMAPS_PER_AREA)
 		Globals.maps[map_type + "/" + variation] = maps
 	
+	# Add fixed maps: end-game / "Final", Overworld, Home, etc.
 	Globals.maps[EndGameMap.map_type] = EndGameMap.new()
+	Globals.maps["Home"] = HomeMap.instance()
 	
 	# Generate last; generating the entrance into the first sub-map
 	# of each dungeon eg. the forest, requires Globals.maps.
