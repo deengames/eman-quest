@@ -10,7 +10,6 @@ const HomeMap = preload("res://Scenes/Maps/Home.tscn")
 const MapDestination = preload("res://Entities/MapDestination.gd")
 const MapLayoutGenerator = preload("res://Scripts/Generators/MapLayoutGenerator.gd")
 const OverworldGenerator = preload("res://Scripts/Generators/OverworldGenerator.gd")
-const Player = preload("res://Entities/Player.tscn")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 # Moving to (map.width / 2, map.height - 1) takes us below the bottom-most tile.
@@ -39,7 +38,6 @@ func _ready():
 func _generate():
 	self._generate_world()
 	SceneManagement.change_scene_to(get_tree(), Globals.maps["Home"])
-	get_tree().current_scene.add_child(Player.instance())
 	get_tree().current_scene.show_intro_events()
 	#get_tree().current_scene.get_node("UI").show_intro_story()
 	
