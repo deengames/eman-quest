@@ -201,6 +201,7 @@ func _load_tileset_or_auto_tileset(tileset_path):
 	else:
 		return load(tileset_path)
 
+# Duplicated in StaticMap.gd
 # https://docs.godotengine.org/en/3.0/tutorials/inputs/inputevent.html#how-does-it-work
 # Fires if nothing else handled the event, it seems.
 func _unhandled_input(event):
