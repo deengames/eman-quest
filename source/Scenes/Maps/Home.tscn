@@ -4,7 +4,7 @@
 [ext_resource path="res://Tilesets/Indoors.tres" type="TileSet" id=2]
 [ext_resource path="res://Entities/MapWarp.tscn" type="PackedScene" id=3]
 
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -68,33 +68,35 @@ occluder_light_mask = 1
 format = 1
 tile_data = PoolIntArray( 0, 4, 65538, 1, 4, 65538, 2, 4, 65538, 3, 4, 65538, 4, 4, 65538, 5, 4, 65538, 6, 4, 65538, 7, 4, 65538, 8, 4, 65538, 9, 4, 65538, 10, 4, 65538, 11, 4, 65538, 12, 4, 65538, 13, 4, 65538, 14, 4, 65538, 65536, 4, 65538, 65537, 3, 0, 65541, 4, 65538, 65548, 5, 0, 65550, 4, 65538, 131072, 4, 65538, 131077, 4, 65538, 131086, 4, 65538, 196608, 4, 65538, 196613, 4, 65538, 196622, 4, 65538, 262144, 4, 65538, 262149, 4, 65538, 262158, 4, 65538, 327680, 4, 65538, 327694, 4, 65538, 393216, 4, 65538, 393230, 4, 65538, 458752, 4, 65538, 458753, 4, 65538, 458754, 4, 65538, 458755, 4, 65538, 458756, 4, 65538, 458757, 4, 65538, 458761, 4, 65538, 458762, 4, 65538, 458763, 4, 65538, 458764, 4, 65538, 458765, 4, 65538, 458766, 4, 65538 )
 
-[node name="Start" type="Node2D" parent="." index="3"]
+[node name="Locations" type="Node2D" parent="." index="3"]
+
+[node name="Start" type="Node2D" parent="Locations" index="0"]
 
 position = Vector2( 807.41, 36.9098 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Exit1" parent="." index="4" instance=ExtResource( 3 )]
+[node name="Exit1" parent="Locations" index="1" instance=ExtResource( 3 )]
 
 position = Vector2( 384, 512 )
 _sections_unfolded = [ "Transform" ]
 destination = "Overworld"
 appear_beside = "Home"
 
-[node name="Exit2" parent="." index="5" instance=ExtResource( 3 )]
+[node name="Exit2" parent="Locations" index="2" instance=ExtResource( 3 )]
 
 position = Vector2( 448, 512 )
 _sections_unfolded = [ "Transform" ]
 destination = "Overworld"
 appear_beside = "Home"
 
-[node name="Exit3" parent="." index="6" instance=ExtResource( 3 )]
+[node name="Exit3" parent="Locations" index="3" instance=ExtResource( 3 )]
 
 position = Vector2( 512, 512 )
 _sections_unfolded = [ "Transform" ]
 destination = "Overworld"
 appear_beside = "Home"
 
-[node name="Entrance" type="Node2D" parent="." index="7"]
+[node name="Entrance" type="Node2D" parent="Locations" index="4"]
 
 position = Vector2( 448, 384 )
 _sections_unfolded = [ "Transform" ]

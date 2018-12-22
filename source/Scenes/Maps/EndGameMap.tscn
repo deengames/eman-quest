@@ -53,34 +53,37 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Locations" type="Node2D" parent="." index="2"]
 
-[node name="Entrance" type="ColorRect" parent="Locations" index="0"]
+[node name="Entrance" type="Node2D" parent="Locations" index="0"]
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 448.0
-margin_top = 416.0
-margin_right = 512.0
-margin_bottom = 480.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-color = Color( 1, 1, 1, 1 )
-_sections_unfolded = [ "Margin", "Transform" ]
+position = Vector2( 468.638, 454.69 )
 
 [node name="Exit1" parent="Locations" index="1" instance=ExtResource( 3 )]
 
-position = Vector2( 448, 0 )
+position = Vector2( 352, 544 )
 _sections_unfolded = [ "Transform" ]
+destination = "Overworld"
+appear_beside = "Final"
 
 [node name="Exit2" parent="Locations" index="2" instance=ExtResource( 3 )]
 
-position = Vector2( 448, 544 )
+position = Vector2( 416, 544 )
 _sections_unfolded = [ "Transform" ]
+destination = "Overworld"
+appear_beside = "Final"
+
+[node name="Exit3" parent="Locations" index="3" instance=ExtResource( 3 )]
+
+position = Vector2( 480, 544 )
+_sections_unfolded = [ "Transform" ]
+destination = "Overworld"
+appear_beside = "Final"
+
+[node name="Exit4" parent="Locations" index="4" instance=ExtResource( 3 )]
+
+position = Vector2( 544, 544 )
+_sections_unfolded = [ "Transform" ]
+destination = "Overworld"
+appear_beside = "Final"
 
 [node name="EndGameNpc" parent="." index="3" instance=ExtResource( 4 )]
 
