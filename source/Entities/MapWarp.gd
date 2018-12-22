@@ -1,6 +1,7 @@
 extends Node2D
 
 const EndGameMap = preload("res://Scenes/Maps/EndGameMap.tscn")
+const HomeMap = preload("res://Scenes/Maps/Home.tscn")
 const MapDestination = preload("res://Entities/MapDestination.gd")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
@@ -91,10 +92,17 @@ func _on_Area2D_body_entered(body):
 			Globals.overworld_position = Vector2(self.position.x, self.position.y + Globals.TILE_HEIGHT)
 			Globals.transition_used = null
 
-		if typeof(target_map) == TYPE_STRING and target_map == "Final":
-			# Final map is a special case. In many ways.
-			var endgame_map = EndGameMap.instance()
-			SceneManagement.change_scene_to(get_tree(), endgame_map)
+		if typeof(target_map) == TYPE_STRING:
+			# TODO: dry with SceneManagement TODO about this
+			if target_map == "Final":
+				var static_map = EndGameMap.instance()
+				SceneManagement.change_scene_to(get_tree(), static_map)
+			elif target_map == "Home":
+				var static_map = HomeMap.instance()
+				SceneManagement.change_scene_to(get_tree(), static_map)
+			else:
+				Globals.transition_used = self.map_destination
+				SceneManagement.change_map_to(get_tree(), target_map)
 		else:
 			Globals.transition_used = self.map_destination
 			SceneManagement.change_map_to(get_tree(), target_map)

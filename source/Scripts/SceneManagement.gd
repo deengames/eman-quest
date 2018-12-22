@@ -2,10 +2,12 @@ extends Node
 
 const AreaType = preload("res://Scripts/Enums/AreaType.gd")
 const Boss = preload("res://Entities/Battle/Boss.gd")
+const EndGameMap = preload("res://Scenes/Maps/EndGameMap.tscn")
+const HomeMap = preload("res://Scenes/Maps/Home.tscn")
 const MapNameLabel = preload("res://Scenes/UI/MapNameLabel.tscn")
+const PopulatedMapScene = preload("res://Scenes/PopulatedMapScene.tscn")
 const StreamlinedRecallBattleScene = preload("res://Scenes/Battle/StreamlinedRecall/StreamlinedRecallBattleScene.tscn")
 const StaticMap = preload("res://Scenes/Maps/StaticMap.gd")
-const PopulatedMapScene = preload("res://Scenes/PopulatedMapScene.tscn")
 const TweenHelper = preload("res://Scripts/TweenHelper.gd")
 
 # Polymorphic. Target can be a type (eg. "Forest/Death") or a submap.
@@ -25,6 +27,16 @@ static func change_map_to(tree, target):
 	
 	if typeof(target) == TYPE_STRING:
 		target_areamap = map_data
+		
+		# Static maps created with .instance() are GCed on exit. Recreate.
+		# This makes a massive assumption that they're stateless ...
+		
+		# TODO: this code doesn't really belong here, does it? Should probably have
+		# a dictionary of static maps to some func that creates them or something.
+		if target == "Final":
+			target_areamap = EndGameMap.instance()
+		elif target == "Home":
+			target_areamap = HomeMap.instance()
 		
 		if typeof(map_data) == TYPE_ARRAY:
 			for map in map_data:

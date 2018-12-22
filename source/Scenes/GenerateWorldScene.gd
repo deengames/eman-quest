@@ -4,7 +4,7 @@ const AreaMap = preload("res://Entities/AreaMap.gd")
 const AreaType = preload("res://Scripts/Enums/AreaType.gd")
 const CaveGenerator = preload("res://Scripts/Generators/CaveGenerator.gd")
 const DungeonGenerator = preload("res://Scripts/Generators/DungeonGenerator.gd")
-const EndGameMap = preload("res://Scenes/Maps/EndGameMap.gd")
+const EndGameMap = preload("res://Scenes/Maps/EndGameMap.tscn")
 const ForestGenerator = preload("res://Scripts/Generators/ForestGenerator.gd")
 const HomeMap = preload("res://Scenes/Maps/Home.tscn")
 const MapDestination = preload("res://Entities/MapDestination.gd")
@@ -53,7 +53,9 @@ func _generate_world():
 		Globals.maps[map_type + "/" + variation] = maps
 	
 	# Add fixed maps: end-game / "Final", Overworld, Home, etc.
-	Globals.maps[EndGameMap.map_type] = EndGameMap.new()
+	# NB: these are destroyed (GCed) and recreated (.instance()) as needed.
+	# They should be stateless.
+	Globals.maps["Final"] = EndGameMap.instance()
 	Globals.maps["Home"] = HomeMap.instance()
 	
 	# Generate last; generating the entrance into the first sub-map
