@@ -23,7 +23,7 @@ extents = Vector2( 32, 32 )
 custom_solver_bias = 0.0
 radius = 64.0
 
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 [node name="Grass" type="Sprite" parent="." index="0"]
 
@@ -126,7 +126,7 @@ position = Vector2( 366, 0 )
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 0, 64, 64, 64 )
+region_rect = Rect2( 320, 0, 64, 64 )
 _sections_unfolded = [ "Region", "Transform" ]
 
 [node name="Cave Entrance" type="Sprite" parent="." index="6"]
@@ -138,7 +138,16 @@ region_enabled = true
 region_rect = Rect2( 64, 64, 64, 64 )
 _sections_unfolded = [ "Region", "Transform" ]
 
-[node name="Tree" type="Sprite" parent="." index="7"]
+[node name="Home" type="Sprite" parent="." index="7"]
+
+position = Vector2( 542, 0 )
+texture = ExtResource( 1 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 64, 64, 64 )
+_sections_unfolded = [ "Region", "Transform" ]
+
+[node name="Tree" type="Sprite" parent="." index="8"]
 
 editor/display_folded = true
 position = Vector2( 0, 96 )

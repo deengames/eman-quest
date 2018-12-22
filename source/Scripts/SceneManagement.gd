@@ -4,6 +4,7 @@ const AreaType = preload("res://Scripts/Enums/AreaType.gd")
 const Boss = preload("res://Entities/Battle/Boss.gd")
 const MapNameLabel = preload("res://Scenes/UI/MapNameLabel.tscn")
 const StreamlinedRecallBattleScene = preload("res://Scenes/Battle/StreamlinedRecall/StreamlinedRecallBattleScene.tscn")
+const StaticMap = preload("res://Scenes/Maps/StaticMap.gd")
 const PopulatedMapScene = preload("res://Scenes/PopulatedMapScene.tscn")
 const TweenHelper = preload("res://Scripts/TweenHelper.gd")
 
@@ -123,7 +124,8 @@ static func _free_current_scene(scene):
 	scene.free()
 
 static func _remove_monster_instances():
-	if Globals.current_map != null:
+	# TODO: might make more sense to check if the map has monsters .. static maps can, right?
+	if Globals.current_map != null and typeof(Globals.current_map) != typeof(StaticMap):
 		# GCed. Don't leave deleted objects around. If you do, the next
 		# time you save (iterate all maps/submaps and save objects), you
 		# run into [deleted, deleted, ...] which crashes.

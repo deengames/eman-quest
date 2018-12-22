@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/Maps/Home.gd" type="Script" id=1]
 [ext_resource path="res://Tilesets/Indoors.tres" type="TileSet" id=2]
+[ext_resource path="res://Entities/MapWarp.tscn" type="PackedScene" id=3]
 
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -71,5 +72,26 @@ tile_data = PoolIntArray( 0, 4, 65538, 1, 4, 65538, 2, 4, 65538, 3, 4, 65538, 4,
 
 position = Vector2( 807.41, 36.9098 )
 _sections_unfolded = [ "Transform" ]
+
+[node name="Exit1" parent="." index="4" instance=ExtResource( 3 )]
+
+position = Vector2( 384, 512 )
+_sections_unfolded = [ "Transform" ]
+destination = "Overworld"
+appear_beside = "Home"
+
+[node name="Exit2" parent="." index="5" instance=ExtResource( 3 )]
+
+position = Vector2( 448, 512 )
+_sections_unfolded = [ "Transform" ]
+destination = "Overworld"
+appear_beside = "Home"
+
+[node name="Exit3" parent="." index="6" instance=ExtResource( 3 )]
+
+position = Vector2( 512, 512 )
+_sections_unfolded = [ "Transform" ]
+destination = "Overworld"
+appear_beside = "Home"
 
 

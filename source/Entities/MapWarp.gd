@@ -4,14 +4,40 @@ const EndGameMap = preload("res://Scenes/Maps/EndGameMap.tscn")
 const MapDestination = preload("res://Entities/MapDestination.gd")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
+######## TODO: use tileset tiles instead?
 const EntranceImageXPositions = {
-	"Dungeon": 0,
+	"Dungeon": 320,
 	"Cave": 64,
 	"Forest": 128,
-	"Final": 320
+	"Final": 320,
+	"Home": 0
 }
 
-var map_destination
+const EntranceImageYPositions = {
+	"Dungeon": 0,
+	"Home": 64
+}
+
+export var destination = "" # dungeon, cave, forest, final
+export var appear_beside = "" # Dungeon, cave, forest, etc. entrance
+
+var _initialized = false
+var map_destination # MapDestination instance
+
+func _ready():
+	# Placed statically on some hand-crafted map, probably. If not, _initialized = true.
+	if not self._initialized:
+		if destination in EntranceImageXPositions.keys():
+			$Sprite.region_rect.position.x = EntranceImageXPositions[destination]
+			if destination in EntranceImageYPositions.keys():
+				$Sprite.region_rect.position.y = EntranceImageYPositions[destination]
+			$Sprite.visible = true
+		else:
+			$Sprite.visible = false
+			
+		self._initialized = true
+	
+	self._set_map_destination()
 
 func initialize_from(map_destination):
 	self.map_destination = map_destination
@@ -26,11 +52,36 @@ func initialize_from(map_destination):
 		
 	if target_map in EntranceImageXPositions.keys():
 		$Sprite.region_rect.position.x = EntranceImageXPositions[target_map]
+		if target_map in EntranceImageYPositions.keys():
+			$Sprite.region_rect.position.y = EntranceImageYPositions[target_map]
 		$Sprite.visible = true
 	else:
 		# Transition from map => world or map => map eg. in-forest maps
 		$Sprite.visible = false
+	self._initialized = true
 
+###
+# Assumes your desination is the overworld; find the relevant entrance (look
+# at the map transitions to find them) and then set up a map_destination next to it.
+###
+func _set_map_destination():
+	if self.destination == "Overworld":
+		var overworld = Globals.maps["Overworld"]
+		
+		var transitions = overworld.transitions
+		var target_position = null
+		for transition in transitions:
+			if transition.target_map.find(self.appear_beside) > -1:
+				target_position = transition.my_position # position of this transition on the overworld
+				# Destination IS NULL RARRGHHHH. If it wasn't, use it to determine position correctly.
+				target_position.y += 1
+		
+		# TODO: can expose destination (last argument) so consumers can specify it; null for now
+		# First argument, my_position, is irrelevant; so, null.
+		self.map_destination = MapDestination.new(null, self.destination, target_position, null)
+		
+		assert (target_position != null)
+		
 func _on_Area2D_body_entered(body):
 	if body == Globals.player:
 		var target_map = self.map_destination.target_map

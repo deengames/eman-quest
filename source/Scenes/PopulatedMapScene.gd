@@ -55,7 +55,7 @@ func _ready():
 	
 	var player = Player.instance()
 	# SceneManagement sets player position correct if back to overworld
-	if map.map_type != "Overworld":
+	if Globals.transition_used.target_position != null:
 		var from = Globals.transition_used
 		player.position = Vector2(
 			from.target_position.x * Globals.TILE_WIDTH,
