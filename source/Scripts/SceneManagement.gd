@@ -136,8 +136,9 @@ static func _free_current_scene(scene):
 	scene.free()
 
 static func _remove_monster_instances():
-	# TODO: might make more sense to check if the map has monsters .. static maps can, right?
-	if Globals.current_map != null and typeof(Globals.current_map) != typeof(StaticMap):
+	# Don't crash if we have a static map and `monsters` is not defined.
+	# This is reflection magic: if the field exists, set it to empty-dictionary.
+	if Globals.current_map != null and 'monsters' in Globals.current_map:
 		# GCed. Don't leave deleted objects around. If you do, the next
 		# time you save (iterate all maps/submaps and save objects), you
 		# run into [deleted, deleted, ...] which crashes.
