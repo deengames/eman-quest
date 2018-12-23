@@ -45,7 +45,7 @@ var current_monster_type = ""
 
 func _ready():
 	randomize()
-	seed(708369640446) 
+	#seed(708369640446) 
 	# slime forest => abcdef
 	# frost forest => abc
 	# river cave => 9, 99, 999, 999

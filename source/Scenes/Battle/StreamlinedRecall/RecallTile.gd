@@ -15,6 +15,9 @@ const _TILE_IMAGE_X = {
 var is_selectable = false
 var _should_be_selected = false
 
+func _ready():
+	self.modulate = Color(1, 1, 1, 0.8)
+
 func show_then_hide():
 	yield(get_tree().create_timer(_DISPLAY_SECONDS), 'timeout')
 	$Contents.region_rect.position.x = _TILE_IMAGE_X["active"]

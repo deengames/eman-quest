@@ -26,7 +26,7 @@ const _GENERATOR_CLASSES = {
 	"Dungeon": DungeonGenerator
 }
 
-const ForestVariations = ["Death"]
+const ForestVariations = ["Frost"]
 const CaveVariations = ["River", "Lava"] # Crystal
 const DungeonVariations = ["Castle", "Desert"]
 

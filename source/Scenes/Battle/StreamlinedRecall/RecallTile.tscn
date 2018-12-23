@@ -3,14 +3,12 @@
 [ext_resource path="res://Scenes/Battle/StreamlinedRecall/RecallTile.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/battle/recall-tile.png" type="Texture" id=2]
 
-
-
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 32, 32 )
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]

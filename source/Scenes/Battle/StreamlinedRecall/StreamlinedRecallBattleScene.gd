@@ -32,6 +32,10 @@ func _ready():
 	$RecallGrid.connect("picked_all_tiles", self, "_on_picked_all_tiles")
 	$RecallGrid.connect("correct_selected", self, "_on_correct_selected")
 	
+	# Experimental
+	$ActionsPanel.modulate = Color(1, 1, 1, 0.5)
+	$RecallGrid.modulate = Color(1, 1, 1, 0.8)
+	
 	if not Features.is_enabled("defend action"):
 		$ActionsPanel/Controls/DefendButton.visible = false
 	
