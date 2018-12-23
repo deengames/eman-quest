@@ -24,7 +24,6 @@ func _ready():
 	var time_range = max_time - min_time
 	self._change_after_seconds = (randf() * time_range) + min_time
 	
-	print("C="+str(self._change_after_seconds))
 	self._pick_destination()
 
 func initialize(x, y):
