@@ -26,7 +26,7 @@ _sections_unfolded = [ "Offset", "Region" ]
 texture = ExtResource( 2 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 0, 0, 64, 64 )
+region_rect = Rect2( 128, 0, 64, 64 )
 _sections_unfolded = [ "Region", "Visibility" ]
 
 [node name="Area2D" type="Area2D" parent="." index="2"]

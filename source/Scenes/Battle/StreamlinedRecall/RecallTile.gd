@@ -16,7 +16,8 @@ var is_selectable = false
 var _should_be_selected = false
 
 func _ready():
-	self.modulate = Color(1, 1, 1, 0.8)
+	# Opaque by default
+	$Cover.modulate = Color(1, 1, 1, 1)
 
 func show_then_hide():
 	yield(get_tree().create_timer(_DISPLAY_SECONDS), 'timeout')
@@ -40,4 +41,7 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 		else:
 			$Contents.region_rect.position.x = _TILE_IMAGE_X["incorrect"]
 			self.emit_signal("incorrect_selected")
+		
 		self.is_selectable = false
+		# Transparent when clicked
+		$Cover.modulate = Color(1, 1, 1, 0.5)

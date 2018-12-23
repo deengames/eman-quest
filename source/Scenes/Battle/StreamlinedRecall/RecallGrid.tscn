@@ -2,9 +2,7 @@
 
 [ext_resource path="res://Scenes/Battle/StreamlinedRecall/RecallGrid.gd" type="Script" id=1]
 
-
-
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -22,7 +20,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-color = Color( 0, 0, 0, 1 )
+color = Color( 0, 0, 1, 0.501961 )
 _sections_unfolded = [ "Margin", "Mouse" ]
 
 
