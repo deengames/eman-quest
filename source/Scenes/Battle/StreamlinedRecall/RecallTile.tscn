@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Battle/StreamlinedRecall/RecallTile.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/battle/recall-tile.png" type="Texture" id=2]
+[ext_resource path="res://assets/images/battle/grid-tile-covers.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -13,21 +14,21 @@ extents = Vector2( 32, 32 )
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Cover" type="Sprite" parent="." index="0"]
-
-texture = ExtResource( 2 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 0, 64, 64 )
-_sections_unfolded = [ "Offset", "Region" ]
-
-[node name="Contents" type="Sprite" parent="." index="1"]
+[node name="Contents" type="Sprite" parent="." index="0"]
 
 texture = ExtResource( 2 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 64, 64 )
 _sections_unfolded = [ "Region", "Visibility" ]
+
+[node name="Cover" type="Sprite" parent="." index="1"]
+
+texture = ExtResource( 3 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 64, 64 )
+_sections_unfolded = [ "Offset", "Region" ]
 
 [node name="Area2D" type="Area2D" parent="." index="2"]
 

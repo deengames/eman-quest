@@ -15,14 +15,11 @@ var _actions_left = 0
 
 var _is_players_turn = false
 
-func set_monster_data(data):
-	MonsterScaler.scale_monster_data(data)
-	data["next_round_turns"] = data["turns"]
-	data["max_health"] = data["health"]
-	self._monster_data = data
-
 func _ready():
+	
 	randomize()
+	self._set_recall_tile_image()
+	
 	var image_name = self._monster_data["type"].replace(' ', '')
 	$MonsterControls/MonsterHealth.max_value = self._monster_data["max_health"]
 	$MonsterControls/MonsterSprite.texture = load("res://assets/images/monsters/" + image_name + ".png")
@@ -33,8 +30,8 @@ func _ready():
 	$RecallGrid.connect("correct_selected", self, "_on_correct_selected")
 	
 	# Experimental
-	$ActionsPanel.modulate = Color(1, 1, 1, 0.5)
-	$RecallGrid.modulate = Color(1, 1, 1, 0.8)
+	#$ActionsPanel.modulate = Color(1, 1, 1, 0.5)
+	#$RecallGrid.modulate = Color(1, 1, 1, 0.8)
 	
 	if not Features.is_enabled("defend action"):
 		$ActionsPanel/Controls/DefendButton.visible = false
@@ -45,6 +42,18 @@ func _ready():
 	self._start_next_turn()
 	
 	_player.connect("poison_damaged", self, "_on_poison_damaged")
+
+func set_monster_data(data):
+	MonsterScaler.scale_monster_data(data)
+	data["next_round_turns"] = data["turns"]
+	data["max_health"] = data["health"]
+	self._monster_data = data
+
+func _set_recall_tile_image():
+	var map_type = Globals.current_map.map_type
+	var variation = Globals.current_map.variation
+	var full_name = map_type + "/" + variation
+	$RecallGrid.set_tile_image(full_name)
 
 # health and energy
 func _update_health_displays():
