@@ -65,6 +65,11 @@ func make_unselectable():
 	for tile in self._tile_controls:
 		tile.is_selectable = false
 
+# Full name is something like "Forest/Frost"
+func set_tile_image(full_name):
+	for tile in self._tile_controls:
+		tile.set_cover_image(full_name)
+
 func _tile_done_hiding():
 	ready_tiles += 1
 	if ready_tiles == self.num_tiles: # As many tiles as expected, report done hiding
