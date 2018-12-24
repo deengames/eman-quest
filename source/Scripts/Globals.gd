@@ -44,7 +44,10 @@ var current_monster = null # monster.data_object
 var current_monster_type = ""
 
 func _ready():
-	randomize()
+	# Debugging code. Random seed, BUT print it out so we know what it is.
+	var seed_value = randi()
+	print("Universe #" + str(seed_value))
+	randomize(seed_value)
 	#seed(708369640446) 
 	# slime forest => abcdef
 	# frost forest => abc
