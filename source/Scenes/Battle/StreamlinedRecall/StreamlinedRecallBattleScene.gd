@@ -18,7 +18,12 @@ var _is_players_turn = false
 func _ready():
 	
 	randomize()
-	self._set_recall_tile_image()
+	
+	var map_type = Globals.current_map.map_type
+	var variation = Globals.current_map.variation
+	self._set_background_image(map_type, variation)
+	self._set_recall_tile_image(map_type, variation)
+	
 	$ActionsPanel.self_modulate = Color(1, 1, 1, 0.5)
 	
 	var image_name = self._monster_data["type"].replace(' ', '')
@@ -46,9 +51,12 @@ func set_monster_data(data):
 	data["max_health"] = data["health"]
 	self._monster_data = data
 
-func _set_recall_tile_image():
-	var map_type = Globals.current_map.map_type
-	var variation = Globals.current_map.variation
+func _set_background_image(map_type, variation):
+	var background_filename = "res://assets/images/battle/battlebacks/" + variation + "-" + map_type + ".png"
+	$Background.texture = load(background_filename)
+
+# Different recal image per map type
+func _set_recall_tile_image(map_type, variation):
 	var full_name = map_type + "/" + variation
 	$RecallGrid.set_tile_image(full_name)
 

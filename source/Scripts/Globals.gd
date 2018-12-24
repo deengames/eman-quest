@@ -48,6 +48,7 @@ func _ready():
 	var seed_value = randi()
 	print("Universe #" + str(seed_value))
 	randomize(seed_value)
+	
 	#seed(708369640446) 
 	# slime forest => abcdef
 	# frost forest => abc
