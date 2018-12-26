@@ -8,7 +8,11 @@ func _ready():
 	self.speaker_name = ""
 	self.dialogue = ""
 
-func set_sepaker_name(speaker):
+func show_text(speaker, content):
+	self.speaker_name = speaker
+	self.dialogue = content
+
+func set_speaker_name(speaker):
 	$Nametag/NameText.text = speaker
 
 func get_speaker_name():

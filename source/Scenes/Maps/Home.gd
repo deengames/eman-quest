@@ -9,3 +9,5 @@ func _ready():
 func show_intro_events():
 	var player = Globals.player
 	player.position = $Locations/Start.position
+	
+	$StoryWindow.show_text("Mom", "AIEEEEEEEEEEEEEEEEEEEEEE!!!!")
