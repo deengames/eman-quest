@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Entities/Player.gd" type="Script" id=1]
+[ext_resource path="res://Entities/MapEntities/Bandit.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/npcs.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=1]
@@ -60,7 +60,7 @@ tracks/0/keys = {
 "values": [ Rect2( 576, 128, 64, 64 ), Rect2( 640, 128, 64, 64 ), Rect2( 704, 128, 64, 64 ), Rect2( 640, 128, 64, 64 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 
 resource_name = "Walk Up"
 length = 0.8
@@ -79,7 +79,7 @@ tracks/0/keys = {
 "values": [ Rect2( 576, 192, 64, 64 ), Rect2( 640, 192, 64, 64 ), Rect2( 704, 192, 64, 64 ), Rect2( 640, 192, 64, 64 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=5]
 
 custom_solver_bias = 0.0
 extents = Vector2( 22, 12 )
@@ -91,6 +91,7 @@ collision_layer = 1
 collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
+speed = 200
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
@@ -110,13 +111,13 @@ playback_speed = 1.0
 "anims/Walk Down" = SubResource( 1 )
 "anims/Walk Left" = SubResource( 2 )
 "anims/Walk Right" = SubResource( 3 )
-"anims/Walk Up" = SubResource( 5 )
+"anims/Walk Up" = SubResource( 4 )
 blend_times = [  ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
 
 position = Vector2( 32, 54 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 _sections_unfolded = [ "Transform" ]
 
 
