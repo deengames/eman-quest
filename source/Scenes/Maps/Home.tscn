@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/Maps/Home.gd" type="Script" id=1]
 [ext_resource path="res://Tilesets/Indoors.tres" type="TileSet" id=2]
 [ext_resource path="res://Entities/MapWarp.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/UI/DialogueWindow.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Entities/MapEntities/Mom.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Entities/MapEntities/Bandit.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Entities/MapEntities/Dad.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/UI/DialogueWindow.tscn" type="PackedScene" id=7]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -71,6 +74,8 @@ tile_data = PoolIntArray( 0, 4, 65538, 1, 4, 65538, 2, 4, 65538, 3, 4, 65538, 4,
 
 [node name="Locations" type="Node2D" parent="." index="3"]
 
+editor/display_folded = true
+
 [node name="Start" type="Node2D" parent="Locations" index="0"]
 
 position = Vector2( 807.41, 36.9098 )
@@ -102,9 +107,28 @@ appear_beside = "Home"
 position = Vector2( 448, 384 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="StoryWindow" parent="." index="4" instance=ExtResource( 4 )]
+[node name="Intro" type="Node2D" parent="." index="4"]
 
-position = Vector2( 206.14, 215.073 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Mom" parent="Intro" index="0" instance=ExtResource( 4 )]
+
+position = Vector2( 512, 320 )
+_sections_unfolded = [ "Offset", "Region", "Transform" ]
+
+[node name="Bandit" parent="Intro" index="1" instance=ExtResource( 5 )]
+
+position = Vector2( 512, 384 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Dad" parent="Intro" index="2" instance=ExtResource( 6 )]
+
+position = Vector2( 448, 256 )
+_sections_unfolded = [ "Offset", "Region", "Transform" ]
+
+[node name="StoryWindow" parent="Intro" index="3" instance=ExtResource( 7 )]
+
+position = Vector2( 165.348, 198.752 )
 _sections_unfolded = [ "Transform" ]
 
 

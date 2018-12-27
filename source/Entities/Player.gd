@@ -11,7 +11,10 @@ func _ready():
 	
 	if Features.is_enabled("zoom-out maps"):
 		$Camera2D.zoom = Vector2(4, 4)
-	
+		
+	# Strange bug that I can't quite figure out. Broke on New Game.
+	if Globals.current_map == null:
+		return
 	
 	# Set camera bounds. Hand-crafted maps don't have these variables.
 	if Globals.current_map.map_type != "Final" and Globals.current_map.map_type != "Home":
