@@ -14,6 +14,7 @@ func show_intro_events():
 	# Called by GenerateWorldScene
 	var player = Globals.player
 	player.position = $Locations/Start.position
+	player.freeze()
 	
 	$Intro/StoryWindow.show_texts([
 		["Mama", "AIEEEEEEEEEEEEEEEEEEEEEE!!!!"],
@@ -25,8 +26,13 @@ func show_intro_events():
 	$Intro/StoryWindow.connect("shown_all", self, "_conclude_intro_events")
 	
 func _conclude_intro_events():
+	
 	yield(get_tree().create_timer(1), 'timeout')
+	# Play sound here
+	
 	var mama = $Intro/Mom
 	var bandit = $Intro/Bandit
 	bandit.run("Down", 4) # run off-screen
 	mama.visible = false
+	
+	bandit.connect("reached_destination",  Globals.player, "unfreeze")

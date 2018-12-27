@@ -18,30 +18,31 @@ func _ready():
 
 func _physics_process(delta):
 	# Called every frame. Delta is time since last frame.
-	# Update game logic here.
-	self._move_parent_to_clicked_destintion()
+	if self.get_parent().can_move:
+		self._move_parent_to_clicked_destintion()
 
 func _clicked_on_map(position):
-	self.destination = position
-	
-	var new_facing = ""
-	var direction = self.destination - self.get_parent().position
-	var magnitude = direction.abs()
-	
-	if magnitude.x > magnitude.y: # more horizontal than vertical
-		if direction.x < 0:
-			new_facing = "Left"
+	if self.get_parent().can_move:
+		self.destination = position
+		
+		var new_facing = ""
+		var direction = self.destination - self.get_parent().position
+		var magnitude = direction.abs()
+		
+		if magnitude.x > magnitude.y: # more horizontal than vertical
+			if direction.x < 0:
+				new_facing = "Left"
+			else:
+				new_facing = "Right"
 		else:
-			new_facing = "Right"
-	else:
-		if direction.y < 0:
-			new_facing = "Up"
-		else:
-			new_facing = "Down"
-	
-	# Even if you didn't change directions, restart animation.
-	# You may have moved down, then reached, now move down again
-	self.emit_signal("facing_new_direction", new_facing)
+			if direction.y < 0:
+				new_facing = "Up"
+			else:
+				new_facing = "Down"
+		
+		# Even if you didn't change directions, restart animation.
+		# You may have moved down, then reached, now move down again
+		self.emit_signal("facing_new_direction", new_facing)
 
 func cancel_destination():
 	self.destination = null

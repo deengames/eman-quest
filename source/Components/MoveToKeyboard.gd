@@ -19,7 +19,8 @@ func _ready():
 	pass
 
 func _physics_process(delta):
-	self._move_to_keyboard()
+	if self.get_parent().can_move:
+		self._move_to_keyboard()
 
 func _move_to_keyboard():
 	var velocity = Vector2(0, 0)

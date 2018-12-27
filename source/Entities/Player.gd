@@ -4,6 +4,8 @@ var _cant_fight_from = null
 var CANT_FIGHT_FOR_SECONDS = 5
 var facing = "down"
 
+var can_move = true
+
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
@@ -36,7 +38,8 @@ func can_fight():
 	return self._cant_fight_from == null
 
 func _change_animation():
-	$AnimationPlayer.play("Walk " + self.facing)
+	if self.can_move:
+		$AnimationPlayer.play("Walk " + self.facing)
 
 func _on_facing_new_direction(new_direction):
 	self.facing = new_direction
@@ -47,3 +50,9 @@ func _on_reached_destination():
 
 func _on_cancel_destination():
 	$MoveToClick.cancel_destination()
+
+func freeze():
+	self.can_move = false
+
+func unfreeze():
+	self.can_move = true
