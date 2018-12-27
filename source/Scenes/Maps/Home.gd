@@ -11,4 +11,8 @@ func show_intro_events():
 	var player = Globals.player
 	player.position = $Locations/Start.position
 	
-	$Intro/StoryWindow.show_text("Mom", "AIEEEEEEEEEEEEEEEEEEEEEE!!!!")
+	$Intro/StoryWindow.show_texts([
+		["Mama", "AIEEEEEEEEEEEEEEEEEEEEEE!!!!"],
+		["Baba", "Unhand her, you brute!"],
+		["Bandit", "Hehehehe! Shut it, old man!"]
+	])
