@@ -14,20 +14,24 @@ const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 # FastLZ:		 206kb
 const _SAVE_COMPRESSION_MODE = File.COMPRESSION_DEFLATE  
 
+const _MAPS_NOT_TO_SAVE = ["Home", "Final"]
+
 static func save(save_id):
 	var maps = {}
-	for map_type in Globals.maps.keys():
-		var source_map = Globals.maps[map_type]
-		var map_data
-		
-		if typeof(source_map) == TYPE_ARRAY:
-			map_data = DictionaryHelper.array_to_dictionary(source_map)
-		else:
-			map_data = source_map.to_dict()
-			
-		maps[map_type] = map_data
 	
-	maps = to_json(maps)	
+	for map_type in Globals.maps.keys():
+		if not map_type in _MAPS_NOT_TO_SAVE:
+			var source_map = Globals.maps[map_type]
+			var map_data
+			
+			if typeof(source_map) == TYPE_ARRAY:
+				map_data = DictionaryHelper.array_to_dictionary(source_map)
+			else:
+				map_data = source_map.to_dict()
+				
+			maps[map_type] = map_data
+	
+	maps = to_json(maps)
 	var player_data = to_json(Globals.player_data.to_dict())
 	var story_data = to_json(Globals.story_data)
 	var overworld_position = to_json(DictionaryHelper.vector2_to_dict(Globals.overworld_position))
