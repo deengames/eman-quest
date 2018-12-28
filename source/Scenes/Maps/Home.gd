@@ -9,6 +9,7 @@ func _ready():
 	player.position = $Locations/Entrance.position
 
 func show_intro_events():
+	$Intro.visible = true
 	self._showing_intro_events = true
 	
 	# Called by GenerateWorldScene
