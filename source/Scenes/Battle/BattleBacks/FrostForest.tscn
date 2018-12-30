@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Tilesets/FrostForest.tres" type="TileSet" id=1]
 
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 [node name="Ground" type="TileMap" parent="." index="0"]
 
