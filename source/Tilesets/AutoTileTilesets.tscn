@@ -6,7 +6,7 @@
 [ext_resource path="res://Tilesets/DesertDungeon.tres" type="TileSet" id=4]
 [ext_resource path="res://Tilesets/Indoors.tres" type="TileSet" id=5]
 
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 [node name="RiverCave" type="TileMap" parent="." index="0"]
 
