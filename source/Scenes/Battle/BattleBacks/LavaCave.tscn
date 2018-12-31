@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Tilesets/LavaCave.tres" type="TileSet" id=1]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" index="0"]
 
 [node name="TileMap" type="TileMap" parent="." index="0"]
 
