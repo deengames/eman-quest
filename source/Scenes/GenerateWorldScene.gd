@@ -199,6 +199,6 @@ func _pick_dungeons_and_variations():
 	
 func _print_and_set_seed():
 	# Debugging code. Random seed, BUT print it out so we know what it is.
-	var seed_value = 9999 #randi()
+	var seed_value = randi()
 	print("Universe #" + str(seed_value))
-	randomize(seed_value)
+	seed(seed_value)
