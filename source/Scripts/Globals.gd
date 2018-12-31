@@ -44,19 +44,7 @@ var current_monster = null # monster.data_object
 var current_monster_type = ""
 
 func _ready():
-	# Debugging code. Random seed, BUT print it out so we know what it is.
-	var seed_value = randi()
-	print("Universe #" + str(seed_value))
-	randomize(seed_value)
-	
-	#seed(708369640446) 
-	# slime forest => abcdef
-	# frost forest => abc
-	# river cave => 9, 99, 999, 999
-	# lava cave => 321
-	# castle dungeon => 4864
-	# desert dungeon => 123321
-	#seed("abcdef".hash())
+	pass
 	
 # https://docs.godotengine.org/en/3.0/tutorials/inputs/inputevent.html#how-does-it-work
 # Fires if nothing else handled the event, it seems.

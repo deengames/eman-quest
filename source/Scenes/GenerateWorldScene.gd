@@ -33,6 +33,7 @@ const DungeonVariations = ["Castle", "Desert"]
 func _ready():
 	# Wait just long enough for the scene to display, then generate
 	yield(get_tree().create_timer(0.25), 'timeout')
+	self._print_and_set_seed()
 	self._generate()
 
 func _generate():
@@ -195,3 +196,9 @@ func _pick_dungeons_and_variations():
 		to_return.append(map_and_variation[0] + "/" + map_and_variation[1])
 	print(to_return)
 	return to_return
+	
+func _print_and_set_seed():
+	# Debugging code. Random seed, BUT print it out so we know what it is.
+	var seed_value = 9999 #randi()
+	print("Universe #" + str(seed_value))
+	randomize(seed_value)

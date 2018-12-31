@@ -53,6 +53,7 @@ func set_monster_data(data):
 
 func _set_background_image(map_type, variation):
 	var background_filename = "res://assets/images/battle/battlebacks/" + variation + "-" + map_type + ".png"
+	print(background_filename)
 	$Background.texture = load(background_filename)
 
 # Different recal image per map type

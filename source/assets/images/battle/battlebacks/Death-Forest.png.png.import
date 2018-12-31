@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/frost-forest.png-27c437366402422a174de3c3e9a349f8.stex"
+path="res://.import/Death-Forest.png.png-5cbf3879e2cbb1c8f3ced2df0840b69e.stex"
 
 [deps]
 
-source_file="res://assets/images/battle/battlebacks/frost-forest.png"
-dest_files=[ "res://.import/frost-forest.png-27c437366402422a174de3c3e9a349f8.stex" ]
+source_file="res://assets/images/battle/battlebacks/Death-Forest.png.png"
+dest_files=[ "res://.import/Death-Forest.png.png-5cbf3879e2cbb1c8f3ced2df0840b69e.stex" ]
 
 [params]
 
