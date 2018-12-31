@@ -31,16 +31,19 @@ const CaveVariations = ["River", "Lava"] # Crystal
 const DungeonVariations = ["Castle", "Desert"]
 
 func _ready():
+	$StartButton.visible = false
+	var game_number = self._print_and_set_seed()
+	
 	# Wait just long enough for the scene to display, then generate
 	yield(get_tree().create_timer(0.25), 'timeout')
-	self._print_and_set_seed()
-	self._generate()
-
-func _generate():
+	
 	self._generate_world()
+	$Status.text = "World #" + str(game_number) + " generated!"
+	$StartButton.visible = true
+
+func _start_game():
 	SceneManagement.change_scene_to(get_tree(), Globals.maps["Home"])
 	get_tree().current_scene.show_intro_events()
-	#get_tree().current_scene.get_node("UI").show_intro_story()
 	
 func _generate_world():
 	var world_areas = _pick_dungeons_and_variations()
@@ -198,7 +201,13 @@ func _pick_dungeons_and_variations():
 	return to_return
 	
 func _print_and_set_seed():
-	# Debugging code. Random seed, BUT print it out so we know what it is.
+	# Random seed, BUT print it out so we know what it is.
+	# Without this ... we always get the same seed. Wut?
+	randomize()
 	var seed_value = randi()
-	print("Universe #" + str(seed_value))
+	print("Game #" + str(seed_value))
 	seed(seed_value)
+	return seed_value
+
+func _on_Button_pressed():
+	self._start_game()

@@ -1,17 +1,25 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/GenerateWorldScene.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/Lato-Black.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="DynamicFont" id=1]
 
-size = 72
+size = 60
 use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 2 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="DynamicFont" id=2]
+
+size = 36
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 2 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[node name="Node2D" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -21,10 +29,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 156.0
-margin_top = 241.0
-margin_right = 811.0
-margin_bottom = 329.0
+margin_left = 3.0
+margin_top = 211.0
+margin_right = 961.0
+margin_bottom = 299.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -32,10 +40,40 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = SubResource( 1 )
-text = "Generating World ..."
+text = "Generating World  ..."
+align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts", "custom_styles" ]
+
+[node name="StartButton" type="Button" parent="." index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 326.0
+margin_top = 321.0
+margin_right = 606.0
+margin_bottom = 371.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 2 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Start Adventure"
+flat = false
+align = 1
+_sections_unfolded = [ "custom_fonts" ]
+
+[connection signal="pressed" from="StartButton" to="." method="_on_Button_pressed"]
 
 
