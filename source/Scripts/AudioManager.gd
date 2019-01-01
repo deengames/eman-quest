@@ -13,15 +13,15 @@ var audio_clips = {
 const AudioFilePlayerClass = preload("res://Utilities/AudioFilePlayer.tscn")
 var audio_instances = []
 
-func play_sound(sound_name, loop_sound=false, sound_position=null):
-	if audio_clips.has(sound_name):
+func play_sound(audio_clip_key, loop_sound=false, sound_position=null):
+	if audio_clips.has(audio_clip_key):
 		var audio_player = AudioFilePlayerClass.instance()
 		
 		Globals.add_child(audio_player)
 		audio_instances.append(audio_player)
 		
 		audio_player.should_loop = loop_sound
-		audio_player.play_sound(audio_clips[sound_name], sound_position)
+		audio_player.play_sound(audio_clips[audio_clip_key], sound_position)
 		audio_player.connect("sound_finished", self, "remove_sound")
 	else:
 		print ("ERROR: cannot play sound that does not exist in audio_clips!")

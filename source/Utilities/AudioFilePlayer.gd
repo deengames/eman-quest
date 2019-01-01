@@ -6,8 +6,7 @@ export var should_loop = false
 signal sound_finished # final finish, not "looping now" restart
 
 func _ready():
-	audio_node = $AudioStreamPlayer2D
-	audio_node.volume_db = 100
+	audio_node = $AudioStreamPlayer
 	audio_node.connect("finished", self, "sound_finished")
 	audio_node.stop()
 	
