@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/quran-17-23.ogg-286a369d23e76c87df336d5831af1a5a.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/quran-17-23.ogg"
+dest_files=[ "res://.import/quran-17-23.ogg-286a369d23e76c87df336d5831af1a5a.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
