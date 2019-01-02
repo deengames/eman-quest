@@ -11,5 +11,5 @@ dest_files=[ "res://.import/quran-17-23.ogg-286a369d23e76c87df336d5831af1a5a.ogg
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

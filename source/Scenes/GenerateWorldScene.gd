@@ -10,7 +10,6 @@ const HomeMap = preload("res://Scenes/Maps/Home.tscn")
 const MapDestination = preload("res://Entities/MapDestination.gd")
 const MapLayoutGenerator = preload("res://Scripts/Generators/MapLayoutGenerator.gd")
 const OverworldGenerator = preload("res://Scripts/Generators/OverworldGenerator.gd")
-const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 # Moving to (map.width / 2, map.height - 1) takes us below the bottom-most tile.
 # Moving up one tile takes us directly on the transition; two tiles, now we're talking.
@@ -42,8 +41,7 @@ func _ready():
 	$StartButton.visible = true
 
 func _start_game():
-	SceneManagement.change_scene_to(get_tree(), Globals.maps["Home"])
-	get_tree().current_scene.show_intro_events()
+	get_tree().change_scene("res://Scenes/QuranScene.tscn")
 	
 func _generate_world():
 	var world_areas = _pick_dungeons_and_variations()

@@ -1,5 +1,7 @@
 extends Node
 
+signal sound_finished
+
 ###### SOURCE: https://godot.readthedocs.io/en/3.0/tutorials/3d/fps_tutorial/part_six.html#doc-fps-tutorial-part-six
 # ------------------------------------
 # All of the audio files.
@@ -10,7 +12,7 @@ var audio_clips = {
 	"quran-intro-2": preload("res://assets/audio/quran-17-24.ogg")
 }
 
-const AudioFilePlayerClass = preload("res://Utilities/AudioFilePlayer.tscn")
+const AudioFilePlayerClass = preload("res://Scenes/AudioFilePlayer.tscn")
 var audio_instances = []
 
 func play_sound(audio_clip_key, loop_sound=false, sound_position=null):
@@ -22,10 +24,20 @@ func play_sound(audio_clip_key, loop_sound=false, sound_position=null):
 		
 		audio_player.should_loop = loop_sound
 		audio_player.play_sound(audio_clips[audio_clip_key], sound_position)
-		audio_player.connect("sound_finished", self, "remove_sound")
+		#audio_player.play_sound(load("res://assets/audio/test.wav"))
+		audio_player.connect("finished", self, "_sound_finished")
 	else:
 		print ("ERROR: cannot play sound that does not exist in audio_clips!")
 # ------------------------------------
+
+###
+# If this isn't firing, check that your .ogg doesn't show Loop checked under Import
+# (next to Scene tab, top-right of Godot 3.0 editor).
+# If it does, uncheck and click Reimport.
+###
+func _sound_finished(audio):
+	self.remove_sound(audio)
+	self.emit_signal("sound_finished")
 
 func remove_sound(audio):
 	var index = audio_instances.find(audio)
