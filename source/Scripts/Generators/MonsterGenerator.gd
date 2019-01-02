@@ -3,7 +3,7 @@ extends Node
 const Monster = preload("res://Entities/Battle/Monster.gd")
 const SpotFinder = preload("res://Scripts/Maps/SpotFinder.gd")
 
-const MONSTER_DATA = preload("res://Data/Monsterdata.gd").MONSTER_DATA
+const MONSTER_DATA = preload("res://Data/MonsterData.gd").MONSTER_DATA
 
 const NUM_MONSTERS = [4, 5] # May not get this much if we can't find empty spots
 const _MAX_EMPTY_SPOT_CHECKS = 1000 # Try 1000 times to find an empty spot. Don't freeze, move on.
