@@ -4,6 +4,7 @@ const AreaMap = preload("res://Entities/AreaMap.gd")
 const DictionaryHelper = preload("res://Scripts/DictionaryHelper.gd")
 const MapDestination = preload("res://Entities/MapDestination.gd")
 const PlayerData = preload("res://Entities/PlayerData.gd")
+const Quest = preload("res://Entities/Quest.gd")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 # When I implemented this, as saves were then, this is what we got:
@@ -43,6 +44,7 @@ static func save(save_id):
 		transition = to_json(Globals.transition_used.to_dict())
 	
 	var world_areas = to_json(Globals.world_areas) # Array of strings
+	var quest = to_json(Globals.quest.to_dict())
 	
 	# TODO: delete
 	var sequence_difficulty = str(Globals.sequence_trigger_difficulty)
@@ -60,6 +62,7 @@ static func save(save_id):
 	save_game.store_line(transition)
 	save_game.store_line(sequence_difficulty) # TODO: delete
 	save_game.store_line(world_areas)
+	save_game.store_line(quest)
 	
 	save_game.close()
 
@@ -81,6 +84,7 @@ static func load(save_id, tree):
 	var transition_data = parse_json(save_game.get_line())
 	var sequence_difficulty = int(save_game.get_line()) # TODO: delete
 	var world_areas = parse_json(save_game.get_line())
+	var quest_data = parse_json(save_game.get_line())
 	
 	save_game.close()
 	
@@ -106,6 +110,7 @@ static func load(save_id, tree):
 	
 	Globals.sequence_trigger_difficulty = sequence_difficulty # TODO: delete
 	Globals.world_areas = world_areas
+	Globals.quest = Quest.from_dict(quest_data)
 
 static func _get_path(save_id):
 	return "user://save-" + str(save_id) + ".save"

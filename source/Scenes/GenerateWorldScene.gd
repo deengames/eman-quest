@@ -2,14 +2,17 @@ extends Node2D
 
 const AreaMap = preload("res://Entities/AreaMap.gd")
 const AreaType = preload("res://Scripts/Enums/AreaType.gd")
+const Boss = preload("res://Entities/Battle/Boss.gd")
 const CaveGenerator = preload("res://Scripts/Generators/CaveGenerator.gd")
 const DungeonGenerator = preload("res://Scripts/Generators/DungeonGenerator.gd")
 const EndGameMap = preload("res://Scenes/Maps/EndGameMap.tscn")
 const ForestGenerator = preload("res://Scripts/Generators/ForestGenerator.gd")
 const HomeMap = preload("res://Scenes/Maps/Home.tscn")
+const KeyItem = preload("res://Entities/KeyItem.gd")
 const MapDestination = preload("res://Entities/MapDestination.gd")
 const MapLayoutGenerator = preload("res://Scripts/Generators/MapLayoutGenerator.gd")
 const OverworldGenerator = preload("res://Scripts/Generators/OverworldGenerator.gd")
+const Quest = preload("res://Entities/Quest.gd")
 
 # Moving to (map.width / 2, map.height - 1) takes us below the bottom-most tile.
 # Moving up one tile takes us directly on the transition; two tiles, now we're talking.
@@ -36,6 +39,7 @@ func _ready():
 	# Wait just long enough for the scene to display, then generate
 	yield(get_tree().create_timer(0.25), 'timeout')
 	
+	Globals.quest = Quest.new()
 	self._generate_world()
 	$Status.text = "World #" + str(game_number) + " generated!"
 	$StartButton.visible = true
@@ -90,14 +94,44 @@ func _generate_subarea_maps(variation, generator_class, num_submaps):
 		map.grid_y = submap.grid_y
 		map.entrance_from_overworld = entrance
 		
+		self._replace_with_quest_boss_if_necessary(map, variation)
+		
 		submaps.append(map)
 	
 	return submaps
 
+func _replace_with_quest_boss_if_necessary(map, variation):
+	if map.area_type == AreaType.BOSS:
+		var dungeon_type = map.map_type + "/" + variation
+		var dungeon_number = Globals.world_areas.find(dungeon_type)
+		
+		# > -1 is redundant/guaranteed
+		if dungeon_number > -1 and dungeon_number < len(Globals.quest.bosses):
+			var quest_boss = Globals.quest.bosses[dungeon_number]
+			# should be only one key/type/boss. Dictionary of type => data
+			for key in map.bosses.keys():
+				
+				var item_data = quest_boss["drops"]
+				var key_item  = KeyItem.new()
+				key_item.initialize(item_data["name"], item_data["description"])
+				
+				# It's just one element. But it's an array, so ...
+				# This seems weird. Replace all bosses with the quest boss?
+				var replaced_bosses = []
+				for old_boss in map.bosses[key]:
+					var boss = Boss.new()
+					boss.initialize(old_boss.x, old_boss.y, quest_boss, key_item)
+					replaced_bosses.append(boss)
+				
+				print("Replaced " + dungeon_type + " boss with quest boss")
+				map.bosses[key] = replaced_bosses
+
+# TODO: delete
 func _generate_village_name():
 	var options = ['Nahr', 'Bahr', 'Shajar', 'Aqram', 'Hira']
 	return options[randi() % len(options)]
 
+# TODO: delete
 func _generate_boss_type():
 	var options = ['snake', 'black dog', 'gargoyle']
 	return options[randi() % len(options)]
