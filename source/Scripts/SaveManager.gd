@@ -42,6 +42,9 @@ static func save(save_id):
 	if Globals.transition_used != null:
 		transition = to_json(Globals.transition_used.to_dict())
 	
+	var world_areas = to_json(Globals.world_areas) # Array of strings
+	
+	# TODO: delete
 	var sequence_difficulty = str(Globals.sequence_trigger_difficulty)
 	
 	var save_game = File.new()
@@ -55,7 +58,8 @@ static func save(save_id):
 	save_game.store_line(current_map_data)
 	save_game.store_line(player_position)
 	save_game.store_line(transition)
-	save_game.store_line(sequence_difficulty)
+	save_game.store_line(sequence_difficulty) # TODO: delete
+	save_game.store_line(world_areas)
 	
 	save_game.close()
 
@@ -75,7 +79,8 @@ static func load(save_id, tree):
 	var current_map_data = parse_json(save_game.get_line())
 	var player_position_data = parse_json(save_game.get_line())
 	var transition_data = parse_json(save_game.get_line())
-	var sequence_difficulty = int(save_game.get_line())
+	var sequence_difficulty = int(save_game.get_line()) # TODO: delete
+	var world_areas = parse_json(save_game.get_line())
 	
 	save_game.close()
 	
@@ -99,7 +104,8 @@ static func load(save_id, tree):
 	SceneManagement.change_map_to(tree, current_map)
 	Globals.player.position = DictionaryHelper.dict_to_vector2(player_position_data)
 	
-	Globals.sequence_trigger_difficulty = sequence_difficulty
+	Globals.sequence_trigger_difficulty = sequence_difficulty # TODO: delete
+	Globals.world_areas = world_areas
 
 static func _get_path(save_id):
 	return "user://save-" + str(save_id) + ".save"

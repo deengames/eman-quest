@@ -23,6 +23,8 @@ var story_data = {} # set in GenerateWorldScene; boss type, village name, etc.
 var overworld_position
 var current_map # AreaMap instance
 var transition_used # MapDestination instance
+var world_areas # Array of areas, in order. eg. ["Forest/Death", "Cave/Lava", "Forest/Frost"]
+# TODO: delete
 var sequence_trigger_difficulty = 4 # Number of tiles to show in sequence, eg. 4
 # End: persist
 ####

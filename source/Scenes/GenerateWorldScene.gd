@@ -45,6 +45,7 @@ func _start_game():
 	
 func _generate_world():
 	var world_areas = _pick_dungeons_and_variations()
+	Globals.world_areas = world_areas
 #
 	for area in world_areas:
 		var divider_index = area.find('/')
