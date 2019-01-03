@@ -22,8 +22,7 @@ func _play_next_ayah():
 	else:
 		# DONE. Launch game.
 		yield(get_tree().create_timer(1), 'timeout')
-		SceneManagement.change_scene_to(get_tree(), Globals.maps["Home"])
-		get_tree().current_scene.show_intro_events()
+		self._launch_game()
 
 func _display_current_ayah():
 	var audio = self._ayaat[self._currently_playing]
@@ -37,3 +36,11 @@ func _display_current_ayah():
 	var next_ayah_image = self.get_node("intro-" + str(self._currently_playing + 1))
 	next_ayah_image.visible = true
 	#TweenHelper.new().fade_in(self, next_ayah_image, _FADE_TIME_SECONDS).start()
+
+func _on_SkipButton_pressed():
+	self._launch_game()
+	_audio_manager.clean_up_audio()
+	
+func _launch_game():
+	SceneManagement.change_scene_to(get_tree(), Globals.maps["Home"])
+	get_tree().current_scene.show_intro_events()
