@@ -1,5 +1,9 @@
 extends Node2D
 
+const AreaType = preload("res://Scripts/Enums/AreaType.gd")
+const Boss = preload("res://Entities/Battle/Boss.gd")
+const KeyItem = preload("res://Entities/KeyItem.gd")
+
 # Number and order of bosses. Eg. [null, {...}, null] means we have to replace
 # the second boss with the data from this array. [{...}] means replace only first boss.
 const BOSSES = [
@@ -27,6 +31,7 @@ const BOSSES = [
 ]
 
 # Number and order of boss events. Null means ignored/nothing.
+# Note that, like the above, this is *per dungeon* not per boss.
 # This is a limited-context grammar. For current story, we just support a few events:
 # 1) messages (show message boxes with text)
 # 2) run away (flee from player until off-screen)
@@ -57,9 +62,41 @@ const BOSS_EVENTS = [
 	}
 ]
 
+static func add_quest_content_if_applicable(map, variation):
+	var dungeon_type = map.map_type + "/" + variation
+	var dungeon_number = Globals.world_areas.find(dungeon_type)
+	
+	# Add quest boss if there's one specified
+	if map.area_type == AreaType.BOSS:
+		# > -1 is redundant/guaranteed
+		if dungeon_number > -1 and dungeon_number < len(BOSSES):
+			var quest_boss = BOSSES[dungeon_number]
+			# should be only one key/type/boss. Dictionary of type => data
+			for key in map.bosses.keys():
+				var item_data = quest_boss["drops"]
+				var key_item  = KeyItem.new()
+				key_item.initialize(item_data["name"], item_data["description"])
+				
+				# It's just one element. But it's an array, so ...
+				# This seems weird. Replace all bosses with the quest boss?
+				var replaced_bosses = []
+				for old_boss in map.bosses[key]:
+					var boss = Boss.new()
+					# Replace at the old boss' coordinates
+					boss.initialize(old_boss.x, old_boss.y, quest_boss, key_item)
+					
+					if dungeon_number < len(BOSS_EVENTS):
+						var events = BOSS_EVENTS[dungeon_number]
+						if events != null:
+							boss.set_events(events)
+					
+					replaced_bosses.append(boss)
+				
+				map.bosses[key] = replaced_bosses
+
 func to_dict():
 	return {
-		"bosses": self.bosses
+		"bosses": self.BOSSES
 	}
 
 static func from_dict(dict):

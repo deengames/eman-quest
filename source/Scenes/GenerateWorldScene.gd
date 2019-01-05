@@ -94,36 +94,11 @@ func _generate_subarea_maps(variation, generator_class, num_submaps):
 		map.grid_y = submap.grid_y
 		map.entrance_from_overworld = entrance
 		
-		self._add_quest_content_if_applicable(map, variation)
+		Globals.quest.add_quest_content_if_applicable(map, variation)
 		
 		submaps.append(map)
 	
 	return submaps
-
-func _add_quest_content_if_applicable(map, variation):
-	var dungeon_type = map.map_type + "/" + variation
-	var dungeon_number = Globals.world_areas.find(dungeon_type)
-	
-	# Add quest boss if there's one specified
-	if map.area_type == AreaType.BOSS:
-		# > -1 is redundant/guaranteed
-		if dungeon_number > -1 and dungeon_number < len(Globals.quest.BOSSES):
-			var quest_boss = Globals.quest.BOSSES[dungeon_number]
-			# should be only one key/type/boss. Dictionary of type => data
-			for key in map.bosses.keys():
-				var item_data = quest_boss["drops"]
-				var key_item  = KeyItem.new()
-				key_item.initialize(item_data["name"], item_data["description"])
-				
-				# It's just one element. But it's an array, so ...
-				# This seems weird. Replace all bosses with the quest boss?
-				var replaced_bosses = []
-				for old_boss in map.bosses[key]:
-					var boss = Boss.new()
-					boss.initialize(old_boss.x, old_boss.y, quest_boss, key_item)
-					replaced_bosses.append(boss)
-				
-				map.bosses[key] = replaced_bosses
 
 # TODO: delete
 func _generate_village_name():
