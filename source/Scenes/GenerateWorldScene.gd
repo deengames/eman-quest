@@ -94,23 +94,23 @@ func _generate_subarea_maps(variation, generator_class, num_submaps):
 		map.grid_y = submap.grid_y
 		map.entrance_from_overworld = entrance
 		
-		self._replace_with_quest_boss_if_necessary(map, variation)
+		self._add_quest_content_if_applicable(map, variation)
 		
 		submaps.append(map)
 	
 	return submaps
 
-func _replace_with_quest_boss_if_necessary(map, variation):
+func _add_quest_content_if_applicable(map, variation):
+	var dungeon_type = map.map_type + "/" + variation
+	var dungeon_number = Globals.world_areas.find(dungeon_type)
+	
+	# Add quest boss if there's one specified
 	if map.area_type == AreaType.BOSS:
-		var dungeon_type = map.map_type + "/" + variation
-		var dungeon_number = Globals.world_areas.find(dungeon_type)
-		
 		# > -1 is redundant/guaranteed
-		if dungeon_number > -1 and dungeon_number < len(Globals.quest.bosses):
-			var quest_boss = Globals.quest.bosses[dungeon_number]
+		if dungeon_number > -1 and dungeon_number < len(Globals.quest.BOSSES):
+			var quest_boss = Globals.quest.BOSSES[dungeon_number]
 			# should be only one key/type/boss. Dictionary of type => data
 			for key in map.bosses.keys():
-				
 				var item_data = quest_boss["drops"]
 				var key_item  = KeyItem.new()
 				key_item.initialize(item_data["name"], item_data["description"])
@@ -123,7 +123,6 @@ func _replace_with_quest_boss_if_necessary(map, variation):
 					boss.initialize(old_boss.x, old_boss.y, quest_boss, key_item)
 					replaced_bosses.append(boss)
 				
-				print("Replaced " + dungeon_type + " boss with quest boss")
 				map.bosses[key] = replaced_bosses
 
 # TODO: delete

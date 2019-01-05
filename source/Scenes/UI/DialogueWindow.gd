@@ -9,11 +9,20 @@ var _showing_texts = false
 var _texts = []
 var _showing_index = -1
 
+var _map_names = []
+
 func _ready():
 	self.set_process_input(true) # block player from moving by clicking
 	$Avatar/Sprite.texture = null
 	self.speaker_name = ""
 	self.dialogue = ""
+	
+	for map_name in Globals.world_areas:
+		var divider_index = area.find('/')
+		var map_type = area.substr(0, divider_index)
+		var variation = area.substr(divider_index + 1, len(area))
+		var friendly_name = variation + " " + map_type
+		self._map_names.append(friendly_name)
 
 func show_texts(texts):
 	self._texts = texts
@@ -39,6 +48,12 @@ func _input(event):
 		
 func show_text(speaker, content):
 	self.speaker_name = speaker
+	
+	for i in range(len(self._map_names)):
+		var map_token = "{map" + str(i + 1) + "}"
+		var map_name = self._map_names[i - 1]
+		content = content.replace(map_token, map_name)
+	
 	self.dialogue = content
 
 func set_speaker_name(speaker):
