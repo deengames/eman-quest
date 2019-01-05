@@ -18,9 +18,9 @@ func _ready():
 	self.dialogue = ""
 	
 	for map_name in Globals.world_areas:
-		var divider_index = area.find('/')
-		var map_type = area.substr(0, divider_index)
-		var variation = area.substr(divider_index + 1, len(area))
+		var divider_index = map_name.find('/')
+		var map_type = map_name.substr(0, divider_index)
+		var variation = map_name.substr(divider_index + 1, len(map_name))
 		var friendly_name = variation + " " + map_type
 		self._map_names.append(friendly_name)
 
