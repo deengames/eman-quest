@@ -53,6 +53,7 @@ func _on_cancel_destination():
 
 func freeze():
 	self.can_move = false
+	$AnimationPlayer.stop()
 
 func unfreeze():
 	self.can_move = true

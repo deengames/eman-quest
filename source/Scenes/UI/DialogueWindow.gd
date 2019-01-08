@@ -16,7 +16,15 @@ func _ready():
 	$Avatar/Sprite.texture = null
 	self.speaker_name = ""
 	self.dialogue = ""
+	self.z_index = 4096 # always be on top
 	
+	# Center automagically on-screen. Assumes there's a Player entity in this scene.
+	var viewport = get_viewport_rect().size
+	var camera_position = Globals.player.get_node("Camera2D").global_position
+	# Pure magic. This calculation makes no sense to me.
+	self.position = camera_position - (viewport / 4)
+	
+	# parse all map names. for substituting {map<n>} tokens in text.
 	for map_name in Globals.world_areas:
 		var divider_index = map_name.find('/')
 		var map_type = map_name.substr(0, divider_index)

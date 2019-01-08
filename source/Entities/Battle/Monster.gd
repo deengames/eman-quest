@@ -84,7 +84,7 @@ func _physics_process(delta):
 		move_and_slide(velocity) 
 
 func _on_Area2D_body_entered(body):
-	SceneManagement.switch_to_battle_if_touched_player(self, body)
+	SceneManagement.switch_to_battle_if_touched_player(get_tree(), self, body)
 
 func _face_current_direction():
 	var delta = (self._destination - self.position).normalized()

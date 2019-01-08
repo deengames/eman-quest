@@ -58,4 +58,4 @@ static func from_dict(dict):
 	return to_return
 
 func _on_Area2D_body_entered(body):
-	SceneManagement.switch_to_battle_if_touched_player(self, body)
+	SceneManagement.switch_to_battle_if_touched_player(get_tree(), self, body)

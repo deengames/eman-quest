@@ -33,7 +33,10 @@ _sections_unfolded = [ "Font", "Settings" ]
 
 [node name="Node2D" type="Node2D" index="0"]
 
+z_index = 4096
+z_as_relative = false
 script = ExtResource( 1 )
+_sections_unfolded = [ "Z Index" ]
 
 [node name="Avatar" parent="." index="0" instance=ExtResource( 2 )]
 

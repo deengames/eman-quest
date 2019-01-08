@@ -6,7 +6,8 @@ const KeyItem = preload("res://Entities/KeyItem.gd")
 
 # Number and order of bosses. Eg. [null, {...}, null] means we have to replace
 # the second boss with the data from this array. [{...}] means replace only first boss.
-const BOSSES = [
+# Can't be const because we have to set it when we load game.
+var bosses = [
 	{
 		"type": "Bandit",
 		"health": 300,
@@ -65,12 +66,13 @@ const BOSS_EVENTS = [
 static func add_quest_content_if_applicable(map, variation):
 	var dungeon_type = map.map_type + "/" + variation
 	var dungeon_number = Globals.world_areas.find(dungeon_type)
+	var bosses = Globals.quest.bosses
 	
 	# Add quest boss if there's one specified
 	if map.area_type == AreaType.BOSS:
 		# > -1 is redundant/guaranteed
-		if dungeon_number > -1 and dungeon_number < len(BOSSES):
-			var quest_boss = BOSSES[dungeon_number]
+		if dungeon_number > -1 and dungeon_number < len(bosses):
+			var quest_boss = bosses[dungeon_number]
 			# should be only one key/type/boss. Dictionary of type => data
 			for key in map.bosses.keys():
 				var item_data = quest_boss["drops"]
@@ -96,7 +98,7 @@ static func add_quest_content_if_applicable(map, variation):
 
 func to_dict():
 	return {
-		"bosses": self.BOSSES
+		"bosses": self.bosses
 	}
 
 static func from_dict(dict):
