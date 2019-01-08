@@ -130,10 +130,11 @@ static func switch_to_battle_if_touched_player(tree, monster, body):
 			Globals.battle_spoils = Globals.current_monster.key_item
 		
 		# Only used for bosses, but ya3ne, global code
-		var event_manager = EventManagement.new()
-		event_manager.show_prebattle_events(tree, monster)
-		
+		var event_manager = EventManagement.new(tree)
+		# Sets up to show post-battle events if applicable
+		event_manager.show_prebattle_events(monster)
 		yield(event_manager, "events_done")
+		
 		var battle_scene = StreamlinedRecallBattleScene.instance()
 		battle_scene.set_monster_data(monster.data_object["data"].duplicate())
 		change_scene_to(monster.get_tree(), battle_scene)

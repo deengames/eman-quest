@@ -11,6 +11,7 @@ const WORLD_WIDTH_IN_TILES = 30 # 1920/64
 const WORLD_HEIGHT_IN_TILES = 18 # 1080/64
 
 signal clicked_on_map(position)
+signal battle_over
 
 var player # current player instance. Used for collision detection mostly.
 
