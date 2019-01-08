@@ -2,8 +2,8 @@ extends Node
 
 const AreaType = preload("res://Scripts/Enums/AreaType.gd")
 const Boss = preload("res://Entities/Battle/Boss.gd")
-const DialogueWindow = preload("res://Scenes/UI/DialogueWindow.tscn")
 const EndGameMap = preload("res://Scenes/Maps/EndGameMap.tscn")
+const EventManagement = preload("res://Scripts/EventManagement.gd")
 const HomeMap = preload("res://Scenes/Maps/Home.tscn")
 const MapNameLabel = preload("res://Scenes/UI/MapNameLabel.tscn")
 const PopulatedMapScene = preload("res://Scenes/PopulatedMapScene.tscn")
@@ -130,26 +130,10 @@ static func switch_to_battle_if_touched_player(tree, monster, body):
 			Globals.battle_spoils = Globals.current_monster.key_item
 		
 		# Only used for bosses, but ya3ne, global code
-		# TODO: move into some sort of global event-processing class
-		if "events" in monster and monster.events != null and len(monster.events) > 0:
-			if monster.events.has("pre-fight"):
-				
-				Globals.player.freeze()
-				var dialog_window = DialogueWindow.instance()
-				
-				var root = tree.get_root()
-				var current_scene = root.get_child(root.get_child_count() - 1)
-				current_scene.add_child(dialog_window)
-				
-				for event in monster.events["pre-fight"]:
-					if event.has("messages"):
-						# Pause here until we get "shown all" signal
-						dialog_window.show_texts(event["messages"])
-						yield(dialog_window, "shown_all")
-				
-				Globals.player.unfreeze()
-				current_scene.remove_child(dialog_window)
-				
+		var event_manager = EventManagement.new()
+		event_manager.show_prebattle_events(tree, monster)
+		
+		yield(event_manager, "events_done")
 		var battle_scene = StreamlinedRecallBattleScene.instance()
 		battle_scene.set_monster_data(monster.data_object["data"].duplicate())
 		change_scene_to(monster.get_tree(), battle_scene)
