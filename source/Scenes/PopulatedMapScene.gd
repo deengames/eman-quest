@@ -8,10 +8,13 @@ const AutoTileTilesets = preload("res://Tilesets/AutoTileTilesets.tscn")
 const Boss = preload("res://Entities/Battle/Boss.tscn")
 const MapWarp = preload("res://Entities/MapWarp.tscn")
 const Monster = preload("res://Entities/Battle/Monster.tscn")
+const MonsterGenerator = preload("res://Scripts/Generators/MonsterGenerator.gd")
 const Player = preload("res://Entities/Player.tscn")
+const Quest = preload("res://Entities/Quest.gd")
 const TreasureChest = preload("res://Entities/TreasureChest.tscn")
 const TilesetMapper = preload("res://Scripts/TilesetMapper.gd")
-const MonsterGenerator = preload("res://Scripts/Generators/MonsterGenerator.gd")
+
+const _NPC_MAX_DISTANCE_TO_BOSS = 4
 
 var map # area map
 var _monsters = {} # Type => pixel coordinates of actual monster scenes/entities
@@ -162,6 +165,8 @@ func _add_monsters():
 		
 		self._monsters[monster_type] = instances
 	
+	######### bosses
+	
 	for boss_type in map.bosses.keys():
 		var bosses = []
 		for boss in map.bosses[boss_type]:
@@ -171,11 +176,42 @@ func _add_monsters():
 				self.add_child(instance)
 				bosses.append(instance)
 				
+				if boss.attach_quest_npcs != null:
+					var all_npcs = []
+					for npc in boss.attach_quest_npcs:
+						var scene_constructor = Quest.NPCS[npc]
+						var npc_instance = scene_constructor.instance()
+						self.add_child(npc_instance)
+						
+						var npc_position = _find_spot_near_boss(boss, all_npcs)
+						all_npcs.append(npc_position)
+						npc_instance.position = Vector2(npc_position.x * Globals.TILE_WIDTH, npc_position.y * Globals.TILE_HEIGHT)
+						
 		self._bosses[boss_type] = bosses
 	
 	# Persist on save
 	map.monsters = self._monsters
 
+
+# Returns coordinates near the boss.
+func _find_spot_near_boss(boss, blocked_coordinates):
+	var ground_tilemap = self.map.tile_data[0]
+	
+	# Find a nearby empty spot. Start under and to the left of the boss,
+	# and iterate sideways, then upwards.
+	var x = (boss.x - Globals.TILE_WIDTH) / Globals.TILE_WIDTH
+	var y = (boss.y / Globals.TILE_HEIGHT) + 2 # boss is 2 tiles high
+	
+	for tile_x in range(_NPC_MAX_DISTANCE_TO_BOSS):
+		for tile_y in range(_NPC_MAX_DISTANCE_TO_BOSS):
+			var tx = x + tile_x
+			var ty = y - tile_y
+			# on the map, not on the boss (2x2 tiles), and not already blocked by another NPC
+			if tx >= 0 and tx < self.map.tiles_wide and ty >= 0 and ty < self.map.tiles_high and \
+			not Vector2(tx, ty) in blocked_coordinates and ground_tilemap.get(tx, ty) in ["Ground", "Grass"] and \
+			tx != boss.x and ty != boss.y and tx != boss.x + 1 and ty != boss.y + 1:
+				return Vector2(tx, ty)
+			
 func _populate_treasure_chests():
 	for data in self.map.treasure_chests:
 		var instance = TreasureChest.instance()

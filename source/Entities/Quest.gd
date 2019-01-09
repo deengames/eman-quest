@@ -4,6 +4,10 @@ const AreaType = preload("res://Scripts/Enums/AreaType.gd")
 const Boss = preload("res://Entities/Battle/Boss.gd")
 const KeyItem = preload("res://Entities/KeyItem.gd")
 
+const NPCS = {
+	"Mom": preload("res://Entities/MapEntities/Mom.tscn")
+}
+
 # Number and order of bosses. Eg. [null, {...}, null] means we have to replace
 # the second boss with the data from this array. [{...}] means replace only first boss.
 # Can't be const because we have to set it when we load game.
@@ -29,6 +33,14 @@ var bosses = [
 			"description": "A small red square of cloth decorated  with white circles"
 		}
 	},
+]
+
+# Again, not const because of saving. Each entry represents dungeon N, array to attach.
+# "load" sucks with export, so preload up top and reference here.
+var attach_quest_npcs = [
+	["Mom"],
+	["Bandit"],
+	["FinalBoss", "Dad"]
 ]
 
 # Number and order of boss events. Null means ignored/nothing.
@@ -67,6 +79,7 @@ static func add_quest_content_if_applicable(map, variation):
 	var dungeon_type = map.map_type + "/" + variation
 	var dungeon_number = Globals.world_areas.find(dungeon_type)
 	var bosses = Globals.quest.bosses
+	var npcs = Globals.quest.attach_quest_npcs
 	
 	# Add quest boss if there's one specified
 	if map.area_type == AreaType.BOSS:
@@ -92,16 +105,21 @@ static func add_quest_content_if_applicable(map, variation):
 						if events != null:
 							boss.set_events(events)
 					
+					if dungeon_number < len(npcs):
+						boss.attach_quest_npcs = npcs[dungeon_number]
+					
 					replaced_bosses.append(boss)
 				
 				map.bosses[key] = replaced_bosses
 
 func to_dict():
 	return {
-		"bosses": self.bosses
+		"bosses": self.bosses,
+		"attach_quest_npcs": self.attach_quest_npcs
 	}
 
 static func from_dict(dict):
 	var to_return = new()
 	to_return.bosses = dict["bosses"]
+	to_return.attach_quest_npcs = dict["attach_quest_npcs"]
 	return to_return

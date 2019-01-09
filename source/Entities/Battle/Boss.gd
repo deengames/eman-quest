@@ -12,7 +12,9 @@ var y = 0
 var is_alive = true
 var data_object = null # Boss.new() instance if we're a packed scene
 var key_item
+# quest stuff
 var events = [] setget set_events
+var attach_quest_npcs = []
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
@@ -31,6 +33,7 @@ func initialize_from(data_object):
 	self.position.y = data_object.y
 	self.key_item = data_object.key_item
 	self.events = data_object.events
+	self.attach_quest_npcs = data_object.attach_quest_npcs
 	var type = data_object.data["type"].replace(' ', '')
 	$Sprite.texture = load("res://assets/images/monsters/" + type + ".png")
 
@@ -46,7 +49,8 @@ func to_dict():
 		"is_alive": self.is_alive,
 		"key_item": self.key_item.to_dict(),
 		"data": self.data,
-		"events": self.events
+		"events": self.events,
+		"attach_quest_npcs": self.attach_quest_npcs
 	}
 
 static func from_dict(dict):
@@ -55,6 +59,7 @@ static func from_dict(dict):
 	to_return.is_alive = dict["is_alive"]
 	to_return.data_object = dict["data"]
 	to_return.events = dict["events"]
+	to_return.attach_quest_npcs = dict["attach_quest_npcs"]
 	return to_return
 
 func _on_Area2D_body_entered(body):
