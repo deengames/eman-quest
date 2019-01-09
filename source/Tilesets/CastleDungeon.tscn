@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 points = PoolVector2Array( 0, 64, 0, 16, 16, 0, 48, 0, 64, 16, 64, 64 )
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" index="0"]
 
 [node name="Ground" type="Sprite" parent="." index="0"]
 
