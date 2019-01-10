@@ -90,6 +90,8 @@ func generate(submap, transitions, variation_name):
 	if submap.area_type == AreaType.BOSS:
 		# Brute-force: find the farthest land tile from the entrance. But, only if the
 		# distance is within N tiles. Wandering the entire breadth of the dungeon is madness.
+		
+		# BUG: what if there's a chest there?
 		var max_distance = 5 * 5
 		
 		var entrance_transition = transitions[0]
