@@ -5,7 +5,7 @@
 [ext_resource path="res://Entities/MapEntities/Dad.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Entities/MapWarp.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Entities/MapEntities/Mom.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Entities/MapEntities/Bandit.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Entities/MapEntities/Bandit/Bandit.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/UI/DialogueWindow.tscn" type="PackedScene" id=7]
 
 [node name="Node2D" type="Node2D"]
@@ -122,7 +122,7 @@ _sections_unfolded = [ "Transform" ]
 position = Vector2( 512, 320 )
 _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
-[node name="Bandit" parent="Intro" index="1" instance=ExtResource( 6 )]
+[node name="Bandit-Intro" parent="Intro" index="1" instance=ExtResource( 6 )]
 
 position = Vector2( 512, 384 )
 _sections_unfolded = [ "Transform" ]
@@ -130,6 +130,6 @@ _sections_unfolded = [ "Transform" ]
 [node name="StoryWindow" parent="Intro" index="2" instance=ExtResource( 7 )]
 
 position = Vector2( 165.348, 198.752 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Z Index" ]
 
 

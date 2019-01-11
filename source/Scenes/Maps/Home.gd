@@ -32,7 +32,7 @@ func _conclude_intro_events():
 	# Play sound here
 	
 	var mama = $Intro/Mom
-	var bandit = $Intro/Bandit
+	var bandit = self.get_node("Intro/Bandit-Intro")
 	bandit.run("Down", 4) # run off-screen
 	mama.visible = false
 	
