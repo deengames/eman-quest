@@ -141,6 +141,12 @@ func _add_monsters():
 				monsters.remove(monsters.find(Globals.current_monster))
 			elif Globals.current_monster.IS_BOSS:
 				Globals.current_monster.is_alive = false
+				if Globals.current_monster.replace_with_npc != null:
+					var npc_class = Globals.quest.NPCS[Globals.current_monster.replace_with_npc]
+					var replacement = npc_class.instance()
+					replacement.position.x = Globals.current_monster.x
+					replacement.position.y = Globals.current_monster.y
+					self.add_child(replacement)
 			
 		Globals.current_monster = null
 		Globals.previous_monsters = null

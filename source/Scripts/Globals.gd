@@ -45,8 +45,8 @@ var won_battle = false
 var battle_spoils = null # KeyItem
 # Coordinates of monsters on-map before battle
 var previous_monsters = null # type => pixel positions
-var current_monster = null # monster.data_object
-var current_monster_type = ""
+var current_monster = null # monster.data_object. Clears after battle.
+var current_monster_type = "" # DOES/SHOULD NOT clear after battle, used for post-fight quest events!
 
 func _ready():
 	pass

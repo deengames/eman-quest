@@ -1,11 +1,17 @@
 extends Node2D
 
+###
+# Was supposed to represent a single quest. With all quest data encapsulated.
+# Lots of stuff are variables instead of consts so we can deserialize them.
+###
+
 const AreaType = preload("res://Scripts/Enums/AreaType.gd")
 const Boss = preload("res://Entities/Battle/Boss.gd")
 const KeyItem = preload("res://Entities/KeyItem.gd")
 
 const NPCS = {
-	"Mom": preload("res://Entities/MapEntities/Mom.tscn")
+	"Mom": preload("res://Entities/MapEntities/Mom.tscn"),
+	"Bandit-Dungeon1": preload("res://Entities/MapEntities/Bandit/Dungeon1.tscn")
 }
 
 # Number and order of bosses. Eg. [null, {...}, null] means we have to replace
@@ -36,12 +42,16 @@ var bosses = [
 ]
 
 # Again, not const because of saving. Each entry represents dungeon N, array to attach.
+# These NPCs show up around the boss, before you fight him.
 # "load" sucks with export, so preload up top and reference here.
 var attach_quest_npcs = [
 	["Mom"],
 	["Bandit"],
 	["FinalBoss", "Dad"]
 ]
+
+# What to replace the boss with when he dies and player returns to the map.
+var replacement_npcs = ["Bandit-Dungeon1"]
 
 # Number and order of boss events. Null means ignored/nothing.
 # Note that, like the above, this is *per dungeon* not per boss.
@@ -78,8 +88,10 @@ const BOSS_EVENTS = [
 static func add_quest_content_if_applicable(map, variation):
 	var dungeon_type = map.map_type + "/" + variation
 	var dungeon_number = Globals.world_areas.find(dungeon_type)
+	
 	var bosses = Globals.quest.bosses
 	var npcs = Globals.quest.attach_quest_npcs
+	var replacement_npcs = Globals.quest.replacement_npcs
 	
 	# Add quest boss if there's one specified
 	if map.area_type == AreaType.BOSS:
@@ -107,6 +119,9 @@ static func add_quest_content_if_applicable(map, variation):
 					
 					if dungeon_number < len(npcs):
 						boss.attach_quest_npcs = npcs[dungeon_number]
+					
+					if dungeon_number < len(replacement_npcs):
+						boss.replace_with_npc = replacement_npcs[dungeon_number]
 					
 					replaced_bosses.append(boss)
 				
