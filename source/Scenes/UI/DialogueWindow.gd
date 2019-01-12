@@ -12,7 +12,6 @@ var _showing_index = -1
 var _map_names = []
 
 func _ready():
-	self.set_process_input(true) # block player from moving by clicking
 	$Avatar/Sprite.texture = null
 	self.speaker_name = ""
 	self.dialogue = ""
@@ -34,8 +33,11 @@ func _ready():
 		self._map_names.append(friendly_name)
 
 func show_texts(texts):
+	self.set_process_input(true) # block player from moving by clicking
 	self._texts = texts
-	_showing_texts = true
+	self._showing_texts = true
+	self._showing_index = -1
+	self.visible = true
 	# Each text is a tuple of (speaker, content)
 	# Pressing space or clicking advances to the next one.
 	self._show_next_text()
@@ -52,8 +54,8 @@ func _input(event):
 			else:
 				# Last scene DONE, close
 				self._showing_texts = false
-				self.emit_signal("shown_all")
 				self.visible = false
+				self.emit_signal("shown_all")
 		
 func show_text(speaker, content):
 	self.speaker_name = speaker
