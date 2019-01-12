@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Entities/MapEntities/Bandit/Bandit.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Entities/MapEntities/Bandit/Dungeon1.gd" type="Script" id=2]
+[ext_resource path="res://assets/images/npcs-dead.png" type="Texture" id=3]
 
 [node name="KinematicBody2D" index="0" instance=ExtResource( 1 )]
 
@@ -10,5 +11,14 @@ script = ExtResource( 2 )
 [node name="Sprite" parent="." index="0"]
 
 region_rect = Rect2( 64, 0, 64, 64 )
+
+[node name="DeadSprite" type="Sprite" parent="." index="1"]
+
+visible = false
+texture = ExtResource( 3 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 128, 64, 64 )
+_sections_unfolded = [ "Offset", "Region" ]
 
 

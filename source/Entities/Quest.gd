@@ -63,14 +63,14 @@ const BOSS_EVENTS = [
 		"pre-fight": [
 			{ "messages": [
 				["Bandit", "Rats! How did you find me so fast?"],
-				["Mama", "I knew you would find us!"],
+				["Mama", "I never lost faith that you would find us!"],
 				["Bandit", "No matter! Your days are over, punk!"]
 			] }
 		],
 		"post-fight": [
 			{ "messages": [
 				["Bandit", "Ugh! You're stronger than you look, runt!"],
-				["Bandit", "Forget this! I'm outta here!"]
+				["Bandit", "You may have defeated me, but the boss already got what he needed from {map1}!"]
 			] },
 			{ "run away": "Bandit" },
 			{ "messages": [

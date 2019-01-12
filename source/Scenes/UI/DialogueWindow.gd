@@ -62,7 +62,7 @@ func show_text(speaker, content):
 	
 	for i in range(len(self._map_names)):
 		var map_token = "{map" + str(i + 1) + "}"
-		var map_name = self._map_names[i - 1]
+		var map_name = self._map_names[i]
 		content = content.replace(map_token, map_name)
 	
 	self.dialogue = content
