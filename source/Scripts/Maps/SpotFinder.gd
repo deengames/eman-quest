@@ -14,13 +14,13 @@ static func find_empty_spot(map_width, map_height, ground_map, object_map, occup
 			[x, y] in occupied_spots or
 			# Trees technically have empty space around them, so make sure
 			# we're not in one of those tiles.
-			not is_area_clear(object_map, x, y, x + 1, y + 1)  or
+			not is_area_clear(object_map, x - 1, y - 1, x, y)  or
 			# current ground tile isn't in walkable_tiles
 			not ground_map.get(x, y) in Globals.WALKABLE_TILES
 		):
 			x = Globals.randint(0, map_width - 1)
 			y = Globals.randint(0, map_height - 1)
-	
+			
 	return [x, y]
 
 static func find_empty_isolated_spot(map_width, map_height, object_map, occupied_spots, max_tries = 99999999):
