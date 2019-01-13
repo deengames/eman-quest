@@ -26,11 +26,10 @@ var current_map # AreaMap instance
 var transition_used # MapDestination instance
 var world_areas # Array of areas, in order. eg. ["Forest/Death", "Cave/Lava", "Forest/Frost"]
 var quest # Quest instance
-
-# TODO: delete
-var sequence_trigger_difficulty = 4 # Number of tiles to show in sequence, eg. 4
 # End: persist
 ####
+
+const WALKABLE_TILES = ['Grass', 'Dirt', 'Ground']
 
 # Used for positioning when changing maps. Probably does not need to be persisted
 # because the value is only set very momentarily when the player steps on a

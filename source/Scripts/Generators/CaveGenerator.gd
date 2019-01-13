@@ -250,7 +250,7 @@ func _generate_treasure_chests():
 
 	while num_chests > 0:
 		var spot = SpotFinder.find_empty_spot(map_width, map_height,
-			self._ground_tilemap, empty_map, ["Ground"], chests_coordinates)
+			self._ground_tilemap, empty_map, chests_coordinates)
 
 		var type = types[randi() % len(types)]
 		var stat = stats[type]

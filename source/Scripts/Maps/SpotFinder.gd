@@ -5,20 +5,19 @@ const TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 const _PADDING_FROM_MAP_EDGES = 5
 const _ISOLATION_DISTANCE_TILES = 10 # n-tile radius
 
-static func find_empty_spot(map_width, map_height, ground_map, object_map, walkable_tiles, occupied_spots):
+static func find_empty_spot(map_width, map_height, ground_map, object_map, occupied_spots):
 	var x = Globals.randint(_PADDING_FROM_MAP_EDGES, map_width - _PADDING_FROM_MAP_EDGES - 1)
 	var y = Globals.randint(_PADDING_FROM_MAP_EDGES, map_height - _PADDING_FROM_MAP_EDGES - 1)
 	
-	while (object_map.get(x, y) != null or
-		occupied_spots.find([x, y]) > -1 or
-		# Trees technically have empty space around them, so make sure
-		# we're not in one of those tiles.
-		object_map.get(x, y) != null or
-		object_map.get(x - 1, y) != null or
-		object_map.get(x, y - 1) != null or
-		object_map.get(x - 1, y - 1) != null or
-		# current ground tile isn't in walkable_tiles
-		walkable_tiles.find(ground_map.get(x, y)) == -1):
+	while (
+			object_map.get(x, y) != null or
+			[x, y] in occupied_spots or
+			# Trees technically have empty space around them, so make sure
+			# we're not in one of those tiles.
+			not is_area_clear(object_map, x, y, x + 1, y + 1)  or
+			# current ground tile isn't in walkable_tiles
+			not ground_map.get(x, y) in Globals.WALKABLE_TILES
+		):
 			x = Globals.randint(0, map_width - 1)
 			y = Globals.randint(0, map_height - 1)
 	
@@ -27,13 +26,15 @@ static func find_empty_spot(map_width, map_height, ground_map, object_map, walka
 static func find_empty_isolated_spot(map_width, map_height, object_map, occupied_spots, max_tries = 99999999):
 	var candidate = null
 	var iterations = 0
+	
+	# For placing monsters or something. Ground map doesn't matter here. Other checks do.
 	var empty_map = TwoDimensionalArray.new(map_width, map_height)
+	for y in range(map_height):
+		for x in range(map_width):
+			empty_map.set(x, y, Globals.WALKABLE_TILES[0])
 	
 	while iterations < max_tries: # returns on success
-		# Asking for all the params we pass in to find_empty_spot is madness. We don't need them.
-		# Instead, just create/fake stuff. Like an empty ground map, and passing [null] allows
-		# the check of "null in [null]" when get(x, y) is null (empty map).
-		candidate = find_empty_spot(map_width, map_height, empty_map, object_map, [null], occupied_spots)
+		candidate = find_empty_spot(map_width, map_height, empty_map, object_map, occupied_spots)
 
 		iterations += 1
 		var found_spot = true
@@ -46,3 +47,12 @@ static func find_empty_isolated_spot(map_width, map_height, object_map, occupied
 		
 		if found_spot:
 			return candidate
+
+# Inclusive of range
+static func is_area_clear(map, start_x, start_y, end_x, end_y):
+	for y in range(start_y, end_y + 1):
+		for x in range(start_x, end_x + 1):
+			if map.get(x, y) != null:
+				return false
+	
+	return true

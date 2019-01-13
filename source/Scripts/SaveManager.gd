@@ -46,9 +46,6 @@ static func save(save_id):
 	var world_areas = to_json(Globals.world_areas) # Array of strings
 	var quest = to_json(Globals.quest.to_dict())
 	
-	# TODO: delete
-	var sequence_difficulty = str(Globals.sequence_trigger_difficulty)
-	
 	var save_game = File.new()
 	# Use gzip because 2D arrays of ["Grass", "Grass", ...] will compres well
 	save_game.open_compressed(_get_path(save_id), File.WRITE, _SAVE_COMPRESSION_MODE)
@@ -60,7 +57,6 @@ static func save(save_id):
 	save_game.store_line(current_map_data)
 	save_game.store_line(player_position)
 	save_game.store_line(transition)
-	save_game.store_line(sequence_difficulty) # TODO: delete
 	save_game.store_line(world_areas)
 	save_game.store_line(quest)
 	
@@ -82,7 +78,6 @@ static func load(save_id, tree):
 	var current_map_data = parse_json(save_game.get_line())
 	var player_position_data = parse_json(save_game.get_line())
 	var transition_data = parse_json(save_game.get_line())
-	var sequence_difficulty = int(save_game.get_line()) # TODO: delete
 	var world_areas = parse_json(save_game.get_line())
 	var quest_data = parse_json(save_game.get_line())
 	
@@ -108,7 +103,6 @@ static func load(save_id, tree):
 	SceneManagement.change_map_to(tree, current_map)
 	Globals.player.position = DictionaryHelper.dict_to_vector2(player_position_data)
 	
-	Globals.sequence_trigger_difficulty = sequence_difficulty # TODO: delete
 	Globals.world_areas = world_areas
 	Globals.quest = Quest.from_dict(quest_data)
 
