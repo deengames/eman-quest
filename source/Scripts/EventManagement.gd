@@ -1,8 +1,11 @@
 extends Node2D
 
+const AlphaFluctuator = preload("res://Scripts/AlphaFluctuator.gd")
 const DialogueWindow = preload("res://Scenes/UI/DialogueWindow.tscn")
 
 signal events_done
+
+const DEATH_TIME_SECONDS = 1.5
 
 var _tree
 var _post_fight_events
@@ -10,6 +13,9 @@ var _post_fight_events
 func _init(tree):
 	self._tree = tree
 
+"""
+Shows pre-battle events for a monster. Also sets up post-battle events (if they exist).
+"""
 func show_prebattle_events(monster):
 	if "events" in monster and monster.events != null and len(monster.events) > 0:
 		if monster.events.has("pre-fight"):
@@ -35,14 +41,38 @@ func show_prebattle_events(monster):
 		# Also emits immediately so consumers don't need to care if there are any events or not
 		self.emit_signal("events_done", monster)
 
-###
-# Process a single event, like a message.
-###
+"""
+Process a single event, like a message.
+"""
 func _process_event(dialog_window, event):
 	if event.has("messages"):
 		# Pause here until we get "shown all" signal
 		dialog_window.show_texts(event["messages"])
 		return "shown_all"
+	elif event.has("die"):
+		var target_name = event["die"]
+		var target = null
+		
+		var children = self._get_current_scene().get_children()
+		for child in children:
+			if child.name == target_name:
+				target = child
+				break
+		
+		if target != null: # found the node to kill
+			# Wait ~1.5s for this to complete
+			var fluctuator = AlphaFluctuator.new(target)
+			self._get_current_scene().add_child(fluctuator)
+			# We can't yield here because we yield elsewhere. This is not done synchronously.
+			# C'est la vie.
+			fluctuator.run(DEATH_TIME_SECONDS)
+			self.remove_child(target)
+			self.remove_child(fluctuator)
+		else:
+			print("WARNING: Can't find node named {name} to kill off!".format({name = target_name}))
+	else:
+		print("Not sure how to process event: {e}".format({e = event}))
+		assert(false)
 
 func _on_battle_over():
 	if Globals.won_battle:

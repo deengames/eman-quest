@@ -1,9 +1,9 @@
 extends Node2D
 
-###
+"""
 # Was supposed to represent a single quest. With all quest data encapsulated.
 # Lots of stuff are variables instead of consts so we can deserialize them.
-###
+"""
 
 const AreaType = preload("res://Scripts/Enums/AreaType.gd")
 const Boss = preload("res://Entities/Battle/Boss.gd")
@@ -72,15 +72,14 @@ const BOSS_EVENTS = [
 				["Bandit", "Ugh! You're stronger than you look, runt!"],
 				["Bandit", "You may have defeated me, but the boss already got what he needed from {map1}!"]
 			] },
-			{ "run away": "Bandit" },
+			{ "die": "Bandit-Dungeon1" },
 			{ "messages": [
 				["Hero", "Are you okay? Did they hurt you?"],
 				["Mama", "I'm fine. Don't worry about me, you have to stop them!"],
 				["Mama", "I heard them saying they're summoning a monster from {map2} ..."],
 				["Mama", "Go stop them! I'll be okay to get home by myself."],
 				["Hero", "Okay. InshaAllah (God willing), we will catch them."]
-			] },
-			{ "run away": "Mama" }
+			] }
 		]
 	}
 ]

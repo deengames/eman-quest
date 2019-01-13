@@ -147,6 +147,7 @@ func _add_monsters():
 					replacement.position.x = Globals.current_monster.x
 					replacement.position.y = Globals.current_monster.y
 					self.add_child(replacement)
+					replacement.name = Globals.current_monster.replace_with_npc
 			
 		Globals.current_monster = null
 		Globals.previous_monsters = null
