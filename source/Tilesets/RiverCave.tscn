@@ -17,7 +17,15 @@ centered = false
 region_rect = Rect2( 0, 0, 64, 64 )
 _sections_unfolded = [ "Offset", "Region" ]
 
-[node name="Water" type="Sprite" parent="." index="1"]
+[node name="Wall" type="Sprite" parent="." index="1"]
+
+visible = false
+texture = ExtResource( 1 )
+centered = false
+region_rect = Rect2( 0, 0, 64, 64 )
+_sections_unfolded = [ "Offset", "Region" ]
+
+[node name="Water" type="Sprite" parent="." index="2"]
 
 editor/display_folded = true
 position = Vector2( 70, 0 )
@@ -44,7 +52,7 @@ position = Vector2( 32, 32 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="WaterRock1" type="Sprite" parent="." index="2"]
+[node name="WaterRock1" type="Sprite" parent="." index="3"]
 
 editor/display_folded = true
 position = Vector2( 0, 70 )
@@ -71,7 +79,7 @@ position = Vector2( 32, 32 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="WaterRock2" type="Sprite" parent="." index="3"]
+[node name="WaterRock2" type="Sprite" parent="." index="4"]
 
 editor/display_folded = true
 position = Vector2( 73, 70 )
@@ -98,7 +106,7 @@ position = Vector2( 32, 32 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="WaterRock3" type="Sprite" parent="." index="4"]
+[node name="WaterRock3" type="Sprite" parent="." index="5"]
 
 editor/display_folded = true
 position = Vector2( 143, 70 )
@@ -125,7 +133,7 @@ position = Vector2( 32, 32 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="WaterRock4" type="Sprite" parent="." index="5"]
+[node name="WaterRock4" type="Sprite" parent="." index="6"]
 
 editor/display_folded = true
 position = Vector2( 213, 70 )
@@ -152,7 +160,7 @@ position = Vector2( 32, 32 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Pebbles1" type="Sprite" parent="." index="6"]
+[node name="Pebbles1" type="Sprite" parent="." index="7"]
 
 position = Vector2( 0, 130 )
 texture = ExtResource( 1 )
@@ -161,7 +169,7 @@ region_enabled = true
 region_rect = Rect2( 320, 192, 64, 64 )
 _sections_unfolded = [ "Offset", "Region" ]
 
-[node name="Pebbles2" type="Sprite" parent="." index="7"]
+[node name="Pebbles2" type="Sprite" parent="." index="8"]
 
 position = Vector2( 70, 130 )
 texture = ExtResource( 1 )
@@ -170,7 +178,7 @@ region_enabled = true
 region_rect = Rect2( 384, 192, 64, 64 )
 _sections_unfolded = [ "Offset", "Region" ]
 
-[node name="Pebbles3" type="Sprite" parent="." index="8"]
+[node name="Pebbles3" type="Sprite" parent="." index="9"]
 
 position = Vector2( 150, 130 )
 texture = ExtResource( 1 )
@@ -179,7 +187,7 @@ region_enabled = true
 region_rect = Rect2( 320, 384, 64, 64 )
 _sections_unfolded = [ "Offset", "Region" ]
 
-[node name="ExitDown" type="Sprite" parent="." index="9"]
+[node name="ExitDown" type="Sprite" parent="." index="10"]
 
 position = Vector2( 0, 200 )
 texture = ExtResource( 1 )
@@ -188,7 +196,7 @@ region_enabled = true
 region_rect = Rect2( 0, 64, 64, 64 )
 _sections_unfolded = [ "Offset", "Region" ]
 
-[node name="ExitRight" type="Sprite" parent="." index="10"]
+[node name="ExitRight" type="Sprite" parent="." index="11"]
 
 position = Vector2( 70, 200 )
 texture = ExtResource( 1 )
@@ -197,7 +205,7 @@ region_enabled = true
 region_rect = Rect2( 0, 128, 64, 64 )
 _sections_unfolded = [ "Offset", "Region" ]
 
-[node name="ExitLeft" type="Sprite" parent="." index="11"]
+[node name="ExitLeft" type="Sprite" parent="." index="12"]
 
 position = Vector2( 140, 200 )
 texture = ExtResource( 1 )
@@ -206,7 +214,7 @@ region_enabled = true
 region_rect = Rect2( 0, 192, 64, 64 )
 _sections_unfolded = [ "Offset", "Region" ]
 
-[node name="ExitUp" type="Sprite" parent="." index="12"]
+[node name="ExitUp" type="Sprite" parent="." index="13"]
 
 position = Vector2( 210, 200 )
 texture = ExtResource( 1 )
