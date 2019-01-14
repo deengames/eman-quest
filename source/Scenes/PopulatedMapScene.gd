@@ -71,6 +71,10 @@ func _ready():
 		# SO, we do something terrible: we freeze the player here, set
 		# Globals.is_changing_map = true, and unfreeze/unset in player.process.
 		# That seems to work. God forgive me for writing such a hack.
+		#
+		# In hindsight, freeze only freezes the mouse/keyboard-movement components,
+		# so the offending code is probably in there somewhere. Despite the fact that
+		# I debugged through it. Several. Times. Repeatedly.
 		##########
 		player.freeze()
 		Globals.unfreeze_player_in_process = true
