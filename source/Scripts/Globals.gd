@@ -48,6 +48,9 @@ var previous_monsters = null # type => pixel positions
 var current_monster = null # monster.data_object. Clears after battle.
 var current_monster_type = "" # DOES/SHOULD NOT clear after battle, used for post-fight quest events!
 
+# Hack. See: https://www.pivotaltracker.com/story/show/163181477
+var unfreeze_player_in_process = false
+
 func _ready():
 	pass
 	

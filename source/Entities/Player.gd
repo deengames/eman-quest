@@ -30,6 +30,11 @@ func temporarily_no_battles():
 	self._cant_fight_from = OS.get_ticks_msec()
 
 func _process(delta):
+	# https://www.pivotaltracker.com/story/show/163181477
+	if Globals.unfreeze_player_in_process and not self.can_move:
+		self.unfreeze()
+		Globals.unfreeze_player_in_process = false
+		
 	var now = OS.get_ticks_msec()
 	if self._cant_fight_from != null and (now - self._cant_fight_from) / 1000 >= CANT_FIGHT_FOR_SECONDS:
 		self._cant_fight_from = null

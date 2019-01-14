@@ -204,6 +204,7 @@ func _pick_dungeons_and_variations():
 	for map_and_variation in picked:
 		# ["Forest", "Death"] => "Forest/Death"
 		to_return.append(map_and_variation[0] + "/" + map_and_variation[1])
+	
 	print(to_return)
 	return to_return
 	
@@ -214,6 +215,7 @@ func _print_and_set_seed():
 	var seed_value = randi()
 	print("Game #" + str(seed_value))
 	seed(seed_value)
+	Globals.seed_value = seed_value
 	return seed_value
 
 func _on_Button_pressed():
