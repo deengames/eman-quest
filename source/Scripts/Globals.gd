@@ -26,6 +26,7 @@ var current_map # AreaMap instance
 var transition_used # MapDestination instance
 var world_areas # Array of areas, in order. eg. ["Forest/Death", "Cave/Lava", "Forest/Frost"]
 var quest # Quest instance
+var seed_value
 # End: persist
 ####
 
