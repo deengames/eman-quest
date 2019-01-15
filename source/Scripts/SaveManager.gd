@@ -39,10 +39,6 @@ static func save(save_id):
 	var current_map_data = to_json(Globals.current_map.to_dict())
 	var player_position = to_json(DictionaryHelper.vector2_to_dict(Globals.player.position))
 	
-	var transition = to_json(null)
-	if Globals.transition_used != null:
-		transition = to_json(Globals.transition_used.to_dict())
-	
 	var world_areas = to_json(Globals.world_areas) # Array of strings
 	var quest = to_json(Globals.quest.to_dict())
 	var seed_value = Globals.seed_value
@@ -57,7 +53,6 @@ static func save(save_id):
 	save_game.store_line(overworld_position)
 	save_game.store_line(current_map_data)
 	save_game.store_line(player_position)
-	save_game.store_line(transition)
 	save_game.store_line(world_areas)
 	save_game.store_line(quest)
 	save_game.store_line(str(seed_value))
@@ -79,7 +74,6 @@ static func load(save_id, tree):
 	var overworld_position_data = parse_json(save_game.get_line())
 	var current_map_data = parse_json(save_game.get_line())
 	var player_position_data = parse_json(save_game.get_line())
-	var transition_data = parse_json(save_game.get_line())
 	var world_areas = parse_json(save_game.get_line())
 	var quest_data = parse_json(save_game.get_line())
 	var seed_value = parse_json(save_game.get_line())
@@ -98,7 +92,6 @@ static func load(save_id, tree):
 	Globals.player_data = PlayerData.from_dict(player_data)
 	Globals.story_data = story_data
 	Globals.overworld_position = DictionaryHelper.dict_to_vector2(overworld_position_data)
-	Globals.transition_used = MapDestination.from_dict(transition_data)
 	
 	var current_map =  AreaMap.from_dict(current_map_data)
 	Globals.current_map = current_map # Required to correctly load

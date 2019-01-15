@@ -17,30 +17,26 @@ func _init(tree):
 Shows pre-battle events for a monster. Also sets up post-battle events (if they exist).
 """
 func show_prebattle_events(monster):
-	if "events" in monster and monster.events != null and len(monster.events) > 0:
-		if monster.events.has("pre-fight"):
-			
-			Globals.player.freeze()
-			
-			var current_scene = self._get_current_scene()
-			var dialog_window = self._create_dialog_window(current_scene)
-			
-			for event in monster.events["pre-fight"]:
-				var yield_event = self._process_event(dialog_window, event)
-				if yield_event != null:
-					yield(dialog_window, yield_event)
-				
-			Globals.player.unfreeze()
-			current_scene.remove_child(dialog_window)
-			self.emit_signal("events_done", monster)
+	if monster.events.has("pre-fight"):
 		
-		if monster.events.has("post-fight"):
-			Globals.connect("battle_over", self, "_on_battle_over")
-			self._post_fight_events = monster.events["post-fight"]
-	else:
-		# Also emits immediately so consumers don't need to care if there are any events or not
+		Globals.player.freeze()
+		
+		var current_scene = self._get_current_scene()
+		var dialog_window = self._create_dialog_window(current_scene)
+		
+		for event in monster.events["pre-fight"]:
+			var yield_event = self._process_event(dialog_window, event)
+			if yield_event != null:
+				yield(dialog_window, yield_event)
+			
+		Globals.player.unfreeze()
+		current_scene.remove_child(dialog_window)
 		self.emit_signal("events_done", monster)
-
+	
+	if monster.events.has("post-fight"):
+		Globals.connect("battle_over", self, "_on_battle_over")
+		self._post_fight_events = monster.events["post-fight"]
+	
 """
 Process a single event, like a message.
 """

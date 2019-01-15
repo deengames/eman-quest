@@ -1,5 +1,8 @@
 extends Node2D
 
+signal clicked_on_map(position)
+signal battle_over
+
 const PlayerData = preload("res://Entities/PlayerData.gd")
 
 const TILE_WIDTH = 64
@@ -10,8 +13,7 @@ const SUBMAP_HEIGHT_IN_TILES = 40
 const WORLD_WIDTH_IN_TILES = 30 # 1920/64
 const WORLD_HEIGHT_IN_TILES = 18 # 1080/64
 
-signal clicked_on_map(position)
-signal battle_over
+const WALKABLE_TILES = ['Grass', 'Dirt', 'Ground']
 
 var player # current player instance. Used for collision detection mostly.
 
@@ -23,20 +25,18 @@ var story_data = {} # set in GenerateWorldScene; boss type, village name, etc.
 # Vector2. come back to these coordinates after leaving the current dungeon. 
 var overworld_position
 var current_map # AreaMap instance
-var transition_used # MapDestination instance
 var world_areas # Array of areas, in order. eg. ["Forest/Death", "Cave/Lava", "Forest/Frost"]
 var quest # Quest instance
 var seed_value
 # End: persist
 ####
 
-const WALKABLE_TILES = ['Grass', 'Dirt', 'Ground']
-
 # Used for positioning when changing maps. Probably does not need to be persisted
 # because the value is only set very momentarily when the player steps on a
 # transition to change rooms/maps.
 
 var current_map_scene # PopulatedMapScene instance
+var transition_used # MapDestination instance
 
 ### State to persist on area map after battles
 # TODO: move into a separate autoload?
