@@ -2,10 +2,11 @@ extends Node2D
 
 const AlphaFluctuator = preload("res://Scripts/Effects/AlphaFluctuator.gd")
 const DialogueWindow = preload("res://Scenes/UI/DialogueWindow.tscn")
+const FadeAndColour = preload("res://Scripts/Effects/FadeAndColour.gd")
 
 signal events_done
 
-const DEATH_TIME_SECONDS = 1.5
+const _EFFECT_TIME_SECONDS = 1.5
 
 var _tree
 var _post_fight_events
@@ -45,8 +46,15 @@ func _process_event(dialog_window, event):
 		# Pause here until we get "shown all" signal
 		dialog_window.show_texts(event["messages"])
 		return "shown_all"
-	elif event.has("die"):
-		var target_name = event["die"]
+	elif event.has("die") or event.has("escape"):
+		
+		var key = ""
+		if event.has("escape"):
+			key = "escape"
+		else:
+			key = "die"
+			
+		var target_name = event[key]
 		var target = null
 		
 		var children = self._get_current_scene().get_children()
@@ -57,15 +65,20 @@ func _process_event(dialog_window, event):
 		
 		if target != null: # found the node to kill
 			# Wait ~1.5s for this to complete
-			var fluctuator = AlphaFluctuator.new(target)
-			self._get_current_scene().add_child(fluctuator)
+			var effect
+			if key == "escape":
+				effect = FadeAndColour.new(target)
+			else:
+				effect = AlphaFluctuator.new(target)
+				
+			self._get_current_scene().add_child(effect)
 			# We can't yield here because we yield elsewhere. This is not done synchronously.
 			# C'est la vie.
-			fluctuator.run(DEATH_TIME_SECONDS)
+			effect.run(_EFFECT_TIME_SECONDS)
 			self.remove_child(target)
-			self.remove_child(fluctuator)
+			self.remove_child(effect)
 		else:
-			print("WARNING: Can't find node named {name} to kill off!".format({name = target_name}))
+			print("WARNING: Can't find node named {name} to {effect}!".format({name = target_name, effect = key}))
 	else:
 		print("Not sure how to process event: {e}".format({e = event}))
 		assert(false)
