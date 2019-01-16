@@ -1,6 +1,6 @@
 extends Node2D
 
-const AlphaFluctuator = preload("res://Scripts/AlphaFluctuator.gd")
+const AlphaFluctuator = preload("res://Scripts/Effects/AlphaFluctuator.gd")
 const DialogueWindow = preload("res://Scenes/UI/DialogueWindow.tscn")
 
 signal events_done
