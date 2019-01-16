@@ -10,8 +10,9 @@ const Boss = preload("res://Entities/Battle/Boss.gd")
 const KeyItem = preload("res://Entities/KeyItem.gd")
 
 const NPCS = {
-	"Mom": preload("res://Entities/MapEntities/Mom.tscn"),
-	"Bandit-Dungeon1": preload("res://Entities/MapEntities/Bandit/Dungeon1.tscn")
+	"Mama": preload("res://Entities/MapEntities/Mom.tscn"),
+	"Bandit-Dungeon1": preload("res://Entities/MapEntities/Bandit/Dungeon1.tscn"),
+	"Bandit-Dungeon2": preload("res://Entities/MapEntities/Bandit/Dungeon2.tscn")
 }
 
 # Number and order of bosses. Eg. [null, {...}, null] means we have to replace
@@ -45,9 +46,14 @@ var bosses = [
 # These NPCs show up around the boss, before you fight him.
 # "load" sucks with export, so preload up top and reference here.
 var attach_quest_npcs = [
-	["Mom"],
-	["Bandit"],
-	["FinalBoss", "Dad"]
+	["Mama"],
+	["Bandit-Dungeon2"]
+	#["FinalBoss", "Dad"]
+]
+
+var post_battle_attach_quest_npcs = [
+	["Mama"],
+	["Bandit-Dungeon2"]
 ]
 
 # What to replace the boss with when he dies and player returns to the map.
@@ -59,6 +65,7 @@ var replacement_npcs = ["Bandit-Dungeon1"]
 # 1) messages (show message boxes with text)
 # 2) run away (flee from player until off-screen)
 const BOSS_EVENTS = [
+	# First boss
 	{
 		"pre-fight": [
 			{ "messages": [
@@ -70,7 +77,7 @@ const BOSS_EVENTS = [
 		"post-fight": [
 			{ "messages": [
 				["Bandit", "Ugh! You're stronger than you look, runt!"],
-				["Bandit", "You may have defeated me, but the boss already got what he needed from {map1}!"]
+				["Bandit", "You may have defeated me, but The Master already got what he needed from {map1}!"]
 			] },
 			{ "die": "Bandit-Dungeon1" },
 			{ "messages": [
@@ -80,6 +87,29 @@ const BOSS_EVENTS = [
 				["Mama", "Go stop them! I'll be okay to get home by myself."],
 				["Hero", "Okay. InshaAllah (God willing), we will catch them."]
 			] }
+		]
+	},
+	# Second boss
+	{
+		"pre-fight": [
+			{ "messages": [
+				["Bandit", "I ..."],
+				["Bandit", "I couldn't ... defeat it ..."],
+				["Bandit", "The Master ..."],
+				["Hero", "?!"],
+				["Hero", "The Master what?!"],
+				["Bandit", "..."]
+			] }
+		],
+		"post-fight": [
+			{ "messages": [
+				["Bandit", "You killed it ... thank you ..."],
+				["Bandit", "The Master ... made us do it ..."],
+				["Hero", "Where is he? I need to save Mama!"],
+				["Bandit", "I don't ... {map3} ..."],
+				["Bandit", "..."],
+			] },
+			{"die": "Bandit-Dungeon2" }
 		]
 	}
 ]
@@ -94,8 +124,8 @@ static func add_quest_content_if_applicable(map, variation):
 	
 	# Add quest boss if there's one specified
 	if map.area_type == AreaType.BOSS:
-		# > -1 is redundant/guaranteed
-		if dungeon_number > -1 and dungeon_number < len(bosses):
+		# Separate bosses from events. Non-quest-bosses have events/attachments too.
+		if dungeon_number < len(bosses):
 			var quest_boss = bosses[dungeon_number]
 			# should be only one key/type/boss. Dictionary of type => data
 			for key in map.bosses.keys():
@@ -110,21 +140,27 @@ static func add_quest_content_if_applicable(map, variation):
 					var boss = Boss.new()
 					# Replace at the old boss' coordinates
 					boss.initialize(old_boss.x, old_boss.y, quest_boss, key_item)
-					
-					if dungeon_number < len(BOSS_EVENTS):
-						var events = BOSS_EVENTS[dungeon_number]
-						if events != null:
-							boss.set_events(events)
-					
-					if dungeon_number < len(npcs):
-						boss.attach_quest_npcs = npcs[dungeon_number]
-					
-					if dungeon_number < len(replacement_npcs):
-						boss.replace_with_npc = replacement_npcs[dungeon_number]
-					
 					replaced_bosses.append(boss)
-				
+					
 				map.bosses[key] = replaced_bosses
+		
+		if dungeon_number < len(BOSS_EVENTS):
+			for key in map.bosses.keys():
+				for boss in map.bosses[key]:
+					var events = BOSS_EVENTS[dungeon_number]
+					if events != null:
+						boss.set_events(events)
+		
+		if dungeon_number < len(npcs):
+			for key in map.bosses.keys():
+				for boss in map.bosses[key]:
+					boss.attach_quest_npcs = npcs[dungeon_number]
+		
+		if dungeon_number < len(replacement_npcs):
+			for key in map.bosses.keys():
+				for boss in map.bosses[key]:
+					boss.replace_with_npc = replacement_npcs[dungeon_number]
+		
 
 func to_dict():
 	return {
