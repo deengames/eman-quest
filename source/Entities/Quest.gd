@@ -12,8 +12,12 @@ const KeyItem = preload("res://Entities/KeyItem.gd")
 const NPCS = {
 	"Mama": preload("res://Entities/MapEntities/Mom.tscn"),
 	"Bandit-Dungeon1": preload("res://Entities/MapEntities/Bandit/Dungeon1.tscn"),
-	"Bandit-Dungeon2": preload("res://Entities/MapEntities/Bandit/Dungeon2.tscn")
+	"Bandit-Dungeon2": preload("res://Entities/MapEntities/Bandit/Dungeon2.tscn"),
+	"Umayyah": preload("res://Entities/MapEntities/FinalBoss.tscn"),
+	"Baba": preload("res://Entities/MapEntities/Dad.tscn")
 }
+
+const FINAL_MAP_NAME = "Ancient Graveyard"
 
 # Number and order of bosses. Eg. [null, {...}, null] means we have to replace
 # the second boss with the data from this array. [{...}] means replace only first boss.
@@ -47,8 +51,8 @@ var bosses = [
 # "load" sucks with export, so preload up top and reference here.
 var attach_quest_npcs = [
 	["Mama"],
-	["Bandit-Dungeon2"]
-	#["FinalBoss", "Dad"]
+	["Bandit-Dungeon2"],
+	["Umayyah", "Baba"]
 ]
 
 var post_battle_attach_quest_npcs = [
@@ -110,6 +114,41 @@ const BOSS_EVENTS = [
 				["Bandit", "..."],
 			] },
 			{"die": "Bandit-Dungeon2" }
+		]
+	},
+	# Third boss
+	{
+		"pre-fight": [
+			{ "messages": [
+				["Umayyah", "Fwahaha, I've been waiting for you!"],
+				["Hero", "Baba! If you hurt him ..."],
+				["Umayyah", "Do as I say and nobody gets hurt!"],
+				["Umayyah", "See that creature over there? You're going to kill it."],
+				["Hero", "..."],
+				["Baba", "Don't do it!"],
+				["Umayyah", "SILENCE! Do it, child, or he dies."],
+				["Hero", "Baba ... forgive me ..."],
+				["Hero", "I'll do it, just let him go ..."],
+				["Umayyah", "Enough talk. The monster, kid."],
+				["Hero", "..."]
+			] }
+		],
+		"post-fight": [
+			{ "messages": [
+				["Umayyah", "That's a good child. Now hand it over! All of them monster parts!"],
+				["Hero", "..."],
+				["", "You gave up the monster parts."],
+				["Umayyah", "At last ... the true power ... !"],
+				["Hero", "Let him go!"],
+				["Umayyah", "Fwahaha! Fool, you will all perish! The true power is mine!"]
+			] },
+			{"escape": "Umayyah" },
+			{ "messages": [
+				["Hero", "Baba!"],
+				["Baba", "I'm ... okay. Hurry, stop him before it's too late!"],
+				["Baba", "He said something about ... {finalmap}, wherever that is."],
+				["Hero", "Ok Baba, I'll find him and put a stop to this."]
+			] }
 		]
 	}
 ]
