@@ -17,7 +17,7 @@ const NPCS = {
 	"Baba": preload("res://Entities/MapEntities/Dad.tscn")
 }
 
-const FINAL_MAP_NAME = "Ancient Graveyard"
+const FINAL_MAP_NAME = "Ancient Ruins"
 
 # Number and order of bosses. Eg. [null, {...}, null] means we have to replace
 # the second boss with the data from this array. [{...}] means replace only first boss.
@@ -53,11 +53,6 @@ var attach_quest_npcs = [
 	["Mama"],
 	["Bandit-Dungeon2"],
 	["Umayyah", "Baba"]
-]
-
-var post_battle_attach_quest_npcs = [
-	["Mama"],
-	["Bandit-Dungeon2"]
 ]
 
 # What to replace the boss with when he dies and player returns to the map.

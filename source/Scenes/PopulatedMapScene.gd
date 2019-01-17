@@ -165,6 +165,8 @@ func _add_monsters():
 					replacement.position.y = Globals.current_monster.y
 					self.add_child(replacement)
 					replacement.name = Globals.current_monster.replace_with_npc
+				if Globals.current_monster.attach_quest_npcs != null:
+					self._spawn_attached_npcs(Globals.current_monster)
 			
 		Globals.current_monster = null
 		Globals.previous_monsters = null
@@ -201,21 +203,23 @@ func _add_monsters():
 				bosses.append(instance)
 				
 				if boss.attach_quest_npcs != null:
-					var all_npcs = []
-					for npc in boss.attach_quest_npcs:
-						var scene_constructor = Quest.NPCS[npc]
-						var npc_instance = scene_constructor.instance()
-						self.add_child(npc_instance)
-						
-						var npc_position = _find_spot_near_boss(boss, all_npcs)
-						all_npcs.append(npc_position)
-						npc_instance.position = Vector2(npc_position.x * Globals.TILE_WIDTH, npc_position.y * Globals.TILE_HEIGHT)
+					self._spawn_attached_npcs(boss)
 						
 		self._bosses[boss_type] = bosses
 	
 	# Persist on save
 	map.monsters = self._monsters
 
+func _spawn_attached_npcs(boss):
+	var all_npcs = []
+	for npc in boss.attach_quest_npcs:
+		var scene_constructor = Quest.NPCS[npc]
+		var npc_instance = scene_constructor.instance()
+		self.add_child(npc_instance)
+		
+		var npc_position = _find_spot_near_boss(boss, all_npcs)
+		all_npcs.append(npc_position)
+		npc_instance.position = Vector2(npc_position.x * Globals.TILE_WIDTH, npc_position.y * Globals.TILE_HEIGHT)
 
 # Returns coordinates near the boss.
 func _find_spot_near_boss(boss, blocked_coordinates):
