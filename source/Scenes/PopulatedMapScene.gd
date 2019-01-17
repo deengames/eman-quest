@@ -215,6 +215,7 @@ func _spawn_attached_npcs(boss):
 	for npc in boss.attach_quest_npcs:
 		var scene_constructor = Quest.NPCS[npc]
 		var npc_instance = scene_constructor.instance()
+		npc_instance.name = npc
 		self.add_child(npc_instance)
 		
 		var npc_position = _find_spot_near_boss(boss, all_npcs)
