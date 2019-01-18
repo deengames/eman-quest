@@ -17,7 +17,7 @@ const NPCS = {
 	"Baba": preload("res://Entities/MapEntities/Dad.tscn")
 }
 
-const FINAL_MAP_NAME = "Ancient Ruins"
+const FINAL_MAP_NAME = "Waterfall Cliff"
 
 # Number and order of bosses. Eg. [null, {...}, null] means we have to replace
 # the second boss with the data from this array. [{...}] means replace only first boss.
