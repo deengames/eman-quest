@@ -42,7 +42,6 @@ func initialize_from(data_object):
 
 func set_events(value):
 	events = value
-	# TODO: set proximity trigger to fire events
 
 func to_dict():
 	return {

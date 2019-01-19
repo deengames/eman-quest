@@ -42,6 +42,7 @@ static func save(save_id):
 	var world_areas = to_json(Globals.world_areas) # Array of strings
 	var quest = to_json(Globals.quest.to_dict())
 	var seed_value = Globals.seed_value
+	var bosses_defeated = Globals.bosses_defeated
 	
 	var save_game = File.new()
 	# Use gzip because 2D arrays of ["Grass", "Grass", ...] will compres well
@@ -56,6 +57,7 @@ static func save(save_id):
 	save_game.store_line(world_areas)
 	save_game.store_line(quest)
 	save_game.store_line(str(seed_value))
+	save_game.store_line(str(bosses_defeated))
 	
 	save_game.close()
 
@@ -77,6 +79,7 @@ static func load(save_id, tree):
 	var world_areas = parse_json(save_game.get_line())
 	var quest_data = parse_json(save_game.get_line())
 	var seed_value = parse_json(save_game.get_line())
+	var bosses_defeated = parse_json(save_game.get_line())
 	
 	save_game.close()
 	
@@ -102,6 +105,7 @@ static func load(save_id, tree):
 	Globals.world_areas = world_areas
 	Globals.quest = Quest.from_dict(quest_data)
 	Globals.seed_value = seed_value
+	Globals.bosses_defeated = bosses_defeated
 
 static func _get_path(save_id):
 	return "user://save-" + str(save_id) + ".save"

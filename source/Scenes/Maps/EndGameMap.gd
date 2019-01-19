@@ -9,6 +9,5 @@ func _ready():
 	player.position = $Locations/Entrance.position
 	self.add_child(player)
 	
-	# Show final event only if we have enough key items.
-	if len(Globals.player_data.key_items) < 3:
-		self.remove_child($EndGameNpc)
+	if Globals.bosses_defeated >= 3:
+		$Umayyah.visible = true

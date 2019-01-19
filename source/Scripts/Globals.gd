@@ -28,6 +28,12 @@ var current_map # AreaMap instance
 var world_areas # Array of areas, in order. eg. ["Forest/Death", "Cave/Lava", "Forest/Frost"]
 var quest # Quest instance
 var seed_value
+# No easy way to say "quest boss defeated" vs. non-quest boss defeated.
+# Non-quest bosses don't exist. And we gave items away in the last battle.
+# Anyway, this increments whenever you kill a boss. Used for final dungeon,
+# and to figure out if we should show the current boss (eg. show boss #3 only
+# after we kill boss #1-2).
+var bosses_defeated = 0
 # End: persist
 ####
 

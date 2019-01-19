@@ -79,8 +79,6 @@ _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [node name="Locations" type="Node2D" parent="." index="4"]
 
-editor/display_folded = true
-
 [node name="Start" type="Node2D" parent="Locations" index="0"]
 
 position = Vector2( 807.41, 36.9098 )
