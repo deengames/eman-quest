@@ -8,3 +8,4 @@ func _ready():
 	
 	if Globals.bosses_defeated >= 3:
 		$Umayyah.visible = true
+		$Umayyah.face_up()

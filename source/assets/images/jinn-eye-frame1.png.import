@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/jinn-eye.png-14eaec3a452fc8b11512d98751697422.stex"
+path="res://.import/jinn-eye-frame1.png-672d31c081f0c25559f7958703e04cc1.stex"
 
 [deps]
 
-source_file="res://assets/images/jinn-eye.png"
-dest_files=[ "res://.import/jinn-eye.png-14eaec3a452fc8b11512d98751697422.stex" ]
+source_file="res://assets/images/jinn-eye-frame1.png"
+dest_files=[ "res://.import/jinn-eye-frame1.png-672d31c081f0c25559f7958703e04cc1.stex" ]
 
 [params]
 
