@@ -1,13 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Maps/EndGameMap.gd" type="Script" id=1]
 [ext_resource path="res://Tilesets/Cliffs.tres" type="TileSet" id=2]
 [ext_resource path="res://Entities/MapEntities/FinalBoss.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Entities/MapEntities/Jinn.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 64, 32 )
+extents = Vector2( 80, 32 )
 
 [node name="Node2D" type="Node2D" index="0"]
 
@@ -35,7 +36,7 @@ tile_data = PoolIntArray( 0, 2, 3, 1, 2, 4, 2, 2, 4, 3, 2, 4, 4, 2, 4, 5, 2, 4, 
 
 [node name="FinalEventsTrigger" type="Area2D" parent="." index="1"]
 
-position = Vector2( 708.341, 213.735 )
+position = Vector2( 735.549, 602.804 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -54,8 +55,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Umayyah" parent="." index="2" instance=ExtResource( 3 )]
 
-visible = false
-position = Vector2( 715.683, 63.5542 )
+position = Vector2( 707.079, 425.586 )
 
 [node name="Locations" type="Node2D" parent="." index="3"]
 
@@ -67,5 +67,9 @@ __meta__ = {
 
 position = Vector2( 93.7038, 1147.22 )
 _sections_unfolded = [ "Transform" ]
+
+[node name="Jinn" parent="." index="4" instance=ExtResource( 4 )]
+
+position = Vector2( 706.392, 295.515 )
 
 
