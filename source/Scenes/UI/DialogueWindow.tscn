@@ -40,6 +40,7 @@ _sections_unfolded = [ "Z Index" ]
 
 [node name="Avatar" parent="." index="0" instance=ExtResource( 2 )]
 
+visible = false
 margin_right = 120.0
 margin_bottom = 120.0
 
@@ -55,8 +56,7 @@ _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [node name="Nametag" parent="." index="1" instance=ExtResource( 2 )]
 
-margin_left = 120.0
-margin_right = 275.0
+margin_right = 155.0
 margin_bottom = 40.0
 
 [node name="NameText" type="Label" parent="Nametag" index="0"]
@@ -84,9 +84,8 @@ _sections_unfolded = [ "Margin", "custom_fonts" ]
 
 [node name="Panel" parent="." index="2" instance=ExtResource( 2 )]
 
-margin_left = 120.0
 margin_top = 40.0
-margin_right = 615.0
+margin_right = 495.0
 margin_bottom = 164.0
 
 [node name="DialogueText" type="Label" parent="Panel" index="0"]
