@@ -1,8 +1,11 @@
 extends "StaticMap.gd"
 
 const DialogueWindow = preload("res://Scenes/UI/DialogueWindow.tscn")
+const SceneManagement = preload("res://Scripts/SceneManagement.gd")
+const StreamlinedRecallBattleScene = preload("res://Scenes/Battle/StreamlinedRecall/StreamlinedRecallBattleScene.tscn")
 
 const map_type = "Final"
+const variation = "Normal" # used for battleback
 const _GLOW_TIME_SECONDS = 3
 
 var _showed_final_events = false
@@ -11,9 +14,10 @@ func _ready():
 	var player = Globals.player
 	player.position = $Locations/Entrance.position
 	
-	if Globals.bosses_defeated >= 3:
-		$Umayyah.visible = true
-		$Umayyah.face_up()
+	if Globals.bosses_defeated < 3:
+		self.remove_child($FinalEventsTrigger)
+		self.remove_child($Jinn)
+		self.remove_child($Umayyah)
 
 func _on_FinalEventsTrigger_body_entered(body):
 	if body == Globals.player and not self._showed_final_events:
@@ -78,9 +82,11 @@ func _on_FinalEventsTrigger_body_entered(body):
 		dialog_window.queue_free()
 		
 		yield(self._pause(1), "completed")
-		player.unfreeze() # not really necessary
-		# Battle
-		print("BATTLE")
+		player.unfreeze() # not really necessary. He will never walk again.
+		
+		var battle_scene = StreamlinedRecallBattleScene.instance()
+		battle_scene.set_monster_data(Globals.quest.final_boss_data)
+		SceneManagement.change_scene_to(body.get_tree(), battle_scene)
 
 func _glow_and_pause(target):
 	target.glow(_GLOW_TIME_SECONDS)

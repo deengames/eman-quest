@@ -23,7 +23,7 @@ const _COVER_IMAGE_COORDINATES = {
 	"Dungeon/Castle": Vector2(64, 64),
 	"Dungeon/Desert": Vector2(128, 64),
 	
-	"Boss": Vector2(192, 64)
+	"Final/Normal": Vector2(192, 64)
 }
 
 var is_selectable = false

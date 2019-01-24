@@ -58,6 +58,24 @@ var attach_quest_npcs = [
 # What to replace the boss with when he dies and player returns to the map.
 var replacement_npcs = ["Bandit-Dungeon1"]
 
+var final_boss_data = {
+	"type": "FinalBoss",
+	"health": 500,
+	"strength": 40,
+	"defense": 25,
+	"turns": 1,
+	"experience points": 0,
+	
+	"skill_probability": 70,
+	"skills": {
+		"armour break": 10,
+		"disable attack": 8,
+		"freeze": 5,
+		"poison": 2,
+		"vampire": 1
+	},
+}
+
 # Number and order of boss events. Null means ignored/nothing.
 # Note that, like the above, this is *per dungeon* not per boss.
 # This is a limited-context grammar. For current story, we just support a few events:
@@ -199,11 +217,13 @@ static func add_quest_content_if_applicable(map, variation):
 func to_dict():
 	return {
 		"bosses": self.bosses,
-		"attach_quest_npcs": self.attach_quest_npcs
+		"attach_quest_npcs": self.attach_quest_npcs,
+		"final_boss_data": self.final_boss_data
 	}
 
 static func from_dict(dict):
 	var to_return = new()
 	to_return.bosses = dict["bosses"]
 	to_return.attach_quest_npcs = dict["attach_quest_npcs"]
+	to_return.final_boss_data = dict["final_boss_data"]
 	return to_return

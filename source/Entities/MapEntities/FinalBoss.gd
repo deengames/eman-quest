@@ -4,12 +4,6 @@ const AlphaFluctuator = preload("res://Scripts/Effects/AlphaFluctuator.gd")
 
 signal done
 
-func _ready():
-	$Sprite.visible = false
-	$HumanSpriteUp.visible = false
-	$HumanSpriteDown.visible = false
-	$WhiteOut.visible = false
-	
 func face_down():
 	$HumanSpriteUp.visible = false
 	$HumanSpriteDown.visible = false
