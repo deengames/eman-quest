@@ -62,13 +62,12 @@ var final_boss_data = {
 	"type": "FinalBoss",
 	"health": 500,
 	"strength": 40,
-	"defense": 25,
+	"defense": 20,
 	"turns": 1,
 	"experience points": 0,
 	
 	"skill_probability": 70,
 	"skills": {
-		"armour break": 10,
 		"disable attack": 8,
 		"freeze": 5,
 		"poison": 2,
