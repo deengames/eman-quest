@@ -98,6 +98,7 @@ static func load(save_id, tree):
 	
 	var current_map =  AreaMap.from_dict(current_map_data)
 	Globals.current_map = current_map # Required to correctly load
+	Globals.current_map_type = current_map.map_type
 	
 	SceneManagement.change_map_to(tree, current_map)
 	Globals.player.position = DictionaryHelper.dict_to_vector2(player_position_data)
@@ -106,6 +107,9 @@ static func load(save_id, tree):
 	Globals.quest = Quest.from_dict(quest_data)
 	Globals.seed_value = seed_value
 	Globals.bosses_defeated = bosses_defeated
+	
+	# Needed to get final map battle => return to map, to work
+	Globals.maps["Final"] = "Final"
 
 static func _get_path(save_id):
 	return "user://save-" + str(save_id) + ".save"

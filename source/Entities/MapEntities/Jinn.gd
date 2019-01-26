@@ -16,3 +16,5 @@ func glow(seconds):
 func _on_glow_done():
 	self.emit_signal("done")
 	
+func show_defeat_events():
+	pass

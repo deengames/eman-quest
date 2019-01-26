@@ -19,8 +19,17 @@ func _ready():
 	
 	randomize()
 	
-	var map_type = Globals.current_map.map_type
-	var variation = Globals.current_map.variation
+	var map_type
+	if typeof(Globals.current_map) == TYPE_STRING: # final map
+		map_type = "Final"
+	else:
+		map_type = Globals.current_map.map_type
+	
+	# For things like the final map, assume "normal" if missing
+	var variation = "Normal"
+	if typeof(Globals.current_map) != TYPE_STRING and "variation" in Globals.current_map:
+		variation = Globals.current_map.variation
+		
 	self._set_background_image(map_type, variation)
 	self._set_recall_tile_image(map_type, variation)
 	

@@ -5,7 +5,6 @@ const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 const StreamlinedRecallBattleScene = preload("res://Scenes/Battle/StreamlinedRecall/StreamlinedRecallBattleScene.tscn")
 
 const map_type = "Final"
-const variation = "Normal" # used for battleback
 const _GLOW_TIME_SECONDS = 3
 
 var _showed_final_events = false
@@ -14,6 +13,8 @@ func _ready():
 	var player = Globals.player
 	player.position = $Locations/Entrance.position
 	
+	# TODO: idempotent. If we already showed events, don't reshow...
+	# if we slew the final boss, show correct post-victory events.
 	if Globals.bosses_defeated < 3:
 		self.remove_child($FinalEventsTrigger)
 		self.remove_child($Jinn)
@@ -84,6 +85,8 @@ func _on_FinalEventsTrigger_body_entered(body):
 		yield(self._pause(1), "completed")
 		player.unfreeze() # not really necessary. He will never walk again.
 		
+		# Restore position after battle
+		Globals.pre_battle_position = [player.position.x, player.position.y]
 		var battle_scene = StreamlinedRecallBattleScene.instance()
 		battle_scene.set_monster_data(Globals.quest.final_boss_data)
 		SceneManagement.change_scene_to(body.get_tree(), battle_scene)

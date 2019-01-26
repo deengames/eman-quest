@@ -42,6 +42,7 @@ var bosses_defeated = 0
 # transition to change rooms/maps.
 
 var current_map_scene # PopulatedMapScene instance
+var current_map_type = ""
 var transition_used # MapDestination instance
 
 ### State to persist on area map after battles

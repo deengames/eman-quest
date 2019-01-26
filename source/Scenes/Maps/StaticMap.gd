@@ -10,6 +10,7 @@ const map_type = "" # used in transitions, plays nice with code that looks up ma
 
 func _ready():
 	Globals.current_map = self
+	Globals.current_map_type = self.map_type
 	Globals.player = Player.instance()
 	self.add_child(Globals.player)
 

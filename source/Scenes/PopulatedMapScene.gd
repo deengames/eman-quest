@@ -26,6 +26,7 @@ func initialize(map):
 
 func _ready():
 	Globals.current_map = map
+	Globals.current_map_type = map.map_type
 	self._restoring_state = Globals.previous_monsters != null
 	
 	var is_autotiling = "auto:" in map.tileset_path
