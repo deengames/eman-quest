@@ -25,6 +25,9 @@ func initialize(monster_data):
 			Globals.player_data.key_items.append(Globals.battle_spoils)
 			Globals.battle_spoils = null
 			Globals.bosses_defeated += 1
+		
+		if monster_data["type"] == Globals.quest.final_boss_data.type:
+			Globals.beat_last_boss = true
 			
 func _on_CloseButton_pressed():
 	self.emit_signal("popup_hide")

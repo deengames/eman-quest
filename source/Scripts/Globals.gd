@@ -57,6 +57,7 @@ var current_monster_type = "" # DOES/SHOULD NOT clear after battle, used for pos
 
 # Hack. See: https://www.pivotaltracker.com/story/show/163181477
 var unfreeze_player_in_process = false
+var beat_last_boss = false
 
 func _ready():
 	pass

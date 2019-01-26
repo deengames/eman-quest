@@ -15,7 +15,7 @@ func _ready():
 	
 	# TODO: idempotent. If we already showed events, don't reshow...
 	# if we slew the final boss, show correct post-victory events.
-	if Globals.bosses_defeated < 3:
+	if Globals.bosses_defeated < 3 or Globals.beat_last_boss == true:
 		self.remove_child($FinalEventsTrigger)
 		self.remove_child($Jinn)
 		self.remove_child($Umayyah)
