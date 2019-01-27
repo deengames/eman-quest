@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Entities/MapEntities/FinalBoss.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/monsters/FinalBossHuman.png" type="Texture" id=2]
 [ext_resource path="res://assets/images/monsters/FinalBoss.png" type="Texture" id=3]
 [ext_resource path="res://assets/images/umayyah-whiteout.png" type="Texture" id=4]
+[ext_resource path="res://assets/images/umayyah-normal.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -54,6 +55,14 @@ _sections_unfolded = [ "Offset", "Region" ]
 
 visible = false
 texture = ExtResource( 4 )
+centered = false
+region_rect = Rect2( 0, 192, 64, 64 )
+_sections_unfolded = [ "Offset", "Region" ]
+
+[node name="Normal" type="Sprite" parent="." index="5"]
+
+visible = false
+texture = ExtResource( 5 )
 centered = false
 region_rect = Rect2( 0, 192, 64, 64 )
 _sections_unfolded = [ "Offset", "Region" ]

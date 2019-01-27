@@ -3,6 +3,7 @@ extends "StaticMap.gd"
 const DialogueWindow = preload("res://Scenes/UI/DialogueWindow.tscn")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 const StreamlinedRecallBattleScene = preload("res://Scenes/Battle/StreamlinedRecall/StreamlinedRecallBattleScene.tscn")
+const TweenHelper = preload("res://Scripts/TweenHelper.gd")
 
 const map_type = "Final"
 const _GLOW_TIME_SECONDS = 3
@@ -15,10 +16,13 @@ func _ready():
 	
 	# TODO: idempotent. If we already showed events, don't reshow...
 	# if we slew the final boss, show correct post-victory events.
-	if Globals.bosses_defeated < 3 or Globals.beat_last_boss == true:
+	if Globals.bosses_defeated < 3:
 		self.remove_child($FinalEventsTrigger)
 		self.remove_child($Jinn)
 		self.remove_child($Umayyah)
+	
+	if Globals.beat_last_boss:
+		self._show_endgame_events()
 
 func _on_FinalEventsTrigger_body_entered(body):
 	if body == Globals.player and not self._showed_final_events:
@@ -64,7 +68,7 @@ func _on_FinalEventsTrigger_body_entered(body):
 		dialog_window.show_texts([
 			["???", "..."],
 			["???", "At last ..."],
-			["???", "This mortal body ... is mine! I am free!!"],
+			["???", "This mortal body ... is mine! I, Mufsid, am free to rain destruction!!"],
 		])
 		yield(dialog_window, "shown_all")
 		dialog_window.queue_free()
@@ -75,7 +79,7 @@ func _on_FinalEventsTrigger_body_entered(body):
 		
 		dialog_window = self._create_dialog_window(current_scene)
 		dialog_window.show_texts([
-			["???", "You will perish, human!"],
+			["Mufsid", "You will perish, human!"],
 			["Hero", "What ... are you ... ?"],
 			["Hero", "Ya Allah ... help me to destroy this monster!"]
 		])
@@ -91,9 +95,79 @@ func _on_FinalEventsTrigger_body_entered(body):
 		battle_scene.set_monster_data(Globals.quest.final_boss_data)
 		SceneManagement.change_scene_to(body.get_tree(), battle_scene)
 
+
+func _show_endgame_events():
+	Globals.player.freeze()
+	
+	self.remove_child($FinalEventsTrigger)
+	$Jinn.visible = false
+	$Jinn.position = $Umayyah.position
+	$Umayyah.face_down()
+	
+	var root = get_tree().get_root()
+	var current_scene = root.get_child(root.get_child_count() - 1)
+		
+	yield(self._pause(1), "completed")
+		
+	var dialog_window = self._create_dialog_window(current_scene)
+	dialog_window.show_texts([
+		["Mufsid", "..."],
+		["Mufsid", "Pathetic ..."],
+		["Mufsid", "This puny human vessel cannot command the full extent of my powers ..."],
+		["Hero", "..."],
+		["Mufsid", "I must find another ..."],
+	])
+	yield(dialog_window, "shown_all")
+	dialog_window.queue_free()
+	
+	yield(self._pause(1), "completed")
+	
+	# 3s glow; 1s umayyah, 1s jinn, 1s jinn post-move
+	self._glow_and_pause($Umayyah)
+	yield(self._pause(1), "completed")
+	
+	$Jinn.visible = true
+	self._glow_and_pause($Jinn)
+	yield(self._pause(1), "completed")
+	
+	$Umayyah.become_normal()
+	$Jinn.position.y -= 3 * Globals.TILE_HEIGHT
+	yield(self._pause(1), "completed")
+	
+	var tween_helper = TweenHelper.new().fade_out(current_scene, $Jinn, 1)
+	self.add_child(tween_helper)
+	tween_helper.start()
+	yield(self._pause(1), "completed")
+
+	dialog_window = self._create_dialog_window(current_scene)
+	dialog_window.show_texts([
+		["Umayyah", "What ... happened? Where am I?"],
+		["Hero", "..."],
+		["Hero", "It looks like you were under the control of a powerful jinn."],
+		["Umayyah", "... The Great Master ... controlled me?"],
+		["Umayyah", "..."]
+	])
+	yield(dialog_window, "shown_all")
+	dialog_window.queue_free()
+	yield(self._pause(1), "completed")
+	
+	dialog_window = self._create_dialog_window(current_scene)
+	dialog_window.show_texts([
+		["Umayyah", "Jinns ... it was a mistake to get involved with them."],
+		["Hero", "I hope you learned your lesson ... my parents almost got hurt."],
+		["Umayyah", "I'm sorry ..."],
+		["Hero", "I'd better get home. Baba and Mama are probably worried."]
+	])
+	yield(dialog_window, "shown_all")
+	dialog_window.queue_free()
+	
+	Globals.player.unfreeze() # not needed
+
+
+# Doesn't actually pause
 func _glow_and_pause(target):
 	target.glow(_GLOW_TIME_SECONDS)
-	yield(target, "done")
+	yield(target, "done") # doesn't actually pause
 
 func _pause(seconds):
 	yield(get_tree().create_timer(seconds), 'timeout')
