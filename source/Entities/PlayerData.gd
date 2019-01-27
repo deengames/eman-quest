@@ -65,7 +65,7 @@ static func from_dict(dict):
 	to_return.level = dict["level"]
 	to_return.experience_points = dict["experience_points"]
 	to_return.health = dict["health"]
-	to_return.strength = dict["strength"]
+	to_return.strength = 999#dict["strength"]
 	to_return.defense = dict["defense"]
 	to_return.num_actions = dict["num_actions"]
 	to_return.unassigned_stats_points = dict["unassigned_stats_points"]
