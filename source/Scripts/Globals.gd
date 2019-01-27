@@ -34,6 +34,7 @@ var seed_value
 # and to figure out if we should show the current boss (eg. show boss #3 only
 # after we kill boss #1-2).
 var bosses_defeated = 0
+var beat_last_boss = false
 # End: persist
 ####
 
@@ -57,7 +58,6 @@ var current_monster_type = "" # DOES/SHOULD NOT clear after battle, used for pos
 
 # Hack. See: https://www.pivotaltracker.com/story/show/163181477
 var unfreeze_player_in_process = false
-var beat_last_boss = false
 
 func _ready():
 	pass

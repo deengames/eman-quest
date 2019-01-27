@@ -14,15 +14,15 @@ func _ready():
 	var player = Globals.player
 	player.position = $Locations/Entrance.position
 	
-	# TODO: idempotent. If we already showed events, don't reshow...
-	# if we slew the final boss, show correct post-victory events.
-	if Globals.bosses_defeated < 3:
+	# If we just slew the final boss, show correct post-victory events.
+	if Globals.beat_last_boss and Globals.current_monster_type == "FinalBoss":
+		Globals.current_monster_type = "" # don't show again
+		self._show_endgame_events()
+	# If we aren't ready, don't show the final boss
+	elif Globals.bosses_defeated < 3 or Globals.beat_last_boss:
 		self.remove_child($FinalEventsTrigger)
 		self.remove_child($Jinn)
 		self.remove_child($Umayyah)
-	
-	if Globals.beat_last_boss:
-		self._show_endgame_events()
 
 func _on_FinalEventsTrigger_body_entered(body):
 	if body == Globals.player and not self._showed_final_events:
@@ -91,6 +91,7 @@ func _on_FinalEventsTrigger_body_entered(body):
 		
 		# Restore position after battle
 		Globals.pre_battle_position = [player.position.x, player.position.y]
+		Globals.current_monster_type = "FinalBoss"
 		var battle_scene = StreamlinedRecallBattleScene.instance()
 		battle_scene.set_monster_data(Globals.quest.final_boss_data)
 		SceneManagement.change_scene_to(body.get_tree(), battle_scene)

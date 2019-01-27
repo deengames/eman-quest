@@ -7,10 +7,14 @@ var _showing_intro_events = false
 func _ready():
 	var player = Globals.player
 	player.position = $Locations/Entrance.position
+	$Mama.visible = Globals.beat_last_boss
 
 func show_intro_events():
 	$Intro.visible = true
 	self._showing_intro_events = true
+	
+	$Mama.appear_wounded()
+	$Mama.position.y += Globals.TILE_HEIGHT
 	
 	# Called by GenerateWorldScene
 	var player = Globals.player
@@ -31,7 +35,7 @@ func _conclude_intro_events():
 	yield(get_tree().create_timer(1), 'timeout')
 	# Play sound here
 	
-	var mama = $Intro/Mom
+	var mama = $Mama
 	var bandit = self.get_node("Intro/Bandit-Intro")
 	bandit.run("Down", 4) # run off-screen
 	mama.visible = false

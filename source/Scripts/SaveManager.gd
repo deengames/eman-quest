@@ -43,11 +43,14 @@ static func save(save_id):
 	var quest = to_json(Globals.quest.to_dict())
 	var seed_value = Globals.seed_value
 	var bosses_defeated = Globals.bosses_defeated
+	var beat_last_boss = Globals.beat_last_boss
 	
 	var save_game = File.new()
 	# Use gzip because 2D arrays of ["Grass", "Grass", ...] will compres well
 	save_game.open_compressed(_get_path(save_id), File.WRITE, _SAVE_COMPRESSION_MODE)
+	#save_game.open(_get_path(save_id), File.WRITE)
 	
+	# TODO: instead of the order of lines mattering, next time, just save a dictionary.
 	save_game.store_line(maps)
 	save_game.store_line(player_data)
 	save_game.store_line(story_data)
@@ -58,6 +61,7 @@ static func save(save_id):
 	save_game.store_line(quest)
 	save_game.store_line(str(seed_value))
 	save_game.store_line(str(bosses_defeated))
+	save_game.store_line(str(beat_last_boss))
 	
 	save_game.close()
 
@@ -69,6 +73,7 @@ static func load(save_id, tree):
 		return # Error! We don't have a save to load.
 	
 	save_game.open_compressed(path, File.READ, _SAVE_COMPRESSION_MODE)
+	#save_game.open(path, File.READ)#, _SAVE_COMPRESSION_MODE)
 	
 	var maps_data = parse_json(save_game.get_line())
 	var player_data = parse_json(save_game.get_line())
@@ -80,6 +85,11 @@ static func load(save_id, tree):
 	var quest_data = parse_json(save_game.get_line())
 	var seed_value = parse_json(save_game.get_line())
 	var bosses_defeated = parse_json(save_game.get_line())
+	var beat_last_boss = save_game.get_line()
+	if beat_last_boss == "True":
+		beat_last_boss = true
+	else:
+		beat_last_boss = false
 	
 	save_game.close()
 	
@@ -107,6 +117,7 @@ static func load(save_id, tree):
 	Globals.quest = Quest.from_dict(quest_data)
 	Globals.seed_value = seed_value
 	Globals.bosses_defeated = bosses_defeated
+	Globals.beat_last_boss = beat_last_boss
 	
 	# Needed to get final map battle => return to map, to work
 	Globals.maps["Final"] = "Final"
