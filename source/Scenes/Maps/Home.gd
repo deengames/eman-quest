@@ -8,11 +8,14 @@ func _ready():
 	var player = Globals.player
 	player.position = $Locations/Entrance.position
 	$Mama.visible = Globals.beat_last_boss
+	if Globals.beat_last_boss:
+		self.remove_child($Intro)
 
 func show_intro_events():
 	$Intro.visible = true
 	self._showing_intro_events = true
 	
+	$Mama.visible = true
 	$Mama.appear_wounded()
 	$Mama.position.y += Globals.TILE_HEIGHT
 	

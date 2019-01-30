@@ -155,7 +155,7 @@ func _show_endgame_events():
 	dialog_window = self._create_dialog_window(current_scene)
 	dialog_window.show_texts([
 		["Umayyah", "Jinns ... it was a mistake to get involved with them."],
-		["Hero", "I hope you learned your lesson ... my parents almost got hurt."],
+		["Hero", "I hope you learned your lesson. My parents got hurt."],
 		["Umayyah", "I'm sorry ..."],
 		["Hero", "I'd better get home. Baba and Mama are probably worried."]
 	])

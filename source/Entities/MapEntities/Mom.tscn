@@ -1,19 +1,38 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Entities/MapEntities/Mom.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/npcs-dead.png" type="Texture" id=2]
 [ext_resource path="res://assets/images/npcs.png" type="Texture" id=3]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 40.0
+height = 20.0
+
+[sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
 extents = Vector2( 20, 10 )
 
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Area2D"]
 
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
 script = ExtResource( 1 )
 
-[node name="Dead" type="Sprite" parent="." index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+
+position = Vector2( 32, 32 )
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform", "Z Index" ]
+
+[node name="Dead" type="Sprite" parent="." index="1"]
 
 visible = false
 texture = ExtResource( 2 )
@@ -22,7 +41,7 @@ region_enabled = true
 region_rect = Rect2( 128, 64, 64, 64 )
 _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
-[node name="Alive" type="Sprite" parent="." index="1"]
+[node name="Alive" type="Sprite" parent="." index="2"]
 
 texture = ExtResource( 3 )
 centered = false
@@ -30,8 +49,9 @@ region_enabled = true
 region_rect = Rect2( 448, 0, 64, 64 )
 _sections_unfolded = [ "Animation", "Offset", "Region" ]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." index="2"]
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="3"]
 
+visible = false
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
@@ -43,7 +63,9 @@ bounce = 0.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0"]
 
 position = Vector2( 32, 54 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 _sections_unfolded = [ "Transform" ]
+
+[connection signal="body_entered" from="." to="." method="_on_Node2D_body_entered"]
 
 
