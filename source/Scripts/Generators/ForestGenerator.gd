@@ -93,7 +93,7 @@ const _PATHS_BUFFER_FROM_EDGE = 5
 const _MIN_CHESTS = 0
 const _MAX_CHESTS = 1
 
-const ENTITY_TILES = {} # name => preload("...")
+const ENTITY_TILES = {} # variation => name => preload("...")
 
 var map_width = Globals.SUBMAP_WIDTH_IN_TILES
 var map_height = Globals.SUBMAP_HEIGHT_IN_TILES

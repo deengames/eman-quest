@@ -34,7 +34,7 @@ func _ready():
 	
 	var mapper = TilesetMapper.new(tileset)
 	var tile_ids = mapper.load_tileset_mapping()
-	var entity_tiles = mapper.get_entity_tiles(map.map_type)
+	var entity_tiles = mapper.get_entity_tiles(map.map_type, map.variation)
 	
 	var tilemaps = []
 	
