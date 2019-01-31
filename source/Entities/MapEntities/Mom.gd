@@ -1,6 +1,7 @@
 extends Node2D
 
 const DialogueWindow = preload("res://Scenes/UI/DialogueWindow.tscn")
+const QuranScene = preload("res://Scenes/QuranScene.tscn")
 const TweenHelper = preload("res://Scripts/TweenHelper.gd")
 
 const _FADE_TIME_SECONDS = 1
@@ -38,19 +39,29 @@ func _show_post_game_events():
 	yield(dialog_window, "shown_all")
 	dialog_window.queue_free()
 	
-	var target = self.get_parent().get_node("Blackout")
+	var home_scene = self.get_parent()
+	var target = home_scene.get_node("Blackout")
 	# EPIC SIGH, player is above the tween object, changing Z by -1 makes him disappear
 	Globals.player.visible = false
 
 	var tween = Tween.new()
 	self.add_child(tween)
-	tween.interpolate_property(target, "color", Color(0, 0, 0, 0), Color(0, 0, 0, 0.5), _FADE_TIME_SECONDS, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	var r = 20/255
+	var g = 16/255
+	var b = 31/255
+	
+	tween.interpolate_property(target, "color", Color(r, g, b, 0), Color(r, g, b, 0.5), _FADE_TIME_SECONDS, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	tween.start()
 	yield(get_tree().create_timer(_FADE_TIME_SECONDS), 'timeout')
 	
-	# Ayaat
+	# Fade in and play ayaat
+	var qs = QuranScene.instance()
+	qs.set_ayaat(["quran-finale-1", "quran-finale-2"])
+	self.add_child(qs)
+	qs.position = Vector2(-960/2, -576/2)
+	yield(qs, 'done')
 	
-	tween.interpolate_property(target, "color", Color(0, 0, 0, 0.5), Color(0, 0, 0, 0), _FADE_TIME_SECONDS, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	tween.interpolate_property(target, "color", Color(r, g, b, 0.5), Color(r, g, b, 0), _FADE_TIME_SECONDS, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	tween.start()
 	yield(get_tree().create_timer(_FADE_TIME_SECONDS), 'timeout')
 	

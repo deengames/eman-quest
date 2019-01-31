@@ -34,21 +34,35 @@ size_flags_vertical = 1
 color = Color( 0.0784314, 0.0627451, 0.12549, 1 )
 _sections_unfolded = [ "Margin" ]
 
-[node name="intro-1" type="Sprite" parent="." index="1"]
+[node name="quran-intro-1" type="Sprite" parent="." index="1"]
 
 visible = false
 texture = ExtResource( 2 )
 centered = false
 _sections_unfolded = [ "Offset" ]
 
-[node name="intro-2" type="Sprite" parent="." index="2"]
+[node name="quran-intro-2" type="Sprite" parent="." index="2"]
 
 visible = false
 texture = ExtResource( 3 )
 centered = false
 _sections_unfolded = [ "Offset" ]
 
-[node name="SkipButton" type="Button" parent="." index="3"]
+[node name="quran-finale-1" type="Sprite" parent="." index="3"]
+
+visible = false
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="quran-finale-2" type="Sprite" parent="." index="4"]
+
+visible = false
+texture = ExtResource( 3 )
+centered = false
+_sections_unfolded = [ "Offset" ]
+
+[node name="SkipButton" type="Button" parent="." index="5"]
 
 anchor_left = 1.0
 anchor_top = 0.0

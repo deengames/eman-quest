@@ -9,7 +9,9 @@ signal sound_finished
 # You will need to provide your own sound files.
 var audio_clips = {
 	"quran-intro-1": preload("res://assets/audio/quran-17-23.ogg"),
-	"quran-intro-2": preload("res://assets/audio/quran-17-24.ogg")
+	"quran-intro-2": preload("res://assets/audio/quran-17-24.ogg"),
+	"quran-finale-1": preload("res://assets/audio/quran-14-41.ogg"),
+	"quran-finale-2": preload("res://assets/audio/quran-14-42.ogg")
 }
 
 const AudioFilePlayerClass = preload("res://Scenes/AudioFilePlayer.tscn")
@@ -27,7 +29,7 @@ func play_sound(audio_clip_key, loop_sound=false, sound_position=null):
 		#audio_player.play_sound(load("res://assets/audio/test.wav"))
 		audio_player.connect("finished", self, "_sound_finished")
 	else:
-		print ("ERROR: cannot play sound that does not exist in audio_clips!")
+		print ("ERROR: cannot play sound {key} that is not defined in audio_clips dictionary!".format({key = audio_clip_key}))
 # ------------------------------------
 
 ###

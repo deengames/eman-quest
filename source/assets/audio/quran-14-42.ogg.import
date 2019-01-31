@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/quran-14-42.ogg-494acaebd3806e90748c620adba48234.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/quran-14-42.ogg"
+dest_files=[ "res://.import/quran-14-42.ogg-494acaebd3806e90748c620adba48234.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

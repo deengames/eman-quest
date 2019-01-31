@@ -8,7 +8,7 @@
 [ext_resource path="res://Scenes/UI/DialogueWindow.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Entities/MapEntities/Bandit/Bandit.tscn" type="PackedScene" id=7]
 
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -148,7 +148,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-color = Color( 0, 0, 0, 0 )
+color = Color( 0.0784314, 0.0627451, 0.121569, 0 )
 _sections_unfolded = [ "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Size Flags", "Visibility" ]
 
 
