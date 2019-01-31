@@ -21,14 +21,19 @@ func load_tileset_mapping():
 	
 	return to_return
 
-func get_entity_tiles(map_type):
+func get_entity_tiles(map_type, variation):
 	var divider = map_type.find('/')
+	
 	if divider > -1:
+		variation = map_type.substr(divider + 1, len(map_type))
 		map_type = map_type.substr(0, divider)
 		
 	if map_type in _GENERATORS:
 		var generator = _GENERATORS[map_type]
-		return generator.ENTITY_TILES
+		# dungeon => { door => ..., ... }
+		var entity_map = generator.ENTITY_TILES
+		if variation != "" and variation in entity_map:
+			return entity_map[variation]
 	
 	return {}
 	

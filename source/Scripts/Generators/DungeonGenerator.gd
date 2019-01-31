@@ -68,7 +68,12 @@ const _NUM_CEILING_TILES = 3 # in tiles
 const _MAX_TORCHES_PER_ROOM = 2 # inclusive
 
 const ENTITY_TILES = {
-	"Door": preload("res://Entities/MapEntities/Door.tscn")
+	"Castle": {
+		"Door": preload("res://Entities/MapEntities/Door.tscn")
+	},
+	"Desert": {
+		"Door": preload("res://Entities/MapEntities/WoodenDoor.tscn")
+	}
 }
 
 var map_width = Globals.SUBMAP_WIDTH_IN_TILES

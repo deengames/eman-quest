@@ -67,7 +67,7 @@ const _NUM_CHESTS = [0, 1]
 const _WATER_DECORATION_TILES_PERCENT = 2 # 1 = 1%
 const _GROUND_DECORATION_TILES_PERCENT = 1
 
-const ENTITY_TILES = {} # name => preload("...")
+const ENTITY_TILES = {} # variation => name => preload("...")
 
 var map_width = Globals.SUBMAP_WIDTH_IN_TILES
 var map_height = Globals.SUBMAP_HEIGHT_IN_TILES

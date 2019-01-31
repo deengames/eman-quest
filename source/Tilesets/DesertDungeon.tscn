@@ -12,10 +12,11 @@ extents = Vector2( 32, 32 )
 custom_solver_bias = 0.0
 extents = Vector2( 32, 32 )
 
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 [node name="Ground" type="Sprite" parent="." index="0"]
 
+visible = false
 texture = ExtResource( 1 )
 centered = false
 region_enabled = true
@@ -49,6 +50,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Torch" type="Sprite" parent="." index="2"]
 
+visible = false
 position = Vector2( 0, 160 )
 texture = ExtResource( 1 )
 centered = false
@@ -58,6 +60,7 @@ _sections_unfolded = [ "Offset", "Region" ]
 
 [node name="Ceiling" type="Sprite" parent="." index="3"]
 
+visible = false
 position = Vector2( 160, 0 )
 texture = ExtResource( 1 )
 centered = false
@@ -83,6 +86,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Wall" type="Sprite" parent="." index="4"]
 
+visible = false
 position = Vector2( 244, 0 )
 texture = ExtResource( 1 )
 centered = false
