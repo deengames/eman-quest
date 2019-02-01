@@ -4,8 +4,6 @@ const AudioManager = preload("res://Scripts/AudioManager.gd")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 const TweenHelper = preload("res://Scripts/TweenHelper.gd")
 
-signal done
-
 const _FADE_TIME_SECONDS = 0.5
 
 var _audio_manager = AudioManager.new()
@@ -54,4 +52,4 @@ func _on_complete():
 		SceneManagement.change_scene_to(get_tree(), Globals.maps["Home"])
 		get_tree().current_scene.show_intro_events()
 	else:
-		self.emit_signal("done")
+		get_tree().change_scene("res://Scenes/CreditsScene.tscn")
