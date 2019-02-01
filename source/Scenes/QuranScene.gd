@@ -29,7 +29,7 @@ func _play_next_ayah():
 	else:
 		# DONE. Launch game.
 		yield(get_tree().create_timer(1), 'timeout')
-		self._launch_game()
+		self._on_complete()
 
 func _display_current_ayah():
 	var audio = self._ayaat[self._currently_playing]
@@ -45,10 +45,10 @@ func _display_current_ayah():
 	#TweenHelper.new().fade_in(self, next_ayah_image, _FADE_TIME_SECONDS).start()
 
 func _on_SkipButton_pressed():
-	self._launch_game()
+	self._on_complete()
 	_audio_manager.clean_up_audio()
 	
-func _launch_game():
+func _on_complete():
 	if self._autostart_game:
 		SceneManagement.change_scene_to(get_tree(), Globals.maps["Home"])
 		get_tree().current_scene.show_intro_events()
