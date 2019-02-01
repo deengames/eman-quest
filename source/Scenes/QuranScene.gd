@@ -21,6 +21,7 @@ func _ready():
 func set_ayaat(ayaat):
 	self._ayaat = ayaat
 	self._autostart_game = false
+	$SkipButton.visible = false
 
 func _play_next_ayah():
 	self._currently_playing += 1

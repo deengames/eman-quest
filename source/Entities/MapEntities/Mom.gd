@@ -2,6 +2,7 @@ extends Node2D
 
 const DialogueWindow = preload("res://Scenes/UI/DialogueWindow.tscn")
 const QuranScene = preload("res://Scenes/QuranScene.tscn")
+const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 const TweenHelper = preload("res://Scripts/TweenHelper.gd")
 
 const _FADE_TIME_SECONDS = 1
@@ -57,15 +58,4 @@ func _show_post_game_events():
 	# Fade in and play ayaat
 	var qs = QuranScene.instance()
 	qs.set_ayaat(["quran-finale-1", "quran-finale-2"])
-	self.add_child(qs)
-	qs.position = Vector2(-960/2, -576/2)
-	yield(qs, 'done')
-	
-	tween.interpolate_property(target, "color", Color(r, g, b, 0.5), Color(r, g, b, 0), _FADE_TIME_SECONDS, Tween.TRANS_LINEAR, Tween.EASE_IN)
-	tween.start()
-	yield(get_tree().create_timer(_FADE_TIME_SECONDS), 'timeout')
-	
-	# Choice: quit or not
-	
-	Globals.player.visible = true
-	Globals.player.unfreeze()
+	SceneManagement.change_scene_to(get_tree(), qs)
