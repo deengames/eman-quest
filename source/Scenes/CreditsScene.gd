@@ -21,7 +21,6 @@ func _ready():
 	tween.interpolate_property($TheEndLabel, "modulate", _INVISIBLE, _VISIBLE, _CONGRATS_FADE_TIME_SECONDS, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	tween.start()
 	yield(get_tree().create_timer(_CREDITS_TIME_SECONDS), 'timeout')
-	tween.queue_free()
 
 	# Thanks fade in ~5s
 	tween = Tween.new()
@@ -29,7 +28,6 @@ func _ready():
 	tween.interpolate_property($ThanksLabel, "modulate", _INVISIBLE, _VISIBLE, _CONGRATS_FADE_TIME_SECONDS, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	tween.start()
 	yield(get_tree().create_timer(_CREDITS_TIME_SECONDS), 'timeout')
-	tween.queue_free()
 	
 	# Both disappear ~5s
 	tween = Tween.new()
@@ -42,9 +40,6 @@ func _ready():
 	tween2.interpolate_property($ThanksLabel, "modulate", _VISIBLE, _INVISIBLE, _CONGRATS_FADE_TIME_SECONDS, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	tween2.start()
 	yield(get_tree().create_timer(_CREDITS_TIME_SECONDS), 'timeout')
-	
-	tween.queue_free()
-	tween2.queue_free()
 	
 	get_tree().change_scene("res://Scenes/Title.tscn")
 	
