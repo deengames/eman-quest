@@ -17,12 +17,12 @@ func _on_Node2D_body_entered(body):
 
 func _show_post_game_events():
 	Globals.player.freeze()
-		
+
 	var root = get_tree().get_root()
 	var current_scene = root.get_child(root.get_child_count() - 1)
 	var dialog_window = DialogueWindow.instance()
 	current_scene.add_child(dialog_window)
-	
+
 	dialog_window.show_texts([
 		["Mama", "You did it! You beat him! My child ..."],
 		["Hero", "Mama, Baba, I'm just glad you're okay ..."],
@@ -39,7 +39,7 @@ func _show_post_game_events():
 	])
 	yield(dialog_window, "shown_all")
 	dialog_window.queue_free()
-	
+
 	var home_scene = self.get_parent()
 	var target = home_scene.get_node("Blackout")
 	# EPIC SIGH, player is above the tween object, changing Z by -1 makes him disappear
@@ -50,11 +50,11 @@ func _show_post_game_events():
 	var r = 20/255
 	var g = 16/255
 	var b = 31/255
-	
+
 	tween.interpolate_property(target, "color", Color(r, g, b, 0), Color(r, g, b, 0.5), _FADE_TIME_SECONDS, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	tween.start()
 	yield(get_tree().create_timer(_FADE_TIME_SECONDS), 'timeout')
-	
+
 	# Fade in and play ayaat
 	var qs = QuranScene.instance()
 	qs.set_ayaat(["quran-finale-1", "quran-finale-2"])

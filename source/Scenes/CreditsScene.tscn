@@ -68,7 +68,7 @@ custom_colors/font_color = Color( 0.639216, 0.67451, 0.745098, 1 )
 text = "CREDITS
 
 NightBlade (@nightblade99) - coding/art
-legendiguess (@legendiguess) - art
+Aleksandr legendiguess Kultaev (@legendiguess) - art
 MrDudeIII (@mr_dude_III) - art
 noodles (@AZHNoodles) - art
 BHGT (@bhagat_nagi) - art
@@ -81,12 +81,13 @@ _sections_unfolded = [ "Margin", "custom_colors", "custom_fonts" ]
 
 [node name="TheEndLabel" type="Label" parent="." index="2"]
 
+modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 960.0
-margin_bottom = 576.0
+margin_bottom = 486.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -105,14 +106,14 @@ _sections_unfolded = [ "Margin", "Visibility", "custom_colors", "custom_fonts" ]
 
 [node name="ThanksLabel" type="Label" parent="." index="3"]
 
-visible = false
+modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 250.0
+margin_top = 200.0
 margin_right = 960.0
-margin_bottom = 576.0
+margin_bottom = 486.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -127,6 +128,6 @@ valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Margin", "custom_colors", "custom_fonts" ]
+_sections_unfolded = [ "Margin", "Visibility", "custom_colors", "custom_fonts" ]
 
 
