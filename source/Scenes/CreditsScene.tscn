@@ -27,7 +27,7 @@ use_filter = false
 font_data = ExtResource( 2 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -68,9 +68,9 @@ custom_colors/font_color = Color( 0.639216, 0.67451, 0.745098, 1 )
 text = "CREDITS
 
 NightBlade (@nightblade99) - coding/art
-Aleksandr legendiguess Kultaev (@legendiguess) - art
+legendiguess (@legendiguess) - art
 MrDudeIII (@mr_dude_III) - art
-noodles (@AZHNoodles) - art
+noodles (@aatena_h) - art
 BHGT (@bhagat_nagi) - art
 Tarek - play-testing"
 align = 1
