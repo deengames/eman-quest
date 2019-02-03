@@ -34,6 +34,7 @@ var seed_value
 # and to figure out if we should show the current boss (eg. show boss #3 only
 # after we kill boss #1-2).
 var bosses_defeated = 0
+var showed_final_events = false
 var beat_last_boss = false
 # End: persist
 ####

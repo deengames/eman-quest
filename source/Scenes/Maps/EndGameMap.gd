@@ -8,8 +8,6 @@ const TweenHelper = preload("res://Scripts/TweenHelper.gd")
 const map_type = "Final"
 const _GLOW_TIME_SECONDS = 3
 
-var _showed_final_events = false
-
 func _ready():
 	var player = Globals.player
 	player.position = $Locations/Entrance.position
@@ -25,10 +23,10 @@ func _ready():
 		self.remove_child($Umayyah)
 
 func _on_FinalEventsTrigger_body_entered(body):
-	if body == Globals.player and not self._showed_final_events:
-		self._showed_final_events = true
-		
-		var player = Globals.player
+	var player = Globals.player
+	
+	if body == player and not Globals.showed_final_events:
+		Globals.showed_final_events = true
 		player.freeze()
 		
 		var root = get_tree().get_root()
@@ -89,12 +87,12 @@ func _on_FinalEventsTrigger_body_entered(body):
 		yield(self._pause(1), "completed")
 		player.unfreeze() # not really necessary. He will never walk again.
 		
-		# Restore position after battle
-		Globals.pre_battle_position = [player.position.x, player.position.y]
-		Globals.current_monster_type = "FinalBoss"
-		var battle_scene = StreamlinedRecallBattleScene.instance()
-		battle_scene.set_monster_data(Globals.quest.final_boss_data)
-		SceneManagement.change_scene_to(body.get_tree(), battle_scene)
+	# Restore position after battle
+	Globals.pre_battle_position = [player.position.x, player.position.y]
+	Globals.current_monster_type = "FinalBoss"
+	var battle_scene = StreamlinedRecallBattleScene.instance()
+	battle_scene.set_monster_data(Globals.quest.final_boss_data)
+	SceneManagement.change_scene_to(body.get_tree(), battle_scene)
 
 
 func _show_endgame_events():

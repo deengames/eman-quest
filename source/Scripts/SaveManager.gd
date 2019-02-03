@@ -44,6 +44,7 @@ static func save(save_id):
 	var seed_value = Globals.seed_value
 	var bosses_defeated = Globals.bosses_defeated
 	var beat_last_boss = Globals.beat_last_boss
+	var showed_final_events = Globals.showed_final_events
 	
 	var save_game = File.new()
 	# Use gzip because 2D arrays of ["Grass", "Grass", ...] will compres well
@@ -62,6 +63,7 @@ static func save(save_id):
 	save_game.store_line(str(seed_value))
 	save_game.store_line(str(bosses_defeated))
 	save_game.store_line(str(beat_last_boss))
+	save_game.store_line(str(showed_final_events))
 	
 	save_game.close()
 
@@ -85,11 +87,11 @@ static func load(save_id, tree):
 	var quest_data = parse_json(save_game.get_line())
 	var seed_value = parse_json(save_game.get_line())
 	var bosses_defeated = parse_json(save_game.get_line())
-	var beat_last_boss = save_game.get_line()
-	if beat_last_boss == "True":
-		beat_last_boss = true
-	else:
-		beat_last_boss = false
+	var beat_last_boss = _get_line_bool(save_game)
+	var showed_final_events = _get_line_bool(save_game)
+	
+	# NB: if we add more stuff to load that's not there, calls
+	# to save_game.get_line() will just return empty-string ("")
 	
 	save_game.close()
 	
@@ -121,6 +123,14 @@ static func load(save_id, tree):
 	
 	# Needed to get final map battle => return to map, to work
 	Globals.maps["Final"] = "Final"
+
+static func _get_line_bool(file):
+	# If that line is blank, this returns false.
+	var string_value = file.get_line()
+	if string_value == "True":
+		return true
+	else:
+		return false
 
 static func _get_path(save_id):
 	return "user://save-" + str(save_id) + ".save"
