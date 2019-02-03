@@ -81,6 +81,7 @@ func _ready():
 		Globals.unfreeze_player_in_process = true
 		
 	if self._restoring_state == true and not Globals.won_battle:
+		# Probably reduundant because we now also set this in BattleResultsWindow.gd
 		player.temporarily_no_battles()
 		
 	Globals.current_map_scene = self

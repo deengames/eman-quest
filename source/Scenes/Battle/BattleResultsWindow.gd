@@ -40,6 +40,10 @@ func _on_WindowDialog_popup_hide():
 		var restore_position = Globals.pre_battle_position
 		Globals.player.position.x = restore_position[0]
 		Globals.player.position.y = restore_position[1]
+		
+		# For final boss battle, if we just lost, don't re-battle immediately.
+		if not Globals.won_battle:
+			Globals.player.temporarily_no_battles()
 	else:
 		# One-off battle
 		get_tree().change_scene('res://Scenes/Title.tscn')
