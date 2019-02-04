@@ -14,8 +14,8 @@ const TweenHelper = preload("res://Scripts/TweenHelper.gd")
 # Polymorphic. Target can be a type (eg. "Forest/Death") or a submap.
 static func change_map_to(tree, target):
 	# battle concluded on final map, which was GCed (null).
-	# Target != overworld means: we're not leaving back to the world map
-	if Globals.current_map_type == "Final" and Globals.transition_used != null and Globals.transition_used.target_map != "Overworld":
+	# Transition_used == null is used to allow us to exit back to the world map from the final map
+	if Globals.current_map_type == "Final" and Globals.transition_used == null:
 		change_scene_to(tree, EndGameMap.instance())
 	else:
 		_remove_monster_instances()
