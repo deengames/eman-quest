@@ -21,6 +21,8 @@ func _ready():
 		self.remove_child($FinalEventsTrigger)
 		self.remove_child($Jinn)
 		self.remove_child($Umayyah)
+	elif Globals.showed_final_events:
+		self.remove_child($Jinn)
 
 func _on_FinalEventsTrigger_body_entered(body):
 	var player = Globals.player
