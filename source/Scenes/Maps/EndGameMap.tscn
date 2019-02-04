@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/Maps/EndGameMap.gd" type="Script" id=1]
 [ext_resource path="res://Tilesets/Cliffs.tres" type="TileSet" id=2]
 [ext_resource path="res://Entities/MapEntities/FinalBoss.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Entities/MapEntities/Jinn.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Entities/MapWarp.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -63,7 +64,6 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Locations" type="Node2D" parent="." index="4"]
 
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -72,6 +72,20 @@ __meta__ = {
 
 position = Vector2( 93.7038, 1147.22 )
 _sections_unfolded = [ "Transform" ]
+
+[node name="Exit1" parent="Locations" index="1" instance=ExtResource( 5 )]
+
+position = Vector2( 0, 1152 )
+_sections_unfolded = [ "Transform" ]
+destination = "Overworld"
+appear_beside = "Final"
+
+[node name="Exit2" parent="Locations" index="2" instance=ExtResource( 5 )]
+
+position = Vector2( 0, 1216 )
+_sections_unfolded = [ "Transform" ]
+destination = "Overworld"
+appear_beside = "Final"
 
 [connection signal="body_entered" from="FinalEventsTrigger" to="." method="_on_FinalEventsTrigger_body_entered"]
 

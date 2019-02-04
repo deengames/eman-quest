@@ -8,7 +8,7 @@
 [ext_resource path="res://Scenes/UI/DialogueWindow.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Entities/MapEntities/Bandit/Bandit.tscn" type="PackedScene" id=7]
 
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -84,8 +84,6 @@ position = Vector2( 512, 256 )
 _sections_unfolded = [ "Offset", "Region", "Transform", "Visibility" ]
 
 [node name="Locations" type="Node2D" parent="." index="5"]
-
-editor/display_folded = true
 
 [node name="Start" type="Node2D" parent="Locations" index="0"]
 

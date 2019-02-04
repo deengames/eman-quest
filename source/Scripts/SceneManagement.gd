@@ -13,8 +13,9 @@ const TweenHelper = preload("res://Scripts/TweenHelper.gd")
 
 # Polymorphic. Target can be a type (eg. "Forest/Death") or a submap.
 static func change_map_to(tree, target):
-	 # battle concluded on final map, which was GCed (null).
-	if Globals.current_map_type == "Final":
+	# battle concluded on final map, which was GCed (null).
+	# Target != overworld means: we're not leaving back to the world map
+	if Globals.current_map_type == "Final" and Globals.transition_used != null and Globals.transition_used.target_map != "Overworld":
 		change_scene_to(tree, EndGameMap.instance())
 	else:
 		_remove_monster_instances()
@@ -151,7 +152,7 @@ static func _free_current_scene(scene):
 static func _remove_monster_instances():
 	# Don't crash if we have a static map and `monsters` is not defined.
 	# This is reflection magic: if the field exists, set it to empty-dictionary.
-	if Globals.current_map != null and 'monsters' in Globals.current_map:
+	if Globals.current_map_type != "Final" and Globals.current_map != null and 'monsters' in Globals.current_map:
 		# GCed. Don't leave deleted objects around. If you do, the next
 		# time you save (iterate all maps/submaps and save objects), you
 		# run into [deleted, deleted, ...] which crashes.
