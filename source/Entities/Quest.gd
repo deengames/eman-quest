@@ -59,14 +59,14 @@ var attach_quest_npcs = [
 var replacement_npcs = ["Bandit-Dungeon1"]
 
 var final_boss_data = {
-	"type": "FinalBoss",
+	"type": "Mufsid",
 	"health": 500,
-	"strength": 400, #40,
+	"strength": 40,
 	"defense": 20,
 	"turns": 1,
 	"experience points": 0,
 	
-	"skill_probability": 0,#70,
+	"skill_probability": 50,
 	"skills": {
 		"disable attack": 8,
 		"freeze": 5,

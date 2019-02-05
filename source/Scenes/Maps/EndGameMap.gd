@@ -88,11 +88,12 @@ func _on_FinalEventsTrigger_body_entered(body):
 		
 		yield(self._pause(1), "completed")
 		player.unfreeze() # not really necessary. He will never walk again.
-		
+	
+	# If respawn here after battle, don't re-trigger battle
 	if player.can_fight():
 		# Restore position after battle
 		Globals.pre_battle_position = [player.position.x, player.position.y]
-		Globals.current_monster_type = "FinalBoss"
+		Globals.current_monster_type = Globals.quest.final_boss_data.type
 		var battle_scene = StreamlinedRecallBattleScene.instance()
 		battle_scene.set_monster_data(Globals.quest.final_boss_data)
 		SceneManagement.change_scene_to(body.get_tree(), battle_scene)
