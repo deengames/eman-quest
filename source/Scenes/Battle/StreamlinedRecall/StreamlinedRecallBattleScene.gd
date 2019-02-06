@@ -3,12 +3,12 @@ extends Node2D
 const BattleResolution = preload("res://Scripts/Battle/BattleResolution.gd")
 const MonsterScaler = preload("res://Scripts/Battle/MonsterScaler.gd")
 
-const _MULTIPLIER_BASE = 1.1 # For attacks, 1.1^7 = ~2x, double if perfect pick...
+const _MULTIPLIER_BASE = 1.25 # five attacks = 8x (1 + 1.25 + 1.25^2 + ... + 1.25^n)
 const _MONSTER_NUM_TILES = 4
 const _MONSTER_TURN_DISPLAY_SECONDS = 2
 
 const _ACTION_POINTS_COST = {
-	"attack": 2,
+	"attack": 1,
 	"critical": 3,
 	"heal": 1,
 	"defend": 1
@@ -17,8 +17,11 @@ const _ACTION_POINTS_COST = {
 var _action_resolver = preload("res://Scripts/Battle/ActionResolver.gd").new()
 var _player = preload("res://Entities//Battle/BattlePlayer.gd").new()
 var _monster_data = {}
-var _multiplier = 0
-var _actions_left = 0
+#var _multiplier = 0
+var _actions_left = 0 # points
+
+var _last_action_picked = "" # eg. attack
+var _times_last_action_picked = 0 # eg. 5 consecutive times
 
 var _is_players_turn = false
 
@@ -93,10 +96,10 @@ func _update_health_displays():
 func _on_picked_all_tiles():
 	var num_right = $RecallGrid.selected_right
 	
-	if Features.is_enabled("multiplier_on_num_right"):
-		self._multiplier = pow(_MULTIPLIER_BASE, num_right)
-	else:
-		self._multiplier = 1
+#	if Features.is_enabled("multiplier_on_num_right"):
+#		self._multiplier = pow(_MULTIPLIER_BASE, num_right)
+#	else:
+#		self._multiplier = 1
 		
 	$RecallGrid.make_unselectable()
 	self._disable_unusable_action_buttons()
@@ -129,7 +132,19 @@ func _show_battle_end(is_victory):
 func _resolve_players_turn(action):
 	self._actions_left -= _ACTION_POINTS_COST[action]
 	
-	var message = self._action_resolver.resolve(action, self._player, self._monster_data, self._multiplier)
+	# Calculate multiplier
+	
+	if action == self._last_action_picked:
+		self._times_last_action_picked += 1
+	else:
+		self._times_last_action_picked = 1
+	self._last_action_picked = action
+		
+	var multiplier = pow(_MULTIPLIER_BASE, self._times_last_action_picked - 1)
+	print("M={m}".format({m = multiplier}))
+	# end multiplier
+	
+	var message = self._action_resolver.resolve(action, self._player, self._monster_data, multiplier)
 	$StatusLabel.text = message
 	self._update_health_displays()
 	
@@ -167,6 +182,8 @@ func _start_next_turn():
 	
 	self._is_players_turn = not self._is_players_turn
 	$RecallGrid.reset()
+	self._last_action_picked = ""
+	self._times_last_action_picked = 0
 	
 	if self._is_players_turn:
 		$TurnLabel.text = "Player attacks!"
