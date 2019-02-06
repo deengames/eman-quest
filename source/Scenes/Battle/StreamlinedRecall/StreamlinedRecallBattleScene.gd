@@ -7,6 +7,13 @@ const _MULTIPLIER_BASE = 1.1 # For attacks, 1.1^7 = ~2x, double if perfect pick.
 const _MONSTER_NUM_TILES = 4
 const _MONSTER_TURN_DISPLAY_SECONDS = 2
 
+const _ACTION_POINTS_COST = {
+	"attack": 1,
+	"critical": 3,
+	"heal": 1,
+	"defend": 1
+}
+
 var _action_resolver = preload("res://Scripts/Battle/ActionResolver.gd").new()
 var _player = preload("res://Entities//Battle/BattlePlayer.gd").new()
 var _monster_data = {}
@@ -121,9 +128,10 @@ func _show_battle_end(is_victory):
 	popup.popup_centered()
 
 func _resolve_players_turn(action):
+	self._actions_left -= _ACTION_POINTS_COST[action]
+	
 	var message = self._action_resolver.resolve(action, self._player, self._monster_data, self._multiplier)
 	$StatusLabel.text = message
-	self._actions_left -= 1
 	self._update_health_displays()
 	
 	if self._monster_data["health"] <= 0:

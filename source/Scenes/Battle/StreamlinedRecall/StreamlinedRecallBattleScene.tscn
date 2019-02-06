@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scenes/Battle/StreamlinedRecall/StreamlinedRecallBattleScene.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/monsters/GoldSlime.png" type="Texture" id=2]
@@ -7,7 +7,8 @@
 [ext_resource path="res://assets/fonts/Lato-Black.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://assets/images/protagonist.png" type="Texture" id=6]
 [ext_resource path="res://Scenes/Battle/StreamlinedRecall/RecallGrid.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/images/battle/actions.png" type="Texture" id=8]
+[ext_resource path="res://assets/fonts/Overlock-Regular.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://assets/images/battle/actions.png" type="Texture" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -34,6 +35,38 @@ font_data = ExtResource( 5 )
 _sections_unfolded = [ "Font", "Settings" ]
 
 [sub_resource type="DynamicFont" id=4]
+
+size = 20
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 8 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=5]
+
+size = 20
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 8 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=6]
+
+size = 20
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 8 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=7]
+
+size = 20
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 8 )
+_sections_unfolded = [ "Font", "Settings" ]
+
+[sub_resource type="DynamicFont" id=8]
 
 size = 36
 use_mipmaps = false
@@ -293,7 +326,6 @@ position = Vector2( 0, 40 )
 
 [node name="AttackButton" type="Button" parent="ActionsPanel/Controls" index="0"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -309,17 +341,19 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+custom_fonts/font = SubResource( 4 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
+text = "1"
 flat = false
-align = 1
-_sections_unfolded = [ "Margin" ]
+align = 2
+_sections_unfolded = [ "Margin", "custom_fonts" ]
 
 [node name="Sprite" type="Sprite" parent="ActionsPanel/Controls/AttackButton" index="0"]
 
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 64, 64 )
@@ -343,17 +377,19 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+custom_fonts/font = SubResource( 5 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
+text = "3"
 flat = false
-align = 1
-_sections_unfolded = [ "Margin" ]
+align = 2
+_sections_unfolded = [ "Margin", "custom_fonts" ]
 
 [node name="Sprite" type="Sprite" parent="ActionsPanel/Controls/CriticalButton" index="0"]
 
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 64, 0, 64, 64 )
@@ -377,17 +413,19 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+custom_fonts/font = SubResource( 6 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
+text = "1"
 flat = false
-align = 1
-_sections_unfolded = [ "Margin" ]
+align = 2
+_sections_unfolded = [ "Margin", "custom_fonts" ]
 
 [node name="Sprite" type="Sprite" parent="ActionsPanel/Controls/PotionButton" index="0"]
 
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 192, 0, 64, 64 )
@@ -410,17 +448,19 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+custom_fonts/font = SubResource( 7 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
+text = "1"
 flat = false
-align = 1
-_sections_unfolded = [ "Margin" ]
+align = 2
+_sections_unfolded = [ "Margin", "custom_fonts" ]
 
 [node name="Sprite" type="Sprite" parent="ActionsPanel/Controls/DefendButton" index="0"]
 
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 128, 0, 64, 64 )
@@ -442,7 +482,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 8 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_as_outline = 1
 text = "Actions: 0"
