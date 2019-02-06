@@ -21,7 +21,7 @@ var health = 60
 var strength = 15
 var defense = 5
 
-var num_actions = 3
+var num_actions = 5
 
 var unassigned_stats_points = 0
 
