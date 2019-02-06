@@ -5,6 +5,7 @@ var _feature_map = {
 	
 	"defend action": true, # Old and new battle engine
 	"zoom-out maps": false,
+	"multiplier_on_num_right": false,
 	
 	# Old/defunct battle engine
 	"consecutive picks battle bonus": true,

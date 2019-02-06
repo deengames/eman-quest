@@ -92,7 +92,12 @@ func _update_health_displays():
 
 func _on_picked_all_tiles():
 	var num_right = $RecallGrid.selected_right
-	self._multiplier = pow(_MULTIPLIER_BASE, num_right)
+	
+	if Features.is_enabled("multiplier_on_num_right"):
+		self._multiplier = pow(_MULTIPLIER_BASE, num_right)
+	else:
+		self._multiplier = 1
+		
 	$RecallGrid.make_unselectable()
 	self._disable_unusable_action_buttons()
 	
