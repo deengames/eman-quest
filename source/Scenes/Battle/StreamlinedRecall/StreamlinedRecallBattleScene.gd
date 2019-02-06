@@ -8,7 +8,7 @@ const _MONSTER_NUM_TILES = 4
 const _MONSTER_TURN_DISPLAY_SECONDS = 2
 
 const _ACTION_POINTS_COST = {
-	"attack": 1,
+	"attack": 2,
 	"critical": 3,
 	"heal": 1,
 	"defend": 1
@@ -94,27 +94,21 @@ func _on_picked_all_tiles():
 	var num_right = $RecallGrid.selected_right
 	self._multiplier = pow(_MULTIPLIER_BASE, num_right)
 	$RecallGrid.make_unselectable()
+	self._disable_unusable_action_buttons()
 	
 	if self._is_players_turn:
 		if num_right > 0:
 			$ActionsPanel/Controls.visible = true
-			# Reset crit button if it's set
-			$ActionsPanel/Controls/CriticalButton.disabled = false
 			
 			if "critical" in self._player.disabled_actions:
-				$ActionsPanel/Controls/CriticalButton.disabled = true
+				self._disable_action_button($ActionsPanel/Controls/CriticalButton)
 			
 			if "attack" in self._player.disabled_actions:
-				$ActionsPanel/Controls/AttackButton.disabled = true
-			else:
-				$ActionsPanel/Controls/AttackButton.disabled = false
-			if "items" in self._player.disabled_actions:
-				$ActionsPanel/Controls/PotionButton.disabled = true
-			else:
-				$ActionsPanel/Controls/PotionButton.disabled = false
+				self._disable_action_button($ActionsPanel/Controls/AttackButton)
 			
-			# Alpha => 100%
-			$ActionsPanel/Controls/CriticalButton/Sprite.modulate.a = 1
+			if "items" in self._player.disabled_actions:
+				self._disable_action_button($ActionsPanel/Controls/PotionButton)
+			
 		else:
 			$StatusLabel.text = "Missed a turn!"
 			yield(get_tree().create_timer(_MONSTER_TURN_DISPLAY_SECONDS), 'timeout')
@@ -203,19 +197,43 @@ func _on_correct_selected():
 
 func _on_AttackButton_pressed():
 	self._resolve_players_turn("attack")
+	self._disable_unusable_action_buttons()
 
 func _on_PotionButton_pressed():
 	self._resolve_players_turn("heal")
+	self._disable_unusable_action_buttons()
 
 func _on_CriticalButton_pressed():
 	self._resolve_players_turn("critical")
-	# Can only hit once.
-	$ActionsPanel/Controls/CriticalButton.disabled = true
-	# Fade out 50% so hopefully the user can tell that it's disabled
-	$ActionsPanel/Controls/CriticalButton/Sprite.modulate.a = 0.5
+	self._disable_unusable_action_buttons()
 
 func _on_DefendButton_pressed():
 	self._resolve_players_turn("defend")
+	self._disable_unusable_action_buttons()
+
+func _disable_unusable_action_buttons():
+	self._enable_action_button($ActionsPanel/Controls/AttackButton)
+	self._enable_action_button($ActionsPanel/Controls/CriticalButton)
+	self._enable_action_button($ActionsPanel/Controls/PotionButton)
+	self._enable_action_button($ActionsPanel/Controls/DefendButton)
+	
+	if self._actions_left < _ACTION_POINTS_COST["attack"]:
+		self._disable_action_button($ActionsPanel/Controls/AttackButton)
+	if self._actions_left < _ACTION_POINTS_COST["critical"]:
+		self._disable_action_button($ActionsPanel/Controls/CriticalButton)
+	if self._actions_left < _ACTION_POINTS_COST["heal"]:
+		self._disable_action_button($ActionsPanel/Controls/PotionButton)
+	if self._actions_left < _ACTION_POINTS_COST["defend"]:
+		self._disable_action_button($ActionsPanel/Controls/DefendButton)
+		
+func _disable_action_button(button):
+	button.disabled = true
+	# Fade out 50% so hopefully the user can tell that it's disabled
+	button.get_node("Sprite").modulate.a = 0.5
+
+func _enable_action_button(button):
+	button.disabled = false
+	button.get_node("Sprite").modulate.a = 1
 	
 func _on_poison_damaged(damage):
 	$StatusLabel.text = "Posioned for " + str(damage) + " damage!"
