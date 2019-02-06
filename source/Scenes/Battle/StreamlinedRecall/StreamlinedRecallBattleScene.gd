@@ -8,7 +8,7 @@ const _MONSTER_NUM_TILES = 4
 const _MONSTER_TURN_DISPLAY_SECONDS = 2
 
 const _ACTION_POINTS_COST = {
-	"attack": 1,
+	"attack": 2,
 	"critical": 3,
 	"heal": 1,
 	"defend": 1
