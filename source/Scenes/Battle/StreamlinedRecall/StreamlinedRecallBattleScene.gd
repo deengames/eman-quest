@@ -14,6 +14,11 @@ const _ACTION_POINTS_COST = {
 	"defend": 1
 }
 
+const _SKILL_POINTS_COST = {
+	"vampire": 7,
+	"bash": 5
+}
+
 var _action_resolver = preload("res://Scripts/Battle/ActionResolver.gd").new()
 var _player = preload("res://Entities//Battle/BattlePlayer.gd").new()
 var _monster_data = {}
@@ -41,10 +46,12 @@ func _ready():
 	if typeof(Globals.current_map) != TYPE_STRING and "variation" in Globals.current_map:
 		variation = Globals.current_map.variation
 		
+	# Panels themselves, not children, are 50% transparent
 	self._set_background_image(map_type, variation)
 	self._set_recall_tile_image(map_type, variation)
 	
 	$ActionsPanel.self_modulate = Color(1, 1, 1, 0.5)
+	$SkillsPanel.self_modulate = Color(1, 1, 1, 0.5)
 	
 	var image_name = self._monster_data["type"].replace(' ', '')
 	$MonsterControls/MonsterHealth.max_value = self._monster_data["max_health"]
@@ -68,6 +75,8 @@ func _ready():
 	
 	if not Features.is_enabled("tech_points"):
 		$TechPointsLabel.visible = false
+	
+	self._disable_unusable_skills()
 
 func set_monster_data(data):
 	MonsterScaler.scale_monster_data(data)
@@ -96,7 +105,7 @@ func _update_health_displays():
 	$MonsterControls/MonsterHealth.value = monster_health
 	$MonsterControls/MonsterHealth/Label.text = str(monster_health)
 	
-	$ActionsLabel.text = "Actions: " + str(_actions_left)
+	$ActionsPanel/ActionsLabel.text = "Actions: " + str(_actions_left)
 
 func _on_picked_all_tiles():
 	var num_right = $RecallGrid.selected_right
@@ -137,8 +146,7 @@ func _show_battle_end(is_victory):
 func _resolve_players_turn(action):
 	self._actions_left -= _ACTION_POINTS_COST[action]
 	
-	# Calculate multiplier
-	
+	# Start multiplier based on picking the same action consecutively
 	if action == self._last_action_picked:
 		self._times_last_action_picked += 1
 	else:
@@ -146,34 +154,47 @@ func _resolve_players_turn(action):
 	self._last_action_picked = action
 		
 	var multiplier = pow(_MULTIPLIER_BASE, self._times_last_action_picked - 1)
-	# end multiplier
+	# End multiplier
 	
+	self._resolve_action(action, multiplier)
+	
+	if self._actions_left == 0: 
+		$ActionsPanel/Controls.visible = false
+		$NextTurnButton.visible = true
+
+func _on_player_skill(skill):
+	var tech_points_cost = _SKILL_POINTS_COST[skill]
+	Globals.player_data.spend_tech_points(tech_points_cost)
+	self._resolve_action(skill, 1)
+	self._disable_unusable_skills()
+	
+# Common to attack/item/etc. and skills
+func _resolve_action(action, multiplier):
 	var message = self._action_resolver.resolve(action, self._player, self._monster_data, multiplier)
 	$StatusLabel.text = message
 	self._update_health_displays()
 	
 	if self._monster_data["health"] <= 0:
 		self._show_battle_end(true)
-	
-	if self._actions_left == 0: 
-		$ActionsPanel/Controls.visible = false
-		$NextTurnButton.visible = true
 
 func _resolve_monster_turn():
-	var message = self._action_resolver.monster_attacks(self._monster_data, self._player, 0, null)
-	$StatusLabel.text = message
-	self._update_health_displays() # show health decrease
-	yield(get_tree().create_timer(_MONSTER_TURN_DISPLAY_SECONDS), 'timeout')
+	var num_turns = self._monster_data["next_round_turns"]
 	
-	 # times defended, apply poison damage, etc. Emits a signal that shows
-	# a message about poison damage.
-	self._player.reset()
-	# We may have been poisoned, update again.
-	self._update_health_displays()
-	
+	for i in range(num_turns):
+		var message = self._action_resolver.monster_attacks(self._monster_data, self._player, 0, null)
+		$StatusLabel.text = message
+		self._update_health_displays() # show health decrease
+		yield(get_tree().create_timer(_MONSTER_TURN_DISPLAY_SECONDS), 'timeout')
+		
+		# times defended, apply poison damage, etc. Emits a signal that shows
+		# a message about poison damage.
+		self._player.reset()
+		# We may have been poisoned, update again.
+		self._update_health_displays()
+		
 	if self._player.current_health <= 0:
 		self._show_battle_end(false)
-	
+		
 	# Avoid having to click Next Turn for nothing
 	self._start_next_turn()
 
@@ -225,7 +246,8 @@ func _on_correct_selected():
 	self._correct_consecutive_tiles_picked += 1
 	if self._correct_consecutive_tiles_picked >= 3:
 		Globals.player_data.add_tech_point()
-		$TechPointsLabel.text = "{points} tech points".format({points = Globals.player_data.tech_points})
+		$SkillsPanel/TechPointsLabel.text = "{points} tech points".format({points = Globals.player_data.tech_points})
+		self._disable_unusable_skills()
 
 func _on_incorrect_selected():
 	self._correct_consecutive_tiles_picked = 0
@@ -246,6 +268,14 @@ func _on_DefendButton_pressed():
 	self._resolve_players_turn("defend")
 	self._disable_unusable_action_buttons()
 
+func _on_VampireButton_pressed():
+	self._on_player_skill("vampire")
+	self._disable_unusable_skills()
+
+func _on_BashButton_pressed():
+	self._on_player_skill("bash")
+	self._disable_unusable_skills()
+
 func _disable_unusable_action_buttons():
 	self._enable_action_button($ActionsPanel/Controls/AttackButton)
 	self._enable_action_button($ActionsPanel/Controls/CriticalButton)
@@ -260,7 +290,17 @@ func _disable_unusable_action_buttons():
 		self._disable_action_button($ActionsPanel/Controls/PotionButton)
 	if self._actions_left < _ACTION_POINTS_COST["defend"]:
 		self._disable_action_button($ActionsPanel/Controls/DefendButton)
-		
+
+# Poorly named. Enables if usable, disables otherwise
+func _disable_unusable_skills():
+	self._enable_action_button($SkillsPanel/VampireButton)
+	self._enable_action_button($SkillsPanel/BashButton)
+	
+	if Globals.player_data.tech_points < _SKILL_POINTS_COST["vampire"]:
+		self._disable_action_button($SkillsPanel/VampireButton)
+	if Globals.player_data.tech_points < _SKILL_POINTS_COST["bash"]:
+		self._disable_action_button($SkillsPanel/BashButton)
+
 func _disable_action_button(button):
 	button.disabled = true
 	# Fade out 50% so hopefully the user can tell that it's disabled
@@ -273,3 +313,5 @@ func _enable_action_button(button):
 func _on_poison_damaged(damage):
 	$StatusLabel.text = "Posioned for " + str(damage) + " damage!"
 	yield(get_tree().create_timer(_MONSTER_TURN_DISPLAY_SECONDS), 'timeout')
+
+

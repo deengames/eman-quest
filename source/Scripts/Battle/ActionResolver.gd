@@ -33,18 +33,20 @@ func resolve(action, player, monster_data, multiplier):
 		elif action == "defend":
 			player.defend(multiplier)
 			return "Hero double-downs on defense!"
+			
 		elif action == "vampire":
 			var damage = max(0, player.total_strength()) # ignores defense
-			damage = ceil(damage * multiplier)
+			damage = 2 * ceil(damage * multiplier)
 			monster_data["health"] -= damage
-			player.heal(damage)
+			player.heal_amount(damage)
 			return "Hero hits/absorbs " + str(damage) + "!"
 		elif action == "bash":
 			monster_data["next_round_turns"] -= 1
 			var damage = max(0, (player.total_strength() * 2) - monster_data["defense"])
 			damage = ceil(damage * multiplier)
 			monster_data["health"] -= damage
-			return "Hero bashes for " + str(damage) + "!\n" + monster_name + " loses a turn!"
+			return "Hero bashes for " + str(damage) + "! " + monster_name + " loses a turn!"
+			
 		elif action == "energy":
 			return "Gained " + str(BattlePlayer.ENERGY_GAIN_PER_ACTION) + " energy!"
 		

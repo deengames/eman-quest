@@ -52,11 +52,13 @@ func _init():
 
 func heal():
 	var amount = floor(self.max_health * HEAL_PERCENT)
-	amount = min(amount, self.max_health - self.current_health)
+	self.heal_amount(amount)
+	return amount
+
+func heal_amount(amount):
 	self.current_health += amount
 	if self.current_health > self.max_health:
 		self.current_health = self.max_health
-	return amount
 
 func defend(multiplier):
 	self._times_defending += 1 * floor(multiplier)

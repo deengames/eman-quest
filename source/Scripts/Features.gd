@@ -7,7 +7,7 @@ var _feature_map = {
 	"zoom-out maps": false,
 	
 	# Current prototype. May keep these.
-	"tech_points": true,
+	"tech_points": true, # points and skills
 	
 	# Old/defunct battle engine
 	"consecutive picks battle bonus": true,
