@@ -13,6 +13,7 @@ const STATS_POINTS_TO_RAISE_ACTIONS = 20
 # TODO: cost doubles but points don't double, and stats gained
 # don't double. Consider increasing this per level or something.
 const _STATS_POINTS_PER_LEVEL = 5
+const _MAX_TECH_POINTS = 20
 
 var level = 1
 var experience_points = 0
@@ -37,6 +38,8 @@ var armour = Equipment.new("armour", "Tunic", StatType.Defense, StatType.Health)
 var equipment = []
 var key_items = []
 
+var tech_points = 0
+
 func _init():
 	weapon.primary_stat_modifier = 7
 	weapon.secondary_stat_modifier = 2
@@ -57,7 +60,8 @@ func to_dict():
 		"weapon": self.weapon.to_dict(),
 		"armour": self.armour.to_dict(),
 		"equipment": DictionaryHelper.array_to_dictionary(self.equipment),
-		"key_items": DictionaryHelper.array_to_dictionary(self.key_items)
+		"key_items": DictionaryHelper.array_to_dictionary(self.key_items),
+		"tech_points": self.tech_points
 	}
 
 static func from_dict(dict):
@@ -74,6 +78,7 @@ static func from_dict(dict):
 	to_return.armour = Equipment.from_dict(dict["armour"])
 	to_return.equipment = DictionaryHelper.array_from_dictionary(dict["equipment"])
 	to_return.key_items = DictionaryHelper.array_from_dictionary(dict["key_items"])
+	to_return.tech_points = dict["tech_points"]
 	return to_return
 	
 func gain_xp(xp):
@@ -95,3 +100,11 @@ func added_actions_point():
 func removed_actions_point():
 	if self.assigned_points["num_actions"] % STATS_POINTS_TO_RAISE_ACTIONS == STATS_POINTS_TO_RAISE_ACTIONS - 1:
 		self.num_actions -= 1
+
+func add_tech_point():
+	self.tech_points += 1
+	self.tech_points = int(min(self.tech_points, _MAX_TECH_POINTS))
+
+func spend_tech_points(n):
+	if self.tech_points >= n:
+		self.tech_points -= n

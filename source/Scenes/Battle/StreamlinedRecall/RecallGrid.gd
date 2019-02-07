@@ -4,6 +4,7 @@ const RecallTile = preload("res://Scenes/Battle/StreamlinedRecall/RecallTile.tsc
 
 signal picked_all_tiles
 signal correct_selected
+signal incorrect_selected
 
 const _WIDTH_IN_TILES = 7 # please extend width, not height
 const _HEIGHT_IN_TILES = 7
@@ -83,6 +84,7 @@ func _on_correct_tile_selected():
 	
 func _on_incorrect_tile_selected():
 	self.selected_wrong += 1
+	self.emit_signal("incorrect_selected")
 	self._emit_if_done()
 
 func _emit_if_done():

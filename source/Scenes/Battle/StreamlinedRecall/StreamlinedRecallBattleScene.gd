@@ -19,6 +19,7 @@ var _player = preload("res://Entities//Battle/BattlePlayer.gd").new()
 var _monster_data = {}
 #var _multiplier = 0
 var _actions_left = 0 # points
+var _correct_consecutive_tiles_picked = 0
 
 var _last_action_picked = "" # eg. attack
 var _times_last_action_picked = 0 # eg. 5 consecutive times
@@ -53,6 +54,7 @@ func _ready():
 	$RecallGrid.battle_player = self._player
 	$RecallGrid.connect("picked_all_tiles", self, "_on_picked_all_tiles")
 	$RecallGrid.connect("correct_selected", self, "_on_correct_selected")
+	$RecallGrid.connect("incorrect_selected", self, "_on_incorrect_selected")
 	
 	if not Features.is_enabled("defend action"):
 		$ActionsPanel/Controls/DefendButton.visible = false
@@ -63,6 +65,9 @@ func _ready():
 	self._start_next_turn()
 	
 	_player.connect("poison_damaged", self, "_on_poison_damaged")
+	
+	if not Features.is_enabled("tech_points"):
+		$TechPointsLabel.visible = false
 
 func set_monster_data(data):
 	MonsterScaler.scale_monster_data(data)
@@ -141,7 +146,6 @@ func _resolve_players_turn(action):
 	self._last_action_picked = action
 		
 	var multiplier = pow(_MULTIPLIER_BASE, self._times_last_action_picked - 1)
-	print("M={m}".format({m = multiplier}))
 	# end multiplier
 	
 	var message = self._action_resolver.resolve(action, self._player, self._monster_data, multiplier)
@@ -184,6 +188,7 @@ func _start_next_turn():
 	$RecallGrid.reset()
 	self._last_action_picked = ""
 	self._times_last_action_picked = 0
+	self._correct_consecutive_tiles_picked = 0
 	
 	if self._is_players_turn:
 		$TurnLabel.text = "Player attacks!"
@@ -216,6 +221,14 @@ func _on_correct_selected():
 	self._actions_left += 1
 	# Updates actions-left
 	self._update_health_displays()
+	
+	self._correct_consecutive_tiles_picked += 1
+	if self._correct_consecutive_tiles_picked >= 3:
+		Globals.player_data.add_tech_point()
+		$TechPointsLabel.text = "{points} tech points".format({points = Globals.player_data.tech_points})
+
+func _on_incorrect_selected():
+	self._correct_consecutive_tiles_picked = 0
 
 func _on_AttackButton_pressed():
 	self._resolve_players_turn("attack")

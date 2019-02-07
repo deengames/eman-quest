@@ -6,6 +6,9 @@ var _feature_map = {
 	"defend action": true, # Old and new battle engine
 	"zoom-out maps": false,
 	
+	# Current prototype. May keep these.
+	"tech_points": true,
+	
 	# Old/defunct battle engine
 	"consecutive picks battle bonus": true,
 	"actions require energy": false,
