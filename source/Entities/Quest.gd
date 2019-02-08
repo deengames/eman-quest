@@ -149,7 +149,7 @@ const BOSS_EVENTS = [
 			{ "messages": [
 				["Umayyah", "That's a good child. Now hand it over! All of them monster parts!"],
 				["Hero", "..."],
-				["", "You gave up the monster parts."],
+				["", "Hero gave up the monster parts."],
 				["Umayyah", "At last ... the true power ... !"],
 				["Hero", "Let him go!"],
 				["Umayyah", "Fwahaha! Fool, you will all perish! The true power is mine!"]

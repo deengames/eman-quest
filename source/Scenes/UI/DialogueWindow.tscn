@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/UI/DialogueWindow.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/UI/ThemedPanel.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/fonts/Lato-Black.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/fonts/Overlock-Regular.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="Gradient" id=1]
 
@@ -36,7 +36,6 @@ _sections_unfolded = [ "Font", "Settings" ]
 z_index = 4096
 z_as_relative = false
 script = ExtResource( 1 )
-_sections_unfolded = [ "Z Index" ]
 
 [node name="Avatar" parent="." index="0" instance=ExtResource( 2 )]
 
@@ -87,6 +86,7 @@ _sections_unfolded = [ "Margin", "custom_fonts" ]
 margin_top = 40.0
 margin_right = 495.0
 margin_bottom = 164.0
+_sections_unfolded = [ "Margin", "Mouse", "custom_styles" ]
 
 [node name="DialogueText" type="Label" parent="Panel" index="0"]
 
