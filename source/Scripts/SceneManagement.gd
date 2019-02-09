@@ -17,7 +17,10 @@ static func change_map_to(tree, target):
 	# Transition_used == null is used to allow us to exit back to the world map from the final map
 	if Globals.current_map_type == "Final" and Globals.transition_used == null:
 		change_scene_to(tree, EndGameMap.instance())
-	elif Globals.current_map_type == "Home":
+	elif Globals.current_monster_type == "Hamza" and Globals.current_map_type == "Home":
+		# Just fought Hamza, go home ... and don't get stuck there
+		# (Without this, exiting home leads back to home.)
+		Globals.current_monster_type = ""
 		change_scene_to(tree, HomeMap.instance())
 	else:
 		_remove_monster_instances()
