@@ -122,14 +122,9 @@ static func change_scene_to(tree, scene_instance):
 static func switch_to_battle_if_touched_player(tree, monster, body):
 	if body == Globals.player and Globals.player.can_fight():
 		
-		# Reset state of last battle's results
-		Globals.pre_battle_position = [Globals.player.position.x, Globals.player.position.y]
-		Globals.won_battle = false
-		
 		# Keep a list of monsters to restore after battle
 		Globals.previous_monsters = Globals.current_map_scene.get_monsters()
 		# Keep track of who to remove if we won
-		Globals.current_monster_type = monster.data_object["data"]["type"]
 		Globals.current_monster = monster.data_object
 		
 		if monster.data_object is Boss:
@@ -142,9 +137,17 @@ static func switch_to_battle_if_touched_player(tree, monster, body):
 			event_manager.show_prebattle_events(monster)
 			yield(event_manager, "events_done")
 		
-		var battle_scene = StreamlinedRecallBattleScene.instance()
-		battle_scene.set_monster_data(monster.data_object["data"].duplicate())
-		change_scene_to(monster.get_tree(), battle_scene)
+		start_battle(monster.get_tree(), monster.data_object["data"].duplicate())
+
+static func start_battle(tree, monster_data):
+	Globals.won_battle = false
+	
+	# Restore position after battle
+	Globals.pre_battle_position = [Globals.player.position.x, Globals.player.position.y]
+	Globals.current_monster_type = monster_data.type
+	var battle_scene = StreamlinedRecallBattleScene.instance()
+	battle_scene.set_monster_data(monster_data)
+	change_scene_to(tree, battle_scene)
 
 static func _free_current_scene(scene):
 	scene.free()
