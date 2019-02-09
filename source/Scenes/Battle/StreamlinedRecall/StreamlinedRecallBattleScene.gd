@@ -214,6 +214,8 @@ func _start_next_turn():
 	if self._is_players_turn:
 		$TurnLabel.text = "Player attacks!"
 		num_tiles = self._player.num_actions
+		# Reset turns if they were decremented eg. stunned. Stun ends on YOUR next turn.
+		self._monster_data["next_round_turns"] = self._monster_data["turns"]
 	else:
 		$TurnLabel.text = self._monster_data["type"] + " attacks!"
 		num_tiles = _MONSTER_NUM_TILES
@@ -246,7 +248,7 @@ func _on_correct_selected():
 	self._correct_consecutive_tiles_picked += 1
 	if self._correct_consecutive_tiles_picked >= 3:
 		Globals.player_data.add_tech_point()
-		$SkillsPanel/TechPointsLabel.text = "{points} tech points".format({points = Globals.player_data.tech_points})
+		$SkillsPanel/TechPointsLabel.text = "Tech Points: {points}".format({points = Globals.player_data.tech_points})
 		self._disable_unusable_skills()
 
 func _on_incorrect_selected():
