@@ -23,7 +23,8 @@ const BATTLE_DATA = {
 }
 
 func _on_Area2D_body_entered(body):
-	if body == Globals.player:
+	# can_fight: after victory/defeat, don't re-trigger immediately
+	if body == Globals.player and Globals.player.can_fight():
 		
 		Globals.player.freeze()
 		var root = get_tree().get_root()

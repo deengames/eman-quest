@@ -1,15 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/Maps/Home.gd" type="Script" id=1]
 [ext_resource path="res://Tilesets/Indoors.tres" type="TileSet" id=2]
 [ext_resource path="res://Entities/MapEntities/Dad.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Entities/MapEntities/Mom.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Entities/MapWarp.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/UI/DialogueWindow.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Entities/MapEntities/Bandit/Bandit.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Entities/MapEntities/Hamza.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Entities/MapEntities/Bandit/Bandit.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Entities/MapEntities/Hamza.tscn" type="PackedScene" id=7]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -119,19 +118,9 @@ appear_beside = "Home"
 position = Vector2( 448, 384 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Intro" type="Node2D" parent="." index="6"]
+[node name="Bandit-Intro" parent="." index="6" instance=ExtResource( 6 )]
 
-editor/display_folded = true
 visible = false
-_sections_unfolded = [ "Transform" ]
-
-[node name="StoryWindow" parent="Intro" index="0" instance=ExtResource( 6 )]
-
-position = Vector2( 200, 175 )
-_sections_unfolded = [ "Transform", "Z Index" ]
-
-[node name="Bandit-Intro" parent="Intro" index="1" instance=ExtResource( 7 )]
-
 position = Vector2( 512, 384 )
 _sections_unfolded = [ "Transform" ]
 
@@ -152,7 +141,7 @@ size_flags_vertical = 1
 color = Color( 0.0784314, 0.0627451, 0.121569, 0 )
 _sections_unfolded = [ "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Size Flags", "Visibility" ]
 
-[node name="Hamza" parent="." index="8" instance=ExtResource( 8 )]
+[node name="Hamza" parent="." index="8" instance=ExtResource( 7 )]
 
 position = Vector2( 398.59, 134.677 )
 

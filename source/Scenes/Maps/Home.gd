@@ -1,5 +1,7 @@
 extends "StaticMap.gd"
 
+const DialogueWindow = preload("res://Scenes/UI/DialogueWindow.tscn")
+
 const map_type = 'Home'
 
 var _showing_intro_events = false
@@ -12,7 +14,7 @@ func _ready():
 		self.remove_child($Intro)
 
 func show_intro_events():
-	$Intro.visible = true
+	$"Bandit-Intro".visible = true
 	self._showing_intro_events = true
 	
 	$Mama.visible = true
@@ -24,14 +26,22 @@ func show_intro_events():
 	player.position = $Locations/Start.position
 	player.freeze()
 	
-	$Intro/StoryWindow.show_texts([
+	var root = get_tree().get_root()
+	var current_scene = root.get_child(root.get_child_count() - 1)
+	var dialog_window = DialogueWindow.instance()
+	current_scene.add_child(dialog_window)
+	
+	var viewport = get_viewport_rect().size
+	dialog_window.position = viewport / 4
+		
+	dialog_window.show_texts([
 		["Mama", "AIEEEEEEEEEEEEEEEEEEEEEE!!!!"],
 		["Baba", "Unhand her, you brute!"],
 		["Bandit", "Hehehehe! Shut it, old man!"],
 		["Bandit", "The boss wanted her, and I got her!"],
 	])
 	
-	$Intro/StoryWindow.connect("shown_all", self, "_conclude_intro_events")
+	dialog_window.connect("shown_all", self, "_conclude_intro_events")
 	
 func _conclude_intro_events():
 	
@@ -39,7 +49,7 @@ func _conclude_intro_events():
 	# Play sound here
 	
 	var mama = $Mama
-	var bandit = self.get_node("Intro/Bandit-Intro")
+	var bandit = $"Bandit-Intro"
 	bandit.run("Down", 4) # run off-screen
 	mama.visible = false
 	
