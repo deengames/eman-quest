@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hamza.png-da44c026ae574edd71b21c03b8d69acd.stex"
+path="res://.import/Normal-Home.png-19d8fc2695d03a8162b1801774e01942.stex"
 
 [deps]
 
-source_file="res://Scenes/Maps/hamza.png"
-dest_files=[ "res://.import/hamza.png-da44c026ae574edd71b21c03b8d69acd.stex" ]
+source_file="res://assets/images/battle/battlebacks/Normal-Home.png"
+dest_files=[ "res://.import/Normal-Home.png-19d8fc2695d03a8162b1801774e01942.stex" ]
 
 [params]
 
