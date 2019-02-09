@@ -4,6 +4,24 @@ const ChoicePanel = preload("res://Scenes/UI/ChoicePanel.tscn")
 const DialogueWindow = preload("res://Scenes/UI/DialogueWindow.tscn")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
+const BATTLE_DATA = {
+	"type": "Hamza",
+	"health": 250,
+	"strength": 20,
+	"defense": 15,
+	"turns": 1,
+	"experience points": 50,
+	
+	"skill_probability": 40,
+	"skills": {
+		"chomp": 60,
+		"roar": 40,
+	},
+	"skill_messages": {
+		"roar": "growls and raises his hackles!"
+	},
+}
+
 func _on_Area2D_body_entered(body):
 	if body == Globals.player:
 		
@@ -34,7 +52,7 @@ func _on_Area2D_body_entered(body):
 		
 func _train_with_hamza():
 	self._unfreeze_player()
-	# Battle!
+	SceneManagement.start_battle(get_tree(), BATTLE_DATA)
 	
 func _unfreeze_player():
 	Globals.player.unfreeze()
