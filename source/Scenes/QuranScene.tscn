@@ -1,19 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/QuranScene.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/quran-intro-1.png" type="Texture" id=2]
 [ext_resource path="res://assets/images/quran-intro-2.png" type="Texture" id=3]
 [ext_resource path="res://assets/images/quran-finale-1.png" type="Texture" id=4]
 [ext_resource path="res://assets/images/quran-finale-2.png" type="Texture" id=5]
-[ext_resource path="res://assets/fonts/Lato-Black.ttf" type="DynamicFontData" id=6]
-
-[sub_resource type="DynamicFont" id=1]
-
-size = 36
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 6 )
-_sections_unfolded = [ "Font", "Font/fallback", "Settings" ]
 
 [node name="Node2D" type="Node2D" index="0"]
 
@@ -81,7 +72,6 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 1 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
