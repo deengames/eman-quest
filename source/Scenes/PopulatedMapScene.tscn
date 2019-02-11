@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/PopulatedMapScene.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/UI.gd" type="Script" id=2]
-[ext_resource path="res://assets/fonts/Lato-Black.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/fonts/Overlock-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://addons/paulloz.colorblindness/colorblindness.material" type="Material" id=4]
 [ext_resource path="res://addons/paulloz.colorblindness/colorblindness.gd" type="Script" id=5]
 [ext_resource path="res://addons/paulloz.colorblindness/icon.svg" type="Texture" id=6]
@@ -10,12 +10,12 @@
 [sub_resource type="DynamicFont" id=1]
 
 size = 20
-use_mipmaps = true
+use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 3 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -80,7 +80,7 @@ group = null
 text = "Equipment"
 flat = false
 align = 1
-_sections_unfolded = [ "Margin" ]
+_sections_unfolded = [ "Margin", "custom_fonts" ]
 
 [node name="KeyItemsButton" type="Button" parent="UI" index="2"]
 
@@ -107,7 +107,7 @@ group = null
 text = "Key Items"
 flat = false
 align = 1
-_sections_unfolded = [ "Margin" ]
+_sections_unfolded = [ "Margin", "custom_fonts" ]
 
 [node name="SaveButton" type="Button" parent="UI" index="3"]
 
@@ -134,7 +134,7 @@ group = null
 text = "Save"
 flat = false
 align = 1
-_sections_unfolded = [ "Margin" ]
+_sections_unfolded = [ "Margin", "custom_fonts" ]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="1"]
 

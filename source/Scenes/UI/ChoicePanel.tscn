@@ -1,18 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/UI/ChoicePanel.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/UI/ThemedPanel.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/fonts/Overlock-Regular.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=1]
-
-size = 20
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 3 )
-_sections_unfolded = [ "Font", "Settings" ]
-
-[sub_resource type="DynamicFont" id=2]
 
 size = 20
 use_mipmaps = false
@@ -27,6 +19,8 @@ _sections_unfolded = [ "Hint", "Margin", "Mouse", "Rect", "custom_styles" ]
 
 [node name="Panel" parent="." index="0" instance=ExtResource( 2 )]
 
+margin_bottom = 177.0
+
 [node name="Label" type="Label" parent="." index="1"]
 
 anchor_left = 0.0
@@ -34,9 +28,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 20.0
-margin_top = 20.0
-margin_right = 360.0
-margin_bottom = 260.0
+margin_top = 17.0
+margin_right = 381.0
+margin_bottom = 113.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -57,10 +51,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 29.0
-margin_top = 236.0
-margin_right = 68.0
-margin_bottom = 268.0
+margin_left = 19.0
+margin_top = 126.0
+margin_right = 58.0
+margin_bottom = 158.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -68,7 +62,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -84,10 +78,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 335.0
-margin_top = 236.0
-margin_right = 371.0
-margin_bottom = 268.0
+margin_left = 345.0
+margin_top = 126.0
+margin_right = 381.0
+margin_bottom = 158.0
 grow_horizontal = 0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -96,7 +90,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
