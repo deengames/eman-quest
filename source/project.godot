@@ -28,10 +28,6 @@ window/size/height=576
 
 enabled=PoolStringArray( "paulloz.colorblindness" )
 
-[gui]
-
-theme/custom_font="res://assets/fonts/DefaultFont.tres"
-
 [rendering]
 
 quality/2d/use_pixel_snap=true

@@ -1,14 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/Title.gd" type="Script" id=1]
-[ext_resource path="res://assets/fonts/Overlock-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/fonts/DefaultFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/fonts/Unibody_8.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 
 size = 72
 use_mipmaps = false
 use_filter = false
-font_data = ExtResource( 2 )
+font_data = ExtResource( 3 )
 _sections_unfolded = [ "Font", "Settings" ]
 
 [node name="Node2D" type="Node2D"]
@@ -21,9 +22,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 313.0
+margin_left = 312.0
 margin_top = 187.0
-margin_right = 682.0
+margin_right = 681.0
 margin_bottom = 281.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -32,6 +33,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -50,7 +52,7 @@ anchor_bottom = 0.0
 margin_left = 123.0
 margin_top = 64.0
 margin_right = 862.0
-margin_bottom = 152.0
+margin_bottom = 153.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -73,7 +75,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 25.0
 margin_top = 504.0
-margin_right = 117.0
+margin_right = 118.0
 margin_bottom = 555.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -82,6 +84,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -108,6 +111,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null

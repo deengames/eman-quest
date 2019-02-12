@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scenes/UI/EquipmentWindow.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/EquipmentWindowFont.tres" type="DynamicFont" id=2]
-[ext_resource path="res://assets/fonts/Lato-Black.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/fonts/Unibody_8.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
 
@@ -166,8 +166,8 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 410.0
 margin_top = 66.0
-margin_right = 621.0
-margin_bottom = 203.0
+margin_right = 760.0
+margin_bottom = 235.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -296,9 +296,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 809.0
-margin_top = 400.0
-margin_right = 884.0
+margin_left = 769.0
+margin_top = 390.0
+margin_right = 883.0
 margin_bottom = 436.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
