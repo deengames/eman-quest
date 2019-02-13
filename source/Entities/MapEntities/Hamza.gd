@@ -39,7 +39,7 @@ func _on_Area2D_body_entered(body):
 		dialog_window.show_texts([
 			["Hero", "Hamza, you're too old to protect Mama and Baba ..."],
 			["Hamza", "Woof!"],
-			["Hero", "I'm never too old to playfight with you though!"]
+			["Hero", "I'm never too old to play-fight with you though!"]
 		])
 		yield(dialog_window, "shown_all")
 		dialog_window.queue_free()
