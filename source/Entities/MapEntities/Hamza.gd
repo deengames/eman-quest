@@ -7,7 +7,7 @@ const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 const BATTLE_DATA = {
 	"type": "Hamza",
 	"health": 250,
-	"strength": 30,
+	"strength": 25,
 	"defense": 15,
 	"turns": 1,
 	"experience points": 50,
