@@ -36,8 +36,18 @@ func _process(delta):
 		Globals.unfreeze_player_in_process = false
 		
 	var now = OS.get_ticks_msec()
-	if self._cant_fight_from != null and (now - self._cant_fight_from) / 1000 >= CANT_FIGHT_FOR_SECONDS:
-		self._cant_fight_from = null
+	if self._cant_fight_from != null:
+		var elapsed_seconds = (now - self._cant_fight_from) / 1000.0
+		
+		if elapsed_seconds >= CANT_FIGHT_FOR_SECONDS:
+			# We're done, fam.
+			self._cant_fight_from = null
+			$Sprite.modulate.a = 1
+		elif elapsed_seconds < CANT_FIGHT_FOR_SECONDS:
+			# Oscillate alpha. Formula maps from [-1 .. 1] to [0.5 .. 1] and retains the same periodicty (2pi).
+			# Use sine so we start at invisible and oscillate (over 5s) into visibility.
+			$Sprite.modulate.a = 0.5 + ((sin(elapsed_seconds * 4) + 1) / 4)
+	
 
 func can_fight():
 	return self._cant_fight_from == null
