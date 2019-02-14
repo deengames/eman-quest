@@ -28,7 +28,7 @@ func initialize(monster_data):
 		
 		if monster_data["type"] == Globals.quest.final_boss_data.type:
 			Globals.beat_last_boss = true
-			
+	
 func _on_CloseButton_pressed():
 	self.emit_signal("popup_hide")
 	Globals.emit_signal("battle_over")
@@ -41,8 +41,8 @@ func _on_WindowDialog_popup_hide():
 		Globals.player.position.x = restore_position[0]
 		Globals.player.position.y = restore_position[1]
 		
-		# For final boss battle, if we just lost, don't re-battle immediately.
-		if not Globals.won_battle:
+		# For boss battle, or Hamza training battle, if we just lost, don't re-battle immediately.
+		if not Globals.won_battle or Globals.current_map_type == "Home":
 			Globals.player.temporarily_no_battles()
 	else:
 		# One-off battle
