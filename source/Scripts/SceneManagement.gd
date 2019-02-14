@@ -142,16 +142,19 @@ static func switch_to_battle_if_touched_player(tree, monster, body):
 			event_manager.show_prebattle_events(monster)
 			yield(event_manager, "events_done")
 		
-		start_battle(monster.get_tree(), monster.data_object["data"].duplicate())
+		start_battle(monster.get_tree(), monster.data_object["data"])
 
 static func start_battle(tree, monster_data):
 	Globals.won_battle = false
+	# We mutate data eg. health. So if you fight the same monster, win/lose, then the
+	# second time, health/etc. will be reduced. We don't want that. So clone data here.
+	var data = monster_data.duplicate()
 	
 	# Restore position after battle
 	Globals.pre_battle_position = [Globals.player.position.x, Globals.player.position.y]
-	Globals.current_monster_type = monster_data.type
+	Globals.current_monster_type = data.type
 	var battle_scene = StreamlinedRecallBattleScene.instance()
-	battle_scene.set_monster_data(monster_data)
+	battle_scene.set_monster_data(data)
 	change_scene_to(tree, battle_scene)
 
 static func _free_current_scene(scene):
