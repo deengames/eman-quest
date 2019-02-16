@@ -1,21 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/PopulatedMapScene.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/UI.gd" type="Script" id=2]
-[ext_resource path="res://assets/fonts/Unibody_8.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://addons/paulloz.colorblindness/colorblindness.material" type="Material" id=4]
-[ext_resource path="res://addons/paulloz.colorblindness/colorblindness.gd" type="Script" id=5]
-[ext_resource path="res://addons/paulloz.colorblindness/icon.svg" type="Texture" id=6]
+[ext_resource path="res://addons/paulloz.colorblindness/colorblindness.material" type="Material" id=3]
+[ext_resource path="res://addons/paulloz.colorblindness/colorblindness.gd" type="Script" id=4]
+[ext_resource path="res://addons/paulloz.colorblindness/icon.svg" type="Texture" id=5]
 
-[sub_resource type="DynamicFont" id=1]
-
-size = 20
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 3 )
-_sections_unfolded = [ "Font", "Settings" ]
-
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -37,7 +28,7 @@ anchor_bottom = 0.0
 margin_left = 16.0
 margin_top = 530.0
 margin_right = 75.0
-margin_bottom = 562.0
+margin_bottom = 565.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -45,7 +36,6 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 1 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -72,7 +62,6 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 1 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -99,7 +88,6 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 1 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -126,7 +114,6 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 1 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -147,7 +134,7 @@ transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 [node name="Colorblindness" type="ColorRect" parent="CanvasLayer" index="0"]
 
 visible = false
-material = ExtResource( 4 )
+material = ExtResource( 3 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -162,10 +149,10 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 1, 1, 1, 1 )
-script = ExtResource( 5 )
+script = ExtResource( 4 )
 _sections_unfolded = [ "Mouse" ]
 __meta__ = {
-"_editor_icon": ExtResource( 6 )
+"_editor_icon": ExtResource( 5 )
 }
 Type = 0
 

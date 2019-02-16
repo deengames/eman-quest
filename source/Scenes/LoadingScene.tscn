@@ -1,17 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://Scenes/LoadingScene.gd" type="Script" id=1]
-[ext_resource path="res://assets/fonts/Unibody_8.ttf" type="DynamicFontData" id=2]
 
-[sub_resource type="DynamicFont" id=1]
-
-size = 72
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 2 )
-_sections_unfolded = [ "Font", "Settings" ]
-
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -31,7 +22,6 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 1 )
 text = "Loading ..."
 percent_visible = 1.0
 lines_skipped = 0

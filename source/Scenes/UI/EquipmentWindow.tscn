@@ -1,8 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/UI/EquipmentWindow.gd" type="Script" id=1]
-[ext_resource path="res://assets/fonts/EquipmentWindowFont.tres" type="DynamicFont" id=2]
-[ext_resource path="res://assets/fonts/Unibody_8.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
 
@@ -33,15 +31,7 @@ anti_aliasing = true
 anti_aliasing_size = 1
 _sections_unfolded = [ "Border", "Corner Radius" ]
 
-[sub_resource type="DynamicFont" id=2]
-
-size = 20
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 3 )
-_sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
-
-[node name="WindowDialog" type="WindowDialog" index="0"]
+[node name="WindowDialog" type="WindowDialog"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -79,7 +69,6 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 2 )
 text = "Current"
 percent_visible = 1.0
 lines_skipped = 0
@@ -102,7 +91,6 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0, 0.752941, 1, 1 )
 text = "Selected"
 percent_visible = 1.0
@@ -126,7 +114,6 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 2 )
 text = "Weapon"
 percent_visible = 1.0
 lines_skipped = 0
@@ -149,7 +136,6 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 2 )
 text = "Armour"
 percent_visible = 1.0
 lines_skipped = 0
@@ -174,7 +160,6 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 2 )
 text = "Broken Yo-Yo
 +5 hp
 +3 def
@@ -200,7 +185,6 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 2 )
 text = "Ancient Cloth
 +5 hp
 +3 def
@@ -226,7 +210,6 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0, 0.752941, 1, 1 )
 text = "Broken Yo-Yo
 +5 hp
@@ -253,7 +236,6 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0, 0.752941, 1, 1 )
 text = "Ancient Cloth
 +5 hp
@@ -282,7 +264,6 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 custom_styles/selected_focus = SubResource( 1 )
-custom_fonts/font = SubResource( 2 )
 items = [  ]
 select_mode = 0
 allow_reselect = false
@@ -307,7 +288,6 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 2 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null

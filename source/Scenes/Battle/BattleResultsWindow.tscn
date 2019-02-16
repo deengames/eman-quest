@@ -1,33 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://Scenes/Battle/BattleResultsWindow.gd" type="Script" id=1]
-[ext_resource path="res://assets/fonts/Lato-Black.ttf" type="DynamicFontData" id=2]
 
-[sub_resource type="DynamicFont" id=1]
-
-size = 36
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 2 )
-_sections_unfolded = [ "Settings" ]
-
-[sub_resource type="DynamicFont" id=2]
-
-size = 48
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 2 )
-_sections_unfolded = [ "Extra Spacing", "Settings" ]
-
-[sub_resource type="DynamicFont" id=3]
-
-size = 36
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 2 )
-_sections_unfolded = [ "Extra Spacing", "Settings" ]
-
-[node name="WindowDialog" type="WindowDialog" index="0"]
+[node name="WindowDialog" type="WindowDialog"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -64,7 +39,6 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 1 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -90,7 +64,6 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 2 )
 text = "Victory!"
 percent_visible = 1.0
 lines_skipped = 0
@@ -113,7 +86,6 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 3 )
 text = "Gained 1234 Experience Points!"
 align = 1
 percent_visible = 1.0
@@ -138,7 +110,6 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 3 )
 text = "Found a key item!"
 align = 1
 percent_visible = 1.0
@@ -162,7 +133,6 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 3 )
 text = "Level: 1
 Experience: 10010/100222"
 percent_visible = 1.0

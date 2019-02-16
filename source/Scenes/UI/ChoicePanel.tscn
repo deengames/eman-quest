@@ -1,18 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/UI/ChoicePanel.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/UI/ThemedPanel.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/fonts/Unibody_8.ttf" type="DynamicFontData" id=3]
 
-[sub_resource type="DynamicFont" id=1]
-
-size = 20
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 3 )
-_sections_unfolded = [ "Font", "Settings" ]
-
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Hint", "Margin", "Mouse", "Rect", "custom_styles" ]
@@ -37,7 +28,6 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 1 )
 text = "???"
 autowrap = true
 percent_visible = 1.0
@@ -62,7 +52,6 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 1 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -90,7 +79,6 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = SubResource( 1 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null

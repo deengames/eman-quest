@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/UI/DialogueWindow.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/UI/ThemedPanel.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/fonts/Unibody_8.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="Gradient" id=1]
 
@@ -15,15 +14,7 @@ flags = 4
 gradient = SubResource( 1 )
 width = 64
 
-[sub_resource type="DynamicFont" id=3]
-
-size = 16
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 3 )
-_sections_unfolded = [ "Font", "Settings" ]
-
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 z_index = 4096
 z_as_relative = false
@@ -66,7 +57,6 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 3 )
 text = "Protagonist"
 percent_visible = 1.0
 lines_skipped = 0
@@ -96,7 +86,6 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 3 )
 text = "This is some text that the protagonist is saying. It looks alright, right? Well, anyway, the text auto-wraps."
 autowrap = true
 percent_visible = 1.0
