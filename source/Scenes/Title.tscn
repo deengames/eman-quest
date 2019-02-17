@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://Scenes/Title.gd" type="Script" id=1]
-[ext_resource path="res://Theme/GlobalTheme.tres" type="Theme" id=2]
 
 [node name="Node2D" type="Node2D" index="0"]
 
@@ -107,25 +106,6 @@ text = "Options"
 flat = false
 align = 1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
-
-[node name="Panel" type="Panel" parent="." index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 85.0
-margin_top = 48.0
-margin_right = 308.0
-margin_bottom = 278.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-theme = ExtResource( 2 )
-_sections_unfolded = [ "Theme" ]
 
 [connection signal="pressed" from="Button" to="." method="_on_newgame_Button_pressed"]
 
