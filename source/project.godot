@@ -30,6 +30,7 @@ enabled=PoolStringArray( "paulloz.colorblindness" )
 
 [gui]
 
+theme/custom="res://EmanQuestTheme.tres"
 theme/custom_font="res://Scenes/Fonts/Default-24px.tres"
 
 [rendering]

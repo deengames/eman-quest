@@ -65,18 +65,18 @@ func _unassign_point(type):
 	self._update_stats_display()
 	
 func _update_stats_display():
-	$Stats/Labels/StatsHeaderLabel.text = ("Stats                      Points" +
+	$Stats/Labels/StatsHeaderLabel.text = ("Stats                  Points" +
 	" (" + str(Globals.player_data.unassigned_stats_points) +
 	" unused)")
 	
-	$Stats/Labels/StatsLabel.text = ("Health: " + str(Globals.player_data.health) + "\n" +
-		"Strength: " + str(Globals.player_data.strength) + "\n" + 
-		"Defense: " + str(Globals.player_data.defense) + "\n" +
-		"Actions: " + str(Globals.player_data.num_actions) + "\n"
+	$Stats/Labels/StatsLabel.text = ("Health: " + str(Globals.player_data.health) + "\n\n" +
+		"Strength: " + str(Globals.player_data.strength) + "\n\n" + 
+		"Defense: " + str(Globals.player_data.defense) + "\n\n" +
+		"Actions: " + str(Globals.player_data.num_actions) + "\n\n"
 	)
 	
-	$Stats/Labels/PointsAssignedLabel.text = (str(Globals.player_data.assigned_points["health"]) + "\n" +
-		str(Globals.player_data.assigned_points["strength"]) + "\n" +
-		str(Globals.player_data.assigned_points["defense"]) + "\n" +
+	$Stats/Labels/PointsAssignedLabel.text = (str(Globals.player_data.assigned_points["health"]) + "\n\n" +
+		str(Globals.player_data.assigned_points["strength"]) + "\n\n" +
+		str(Globals.player_data.assigned_points["defense"]) + "\n\n" +
 		str(Globals.player_data.assigned_points["num_actions"])
 	)
