@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/Title.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Fonts/Default-24px.tres" type="DynamicFont" id=2]
 
 [node name="Node2D" type="Node2D" index="0"]
 
@@ -14,8 +15,8 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 437.0
 margin_top = 207.0
-margin_right = 550.0
-margin_bottom = 242.0
+margin_right = 569.0
+margin_bottom = 247.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -23,6 +24,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null

@@ -1,6 +1,6 @@
 [gd_resource type="DynamicFont" load_steps=2 format=2]
 
-[ext_resource path="res://assets/fonts/Nunito-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/fonts/Grand9KPixel.ttf" type="DynamicFontData" id=1]
 
 [resource]
 
@@ -8,5 +8,5 @@ size = 24
 use_mipmaps = false
 use_filter = false
 font_data = ExtResource( 1 )
-_sections_unfolded = [ "Font", "Settings" ]
+_sections_unfolded = [ "Font", "Font/fallback", "Settings" ]
 
