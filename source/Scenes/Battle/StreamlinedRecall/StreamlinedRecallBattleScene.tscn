@@ -1,29 +1,41 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Battle/StreamlinedRecall/StreamlinedRecallBattleScene.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/monsters/GoldSlime.png" type="Texture" id=2]
 [ext_resource path="res://assets/images/gui/healthbar-bg.png" type="Texture" id=3]
 [ext_resource path="res://assets/images/gui/healthbar-fill.png" type="Texture" id=4]
 [ext_resource path="res://assets/images/protagonist.png" type="Texture" id=5]
-[ext_resource path="res://assets/fonts/Lato-Black.ttf" type="DynamicFontData" id=6]
-[ext_resource path="res://Scenes/Battle/StreamlinedRecall/RecallGrid.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/images/battle/actions.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/Battle/StreamlinedRecall/RecallGrid.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/images/battle/actions.png" type="Texture" id=7]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="StyleBoxFlat" id=1]
 
-size = 24
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 6 )
-_sections_unfolded = [ "Font", "Settings" ]
-
-[sub_resource type="DynamicFont" id=2]
-
-size = 26
-use_mipmaps = false
-use_filter = false
-font_data = ExtResource( 6 )
-_sections_unfolded = [ "Font", "Settings" ]
+content_margin_left = -1.0
+content_margin_right = -1.0
+content_margin_top = -1.0
+content_margin_bottom = -1.0
+bg_color = Color( 0, 0, 0, 0.501961 )
+draw_center = true
+border_width_left = 0
+border_width_top = 0
+border_width_right = 0
+border_width_bottom = 0
+border_color = Color( 0, 0, 0, 1 )
+border_blend = false
+corner_radius_top_left = 0
+corner_radius_top_right = 0
+corner_radius_bottom_right = 0
+corner_radius_bottom_left = 0
+corner_detail = 8
+expand_margin_left = 0.0
+expand_margin_right = 0.0
+expand_margin_top = 0.0
+expand_margin_bottom = 0.0
+shadow_color = Color( 0, 0, 0, 0.6 )
+shadow_size = 0
+anti_aliasing = true
+anti_aliasing_size = 1
+_sections_unfolded = [ "Border", "Border Width" ]
 
 [node name="Node2D" type="Node2D" index="0"]
 
@@ -85,9 +97,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 10.0
-margin_top = 2.0
+margin_top = -4.0
 margin_right = 141.0
-margin_bottom = 32.0
+margin_bottom = 38.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -152,9 +164,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 10.0
-margin_top = 2.0
+margin_top = -5.0
 margin_right = 141.0
-margin_bottom = 32.0
+margin_bottom = 37.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -193,7 +205,7 @@ autowrap = true
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_constants", "custom_fonts" ]
+_sections_unfolded = [ "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
 [node name="StatusLabel" type="Label" parent="." index="4"]
 
@@ -204,23 +216,25 @@ anchor_bottom = 0.0
 margin_left = 20.0
 margin_top = 520.0
 margin_right = 930.0
-margin_bottom = 559.0
+margin_bottom = 562.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 1 )
+custom_styles/normal = SubResource( 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_as_outline = 1
 text = "Slime deals 9999 damage! DIE!"
+align = 1
+valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_constants", "custom_fonts" ]
+_sections_unfolded = [ "Anchor", "Margin", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
-[node name="RecallGrid" parent="." index="5" instance=ExtResource( 7 )]
+[node name="RecallGrid" parent="." index="5" instance=ExtResource( 6 )]
 
 position = Vector2( 270, 30 )
 
@@ -345,7 +359,7 @@ _sections_unfolded = [ "Margin", "custom_fonts" ]
 
 [node name="Sprite" type="Sprite" parent="SkillsPanel/VampireButton" index="0"]
 
-texture = ExtResource( 8 )
+texture = ExtResource( 7 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 320, 0, 64, 64 )
@@ -379,7 +393,7 @@ _sections_unfolded = [ "Margin", "custom_fonts" ]
 
 [node name="Sprite" type="Sprite" parent="SkillsPanel/BashButton" index="0"]
 
-texture = ExtResource( 8 )
+texture = ExtResource( 7 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 384, 0, 64, 64 )
@@ -419,7 +433,6 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_as_outline = 1
 text = "Action Points: 0"
@@ -461,7 +474,7 @@ _sections_unfolded = [ "Margin", "custom_fonts" ]
 
 [node name="Sprite" type="Sprite" parent="ActionsPanel/Controls/AttackButton" index="0"]
 
-texture = ExtResource( 8 )
+texture = ExtResource( 7 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 64, 64 )
@@ -496,7 +509,7 @@ _sections_unfolded = [ "Margin", "custom_fonts" ]
 
 [node name="Sprite" type="Sprite" parent="ActionsPanel/Controls/CriticalButton" index="0"]
 
-texture = ExtResource( 8 )
+texture = ExtResource( 7 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 64, 0, 64, 64 )
@@ -531,7 +544,7 @@ _sections_unfolded = [ "Margin", "custom_fonts" ]
 
 [node name="Sprite" type="Sprite" parent="ActionsPanel/Controls/PotionButton" index="0"]
 
-texture = ExtResource( 8 )
+texture = ExtResource( 7 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 192, 0, 64, 64 )
@@ -566,7 +579,7 @@ _sections_unfolded = [ "Margin", "custom_fonts" ]
 
 [node name="Sprite" type="Sprite" parent="ActionsPanel/Controls/DefendButton" index="0"]
 
-texture = ExtResource( 8 )
+texture = ExtResource( 7 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 128, 0, 64, 64 )
