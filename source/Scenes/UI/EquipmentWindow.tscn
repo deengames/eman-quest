@@ -20,7 +20,7 @@ popup_exclusive = false
 window_title = ""
 resizable = true
 script = ExtResource( 1 )
-_sections_unfolded = [ "Margin" ]
+_sections_unfolded = [ "Margin", "custom_styles" ]
 
 [node name="Titles" type="Node2D" parent="." index="0"]
 

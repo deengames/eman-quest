@@ -20,5 +20,5 @@ expand_margin_top = 0.0
 expand_margin_bottom = 0.0
 modulate_color = Color( 1, 1, 1, 1 )
 draw_center = true
-_sections_unfolded = [ "Margin" ]
+_sections_unfolded = [ "Expand Margin", "Margin" ]
 
