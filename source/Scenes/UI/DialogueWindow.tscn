@@ -13,7 +13,7 @@ flags = 4
 gradient = SubResource( 1 )
 width = 64
 
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 z_index = 4096
 z_as_relative = false
@@ -68,10 +68,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 12.0
-margin_top = 8.0
-margin_right = 115.0
-margin_bottom = 34.0
+margin_left = 4.0
+margin_right = 144.0
+margin_bottom = 50.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -107,8 +106,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 12.0
-margin_top = 12.0
+margin_left = 4.0
+margin_top = 4.0
 margin_right = 483.0
 margin_bottom = 141.0
 rect_pivot_offset = Vector2( 0, 0 )
