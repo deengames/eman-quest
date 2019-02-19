@@ -123,6 +123,8 @@ static func load(save_id, tree):
 	
 	# Needed to get final map battle => return to map, to work
 	Globals.maps["Final"] = "Final"
+	
+	print("Loaded game #" + str(seed_value))
 
 static func _get_line_bool(file):
 	# If that line is blank, this returns false.

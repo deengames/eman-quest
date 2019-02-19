@@ -94,11 +94,11 @@ func get_next_level_xp():
 
 # Very hacky. But tested.
 func added_actions_point():
-	if self.assigned_points["num_actions"] % STATS_POINTS_TO_RAISE_ACTIONS == 0:
+	if int(self.assigned_points["num_actions"]) % STATS_POINTS_TO_RAISE_ACTIONS == 0:
 		self.num_actions += 1
 
 func removed_actions_point():
-	if self.assigned_points["num_actions"] % STATS_POINTS_TO_RAISE_ACTIONS == STATS_POINTS_TO_RAISE_ACTIONS - 1:
+	if int(self.assigned_points["num_actions"]) % STATS_POINTS_TO_RAISE_ACTIONS == STATS_POINTS_TO_RAISE_ACTIONS - 1:
 		self.num_actions -= 1
 
 func add_tech_point():

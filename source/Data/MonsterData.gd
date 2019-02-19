@@ -91,8 +91,8 @@ const MONSTER_DATA = {
 				"type": "Skelly",
 				"weight": 40,
 				"health": 110,
-				"strength": 24,
-				"defense": 13,
+				"strength": 28,
+				"defense": 16,
 				"turns": 1,
 				"experience points": 20,
 				
