@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Entities/MapEntities/FinalBoss.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/monsters/FinalBossHuman.png" type="Texture" id=2]
-[ext_resource path="res://assets/images/monsters/FinalBoss.png" type="Texture" id=3]
+[ext_resource path="res://assets/images/monsters/Mufsid.png" type="Texture" id=3]
 [ext_resource path="res://assets/images/umayyah-whiteout.png" type="Texture" id=4]
 [ext_resource path="res://assets/images/umayyah-normal.png" type="Texture" id=5]
 
@@ -11,7 +11,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 22, 12 )
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[node name="KinematicBody2D" type="KinematicBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 1
