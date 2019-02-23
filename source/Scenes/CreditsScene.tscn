@@ -1,25 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://Scenes/CreditsScene.gd" type="Script" id=1]
-[ext_resource path="res://assets/fonts/Unibody_8.ttf" type="DynamicFontData" id=2]
 
-[sub_resource type="DynamicFont" id=1]
-
-size = 144
-use_mipmaps = true
-use_filter = false
-font_data = ExtResource( 2 )
-_sections_unfolded = [ "Font", "Settings" ]
-
-[sub_resource type="DynamicFont" id=2]
-
-size = 72
-use_mipmaps = true
-use_filter = false
-font_data = ExtResource( 2 )
-_sections_unfolded = [ "Font", "Settings" ]
-
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -68,7 +51,7 @@ align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Margin", "Visibility", "custom_fonts" ]
+_sections_unfolded = [ "Visibility", "custom_fonts" ]
 
 [node name="TheEndLabel" type="Label" parent="." index="2"]
 
@@ -85,7 +68,6 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.984314, 0.87451, 0.419608, 1 )
 text = "The End!"
 align = 1
@@ -93,7 +75,7 @@ valign = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Margin", "Visibility", "custom_colors", "custom_fonts" ]
+_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Pause", "Rect", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
 [node name="ThanksLabel" type="Label" parent="." index="3"]
 
@@ -111,7 +93,6 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.984314, 0.87451, 0.419608, 1 )
 text = "Thanks for playing!"
 align = 1
