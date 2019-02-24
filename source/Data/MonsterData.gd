@@ -128,7 +128,7 @@ const MONSTER_DATA = {
 				"health": 110,
 				"strength": 20,
 				"defense": 16,
-				"turns": 1,
+				"turns": 2,
 				"experience points": 16,
 				
 				"skill_probability": 50, # 40 = 40%
