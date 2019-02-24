@@ -8,7 +8,7 @@ const MONSTER_DATA = {
 				"type": "Gold Slime",
 				"weight": 70,
 				"health": 70,
-				"strength": 15,
+				"strength": 25,
 				"defense": 17,
 				"turns": 1,
 				"experience points": 14,
@@ -28,7 +28,7 @@ const MONSTER_DATA = {
 				"experience points": 11,
 				"vampire multiplier": 1.1, # normal is 1.5
 				
-				"skill_probability": 20,
+				"skill_probability": 75,
 				"skills": {
 					"vampire": 100 
 				}
