@@ -61,8 +61,8 @@ var replacement_npcs = ["Bandit-Dungeon1"]
 var final_boss_data = {
 	"type": "Mufsid",
 	"health": 500,
-	"strength": 40,
-	"defense": 20,
+	"strength": 35,
+	"defense": 18,
 	"turns": 1,
 	"experience points": 0,
 	
