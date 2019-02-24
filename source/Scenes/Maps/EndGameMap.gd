@@ -13,7 +13,7 @@ func _ready():
 	player.position = $Locations/Entrance.position
 	
 	# If we just slew the final boss, show correct post-victory events.
-	if Globals.beat_last_boss and Globals.current_monster_type == "FinalBoss":
+	if Globals.beat_last_boss and Globals.current_monster_type == "Mufsid":
 		Globals.current_monster_type = "" # don't show again
 		self._show_endgame_events()
 	# If we aren't ready, don't show the final boss
