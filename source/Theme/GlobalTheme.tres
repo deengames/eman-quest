@@ -1,13 +1,16 @@
-[gd_resource type="Theme" load_steps=636 format=2]
+[gd_resource type="Theme" load_steps=639 format=2]
 
 [ext_resource path="res://assets/images/gui/dialog-skin.png" type="Texture" id=1]
 [ext_resource path="res://Theme/PanelStyle.tres" type="StyleBox" id=2]
 [ext_resource path="res://Theme/Discard/ButtonPressed.tres" type="StyleBox" id=3]
-[ext_resource path="res://Theme/Discard/ButtonFocus.tres" type="StyleBox" id=4]
-[ext_resource path="res://Theme/Discard/ButtonNormal.tres" type="StyleBox" id=5]
-[ext_resource path="res://Theme/Discard/ButtonDisabled.tres" type="StyleBox" id=6]
-[ext_resource path="res://Theme/Discard/ButtonHover.tres" type="StyleBox" id=7]
-[ext_resource path="res://Theme/Default-24px.tres" type="DynamicFont" id=8]
+[ext_resource path="res://Theme/CheckButton-Off.tres" type="Texture" id=4]
+[ext_resource path="res://Theme/CheckButton-On.tres" type="Texture" id=5]
+[ext_resource path="res://Theme/Discard/ButtonFocus.tres" type="StyleBox" id=6]
+[ext_resource path="res://Theme/Discard/ButtonNormal.tres" type="StyleBox" id=7]
+[ext_resource path="res://Theme/Discard/ButtonDisabled.tres" type="StyleBox" id=8]
+[ext_resource path="res://Theme/Discard/ButtonHover.tres" type="StyleBox" id=9]
+[ext_resource path="res://Theme/WindowDialog-Close.tres" type="Texture" id=10]
+[ext_resource path="res://Theme/Default-24px.tres" type="DynamicFont" id=11]
 
 [sub_resource type="StyleBoxTexture" id=1]
 
@@ -109,23 +112,7 @@ shadow_size = 0
 anti_aliasing = true
 anti_aliasing_size = 1
 
-[sub_resource type="ImageTexture" id=8]
-
-flags = 0
-storage = 0
-lossy_quality = 0.7
-flags = 0
-size = Vector2( 42, 26 )
-
-[sub_resource type="ImageTexture" id=9]
-
-flags = 0
-storage = 0
-lossy_quality = 0.7
-flags = 0
-size = Vector2( 42, 26 )
-
-[sub_resource type="StyleBoxFlat" id=10]
+[sub_resource type="StyleBoxFlat" id=8]
 
 content_margin_left = 6.0
 content_margin_right = 6.0
@@ -153,6 +140,22 @@ shadow_size = 0
 anti_aliasing = true
 anti_aliasing_size = 1
 
+[sub_resource type="ImageTexture" id=9]
+
+flags = 0
+storage = 0
+lossy_quality = 0.7
+flags = 0
+size = Vector2( 16, 16 )
+
+[sub_resource type="ImageTexture" id=10]
+
+flags = 0
+storage = 0
+lossy_quality = 0.7
+flags = 0
+size = Vector2( 16, 16 )
+
 [sub_resource type="ImageTexture" id=11]
 
 flags = 0
@@ -161,23 +164,7 @@ lossy_quality = 0.7
 flags = 0
 size = Vector2( 16, 16 )
 
-[sub_resource type="ImageTexture" id=12]
-
-flags = 0
-storage = 0
-lossy_quality = 0.7
-flags = 0
-size = Vector2( 16, 16 )
-
-[sub_resource type="ImageTexture" id=13]
-
-flags = 0
-storage = 0
-lossy_quality = 0.7
-flags = 0
-size = Vector2( 16, 16 )
-
-[sub_resource type="StyleBoxFlat" id=14]
+[sub_resource type="StyleBoxFlat" id=12]
 
 content_margin_left = 8.0
 content_margin_right = 8.0
@@ -205,13 +192,29 @@ shadow_size = 4
 anti_aliasing = true
 anti_aliasing_size = 1
 
-[sub_resource type="ImageTexture" id=15]
+[sub_resource type="ImageTexture" id=13]
 
 flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
 size = Vector2( 16, 16 )
+
+[sub_resource type="ImageTexture" id=14]
+
+flags = 0
+storage = 0
+lossy_quality = 0.7
+flags = 0
+size = Vector2( 16, 16 )
+
+[sub_resource type="ImageTexture" id=15]
+
+flags = 0
+storage = 0
+lossy_quality = 0.7
+flags = 0
+size = Vector2( 16, 12 )
 
 [sub_resource type="ImageTexture" id=16]
 
@@ -227,7 +230,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 12 )
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=18]
 
@@ -347,7 +350,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 16 )
+size = Vector2( 16, 12 )
 
 [sub_resource type="ImageTexture" id=33]
 
@@ -363,7 +366,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 12 )
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=35]
 
@@ -475,7 +478,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 16 )
+size = Vector2( 8, 16 )
 
 [sub_resource type="ImageTexture" id=49]
 
@@ -491,7 +494,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 8, 16 )
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=51]
 
@@ -515,7 +518,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 16 )
+size = Vector2( 16, 12 )
 
 [sub_resource type="ImageTexture" id=54]
 
@@ -531,7 +534,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 12 )
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=56]
 
@@ -579,7 +582,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 16 )
+size = Vector2( 32, 128 )
 
 [sub_resource type="ImageTexture" id=62]
 
@@ -587,7 +590,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 16 )
+size = Vector2( 16, 128 )
 
 [sub_resource type="ImageTexture" id=63]
 
@@ -595,7 +598,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 32, 128 )
+size = Vector2( 16, 128 )
 
 [sub_resource type="ImageTexture" id=64]
 
@@ -611,7 +614,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 128 )
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=66]
 
@@ -619,7 +622,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 128 )
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=67]
 
@@ -739,7 +742,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 16 )
+size = Vector2( 64, 64 )
 
 [sub_resource type="ImageTexture" id=82]
 
@@ -755,7 +758,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 64, 64 )
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=84]
 
@@ -819,7 +822,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 16 )
+size = Vector2( 16, 12 )
 
 [sub_resource type="ImageTexture" id=92]
 
@@ -835,7 +838,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 12 )
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=94]
 
@@ -1139,7 +1142,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 16 )
+size = Vector2( 12, 12 )
 
 [sub_resource type="ImageTexture" id=132]
 
@@ -1155,7 +1158,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 12, 12 )
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=134]
 
@@ -1179,7 +1182,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 16 )
+size = Vector2( 12, 12 )
 
 [sub_resource type="ImageTexture" id=137]
 
@@ -1187,7 +1190,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 16 )
+size = Vector2( 12, 12 )
 
 [sub_resource type="ImageTexture" id=138]
 
@@ -1219,7 +1222,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 12, 12 )
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=142]
 
@@ -1227,7 +1230,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 12, 12 )
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=143]
 
@@ -1275,7 +1278,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 16 )
+size = Vector2( 64, 64 )
 
 [sub_resource type="ImageTexture" id=149]
 
@@ -1283,7 +1286,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 16 )
+size = Vector2( 16, 12 )
 
 [sub_resource type="ImageTexture" id=150]
 
@@ -1291,7 +1294,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 64, 64 )
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=151]
 
@@ -1299,7 +1302,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 12 )
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=152]
 
@@ -1355,7 +1358,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 16 )
+size = Vector2( 8, 8 )
 
 [sub_resource type="ImageTexture" id=159]
 
@@ -1371,7 +1374,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 8, 8 )
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=161]
 
@@ -1379,7 +1382,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 16 )
+size = Vector2( 10, 10 )
 
 [sub_resource type="ImageTexture" id=162]
 
@@ -1387,7 +1390,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 16 )
+size = Vector2( 10, 10 )
 
 [sub_resource type="ImageTexture" id=163]
 
@@ -1395,7 +1398,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 10, 10 )
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=164]
 
@@ -1403,7 +1406,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 10, 10 )
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=165]
 
@@ -1411,7 +1414,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 16 )
+size = Vector2( 16, 12 )
 
 [sub_resource type="ImageTexture" id=166]
 
@@ -1427,7 +1430,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 12 )
+size = Vector2( 8, 8 )
 
 [sub_resource type="ImageTexture" id=168]
 
@@ -1435,7 +1438,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 16 )
+size = Vector2( 32, 32 )
 
 [sub_resource type="ImageTexture" id=169]
 
@@ -1443,7 +1446,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 8, 8 )
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=170]
 
@@ -1451,15 +1454,15 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 32, 32 )
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=171]
 
-flags = 0
+flags = 7
 storage = 0
 lossy_quality = 0.7
-flags = 0
-size = Vector2( 16, 16 )
+flags = 7
+size = Vector2( 64, 64 )
 
 [sub_resource type="ImageTexture" id=172]
 
@@ -1499,15 +1502,15 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 16 )
+size = Vector2( 32, 32 )
 
 [sub_resource type="ImageTexture" id=177]
 
-flags = 7
+flags = 0
 storage = 0
 lossy_quality = 0.7
-flags = 7
-size = Vector2( 64, 64 )
+flags = 0
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=178]
 
@@ -1515,7 +1518,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 32, 32 )
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=179]
 
@@ -1523,7 +1526,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 16 )
+size = Vector2( 32, 32 )
 
 [sub_resource type="ImageTexture" id=180]
 
@@ -1539,7 +1542,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 32, 32 )
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=182]
 
@@ -1567,11 +1570,11 @@ size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=185]
 
-flags = 0
+flags = 7
 storage = 0
 lossy_quality = 0.7
-flags = 0
-size = Vector2( 16, 16 )
+flags = 7
+size = Vector2( 64, 64 )
 
 [sub_resource type="ImageTexture" id=186]
 
@@ -1579,15 +1582,15 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 16 )
+size = Vector2( 32, 32 )
 
 [sub_resource type="ImageTexture" id=187]
 
-flags = 7
+flags = 0
 storage = 0
 lossy_quality = 0.7
-flags = 7
-size = Vector2( 64, 64 )
+flags = 0
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=188]
 
@@ -1595,7 +1598,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 32, 32 )
+size = Vector2( 8, 16 )
 
 [sub_resource type="ImageTexture" id=189]
 
@@ -1611,7 +1614,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 8, 16 )
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=191]
 
@@ -1639,19 +1642,19 @@ size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=194]
 
-flags = 0
+flags = 7
 storage = 0
 lossy_quality = 0.7
-flags = 0
-size = Vector2( 16, 16 )
+flags = 7
+size = Vector2( 128, 128 )
 
 [sub_resource type="ImageTexture" id=195]
 
-flags = 0
+flags = 7
 storage = 0
 lossy_quality = 0.7
-flags = 0
-size = Vector2( 16, 16 )
+flags = 7
+size = Vector2( 128, 128 )
 
 [sub_resource type="ImageTexture" id=196]
 
@@ -1727,19 +1730,19 @@ size = Vector2( 128, 128 )
 
 [sub_resource type="ImageTexture" id=205]
 
-flags = 7
+flags = 0
 storage = 0
 lossy_quality = 0.7
-flags = 7
-size = Vector2( 128, 128 )
+flags = 0
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=206]
 
-flags = 7
+flags = 0
 storage = 0
 lossy_quality = 0.7
-flags = 7
-size = Vector2( 128, 128 )
+flags = 0
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=207]
 
@@ -1851,7 +1854,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 16 )
+size = Vector2( 14, 14 )
 
 [sub_resource type="ImageTexture" id=221]
 
@@ -1859,7 +1862,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 16 )
+size = Vector2( 14, 8 )
 
 [sub_resource type="ImageTexture" id=222]
 
@@ -1867,7 +1870,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 14, 14 )
+size = Vector2( 10, 10 )
 
 [sub_resource type="ImageTexture" id=223]
 
@@ -1875,7 +1878,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 14, 8 )
+size = Vector2( 4, 16 )
 
 [sub_resource type="ImageTexture" id=224]
 
@@ -1883,7 +1886,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 10, 10 )
+size = Vector2( 8, 64 )
 
 [sub_resource type="ImageTexture" id=225]
 
@@ -1891,7 +1894,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 4, 16 )
+size = Vector2( 6, 16 )
 
 [sub_resource type="ImageTexture" id=226]
 
@@ -1899,7 +1902,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 8, 64 )
+size = Vector2( 12, 12 )
 
 [sub_resource type="ImageTexture" id=227]
 
@@ -1907,7 +1910,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 6, 16 )
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=228]
 
@@ -1915,7 +1918,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 12, 12 )
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=229]
 
@@ -1947,7 +1950,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 16 )
+size = Vector2( 12, 12 )
 
 [sub_resource type="ImageTexture" id=233]
 
@@ -1955,7 +1958,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 16 )
+size = Vector2( 12, 12 )
 
 [sub_resource type="ImageTexture" id=234]
 
@@ -1979,7 +1982,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 12, 12 )
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=237]
 
@@ -1987,7 +1990,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 12, 12 )
+size = Vector2( 16, 16 )
 
 [sub_resource type="ImageTexture" id=238]
 
@@ -2003,7 +2006,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 16 )
+size = Vector2( 8, 8 )
 
 [sub_resource type="ImageTexture" id=240]
 
@@ -2019,7 +2022,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 8, 8 )
+size = Vector2( 42, 26 )
 
 [sub_resource type="ImageTexture" id=242]
 
@@ -2027,7 +2030,7 @@ flags = 0
 storage = 0
 lossy_quality = 0.7
 flags = 0
-size = Vector2( 16, 16 )
+size = Vector2( 42, 26 )
 
 [sub_resource type="ImageTexture" id=243]
 
@@ -5144,7 +5147,7 @@ content_margin_left = 2.0
 content_margin_right = 2.0
 content_margin_top = 2.0
 content_margin_bottom = 2.0
-texture = SubResource( 235 )
+texture = SubResource( 233 )
 region_rect = Rect2( 0, 0, 12, 12 )
 margin_left = 6.0
 margin_right = 6.0
@@ -5163,7 +5166,7 @@ content_margin_left = 2.0
 content_margin_right = 2.0
 content_margin_top = 2.0
 content_margin_bottom = 2.0
-texture = SubResource( 236 )
+texture = SubResource( 234 )
 region_rect = Rect2( 0, 0, 12, 12 )
 margin_left = 5.0
 margin_right = 5.0
@@ -5182,7 +5185,7 @@ content_margin_left = 2.0
 content_margin_right = 2.0
 content_margin_top = 2.0
 content_margin_bottom = 2.0
-texture = SubResource( 237 )
+texture = SubResource( 235 )
 region_rect = Rect2( 0, 0, 12, 12 )
 margin_left = 6.0
 margin_right = 6.0
@@ -5201,7 +5204,7 @@ content_margin_left = 0.0
 content_margin_right = 0.0
 content_margin_top = 0.0
 content_margin_bottom = 0.0
-texture = SubResource( 234 )
+texture = SubResource( 232 )
 region_rect = Rect2( 0, 0, 12, 12 )
 margin_left = 5.0
 margin_right = 5.0
@@ -5220,7 +5223,7 @@ content_margin_left = 0.0
 content_margin_right = 0.0
 content_margin_top = 0.0
 content_margin_bottom = 0.0
-texture = SubResource( 234 )
+texture = SubResource( 232 )
 region_rect = Rect2( 0, 0, 12, 12 )
 margin_left = 5.0
 margin_right = 5.0
@@ -5484,7 +5487,7 @@ content_margin_left = 0.0
 content_margin_right = 0.0
 content_margin_top = 0.0
 content_margin_bottom = 0.0
-texture = SubResource( 229 )
+texture = SubResource( 227 )
 region_rect = Rect2( 0, 0, 16, 16 )
 margin_left = 4.0
 margin_right = 4.0
@@ -5503,7 +5506,7 @@ content_margin_left = 2.0
 content_margin_right = 2.0
 content_margin_top = 1.0
 content_margin_bottom = 1.0
-texture = SubResource( 230 )
+texture = SubResource( 228 )
 region_rect = Rect2( 0, 0, 16, 16 )
 margin_left = 6.0
 margin_right = 6.0
@@ -5683,7 +5686,7 @@ content_margin_left = 2.0
 content_margin_right = 2.0
 content_margin_top = 2.0
 content_margin_bottom = 2.0
-texture = SubResource( 235 )
+texture = SubResource( 233 )
 region_rect = Rect2( 0, 0, 12, 12 )
 margin_left = 6.0
 margin_right = 6.0
@@ -5702,7 +5705,7 @@ content_margin_left = 2.0
 content_margin_right = 2.0
 content_margin_top = 2.0
 content_margin_bottom = 2.0
-texture = SubResource( 236 )
+texture = SubResource( 234 )
 region_rect = Rect2( 0, 0, 12, 12 )
 margin_left = 5.0
 margin_right = 5.0
@@ -5721,7 +5724,7 @@ content_margin_left = 2.0
 content_margin_right = 2.0
 content_margin_top = 2.0
 content_margin_bottom = 2.0
-texture = SubResource( 237 )
+texture = SubResource( 235 )
 region_rect = Rect2( 0, 0, 12, 12 )
 margin_left = 6.0
 margin_right = 6.0
@@ -5740,7 +5743,7 @@ content_margin_left = 0.0
 content_margin_right = 0.0
 content_margin_top = 0.0
 content_margin_bottom = 0.0
-texture = SubResource( 234 )
+texture = SubResource( 232 )
 region_rect = Rect2( 0, 0, 12, 12 )
 margin_left = 5.0
 margin_right = 5.0
@@ -5759,7 +5762,7 @@ content_margin_left = 0.0
 content_margin_right = 0.0
 content_margin_top = 0.0
 content_margin_bottom = 0.0
-texture = SubResource( 234 )
+texture = SubResource( 232 )
 region_rect = Rect2( 0, 0, 12, 12 )
 margin_left = 5.0
 margin_right = 5.0
@@ -5880,7 +5883,7 @@ _sections_unfolded = [ "Expand Margin", "Margin", "Modulate", "Resource" ]
 
 [resource]
 
-default_font = ExtResource( 8 )
+default_font = ExtResource( 11 )
 BoxContainer/constants/separation = 4
 Button/colors/font_color = Color( 0.79902, 0.807843, 0.827451, 1 )
 Button/colors/font_color_disabled = Color( 1, 1, 1, 0.3 )
@@ -5915,21 +5918,21 @@ CheckButton/colors/font_color_pressed = Color( 0.411765, 0.611765, 0.909804, 1 )
 CheckButton/colors/icon_color_hover = Color( 0.879412, 0.884706, 0.896471, 1 )
 CheckButton/constants/check_vadjust = 0
 CheckButton/constants/hseparation = 4
-CheckButton/icons/off = SubResource( 8 )
-CheckButton/icons/on = SubResource( 9 )
-CheckButton/styles/disabled = SubResource( 10 )
-CheckButton/styles/hover = SubResource( 10 )
-CheckButton/styles/normal = SubResource( 10 )
-CheckButton/styles/pressed = SubResource( 10 )
+CheckButton/icons/off = ExtResource( 4 )
+CheckButton/icons/on = ExtResource( 5 )
+CheckButton/styles/disabled = SubResource( 8 )
+CheckButton/styles/hover = SubResource( 8 )
+CheckButton/styles/normal = SubResource( 8 )
+CheckButton/styles/pressed = SubResource( 8 )
 ColorPicker/constants/h_width = 30
 ColorPicker/constants/label_width = 10
 ColorPicker/constants/margin = 8
 ColorPicker/constants/sv_height = 256
 ColorPicker/constants/sv_width = 256
-ColorPicker/icons/add_preset = SubResource( 11 )
-ColorPicker/icons/preset_bg = SubResource( 12 )
-ColorPicker/icons/screen_picker = SubResource( 13 )
-ColorPickerButton/icons/bg = SubResource( 12 )
+ColorPicker/icons/add_preset = SubResource( 9 )
+ColorPicker/icons/preset_bg = SubResource( 10 )
+ColorPicker/icons/screen_picker = SubResource( 11 )
+ColorPickerButton/icons/bg = SubResource( 10 )
 Editor/colors/accent_color = Color( 0.411765, 0.611765, 0.909804, 1 )
 Editor/colors/base_color = Color( 0.196078, 0.231373, 0.309804, 1 )
 Editor/colors/contrast_color_1 = Color( 0.397059, 0.423529, 0.482353, 1 )
@@ -5953,7 +5956,7 @@ Editor/colors/warning_color = Color( 0.988235, 1.06024, 0.327529, 1.2 )
 Editor/constants/dark_theme = 1
 Editor/constants/scale = 1
 Editor/constants/thumb_size = 64
-EditorAbout/styles/panel = SubResource( 14 )
+EditorAbout/styles/panel = SubResource( 12 )
 EditorFonts/fonts/doc = null
 EditorFonts/fonts/doc_source = null
 EditorFonts/fonts/doc_title = null
@@ -5963,242 +5966,242 @@ EditorFonts/fonts/source = null
 EditorFonts/fonts/status_source = null
 EditorFonts/fonts/title = null
 EditorHelp/colors/headline_color = Color( 1, 1, 1, 1 )
-EditorIcons/icons/2D = SubResource( 15 )
-EditorIcons/icons/3D = SubResource( 16 )
-EditorIcons/icons/AABB = SubResource( 17 )
-EditorIcons/icons/ARVRAnchor = SubResource( 18 )
-EditorIcons/icons/ARVRCamera = SubResource( 19 )
-EditorIcons/icons/ARVRController = SubResource( 20 )
-EditorIcons/icons/ARVROrigin = SubResource( 21 )
-EditorIcons/icons/AcceptDialog = SubResource( 22 )
-EditorIcons/icons/ActionCopy = SubResource( 23 )
-EditorIcons/icons/ActionCut = SubResource( 24 )
-EditorIcons/icons/ActionPaste = SubResource( 25 )
-EditorIcons/icons/Add = SubResource( 11 )
-EditorIcons/icons/Anchor = SubResource( 26 )
-EditorIcons/icons/AnimatedSprite = SubResource( 27 )
-EditorIcons/icons/AnimatedSprite3D = SubResource( 28 )
-EditorIcons/icons/Animation = SubResource( 29 )
-EditorIcons/icons/AnimationPlayer = SubResource( 30 )
-EditorIcons/icons/AnimationTreePlayer = SubResource( 31 )
-EditorIcons/icons/Area = SubResource( 32 )
-EditorIcons/icons/Area2D = SubResource( 33 )
-EditorIcons/icons/Array = SubResource( 34 )
-EditorIcons/icons/ArrayMesh = SubResource( 35 )
-EditorIcons/icons/ArrowLeft = SubResource( 36 )
-EditorIcons/icons/ArrowRight = SubResource( 37 )
-EditorIcons/icons/ArrowUp = SubResource( 38 )
-EditorIcons/icons/AssetLib = SubResource( 39 )
-EditorIcons/icons/AtlasTexture = SubResource( 40 )
-EditorIcons/icons/AudioBusBypass = SubResource( 41 )
-EditorIcons/icons/AudioBusLayout = SubResource( 42 )
-EditorIcons/icons/AudioBusMute = SubResource( 43 )
-EditorIcons/icons/AudioBusSolo = SubResource( 44 )
-EditorIcons/icons/AudioStreamPlayer = SubResource( 45 )
-EditorIcons/icons/AudioStreamPlayer2D = SubResource( 46 )
-EditorIcons/icons/AudioStreamPlayer3D = SubResource( 47 )
-EditorIcons/icons/AudioStreamSample = SubResource( 48 )
-EditorIcons/icons/AutoPlay = SubResource( 49 )
-EditorIcons/icons/Back = SubResource( 50 )
-EditorIcons/icons/BackBufferCopy = SubResource( 51 )
-EditorIcons/icons/Bake = SubResource( 52 )
-EditorIcons/icons/BakedLightmap = SubResource( 53 )
-EditorIcons/icons/BakedLightmapData = SubResource( 54 )
-EditorIcons/icons/Basis = SubResource( 55 )
-EditorIcons/icons/BitMap = SubResource( 56 )
-EditorIcons/icons/BitmapFont = SubResource( 57 )
-EditorIcons/icons/Blend = SubResource( 58 )
-EditorIcons/icons/Bone = SubResource( 59 )
-EditorIcons/icons/BoneAttachment = SubResource( 60 )
-EditorIcons/icons/BoneTrack = SubResource( 61 )
-EditorIcons/icons/BoxShape = SubResource( 62 )
-EditorIcons/icons/BusVuDb = SubResource( 63 )
-EditorIcons/icons/BusVuEmpty = SubResource( 64 )
-EditorIcons/icons/BusVuFrozen = SubResource( 65 )
-EditorIcons/icons/BusVuFull = SubResource( 66 )
-EditorIcons/icons/Button = SubResource( 67 )
-EditorIcons/icons/ButtonGroup = SubResource( 68 )
-EditorIcons/icons/Camera = SubResource( 69 )
-EditorIcons/icons/Camera2D = SubResource( 70 )
-EditorIcons/icons/CanvasItem = SubResource( 71 )
-EditorIcons/icons/CanvasItemMaterial = SubResource( 72 )
-EditorIcons/icons/CanvasItemShader = SubResource( 73 )
-EditorIcons/icons/CanvasItemShaderGraph = SubResource( 74 )
-EditorIcons/icons/CanvasLayer = SubResource( 75 )
-EditorIcons/icons/CanvasModulate = SubResource( 76 )
-EditorIcons/icons/CapsuleMesh = SubResource( 77 )
-EditorIcons/icons/CapsuleShape = SubResource( 78 )
-EditorIcons/icons/CapsuleShape2D = SubResource( 79 )
-EditorIcons/icons/CenterContainer = SubResource( 80 )
-EditorIcons/icons/CheckBox = SubResource( 81 )
-EditorIcons/icons/CheckButton = SubResource( 82 )
-EditorIcons/icons/Checkerboard = SubResource( 83 )
-EditorIcons/icons/CircleShape2D = SubResource( 84 )
-EditorIcons/icons/ClassList = SubResource( 85 )
-EditorIcons/icons/Clear = SubResource( 86 )
-EditorIcons/icons/Close = SubResource( 87 )
-EditorIcons/icons/Collapse = SubResource( 88 )
-EditorIcons/icons/CollisionPolygon = SubResource( 89 )
-EditorIcons/icons/CollisionPolygon2D = SubResource( 90 )
-EditorIcons/icons/CollisionShape = SubResource( 91 )
-EditorIcons/icons/CollisionShape2D = SubResource( 92 )
-EditorIcons/icons/Color = SubResource( 93 )
-EditorIcons/icons/ColorPick = SubResource( 13 )
-EditorIcons/icons/ColorPicker = SubResource( 94 )
-EditorIcons/icons/ColorPickerButton = SubResource( 95 )
-EditorIcons/icons/ColorRamp = SubResource( 96 )
-EditorIcons/icons/ColorRect = SubResource( 97 )
-EditorIcons/icons/ConcavePolygonShape = SubResource( 98 )
-EditorIcons/icons/ConcavePolygonShape2D = SubResource( 99 )
-EditorIcons/icons/ConeTwistJoint = SubResource( 100 )
-EditorIcons/icons/ConfirmationDialog = SubResource( 101 )
-EditorIcons/icons/Container = SubResource( 102 )
-EditorIcons/icons/Control = SubResource( 103 )
-EditorIcons/icons/ControlAlignBottomCenter = SubResource( 104 )
-EditorIcons/icons/ControlAlignBottomLeft = SubResource( 105 )
-EditorIcons/icons/ControlAlignBottomRight = SubResource( 106 )
-EditorIcons/icons/ControlAlignBottomWide = SubResource( 107 )
-EditorIcons/icons/ControlAlignCenter = SubResource( 108 )
-EditorIcons/icons/ControlAlignCenterLeft = SubResource( 109 )
-EditorIcons/icons/ControlAlignCenterRight = SubResource( 110 )
-EditorIcons/icons/ControlAlignLeftCenter = SubResource( 111 )
-EditorIcons/icons/ControlAlignLeftWide = SubResource( 112 )
-EditorIcons/icons/ControlAlignRightCenter = SubResource( 113 )
-EditorIcons/icons/ControlAlignRightWide = SubResource( 114 )
-EditorIcons/icons/ControlAlignTopCenter = SubResource( 115 )
-EditorIcons/icons/ControlAlignTopLeft = SubResource( 116 )
-EditorIcons/icons/ControlAlignTopRight = SubResource( 117 )
-EditorIcons/icons/ControlAlignTopWide = SubResource( 118 )
-EditorIcons/icons/ControlAlignWide = SubResource( 119 )
-EditorIcons/icons/ControlHcenterWide = SubResource( 120 )
-EditorIcons/icons/ControlLayout = SubResource( 121 )
-EditorIcons/icons/ControlVcenterWide = SubResource( 122 )
-EditorIcons/icons/ConvexPolygonShape = SubResource( 123 )
-EditorIcons/icons/ConvexPolygonShape2D = SubResource( 124 )
-EditorIcons/icons/CopyNodePath = SubResource( 125 )
-EditorIcons/icons/CreateNewSceneFrom = SubResource( 126 )
-EditorIcons/icons/CubeMap = SubResource( 127 )
-EditorIcons/icons/CubeMesh = SubResource( 128 )
-EditorIcons/icons/Curve = SubResource( 129 )
-EditorIcons/icons/Curve2D = SubResource( 130 )
-EditorIcons/icons/Curve3D = SubResource( 131 )
-EditorIcons/icons/CurveClose = SubResource( 132 )
-EditorIcons/icons/CurveConstant = SubResource( 133 )
-EditorIcons/icons/CurveCreate = SubResource( 134 )
-EditorIcons/icons/CurveCurve = SubResource( 135 )
-EditorIcons/icons/CurveDelete = SubResource( 136 )
-EditorIcons/icons/CurveEdit = SubResource( 137 )
-EditorIcons/icons/CurveIn = SubResource( 138 )
-EditorIcons/icons/CurveInOut = SubResource( 139 )
-EditorIcons/icons/CurveLinear = SubResource( 140 )
-EditorIcons/icons/CurveOut = SubResource( 141 )
-EditorIcons/icons/CurveOutIn = SubResource( 142 )
-EditorIcons/icons/CurveTexture = SubResource( 143 )
-EditorIcons/icons/CylinderMesh = SubResource( 144 )
-EditorIcons/icons/DampedSpringJoint2D = SubResource( 145 )
-EditorIcons/icons/Debug = SubResource( 146 )
-EditorIcons/icons/DebugContinue = SubResource( 147 )
-EditorIcons/icons/DebugNext = SubResource( 148 )
-EditorIcons/icons/DebugStep = SubResource( 149 )
-EditorIcons/icons/DefaultProjectIcon = SubResource( 150 )
-EditorIcons/icons/Dictionary = SubResource( 151 )
-EditorIcons/icons/DirectionalLight = SubResource( 152 )
-EditorIcons/icons/DistractionFree = SubResource( 153 )
-EditorIcons/icons/Duplicate = SubResource( 154 )
-EditorIcons/icons/DynamicFont = SubResource( 155 )
-EditorIcons/icons/DynamicFontData = SubResource( 156 )
-EditorIcons/icons/Edit = SubResource( 157 )
-EditorIcons/icons/EditKey = SubResource( 158 )
-EditorIcons/icons/EditPivot = SubResource( 159 )
-EditorIcons/icons/EditResource = SubResource( 160 )
-EditorIcons/icons/Editor3DHandle = SubResource( 161 )
-EditorIcons/icons/EditorControlAnchor = SubResource( 162 )
-EditorIcons/icons/EditorHandle = SubResource( 163 )
-EditorIcons/icons/EditorHandleAdd = SubResource( 164 )
-EditorIcons/icons/EditorPivot = SubResource( 165 )
-EditorIcons/icons/EditorPlugin = SubResource( 166 )
-EditorIcons/icons/Enum = SubResource( 167 )
-EditorIcons/icons/Environment = SubResource( 168 )
-EditorIcons/icons/Error = SubResource( 169 )
-EditorIcons/icons/ErrorSign = SubResource( 170 )
-EditorIcons/icons/Favorites = SubResource( 171 )
-EditorIcons/icons/File = SubResource( 172 )
-EditorIcons/icons/FileBigThumb = SubResource( 173 )
-EditorIcons/icons/FileBroken = SubResource( 174 )
-EditorIcons/icons/FileBrokenBigThumb = SubResource( 175 )
-EditorIcons/icons/FileDead = SubResource( 176 )
-EditorIcons/icons/FileDeadBigThumb = SubResource( 177 )
-EditorIcons/icons/FileDeadMediumThumb = SubResource( 178 )
-EditorIcons/icons/FileDialog = SubResource( 179 )
-EditorIcons/icons/FileList = SubResource( 180 )
-EditorIcons/icons/FileMediumThumb = SubResource( 181 )
-EditorIcons/icons/FileThumbnail = SubResource( 182 )
-EditorIcons/icons/Filesystem = SubResource( 183 )
-EditorIcons/icons/FixedMaterial = SubResource( 184 )
-EditorIcons/icons/FixedSpatialMaterial = SubResource( 185 )
-EditorIcons/icons/Folder = SubResource( 186 )
-EditorIcons/icons/FolderBigThumb = SubResource( 187 )
-EditorIcons/icons/FolderMediumThumb = SubResource( 188 )
-EditorIcons/icons/Font = SubResource( 189 )
-EditorIcons/icons/Forward = SubResource( 190 )
-EditorIcons/icons/GDNativeLibrary = SubResource( 191 )
-EditorIcons/icons/GDScript = SubResource( 192 )
-EditorIcons/icons/GIProbe = SubResource( 193 )
-EditorIcons/icons/GIProbeData = SubResource( 194 )
-EditorIcons/icons/Generic6DOFJoint = SubResource( 195 )
-EditorIcons/icons/GizmoBakedLightmap = SubResource( 196 )
-EditorIcons/icons/GizmoCamera = SubResource( 197 )
-EditorIcons/icons/GizmoDirectionalLight = SubResource( 198 )
-EditorIcons/icons/GizmoGIProbe = SubResource( 199 )
-EditorIcons/icons/GizmoLight = SubResource( 200 )
-EditorIcons/icons/GizmoListener = SubResource( 201 )
-EditorIcons/icons/GizmoParticles = SubResource( 202 )
-EditorIcons/icons/GizmoReflectionProbe = SubResource( 203 )
-EditorIcons/icons/GizmoSpatialSamplePlayer = SubResource( 204 )
-EditorIcons/icons/GizmoSpatialStreamPlayer = SubResource( 205 )
-EditorIcons/icons/GizmoSpotLight = SubResource( 206 )
-EditorIcons/icons/Godot = SubResource( 207 )
-EditorIcons/icons/GodotDocs = SubResource( 208 )
-EditorIcons/icons/Gradient = SubResource( 209 )
-EditorIcons/icons/GradientTexture = SubResource( 210 )
-EditorIcons/icons/GraphEdit = SubResource( 211 )
-EditorIcons/icons/GraphNode = SubResource( 212 )
-EditorIcons/icons/Grid = SubResource( 213 )
-EditorIcons/icons/GridContainer = SubResource( 214 )
-EditorIcons/icons/GridMap = SubResource( 215 )
-EditorIcons/icons/GrooveJoint2D = SubResource( 216 )
-EditorIcons/icons/Group = SubResource( 217 )
-EditorIcons/icons/GroupViewport = SubResource( 218 )
-EditorIcons/icons/Groups = SubResource( 219 )
+EditorIcons/icons/2D = SubResource( 13 )
+EditorIcons/icons/3D = SubResource( 14 )
+EditorIcons/icons/AABB = SubResource( 15 )
+EditorIcons/icons/ARVRAnchor = SubResource( 16 )
+EditorIcons/icons/ARVRCamera = SubResource( 17 )
+EditorIcons/icons/ARVRController = SubResource( 18 )
+EditorIcons/icons/ARVROrigin = SubResource( 19 )
+EditorIcons/icons/AcceptDialog = SubResource( 20 )
+EditorIcons/icons/ActionCopy = SubResource( 21 )
+EditorIcons/icons/ActionCut = SubResource( 22 )
+EditorIcons/icons/ActionPaste = SubResource( 23 )
+EditorIcons/icons/Add = SubResource( 9 )
+EditorIcons/icons/Anchor = SubResource( 24 )
+EditorIcons/icons/AnimatedSprite = SubResource( 25 )
+EditorIcons/icons/AnimatedSprite3D = SubResource( 26 )
+EditorIcons/icons/Animation = SubResource( 27 )
+EditorIcons/icons/AnimationPlayer = SubResource( 28 )
+EditorIcons/icons/AnimationTreePlayer = SubResource( 29 )
+EditorIcons/icons/Area = SubResource( 30 )
+EditorIcons/icons/Area2D = SubResource( 31 )
+EditorIcons/icons/Array = SubResource( 32 )
+EditorIcons/icons/ArrayMesh = SubResource( 33 )
+EditorIcons/icons/ArrowLeft = SubResource( 34 )
+EditorIcons/icons/ArrowRight = SubResource( 35 )
+EditorIcons/icons/ArrowUp = SubResource( 36 )
+EditorIcons/icons/AssetLib = SubResource( 37 )
+EditorIcons/icons/AtlasTexture = SubResource( 38 )
+EditorIcons/icons/AudioBusBypass = SubResource( 39 )
+EditorIcons/icons/AudioBusLayout = SubResource( 40 )
+EditorIcons/icons/AudioBusMute = SubResource( 41 )
+EditorIcons/icons/AudioBusSolo = SubResource( 42 )
+EditorIcons/icons/AudioStreamPlayer = SubResource( 43 )
+EditorIcons/icons/AudioStreamPlayer2D = SubResource( 44 )
+EditorIcons/icons/AudioStreamPlayer3D = SubResource( 45 )
+EditorIcons/icons/AudioStreamSample = SubResource( 46 )
+EditorIcons/icons/AutoPlay = SubResource( 47 )
+EditorIcons/icons/Back = SubResource( 48 )
+EditorIcons/icons/BackBufferCopy = SubResource( 49 )
+EditorIcons/icons/Bake = SubResource( 50 )
+EditorIcons/icons/BakedLightmap = SubResource( 51 )
+EditorIcons/icons/BakedLightmapData = SubResource( 52 )
+EditorIcons/icons/Basis = SubResource( 53 )
+EditorIcons/icons/BitMap = SubResource( 54 )
+EditorIcons/icons/BitmapFont = SubResource( 55 )
+EditorIcons/icons/Blend = SubResource( 56 )
+EditorIcons/icons/Bone = SubResource( 57 )
+EditorIcons/icons/BoneAttachment = SubResource( 58 )
+EditorIcons/icons/BoneTrack = SubResource( 59 )
+EditorIcons/icons/BoxShape = SubResource( 60 )
+EditorIcons/icons/BusVuDb = SubResource( 61 )
+EditorIcons/icons/BusVuEmpty = SubResource( 62 )
+EditorIcons/icons/BusVuFrozen = SubResource( 63 )
+EditorIcons/icons/BusVuFull = SubResource( 64 )
+EditorIcons/icons/Button = SubResource( 65 )
+EditorIcons/icons/ButtonGroup = SubResource( 66 )
+EditorIcons/icons/Camera = SubResource( 67 )
+EditorIcons/icons/Camera2D = SubResource( 68 )
+EditorIcons/icons/CanvasItem = SubResource( 69 )
+EditorIcons/icons/CanvasItemMaterial = SubResource( 70 )
+EditorIcons/icons/CanvasItemShader = SubResource( 71 )
+EditorIcons/icons/CanvasItemShaderGraph = SubResource( 72 )
+EditorIcons/icons/CanvasLayer = SubResource( 73 )
+EditorIcons/icons/CanvasModulate = SubResource( 74 )
+EditorIcons/icons/CapsuleMesh = SubResource( 75 )
+EditorIcons/icons/CapsuleShape = SubResource( 76 )
+EditorIcons/icons/CapsuleShape2D = SubResource( 77 )
+EditorIcons/icons/CenterContainer = SubResource( 78 )
+EditorIcons/icons/CheckBox = SubResource( 79 )
+EditorIcons/icons/CheckButton = SubResource( 80 )
+EditorIcons/icons/Checkerboard = SubResource( 81 )
+EditorIcons/icons/CircleShape2D = SubResource( 82 )
+EditorIcons/icons/ClassList = SubResource( 83 )
+EditorIcons/icons/Clear = SubResource( 84 )
+EditorIcons/icons/Close = SubResource( 85 )
+EditorIcons/icons/Collapse = SubResource( 86 )
+EditorIcons/icons/CollisionPolygon = SubResource( 87 )
+EditorIcons/icons/CollisionPolygon2D = SubResource( 88 )
+EditorIcons/icons/CollisionShape = SubResource( 89 )
+EditorIcons/icons/CollisionShape2D = SubResource( 90 )
+EditorIcons/icons/Color = SubResource( 91 )
+EditorIcons/icons/ColorPick = SubResource( 11 )
+EditorIcons/icons/ColorPicker = SubResource( 92 )
+EditorIcons/icons/ColorPickerButton = SubResource( 93 )
+EditorIcons/icons/ColorRamp = SubResource( 94 )
+EditorIcons/icons/ColorRect = SubResource( 95 )
+EditorIcons/icons/ConcavePolygonShape = SubResource( 96 )
+EditorIcons/icons/ConcavePolygonShape2D = SubResource( 97 )
+EditorIcons/icons/ConeTwistJoint = SubResource( 98 )
+EditorIcons/icons/ConfirmationDialog = SubResource( 99 )
+EditorIcons/icons/Container = SubResource( 100 )
+EditorIcons/icons/Control = SubResource( 101 )
+EditorIcons/icons/ControlAlignBottomCenter = SubResource( 102 )
+EditorIcons/icons/ControlAlignBottomLeft = SubResource( 103 )
+EditorIcons/icons/ControlAlignBottomRight = SubResource( 104 )
+EditorIcons/icons/ControlAlignBottomWide = SubResource( 105 )
+EditorIcons/icons/ControlAlignCenter = SubResource( 106 )
+EditorIcons/icons/ControlAlignCenterLeft = SubResource( 107 )
+EditorIcons/icons/ControlAlignCenterRight = SubResource( 108 )
+EditorIcons/icons/ControlAlignLeftCenter = SubResource( 109 )
+EditorIcons/icons/ControlAlignLeftWide = SubResource( 110 )
+EditorIcons/icons/ControlAlignRightCenter = SubResource( 111 )
+EditorIcons/icons/ControlAlignRightWide = SubResource( 112 )
+EditorIcons/icons/ControlAlignTopCenter = SubResource( 113 )
+EditorIcons/icons/ControlAlignTopLeft = SubResource( 114 )
+EditorIcons/icons/ControlAlignTopRight = SubResource( 115 )
+EditorIcons/icons/ControlAlignTopWide = SubResource( 116 )
+EditorIcons/icons/ControlAlignWide = SubResource( 117 )
+EditorIcons/icons/ControlHcenterWide = SubResource( 118 )
+EditorIcons/icons/ControlLayout = SubResource( 119 )
+EditorIcons/icons/ControlVcenterWide = SubResource( 120 )
+EditorIcons/icons/ConvexPolygonShape = SubResource( 121 )
+EditorIcons/icons/ConvexPolygonShape2D = SubResource( 122 )
+EditorIcons/icons/CopyNodePath = SubResource( 123 )
+EditorIcons/icons/CreateNewSceneFrom = SubResource( 124 )
+EditorIcons/icons/CubeMap = SubResource( 125 )
+EditorIcons/icons/CubeMesh = SubResource( 126 )
+EditorIcons/icons/Curve = SubResource( 127 )
+EditorIcons/icons/Curve2D = SubResource( 128 )
+EditorIcons/icons/Curve3D = SubResource( 129 )
+EditorIcons/icons/CurveClose = SubResource( 130 )
+EditorIcons/icons/CurveConstant = SubResource( 131 )
+EditorIcons/icons/CurveCreate = SubResource( 132 )
+EditorIcons/icons/CurveCurve = SubResource( 133 )
+EditorIcons/icons/CurveDelete = SubResource( 134 )
+EditorIcons/icons/CurveEdit = SubResource( 135 )
+EditorIcons/icons/CurveIn = SubResource( 136 )
+EditorIcons/icons/CurveInOut = SubResource( 137 )
+EditorIcons/icons/CurveLinear = SubResource( 138 )
+EditorIcons/icons/CurveOut = SubResource( 139 )
+EditorIcons/icons/CurveOutIn = SubResource( 140 )
+EditorIcons/icons/CurveTexture = SubResource( 141 )
+EditorIcons/icons/CylinderMesh = SubResource( 142 )
+EditorIcons/icons/DampedSpringJoint2D = SubResource( 143 )
+EditorIcons/icons/Debug = SubResource( 144 )
+EditorIcons/icons/DebugContinue = SubResource( 145 )
+EditorIcons/icons/DebugNext = SubResource( 146 )
+EditorIcons/icons/DebugStep = SubResource( 147 )
+EditorIcons/icons/DefaultProjectIcon = SubResource( 148 )
+EditorIcons/icons/Dictionary = SubResource( 149 )
+EditorIcons/icons/DirectionalLight = SubResource( 150 )
+EditorIcons/icons/DistractionFree = SubResource( 151 )
+EditorIcons/icons/Duplicate = SubResource( 152 )
+EditorIcons/icons/DynamicFont = SubResource( 153 )
+EditorIcons/icons/DynamicFontData = SubResource( 154 )
+EditorIcons/icons/Edit = SubResource( 155 )
+EditorIcons/icons/EditKey = SubResource( 156 )
+EditorIcons/icons/EditPivot = SubResource( 157 )
+EditorIcons/icons/EditResource = SubResource( 158 )
+EditorIcons/icons/Editor3DHandle = SubResource( 159 )
+EditorIcons/icons/EditorControlAnchor = SubResource( 160 )
+EditorIcons/icons/EditorHandle = SubResource( 161 )
+EditorIcons/icons/EditorHandleAdd = SubResource( 162 )
+EditorIcons/icons/EditorPivot = SubResource( 163 )
+EditorIcons/icons/EditorPlugin = SubResource( 164 )
+EditorIcons/icons/Enum = SubResource( 165 )
+EditorIcons/icons/Environment = SubResource( 166 )
+EditorIcons/icons/Error = SubResource( 167 )
+EditorIcons/icons/ErrorSign = SubResource( 168 )
+EditorIcons/icons/Favorites = SubResource( 169 )
+EditorIcons/icons/File = SubResource( 170 )
+EditorIcons/icons/FileBigThumb = SubResource( 171 )
+EditorIcons/icons/FileBroken = SubResource( 172 )
+EditorIcons/icons/FileBrokenBigThumb = SubResource( 173 )
+EditorIcons/icons/FileDead = SubResource( 174 )
+EditorIcons/icons/FileDeadBigThumb = SubResource( 175 )
+EditorIcons/icons/FileDeadMediumThumb = SubResource( 176 )
+EditorIcons/icons/FileDialog = SubResource( 177 )
+EditorIcons/icons/FileList = SubResource( 178 )
+EditorIcons/icons/FileMediumThumb = SubResource( 179 )
+EditorIcons/icons/FileThumbnail = SubResource( 180 )
+EditorIcons/icons/Filesystem = SubResource( 181 )
+EditorIcons/icons/FixedMaterial = SubResource( 182 )
+EditorIcons/icons/FixedSpatialMaterial = SubResource( 183 )
+EditorIcons/icons/Folder = SubResource( 184 )
+EditorIcons/icons/FolderBigThumb = SubResource( 185 )
+EditorIcons/icons/FolderMediumThumb = SubResource( 186 )
+EditorIcons/icons/Font = SubResource( 187 )
+EditorIcons/icons/Forward = SubResource( 188 )
+EditorIcons/icons/GDNativeLibrary = SubResource( 189 )
+EditorIcons/icons/GDScript = SubResource( 190 )
+EditorIcons/icons/GIProbe = SubResource( 191 )
+EditorIcons/icons/GIProbeData = SubResource( 192 )
+EditorIcons/icons/Generic6DOFJoint = SubResource( 193 )
+EditorIcons/icons/GizmoBakedLightmap = SubResource( 194 )
+EditorIcons/icons/GizmoCamera = SubResource( 195 )
+EditorIcons/icons/GizmoDirectionalLight = SubResource( 196 )
+EditorIcons/icons/GizmoGIProbe = SubResource( 197 )
+EditorIcons/icons/GizmoLight = SubResource( 198 )
+EditorIcons/icons/GizmoListener = SubResource( 199 )
+EditorIcons/icons/GizmoParticles = SubResource( 200 )
+EditorIcons/icons/GizmoReflectionProbe = SubResource( 201 )
+EditorIcons/icons/GizmoSpatialSamplePlayer = SubResource( 202 )
+EditorIcons/icons/GizmoSpatialStreamPlayer = SubResource( 203 )
+EditorIcons/icons/GizmoSpotLight = SubResource( 204 )
+EditorIcons/icons/Godot = SubResource( 205 )
+EditorIcons/icons/GodotDocs = SubResource( 206 )
+EditorIcons/icons/Gradient = SubResource( 207 )
+EditorIcons/icons/GradientTexture = SubResource( 208 )
+EditorIcons/icons/GraphEdit = SubResource( 209 )
+EditorIcons/icons/GraphNode = SubResource( 210 )
+EditorIcons/icons/Grid = SubResource( 211 )
+EditorIcons/icons/GridContainer = SubResource( 212 )
+EditorIcons/icons/GridMap = SubResource( 213 )
+EditorIcons/icons/GrooveJoint2D = SubResource( 214 )
+EditorIcons/icons/Group = SubResource( 215 )
+EditorIcons/icons/GroupViewport = SubResource( 216 )
+EditorIcons/icons/Groups = SubResource( 217 )
 EditorIcons/icons/GuiChecked = SubResource( 3 )
-EditorIcons/icons/GuiClose = SubResource( 220 )
-EditorIcons/icons/GuiCloseCustomizable = SubResource( 221 )
-EditorIcons/icons/GuiDropdown = SubResource( 222 )
-EditorIcons/icons/GuiEllipsis = SubResource( 223 )
-EditorIcons/icons/GuiGraphNodePort = SubResource( 224 )
-EditorIcons/icons/GuiHTick = SubResource( 225 )
-EditorIcons/icons/GuiHsplitter = SubResource( 226 )
-EditorIcons/icons/GuiMiniCheckerboard = SubResource( 12 )
-EditorIcons/icons/GuiMiniTabMenu = SubResource( 227 )
-EditorIcons/icons/GuiOptionArrow = SubResource( 228 )
-EditorIcons/icons/GuiProgressBar = SubResource( 229 )
-EditorIcons/icons/GuiProgressFill = SubResource( 230 )
+EditorIcons/icons/GuiClose = SubResource( 218 )
+EditorIcons/icons/GuiCloseCustomizable = SubResource( 219 )
+EditorIcons/icons/GuiDropdown = SubResource( 220 )
+EditorIcons/icons/GuiEllipsis = SubResource( 221 )
+EditorIcons/icons/GuiGraphNodePort = SubResource( 222 )
+EditorIcons/icons/GuiHTick = SubResource( 223 )
+EditorIcons/icons/GuiHsplitter = SubResource( 224 )
+EditorIcons/icons/GuiMiniCheckerboard = SubResource( 10 )
+EditorIcons/icons/GuiMiniTabMenu = SubResource( 225 )
+EditorIcons/icons/GuiOptionArrow = SubResource( 226 )
+EditorIcons/icons/GuiProgressBar = SubResource( 227 )
+EditorIcons/icons/GuiProgressFill = SubResource( 228 )
 EditorIcons/icons/GuiRadioChecked = SubResource( 4 )
 EditorIcons/icons/GuiRadioUnchecked = SubResource( 5 )
-EditorIcons/icons/GuiResizer = SubResource( 231 )
-EditorIcons/icons/GuiScrollArrowLeft = SubResource( 232 )
-EditorIcons/icons/GuiScrollArrowRight = SubResource( 233 )
-EditorIcons/icons/GuiScrollBg = SubResource( 234 )
-EditorIcons/icons/GuiScrollGrabber = SubResource( 235 )
-EditorIcons/icons/GuiScrollGrabberHl = SubResource( 236 )
-EditorIcons/icons/GuiScrollGrabberPressed = SubResource( 237 )
-EditorIcons/icons/GuiSliderGrabber = SubResource( 238 )
-EditorIcons/icons/GuiSliderGrabberHl = SubResource( 239 )
-EditorIcons/icons/GuiSpinboxUpdown = SubResource( 240 )
-EditorIcons/icons/GuiTab = SubResource( 241 )
-EditorIcons/icons/GuiTabMenu = SubResource( 242 )
-EditorIcons/icons/GuiToggleOff = SubResource( 8 )
-EditorIcons/icons/GuiToggleOn = SubResource( 9 )
+EditorIcons/icons/GuiResizer = SubResource( 229 )
+EditorIcons/icons/GuiScrollArrowLeft = SubResource( 230 )
+EditorIcons/icons/GuiScrollArrowRight = SubResource( 231 )
+EditorIcons/icons/GuiScrollBg = SubResource( 232 )
+EditorIcons/icons/GuiScrollGrabber = SubResource( 233 )
+EditorIcons/icons/GuiScrollGrabberHl = SubResource( 234 )
+EditorIcons/icons/GuiScrollGrabberPressed = SubResource( 235 )
+EditorIcons/icons/GuiSliderGrabber = SubResource( 236 )
+EditorIcons/icons/GuiSliderGrabberHl = SubResource( 237 )
+EditorIcons/icons/GuiSpinboxUpdown = SubResource( 238 )
+EditorIcons/icons/GuiTab = SubResource( 239 )
+EditorIcons/icons/GuiTabMenu = SubResource( 240 )
+EditorIcons/icons/GuiToggleOff = SubResource( 241 )
+EditorIcons/icons/GuiToggleOn = SubResource( 242 )
 EditorIcons/icons/GuiTreeArrowDown = SubResource( 243 )
 EditorIcons/icons/GuiTreeArrowRight = SubResource( 244 )
 EditorIcons/icons/GuiTreeOption = SubResource( 245 )
@@ -6529,7 +6532,7 @@ EditorIcons/icons/ZoomReset = SubResource( 568 )
 EditorIcons/icons/bool = SubResource( 569 )
 EditorIcons/icons/float = SubResource( 570 )
 EditorIcons/icons/int = SubResource( 571 )
-EditorSettingsDialog/styles/panel = SubResource( 14 )
+EditorSettingsDialog/styles/panel = SubResource( 12 )
 EditorStyles/styles/Background = SubResource( 572 )
 EditorStyles/styles/BottomPanelDebuggerOverride = SubResource( 573 )
 EditorStyles/styles/Content = SubResource( 574 )
@@ -6539,14 +6542,14 @@ EditorStyles/styles/DebuggerTabFG = SubResource( 577 )
 EditorStyles/styles/Focus = SubResource( 578 )
 EditorStyles/styles/Information3dViewport = SubResource( 579 )
 EditorStyles/styles/MenuHover = SubResource( 580 )
-EditorStyles/styles/MenuPanel = SubResource( 10 )
+EditorStyles/styles/MenuPanel = SubResource( 8 )
 EditorStyles/styles/PlayButtonPanel = SubResource( 581 )
 EditorStyles/styles/SceneTabBG = SubResource( 576 )
 EditorStyles/styles/SceneTabFG = SubResource( 577 )
 EditorStyles/styles/ScriptEditor = SubResource( 582 )
 EditorStyles/styles/ScriptEditorPanel = SubResource( 583 )
 FileDialog/colors/files_disabled = Color( 1, 1, 1, 0.3 )
-FileDialog/icons/folder = SubResource( 186 )
+FileDialog/icons/folder = SubResource( 184 )
 GraphEdit/colors/grid_major = Color( 1, 1, 1, 0.15 )
 GraphEdit/colors/grid_minor = Color( 1, 1, 1, 0.07 )
 GraphEdit/constants/bezier_len_neg = 160
@@ -6562,9 +6565,9 @@ GraphNode/constants/close_h_offset = 20
 GraphNode/constants/close_offset = 20
 GraphNode/constants/port_offset = 14
 GraphNode/constants/title_h_offset = -16
-GraphNode/icons/close = SubResource( 221 )
-GraphNode/icons/port = SubResource( 224 )
-GraphNode/icons/resizer = SubResource( 231 )
+GraphNode/icons/close = SubResource( 219 )
+GraphNode/icons/port = SubResource( 222 )
+GraphNode/icons/resizer = SubResource( 229 )
 GraphNode/styles/breakpoint = SubResource( 585 )
 GraphNode/styles/comment = SubResource( 586 )
 GraphNode/styles/commentfocus = SubResource( 587 )
@@ -6585,12 +6588,12 @@ HScrollBar/styles/grabber_pressed = SubResource( 594 )
 HScrollBar/styles/scroll = SubResource( 595 )
 HScrollBar/styles/scroll_focus = SubResource( 596 )
 HSeparator/styles/separator = SubResource( 597 )
-HSlider/icons/grabber = SubResource( 238 )
-HSlider/icons/grabber_highlight = SubResource( 239 )
+HSlider/icons/grabber = SubResource( 236 )
+HSlider/icons/grabber_highlight = SubResource( 237 )
 HSlider/styles/grabber_area = SubResource( 598 )
 HSlider/styles/slider = SubResource( 599 )
 HSplitContainer/constants/separation = 8
-HSplitContainer/icons/grabber = SubResource( 226 )
+HSplitContainer/icons/grabber = SubResource( 224 )
 HSplitContainer/styles/bg = SubResource( 601 )
 ItemList/colors/font_color = Color( 0.79902, 0.807843, 0.827451, 1 )
 ItemList/colors/font_color_selected = Color( 1, 1, 1, 1 )
@@ -6616,9 +6619,9 @@ LineEdit/colors/cursor_color = Color( 0.79902, 0.807843, 0.827451, 1 )
 LineEdit/colors/font_color = Color( 0.79902, 0.807843, 0.827451, 1 )
 LineEdit/colors/read_only = Color( 1, 1, 1, 0.3 )
 LineEdit/colors/selection_color = Color( 0.490196, 0.490196, 0.490196, 1 )
-LineEdit/styles/focus = ExtResource( 4 )
-LineEdit/styles/normal = ExtResource( 5 )
-LineEdit/styles/read_only = ExtResource( 6 )
+LineEdit/styles/focus = ExtResource( 6 )
+LineEdit/styles/normal = ExtResource( 7 )
+LineEdit/styles/read_only = ExtResource( 8 )
 LinkButton/colors/font_color = Color( 0.79902, 0.807843, 0.827451, 1 )
 LinkButton/styles/focus = SubResource( 581 )
 MarginContainer/constants/margin_bottom = 0
@@ -6627,11 +6630,11 @@ MarginContainer/constants/margin_right = 0
 MarginContainer/constants/margin_top = 0
 MenuButton/colors/font_color = Color( 0.79902, 0.807843, 0.827451, 1 )
 MenuButton/colors/font_color_hover = Color( 0.879412, 0.884706, 0.896471, 1 )
-MenuButton/styles/disabled = SubResource( 10 )
-MenuButton/styles/focus = SubResource( 10 )
-MenuButton/styles/hover = SubResource( 10 )
-MenuButton/styles/normal = SubResource( 10 )
-MenuButton/styles/pressed = SubResource( 10 )
+MenuButton/styles/disabled = SubResource( 8 )
+MenuButton/styles/focus = SubResource( 8 )
+MenuButton/styles/hover = SubResource( 8 )
+MenuButton/styles/normal = SubResource( 8 )
+MenuButton/styles/pressed = SubResource( 8 )
 OptionButton/colors/font_color = Color( 0.79902, 0.807843, 0.827451, 1 )
 OptionButton/colors/font_color_disabled = Color( 1, 1, 1, 0.3 )
 OptionButton/colors/font_color_hover = Color( 0.879412, 0.884706, 0.896471, 1 )
@@ -6639,14 +6642,14 @@ OptionButton/colors/font_color_pressed = Color( 0.411765, 0.611765, 0.909804, 1 
 OptionButton/colors/icon_color_hover = Color( 0.879412, 0.884706, 0.896471, 1 )
 OptionButton/constants/arrow_margin = 4
 OptionButton/constants/modulate_arrow = 1
-OptionButton/icons/arrow = SubResource( 228 )
-OptionButton/styles/disabled = ExtResource( 6 )
-OptionButton/styles/focus = ExtResource( 4 )
-OptionButton/styles/hover = ExtResource( 7 )
-OptionButton/styles/normal = ExtResource( 5 )
+OptionButton/icons/arrow = SubResource( 226 )
+OptionButton/styles/disabled = ExtResource( 8 )
+OptionButton/styles/focus = ExtResource( 6 )
+OptionButton/styles/hover = ExtResource( 9 )
+OptionButton/styles/normal = ExtResource( 7 )
 OptionButton/styles/pressed = ExtResource( 3 )
 Panel/styles/panel = ExtResource( 2 )
-PanelContainer/styles/panel = SubResource( 10 )
+PanelContainer/styles/panel = SubResource( 8 )
 PopupMenu/colors/font_color = Color( 0.79902, 0.807843, 0.827451, 1 )
 PopupMenu/colors/font_color_accel = Color( 1, 1, 1, 0.3 )
 PopupMenu/colors/font_color_disabled = Color( 1, 1, 1, 0.3 )
@@ -6655,66 +6658,66 @@ PopupMenu/constants/vseparation = 4
 PopupMenu/icons/checked = SubResource( 3 )
 PopupMenu/icons/radio_checked = SubResource( 4 )
 PopupMenu/icons/radio_unchecked = SubResource( 5 )
-PopupMenu/icons/submenu = SubResource( 37 )
+PopupMenu/icons/submenu = SubResource( 35 )
 PopupMenu/icons/unchecked = SubResource( 6 )
 PopupMenu/icons/visibility_hidden = SubResource( 248 )
 PopupMenu/icons/visibility_visible = SubResource( 249 )
 PopupMenu/icons/visibility_xray = SubResource( 250 )
-PopupMenu/styles/disabled = SubResource( 10 )
-PopupMenu/styles/focus = SubResource( 10 )
+PopupMenu/styles/disabled = SubResource( 8 )
+PopupMenu/styles/focus = SubResource( 8 )
 PopupMenu/styles/hover = SubResource( 605 )
-PopupMenu/styles/normal = SubResource( 10 )
+PopupMenu/styles/normal = SubResource( 8 )
 PopupMenu/styles/panel = SubResource( 606 )
-PopupMenu/styles/pressed = SubResource( 10 )
+PopupMenu/styles/pressed = SubResource( 8 )
 PopupMenu/styles/separator = SubResource( 607 )
 PopupPanel/styles/panel = SubResource( 606 )
 ProgressBar/colors/font_color = Color( 0.79902, 0.807843, 0.827451, 1 )
 ProgressBar/styles/bg = SubResource( 608 )
 ProgressBar/styles/fg = SubResource( 609 )
-ProjectSettingsEditor/styles/panel = SubResource( 14 )
+ProjectSettingsEditor/styles/panel = SubResource( 12 )
 RichTextLabel/colors/default_color = Color( 0.79902, 0.807843, 0.827451, 1 )
 RichTextLabel/styles/focus = SubResource( 610 )
 RichTextLabel/styles/normal = SubResource( 584 )
-SpinBox/icons/updown = SubResource( 240 )
+SpinBox/icons/updown = SubResource( 238 )
 TabContainer/colors/font_color_bg = Color( 1, 1, 1, 0.3 )
 TabContainer/colors/font_color_fg = Color( 0.79902, 0.807843, 0.827451, 1 )
 TabContainer/constants/side_margin = 0
-TabContainer/icons/decrement = SubResource( 232 )
-TabContainer/icons/decrement_highlight = SubResource( 232 )
-TabContainer/icons/increment = SubResource( 233 )
-TabContainer/icons/increment_highlight = SubResource( 233 )
-TabContainer/icons/menu = SubResource( 242 )
-TabContainer/icons/menu_hl = SubResource( 242 )
+TabContainer/icons/decrement = SubResource( 230 )
+TabContainer/icons/decrement_highlight = SubResource( 230 )
+TabContainer/icons/increment = SubResource( 231 )
+TabContainer/icons/increment_highlight = SubResource( 231 )
+TabContainer/icons/menu = SubResource( 240 )
+TabContainer/icons/menu_hl = SubResource( 240 )
 TabContainer/styles/panel = SubResource( 611 )
 TabContainer/styles/tab_bg = SubResource( 576 )
 TabContainer/styles/tab_fg = SubResource( 577 )
 Tabs/colors/font_color_bg = Color( 1, 1, 1, 0.3 )
 Tabs/colors/font_color_fg = Color( 0.79902, 0.807843, 0.827451, 1 )
 Tabs/constants/hseparation = 4
-Tabs/icons/close = SubResource( 220 )
-Tabs/icons/decrement = SubResource( 232 )
-Tabs/icons/decrement_highlight = SubResource( 232 )
-Tabs/icons/increment = SubResource( 233 )
-Tabs/icons/increment_highlight = SubResource( 233 )
-Tabs/styles/button = SubResource( 10 )
-Tabs/styles/button_pressed = SubResource( 10 )
+Tabs/icons/close = SubResource( 218 )
+Tabs/icons/decrement = SubResource( 230 )
+Tabs/icons/decrement_highlight = SubResource( 230 )
+Tabs/icons/increment = SubResource( 231 )
+Tabs/icons/increment_highlight = SubResource( 231 )
+Tabs/styles/button = SubResource( 8 )
+Tabs/styles/button_pressed = SubResource( 8 )
 Tabs/styles/tab_bg = SubResource( 576 )
 Tabs/styles/tab_fg = SubResource( 577 )
 TextEdit/colors/caret_color = Color( 1, 1, 1, 0.2 )
 TextEdit/colors/font_color = Color( 0.79902, 0.807843, 0.827451, 1 )
 TextEdit/colors/selection_color = Color( 0.490196, 0.490196, 0.490196, 1 )
-TextEdit/icons/tab = SubResource( 241 )
-TextEdit/styles/focus = ExtResource( 7 )
-TextEdit/styles/normal = ExtResource( 5 )
-TextEdit/styles/read_only = ExtResource( 6 )
+TextEdit/icons/tab = SubResource( 239 )
+TextEdit/styles/focus = ExtResource( 9 )
+TextEdit/styles/normal = ExtResource( 7 )
+TextEdit/styles/read_only = ExtResource( 8 )
 ToolButton/colors/font_color = Color( 0.79902, 0.807843, 0.827451, 1 )
 ToolButton/colors/font_color_hover = Color( 0.879412, 0.884706, 0.896471, 1 )
 ToolButton/colors/font_color_pressed = Color( 0.411765, 0.611765, 0.909804, 1 )
-ToolButton/styles/disabled = SubResource( 10 )
-ToolButton/styles/focus = SubResource( 10 )
-ToolButton/styles/hover = SubResource( 10 )
-ToolButton/styles/normal = SubResource( 10 )
-ToolButton/styles/pressed = SubResource( 10 )
+ToolButton/styles/disabled = SubResource( 8 )
+ToolButton/styles/focus = SubResource( 8 )
+ToolButton/styles/hover = SubResource( 8 )
+ToolButton/styles/normal = SubResource( 8 )
+ToolButton/styles/pressed = SubResource( 8 )
 TooltipLabel/colors/font_color = Color( 0.20098, 0.192157, 0.172549, 1 )
 TooltipLabel/colors/font_color_shadow = Color( 0, 0, 0, 0.1 )
 TooltipPanel/styles/panel = SubResource( 612 )
@@ -6735,7 +6738,7 @@ Tree/constants/vseparation = 4
 Tree/icons/arrow = SubResource( 243 )
 Tree/icons/arrow_collapsed = SubResource( 244 )
 Tree/icons/checked = SubResource( 3 )
-Tree/icons/select_arrow = SubResource( 222 )
+Tree/icons/select_arrow = SubResource( 220 )
 Tree/icons/select_option = SubResource( 245 )
 Tree/icons/unchecked = SubResource( 6 )
 Tree/icons/updown = SubResource( 246 )
@@ -6745,7 +6748,7 @@ Tree/styles/button_pressed = SubResource( 613 )
 Tree/styles/cursor = SubResource( 614 )
 Tree/styles/cursor_unfocused = SubResource( 614 )
 Tree/styles/custom_button = SubResource( 615 )
-Tree/styles/custom_button_hover = ExtResource( 5 )
+Tree/styles/custom_button_hover = ExtResource( 7 )
 Tree/styles/custom_button_pressed = SubResource( 616 )
 Tree/styles/selected = SubResource( 603 )
 Tree/styles/selected_focus = SubResource( 604 )
@@ -6763,8 +6766,8 @@ VScrollBar/styles/grabber_pressed = SubResource( 620 )
 VScrollBar/styles/scroll = SubResource( 621 )
 VScrollBar/styles/scroll_focus = SubResource( 622 )
 VSeparator/styles/separator = SubResource( 623 )
-VSlider/icons/grabber = SubResource( 238 )
-VSlider/icons/grabber_highlight = SubResource( 239 )
+VSlider/icons/grabber = SubResource( 236 )
+VSlider/icons/grabber_highlight = SubResource( 237 )
 VSlider/styles/grabber_area = SubResource( 624 )
 VSlider/styles/slider = SubResource( 625 )
 VSplitContainer/constants/separation = 8
@@ -6775,8 +6778,8 @@ WindowDialog/constants/close_h_ofs = 22
 WindowDialog/constants/close_v_ofs = 20
 WindowDialog/constants/title_height = 24
 WindowDialog/fonts/title_font = null
-WindowDialog/icons/close = SubResource( 220 )
-WindowDialog/icons/close_highlight = SubResource( 220 )
+WindowDialog/icons/close = ExtResource( 10 )
+WindowDialog/icons/close_highlight = ExtResource( 10 )
 WindowDialog/styles/panel = SubResource( 627 )
-_sections_unfolded = [ "Button/styles", "EditorFonts/fonts", "ItemList/styles", "Label/constants", "Label/styles", "Panel/styles", "WindowDialog/fonts", "WindowDialog/styles" ]
+_sections_unfolded = [ "Button/styles", "CheckButton", "CheckButton/icons", "EditorFonts/fonts", "ItemList/styles", "Label/constants", "Label/styles", "Panel/styles", "WindowDialog", "WindowDialog/fonts", "WindowDialog/icons", "WindowDialog/styles" ]
 
