@@ -6,6 +6,7 @@
 [node name="Node2D" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="MapNamePanel" type="NinePatchRect" parent="." index="0"]
 
@@ -26,7 +27,7 @@ patch_margin_left = 48
 patch_margin_top = 46
 patch_margin_right = 48
 patch_margin_bottom = 55
-_sections_unfolded = [ "Axis Stretch", "Patch Margin", "Rect" ]
+_sections_unfolded = [ "Anchor", "Axis Stretch", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Patch Margin", "Pause", "Rect", "Size Flags", "Theme", "Visibility" ]
 
 [node name="Label" type="Label" parent="MapNamePanel" index="0"]
 
@@ -52,6 +53,6 @@ autowrap = true
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Anchor", "Margin", "custom_colors", "custom_fonts" ]
+_sections_unfolded = [ "Anchor", "Margin", "custom_fonts" ]
 
 

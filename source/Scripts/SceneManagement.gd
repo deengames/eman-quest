@@ -85,13 +85,15 @@ static func change_map_to(tree, target):
 			container.name = "Fade Container"
 			container.set_anchors_and_margins_preset(Control.PRESET_CENTER_TOP)
 			container.margin_top += 100
+			# Offset is, just, wrong. Not sure why. Kludgey fix. Experimentally-derived value
+			container.margin_left -= 118
+			container.add_child(map_name_label)
 			
 			# Add to scene
 			var root = tree.get_root()
 			var current_scene = root.get_child(root.get_child_count() - 1)
 			var ui = current_scene.get_node("UI")
 			ui.add_child(container)
-			container.add_child(map_name_label)
 			
 			# Wait 3s, then fade over 1s
 			var tween_helper = TweenHelper.new().fade_out(current_scene, container, 1)
