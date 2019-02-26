@@ -121,6 +121,7 @@ func _on_picked_all_tiles():
 	if self._is_players_turn:
 		if num_right > 0:
 			$ActionsPanel/Controls.visible = true
+			$SkillsPanel/Controls.visible = true
 			
 			if "critical" in self._player.disabled_actions:
 				self._disable_action_button($ActionsPanel/Controls/CriticalButton)
@@ -178,6 +179,7 @@ func _resolve_action(action, multiplier):
 		self._show_battle_end(true)
 
 func _resolve_monster_turn():
+	$SkillsPanel/Controls.visible = false
 	var num_turns = self._monster_data["next_round_turns"]
 	
 	for i in range(num_turns):
@@ -295,8 +297,8 @@ func _disable_unusable_action_buttons():
 
 # Poorly named. Enables if usable, disables otherwise
 func _disable_unusable_skills():
-	self._enable_action_button($SkillsPanel/VampireButton)
-	self._enable_action_button($SkillsPanel/BashButton)
+	self._enable_action_button($SkillsPanel/Controls/VampireButton)
+	self._enable_action_button($SkillsPanel/Controls/BashButton)
 	
 	if Globals.player_data.tech_points < _SKILL_POINTS_COST["vampire"]:
 		self._disable_action_button($SkillsPanel/VampireButton)

@@ -245,9 +245,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 57.0
-margin_top = 258.0
+margin_top = 248.0
 margin_right = 217.0
-margin_bottom = 303.0
+margin_bottom = 306.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -331,7 +331,11 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_constants", "custom_fonts" ]
 
-[node name="VampireButton" type="Button" parent="SkillsPanel" index="2"]
+[node name="Controls" type="Node2D" parent="SkillsPanel" index="2"]
+
+editor/display_folded = true
+
+[node name="VampireButton" type="Button" parent="SkillsPanel/Controls" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -357,7 +361,7 @@ flat = false
 align = 2
 _sections_unfolded = [ "Margin", "custom_fonts" ]
 
-[node name="Sprite" type="Sprite" parent="SkillsPanel/VampireButton" index="0"]
+[node name="Sprite" type="Sprite" parent="SkillsPanel/Controls/VampireButton" index="0"]
 
 texture = ExtResource( 7 )
 centered = false
@@ -365,7 +369,7 @@ region_enabled = true
 region_rect = Rect2( 320, 0, 64, 64 )
 _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
-[node name="BashButton" type="Button" parent="SkillsPanel" index="3"]
+[node name="BashButton" type="Button" parent="SkillsPanel/Controls" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -391,7 +395,7 @@ flat = false
 align = 2
 _sections_unfolded = [ "Margin", "custom_fonts" ]
 
-[node name="Sprite" type="Sprite" parent="SkillsPanel/BashButton" index="0"]
+[node name="Sprite" type="Sprite" parent="SkillsPanel/Controls/BashButton" index="0"]
 
 texture = ExtResource( 7 )
 centered = false
@@ -587,9 +591,9 @@ _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [connection signal="pressed" from="NextTurnButton" to="." method="_on_NextTurnButton_pressed"]
 
-[connection signal="pressed" from="SkillsPanel/VampireButton" to="." method="_on_VampireButton_pressed"]
+[connection signal="pressed" from="SkillsPanel/Controls/VampireButton" to="." method="_on_VampireButton_pressed"]
 
-[connection signal="pressed" from="SkillsPanel/BashButton" to="." method="_on_BashButton_pressed"]
+[connection signal="pressed" from="SkillsPanel/Controls/BashButton" to="." method="_on_BashButton_pressed"]
 
 [connection signal="pressed" from="ActionsPanel/Controls/AttackButton" to="." method="_on_AttackButton_pressed"]
 
