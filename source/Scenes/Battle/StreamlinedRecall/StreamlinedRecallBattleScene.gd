@@ -50,8 +50,8 @@ func _ready():
 	self._set_background_image(map_type, variation)
 	self._set_recall_tile_image(map_type, variation)
 	
-	$ActionsPanel.self_modulate = Color(1, 1, 1, 0.5)
-	$SkillsPanel.self_modulate = Color(1, 1, 1, 0.5)
+	$ActionsPanel.self_modulate = Color(1, 1, 1, 0.75)
+	$SkillsPanel.self_modulate = Color(1, 1, 1, 0.75)
 	
 	var image_name = self._monster_data["type"].replace(' ', '')
 	$MonsterControls/MonsterHealth.max_value = self._monster_data["max_health"]
