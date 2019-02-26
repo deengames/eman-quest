@@ -173,8 +173,8 @@ const MONSTER_DATA = {
 			"Foot Soldier": {
 				"type": "Foot Soldier",
 				"weight": 70,
-				"health": 110,
-				"strength": 19,
+				"health": 120,
+				"strength": 30,
 				"defense": 14,
 				"turns": 1,
 				"experience points": 17,
