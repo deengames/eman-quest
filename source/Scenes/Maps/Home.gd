@@ -48,9 +48,8 @@ func _conclude_intro_events():
 	yield(get_tree().create_timer(1), 'timeout')
 	# Play sound here
 	
-	var mama = $Mama
 	var bandit = $"Bandit-Intro"
 	bandit.run("Down", 4) # run off-screen
-	mama.visible = false
+	self.remove_child($Mama)
 	
 	bandit.connect("reached_destination",  Globals.player, "unfreeze")
