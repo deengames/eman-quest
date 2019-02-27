@@ -301,9 +301,9 @@ func _disable_unusable_skills():
 	self._enable_action_button($SkillsPanel/Controls/BashButton)
 	
 	if Globals.player_data.tech_points < _SKILL_POINTS_COST["vampire"]:
-		self._disable_action_button($SkillsPanel/VampireButton)
+		self._disable_action_button($SkillsPanel/Controls/VampireButton)
 	if Globals.player_data.tech_points < _SKILL_POINTS_COST["bash"]:
-		self._disable_action_button($SkillsPanel/BashButton)
+		self._disable_action_button($SkillsPanel/Controls/BashButton)
 
 func _disable_action_button(button):
 	button.disabled = true
