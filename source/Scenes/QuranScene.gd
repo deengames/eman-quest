@@ -44,8 +44,8 @@ func _display_current_ayah():
 	#TweenHelper.new().fade_in(self, next_ayah_image, _FADE_TIME_SECONDS).start()
 
 func _on_SkipButton_pressed():
-	self._on_complete()
 	_audio_manager.clean_up_audio()
+	self._on_complete()
 	
 func _on_complete():
 	if self._autostart_game:
