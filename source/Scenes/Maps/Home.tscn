@@ -1,12 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Maps/Home.gd" type="Script" id=1]
 [ext_resource path="res://Tilesets/Indoors.tres" type="TileSet" id=2]
 [ext_resource path="res://Entities/MapEntities/Dad.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Entities/MapEntities/Mom.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Entities/MapWarp.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Entities/MapEntities/Bandit/Bandit.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Entities/MapEntities/Hamza.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Entities/MapWarp.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Entities/MapEntities/Hamza.tscn" type="PackedScene" id=5]
 
 [node name="Node2D" type="Node2D"]
 
@@ -77,36 +75,28 @@ tile_data = PoolIntArray( 0, 4, 65538, 1, 4, 65538, 2, 4, 65538, 3, 4, 65538, 4,
 position = Vector2( 448, 256 )
 _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
-[node name="Mama" parent="." index="4" instance=ExtResource( 4 )]
-
-visible = false
-position = Vector2( 512, 256 )
-_sections_unfolded = [ "Offset", "Region", "Transform", "Visibility" ]
-
-[node name="Locations" type="Node2D" parent="." index="5"]
-
-editor/display_folded = true
+[node name="Locations" type="Node2D" parent="." index="4"]
 
 [node name="Start" type="Node2D" parent="Locations" index="0"]
 
 position = Vector2( 807.41, 36.9098 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Exit1" parent="Locations" index="1" instance=ExtResource( 5 )]
+[node name="Exit1" parent="Locations" index="1" instance=ExtResource( 4 )]
 
 position = Vector2( 384, 512 )
 _sections_unfolded = [ "Transform" ]
 destination = "Overworld"
 appear_beside = "Home"
 
-[node name="Exit2" parent="Locations" index="2" instance=ExtResource( 5 )]
+[node name="Exit2" parent="Locations" index="2" instance=ExtResource( 4 )]
 
 position = Vector2( 448, 512 )
 _sections_unfolded = [ "Transform" ]
 destination = "Overworld"
 appear_beside = "Home"
 
-[node name="Exit3" parent="Locations" index="3" instance=ExtResource( 5 )]
+[node name="Exit3" parent="Locations" index="3" instance=ExtResource( 4 )]
 
 position = Vector2( 512, 512 )
 _sections_unfolded = [ "Transform" ]
@@ -118,20 +108,25 @@ appear_beside = "Home"
 position = Vector2( 448, 384 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Bandit-Intro" parent="." index="6" instance=ExtResource( 6 )]
+[node name="Bandit" type="Node2D" parent="Locations" index="5"]
 
-visible = false
-position = Vector2( 512, 384 )
+position = Vector2( 527.369, 387.729 )
+
+[node name="Mama" type="Node2D" parent="Locations" index="6"]
+
+position = Vector2( 512.66, 259.746 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Blackout" type="ColorRect" parent="." index="7"]
+[node name="Blackout" type="ColorRect" parent="." index="5"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 960.0
-margin_bottom = 576.0
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 959.0
+margin_bottom = 575.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -141,7 +136,7 @@ size_flags_vertical = 1
 color = Color( 0.0784314, 0.0627451, 0.121569, 0 )
 _sections_unfolded = [ "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Size Flags", "Visibility" ]
 
-[node name="Hamza" parent="." index="8" instance=ExtResource( 7 )]
+[node name="Hamza" parent="." index="6" instance=ExtResource( 5 )]
 
 position = Vector2( 398.59, 134.677 )
 

@@ -1,25 +1,32 @@
 extends "StaticMap.gd"
 
+const Bandit = preload("res://Entities/MapEntities/Bandit/Bandit.tscn")
 const DialogueWindow = preload("res://Scenes/UI/DialogueWindow.tscn")
+const Mama = preload("res://Entities/MapEntities/Mom.tscn")
 
 const map_type = 'Home'
 
 var _showing_intro_events = false
+# used in intro only
+var _mama
+var _bandit
 
 func _ready():
 	var player = Globals.player
 	player.position = $Locations/Entrance.position
-	$Mama.visible = Globals.beat_last_boss
+	
 	if Globals.beat_last_boss:
-		self.remove_child($Intro)
-
+		self.remove_child($"Bandit-Intro")
+		_spawn(Mama, $Locations/Mama)
+		
 func show_intro_events():
-	$"Bandit-Intro".visible = true
 	self._showing_intro_events = true
 	
-	$Mama.visible = true
-	$Mama.appear_wounded()
-	$Mama.position.y += Globals.TILE_HEIGHT
+	_mama = _spawn(Mama, $Locations/Mama)
+	_mama.position.y += Globals.TILE_HEIGHT
+	_mama.appear_wounded()
+	
+	_bandit = _spawn(Bandit, $Locations/Bandit)
 	
 	# Called by GenerateWorldScene
 	var player = Globals.player
@@ -48,8 +55,15 @@ func _conclude_intro_events():
 	yield(get_tree().create_timer(1), 'timeout')
 	# Play sound here
 	
-	var bandit = $"Bandit-Intro"
-	bandit.run("Down", 4) # run off-screen
-	self.remove_child($Mama)
+	_bandit.run("Down", 4) # run off-screen
+	self.remove_child(_mama)
+	_bandit.connect("reached_destination",  self, "_bandit_reached")
 	
-	bandit.connect("reached_destination",  Globals.player, "unfreeze")
+func _bandit_reached():
+	Globals.player.unfreeze()
+	
+func _spawn(clazz, location):
+	var instance = clazz.instance()
+	self.add_child(instance)
+	instance.position = location.position
+	return instance
