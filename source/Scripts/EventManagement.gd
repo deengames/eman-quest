@@ -57,7 +57,8 @@ func _process_event(dialog_window, event):
 		var target_name = event[key]
 		var target = null
 		
-		var children = self._get_current_scene().get_children()
+		var current_scene = self._get_current_scene()
+		var children = current_scene.get_children()
 		for child in children:
 			if child.name == target_name:
 				target = child
@@ -73,10 +74,9 @@ func _process_event(dialog_window, event):
 				
 			self._get_current_scene().add_child(effect)
 			# We can't yield here because we yield elsewhere. This is not done synchronously.
-			# C'est la vie.
+			# C'est la vie. This is a horrible crutch / work-around.
 			effect.run(_EFFECT_TIME_SECONDS)
-			self.remove_child(target)
-			self.remove_child(effect)
+			effect.remove_on_done(current_scene, target)
 		else:
 			print("WARNING: Can't find node named {name} to {effect}!".format({name = target_name, effect = key}))
 	else:
