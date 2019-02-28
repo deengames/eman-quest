@@ -64,7 +64,7 @@ var final_boss_data = {
 	"strength": 35,
 	"defense": 18,
 	"turns": 1,
-	"experience points": 0,
+	"experience points": 500,
 	
 	"skill_probability": 50,
 	"skills": {

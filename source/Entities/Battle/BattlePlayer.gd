@@ -6,7 +6,7 @@ signal died
 signal poison_damaged
 
 const HEAL_PERCENT = 0.4 # 0.2 = 20%
-const DEFEND_MULTIPLIER = 1.3 # 1.5 => defend multiplies defense by 1.5x per action
+const DEFEND_MULTIPLIER = 0.3 # 0.3 = 30%+ per defend
 const _ENERGY_PER_TURN = 3
 const ENERGY_GAIN_PER_ACTION = 2
 
@@ -60,8 +60,8 @@ func heal_amount(amount):
 	if self.current_health > self.max_health:
 		self.current_health = self.max_health
 
-func defend(multiplier):
-	self._times_defending += 1 * floor(multiplier)
+func defend():
+	self._times_defending += 1
 
 func reset():
 	self.energy += _ENERGY_PER_TURN
@@ -95,7 +95,9 @@ func total_defense():
 	var total = self._defense
 	total += _get_equipment_modifier(Globals.player_data.weapon, StatType.Defense)
 	total += _get_equipment_modifier(Globals.player_data.armour, StatType.Defense)
-	return floor(total * pow(DEFEND_MULTIPLIER, self._times_defending))
+	var grand_total = floor(total * (1.0 + (DEFEND_MULTIPLIER * self._times_defending)))
+	print("{total} with {n} times defending = {grand}".format({total = total, n = self._times_defending, grand = grand_total}))
+	return grand_total
 
 func damage(damage):
 	if damage > 0:
