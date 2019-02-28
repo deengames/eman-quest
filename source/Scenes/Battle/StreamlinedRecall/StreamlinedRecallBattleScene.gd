@@ -122,22 +122,24 @@ func _on_picked_all_tiles():
 		if num_right > 0:
 			$ActionsPanel/Controls.visible = true
 			$SkillsPanel/Controls.visible = true
-			
-			if "critical" in self._player.disabled_actions:
-				self._disable_action_button($ActionsPanel/Controls/CriticalButton)
-			
-			if "attack" in self._player.disabled_actions:
-				self._disable_action_button($ActionsPanel/Controls/AttackButton)
-			
-			if "items" in self._player.disabled_actions:
-				self._disable_action_button($ActionsPanel/Controls/PotionButton)
-			
+			self._disable_disabled_actions()
 		else:
 			$StatusLabel.text = "Missed a turn!"
 			yield(get_tree().create_timer(_MONSTER_TURN_DISPLAY_SECONDS), 'timeout')
 			self._start_next_turn()
 	else:
 		self._resolve_monster_turn()
+
+func _disable_disabled_actions():
+	if "critical" in self._player.disabled_actions:
+		self._disable_action_button($ActionsPanel/Controls/CriticalButton)
+	
+	if "attack" in self._player.disabled_actions:
+		self._disable_action_button($ActionsPanel/Controls/AttackButton)
+	
+	if "items" in self._player.disabled_actions:
+		self._disable_action_button($ActionsPanel/Controls/PotionButton)
+	
 
 func _show_battle_end(is_victory):
 	var popup = BattleResolution.end_battle(is_victory, self._monster_data)
@@ -294,6 +296,8 @@ func _disable_unusable_action_buttons():
 		self._disable_action_button($ActionsPanel/Controls/PotionButton)
 	if self._actions_left < _ACTION_POINTS_COST["defend"]:
 		self._disable_action_button($ActionsPanel/Controls/DefendButton)
+
+	self._disable_disabled_actions()
 
 # Poorly named. Enables if usable, disables otherwise
 func _disable_unusable_skills():
