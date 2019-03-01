@@ -71,6 +71,7 @@ func _ready():
 	
 	$StatusLabel.text = ""
 	$NextTurnButton.visible = false
+	$SkillsPanel/Controls.visible = false
 	self._start_next_turn()
 	
 	_player.connect("poison_damaged", self, "_on_poison_damaged")
