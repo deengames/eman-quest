@@ -67,6 +67,8 @@ func _ready():
 		$ActionsPanel/Controls/DefendButton.visible = false
 	
 	self._update_health_displays()
+	self._update_tech_points_display()
+	
 	$StatusLabel.text = ""
 	$NextTurnButton.visible = false
 	self._start_next_turn()
@@ -252,7 +254,7 @@ func _on_correct_selected():
 	self._correct_consecutive_tiles_picked += 1
 	if self._correct_consecutive_tiles_picked >= 3:
 		Globals.player_data.add_tech_point()
-		$SkillsPanel/TechPointsLabel.text = "Tech Points: {points}".format({points = Globals.player_data.tech_points})
+		self._update_tech_points_display()
 		self._disable_unusable_skills()
 
 func _on_incorrect_selected():
@@ -322,4 +324,5 @@ func _on_poison_damaged(damage):
 	$StatusLabel.text = "Posioned for " + str(damage) + " damage!"
 	yield(get_tree().create_timer(_MONSTER_TURN_DISPLAY_SECONDS), 'timeout')
 
-
+func _update_tech_points_display():
+	$SkillsPanel/TechPointsLabel.text = "Tech Points: {points}".format({points = int(Globals.player_data.tech_points)})
