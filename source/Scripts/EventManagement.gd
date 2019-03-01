@@ -98,6 +98,9 @@ func _on_battle_over():
 		Globals.player.unfreeze()
 		current_scene.remove_child(dialog_window)
 
+		# Don't repeat events after subsequent battles
+		Globals.disconnect("battle_over", self, "_on_battle_over")
+
 func _create_dialog_window(current_scene):
 	var dialog_window = DialogueWindow.instance()
 	current_scene.add_child(dialog_window)
