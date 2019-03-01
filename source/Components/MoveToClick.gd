@@ -54,6 +54,7 @@ func _move_parent_to_clicked_destintion():
 	if destination != null:
 		var velocity = (destination - position).normalized() * self.speed
 		if (destination - position).length() > MINIMUM_MOVE_DISTANCE:
+			print("MOUSE: MOVED")
 			self.get_parent().move_and_slide(velocity)
 		else:
 			self.emit_signal("reached_destination")

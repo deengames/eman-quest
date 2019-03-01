@@ -90,6 +90,7 @@ func _on_Area2D_body_entered(body):
 		# Leaving overworld? Come back one tile under the current tile.
 		if Globals.current_map.map_type == "Overworld":
 			Globals.overworld_position = Vector2(self.position.x, self.position.y + Globals.TILE_HEIGHT)
+			print("SET: overworld=" + str(Globals.overworld_position))
 			Globals.transition_used = null
 
 		if typeof(target_map) == TYPE_STRING:
@@ -109,5 +110,6 @@ func _on_Area2D_body_entered(body):
 
 		# Come back to the overworld? Restore coordinates.
 		if Globals.current_map.map_type == "Overworld" and Globals.overworld_position != null:
+			print("Back to the overworld: " + str(Globals.overworld_position))
 			Globals.player.position = Globals.overworld_position
 			Globals.overworld_position = null

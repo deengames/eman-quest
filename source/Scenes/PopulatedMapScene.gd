@@ -57,12 +57,17 @@ func _ready():
 	
 	var player = Player.instance()
 	# SceneManagement sets player position correct if back to overworld
+	var debug = ""
+	if Globals.transition_used != null: debug += ", target=" + str(Globals.transition_used.target_position)
+	print("TU=" + str(Globals.transition_used) + debug)
 	if Globals.transition_used != null and Globals.transition_used.target_position != null:
 		var from = Globals.transition_used
 		
 		player.position = Vector2(
 			from.target_position.x * Globals.TILE_WIDTH,
 			from.target_position.y * Globals.TILE_HEIGHT)
+		
+		print("POS at " + str(player.position))
 			
 		#########
 		# https://www.pivotaltracker.com/story/show/163181477

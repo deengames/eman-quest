@@ -49,6 +49,7 @@ func _move_to_keyboard():
 		previously_facing = new_facing
 	
 	if velocity.x != 0 or velocity.y != 0:
+		print("MTK: moved " + str(self.get_parent().position))
 		velocity = velocity.normalized() * self.speed
 		velocity = self.get_parent().move_and_slide(velocity, ZERO_VECTOR)
 		self.emit_signal("cancel_destination") # if clicked, cancel that destination
