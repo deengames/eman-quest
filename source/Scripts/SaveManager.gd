@@ -114,7 +114,6 @@ static func load(save_id, tree):
 	
 	var SceneManagement = load("res://Scripts/SceneManagement.gd")
 	SceneManagement.change_map_to(tree, current_map)
-	Globals.player = Player.new()
 	Globals.player.position = DictionaryHelper.dict_to_vector2(player_position_data)
 	
 	Globals.world_areas = world_areas
