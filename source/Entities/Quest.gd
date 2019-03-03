@@ -221,7 +221,7 @@ func to_dict():
 	}
 
 static func from_dict(dict):
-	var my_class = load("res://Scripts/ENtities/Quest.gd")
+	var my_class = load("res://Entities/Quest.gd")
 	var to_return = my_class.new()
 	to_return.bosses = dict["bosses"]
 	to_return.attach_quest_npcs = dict["attach_quest_npcs"]

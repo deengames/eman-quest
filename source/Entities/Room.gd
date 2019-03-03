@@ -5,7 +5,7 @@ const AreaType = preload("res://Scripts/Enums/AreaType.gd")
 var grid_x
 var grid_y
 var connections = {} # direction => room
-var area_type = AreaType.NORMAL
+var area_type = AreaType.AREA_TYPE.NORMAL
 
 func _init(grid_x, grid_y):
 	self.grid_x = grid_x
@@ -49,7 +49,7 @@ func to_dict():
 	}
 
 static func from_dict(dict):
-	var my_class = load("res://Scripts/Entities/Room.gd")
+	var my_class = load("res://Entities/Room.gd")
 	var to_return = my_class.new(dict["grid_x"], dict["grid_y"])
 	to_return.area_type = dict["area_type"]
 	

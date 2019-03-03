@@ -57,7 +57,7 @@ func to_dict():
 	}
 
 static func from_dict(dict):
-	var my_class = load("res://Scripts/Entities/Boss.gd")
+	var my_class = load("res://Entities/Battle/Boss.gd")
 	var to_return = my_class.new()
 	to_return.initialize(dict["x"], dict["y"], dict["data"], KeyItem.from_dict(dict["key_item"]))
 	to_return.is_alive = dict["is_alive"]

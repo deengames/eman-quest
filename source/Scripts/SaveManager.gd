@@ -3,9 +3,10 @@ extends Node
 const AreaMap = preload("res://Entities/AreaMap.gd")
 const DictionaryHelper = preload("res://Scripts/DictionaryHelper.gd")
 const MapDestination = preload("res://Entities/MapDestination.gd")
+const Player = preload("res://Entities/Player.gd")
 const PlayerData = preload("res://Entities/PlayerData.gd")
 const Quest = preload("res://Entities/Quest.gd")
-var SceneManagement = load("res://Scripts/SceneManagement.gd")
+const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 # When I implemented this, as saves were then, this is what we got:
 # Uncompressed:	7120kb
@@ -113,6 +114,7 @@ static func load(save_id, tree):
 	Globals.current_map_type = current_map.map_type
 	
 	SceneManagement.change_map_to(tree, current_map)
+	Globals.player = Player.new()
 	Globals.player.position = DictionaryHelper.dict_to_vector2(player_position_data)
 	
 	Globals.world_areas = world_areas
