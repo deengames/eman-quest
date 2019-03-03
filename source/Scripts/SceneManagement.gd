@@ -119,8 +119,7 @@ static func change_scene_to(tree, scene_instance):
 	# http://docs.godotengine.org/en/3.0/getting_started/step_by_step/singletons_autoload.html?highlight=change_scene
 	var root = tree.get_root()
 	var current_scene = root.get_child(root.get_child_count() - 1)
-	# TODO: FIX
-	current_scene.free()
+	current_scene.queue_free()
 	
 	current_scene = scene_instance
 	tree.get_root().add_child(current_scene)
