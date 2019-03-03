@@ -119,7 +119,7 @@ static func change_scene_to(tree, scene_instance):
 	# http://docs.godotengine.org/en/3.0/getting_started/step_by_step/singletons_autoload.html?highlight=change_scene
 	var root = tree.get_root()
 	var current_scene = root.get_child(root.get_child_count() - 1)
-	call_deferred("_free_current_scene", current_scene)
+	current_scene.free()
 	
 	current_scene = scene_instance
 	tree.get_root().add_child(current_scene)
@@ -158,9 +158,6 @@ static func start_battle(tree, monster_data):
 	var battle_scene = StreamlinedRecallBattleScene.instance()
 	battle_scene.set_monster_data(data)
 	change_scene_to(tree, battle_scene)
-
-static func _free_current_scene(scene):
-	scene.free()
 
 static func _remove_monster_instances():
 	# Don't crash if we have a static map and `monsters` is not defined.

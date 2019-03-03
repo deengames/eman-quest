@@ -6,7 +6,6 @@ const MapDestination = preload("res://Entities/MapDestination.gd")
 const Player = preload("res://Entities/Player.gd")
 const PlayerData = preload("res://Entities/PlayerData.gd")
 const Quest = preload("res://Entities/Quest.gd")
-const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 # When I implemented this, as saves were then, this is what we got:
 # Uncompressed:	7120kb
@@ -113,6 +112,7 @@ static func load(save_id, tree):
 	Globals.current_map = current_map # Required to correctly load
 	Globals.current_map_type = current_map.map_type
 	
+	var SceneManagement = load("res://Scripts/SceneManagement.gd")
 	SceneManagement.change_map_to(tree, current_map)
 	Globals.player = Player.new()
 	Globals.player.position = DictionaryHelper.dict_to_vector2(player_position_data)
