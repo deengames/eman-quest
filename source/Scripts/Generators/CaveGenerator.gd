@@ -101,7 +101,7 @@ func generate(submap, transitions, variation_name):
 		
 		for y in range(self.map_height):
 			for x in range(self.map_width):
-				if self._ground_tilemap.get(x, y) == "Ground":
+				if self._ground_tilemap.get_at(x, y) == "Ground":
 					var current_distance = sqrt(pow(x - entrance[0], 2) + pow(y - entrance[1], 2))
 					if current_distance > distance and current_distance <= max_distance:
 						farthest = [x, y]
@@ -151,9 +151,9 @@ func _generate_cave(area_type, transitions, variation_name):
 	
 	for y in range(0, self.map_height):
 		for x in range(0, self.map_width):
-			var tile = self._ground_tilemap.get(x, y)
+			var tile = self._ground_tilemap.get_at(x, y)
 			if tile != "Ground":
-				solid_tiles_map.set(x, y, tile)
+				solid_tiles_map.set_at(x, y, tile)
 	
 	if variation_name != "Lava":
 		self._generate_decoration_tiles(decoration_tilemap)
@@ -170,7 +170,7 @@ func _generate_tiles(transitions):
 	var created_ground = []
 	
 	while floors_to_create > 0:
-		if self._ground_tilemap.get(current_x, current_y) != "Ground":
+		if self._ground_tilemap.get_at(current_x, current_y) != "Ground":
 			self._convert_to_dirt([current_x, current_y])
 			created_ground.append([current_x, current_y])
 			floors_to_create -= 9 # created a 3x3 block
@@ -293,7 +293,7 @@ func _decorate_water(decoration_tilemap):
 		if (self._is_clear_around(self._ground_tilemap, x, y, "Water") and
 			self._is_clear_around(decoration_tilemap, x, y, null)):
 				var tile = _WATER_DECORATION_TILE_CHOICES[randi() % len(_WATER_DECORATION_TILE_CHOICES)]
-				decoration_tilemap.set(x, y, tile)
+				decoration_tilemap.set_at(x, y, tile)
 				num_left -= 1
 
 # Adds random rocks into the river
@@ -309,22 +309,22 @@ func _decorate_ground(decoration_tilemap):
 			self._is_clear_around(decoration_tilemap, x, y, null)):
 				
 				var tile = _GROUND_DECORATION_TILE_CHOICES[randi() % len(_GROUND_DECORATION_TILE_CHOICES)]
-				decoration_tilemap.set(x, y, tile)
+				decoration_tilemap.set_at(x, y, tile)
 				num_left -= 1
 
 func _is_clear_around(tilemap, x, y, empty_tile_definition):
-	return (tilemap.get(x, y) == empty_tile_definition and tilemap.get(x, y - 1) == empty_tile_definition and
-		tilemap.get(x + 1, y - 1) == empty_tile_definition and tilemap.get(x + 1, y) == empty_tile_definition and
-		tilemap.get(x + 1, y + 1) == empty_tile_definition and tilemap.get(x, y + 1) == empty_tile_definition and
-		tilemap.get(x - 1, y + 1) == empty_tile_definition and tilemap.get(x - 1, y) == empty_tile_definition and
-		tilemap.get(x - 1, y - 1) == empty_tile_definition)
+	return (tilemap.get_at(x, y) == empty_tile_definition and tilemap.get_at(x, y - 1) == empty_tile_definition and
+		tilemap.get_at(x + 1, y - 1) == empty_tile_definition and tilemap.get_at(x + 1, y) == empty_tile_definition and
+		tilemap.get_at(x + 1, y + 1) == empty_tile_definition and tilemap.get_at(x, y + 1) == empty_tile_definition and
+		tilemap.get_at(x - 1, y + 1) == empty_tile_definition and tilemap.get_at(x - 1, y) == empty_tile_definition and
+		tilemap.get_at(x - 1, y - 1) == empty_tile_definition)
 
 ############# TODO: DRY
 # Almost common with OverworldGenerator
 func _fill_with(tile_name, map_array):
 	for y in range(0, map_height):
 		for x in range(0, map_width):
-			map_array.set(x, y, tile_name)
+			map_array.set_at(x, y, tile_name)
 
 # Creates a 3x3 dirt square. Technically, we only need a 2x2 for auto-tiling.
 # But, if we use a 2x2, we get disembodied-looking islands that we can walk on.
@@ -355,4 +355,4 @@ func _convert_to(position, type = "Ground"):
 	var y = position[1]
 
 	if x >= 0 and x < map_width and y >= 0 and y < map_height:
-		self._ground_tilemap.set(x, y, type)
+		self._ground_tilemap.set_at(x, y, type)

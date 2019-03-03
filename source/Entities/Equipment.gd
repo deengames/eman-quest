@@ -69,7 +69,9 @@ static func randint(minimum, maximum):
 	return range(minimum, maximum + 1)[randi() % range(minimum, maximum + 1).size()]
 
 static func from_dict(dictionary):
-	var equipment = new(dictionary["type"], dictionary["equipment_name"],
+	var my_class = load("res://Entities/Equipment.gd")
+	
+	var equipment = my_class.new(dictionary["type"], dictionary["equipment_name"],
 		dictionary["primary_stat"],
 		dictionary["secondary_stat"])
 	

@@ -276,21 +276,21 @@ func _turn_2x2_bushes_into_trees(tree_map):
 	for y in range(0, map_height - 1):
 		for x in range(0, map_width - 1):
 			if x % 2 == 0 and y % 2 == 0:
-				if (tree_map.get(x, y) == "Bush" and 
-				tree_map.get(x + 1, y) == "Bush" and
-				tree_map.get(x, y + 1) == "Bush" and
-				tree_map.get(x + 1, y + 1) == "Bush"):
-					tree_map.set(x, y, "Tree")
-					tree_map.set(x + 1, y, null)
-					tree_map.set(x, y + 1, null)
-					tree_map.set(x + 1, y + 1, null)
+				if (tree_map.get_at(x, y) == "Bush" and 
+				tree_map.get_at(x + 1, y) == "Bush" and
+				tree_map.get_at(x, y + 1) == "Bush" and
+				tree_map.get_at(x + 1, y + 1) == "Bush"):
+					tree_map.set_at(x, y, "Tree")
+					tree_map.set_at(x + 1, y, null)
+					tree_map.set_at(x, y + 1, null)
+					tree_map.set_at(x + 1, y + 1, null)
 				
 
 # Almost common with OverworldGenerator
 func _fill_with(tile_name, map_array):
 	for y in range(0, map_height):
 		for x in range(0, map_width):
-			map_array.set(x, y, tile_name)
+			map_array.set_at(x, y, tile_name)
 
 func _convert_to_dirt(position, dirt_map, tree_map):
 	self._convert_to(position, true, dirt_map, tree_map)
@@ -305,11 +305,11 @@ func _convert_to(position, add_dirt, dirt_map, tree_map):
 	var x = position[0]
 	var y = position[1]
 	
-	if not add_dirt and dirt_map.get(x, y) != "Dirt":
-		dirt_map.set(x, y, "Grass")
+	if not add_dirt and dirt_map.get_at(x, y) != "Dirt":
+		dirt_map.set_at(x, y, "Grass")
 	else:
-		dirt_map.set(x, y, "Dirt")
-	tree_map.set(x, y, null) # remove tree
+		dirt_map.set_at(x, y, "Dirt")
+	tree_map.set_at(x, y, null) # remove tree
 	
 	# Start up, move clockwise
 	self._clear_if_tree(tree_map, x, y - 1)
@@ -324,6 +324,6 @@ func _convert_to(position, add_dirt, dirt_map, tree_map):
 func _clear_if_tree(tree_map, x, y):
 	if x >= 0 and x < map_width:
 		if y >= 0 and y < map_height:
-			if tree_map.get(x, y) != null:
-				tree_map.set(x, y, null)
+			if tree_map.get_at(x, y) != null:
+				tree_map.set_at(x, y, null)
 

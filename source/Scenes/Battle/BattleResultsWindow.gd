@@ -1,6 +1,6 @@
 extends WindowDialog
 
-const SceneManagement = preload("res://Scripts/SceneManagement.gd")
+var SceneManagement = load("res://Scripts/SceneManagement.gd")
 
 func _ready():
 	self.popup_exclusive = true

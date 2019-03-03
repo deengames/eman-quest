@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const SceneManagement = preload("res://Scripts/SceneManagement.gd")
+var SceneManagement = load("res://Scripts/SceneManagement.gd")
 
 const _MOVE_SPEED = 100
 const _CHANGE_DESTINATION_EVERY_N_SECONDS = [1, 2]
@@ -54,7 +54,8 @@ static func from_dict(dict):
 	if dict == null:
 		return null
 		
-	var to_return = new()
+	var my_class = load("res://Entities/Battle/Monster.gd")
+	var to_return = my_class.new()
 	var data = dict["data"]
 	to_return.initialize(dict["x"], dict["y"])
 	# needed for loading and re-instantiating on map

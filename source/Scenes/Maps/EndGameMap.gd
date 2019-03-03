@@ -1,14 +1,14 @@
 extends "StaticMap.gd"
 
 const DialogueWindow = preload("res://Scenes/UI/DialogueWindow.tscn")
-const SceneManagement = preload("res://Scripts/SceneManagement.gd")
+var SceneManagement = load("res://Scripts/SceneManagement.gd")
 const StreamlinedRecallBattleScene = preload("res://Scenes/Battle/StreamlinedRecall/StreamlinedRecallBattleScene.tscn")
 const TweenHelper = preload("res://Scripts/TweenHelper.gd")
 
-const map_type = "Final"
 const _GLOW_TIME_SECONDS = 3
 
 func _ready():
+	self.map_type = 'Final'
 	var player = Globals.player
 	player.position = $Locations/Entrance.position
 	

@@ -50,7 +50,8 @@ func to_dict():
 	}
 
 static func from_dict(dict):
-	var map = new(dict["map_type"], dict["variation"], dict["tileset_path"],
+	var my_class = load("res://Entities/AreaMap.gd")
+	var map = my_class.new(dict["map_type"], dict["variation"], dict["tileset_path"],
 		dict["tiles_wide"], dict["tiles_high"], dict["area_type"])
 	
 	map.transitions = DictionaryHelper.array_from_dictionary(dict["transitions"])

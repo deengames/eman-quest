@@ -4,14 +4,13 @@ const Bandit = preload("res://Entities/MapEntities/Bandit/Bandit.tscn")
 const DialogueWindow = preload("res://Scenes/UI/DialogueWindow.tscn")
 const Mama = preload("res://Entities/MapEntities/Mom.tscn")
 
-const map_type = 'Home'
-
 var _showing_intro_events = false
 # used in intro only
 var _mama
 var _bandit
 
 func _ready():
+	self.map_type = 'Home'
 	var player = Globals.player
 	player.position = $Locations/Entrance.position
 	

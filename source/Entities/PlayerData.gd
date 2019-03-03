@@ -33,8 +33,8 @@ var assigned_points = {
 	"num_actions": int(0) # requires ~20 points to raise it by 1
 }
 
-var weapon = Equipment.new("weapon", "Dagger", StatType.Strength, StatType.Defense)
-var armour = Equipment.new("armour", "Tunic", StatType.Defense, StatType.Health)
+var weapon = Equipment.new("weapon", "Dagger", StatType.StatType.Strength, StatType.StatType.Defense)
+var armour = Equipment.new("armour", "Tunic", StatType.StatType.Defense, StatType.StatType.Health)
 var equipment = []
 var key_items = []
 
@@ -65,7 +65,9 @@ func to_dict():
 	}
 
 static func from_dict(dict):
-	var to_return = new()
+	var my_class = load("res://Entities/PlayerData.gd")
+	
+	var to_return = my_class.new()
 	to_return.level = dict["level"]
 	to_return.experience_points = dict["experience_points"]
 	to_return.health = dict["health"]

@@ -5,7 +5,7 @@ const DictionaryHelper = preload("res://Scripts/DictionaryHelper.gd")
 const MapDestination = preload("res://Entities/MapDestination.gd")
 const PlayerData = preload("res://Entities/PlayerData.gd")
 const Quest = preload("res://Entities/Quest.gd")
-const SceneManagement = preload("res://Scripts/SceneManagement.gd")
+var SceneManagement = load("res://Scripts/SceneManagement.gd")
 
 # When I implemented this, as saves were then, this is what we got:
 # Uncompressed:	7120kb

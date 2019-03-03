@@ -221,10 +221,11 @@ func to_dict():
 	}
 
 static func from_dict(dict):
-	var to_return = new()
+	var my_class = load("res://Scripts/ENtities/Quest.gd")
+	var to_return = my_class.new()
 	to_return.bosses = dict["bosses"]
 	to_return.attach_quest_npcs = dict["attach_quest_npcs"]
 	# HACK: always use the freshest data.
 	#to_return.final_boss_data = dict["final_boss_data"]
-	to_return.final_boss_data = new().final_boss_data
+	to_return.final_boss_data = my_class.new().final_boss_data
 	return to_return

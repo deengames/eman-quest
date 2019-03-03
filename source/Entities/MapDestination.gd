@@ -35,7 +35,8 @@ static func from_dict(dict):
 		# Even if we do nothing here, transition works. #lolwut?
 		target_map = Room.from_dict(target_map)
 		
-	return new(
+	var my_class = load("res://Entities/MapDestination.gd")
+	return my_class.new(
 		DictionaryHelper.dict_to_vector2(dict["my_position"]),
 		target_map,
 		DictionaryHelper.dict_to_vector2(dict["target_position"]),

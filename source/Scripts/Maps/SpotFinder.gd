@@ -10,13 +10,13 @@ static func find_empty_spot(map_width, map_height, ground_map, object_map, occup
 	var y = Globals.randint(_PADDING_FROM_MAP_EDGES, map_height - _PADDING_FROM_MAP_EDGES - 1)
 	
 	while (
-			object_map.get(x, y) != null or
+			object_map.get_at(x, y) != null or
 			[x, y] in occupied_spots or
 			# Trees technically have empty space around them, so make sure
 			# we're not in one of those tiles.
 			not is_area_clear(object_map, x - 1, y - 1, x, y)  or
 			# current ground tile isn't in walkable_tiles
-			not ground_map.get(x, y) in Globals.WALKABLE_TILES
+			not ground_map.get_at(x, y) in Globals.WALKABLE_TILES
 		):
 			x = Globals.randint(0, map_width - 1)
 			y = Globals.randint(0, map_height - 1)
@@ -31,7 +31,7 @@ static func find_empty_isolated_spot(map_width, map_height, object_map, occupied
 	var empty_map = TwoDimensionalArray.new(map_width, map_height)
 	for y in range(map_height):
 		for x in range(map_width):
-			empty_map.set(x, y, Globals.WALKABLE_TILES[0])
+			empty_map.set_at(x, y, Globals.WALKABLE_TILES[0])
 	
 	while iterations < max_tries: # returns on success
 		candidate = find_empty_spot(map_width, map_height, empty_map, object_map, occupied_spots)
@@ -52,7 +52,7 @@ static func find_empty_isolated_spot(map_width, map_height, object_map, occupied
 static func is_area_clear(map, start_x, start_y, end_x, end_y):
 	for y in range(start_y, end_y + 1):
 		for x in range(start_x, end_x + 1):
-			if map.get(x, y) != null:
+			if map.get_at(x, y) != null:
 				return false
 	
 	return true

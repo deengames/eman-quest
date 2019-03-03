@@ -11,7 +11,7 @@ func _init(grid_x, grid_y):
 	self.grid_x = grid_x
 	self.grid_y = grid_y
 
-func connect(room):
+func connect_to(room):
 	if room.grid_x == self.grid_x:
 		if room.grid_y < self.grid_y:
 			# Room is above us
@@ -49,7 +49,8 @@ func to_dict():
 	}
 
 static func from_dict(dict):
-	var to_return = new(dict["grid_x"], dict["grid_y"])
+	var my_class = load("res://Scripts/Entities/Room.gd")
+	var to_return = my_class.new(dict["grid_x"], dict["grid_y"])
 	to_return.area_type = dict["area_type"]
 	
 	if dict.has("connections"):

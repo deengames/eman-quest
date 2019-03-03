@@ -33,15 +33,15 @@ static func generate_layout(num_rooms):
 	
 	var current = Room.new(x, y)
 	current.area_type = AreaType.ENTRANCE
-	to_return.set(x, y, current)
+	to_return.set_at(x, y, current)
 	var rooms = [current]
 
 	while left_to_generate > 0:
 		var next = _pick_unexplored_adjacent(current, to_return)
 		if next != null:
 			var room = Room.new(next.x, next.y)
-			to_return.set(next.x, next.y, room)
-			current.connect(room)
+			to_return.set_at(next.x, next.y, room)
+			current.connect_to(room)
 			rooms.append(room)
 			left_to_generate -= 1
 			current = room

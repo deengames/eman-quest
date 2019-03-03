@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 const KeyItem = preload("res://Entities/KeyItem.gd")
-const SceneManagement = preload("res://Scripts/SceneManagement.gd")
+var SceneManagement = load("res://Scripts/SceneManagement.gd")
 
 var data = {}
 
@@ -57,7 +57,8 @@ func to_dict():
 	}
 
 static func from_dict(dict):
-	var to_return = new()
+	var my_class = load("res://Scripts/Entities/Boss.gd")
+	var to_return = my_class.new()
 	to_return.initialize(dict["x"], dict["y"], dict["data"], KeyItem.from_dict(dict["key_item"]))
 	to_return.is_alive = dict["is_alive"]
 	to_return.data_object = dict["data"]

@@ -39,7 +39,8 @@ func to_dict():
 	}
 
 static func from_dict(dict):
-	var to_return = new()
+	var my_class = load("res://Entities/TreasureChest.gd")
+	var to_return = my_class.new()
 	var contents = Equipment.from_dict(dict["contents"])
 	to_return.initialize(dict["tile_x"], dict["tile_y"], contents)
 	to_return.is_opened = dict["is_opened"]

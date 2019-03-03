@@ -2,7 +2,7 @@ extends Node2D
 
 const ChoicePanel = preload("res://Scenes/UI/ChoicePanel.tscn")
 const DialogueWindow = preload("res://Scenes/UI/DialogueWindow.tscn")
-const SceneManagement = preload("res://Scripts/SceneManagement.gd")
+var SceneManagement = load("res://Scripts/SceneManagement.gd")
 
 const BATTLE_DATA = {
 	"type": "Hamza",
