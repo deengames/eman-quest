@@ -51,7 +51,6 @@ func _ready():
 	self._set_recall_tile_image(map_type, variation)
 	
 	$ActionsPanel.self_modulate = Color(1, 1, 1, 0.75)
-	$SkillsPanel.self_modulate = Color(1, 1, 1, 0.75)
 	
 	var image_name = self._monster_data["type"].replace(' ', '')
 	$MonsterControls/MonsterHealth.max_value = self._monster_data["max_health"]
@@ -71,7 +70,7 @@ func _ready():
 	
 	$StatusLabel.text = ""
 	$NextTurnButton.visible = false
-	$SkillsPanel/Controls.visible = false
+	$ActionsPanel.visible = false
 	self._start_next_turn()
 	
 	_player.connect("poison_damaged", self, "_on_poison_damaged")
@@ -123,8 +122,8 @@ func _on_picked_all_tiles():
 	
 	if self._is_players_turn:
 		if num_right > 0:
+			$ActionsPanel.visible = true
 			$ActionsPanel/Controls.visible = true
-			$SkillsPanel/Controls.visible = true
 			self._disable_disabled_actions()
 		else:
 			$StatusLabel.text = "Missed a turn!"
@@ -165,7 +164,6 @@ func _resolve_players_turn(action):
 	self._resolve_action(action, multiplier)
 	
 	if self._actions_left == 0: 
-		$ActionsPanel/Controls.visible = false
 		$NextTurnButton.visible = true
 
 func _on_player_skill(skill):
@@ -184,7 +182,6 @@ func _resolve_action(action, multiplier):
 		self._show_battle_end(true)
 
 func _resolve_monster_turn():
-	$SkillsPanel/Controls.visible = false
 	var num_turns = self._monster_data["next_round_turns"]
 	
 	for i in range(num_turns):
@@ -229,7 +226,7 @@ func _start_next_turn():
 		self._player.reset_disabled_actions()
 	
 	$NextTurnButton.visible = false
-	$ActionsPanel/Controls.visible = false
+	$ActionsPanel.visible = false
 
 	if self._player.is_asleep:
 		$StatusLabel.text = "You snore!"
@@ -304,13 +301,13 @@ func _disable_unusable_action_buttons():
 
 # Poorly named. Enables if usable, disables otherwise
 func _disable_unusable_skills():
-	self._enable_action_button($SkillsPanel/Controls/VampireButton)
-	self._enable_action_button($SkillsPanel/Controls/BashButton)
+	self._enable_action_button($ActionsPanel/Controls/VampireButton)
+	self._enable_action_button($ActionsPanel/Controls/BashButton)
 	
 	if Globals.player_data.tech_points < _SKILL_POINTS_COST["vampire"]:
-		self._disable_action_button($SkillsPanel/Controls/VampireButton)
+		self._disable_action_button($ActionsPanel/Controls/VampireButton)
 	if Globals.player_data.tech_points < _SKILL_POINTS_COST["bash"]:
-		self._disable_action_button($SkillsPanel/Controls/BashButton)
+		self._disable_action_button($ActionsPanel/Controls/BashButton)
 
 func _disable_action_button(button):
 	button.disabled = true
@@ -326,4 +323,4 @@ func _on_poison_damaged(damage):
 	yield(get_tree().create_timer(_MONSTER_TURN_DISPLAY_SECONDS), 'timeout')
 
 func _update_tech_points_display():
-	$SkillsPanel/TechPointsLabel.text = "Tech Points: {points}".format({points = int(Globals.player_data.tech_points)})
+	$ActionsPanel/TechPointsLabel.text = "Tech Points: {points}".format({points = int(Globals.player_data.tech_points)})

@@ -48,19 +48,21 @@ _sections_unfolded = [ "Offset" ]
 
 [node name="MonsterControls" type="Node2D" parent="." index="1"]
 
-position = Vector2( 0, 60 )
+editor/display_folded = true
+position = Vector2( 708, 192 )
 
 [node name="MonsterSprite" type="Sprite" parent="MonsterControls" index="0"]
 
-position = Vector2( 10, 40 )
+position = Vector2( 10, 39 )
 texture = ExtResource( 2 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 64, 64 )
-_sections_unfolded = [ "Offset", "Region" ]
+_sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [node name="MonsterHealth" type="TextureProgress" parent="MonsterControls" index="1"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -117,6 +119,9 @@ _sections_unfolded = [ "Theme", "custom_colors", "custom_constants", "custom_fon
 
 [node name="PlayerControls" type="Node2D" parent="." index="2"]
 
+editor/display_folded = true
+position = Vector2( 0, 220 )
+
 [node name="PlayerSprite" type="Sprite" parent="PlayerControls" index="0"]
 
 position = Vector2( 11.718, -14.4058 )
@@ -124,7 +129,7 @@ texture = ExtResource( 5 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 64, 128 )
-_sections_unfolded = [ "Offset", "Region" ]
+_sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [node name="PlayerHealth" type="TextureProgress" parent="PlayerControls" index="1"]
 
@@ -188,10 +193,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 20.0
-margin_top = 180.0
-margin_right = 253.0
-margin_bottom = 243.0
+margin_left = 261.0
+margin_top = 10.0
+margin_right = 712.0
+margin_bottom = 52.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -201,11 +206,13 @@ size_flags_vertical = 4
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_as_outline = 1
 text = "Gold slime attacks!!"
+align = 1
+valign = 1
 autowrap = true
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
+_sections_unfolded = [ "Margin", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
 [node name="StatusLabel" type="Label" parent="." index="4"]
 
@@ -236,7 +243,7 @@ _sections_unfolded = [ "Anchor", "Margin", "custom_colors", "custom_constants", 
 
 [node name="RecallGrid" parent="." index="5" instance=ExtResource( 6 )]
 
-position = Vector2( 270, 30 )
+position = Vector2( 262, 60 )
 
 [node name="NextTurnButton" type="Button" parent="." index="6"]
 
@@ -244,10 +251,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 57.0
-margin_top = 248.0
-margin_right = 217.0
-margin_bottom = 306.0
+margin_left = 424.0
+margin_top = 415.0
+margin_right = 584.0
+margin_bottom = 473.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -264,58 +271,34 @@ flat = false
 align = 1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="SkillsPanel" type="Panel" parent="." index="7"]
+[node name="ActionsPanel" type="Panel" parent="." index="7"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 734.0
-margin_top = 30.0
-margin_right = 944.0
-margin_bottom = 269.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-_sections_unfolded = [ "Visibility" ]
-
-[node name="SkillsLabel" type="Label" parent="SkillsPanel" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 14.0
-margin_top = 10.0
-margin_right = 179.0
-margin_bottom = 54.0
+margin_left = 344.0
+margin_top = 126.0
+margin_right = 639.0
+margin_bottom = 385.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_as_outline = 1
-text = "Skills"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_constants", "custom_fonts" ]
+size_flags_vertical = 1
+_sections_unfolded = [ "Anchor", "Margin" ]
 
-[node name="TechPointsLabel" type="Label" parent="SkillsPanel" index="1"]
+[node name="TechPointsLabel" type="Label" parent="ActionsPanel" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 12.0
-margin_top = 57.0
-margin_right = 189.0
-margin_bottom = 92.0
+margin_left = 55.0
+margin_top = 131.0
+margin_right = 232.0
+margin_bottom = 173.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -325,111 +308,22 @@ size_flags_vertical = 4
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_as_outline = 1
 text = "Tech Points: 0"
+align = 1
 autowrap = true
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_constants", "custom_fonts" ]
+_sections_unfolded = [ "Rect", "custom_colors", "custom_constants", "custom_fonts" ]
 
-[node name="Controls" type="Node2D" parent="SkillsPanel" index="2"]
-
-editor/display_folded = true
-
-[node name="VampireButton" type="Button" parent="SkillsPanel/Controls" index="0"]
+[node name="ActionsLabel" type="Label" parent="ActionsPanel" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 14.0
-margin_top = 110.0
-margin_right = 78.0
-margin_bottom = 174.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "7"
-flat = false
-align = 2
-_sections_unfolded = [ "Margin", "custom_fonts" ]
-
-[node name="Sprite" type="Sprite" parent="SkillsPanel/Controls/VampireButton" index="0"]
-
-texture = ExtResource( 7 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 320, 0, 64, 64 )
-_sections_unfolded = [ "Offset", "Region", "Transform" ]
-
-[node name="BashButton" type="Button" parent="SkillsPanel/Controls" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 94.0
-margin_top = 110.0
-margin_right = 158.0
-margin_bottom = 174.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "5"
-flat = false
-align = 2
-_sections_unfolded = [ "Margin", "custom_fonts" ]
-
-[node name="Sprite" type="Sprite" parent="SkillsPanel/Controls/BashButton" index="0"]
-
-texture = ExtResource( 7 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 384, 0, 64, 64 )
-_sections_unfolded = [ "Offset", "Region", "Transform" ]
-
-[node name="ActionsPanel" type="Panel" parent="." index="8"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 24.0
-margin_top = 316.0
-margin_right = 244.0
-margin_bottom = 508.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-_sections_unfolded = [ "Anchor", "Margin" ]
-
-[node name="ActionsLabel" type="Label" parent="ActionsPanel" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 15.0
+margin_left = 55.0
 margin_top = 3.0
-margin_right = 207.0
+margin_right = 247.0
 margin_bottom = 47.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -440,12 +334,13 @@ size_flags_vertical = 4
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_as_outline = 1
 text = "Action Points: 0"
+align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_colors", "custom_constants", "custom_fonts" ]
+_sections_unfolded = [ "Rect", "custom_colors", "custom_constants", "custom_fonts" ]
 
-[node name="Controls" type="Node2D" parent="ActionsPanel" index="1"]
+[node name="Controls" type="Node2D" parent="ActionsPanel" index="2"]
 
 position = Vector2( 0, 40 )
 
@@ -486,7 +381,6 @@ _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [node name="CriticalButton" type="Button" parent="ActionsPanel/Controls" index="1"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -561,10 +455,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 8.0
-margin_top = 80.0
-margin_right = 72.0
-margin_bottom = 144.0
+margin_left = 218.0
+margin_top = 10.0
+margin_right = 282.0
+margin_bottom = 74.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -589,11 +483,77 @@ region_enabled = true
 region_rect = Rect2( 128, 0, 64, 64 )
 _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
+[node name="VampireButton" type="Button" parent="ActionsPanel/Controls" index="4"]
+
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 78.0
+margin_top = 138.0
+margin_right = 142.0
+margin_bottom = 202.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "7"
+flat = false
+align = 2
+_sections_unfolded = [ "Margin", "custom_fonts" ]
+
+[node name="Sprite" type="Sprite" parent="ActionsPanel/Controls/VampireButton" index="0"]
+
+texture = ExtResource( 7 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 320, 0, 64, 64 )
+_sections_unfolded = [ "Offset", "Region", "Transform" ]
+
+[node name="BashButton" type="Button" parent="ActionsPanel/Controls" index="5"]
+
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 148.0
+margin_top = 138.0
+margin_right = 212.0
+margin_bottom = 202.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "5"
+flat = false
+align = 2
+_sections_unfolded = [ "Margin", "custom_fonts" ]
+
+[node name="Sprite" type="Sprite" parent="ActionsPanel/Controls/BashButton" index="0"]
+
+texture = ExtResource( 7 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 384, 0, 64, 64 )
+_sections_unfolded = [ "Offset", "Region", "Transform" ]
+
 [connection signal="pressed" from="NextTurnButton" to="." method="_on_NextTurnButton_pressed"]
-
-[connection signal="pressed" from="SkillsPanel/Controls/VampireButton" to="." method="_on_VampireButton_pressed"]
-
-[connection signal="pressed" from="SkillsPanel/Controls/BashButton" to="." method="_on_BashButton_pressed"]
 
 [connection signal="pressed" from="ActionsPanel/Controls/AttackButton" to="." method="_on_AttackButton_pressed"]
 
@@ -602,5 +562,9 @@ _sections_unfolded = [ "Offset", "Region", "Transform" ]
 [connection signal="pressed" from="ActionsPanel/Controls/PotionButton" to="." method="_on_PotionButton_pressed"]
 
 [connection signal="pressed" from="ActionsPanel/Controls/DefendButton" to="." method="_on_DefendButton_pressed"]
+
+[connection signal="pressed" from="ActionsPanel/Controls/VampireButton" to="." method="_on_VampireButton_pressed"]
+
+[connection signal="pressed" from="ActionsPanel/Controls/BashButton" to="." method="_on_BashButton_pressed"]
 
 
