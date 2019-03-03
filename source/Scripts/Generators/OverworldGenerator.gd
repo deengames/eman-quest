@@ -97,7 +97,7 @@ func _place_area_entrances(map, areas_in_world):
 			var maps = Globals.maps[destination]
 			if typeof(maps) == TYPE_ARRAY: # not Final map
 				for submap in maps:
-					if submap.area_type == AreaType.ENTRANCE:
+					if submap.area_type == AreaType.AREA_TYPE.ENTRANCE:
 						target_destination = submap.entrance_from_overworld
 						break
 

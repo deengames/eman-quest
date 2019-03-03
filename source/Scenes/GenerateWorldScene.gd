@@ -114,7 +114,7 @@ func _generate_transitions(submap, map_width, map_height):
 	var transitions = []
 	var entrance_from_overworld = null
 	
-	if submap.area_type == AreaType.ENTRANCE:
+	if submap.area_type == AreaType.AREA_TYPE.ENTRANCE:
 		var position = Vector2(0, 0)
 		
 		# Caves use this to paint the tile with the correct light-showing tile

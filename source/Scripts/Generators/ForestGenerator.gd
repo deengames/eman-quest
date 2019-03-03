@@ -114,7 +114,7 @@ func generate(submap, transitions, variation_name):
 	map.transitions = transitions
 	map.treasure_chests = self._generate_treasure_chests()
 	
-	if submap.area_type == AreaType.BOSS:
+	if submap.area_type == AreaType.AREA_TYPE.BOSS:
 		map.bosses = self._generate_boss(variation_name)
 	
 	for data in tile_data:
@@ -255,7 +255,7 @@ func _generate_treasure_chests():
 	var chests = []
 	var chests_coordinates = []
 	var types = ["weapon", "armour"]
-	var stats = {"weapon": StatType.Strength, "armour": StatType.Defense}
+	var stats = {"weapon": StatType.StatType.Strength, "armour": StatType.StatType.Defense}
 	
 	while num_chests > 0:
 		var spot = SpotFinder.find_empty_spot(map_width, map_height,

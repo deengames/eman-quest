@@ -32,7 +32,7 @@ static func generate_layout(num_rooms):
 	var y = coordinates[1]
 	
 	var current = Room.new(x, y)
-	current.area_type = AreaType.ENTRANCE
+	current.area_type = AreaType.AREA_TYPE.ENTRANCE
 	to_return.set_at(x, y, current)
 	var rooms = [current]
 
@@ -49,7 +49,7 @@ static func generate_layout(num_rooms):
 			# Nothing available; pick random room
 			current = rooms[randi() % len(rooms)]
 	
-	rooms[-1].area_type = AreaType.BOSS
+	rooms[-1].area_type = AreaType.AREA_TYPE.BOSS
 
 	return rooms
 

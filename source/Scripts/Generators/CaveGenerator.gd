@@ -87,7 +87,7 @@ func generate(submap, transitions, variation_name):
 	map.transitions = transitions
 	map.treasure_chests = self._generate_treasure_chests()
 
-	if submap.area_type == AreaType.BOSS:
+	if submap.area_type == AreaType.AREA_TYPE.BOSS:
 		# Brute-force: find the farthest land tile from the entrance. But, only if the
 		# distance is within N tiles. Wandering the entire breadth of the dungeon is madness.
 		
@@ -242,7 +242,7 @@ func _generate_treasure_chests():
 	var chests = []
 	var chests_coordinates = []
 	var types = ["weapon", "armour"]
-	var stats = {"weapon": StatType.Strength, "armour": StatType.Defense}
+	var stats = {"weapon": StatType.StatType.Strength, "armour": StatType.StatType.Defense}
 	
 	# Sigh, refactoring. This map has no separate object/wall map. So pass
 	# an empty map in here.

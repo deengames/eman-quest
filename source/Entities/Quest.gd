@@ -174,7 +174,7 @@ static func add_quest_content_if_applicable(map, variation):
 	var replacement_npcs = Globals.quest.replacement_npcs
 	
 	# Add quest boss if there's one specified
-	if map.area_type == AreaType.BOSS:
+	if map.area_type == AreaType.AREA_TYPE.BOSS:
 		# Separate bosses from events. Non-quest-bosses have events/attachments too.
 		if dungeon_number < len(bosses):
 			var quest_boss = bosses[dungeon_number]

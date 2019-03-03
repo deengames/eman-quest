@@ -51,7 +51,7 @@ static func change_map_to(tree, target):
 			
 			if typeof(map_data) == TYPE_ARRAY:
 				for map in map_data:
-					if map.area_type == AreaType.ENTRANCE:
+					if map.area_type == AreaType.AREA_TYPE.ENTRANCE:
 						target_areamap = map
 						break
 		else:
@@ -119,6 +119,7 @@ static func change_scene_to(tree, scene_instance):
 	# http://docs.godotengine.org/en/3.0/getting_started/step_by_step/singletons_autoload.html?highlight=change_scene
 	var root = tree.get_root()
 	var current_scene = root.get_child(root.get_child_count() - 1)
+	# TODO: FIX
 	current_scene.free()
 	
 	current_scene = scene_instance
