@@ -160,7 +160,7 @@ static func start_battle(tree, monster_data):
 	change_scene_to(tree, battle_scene)
 
 static func _free_current_scene(scene):
-	scene.free()
+	scene.queue_free()
 
 static func _remove_monster_instances():
 	# Don't crash if we have a static map and `monsters` is not defined.
