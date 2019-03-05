@@ -33,7 +33,7 @@ func _generate_world_map():
 func _fill_with_grass(map):
 	for y in range(0, Globals.WORLD_HEIGHT_IN_TILES):
 		for x in range(0, Globals.WORLD_WIDTH_IN_TILES):
-			map.set(x, y, "Grass")
+			map.set_at(x, y, "Grass")
 
 # Returns the [x, y] of the last tile in the river (farthest from the edge of the map)
 func _create_river(map):
@@ -54,7 +54,7 @@ func _create_river(map):
 			start_y = stop_y
 			stop_y = Globals.WORLD_HEIGHT_IN_TILES
 		for y in range(start_y, stop_y):
-			map.set(x, y, "Water")
+			map.set_at(x, y, "Water")
 
 	else: #if direction == 2 or direction == 4:
 		var y = Globals.randint(Globals.WORLD_HEIGHT_IN_TILES / 3, 2 * Globals.WORLD_HEIGHT_IN_TILES / 3)
@@ -69,7 +69,7 @@ func _create_river(map):
 			stop_x = Globals.WORLD_WIDTH_IN_TILES
 
 		for x in range(start_x, stop_x):
-			map.set(x, y, "Water")
+			map.set_at(x, y, "Water")
 
 	return [last_x, last_y]
 
@@ -79,7 +79,7 @@ func _create_lake(map, lake_coordinates):
 	# Creates a 3x3 lake. End of range is exclusive, so add another +1
 	for y in range(lake_y - 1, lake_y + 2):
 		for x in range (lake_x - 1, lake_x + 2):
-			map.set(x, y, "Water")
+			map.set_at(x, y, "Water")
 
 func _place_area_entrances(map, areas_in_world):
 	var placed_areas = []
@@ -128,5 +128,5 @@ func _is_tile_valid_and_empty(tile_data, placed_areas, x, y):
 	var coordinates = Vector2(x, y)
 	# Don't be on the border of the map
 	var is_on_map = x > 0 and x < map_width - 1 and y > 0 and y < map_height - 1
-	var is_empty = tile_data.get(x, y) == "Grass" and placed_areas.find(coordinates) == -1
+	var is_empty = tile_data.get_at(x, y) == "Grass" and placed_areas.find(coordinates) == -1
 	return  is_on_map and is_empty

@@ -137,9 +137,9 @@ func _generate_dungeon(area_type, transitions):
 	
 	for y in range(0, self.map_height):
 		for x in range(0, self.map_width):
-			var tile = ground_map.get(x, y)
+			var tile = ground_map.get_at(x, y)
 			if tile != "Ground":
-				solid_tiles_map.set(x, y, tile)
+				solid_tiles_map.set_at(x, y, tile)
 
 	return to_return
 
@@ -257,21 +257,21 @@ func _find_closest_room_to(room, rooms):
 func _generate_door(x, y, ground_map, decoration_map):
 	var adjacent_ground = 0
 	
-	if ground_map.get(x - 1, y - 1) == "Ground":
+	if ground_map.get_at(x - 1, y - 1) == "Ground":
 		adjacent_ground += 1
-	if ground_map.get(x, y - 1) == "Ground":
+	if ground_map.get_at(x, y - 1) == "Ground":
 		adjacent_ground += 1
-	if ground_map.get(x + 1, y - 1) == "Ground":
+	if ground_map.get_at(x + 1, y - 1) == "Ground":
 		adjacent_ground += 1
-	if ground_map.get(x - 1, y) == "Ground":
+	if ground_map.get_at(x - 1, y) == "Ground":
 		adjacent_ground += 1
-	if ground_map.get(x + 1, y) == "Ground":
+	if ground_map.get_at(x + 1, y) == "Ground":
 		adjacent_ground += 1
-	if ground_map.get(x - 1, y + 1) == "Ground":
+	if ground_map.get_at(x - 1, y + 1) == "Ground":
 		adjacent_ground += 1
-	if ground_map.get(x, y + 1) == "Ground":
+	if ground_map.get_at(x, y + 1) == "Ground":
 		adjacent_ground += 1
-	if ground_map.get(x + 1, y + 1) == "Ground":
+	if ground_map.get_at(x + 1, y + 1) == "Ground":
 		adjacent_ground += 1
 	
 	# Must have two adjacent wall tiles
@@ -305,8 +305,8 @@ func _generate_room(room_rect, ground_map, decoration_map):
 	
 func _add_torch(x, y, ground_map, decoration_map):
 	# Place only on walls
-	if ground_map.get(x, y) == "Wall":
-		decoration_map.set(x, y, "Torch")
+	if ground_map.get_at(x, y) == "Wall":
+		decoration_map.set_at(x, y, "Torch")
 
 func _generate_path(point1, point2, ground_map, decoration_map):
 	var from_x = point1[0]
@@ -328,9 +328,9 @@ func _generate_path(point1, point2, ground_map, decoration_map):
 		
 		# Decorate any paths with 2-tile high walls
 		# This shortens ceilings and shows awesome walls instead
-		if ground_map.get(from_x, from_y - 1) == "Ceiling":
+		if ground_map.get_at(from_x, from_y - 1) == "Ceiling":
 			self._set_tile([from_x, from_y - 1], "Wall", ground_map)
-		if ground_map.get(from_x, from_y - 2) == "Ceiling":
+		if ground_map.get_at(from_x, from_y - 2) == "Ceiling":
 			self._set_tile([from_x, from_y - 2], "Wall", ground_map)
 
 func _generate_treasure_chests():
@@ -364,7 +364,7 @@ func _generate_treasure_chests():
 func _fill_with(tile_name, map_array):
 	for y in range(0, map_height):
 		for x in range(0, map_width):
-			map_array.set(x, y, tile_name)
+			map_array.set_at(x, y, tile_name)
 
 func _convert_to_ground(position, ground_map, decoration_map):
 	self._convert_to(position, "Ground", ground_map, decoration_map)
@@ -377,8 +377,8 @@ func _convert_to(position, type, ground_map, decoration_map):
 	var y = position[1]
 
 	if x >= 0 and x < map_width and y >= 0 and y < map_height:
-		ground_map.set(x, y, type)
-		decoration_map.set(x, y, null) # remove decoration
+		ground_map.set_at(x, y, type)
+		decoration_map.set_at(x, y, null) # remove decoration
 
 func _set_tile(position, type, map):
 	# Draws dirt at the specified position. Also clears trees for
@@ -388,11 +388,11 @@ func _set_tile(position, type, map):
 	var y = position[1]
 
 	if x >= 0 and x < map_width and y >= 0 and y < map_height:
-		map.set(x, y, type)
+		map.set_at(x, y, type)
 
 func _clear_if_wall(ground_map, x, y):
 	if x >= 0 and x < map_width:
 		if y >= 0 and y < map_height:
-			if ground_map.get(x, y) == "Wall" or ground_map.get(x, y) == "Ceiling":
-				ground_map.set(x, y, null)
+			if ground_map.get_at(x, y) == "Wall" or ground_map.get_at(x, y) == "Ceiling":
+				ground_map.set_at(x, y, null)
 

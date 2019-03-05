@@ -51,14 +51,14 @@ func has(x, y):
 	var index = self._get_index(x, y)
 	return index < self._data.size() and self._data[index] != null
 	
-func get(x, y):
+func get_at(x, y):
 	var index = self._get_index(x, y)
 	if index < len(self._data):
 		return self._data[index]
 	else:
 		return null
 
-func set(x, y, item):
+func set_at(x, y, item):
 	var index = self._get_index(x, y)
 	self._data[index] = item
 	

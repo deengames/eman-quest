@@ -19,7 +19,7 @@ var _feature_map = {
 	"instant actions": true
 }
 
-func set(feature, enabled):
+func set_state(feature, enabled):
 	if feature in self._feature_map:
 		_feature_map[feature] = enabled
 	else:

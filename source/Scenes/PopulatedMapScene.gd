@@ -115,7 +115,7 @@ func get_monsters():
 func _populate_tiles(tilemap_data, tilemap, tile_ids, entity_tiles):
 	for y in range(0, tilemap_data.height):
 		for x in range(0, tilemap_data.width):
-			var tile_name = tilemap_data.get(x, y)
+			var tile_name = tilemap_data.get_at(x, y)
 			
 			if tile_name != null:
 				tilemap.set_cell(x, y, tile_ids[tile_name])
@@ -252,7 +252,7 @@ func _find_spot_near_boss(boss, blocked_coordinates):
 			var ty = y - tile_y
 			# on the map, not on the boss (2x2 tiles), and not already blocked by another NPC
 			if tx >= 0 and tx < self.map.tiles_wide and ty >= 0 and ty < self.map.tiles_high and \
-			not Vector2(tx, ty) in blocked_coordinates and ground_tilemap.get(tx, ty) in Globals.WALKABLE_TILES and \
+			not Vector2(tx, ty) in blocked_coordinates and ground_tilemap.get_at(tx, ty) in Globals.WALKABLE_TILES and \
 			tx != boss.x and ty != boss.y and tx != boss.x + 1 and ty != boss.y + 1:
 				return Vector2(tx, ty)
 			
