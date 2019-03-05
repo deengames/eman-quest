@@ -144,8 +144,16 @@ static func switch_to_battle_if_touched_player(tree, monster, body):
 			event_manager.show_prebattle_events(monster)
 			yield(event_manager, "events_done")
 		
+		Globals.player.freeze()
+		monster.freeze()
+		
+		_show_battle_transition(monster.get_tree())
+		yield(tree.create_timer(1), 'timeout')
 		start_battle(monster.get_tree(), monster.data_object["data"])
 
+static func _show_battle_transition(tree):
+	print("Transition done")
+	
 static func start_battle(tree, monster_data):
 	Globals.won_battle = false
 	# We mutate data eg. health. So if you fight the same monster, win/lose, then the

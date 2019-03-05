@@ -14,6 +14,7 @@ var x = 0
 var y = 0
 var data_object = null # Monster.new() instance
 
+var _frozen = false
 var _destination = Vector2(0, 0)
 var _destination_last_changed = OS.get_ticks_msec()
 
@@ -36,6 +37,10 @@ func initialize_from(monster):
 	self.position.y = monster.y
 	var type = monster.data["type"].replace(' ', '')
 	$Sprite.texture = load("res://assets/images/monsters/" + type + ".png")
+
+func freeze():
+	self._frozen = true
+	$AnimationPlayer.stop()
 
 func to_dict():
 	var data = null
@@ -64,11 +69,12 @@ static func from_dict(dict):
 
 
 func _process(delta):
-	var now = OS.get_ticks_msec()
-	
-	if now - self._destination_last_changed > self._change_after_seconds * 1000:
-		self._pick_destination()
-		_destination_last_changed = now
+	if not self._frozen:
+		var now = OS.get_ticks_msec()
+		
+		if now - self._destination_last_changed > self._change_after_seconds * 1000:
+			self._pick_destination()
+			_destination_last_changed = now
 
 func _pick_destination():
 	var root = get_tree().get_root()
@@ -79,12 +85,14 @@ func _pick_destination():
 	self._face_current_direction()
 
 func _physics_process(delta):
-	if self._destination != null:
-		var velocity = (self._destination - self.position).normalized() * self._MOVE_SPEED
-		move_and_slide(velocity) 
+	if not self._frozen:
+		if self._destination != null:
+			var velocity = (self._destination - self.position).normalized() * self._MOVE_SPEED
+			move_and_slide(velocity) 
 
 func _on_Area2D_body_entered(body):
-	SceneManagement.switch_to_battle_if_touched_player(get_tree(), self, body)
+	if not self._frozen:
+		SceneManagement.switch_to_battle_if_touched_player(get_tree(), self, body)
 
 func _face_current_direction():
 	var delta = (self._destination - self.position).normalized()
