@@ -4,6 +4,7 @@ extends Node2D
 # A class that takes an AreaMap and generates the scene (tiles, enemies, etc.)
 ###
 
+const AudioManager = preload("res://Scripts/AudioManager.gd")
 const AutoTileTilesets = preload("res://Tilesets/AutoTileTilesets.tscn")
 const Boss = preload("res://Entities/Battle/Boss.tscn")
 const MapWarp = preload("res://Entities/MapWarp.tscn")
@@ -17,14 +18,18 @@ const TilesetMapper = preload("res://Scripts/TilesetMapper.gd")
 const _NPC_MAX_DISTANCE_TO_BOSS = 4
 
 var map # area map
+
 var _monsters = {} # Type => pixel coordinates of actual monster scenes/entities
 var _bosses = {} # Type => pixel coordinates of actual boss scenes/entities
 var _restoring_state = false # restoring to previous state after battle
+var _audio_bgs # AudioManager
 
 func initialize(map):
 	self.map = map
 
 func _ready():
+	self._audio_bgs = AudioManager.new()
+	
 	Globals.current_map = map
 	Globals.current_map_type = map.map_type
 	self._restoring_state = Globals.previous_monsters != null
@@ -35,6 +40,11 @@ func _ready():
 	var mapper = TilesetMapper.new(tileset)
 	var tile_ids = mapper.load_tileset_mapping()
 	var entity_tiles = mapper.get_entity_tiles(map.map_type, map.variation)
+	
+	if map != null and map.map_type != null and map.variation != null:
+		var bgs_key = map.variation.to_lower() + "-" + map.map_type.to_lower() + "-bgs"
+		if self._audio_bgs.audio_clips.has(bgs_key):
+			self._audio_bgs.play_sound(bgs_key)
 	
 	var tilemaps = []
 	
@@ -63,7 +73,7 @@ func _ready():
 		player.position = Vector2(
 			from.target_position.x * Globals.TILE_WIDTH,
 			from.target_position.y * Globals.TILE_HEIGHT)
-			
+		
 		#########
 		# https://www.pivotaltracker.com/story/show/163181477
 		# Worst. Bug. Ever. SOMETIMES, in ONE particular cave map,
@@ -87,6 +97,9 @@ func _ready():
 	Globals.current_map_scene = self
 		
 	self.add_child(player)
+
+func _exit_tree():
+	self._audio_bgs.clean_up_audio()
 
 func get_monsters():
 	var to_return = {}

@@ -11,7 +11,8 @@ var audio_clips = {
 	"quran-intro-1": preload("res://assets/audio/quran-17-23.ogg"),
 	"quran-intro-2": preload("res://assets/audio/quran-17-24.ogg"),
 	"quran-finale-1": preload("res://assets/audio/quran-14-41.ogg"),
-	"quran-finale-2": preload("res://assets/audio/quran-14-42.ogg")
+	"quran-finale-2": preload("res://assets/audio/quran-14-42.ogg"),
+	"slime-forest-bgs": preload("res://assets/audio/bgs/Slime-Forest.ogg")
 }
 
 const AudioFilePlayerClass = preload("res://Scenes/AudioFilePlayer.tscn")
@@ -26,7 +27,6 @@ func play_sound(audio_clip_key, loop_sound=false, sound_position=null):
 		
 		audio_player.should_loop = loop_sound
 		audio_player.play_sound(audio_clips[audio_clip_key], sound_position)
-		#audio_player.play_sound(load("res://assets/audio/test.wav"))
 		audio_player.connect("finished", self, "_sound_finished")
 	else:
 		print ("ERROR: cannot play sound {key} that is not defined in audio_clips dictionary!".format({key = audio_clip_key}))

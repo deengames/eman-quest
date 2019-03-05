@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Slime-Forest.ogg-76110b9b8df3c6cfee04d8197d762948.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/bgs/Slime-Forest.ogg"
+dest_files=[ "res://.import/Slime-Forest.ogg-76110b9b8df3c6cfee04d8197d762948.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
