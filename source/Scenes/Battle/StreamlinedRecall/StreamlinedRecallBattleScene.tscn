@@ -37,7 +37,7 @@ anti_aliasing = true
 anti_aliasing_size = 1
 _sections_unfolded = [ "Border", "Border Width" ]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -133,6 +133,7 @@ _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [node name="PlayerHealth" type="TextureProgress" parent="PlayerControls" index="1"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -346,7 +347,6 @@ position = Vector2( 0, 40 )
 
 [node name="AttackButton" type="Button" parent="ActionsPanel/Controls" index="0"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -369,14 +369,14 @@ group = null
 text = "2"
 flat = false
 align = 2
-_sections_unfolded = [ "Margin", "custom_fonts" ]
+_sections_unfolded = [ "Anchor", "Margin", "Size Flags", "custom_fonts" ]
 
 [node name="Sprite" type="Sprite" parent="ActionsPanel/Controls/AttackButton" index="0"]
 
 texture = ExtResource( 7 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 0, 0, 64, 64 )
+region_rect = Rect2( 0, 0, 48, 48 )
 _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [node name="CriticalButton" type="Button" parent="ActionsPanel/Controls" index="1"]
@@ -410,12 +410,11 @@ _sections_unfolded = [ "Margin", "custom_fonts" ]
 texture = ExtResource( 7 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 64, 0, 64, 64 )
+region_rect = Rect2( 48, 0, 48, 48 )
 _sections_unfolded = [ "Offset", "Region", "Transform", "Visibility" ]
 
 [node name="PotionButton" type="Button" parent="ActionsPanel/Controls" index="2"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -445,12 +444,11 @@ _sections_unfolded = [ "Margin", "custom_fonts" ]
 texture = ExtResource( 7 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 192, 0, 64, 64 )
+region_rect = Rect2( 144, 0, 48, 48 )
 _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [node name="DefendButton" type="Button" parent="ActionsPanel/Controls" index="3"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -480,12 +478,11 @@ _sections_unfolded = [ "Margin", "custom_fonts" ]
 texture = ExtResource( 7 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 128, 0, 64, 64 )
+region_rect = Rect2( 96, 0, 48, 48 )
 _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [node name="VampireButton" type="Button" parent="ActionsPanel/Controls" index="4"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -515,12 +512,11 @@ _sections_unfolded = [ "Margin", "custom_fonts" ]
 texture = ExtResource( 7 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 320, 0, 64, 64 )
+region_rect = Rect2( 240, 0, 48, 48 )
 _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [node name="BashButton" type="Button" parent="ActionsPanel/Controls" index="5"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -550,7 +546,7 @@ _sections_unfolded = [ "Margin", "custom_fonts" ]
 texture = ExtResource( 7 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 384, 0, 64, 64 )
+region_rect = Rect2( 288, 0, 48, 48 )
 _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [connection signal="pressed" from="NextTurnButton" to="." method="_on_NextTurnButton_pressed"]

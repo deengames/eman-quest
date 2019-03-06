@@ -29,14 +29,14 @@ var frames = {
 
 const Actions = {
 	"attack": 0,
-	"critical": 64,
+	"critical": 48,
 	#"defend": 128,
-	"heal": 192
+	"heal": 144
 }
 
 const AdvancedActions = {
-	"vampire": 320,
-	"bash": 384
+	"vampire": 240,
+	"bash": 288
 }
 
 const WRONG_IMAGE_X = 256
@@ -49,7 +49,7 @@ func _ready():
 	self.reset()
 	
 	if Features.is_enabled("defend action"):
-		AdvancedActions["defend"] = 128
+		AdvancedActions["defend"] = 96
 
 func _process(delta):
 	if self.state == "first showing":
