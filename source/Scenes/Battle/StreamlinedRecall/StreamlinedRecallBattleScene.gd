@@ -33,6 +33,13 @@ var _is_players_turn = false
 
 func _ready():
 	
+	# blackout
+	var tree = self.get_tree()
+	var root = tree.get_root()
+	var canvas_modulate = CanvasModulate.new()
+	root.add_child(canvas_modulate)
+	canvas_modulate.color = Color(0, 0, 0, 1)
+	
 	randomize()
 	
 	var map_type
@@ -71,7 +78,6 @@ func _ready():
 	$StatusLabel.text = ""
 	$NextTurnButton.visible = false
 	$ActionsPanel.visible = false
-	self._start_next_turn()
 	
 	_player.connect("poison_damaged", self, "_on_poison_damaged")
 	
@@ -79,6 +85,20 @@ func _ready():
 		$TechPointsLabel.visible = false
 	
 	self._disable_unusable_skills()
+	
+	# Fade in	
+	var animation_time_seconds = 0.5
+	
+	var tween = Tween.new()
+	tween.interpolate_property(canvas_modulate, "color", Color(0, 0, 0, 1), Color(1, 1, 1, 1), animation_time_seconds, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	root.add_child(tween)
+	tween.start()
+	yield(tree.create_timer(animation_time_seconds), 'timeout')
+	root.remove_child(tween)
+	root.remove_child(canvas_modulate)
+	# Fade done
+	
+	self._start_next_turn()
 
 func set_monster_data(data):
 	MonsterScaler.scale_monster_data(data)

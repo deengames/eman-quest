@@ -147,7 +147,7 @@ static func switch_to_battle_if_touched_player(tree, monster, body):
 		Globals.player.freeze()
 		monster.freeze()
 		
-		var animation_time_seconds = 3
+		var animation_time_seconds = 0.75
 		var root = tree.get_root()
 		var to_remove = _show_battle_transition(root, animation_time_seconds) # returns immediately
 		yield(tree.create_timer(animation_time_seconds), 'timeout')
@@ -161,7 +161,7 @@ static func _show_battle_transition(root, animation_time_seconds):
 	root.add_child(canvas_modulate)
 	
 	var tween = Tween.new()
-	tween.interpolate_property(canvas_modulate, "color", Color(0, 0, 0, 0), Color(0, 0, 0, 1), animation_time_seconds, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	tween.interpolate_property(canvas_modulate, "color", Color(1, 1, 1, 1), Color(0, 0, 0, 1), animation_time_seconds, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	root.add_child(tween)
 	tween.start()
 	
