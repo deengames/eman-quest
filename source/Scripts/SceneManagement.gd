@@ -165,7 +165,12 @@ static func _show_battle_transition(root, animation_time_seconds):
 	root.add_child(tween)
 	tween.start()
 	
-	return [canvas_modulate, tween]
+	var player_tween = Tween.new()
+	player_tween.interpolate_property(Globals.player.get_node("Camera2D"), "zoom", Vector2(1, 1), Vector2(0, 0), animation_time_seconds, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	root.add_child(player_tween)
+	player_tween.start()
+	
+	return [canvas_modulate, tween, player_tween]
 	
 static func start_battle(tree, monster_data):
 	Globals.won_battle = false
