@@ -148,14 +148,15 @@ static func switch_to_battle_if_touched_player(tree, monster, body):
 		monster.freeze()
 		
 		var animation_time_seconds = 3
-		var to_remove = _show_battle_transition(tree, animation_time_seconds) # returns immediately
+		var root = tree.get_root()
+		var to_remove = _show_battle_transition(root, animation_time_seconds) # returns immediately
 		yield(tree.create_timer(animation_time_seconds), 'timeout')
-		tree.get_root().remove_child(to_remove)
+		for item in to_remove:
+			root.remove_child(item)
 		
 		start_battle(tree, monster.data_object["data"])
 
-static func _show_battle_transition(tree, animation_time_seconds):
-	var root = tree.get_root()
+static func _show_battle_transition(root, animation_time_seconds):
 	var canvas_modulate = CanvasModulate.new()
 	root.add_child(canvas_modulate)
 	
@@ -164,7 +165,7 @@ static func _show_battle_transition(tree, animation_time_seconds):
 	root.add_child(tween)
 	tween.start()
 	
-	return canvas_modulate
+	return [canvas_modulate, tween]
 	
 static func start_battle(tree, monster_data):
 	Globals.won_battle = false
