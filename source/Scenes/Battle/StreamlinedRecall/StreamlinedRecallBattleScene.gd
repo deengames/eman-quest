@@ -332,11 +332,11 @@ func _disable_unusable_skills():
 func _disable_action_button(button):
 	button.disabled = true
 	# Fade out 50% so hopefully the user can tell that it's disabled
-	button.get_node("Sprite").modulate.a = 0.5
+	button.modulate.a = 0.5
 
 func _enable_action_button(button):
 	button.disabled = false
-	button.get_node("Sprite").modulate.a = 1
+	button.modulate.a = 1
 	
 func _on_poison_damaged(damage):
 	$StatusLabel.text = "Posioned for " + str(damage) + " damage!"

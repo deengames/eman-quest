@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/Battle/StreamlinedRecall/StreamlinedRecallBattleScene.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/monsters/GoldSlime.png" type="Texture" id=2]
@@ -6,7 +6,12 @@
 [ext_resource path="res://assets/images/gui/healthbar-fill.png" type="Texture" id=4]
 [ext_resource path="res://assets/images/protagonist.png" type="Texture" id=5]
 [ext_resource path="res://Scenes/Battle/StreamlinedRecall/RecallGrid.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/images/battle/actions.png" type="Texture" id=7]
+[ext_resource path="res://assets/images/battle/actions/attack.png" type="Texture" id=7]
+[ext_resource path="res://assets/images/battle/actions/critical.png" type="Texture" id=8]
+[ext_resource path="res://assets/images/battle/actions/item.png" type="Texture" id=9]
+[ext_resource path="res://assets/images/battle/actions/defend.png" type="Texture" id=10]
+[ext_resource path="res://assets/images/battle/actions/vampire.png" type="Texture" id=11]
+[ext_resource path="res://assets/images/battle/actions/bash.png" type="Texture" id=12]
 
 [sub_resource type="StyleBoxFlat" id=1]
 
@@ -278,10 +283,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 344.0
-margin_top = 146.0
-margin_right = 639.0
-margin_bottom = 405.0
+margin_left = 280.0
+margin_top = 130.0
+margin_right = 680.0
+margin_bottom = 410.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -296,10 +301,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 55.0
-margin_top = 131.0
-margin_right = 232.0
-margin_bottom = 173.0
+margin_top = 136.0
+margin_right = 400.0
+margin_bottom = 178.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -314,7 +318,7 @@ autowrap = true
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Rect", "custom_colors", "custom_constants", "custom_fonts" ]
+_sections_unfolded = [ "Margin", "Rect", "custom_colors", "custom_constants", "custom_fonts" ]
 
 [node name="ActionsLabel" type="Label" parent="ActionsPanel" index="1"]
 
@@ -322,10 +326,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 55.0
 margin_top = 3.0
-margin_right = 247.0
-margin_bottom = 47.0
+margin_right = 400.0
+margin_bottom = 50.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -339,11 +342,12 @@ align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Rect", "custom_colors", "custom_constants", "custom_fonts" ]
+_sections_unfolded = [ "Margin", "Rect", "custom_colors", "custom_constants", "custom_fonts" ]
 
 [node name="Controls" type="Node2D" parent="ActionsPanel" index="2"]
 
 position = Vector2( 0, 40 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="AttackButton" type="Button" parent="ActionsPanel/Controls" index="0"]
 
@@ -351,10 +355,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 8.0
+margin_left = 9.0
 margin_top = 10.0
-margin_right = 72.0
-margin_bottom = 74.0
+margin_right = 95.0
+margin_bottom = 82.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -367,17 +371,10 @@ enabled_focus_mode = 2
 shortcut = null
 group = null
 text = "2"
+icon = ExtResource( 7 )
 flat = false
 align = 2
 _sections_unfolded = [ "Anchor", "Margin", "Size Flags", "custom_fonts" ]
-
-[node name="Sprite" type="Sprite" parent="ActionsPanel/Controls/AttackButton" index="0"]
-
-texture = ExtResource( 7 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 0, 0, 48, 48 )
-_sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [node name="CriticalButton" type="Button" parent="ActionsPanel/Controls" index="1"]
 
@@ -385,10 +382,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 78.0
+margin_left = 108.0
 margin_top = 10.0
-margin_right = 142.0
-margin_bottom = 74.0
+margin_right = 194.0
+margin_bottom = 82.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -401,17 +398,10 @@ enabled_focus_mode = 2
 shortcut = null
 group = null
 text = "3"
+icon = ExtResource( 8 )
 flat = false
 align = 2
 _sections_unfolded = [ "Margin", "custom_fonts" ]
-
-[node name="Sprite" type="Sprite" parent="ActionsPanel/Controls/CriticalButton" index="0"]
-
-texture = ExtResource( 7 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 48, 0, 48, 48 )
-_sections_unfolded = [ "Offset", "Region", "Transform", "Visibility" ]
 
 [node name="PotionButton" type="Button" parent="ActionsPanel/Controls" index="2"]
 
@@ -419,10 +409,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 148.0
+margin_left = 209.0
 margin_top = 10.0
-margin_right = 212.0
-margin_bottom = 74.0
+margin_right = 295.0
+margin_bottom = 82.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -435,17 +425,10 @@ enabled_focus_mode = 2
 shortcut = null
 group = null
 text = "1"
+icon = ExtResource( 9 )
 flat = false
 align = 2
 _sections_unfolded = [ "Margin", "custom_fonts" ]
-
-[node name="Sprite" type="Sprite" parent="ActionsPanel/Controls/PotionButton" index="0"]
-
-texture = ExtResource( 7 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 144, 0, 48, 48 )
-_sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [node name="DefendButton" type="Button" parent="ActionsPanel/Controls" index="3"]
 
@@ -453,10 +436,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 218.0
+margin_left = 306.0
 margin_top = 10.0
-margin_right = 282.0
-margin_bottom = 74.0
+margin_right = 392.0
+margin_bottom = 82.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -469,17 +452,10 @@ enabled_focus_mode = 2
 shortcut = null
 group = null
 text = "1"
+icon = ExtResource( 10 )
 flat = false
 align = 2
 _sections_unfolded = [ "Margin", "custom_fonts" ]
-
-[node name="Sprite" type="Sprite" parent="ActionsPanel/Controls/DefendButton" index="0"]
-
-texture = ExtResource( 7 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 96, 0, 48, 48 )
-_sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [node name="VampireButton" type="Button" parent="ActionsPanel/Controls" index="4"]
 
@@ -487,10 +463,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 78.0
-margin_top = 138.0
-margin_right = 142.0
-margin_bottom = 202.0
+margin_left = 209.0
+margin_top = 143.0
+margin_right = 295.0
+margin_bottom = 215.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -503,17 +479,10 @@ enabled_focus_mode = 2
 shortcut = null
 group = null
 text = "7"
+icon = ExtResource( 11 )
 flat = false
 align = 2
 _sections_unfolded = [ "Margin", "custom_fonts" ]
-
-[node name="Sprite" type="Sprite" parent="ActionsPanel/Controls/VampireButton" index="0"]
-
-texture = ExtResource( 7 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 240, 0, 48, 48 )
-_sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [node name="BashButton" type="Button" parent="ActionsPanel/Controls" index="5"]
 
@@ -521,10 +490,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 148.0
-margin_top = 138.0
-margin_right = 212.0
-margin_bottom = 202.0
+margin_left = 108.0
+margin_top = 143.0
+margin_right = 194.0
+margin_bottom = 215.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -537,17 +506,10 @@ enabled_focus_mode = 2
 shortcut = null
 group = null
 text = "5"
+icon = ExtResource( 12 )
 flat = false
 align = 2
 _sections_unfolded = [ "Margin", "custom_fonts" ]
-
-[node name="Sprite" type="Sprite" parent="ActionsPanel/Controls/BashButton" index="0"]
-
-texture = ExtResource( 7 )
-centered = false
-region_enabled = true
-region_rect = Rect2( 288, 0, 48, 48 )
-_sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [connection signal="pressed" from="NextTurnButton" to="." method="_on_NextTurnButton_pressed"]
 
