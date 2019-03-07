@@ -12,7 +12,7 @@ func _ready():
 	Globals.player = self
 	
 	if Features.is_enabled("zoom-out maps"):
-		$Camera2D.zoom = Vector2(4, 4)
+		$Camera2D.zoom = Vector2(0.3, 0.3)
 		
 	# Strange bug that I can't quite figure out. Broke on New Game.
 	if Globals.current_map == null:
