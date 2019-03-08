@@ -62,6 +62,11 @@ func _ready():
 	var image_name = self._monster_data["type"].replace(' ', '')
 	$MonsterControls/MonsterHealth.max_value = self._monster_data["max_health"]
 	$MonsterControls/MonsterSprite.texture = load("res://assets/images/monsters/" + image_name + ".png")
+	
+	$MonsterControls/NameLabel.text = self._monster_data["type"]
+	if not self._monster_data["is_boss"]:
+		$MonsterControls/NameLabel.text += " (level ??)"
+		
 	$PlayerControls/PlayerHealth.max_value = self._player.max_health
 	
 	$RecallGrid.battle_player = self._player
@@ -86,7 +91,7 @@ func _ready():
 	
 	self._disable_unusable_skills()
 	
-	# Fade in	
+	# Fade in
 	var animation_time_seconds = 0.5
 	
 	var tween = Tween.new()
