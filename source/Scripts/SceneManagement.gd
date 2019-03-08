@@ -136,9 +136,6 @@ static func switch_to_battle_if_touched_player(tree, monster, body):
 		
 		if monster.data_object is Boss:
 			Globals.battle_spoils = Globals.current_monster.key_item
-			monster.data_object.data["is_boss"] = true
-		else:
-			monster.data_object.data["is_boss"] = false
 		
 		if "events" in monster and monster.events != null and len(monster.events) > 0:
 			# Only used for bosses, but ya3ne, global code
@@ -148,7 +145,8 @@ static func switch_to_battle_if_touched_player(tree, monster, body):
 			yield(event_manager, "events_done")
 		
 		Globals.player.freeze()
-		monster.freeze()
+		if not monster is Boss:
+			monster.freeze()
 		
 		var animation_time_seconds = 0.5
 		var root = tree.get_root()

@@ -63,9 +63,7 @@ func _ready():
 	$MonsterControls/MonsterHealth.max_value = self._monster_data["max_health"]
 	$MonsterControls/MonsterSprite.texture = load("res://assets/images/monsters/" + image_name + ".png")
 	
-	$MonsterControls/NameLabel.text = self._monster_data["type"]
-	if not self._monster_data["is_boss"]:
-		$MonsterControls/NameLabel.text += " (level ??)"
+	$MonsterControls/NameLabel.text = self._monster_data["type"] + " (level " + str(self._monster_data["level"]) + ")"
 		
 	$PlayerControls/PlayerHealth.max_value = self._player.max_health
 	
