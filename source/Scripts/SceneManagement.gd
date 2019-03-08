@@ -145,7 +145,8 @@ static func switch_to_battle_if_touched_player(tree, monster, body):
 			yield(event_manager, "events_done")
 		
 		Globals.player.freeze()
-		monster.freeze()
+		if not monster is Boss:
+			monster.freeze()
 		
 		var animation_time_seconds = 0.5
 		var root = tree.get_root()

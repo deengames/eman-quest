@@ -53,7 +53,6 @@ _sections_unfolded = [ "Offset" ]
 
 [node name="MonsterControls" type="Node2D" parent="." index="1"]
 
-editor/display_folded = true
 position = Vector2( 708, 192 )
 
 [node name="MonsterSprite" type="Sprite" parent="MonsterControls" index="0"]
@@ -122,6 +121,33 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Theme", "custom_colors", "custom_constants", "custom_fonts" ]
 
+[node name="NameLabel" type="Label" parent="MonsterControls" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 9.0
+margin_top = -35.0
+margin_right = 247.0
+margin_bottom = 43.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 2
+text = "Vampire bat (level 9)"
+align = 1
+valign = 2
+autowrap = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_constants" ]
+
 [node name="PlayerControls" type="Node2D" parent="." index="2"]
 
 editor/display_folded = true
@@ -138,15 +164,14 @@ _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [node name="PlayerHealth" type="TextureProgress" parent="PlayerControls" index="1"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 92.0
-margin_top = 29.0
+margin_top = 19.0
 margin_right = 242.0
-margin_bottom = 61.0
+margin_bottom = 51.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
