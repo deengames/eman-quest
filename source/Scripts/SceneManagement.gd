@@ -144,17 +144,9 @@ static func switch_to_battle_if_touched_player(tree, monster, body):
 			event_manager.show_prebattle_events(monster)
 			yield(event_manager, "events_done")
 		
-		Globals.player.freeze()
 		if not monster is Boss:
 			monster.freeze()
-		
-		var animation_time_seconds = 0.5
-		var root = tree.get_root()
-		var to_remove = _show_battle_transition(root, animation_time_seconds) # returns immediately
-		yield(tree.create_timer(animation_time_seconds), 'timeout')
-		for item in to_remove:
-			root.remove_child(item)
-		
+			
 		start_battle(tree, monster.data_object["data"])
 
 static func _show_battle_transition(root, animation_time_seconds):
@@ -174,6 +166,18 @@ static func _show_battle_transition(root, animation_time_seconds):
 	return [canvas_modulate, tween, camera_tween]
 	
 static func start_battle(tree, monster_data):
+	# Transition
+	Globals.player.freeze()
+	
+	var animation_time_seconds = 0.5
+	var root = tree.get_root()
+	var to_remove = _show_battle_transition(root, animation_time_seconds) # returns immediately
+	yield(tree.create_timer(animation_time_seconds), 'timeout')
+	for item in to_remove:
+		root.remove_child(item)
+		
+	# Start battle
+			
 	Globals.won_battle = false
 	# We mutate data eg. health. So if you fight the same monster, win/lose, then the
 	# second time, health/etc. will be reduced. We don't want that. So clone data here.
