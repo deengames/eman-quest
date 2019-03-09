@@ -192,6 +192,7 @@ func _resolve_players_turn(action):
 func _on_player_skill(skill):
 	var tech_points_cost = _SKILL_POINTS_COST[skill]
 	Globals.player_data.spend_tech_points(tech_points_cost)
+	self._update_tech_points_display()
 	self._resolve_action(skill, 1)
 	self._disable_unusable_skills()
 	
