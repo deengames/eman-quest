@@ -33,9 +33,15 @@ func _add_item(equipment):
 	self._all_items.append(equipment)
 
 func _on_ItemList_nothing_selected():
-	$ItemList.clear()
+	# Unselect item. Probably a Godot bug that it still looks selected.
+	# Bug opened: https://github.com/godotengine/godot/issues/26895
+	for i in range(len(self._all_items)):
+		$ItemList.unselect(i)
+		
 	$EquipButton.disabled = true
 	self._selected_item = null
+	self._clear_selected_display()
+	
 
 func _on_ItemList_item_selected(index):
 	var item = self._all_items[index]
