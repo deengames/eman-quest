@@ -24,6 +24,8 @@ var _bosses = {} # Type => pixel coordinates of actual boss scenes/entities
 var _restoring_state = false # restoring to previous state after battle
 var _audio_bgs # AudioManager
 
+var _total_time = 0
+
 func initialize(map):
 	self.map = map
 
@@ -279,3 +281,19 @@ func _load_tileset_or_auto_tileset(tileset_path):
 		return tileset
 	else:
 		return load(tileset_path)
+
+func _process(elapsed):
+	# eg. sin(4x) cycles four times per 2pi instead of once
+	var CYCLE_FAST_MULTIPLIER = 2
+	
+	self._total_time += elapsed
+	var stats_button = $UI/StatsButton
+	
+	if Globals.player_data.unassigned_stats_points > 0:
+		# Guaranteed to be at least 0.5. Goes over 1.0, so it stays solid longer
+		# (it's like fade-to-solid and hold, then fade out and fade back in).
+		var alpha = 0.5 + abs(sin(CYCLE_FAST_MULTIPLIER * self._total_time))
+		stats_button.modulate = Color(1, 0.5, 0, alpha)
+	else:
+		stats_button.modulate = Color(1, 1, 1, 1)
+		
