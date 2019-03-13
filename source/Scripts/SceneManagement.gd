@@ -7,9 +7,12 @@ const EventManagement = preload("res://Scripts/EventManagement.gd")
 const HomeMap = preload("res://Scenes/Maps/Home.tscn")
 const MapNameLabel = preload("res://Scenes/UI/MapNameLabel.tscn")
 const PopulatedMapScene = preload("res://Scenes/PopulatedMapScene.tscn")
+const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
 const StreamlinedRecallBattleScene = preload("res://Scenes/Battle/StreamlinedRecall/StreamlinedRecallBattleScene.tscn")
 const StaticMap = preload("res://Scenes/Maps/StaticMap.gd")
 const TweenHelper = preload("res://Scripts/TweenHelper.gd")
+
+const _MAP_TRANSITION_SECONDS = 1
 
 # Polymorphic. Target can be a type (eg. "Forest/Death") or a submap.
 static func change_map_to(tree, target):
@@ -74,6 +77,7 @@ static func change_map_to(tree, target):
 		populated_map.initialize(target_areamap)
 		
 		change_scene_to(tree, populated_map)
+		
 		Globals.current_map_scene = populated_map
 		
 		if show_map_name:
@@ -109,10 +113,12 @@ static func change_map_to(tree, target):
 			# TODO: tween
 			camera.zoom.x = 2
 			camera.zoom.y = 2
-	
+
 # Make it the current scene. Necessary to keep the type.
 # If we use change_scene, it becomes a Node2D, not an AreaMap.
 static func change_scene_to(tree, scene_instance):
+	SceneFadeManager.fade_out(tree.get_root(), _MAP_TRANSITION_SECONDS)
+	
 	if Globals.current_map_type != "Final" and Globals.current_map_type != "Home":
 		_remove_monster_instances()
 	
@@ -125,6 +131,9 @@ static func change_scene_to(tree, scene_instance):
 	tree.get_root().add_child(current_scene)
 	# Optional, to make it compatible with the SceneTree.change_scene() API.
 	tree.set_current_scene(current_scene)
+	
+	SceneFadeManager.fade_in(tree.get_root(), _MAP_TRANSITION_SECONDS)
+	
 
 static func switch_to_battle_if_touched_player(tree, monster, body):
 	if body == Globals.player and Globals.player.can_fight():
@@ -150,20 +159,15 @@ static func switch_to_battle_if_touched_player(tree, monster, body):
 		start_battle(tree, monster.data_object["data"])
 
 static func _show_battle_transition(root, animation_time_seconds):
-	var canvas_modulate = CanvasModulate.new()
-	root.add_child(canvas_modulate)
-	
-	var tween = Tween.new()
-	tween.interpolate_property(canvas_modulate, "color", Color(1, 1, 1, 1), Color(0, 0, 0, 1), animation_time_seconds, Tween.TRANS_LINEAR, Tween.EASE_IN)
-	root.add_child(tween)
-	tween.start()
+	var to_remove = SceneFadeManager.fade_out(root, animation_time_seconds)
 	
 	var camera_tween = Tween.new()
 	camera_tween.interpolate_property(Globals.player.get_node("Camera2D"), "zoom", Vector2(1, 1), Vector2(0, 0), animation_time_seconds, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	root.add_child(camera_tween)
 	camera_tween.start()
+	to_remove.append(camera_tween)
 	
-	return [canvas_modulate, tween, camera_tween]
+	return to_remove
 	
 static func start_battle(tree, monster_data):
 	# Transition
