@@ -7,6 +7,7 @@ const EventManagement = preload("res://Scripts/EventManagement.gd")
 const HomeMap = preload("res://Scenes/Maps/Home.tscn")
 const MapNameLabel = preload("res://Scenes/UI/MapNameLabel.tscn")
 const PopulatedMapScene = preload("res://Scenes/PopulatedMapScene.tscn")
+const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
 const StreamlinedRecallBattleScene = preload("res://Scenes/Battle/StreamlinedRecall/StreamlinedRecallBattleScene.tscn")
 const StaticMap = preload("res://Scenes/Maps/StaticMap.gd")
 const TweenHelper = preload("res://Scripts/TweenHelper.gd")
@@ -150,20 +151,14 @@ static func switch_to_battle_if_touched_player(tree, monster, body):
 		start_battle(tree, monster.data_object["data"])
 
 static func _show_battle_transition(root, animation_time_seconds):
-	var canvas_modulate = CanvasModulate.new()
-	root.add_child(canvas_modulate)
-	
-	var tween = Tween.new()
-	tween.interpolate_property(canvas_modulate, "color", Color(1, 1, 1, 1), Color(0, 0, 0, 1), animation_time_seconds, Tween.TRANS_LINEAR, Tween.EASE_IN)
-	root.add_child(tween)
-	tween.start()
-	
 	var camera_tween = Tween.new()
 	camera_tween.interpolate_property(Globals.player.get_node("Camera2D"), "zoom", Vector2(1, 1), Vector2(0, 0), animation_time_seconds, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	root.add_child(camera_tween)
 	camera_tween.start()
 	
-	return [canvas_modulate, tween, camera_tween]
+	SceneFadeManager.fade_out(root, animation_time_seconds)
+	
+	return [camera_tween]
 	
 static func start_battle(tree, monster_data):
 	# Transition
