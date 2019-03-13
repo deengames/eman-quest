@@ -12,6 +12,7 @@ const Monster = preload("res://Entities/Battle/Monster.tscn")
 const MonsterGenerator = preload("res://Scripts/Generators/MonsterGenerator.gd")
 const Player = preload("res://Entities/Player.tscn")
 const Quest = preload("res://Entities/Quest.gd")
+const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
 const TreasureChest = preload("res://Entities/TreasureChest.tscn")
 const TilesetMapper = preload("res://Scripts/TilesetMapper.gd")
 
@@ -100,6 +101,8 @@ func _ready():
 	Globals.current_map_scene = self
 		
 	self.add_child(player)
+	
+	SceneFadeManager.fade_in(self.get_tree().get_root(), Globals.SCENE_TRANSITION_TIME_SECONDS)
 
 func _exit_tree():
 	self._audio_bgs.clean_up_audio()

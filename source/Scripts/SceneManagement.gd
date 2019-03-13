@@ -74,6 +74,10 @@ static func change_map_to(tree, target):
 		var populated_map = PopulatedMapScene.instance()
 		populated_map.initialize(target_areamap)
 		
+		var state = SceneFadeManager.fade_out(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
+		yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
+		state.resume()
+		
 		change_scene_to(tree, populated_map)
 		Globals.current_map_scene = populated_map
 		

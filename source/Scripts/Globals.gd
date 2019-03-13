@@ -14,6 +14,7 @@ const WORLD_WIDTH_IN_TILES = 30 # 1920/64
 const WORLD_HEIGHT_IN_TILES = 18 # 1080/64
 
 const WALKABLE_TILES = ['Grass', 'Dirt', 'Ground']
+const SCENE_TRANSITION_TIME_SECONDS = 0.5
 
 var player # current player instance. Used for collision detection mostly.
 
