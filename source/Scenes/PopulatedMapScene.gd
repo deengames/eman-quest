@@ -102,7 +102,7 @@ func _ready():
 		
 	self.add_child(player)
 	
-	SceneFadeManager.fade_in(self.get_tree().get_root(), Globals.SCENE_TRANSITION_TIME_SECONDS)
+	SceneFadeManager.fade_in(self.get_tree(), Globals.SCENE_TRANSITION_TIME_SECONDS)
 
 func _exit_tree():
 	self._audio_bgs.clean_up_audio()
