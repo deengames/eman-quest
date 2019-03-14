@@ -113,7 +113,8 @@ static func load(save_id, tree):
 	Globals.current_map_type = current_map.map_type
 	
 	SceneManagement.change_map_to(tree, current_map)
-	Globals.player.position = DictionaryHelper.dict_to_vector2(player_position_data)
+	
+	Globals.future_player_position = DictionaryHelper.dict_to_vector2(player_position_data)
 	
 	Globals.world_areas = world_areas
 	Globals.quest = Quest.from_dict(quest_data)

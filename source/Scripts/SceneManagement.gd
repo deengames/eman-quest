@@ -73,13 +73,16 @@ static func change_map_to(tree, target):
 			
 		var populated_map = PopulatedMapScene.instance()
 		populated_map.initialize(target_areamap)
-		
-		Globals.player.freeze()
+
 		var state = SceneFadeManager.fade_out(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
 		yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
 		state.resume()
 		
+		if Globals.player != null:
+			Globals.player.freeze()
+		
 		change_scene_to(tree, populated_map)
+		
 		Globals.current_map_scene = populated_map
 		
 		if show_map_name:
@@ -120,7 +123,7 @@ static func change_map_to(tree, target):
 			# TODO: tween
 			camera.zoom.x = 2
 			camera.zoom.y = 2
-
+	
 # Returns the last child that's not a Tween or CanvasModulate.
 static func _get_last_child(root):
 	var child_count = root.get_child_count()

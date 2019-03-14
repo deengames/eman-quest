@@ -10,6 +10,9 @@ func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	Globals.player = self
+	if Globals.future_player_position != null:
+		self.position = Globals.future_player_position
+		Globals.future_player_position = null
 	
 	if Features.is_enabled("zoom-out maps"):
 		$Camera2D.zoom = Vector2(4, 4)

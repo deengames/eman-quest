@@ -58,6 +58,12 @@ var previous_monsters = null # type => pixel positions
 var current_monster = null # monster.data_object. Clears after battle.
 var current_monster_type = "" # DOES/SHOULD NOT clear after battle, used for post-fight quest events!
 
+# TERRIBLE HACK. Used only to place player properly after we load game.
+# Because of fading, the player instance is not created yet; we have to fade
+# out before we show the current map, and creating that map creates the player.
+# So, we can't set the player coordinates; we need to set that later.
+var future_player_position = null # Vector2
+
 # Hack. See: https://www.pivotaltracker.com/story/show/163181477
 var unfreeze_player_in_process = false
 

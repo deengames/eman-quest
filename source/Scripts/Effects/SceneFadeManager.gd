@@ -10,7 +10,9 @@ static func fade_in(tree, animation_time_seconds):
 	return _fade(tree, animation_time_seconds, _BLACK, _WHITE)
 	
 static func _fade(tree, animation_time_seconds, start_colour, end_colour):
-	Globals.player.freeze()
+	# null when loading game. Player isn't created yet (map isn't loaded yet)
+	if Globals.player != null:
+		Globals.player.freeze()
 	
 	var canvas_modulate = CanvasModulate.new()
 	var root = tree.get_root()
@@ -26,8 +28,8 @@ static func _fade(tree, animation_time_seconds, start_colour, end_colour):
 	# See: https://twitter.com/nightblade99/status/1105664856181493760
 	########## TODO: figure out how to do a yield in a yield?
 	#yield(tree.create_timer(animation_time_seconds), 'timeout')
+	
 	yield(tween, "tween_completed")
-	Globals.player.unfreeze()
 	
 	root.remove_child(tween)
 	root.remove_child(canvas_modulate)
