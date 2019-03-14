@@ -96,8 +96,13 @@ static func change_map_to(tree, target):
 			container.add_child(map_name_label)
 			
 			# Add to scene
+			# The usual root.get_child(root.get_child_count() - 1) doesn't work here.
+			# That's because, in addition to the Node2Ds, we have CanvasModulate + Tween.
+			# So, get the last child who's not one of those.
+			
 			var root = tree.get_root()
-			var current_scene = root.get_child(root.get_child_count() - 1)
+			var current_scene = _get_last_child(root)
+			
 			var ui = current_scene.get_node("UI")
 			ui.add_child(container)
 			
@@ -115,7 +120,20 @@ static func change_map_to(tree, target):
 			# TODO: tween
 			camera.zoom.x = 2
 			camera.zoom.y = 2
+
+# Returns the last child that's not a Tween or CanvasModulate.
+static func _get_last_child(root):
+	var child_count = root.get_child_count()
+	var last_child = root.get_child(0)
 	
+	for i in range(child_count):
+		var child = root.get_child(i)
+		var clazz = child.get_class()
+		if clazz != "CanvasModulate" and clazz != "Tween":
+			last_child = child
+	
+	return last_child
+			
 # Make it the current scene. Necessary to keep the type.
 # If we use change_scene, it becomes a Node2D, not an AreaMap.
 static func change_scene_to(tree, scene_instance):
