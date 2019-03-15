@@ -22,13 +22,13 @@ const MONSTER_DATA = {
 				"type": "Vampire Bat",
 				"weight": 30,
 				"health": 85,
-				"strength": 24,
-				"defense": 15,
+				"strength": 23,
+				"defense": 14,
 				"turns": 1,
 				"experience points": 11,
 				"vampire multiplier": 1.1, # normal is 1.5
 				
-				"skill_probability": 75,
+				"skill_probability": 50,
 				"skills": {
 					"vampire": 100 
 				}
