@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/UI/StatsWindow.gd" type="Script" id=1]
+[ext_resource path="res://assets/images/gui/pointer.png" type="Texture" id=2]
 
 [node name="WindowDialog" type="WindowDialog" index="0"]
 
@@ -25,7 +26,11 @@ _sections_unfolded = [ "Margin" ]
 
 [node name="Stats" type="Node2D" parent="." index="1"]
 
+editor/display_folded = true
+
 [node name="Labels" type="Node2D" parent="Stats" index="0"]
+
+editor/display_folded = true
 
 [node name="LevelLabel" type="Label" parent="Stats/Labels" index="0"]
 
@@ -152,6 +157,8 @@ max_lines_visible = -1
 _sections_unfolded = [ "Margin", "custom_fonts" ]
 
 [node name="Buttons" type="Node2D" parent="Stats" index="1"]
+
+editor/display_folded = true
 
 [node name="UnassignHealthButton" type="Button" parent="Stats/Buttons" index="0"]
 
@@ -360,6 +367,13 @@ text = "+"
 flat = false
 align = 1
 _sections_unfolded = [ "Margin", "Rect", "custom_fonts" ]
+
+[node name="Pointer" type="Sprite" parent="Stats" index="2"]
+
+position = Vector2( 421.941, 114.178 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
 
 [node name="Equipment" type="Node2D" parent="." index="2"]
 

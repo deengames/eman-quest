@@ -1,6 +1,10 @@
 extends WindowDialog
 
+var _pointer_base_x = 0
+var _total_time = 0
+
 func _ready():
+	self._pointer_base_x = $Stats/Pointer.position.x
 	self.popup_exclusive = true
 	self._update_stats_display()
 	
@@ -80,3 +84,11 @@ func _update_stats_display():
 		str(Globals.player_data.assigned_points["defense"]) + "\n\n" +
 		str(Globals.player_data.assigned_points["num_actions"])
 	)
+
+func _process(delta):
+	if Globals.player_data.unassigned_stats_points > 0:
+		self._total_time += delta
+		$Stats/Pointer.visible = true
+		$Stats/Pointer.position.x = self._pointer_base_x + (24 * cos(self._total_time * 4))
+	else:
+		$Stats/Pointer.visible = false

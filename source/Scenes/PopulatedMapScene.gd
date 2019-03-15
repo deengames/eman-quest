@@ -297,6 +297,8 @@ func _process(elapsed):
 		# (it's like fade-to-solid and hold, then fade out and fade back in).
 		var alpha = 0.5 + abs(sin(CYCLE_FAST_MULTIPLIER * self._total_time))
 		stats_button.modulate = Color(1, 0.5, 0, alpha)
+		stats_button.text = "! Stats"
 	else:
 		stats_button.modulate = Color(1, 1, 1, 1)
+		stats_button.text = "Stats"
 		
