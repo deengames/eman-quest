@@ -41,12 +41,10 @@ var _turns_poisoned = 0
 
 func _init():
 	var player_data = Globals.player_data
-	# Called when the node is added to the scene for the first time.
-	# Initialization here
-	self.current_health = player_data.health
+	self.max_health = player_data.health
+	self.current_health = self._total_health()
 	self.strength = player_data.strength
 	self._defense = player_data.defense
-	self.max_health = player_data.health
 	self.num_actions = player_data.num_actions
 	self.energy = self.max_energy / 2
 
@@ -128,4 +126,10 @@ func _get_equipment_modifier(equipment, stat_type):
 		if equipment.secondary_stat == stat_type:
 			total += equipment.secondary_stat_modifier
 	
+	return total
+
+func _total_health():
+	var total = self.max_health
+	total += _get_equipment_modifier(Globals.player_data.weapon, StatType.Health)
+	total += _get_equipment_modifier(Globals.player_data.armour, StatType.Health)
 	return total
