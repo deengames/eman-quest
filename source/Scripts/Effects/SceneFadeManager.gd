@@ -11,7 +11,9 @@ static func fade_in(tree, animation_time_seconds):
 	
 static func _fade(tree, animation_time_seconds, start_colour, end_colour):
 	# null when loading game. Player isn't created yet (map isn't loaded yet)
-	if Globals.player != null:
+	# When returning from battle to map, player is previously freed instance. CRASH.
+	# So, check if Globals.pre_battle_position is non-null. If so, skip this.
+	if Globals.pre_battle_position == null and Globals.player != null:
 		Globals.player.freeze()
 	
 	var canvas_modulate = CanvasModulate.new()
@@ -31,7 +33,8 @@ static func _fade(tree, animation_time_seconds, start_colour, end_colour):
 	
 	yield(tween, "tween_completed")
 	
-	if Globals.post_fade_position != null:
+	# pre_battle_position: non-null when the player is being freed
+	if Globals.pre_battle_position == null and  Globals.post_fade_position != null:
 		if Globals.player != null:
 			Globals.player.position = Globals.post_fade_position
 		Globals.post_fade_position = null

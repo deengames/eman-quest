@@ -50,7 +50,7 @@ var transition_used # MapDestination instance
 
 ### State to persist on area map after battles
 # TODO: move into a separate autoload?
-var pre_battle_position = [0, 0]
+var pre_battle_position = null
 var won_battle = false
 var battle_spoils = null # KeyItem
 # Coordinates of monsters on-map before battle

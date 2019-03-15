@@ -108,6 +108,6 @@ func _on_Area2D_body_entered(body):
 			SceneManagement.change_map_to(get_tree(), target_map)
 
 		# Come back to the overworld? Restore coordinates.
-		if self.map_destination.target_map == "Overworld" and Globals.overworld_position != null:
+		if typeof(self.map_destination.target_map) == TYPE_STRING and self.map_destination.target_map == "Overworld" and Globals.overworld_position != null:
 			Globals.future_player_position = Globals.overworld_position
 			Globals.overworld_position = null

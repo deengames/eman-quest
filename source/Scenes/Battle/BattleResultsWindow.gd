@@ -38,11 +38,11 @@ func _on_WindowDialog_popup_hide():
 	if Globals.current_map != null:
 		SceneManagement.change_map_to(get_tree(), Globals.current_map)
 		var restore_position = Globals.pre_battle_position
-		Globals.player.position.x = restore_position[0]
-		Globals.player.position.y = restore_position[1]
+		Globals.post_fade_position = Vector2(restore_position[0], restore_position[1])
 		
 		# For boss battle, or Hamza training battle, if we just lost, don't re-battle immediately.
-		if not Globals.won_battle or Globals.current_map_type == "Home":
+		# pre_battle_position null check: makes sure player is not disposed		
+		if (not Globals.won_battle or Globals.current_map_type == "Home") and Globals.pre_battle_position == null:
 			Globals.player.temporarily_no_battles()
 	else:
 		# One-off battle

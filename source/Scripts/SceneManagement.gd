@@ -77,8 +77,9 @@ static func change_map_to(tree, target):
 		var state = SceneFadeManager.fade_out(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
 		yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
 		state.resume()
-		
-		if Globals.player != null:
+
+		# pre_battle_position null check: non-null when player is previously freed
+		if Globals.player != null and Globals.pre_battle_position == null:
 			Globals.player.freeze()
 		
 		change_scene_to(tree, populated_map)
@@ -176,13 +177,16 @@ static func switch_to_battle_if_touched_player(tree, monster, body):
 			
 		start_battle(tree, monster.data_object["data"])
 
-static func _show_battle_transition(root, animation_time_seconds):
+static func _show_battle_transition(tree, animation_time_seconds):
 	var camera_tween = Tween.new()
 	camera_tween.interpolate_property(Globals.player.get_node("Camera2D"), "zoom", Vector2(1, 1), Vector2(0, 0), animation_time_seconds, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	
+	var root = tree.get_root()	
 	root.add_child(camera_tween)
+	
 	camera_tween.start()
 	
-	SceneFadeManager.fade_out(root, animation_time_seconds)
+	SceneFadeManager.fade_out(tree, animation_time_seconds)
 	
 	return [camera_tween]
 	
@@ -192,7 +196,7 @@ static func start_battle(tree, monster_data):
 	
 	var animation_time_seconds = 0.5
 	var root = tree.get_root()
-	var to_remove = _show_battle_transition(root, animation_time_seconds) # returns immediately
+	var to_remove = _show_battle_transition(tree, animation_time_seconds) # returns immediately
 	yield(tree.create_timer(animation_time_seconds), 'timeout')
 	for item in to_remove:
 		root.remove_child(item)
