@@ -5,7 +5,7 @@ var _feature_map = {
 	"defend action": true, # Exists in old and new battle engine
 	"zoom-out maps": false, # toggleable via options menu
 	"tech_points": true, # points and skills
-	"monsters chase you": true,
+	"monsters chase you": false,
 	
 	# Old/defunct ones, mostly old battle engine toggles
 	"streamlined battles: enemy triggers": false,
