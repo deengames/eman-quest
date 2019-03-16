@@ -79,8 +79,12 @@ func _process(delta):
 func _pick_destination():
 	var root = get_tree().get_root()
 	var current_map = Globals.current_map
-	self._destination.x = Globals.randint(0, (current_map.tiles_wide - 1) * Globals.TILE_WIDTH)
-	self._destination.y = Globals.randint(0, (current_map.tiles_high - 1) * Globals.TILE_HEIGHT)
+	# null when you first load/enter a map
+	if Features.is_enabled("monsters chase you") and Globals.player != null:
+		self._destination = Globals.player.position
+	else:
+		self._destination.x = Globals.randint(0, (current_map.tiles_wide - 1) * Globals.TILE_WIDTH)
+		self._destination.y = Globals.randint(0, (current_map.tiles_high - 1) * Globals.TILE_HEIGHT)
 
 	self._face_current_direction()
 

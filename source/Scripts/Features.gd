@@ -1,15 +1,15 @@
 extends Node
 
 var _feature_map = {
+	# Stuff that's going into production	
+	"defend action": true, # Exists in old and new battle engine
+	"zoom-out maps": false, # toggleable via options menu
+	"tech_points": true, # points and skills
+	"monsters chase you": true,
+	
+	# Old/defunct ones, mostly old battle engine toggles
 	"streamlined battles: enemy triggers": false,
 	
-	"defend action": true, # Old and new battle engine
-	"zoom-out maps": false,
-	
-	# Current prototype. May keep these.
-	"tech_points": true, # points and skills
-	
-	# Old/defunct battle engine
 	"consecutive picks battle bonus": true,
 	"actions require energy": false,
 	"equipment generates tiles": true,
