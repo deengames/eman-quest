@@ -11,6 +11,7 @@ var _enabled = false
 var _total_time = 0 # will eventually overflow ...
 var _target
 var _target_runtime = 0
+var _remove_on_done = [] # container, child_node
 
 func _init(target):
 	self._target = target
@@ -40,3 +41,11 @@ func _process(delta):
 		self._enabled = false
 		self._target.modulate = Color(0, 0, 0, 0)
 		self.emit_signal("done")
+		
+		if len(self._remove_on_done) >= 2:
+			var container = self._remove_on_done[0]
+			var child_node = self._remove_on_done[1]
+			container.remove_child(child_node)
+
+func remove_on_done(container, node):
+	self._remove_on_done = [container, node]
