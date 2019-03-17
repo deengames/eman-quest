@@ -42,6 +42,10 @@ func freeze():
 	self._frozen = true
 	$AnimationPlayer.stop()
 
+func unfreeze():
+	self._frozen = false
+	self._pick_destination()
+
 func to_dict():
 	var data = null
 	if self.data_object != null:

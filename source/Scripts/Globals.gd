@@ -69,6 +69,9 @@ var post_fade_position = null # Vector2
 var unfreeze_player_in_process = false
 ###### end terrible hacks
 
+# TODO: can make this a string (event name) to emit if required
+var emit_battle_over_after_fade = false # trigger Global.battle_over after next fade finishes
+
 func _ready():
 	pass
 	

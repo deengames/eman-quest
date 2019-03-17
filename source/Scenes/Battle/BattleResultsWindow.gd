@@ -31,7 +31,7 @@ func initialize(monster_data):
 	
 func _on_CloseButton_pressed():
 	self.emit_signal("popup_hide")
-	Globals.emit_signal("battle_over")
+	Globals.emit_battle_over_after_fade = true
 
 func _on_WindowDialog_popup_hide():
 	# On close

@@ -105,7 +105,7 @@ static func change_map_to(tree, target):
 			# So, get the last child who's not one of those.
 			
 			var root = tree.get_root()
-			var current_scene = _get_last_child(root)
+			var current_scene = get_current_scene(root)
 			
 			var ui = current_scene.get_node("UI")
 			ui.add_child(container)
@@ -126,7 +126,7 @@ static func change_map_to(tree, target):
 			camera.zoom.y = 2
 	
 # Returns the last child that's not a Tween or CanvasModulate.
-static func _get_last_child(root):
+static func get_current_scene(root):
 	var child_count = root.get_child_count()
 	var last_child = root.get_child(0)
 	

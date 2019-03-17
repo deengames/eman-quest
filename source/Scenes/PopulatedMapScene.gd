@@ -20,7 +20,9 @@ const _NPC_MAX_DISTANCE_TO_BOSS = 4
 
 var map # area map
 
-var _monsters = {} # Type => pixel coordinates of actual monster scenes/entities
+# Type => pixel coordinates of actual monster scenes/entities
+# In add_monsters, transmuated into type => scenes/entities
+var _monsters = {}
 var _bosses = {} # Type => pixel coordinates of actual boss scenes/entities
 var _restoring_state = false # restoring to previous state after battle
 var _audio_bgs # AudioManager
@@ -103,6 +105,10 @@ func _ready():
 	self.add_child(player)
 	
 	SceneFadeManager.fade_in(self.get_tree(), Globals.SCENE_TRANSITION_TIME_SECONDS)
+	
+	if Globals.emit_battle_over_after_fade:
+		Globals.emit_battle_over_after_fade = false
+		Globals.emit_signal("battle_over")
 
 func _exit_tree():
 	self._audio_bgs.clean_up_audio()
@@ -118,6 +124,16 @@ func get_monsters():
 				
 	return to_return
 
+func freeze_monsters():
+	for type in self._monsters.keys():
+		for monster in self._monsters[type]:
+			monster.freeze()
+			
+func unfreeze_monsters():
+	for type in self._monsters.keys():
+		for monster in self._monsters[type]:
+			monster.unfreeze()
+			
 func _populate_tiles(tilemap_data, tilemap, tile_ids, entity_tiles):
 	for y in range(0, tilemap_data.height):
 		for x in range(0, tilemap_data.width):

@@ -1,7 +1,7 @@
 extends Node
 
 var _feature_map = {
-	# Stuff that's going into production	
+	# Stuff that's going into production
 	"defend action": true, # Exists in old and new battle engine
 	"zoom-out maps": false, # toggleable via options menu
 	"tech_points": true, # points and skills

@@ -3,6 +3,7 @@ extends Node2D
 const AlphaFluctuator = preload("res://Scripts/Effects/AlphaFluctuator.gd")
 const DialogueWindow = preload("res://Scenes/UI/DialogueWindow.tscn")
 const FadeAndColour = preload("res://Scripts/Effects/FadeAndColour.gd")
+const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 signal events_done
 
@@ -21,8 +22,9 @@ func show_prebattle_events(monster):
 	if monster.events.has("pre-fight"):
 		
 		Globals.player.freeze()
+		Globals.current_map_scene.freeze_monsters()
 		
-		var current_scene = self._get_current_scene()
+		var current_scene = SceneManagement.get_current_scene(self._tree.get_root())
 		var dialog_window = self._create_dialog_window(current_scene)
 		
 		for event in monster.events["pre-fight"]:
@@ -57,7 +59,7 @@ func _process_event(dialog_window, event):
 		var target_name = event[key]
 		var target = null
 		
-		var current_scene = self._get_current_scene()
+		var current_scene = SceneManagement.get_current_scene(self._tree.get_root())
 		var children = current_scene.get_children()
 		for child in children:
 			if child.name == target_name:
@@ -72,7 +74,7 @@ func _process_event(dialog_window, event):
 			else:
 				effect = AlphaFluctuator.new(target)
 				
-			self._get_current_scene().add_child(effect)
+			SceneManagement.get_current_scene(self._tree.get_root()).add_child(effect)
 			# We can't yield here because we yield elsewhere. This is not done synchronously.
 			# C'est la vie. This is a horrible crutch / work-around.
 			effect.run(_EFFECT_TIME_SECONDS)
@@ -85,10 +87,11 @@ func _process_event(dialog_window, event):
 
 func _on_battle_over():
 	if Globals.won_battle:
-		Globals.player.freeze()
-		
-		var current_scene = self._get_current_scene()
+		var current_scene = SceneManagement.get_current_scene(self._tree.get_root())
 		var dialog_window = self._create_dialog_window(current_scene)
+		
+		Globals.player.freeze()
+		Globals.current_map_scene.freeze_monsters()
 		
 		for event in self._post_fight_events:
 			var yield_event = self._process_event(dialog_window, event)
@@ -96,6 +99,7 @@ func _on_battle_over():
 				yield(dialog_window, yield_event)
 				
 		Globals.player.unfreeze()
+		Globals.current_map_scene.unfreeze_monsters()
 		current_scene.remove_child(dialog_window)
 
 		# Don't repeat events after subsequent battles
@@ -105,8 +109,3 @@ func _create_dialog_window(current_scene):
 	var dialog_window = DialogueWindow.instance()
 	current_scene.add_child(dialog_window)
 	return dialog_window
-
-func _get_current_scene():
-	var root = self._tree.get_root()
-	var current_scene = root.get_child(root.get_child_count() - 1)
-	return current_scene
