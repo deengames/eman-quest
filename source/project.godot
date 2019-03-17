@@ -26,7 +26,7 @@ window/size/height=576
 
 [editor_plugins]
 
-enabled=PoolStringArray( "paulloz.colorblindness" )
+enabled=PoolStringArray( "gut", "paulloz.colorblindness" )
 
 [gui]
 
