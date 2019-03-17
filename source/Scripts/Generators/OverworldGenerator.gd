@@ -7,10 +7,6 @@ var TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 
 # Don't place things N tiles from the edges of the map
 const _PADDING_FROM_SIDES_OF_MAP = 4
-# Should be less than padding above, but greater than 2 (distance we displace the player
-# down after they exit onto the overworld).
-# See: https://www.pivotaltracker.com/story/show/164681256
-const _DISTANCE_BETWEEN_OVERWORLD_ENTRANCES = 3 
 
 var map_width = Globals.WORLD_WIDTH_IN_TILES
 var map_height = Globals.WORLD_HEIGHT_IN_TILES
@@ -118,20 +114,15 @@ func _find_empty_area(tile_data, placed_areas):
 	return Vector2(x, y)
 
 func _is_area_around_tile_valid_and_empty(tile_data, placed_areas, x, y):
-	if not _is_tile_valid_and_empty(tile_data, placed_areas, x, y):
-		return false
-	
-	var min_x = max(x - _DISTANCE_BETWEEN_OVERWORLD_ENTRANCES, 0)
-	var max_x = min(x + _DISTANCE_BETWEEN_OVERWORLD_ENTRANCES, map_width - 1)
-	var min_y = max(y - _DISTANCE_BETWEEN_OVERWORLD_ENTRANCES, 0)
-	var max_y = min(y + _DISTANCE_BETWEEN_OVERWORLD_ENTRANCES, map_height - 1)
-	
-	for j in range(min_y, max_y):
-		for i in range(min_x, max_x):
-			if not _is_tile_valid_and_empty(tile_data, placed_areas, i, j):
-				return false
-	
-	return true
+	return (_is_tile_valid_and_empty(tile_data, placed_areas, x - 1, y - 1) and
+		_is_tile_valid_and_empty(tile_data, placed_areas, x, y - 1) and
+		_is_tile_valid_and_empty(tile_data, placed_areas, x + 1, y - 1) and
+		_is_tile_valid_and_empty(tile_data, placed_areas, x + 1, y) and
+		_is_tile_valid_and_empty(tile_data, placed_areas, x + 1, y + 1) and
+		_is_tile_valid_and_empty(tile_data, placed_areas, x, y + 1) and
+		_is_tile_valid_and_empty(tile_data, placed_areas, x - 1, y + 1) and
+		_is_tile_valid_and_empty(tile_data, placed_areas, x - 1, y) and
+		_is_tile_valid_and_empty(tile_data, placed_areas, x, y))
 
 func _is_tile_valid_and_empty(tile_data, placed_areas, x, y):
 	var coordinates = Vector2(x, y)
