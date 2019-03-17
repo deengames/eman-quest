@@ -86,12 +86,9 @@ func _set_map_destination():
 		
 func _on_Area2D_body_entered(body):
 	if body == Globals.player:
-		var tree = get_tree()
+		var tree = body.get_tree()
 		var target_map = self.map_destination.target_map
-		
-		SceneFadeManager.fade_out(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
-		yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
-		
+
 		# Leaving overworld? Come back one tile under the current tile.
 		if Globals.current_map.map_type == "Overworld":
 			Globals.overworld_position = Vector2(self.position.x, self.position.y + Globals.TILE_HEIGHT)
@@ -100,22 +97,22 @@ func _on_Area2D_body_entered(body):
 		if typeof(target_map) == TYPE_STRING:
 			# TODO: dry with SceneManagement TODO about this
 			var static_map
-			
 			if target_map == "Final" or target_map == "Home":
+				
 				if target_map == "Final":
 					static_map = EndGameMap.instance()
 				elif target_map == "Home":
 					static_map = HomeMap.instance()
-			
-				SceneManagement.change_scene_to(tree, static_map)
+				
+				SceneManagement.change_scene_to(get_tree(), static_map)
 				SceneFadeManager.fade_in(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
 				Globals.player.unfreeze()
 			else:
 				Globals.transition_used = self.map_destination
-				SceneManagement.change_map_to(tree, target_map)
+				SceneManagement.change_map_to(get_tree(), target_map)
 		else:
 			Globals.transition_used = self.map_destination
-			SceneManagement.change_map_to(tree, target_map)
+			SceneManagement.change_map_to(get_tree(), target_map)
 
 		# Come back to the overworld? Restore coordinates.
 		if typeof(self.map_destination.target_map) == TYPE_STRING and self.map_destination.target_map == "Overworld" and Globals.overworld_position != null:
