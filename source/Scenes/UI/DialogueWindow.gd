@@ -21,7 +21,6 @@ func _ready():
 	
 	# Center automagically on-screen. If there's a Player entity in this scene.
 	var viewport = get_viewport_rect().size
-	# Second null check: is player NOT previously freed?
 	if Globals.player != null:
 		var camera_position = Globals.player.get_node("Camera2D").global_position
 		# Pure magic. This calculation makes no sense to me.

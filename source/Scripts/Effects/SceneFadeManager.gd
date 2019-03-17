@@ -34,7 +34,7 @@ static func _fade(tree, animation_time_seconds, start_colour, end_colour):
 	yield(tween, "tween_completed")
 	
 	# pre_battle_position: non-null when the player is being freed
-	if Globals.pre_battle_position == null and  Globals.post_fade_position != null:
+	if Globals.pre_battle_position == null and Globals.post_fade_position != null:
 		if Globals.player != null:
 			Globals.player.position = Globals.post_fade_position
 		Globals.post_fade_position = null
