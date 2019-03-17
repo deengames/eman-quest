@@ -16,7 +16,7 @@ const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
 const TreasureChest = preload("res://Entities/TreasureChest.tscn")
 const TilesetMapper = preload("res://Scripts/TilesetMapper.gd")
 
-const _NPC_MAX_DISTANCE_TO_BOSS = 4
+const _NPC_MAX_DISTANCE_TO_BOSS = 5
 
 var map # area map
 
@@ -272,11 +272,24 @@ func _find_spot_near_boss(boss, blocked_coordinates):
 		for tile_y in range(_NPC_MAX_DISTANCE_TO_BOSS):
 			var tx = x + tile_x
 			var ty = y - tile_y
-			# on the map, not on the boss (2x2 tiles), and not already blocked by another NPC
+			# On the map, not on the boss (2x2 tiles), and not already blocked by another NPC
+			
+			# https://www.pivotaltracker.com/story/show/164683595
+			# Check around this tile so NPC doesn't spawn on a tile
+			# next to, say, a lava tile that gets auto-tiled into lava.
 			if tx >= 0 and tx < self.map.tiles_wide and ty >= 0 and ty < self.map.tiles_high and \
-			not Vector2(tx, ty) in blocked_coordinates and ground_tilemap.get_at(tx, ty) in Globals.WALKABLE_TILES and \
-			tx != boss.x and ty != boss.y and tx != boss.x + 1 and ty != boss.y + 1:
-				return Vector2(tx, ty)
+				not Vector2(tx, ty) in blocked_coordinates and \
+				ground_tilemap.get_at(tx, ty) in Globals.WALKABLE_TILES and \
+				ground_tilemap.get_at(tx, ty - 1) in Globals.WALKABLE_TILES and \
+				ground_tilemap.get_at(tx + 1, ty - 1) in Globals.WALKABLE_TILES and \
+				ground_tilemap.get_at(tx + 1, ty) in Globals.WALKABLE_TILES and \
+				ground_tilemap.get_at(tx + 1, ty + 1) in Globals.WALKABLE_TILES and \
+				ground_tilemap.get_at(tx, ty + 1) in Globals.WALKABLE_TILES and \
+				ground_tilemap.get_at(tx - 1, ty + 1) in Globals.WALKABLE_TILES and \
+				ground_tilemap.get_at(tx - 1, ty) in Globals.WALKABLE_TILES and \
+				ground_tilemap.get_at(tx - 1, ty - 1) in Globals.WALKABLE_TILES and \
+				tx != boss.x and ty != boss.y and tx != boss.x + 1 and ty != boss.y + 1:
+					return Vector2(tx, ty)
 			
 func _populate_treasure_chests():
 	for data in self.map.treasure_chests:
