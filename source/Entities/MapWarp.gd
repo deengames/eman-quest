@@ -3,6 +3,7 @@ extends Node2D
 const EndGameMap = preload("res://Scenes/Maps/EndGameMap.tscn")
 const HomeMap = preload("res://Scenes/Maps/Home.tscn")
 const MapDestination = preload("res://Entities/MapDestination.gd")
+const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 ######## TODO: use tileset tiles instead?
@@ -85,6 +86,7 @@ func _set_map_destination():
 		
 func _on_Area2D_body_entered(body):
 	if body == Globals.player:
+		var tree = body.get_tree()
 		var target_map = self.map_destination.target_map
 
 		# Leaving overworld? Come back one tile under the current tile.
@@ -94,12 +96,17 @@ func _on_Area2D_body_entered(body):
 
 		if typeof(target_map) == TYPE_STRING:
 			# TODO: dry with SceneManagement TODO about this
-			if target_map == "Final":
-				var static_map = EndGameMap.instance()
+			var static_map
+			if target_map == "Final" or target_map == "Home":
+				
+				if target_map == "Final":
+					static_map = EndGameMap.instance()
+				elif target_map == "Home":
+					static_map = HomeMap.instance()
+				
 				SceneManagement.change_scene_to(get_tree(), static_map)
-			elif target_map == "Home":
-				var static_map = HomeMap.instance()
-				SceneManagement.change_scene_to(get_tree(), static_map)
+				SceneFadeManager.fade_in(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
+				Globals.player.unfreeze()
 			else:
 				Globals.transition_used = self.map_destination
 				SceneManagement.change_map_to(get_tree(), target_map)
