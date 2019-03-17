@@ -46,6 +46,7 @@ func _process(delta):
 				var container = self._remove_on_done[0]
 				var child_node = self._remove_on_done[1]
 				container.remove_child(child_node)
+				self._remove_on_done = []
 
 func remove_on_done(container, node):
 	self._remove_on_done = [container, node]

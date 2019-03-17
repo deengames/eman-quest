@@ -87,6 +87,10 @@ func _process_event(dialog_window, event):
 
 func _on_battle_over():
 	if Globals.won_battle:
+		# Should technically go in pre-battle too, but bug is only here
+		# Can't put this in DialogWindow, events show multiple of them.
+		Globals.is_dialog_open = true
+		
 		var current_scene = SceneManagement.get_current_scene(self._tree.get_root())
 		var dialog_window = self._create_dialog_window(current_scene)
 		
@@ -101,7 +105,8 @@ func _on_battle_over():
 		Globals.player.unfreeze()
 		Globals.current_map_scene.unfreeze_monsters()
 		current_scene.remove_child(dialog_window)
-
+		Globals.is_dialog_open = false
+		
 		# Don't repeat events after subsequent battles
 		Globals.disconnect("battle_over", self, "_on_battle_over")
 

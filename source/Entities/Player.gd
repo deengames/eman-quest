@@ -39,7 +39,8 @@ func temporarily_no_battles():
 
 func _process(delta):
 	# https://www.pivotaltracker.com/story/show/163181477
-	if Globals.unfreeze_player_in_process and not self.can_move:
+	# Don't unfreeze prematurely when we have post-boss-battle events
+	if Globals.unfreeze_player_in_process and not self.can_move and Globals.is_dialog_open == false:
 		self.unfreeze()
 		Globals.unfreeze_player_in_process = false
 		

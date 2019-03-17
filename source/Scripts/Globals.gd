@@ -67,6 +67,7 @@ var future_player_position = null # Vector2
 var post_fade_position = null # Vector2
 # Hack. See: https://www.pivotaltracker.com/story/show/163181477
 var unfreeze_player_in_process = false
+var is_dialog_open = false # "Static" variable
 ###### end terrible hacks
 
 # TODO: can make this a string (event name) to emit if required
