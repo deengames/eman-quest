@@ -8,13 +8,16 @@ const _ISOLATION_DISTANCE_TILES = 10 # n-tile radius
 static func find_empty_spot(map_width, map_height, ground_map, object_map, occupied_spots):
 	var x = Globals.randint(_PADDING_FROM_MAP_EDGES, map_width - _PADDING_FROM_MAP_EDGES - 1)
 	var y = Globals.randint(_PADDING_FROM_MAP_EDGES, map_height - _PADDING_FROM_MAP_EDGES - 1)
-	
 	while (
 			object_map.get_at(x, y) != null or
 			[x, y] in occupied_spots or
-			# Trees technically have empty space around them, so make sure
-			# we're not in one of those tiles.
-			not is_area_clear(object_map, x - 1, y - 1, x, y)  or
+			# Trees technically are 2x2 but have empty space around them,
+			# so make sure we're not in one of those tiles.
+			
+			# Also, enemies get stuck on autotiles
+			# if they're in the corner, so make sure there's really lots of space.
+			# See: https://www.pivotaltracker.com/story/show/162297155
+			not is_area_clear(object_map, x - 1, y - 1, x + 1, y + 1)  or
 			# current ground tile isn't in walkable_tiles
 			not ground_map.get_at(x, y) in Globals.WALKABLE_TILES
 		):
