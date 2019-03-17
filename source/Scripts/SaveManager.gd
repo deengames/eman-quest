@@ -115,6 +115,8 @@ static func load(save_id, tree):
 	SceneManagement.change_map_to(tree, current_map)
 	
 	Globals.future_player_position = DictionaryHelper.dict_to_vector2(player_position_data)
+	# https://www.pivotaltracker.com/story/show/164681270
+	Globals.player.position = Globals.future_player_position
 	
 	Globals.world_areas = world_areas
 	Globals.quest = Quest.from_dict(quest_data)

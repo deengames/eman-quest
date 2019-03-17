@@ -74,10 +74,6 @@ static func change_map_to(tree, target):
 		var populated_map = PopulatedMapScene.instance()
 		populated_map.initialize(target_areamap)
 
-		var state = SceneFadeManager.fade_out(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
-		yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
-		state.resume()
-
 		# pre_battle_position null check: non-null when player is previously freed
 		if Globals.player != null and Globals.pre_battle_position == null:
 			Globals.player.freeze()
