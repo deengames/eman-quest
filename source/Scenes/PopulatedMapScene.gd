@@ -246,6 +246,15 @@ func _add_monsters():
 	
 	# Persist on save
 	map.monsters = self._monsters
+	
+	# https://www.pivotaltracker.com/story/show/164683583
+	# Bug: monster spawns off-map in lava. Turns out monster spawning is OK;
+	# something, somewhere, moves/respawns the monsters a second time. How? Why?
+	# Questions, but no answers. Strangely enough, freezing monsters, even for
+	# just a fractional second, seems to "fix" the problem. Alas, I concede.
+	self.freeze_monsters()
+	yield(get_tree().create_timer(0.1), 'timeout')
+	self.unfreeze_monsters()
 
 func _spawn_attached_npcs(boss):
 	var all_npcs = []
