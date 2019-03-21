@@ -95,9 +95,14 @@ func _pick_destination():
 func _physics_process(delta):
 	if not self._frozen:
 		if self._destination != null:
+			# https://www.pivotaltracker.com/n/projects/2174345/stories/164683583
+			# BUG: monsters spawn off-map. Turns out they spawn on-map (eg. At=(2304, 2334)),
+			# with an upward velocity, then next frame, move_and_slide moves them off the
+			# bottom of the map. Strange. So, try to detect if collide and move if clear.
 			var velocity = (self._destination - self.position).normalized() * self._MOVE_SPEED
-			move_and_slide(velocity) 
-
+			if not self.test_move(Transform2D(0, self.position), velocity):
+				move_and_slide(velocity)
+				
 func _on_Area2D_body_entered(body):
 	if not self._frozen:
 		SceneManagement.switch_to_battle_if_touched_player(get_tree(), self, body)
