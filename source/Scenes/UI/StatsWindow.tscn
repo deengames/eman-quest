@@ -9,9 +9,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 1.0
-margin_right = 737.0
-margin_bottom = 428.0
+margin_right = 700.0
+margin_bottom = 410.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -26,11 +25,9 @@ _sections_unfolded = [ "Margin" ]
 
 [node name="Stats" type="Node2D" parent="." index="1"]
 
-editor/display_folded = true
+position = Vector2( -4, -20 )
 
 [node name="Labels" type="Node2D" parent="Stats" index="0"]
-
-editor/display_folded = true
 
 [node name="LevelLabel" type="Label" parent="Stats/Labels" index="0"]
 
@@ -370,12 +367,15 @@ _sections_unfolded = [ "Margin", "Rect", "custom_fonts" ]
 
 [node name="Pointer" type="Sprite" parent="Stats" index="2"]
 
-position = Vector2( 421.941, 114.178 )
+position = Vector2( 431.941, 114.178 )
 texture = ExtResource( 2 )
 centered = false
 _sections_unfolded = [ "Offset" ]
 
 [node name="Equipment" type="Node2D" parent="." index="2"]
+
+editor/display_folded = true
+position = Vector2( -4, -20 )
 
 [node name="WeaponLabel" type="Label" parent="Equipment" index="0"]
 
@@ -383,9 +383,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 500.0
+margin_left = 490.0
 margin_top = 35.0
-margin_right = 712.0
+margin_right = 702.0
 margin_bottom = 197.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -408,9 +408,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 500.0
+margin_left = 490.0
 margin_top = 226.0
-margin_right = 713.0
+margin_right = 703.0
 margin_bottom = 388.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
