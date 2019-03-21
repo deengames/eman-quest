@@ -35,6 +35,5 @@ func _on_ItemList_item_selected(index):
 	self._selected_item = item
 
 func _clear_selected_display():
-	$Sprite.visible = false
 	$ItemName.text = ""
 	$Description.text = ""
