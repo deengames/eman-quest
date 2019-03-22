@@ -76,7 +76,8 @@ static func change_map_to(tree, target):
 
 		var state = SceneFadeManager.fade_out(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
 		yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
-		state.resume()
+		if state.is_valid(true):
+			state.resume()
 
 		# pre_battle_position null check: non-null when player is previously freed
 		if Globals.player != null and Globals.pre_battle_position == null:
