@@ -134,6 +134,7 @@ func _generate_dungeon(area_type, transitions):
 	to_return.append(decoration_tilemap)
 	
 	self._generate_rooms(transitions, ground_map, decoration_tilemap)
+	self._remove_orphan_doors(ground_map, decoration_tilemap)
 	
 	for y in range(0, self.map_height):
 		for x in range(0, self.map_width):
@@ -254,7 +255,14 @@ func _find_closest_room_to(room, rooms):
 	
 	return closest_node
 
+# Must have two adjacent wall tiles. This allows corner doors, too.
 func _generate_door(x, y, ground_map, decoration_map):
+	var adjacent_ground = self._count_ground_tiles_around(ground_map, x, y)
+	
+	if adjacent_ground == 2:
+		self._set_tile([x, y], "Door", decoration_map)
+
+func _count_ground_tiles_around(ground_map, x, y):
 	var adjacent_ground = 0
 	
 	if ground_map.get_at(x - 1, y - 1) == "Ground":
@@ -274,10 +282,20 @@ func _generate_door(x, y, ground_map, decoration_map):
 	if ground_map.get_at(x + 1, y + 1) == "Ground":
 		adjacent_ground += 1
 	
-	# Must have two adjacent wall tiles
-	if adjacent_ground == 2:
-		self._set_tile([x, y], "Door", decoration_map)
+	return adjacent_ground
 
+# https://www.pivotaltracker.com/story/show/162568442
+# Remove doors with more than two ground tiles around them.
+# Usually because we placed a door, then generated a tunnel beside it for another room.
+func _remove_orphan_doors(ground_map, decoration_map):
+	for y in range(0, self.map_height):
+		for x in range(0, self.map_width):
+			var tile = decoration_map.get_at(x, y)
+			if tile == "Door":
+				var adjacent_ground = self._count_ground_tiles_around(ground_map, x, y)
+				if adjacent_ground != 2:
+					decoration_map.set_at(x, y, null)
+			
 func _generate_room(room_rect, ground_map, decoration_map):
 	var wall_tiles = _ROOM_WALL_HEIGHT - _NUM_CEILING_TILES
 	
