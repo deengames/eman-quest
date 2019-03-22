@@ -91,6 +91,9 @@ func generate(submap, transitions, variation_name):
 		# Brute-force: find the farthest land tile from the entrance. But, only if the
 		# distance is within N tiles. Wandering the entire breadth of the dungeon is madness.
 		
+		# https://www.pivotaltracker.com/story/show/163078635
+		# Also, make sure we're on a 3x3 square of land
+		
 		# BUG: what if there's a chest there?
 		var max_distance = 5 * 5
 		
@@ -101,7 +104,9 @@ func generate(submap, transitions, variation_name):
 		
 		for y in range(self.map_height):
 			for x in range(self.map_width):
-				if self._ground_tilemap.get_at(x, y) == "Ground":
+				if _is_ground(x, y) and _is_ground(x + 1, y) and _is_ground(x + 1, y + 1) and \
+				_is_ground(x, y + 1) and _is_ground(x - 1, y + 1) and _is_ground(x - 1, y) and \
+				_is_ground(x - 1, y - 1) and _is_ground(x, y - 1) and _is_ground(x + 1, y - 1):
 					var current_distance = sqrt(pow(x - entrance[0], 2) + pow(y - entrance[1], 2))
 					if current_distance > distance and current_distance <= max_distance:
 						farthest = [x, y]
@@ -113,6 +118,9 @@ func generate(submap, transitions, variation_name):
 		map.add_tile_data(data)
 
 	return map
+
+func _is_ground(x, y):
+	return self._ground_tilemap.get_at(x, y) == "Ground"
 
 func _generate_boss(variation_name, coordinates):
 	# TODO: place boss
