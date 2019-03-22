@@ -99,8 +99,11 @@ func _physics_process(delta):
 			# BUG: monsters spawn off-map. Turns out they spawn on-map (eg. At=(2304, 2334)),
 			# with an upward velocity, then next frame, move_and_slide moves them off the
 			# bottom of the map. Strange. So, try to detect if collide and move if clear.
+			#
+			# This bug also breaks enemies chase you. So, ignore check in that case.
 			var velocity = (self._destination - self.position).normalized() * self._MOVE_SPEED
-			if not self.test_move(Transform2D(0, self.position), velocity):
+			
+			if Features.is_enabled("monsters chase you") or not self.test_move(Transform2D(0, self.position), velocity):
 				move_and_slide(velocity)
 				
 func _on_Area2D_body_entered(body):

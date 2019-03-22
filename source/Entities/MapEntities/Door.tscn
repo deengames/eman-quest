@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Entities/MapEntities/Door.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/castle-tiles.png" type="Texture" id=2]
@@ -8,7 +8,12 @@
 custom_solver_bias = 0.0
 points = PoolVector2Array( -8, 72, -8, 24, 8, -8, 56, -8, 72, 24, 72, 72 )
 
-[node name="Node2D" type="Node2D" index="0"]
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 32, 32 )
+
+[node name="Node2D" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -33,6 +38,22 @@ audio_bus_name = "Master"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door/Area2D" index="0"]
 
 shape = SubResource( 1 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="1"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0"]
+
+position = Vector2( 32, 32 )
+shape = SubResource( 2 )
+_sections_unfolded = [ "Transform" ]
 
 [connection signal="body_entered" from="Door/Area2D" to="." method="_on_Area2D_body_entered"]
 
