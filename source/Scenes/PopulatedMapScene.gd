@@ -239,21 +239,28 @@ func _add_monsters():
 		
 		self._monsters[monster_type] = instances
 	
-	######### bosses
+	######### bosses. Spawn only when expected (fought one boss? Only boss #2 spawns)
 	
-	for boss_type in map.bosses.keys():
-		var bosses = []
-		for boss in map.bosses[boss_type]:
-			if boss.is_alive:
-				var instance = Boss.instance()
-				instance.initialize_from(boss)
-				self.add_child(instance)
-				bosses.append(instance)
-				
-				if boss.attach_quest_npcs != null:
-					self._spawn_attached_npcs(boss)
-						
-		self._bosses[boss_type] = bosses
+	# Don't apply this when maps have no variation (home/endgame)
+	var dungeon_number = -1
+	
+	if map.variation != null:
+		var dungeon_type = map.map_type + "/" + map.variation
+		dungeon_number = Globals.world_areas.find(dungeon_type) # base 0
+	if map.variation == null or dungeon_number == Globals.bosses_defeated:
+		for boss_type in map.bosses.keys():
+			var bosses = []
+			for boss in map.bosses[boss_type]:
+				if boss.is_alive:
+					var instance = Boss.instance()
+					instance.initialize_from(boss)
+					self.add_child(instance)
+					bosses.append(instance)
+					
+					if boss.attach_quest_npcs != null:
+						self._spawn_attached_npcs(boss)
+							
+			self._bosses[boss_type] = bosses
 	
 	# Persist on save
 	map.monsters = self._monsters
