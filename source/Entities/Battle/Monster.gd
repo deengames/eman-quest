@@ -105,6 +105,8 @@ func _physics_process(delta):
 			
 			if Features.is_enabled("monsters chase you") or not self.test_move(Transform2D(0, self.position), velocity):
 				move_and_slide(velocity)
+			elif self.test_move(Transform2D(0, self.position), velocity):
+				self._destination = self.position
 				
 func _on_Area2D_body_entered(body):
 	if not self._frozen:
