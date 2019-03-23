@@ -276,8 +276,11 @@ func _find_spot_near_boss(boss, blocked_coordinates):
 	
 	# Find a nearby empty spot. Start under and to the left of the boss,
 	# and iterate sideways, then upwards.
-	var x = (boss.x - Globals.TILE_WIDTH) / Globals.TILE_WIDTH
-	var y = (boss.y / Globals.TILE_HEIGHT) + 2 # boss is 2 tiles high
+	var boss_tile_x = boss.x / Globals.TILE_WIDTH
+	var boss_tile_y = boss.y / Globals.TILE_HEIGHT
+	
+	var x = boss_tile_x - 1
+	var y = boss_tile_y - 1
 	
 	for tile_x in range(_NPC_MAX_DISTANCE_TO_BOSS):
 		for tile_y in range(_NPC_MAX_DISTANCE_TO_BOSS):
@@ -299,9 +302,31 @@ func _find_spot_near_boss(boss, blocked_coordinates):
 				ground_tilemap.get_at(tx - 1, ty + 1) in Globals.WALKABLE_TILES and \
 				ground_tilemap.get_at(tx - 1, ty) in Globals.WALKABLE_TILES and \
 				ground_tilemap.get_at(tx - 1, ty - 1) in Globals.WALKABLE_TILES and \
-				tx != boss.x and ty != boss.y and tx != boss.x + 1 and ty != boss.y + 1:
+				not self._is_boss_tile(tx, ty, boss_tile_x, boss_tile_y):
 					return Vector2(tx, ty)
 			
+	# https://www.pivotaltracker.com/story/show/164847969
+	# https://twitter.com/nightblade99/status/1109522513778733056
+	# We couldn't find a spot. Idelaly, we should generate the map without this problem.
+	# Realistically, we can't do that; pick any empty spot adjacent to the boss.
+	for tx in range(boss_tile_x - 1, boss_tile_x + 2):
+		for ty in range(boss_tile_y - 1, boss_tile_y + 2):
+			if tx == boss_tile_x and ty == boss_tile_y - 1:
+				print("(" + str(tx) + ", " + str(ty) + "), blocked=" + str(blocked_coordinates) + " walk=" + ground_tilemap.get_at(tx, ty) + " and boss=(" + str(boss_tile_x) + ", " + str(boss_tile_y) + ")")
+			
+			if tx >= 0 and tx < self.map.tiles_wide and ty >= 0 and ty < self.map.tiles_high and \
+				ground_tilemap.get_at(tx, ty) in Globals.WALKABLE_TILES and \
+				not Vector2(tx, ty) in blocked_coordinates and \
+				not self._is_boss_tile(tx, ty, boss_tile_x, boss_tile_y):
+				return Vector2(tx, ty)
+	
+	# Worst case of the worst case: return a square on the 2x2 boss. Bottom-right one.
+	return Vector2(boss_tile_x + 1, boss_tile_y + 1)
+
+func _is_boss_tile(tile_x, tile_y, boss_tile_x, boss_tile_y):
+	return tile_x >= boss_tile_x and tile_x <= boss_tile_x + 1 and \
+		tile_y >= boss_tile_y and tile_y <= boss_tile_y + 1
+
 func _populate_treasure_chests():
 	for data in self.map.treasure_chests:
 		var instance = TreasureChest.instance()
