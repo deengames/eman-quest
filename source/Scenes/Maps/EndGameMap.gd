@@ -9,6 +9,7 @@ const map_type = "Final"
 const _GLOW_TIME_SECONDS = 3
 
 func _ready():
+	Globals.disposing_map = false
 	var player = Globals.player
 	player.position = $Locations/Entrance.position
 	
@@ -23,6 +24,10 @@ func _ready():
 		self.remove_child($Umayyah)
 	elif Globals.showed_final_events:
 		self.remove_child($Jinn)
+
+func _exit_tree():
+	# https://www.pivotaltracker.com/story/show/164255140
+	Globals.disposing_map = true
 
 func _on_FinalEventsTrigger_body_entered(body):
 	var player = Globals.player

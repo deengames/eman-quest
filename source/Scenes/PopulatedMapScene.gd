@@ -79,6 +79,12 @@ func _ready():
 			from.target_position.x * Globals.TILE_WIDTH,
 			from.target_position.y * Globals.TILE_HEIGHT)
 		
+	if self._restoring_state == true and not Globals.won_battle:
+		# Probably reduundant because we now also set this in BattleResultsWindow.gd
+		player.temporarily_no_battles()
+		
+	Globals.current_map_scene = self
+	
 	#########
 	# https://www.pivotaltracker.com/story/show/163181477
 	# https://www.pivotaltracker.com/story/show/162750314
@@ -92,16 +98,13 @@ func _ready():
 	# In hindsight, freeze only freezes the mouse/keyboard-movement components,
 	# so the offending code is probably in there somewhere. Despite the fact that
 	# I debugged through it. Several. Times. Repeatedly.
+	#
+	# It's probably the same bug that teleports monsters to the bottom of the map when
+	# they are moving upward and collide into a solid tile.
 	##########
 	player.freeze()
 	Globals.unfreeze_player_in_process = true
-		
-	if self._restoring_state == true and not Globals.won_battle:
-		# Probably reduundant because we now also set this in BattleResultsWindow.gd
-		player.temporarily_no_battles()
-		
-	Globals.current_map_scene = self
-		
+	
 	self.add_child(player)
 	
 	SceneFadeManager.fade_in(self.get_tree(), Globals.SCENE_TRANSITION_TIME_SECONDS)
@@ -133,6 +136,14 @@ func unfreeze_monsters():
 	for type in self._monsters.keys():
 		for monster in self._monsters[type]:
 			monster.unfreeze()
+
+func hide_ui():
+	for child in $UI.get_children():
+		child.visible = false
+
+func show_ui():
+	for child in $UI.get_children():
+		child.visible = true
 			
 func _populate_tiles(tilemap_data, tilemap, tile_ids, entity_tiles):
 	for y in range(0, tilemap_data.height):

@@ -70,6 +70,9 @@ var unfreeze_player_in_process = false
 var is_dialog_open = false # "Static" variable
 ###### end terrible hacks
 
+# https://www.pivotaltracker.com/story/show/164255140
+var disposing_map = true
+
 # TODO: can make this a string (event name) to emit if required
 var emit_battle_over_after_fade = false # trigger Global.battle_over after next fade finishes
 
@@ -90,3 +93,12 @@ func _unhandled_input(event):
 # Source: https://godotengine.org/qa/2539/how-would-i-go-about-picking-a-random-number
 func randint(minimum, maximum):
 	return range(minimum, maximum + 1)[randi() % range(minimum, maximum + 1).size()]
+	
+func hide_ui():
+	# https://www.pivotaltracker.com/story/show/164255140
+	if not self.disposing_map and self.current_map_scene != null:
+		self.current_map_scene.hide_ui()
+
+func show_ui():
+	if self.current_map_scene != null:
+		self.current_map_scene.show_ui()

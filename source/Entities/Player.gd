@@ -33,7 +33,9 @@ func _ready():
 	else:
 		$Camera2D.limit_right = Globals.current_map.get_tiles_wide() * Globals.TILE_WIDTH
 		$Camera2D.limit_bottom = Globals.current_map.get_tiles_high() * Globals.TILE_HEIGHT
-		
+	
+	Globals.disposing_map = false
+	
 func temporarily_no_battles():
 	self._cant_fight_from = OS.get_ticks_msec()
 
@@ -78,6 +80,8 @@ func _on_cancel_destination():
 func freeze():
 	self.can_move = false
 	$AnimationPlayer.stop()
+	Globals.hide_ui()
 
 func unfreeze():
 	self.can_move = true
+	Globals.show_ui()
