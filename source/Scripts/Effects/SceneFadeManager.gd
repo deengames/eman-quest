@@ -17,6 +17,8 @@ static func _fade(tree, animation_time_seconds, start_colour, end_colour):
 		Globals.player.freeze()
 	
 	var canvas_modulate = CanvasModulate.new()
+	# Fixes jerky frame between fades; see: https://twitter.com/nightblade99/status/1109278972976623616
+	canvas_modulate.color = start_colour
 	var root = tree.get_root()
 	root.add_child(canvas_modulate)
 	
