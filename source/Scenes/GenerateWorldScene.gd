@@ -32,12 +32,15 @@ const ForestVariations = ["Slime", "Frost", "Death"]
 const CaveVariations = ["River", "Lava"] # Crystal
 const DungeonVariations = ["Castle", "Desert"]
 
+var delay_to_display = true
+
 func _ready():
 	$StartButton.visible = false
 	var game_number = self._print_and_set_seed()
 	
 	# Wait just long enough for the scene to display, then generate
-	yield(get_tree().create_timer(0.25), 'timeout')
+	if self.delay_to_display:
+		yield(get_tree().create_timer(0.25), 'timeout')
 	
 	Globals.quest = Quest.new()
 	self._generate_world()
