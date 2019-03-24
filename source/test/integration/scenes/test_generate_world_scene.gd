@@ -1,4 +1,4 @@
-extends "res://addons/gut/test.gd"
+extends "res://test/BaseIntegrationTest.gd"
 
 const GenerateWorldScene = preload("res://Scenes/GenerateWorldScene.tscn")
 

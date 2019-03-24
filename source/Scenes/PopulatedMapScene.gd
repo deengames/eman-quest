@@ -19,6 +19,8 @@ const TilesetMapper = preload("res://Scripts/TilesetMapper.gd")
 const _NPC_MAX_DISTANCE_TO_BOSS = 5
 
 var map # area map
+# for testing
+var play_audio = true
 
 # Type => pixel coordinates of actual monster scenes/entities
 # In add_monsters, transmuated into type => scenes/entities
@@ -33,8 +35,6 @@ func initialize(map):
 	self.map = map
 
 func _ready():
-	self._audio_bgs = AudioManager.new()
-	
 	Globals.current_map = map
 	Globals.current_map_type = map.map_type
 	self._restoring_state = Globals.previous_monsters != null
@@ -45,11 +45,14 @@ func _ready():
 	var mapper = TilesetMapper.new(tileset)
 	var tile_ids = mapper.load_tileset_mapping()
 	var entity_tiles = mapper.get_entity_tiles(map.map_type, map.variation)
-	
-	if map != null and map.map_type != null and map.variation != null:
-		var bgs_key = map.variation.to_lower() + "-" + map.map_type.to_lower() + "-bgs"
-		if self._audio_bgs.audio_clips.has(bgs_key):
-			self._audio_bgs.play_sound(bgs_key)
+
+	if self.play_audio:
+		self._audio_bgs = AudioManager.new()
+		
+		if map != null and map.map_type != null and map.variation != null:
+			var bgs_key = map.variation.to_lower() + "-" + map.map_type.to_lower() + "-bgs"
+			if self._audio_bgs.audio_clips.has(bgs_key):
+				self._audio_bgs.play_sound(bgs_key)
 	
 	var tilemaps = []
 	
@@ -114,7 +117,8 @@ func _ready():
 		Globals.emit_signal("battle_over")
 
 func _exit_tree():
-	self._audio_bgs.clean_up_audio()
+	if self.play_audio:
+		self._audio_bgs.clean_up_audio()
 
 func get_monsters():
 	var to_return = {}
