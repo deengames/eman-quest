@@ -95,10 +95,14 @@ func randint(minimum, maximum):
 	return range(minimum, maximum + 1)[randi() % range(minimum, maximum + 1).size()]
 	
 func hide_ui():
+	return
+	
 	# https://www.pivotaltracker.com/story/show/164255140
 	if not self.disposing_map and self.current_map_scene != null:
 		self.current_map_scene.hide_ui()
 
 func show_ui():
+	return
+	
 	if self.current_map_scene != null:
 		self.current_map_scene.show_ui()
