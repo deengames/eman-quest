@@ -94,7 +94,7 @@ func randint(minimum, maximum):
 	
 func hide_ui():
 	# https://www.pivotaltracker.com/story/show/164255140
-	if not ReferenceChecker.is_previously_freed(self.current_map_scene):
+	if not ReferenceChecker.is_previously_freed(self.current_map_scene) and "hide_ui" in self.current_map_scene:
 		self.current_map_scene.hide_ui()
 
 func show_ui():
