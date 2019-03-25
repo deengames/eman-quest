@@ -3,6 +3,7 @@ extends "StaticMap.gd"
 const Bandit = preload("res://Entities/MapEntities/Bandit/Bandit.tscn")
 const DialogueWindow = preload("res://Scenes/UI/DialogueWindow.tscn")
 const Mama = preload("res://Entities/MapEntities/Mom.tscn")
+const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 const map_type = 'Home'
 
@@ -34,7 +35,7 @@ func show_intro_events():
 	player.freeze()
 	
 	var root = get_tree().get_root()
-	var current_scene = root.get_child(root.get_child_count() - 1)
+	var current_scene = SceneManagement.get_current_scene(root)
 	var dialog_window = DialogueWindow.instance()
 	current_scene.add_child(dialog_window)
 	

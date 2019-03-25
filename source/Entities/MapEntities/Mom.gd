@@ -19,7 +19,7 @@ func _show_post_game_events():
 	Globals.player.freeze()
 
 	var root = get_tree().get_root()
-	var current_scene = root.get_child(root.get_child_count() - 1)
+	var current_scene = SceneManagement.get_current_scene(root)
 	var dialog_window = DialogueWindow.instance()
 	current_scene.add_child(dialog_window)
 

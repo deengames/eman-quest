@@ -32,7 +32,7 @@ func _on_FinalEventsTrigger_body_entered(body):
 		player.freeze()
 		
 		var root = get_tree().get_root()
-		var current_scene = root.get_child(root.get_child_count() - 1)
+		var current_scene = SceneManagement.get_current_scene(root)
 		
 		yield(self._pause(1), "completed")
 		
@@ -103,7 +103,7 @@ func _show_endgame_events():
 	$Umayyah.face_down()
 	
 	var root = get_tree().get_root()
-	var current_scene = root.get_child(root.get_child_count() - 1)
+	var current_scene = SceneManagement.get_current_scene(root)
 		
 	yield(self._pause(1), "completed")
 		
