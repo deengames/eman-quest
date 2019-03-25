@@ -12,18 +12,12 @@ var _mama
 var _bandit
 
 func _ready():
-	Globals.disposing_map = false
 	var player = Globals.player
 	player.position = $Locations/Entrance.position
 	
 	if Globals.beat_last_boss:
 		self.remove_child($"Bandit-Intro")
 		_spawn(Mama, $Locations/Mama)
-
-func _exit_tree():
-	# https://www.pivotaltracker.com/story/show/164255140
-	# Make sure Globals.maps["Home"] is never previously-freed instance.
-	Globals.disposing_map = true
 
 func show_intro_events():
 	self._showing_intro_events = true

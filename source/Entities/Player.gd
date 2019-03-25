@@ -34,8 +34,6 @@ func _ready():
 		$Camera2D.limit_right = Globals.current_map.get_tiles_wide() * Globals.TILE_WIDTH
 		$Camera2D.limit_bottom = Globals.current_map.get_tiles_high() * Globals.TILE_HEIGHT
 	
-	Globals.disposing_map = false
-	
 func temporarily_no_battles():
 	self._cant_fight_from = OS.get_ticks_msec()
 
