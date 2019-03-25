@@ -106,9 +106,7 @@ func _on_Area2D_body_entered(body):
 				
 				SceneFadeManager.fade_out(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
 				yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
-				
 				SceneManagement.change_scene_to(get_tree(), static_map)
-				SceneFadeManager.fade_in(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
 				Globals.player.unfreeze()
 			else:
 				Globals.transition_used = self.map_destination

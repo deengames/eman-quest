@@ -27,12 +27,6 @@ static func _fade(tree, animation_time_seconds, start_colour, end_colour):
 	root.add_child(tween)
 	tween.start()
 	
-	# Calling yield causes scene management to break.
-	# Add a yield here, start a new game, and leave the world map; you'll see: madness.
-	# See: https://twitter.com/nightblade99/status/1105664856181493760
-	########## TODO: figure out how to do a yield in a yield?
-	#yield(tree.create_timer(animation_time_seconds), 'timeout')
-	
 	yield(tween, "tween_completed")
 	
 	# pre_battle_position: non-null when the player is being freed
@@ -40,6 +34,6 @@ static func _fade(tree, animation_time_seconds, start_colour, end_colour):
 		if Globals.player != null:
 			Globals.player.position = Globals.post_fade_position
 		Globals.post_fade_position = null
-		
+	
 	root.remove_child(tween)
 	root.remove_child(canvas_modulate)

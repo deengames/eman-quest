@@ -1,6 +1,7 @@
 extends Node2D
 
 const Player = preload("res://Entities/Player.tscn")
+const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
 
 ### 
 # A static map. Contains instructions to work + common code.
@@ -13,6 +14,8 @@ func _ready():
 	Globals.current_map_type = self.map_type
 	Globals.player = Player.instance()
 	self.add_child(Globals.player)
+	
+	SceneFadeManager.fade_in(self.get_tree(), Globals.SCENE_TRANSITION_TIME_SECONDS)
 
 func get_tiles_wide():
 	return $Ground.get_used_rect().size.x
