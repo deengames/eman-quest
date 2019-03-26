@@ -1,5 +1,7 @@
 extends Node
 
+const ReferenceChecker = preload("res://Scripts/ReferenceChecker.gd")
+
 const _WHITE = Color(1, 1, 1, 1)
 const _BLACK = Color(0, 0, 0, 1)
 
@@ -10,10 +12,9 @@ static func fade_in(tree, animation_time_seconds):
 	return _fade(tree, animation_time_seconds, _BLACK, _WHITE)
 	
 static func _fade(tree, animation_time_seconds, start_colour, end_colour):
-	# null when loading game. Player isn't created yet (map isn't loaded yet)
-	# When returning from battle to map, player is previously freed instance. CRASH.
-	# So, check if Globals.pre_battle_position is non-null. If so, skip this.
-	if Globals.pre_battle_position == null and Globals.player != null:
+	# Player is null when loading game (map, which creates player, isn't loaded yet).
+	# When returning from regular battle to map, player is previously freed instance.
+	if Globals.player != null and not ReferenceChecker.is_previously_freed(Globals.player):
 		Globals.player.freeze()
 	
 	var canvas_modulate = CanvasModulate.new()
@@ -37,3 +38,6 @@ static func _fade(tree, animation_time_seconds, start_colour, end_colour):
 	
 	root.remove_child(tween)
 	root.remove_child(canvas_modulate)
+
+	if Globals.player != null and not ReferenceChecker.is_previously_freed(Globals.player):
+		Globals.player.unfreeze()
