@@ -11,13 +11,13 @@ func _ready():
 	# Initialization here
 	Globals.player = self
 	
-	if Globals.future_player_position != null:
-		self.position = Globals.future_player_position
-		Globals.future_player_position = null
-	
 	if Globals.post_fade_position != null:
 		self.position = Globals.post_fade_position
 		Globals.post_fade_position = null
+	
+	if Globals.future_player_position != null:
+		self.position = Globals.future_player_position
+		Globals.future_player_position = null
 	
 	if Features.is_enabled("zoom-out maps"):
 		$Camera2D.zoom = Vector2(4, 4)
