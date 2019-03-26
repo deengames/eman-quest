@@ -86,6 +86,13 @@ func _set_map_destination():
 		
 func _on_Area2D_body_entered(body):
 	if body == Globals.player:
+		
+		# If we had a post-fade position, player exited quickly from home to world map,
+		# we don't want to restore to that position now.
+		Globals.future_player_position = null
+		
+		Globals.player.freeze()
+		
 		var tree = body.get_tree()
 		var target_map = self.map_destination.target_map
 
@@ -119,3 +126,4 @@ func _on_Area2D_body_entered(body):
 		if typeof(self.map_destination.target_map) == TYPE_STRING and self.map_destination.target_map == "Overworld" and Globals.overworld_position != null:
 			Globals.future_player_position = Globals.overworld_position
 			Globals.overworld_position = null
+			

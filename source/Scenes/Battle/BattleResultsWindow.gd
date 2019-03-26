@@ -38,7 +38,7 @@ func _on_WindowDialog_popup_hide():
 	if Globals.current_map != null:
 		SceneManagement.change_map_to(get_tree(), Globals.current_map)
 		var restore_position = Globals.pre_battle_position
-		Globals.post_fade_position = Vector2(restore_position[0], restore_position[1])
+		Globals.future_player_position = Vector2(restore_position[0], restore_position[1])
 		
 		# For boss battle, or Hamza training battle, if we just lost, don't re-battle immediately.
 		# pre_battle_position null check: makes sure player is not disposed		

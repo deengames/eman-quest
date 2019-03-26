@@ -1,7 +1,5 @@
 extends Node
 
-const ReferenceChecker = preload("res://Scripts/ReferenceChecker.gd")
-
 const _WHITE = Color(1, 1, 1, 1)
 const _BLACK = Color(0, 0, 0, 1)
 
@@ -12,11 +10,6 @@ static func fade_in(tree, animation_time_seconds):
 	return _fade(tree, animation_time_seconds, _BLACK, _WHITE)
 	
 static func _fade(tree, animation_time_seconds, start_colour, end_colour):
-	# Player is null when loading game (map, which creates player, isn't loaded yet).
-	# When returning from regular battle to map, player is previously freed instance.
-	if Globals.player != null and not ReferenceChecker.is_previously_freed(Globals.player):
-		Globals.player.freeze()
-	
 	var canvas_modulate = CanvasModulate.new()
 	# Fixes jerky frame between fades; see: https://twitter.com/nightblade99/status/1109278972976623616
 	canvas_modulate.color = start_colour
@@ -31,13 +24,10 @@ static func _fade(tree, animation_time_seconds, start_colour, end_colour):
 	yield(tween, "tween_completed")
 	
 	# pre_battle_position: non-null when the player is being freed
-	if Globals.pre_battle_position == null and Globals.post_fade_position != null:
+	if Globals.pre_battle_position == null and Globals.future_player_position != null:
 		if Globals.player != null:
-			Globals.player.position = Globals.post_fade_position
-		Globals.post_fade_position = null
+			Globals.player.position = Globals.future_player_position
+		Globals.future_player_position = null
 	
 	root.remove_child(tween)
 	root.remove_child(canvas_modulate)
-
-	if Globals.player != null and not ReferenceChecker.is_previously_freed(Globals.player):
-		Globals.player.unfreeze()
