@@ -65,6 +65,7 @@ var current_monster_type = "" # DOES/SHOULD NOT clear after battle, used for pos
 # out before we show the current map, and creating that map creates the player.
 # So, we can't set the player coordinates; we need to set that later.
 var future_player_position = null # Vector2
+var post_fade_position = null # Vector2
 # Hack. See: https://www.pivotaltracker.com/story/show/163181477
 var unfreeze_player_in_process = false
 var is_dialog_open = false # "Static" variable

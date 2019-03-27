@@ -89,7 +89,7 @@ func _on_Area2D_body_entered(body):
 		
 		# If we had a post-fade position, player exited quickly from home to world map,
 		# we don't want to restore to that position now.
-		Globals.future_player_position = null
+		Globals.post_fade_position = null
 		
 		Globals.player.freeze()
 		
