@@ -1,5 +1,6 @@
 extends WindowDialog
 
+const ReferenceChecker = preload("res://Scripts/ReferenceChecker.gd")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 func _ready():
@@ -42,7 +43,7 @@ func _on_WindowDialog_popup_hide():
 		
 		# For boss battle, or Hamza training battle, if we just lost, don't re-battle immediately.
 		# pre_battle_position null check: makes sure player is not disposed		
-		if (not Globals.won_battle or Globals.current_map_type == "Home") and Globals.pre_battle_position == null:
+		if (not Globals.won_battle or Globals.current_map_type == "Home") and not ReferenceChecker.is_previously_freed(Globals.player):
 			Globals.player.temporarily_no_battles()
 	else:
 		# One-off battle

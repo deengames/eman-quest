@@ -120,6 +120,10 @@ static func change_map_to(tree, target):
 			current_scene.add_child(timer)
 		
 		if map_type == "Overworld":
+			# Part of a fix for a change introduced for https://www.pivotaltracker.com/story/show/164848304
+			# EndGameMap can't clear Globals.pre_battle_position because that causes a crash
+			# Instead: whenever we go back to the overworld, clear it out if it exists.
+			Globals.pre_battle_position = null
 			var camera = Globals.player.get_node("Camera2D")
 			# zoom of 2 = 50%
 			# TODO: tween

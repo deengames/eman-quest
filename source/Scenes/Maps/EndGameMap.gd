@@ -10,8 +10,16 @@ const _GLOW_TIME_SECONDS = 3
 
 func _ready():
 	var player = Globals.player
-	player.position = $Locations/Entrance.position
-	
+	# https://www.pivotaltracker.com/story/show/164848304
+	# Somehow, setting player position doesn't apply unless we change it here.
+	# It looks like a Godot bug. Ya know what I'm talkin' about. Traced all the places
+	# where we change the player's position, and none of them are incorrect. Somehow,
+	# even when frozen, she just ends up going to the location specified here. ?????
+	if Globals.pre_battle_position != null:
+		player.position = Vector2(Globals.pre_battle_position[0], Globals.pre_battle_position[1])
+	else:
+		player.position = $Locations/Entrance.position
+		
 	# If we just slew the final boss, show correct post-victory events.
 	if Globals.beat_last_boss and Globals.current_monster_type == "Mufsid":
 		Globals.current_monster_type = "" # don't show again
