@@ -95,10 +95,11 @@ func randint(minimum, maximum):
 func hide_ui():
 	# Rarely, this is something unusual, like AlphaFluctuator instance; hence, is/in check
 	# https://www.pivotaltracker.com/story/show/164255140
-	if self.current_map_scene != null and not ReferenceChecker.is_previously_freed(self.current_map_scene) and "hide_ui" in self.current_map_scene:
+	# Regression: broke this by adding "hide_ui in current_map_scene", which I fixed again in https://www.pivotaltracker.com/story/show/164947430
+	if self.current_map_scene != null and not ReferenceChecker.is_previously_freed(self.current_map_scene):# and "hide_ui" in self.current_map_scene:
 		self.current_map_scene.hide_ui()
 
 func show_ui():
 	# Rarely, this is something unusual, like AlphaFluctuator instance
-	if self.current_map_scene != null and not ReferenceChecker.is_previously_freed(self.current_map_scene) and "show_ui" in self.current_map_scene:
+	if self.current_map_scene != null and not ReferenceChecker.is_previously_freed(self.current_map_scene):# and "show_ui" in self.current_map_scene:
 		self.current_map_scene.show_ui()
