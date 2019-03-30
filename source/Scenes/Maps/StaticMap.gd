@@ -12,6 +12,9 @@ const map_type = "" # used in transitions, plays nice with code that looks up ma
 func _ready():
 	Globals.current_map = self
 	Globals.current_map_type = self.map_type
+	
+	# Part of fixes for https://www.pivotaltracker.com/story/show/165001877
+	Globals.current_map_scene = self
 	Globals.player = Player.instance()
 	self.add_child(Globals.player)
 	
@@ -22,3 +25,8 @@ func get_tiles_wide():
 
 func get_tiles_high():
 	return $Ground.get_used_rect().size.y
+
+# Part of fixes for https://www.pivotaltracker.com/story/show/165001877
+# These don't need an implementation
+func show_ui(): pass
+func hide_ui(): pass
