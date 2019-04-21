@@ -82,7 +82,7 @@ func _set_map_destination():
 		# First argument, my_position, is irrelevant; so, null.
 		self.map_destination = MapDestination.new(null, self.destination, target_position, null)
 		
-		if Globals.enable_assertions == true:
+		if Globals.is_testing == false:
 			assert (target_position != null)
 		
 func _on_Area2D_body_entered(body):

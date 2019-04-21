@@ -75,15 +75,17 @@ static func change_map_to(tree, target):
 		populated_map.initialize(target_areamap)
 
 		var state = SceneFadeManager.fade_out(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
-		yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
-		if state.is_valid(true):
-			state.resume()
+		if not Globals.is_testing:
+			yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
+			if state.is_valid(true):
+				state.resume()
 
 		# pre_battle_position null check: non-null when player is previously freed
 		if Globals.player != null and Globals.pre_battle_position == null:
 			Globals.player.freeze()
 		
-		change_scene_to(tree, populated_map)
+		if Globals.is_testing == false:
+			change_scene_to(tree, populated_map)
 		
 		Globals.current_map_scene = populated_map
 		
@@ -109,7 +111,8 @@ static func change_map_to(tree, target):
 			var current_scene = get_current_scene(root)
 			
 			var ui = current_scene.get_node("UI")
-			ui.add_child(container)
+			if Globals.is_testing == false:
+				ui.add_child(container) # null during tests
 			
 			# Wait 3s, then fade over 1s
 			var tween_helper = TweenHelper.new().fade_out(current_scene, container, 1)
@@ -124,11 +127,13 @@ static func change_map_to(tree, target):
 			# EndGameMap can't clear Globals.pre_battle_position because that causes a crash
 			# Instead: whenever we go back to the overworld, clear it out if it exists.
 			Globals.pre_battle_position = null
-			var camera = Globals.player.get_node("Camera2D")
-			# zoom of 2 = 50%
-			# TODO: tween
-			camera.zoom.x = 2
-			camera.zoom.y = 2
+			
+			if Globals.is_testing == false:
+				var camera = Globals.player.get_node("Camera2D")
+				# zoom of 2 = 50%
+				# TODO: tween
+				camera.zoom.x = 2
+				camera.zoom.y = 2
 	
 # Returns the last child that's not a Tween or CanvasModulate.
 static func get_current_scene(root):

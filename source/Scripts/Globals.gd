@@ -76,7 +76,7 @@ var emit_battle_over_after_fade = false # trigger Global.battle_over after next 
 
 #### ONLY FOR TESTING, ya3ne, making stuff more testable. Like, disable assertions
 # about deeply-nested things and their invariants, so we don't have to mock too much.
-var enable_assertions = true
+var is_testing = false
 
 func _ready():
 	pass
