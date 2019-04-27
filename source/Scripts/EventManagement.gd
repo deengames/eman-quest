@@ -83,7 +83,8 @@ func _process_event(dialog_window, event):
 			print("WARNING: Can't find node named {name} to {effect}!".format({name = target_name, effect = key}))
 	else:
 		print("Not sure how to process event: {e}".format({e = event}))
-		assert(false)
+		if Globals.enable_assertions == true:
+			assert(false)
 
 func _on_battle_over():
 	if Globals.won_battle:
