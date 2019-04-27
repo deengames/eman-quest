@@ -26,7 +26,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Rect2( 0, 0, 64, 125 ), Rect2( 64, 0, 64, 125 ), Rect2( 128, 0, 64, 125 ), Rect2( 192, 0, 64, 125 ) ]
+"values": [ Rect2( 0, 0, 64, 64 ), Rect2( 64, 0, 64, 64 ), Rect2( 128, 0, 64, 64 ), Rect2( 64, 0, 64, 64 ) ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -45,7 +45,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Rect2( 0, 375, 64, 125 ), Rect2( 64, 375, 64, 125 ), Rect2( 128, 375, 64, 125 ), Rect2( 192, 375, 64, 125 ) ]
+"values": [ Rect2( 0, 128, 64, 64 ), Rect2( 64, 128, 64, 64 ), Rect2( 128, 128, 64, 64 ), Rect2( 64, 128, 64, 64 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -63,7 +63,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Rect2( 0, 125, 64, 125 ), Rect2( 64, 125, 64, 125 ), Rect2( 128, 125, 64, 125 ), Rect2( 192, 125, 64, 125 ) ]
+"values": [ Rect2( 0, 64, 64, 64 ), Rect2( 64, 64, 64, 64 ), Rect2( 128, 64, 64, 64 ), Rect2( 64, 64, 64, 64 ) ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -81,7 +81,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Rect2( 0, 250, 64, 125 ), Rect2( 64, 250, 64, 125 ), Rect2( 128, 250, 64, 125 ), Rect2( 192, 250, 64, 125 ) ]
+"values": [ Rect2( 0, 192, 64, 64 ), Rect2( 64, 192, 64, 64 ), Rect2( 128, 192, 64, 64 ), Rect2( 64, 192, 64, 64 ) ]
 }
 
 [node name="KinematicBody2D" type="KinematicBody2D" index="0"]
@@ -124,7 +124,7 @@ _sections_unfolded = [ "Drag Margin", "Editor", "Limit", "Offset", "Smoothing", 
 texture = ExtResource( 2 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 192, 0, 64, 125 )
+region_rect = Rect2( 64, 192, 64, 64 )
 _sections_unfolded = [ "Offset", "Region" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
