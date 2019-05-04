@@ -3,8 +3,8 @@ extends Node2D
 signal clicked_on_map(position)
 signal battle_over
 
-const ReferenceChecker = preload("res://Scripts/ReferenceChecker.gd")
 const PlayerData = preload("res://Entities/PlayerData.gd")
+const ReferenceChecker = preload("res://Scripts/ReferenceChecker.gd")
 
 const TILE_WIDTH = 64
 const TILE_HEIGHT = 64

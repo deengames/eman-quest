@@ -1,5 +1,7 @@
 extends Node2D
 
+const PlayerData = preload("res://Entities/PlayerData.gd")
+
 const _CREDITS_TIME_SECONDS = 10
 const _CONGRATS_FADE_TIME_SECONDS = 5
 const _VISIBLE = Color(1, 1, 1, 1)
@@ -41,7 +43,16 @@ func _ready():
 	tween2.start()
 	yield(get_tree().create_timer(_CREDITS_TIME_SECONDS), 'timeout')
 	
+	self._clear_globals()
+	
 	get_tree().change_scene("res://Scenes/Title.tscn")
 	
-func _on_credits_rolled():
-	pass
+func _clear_globals():
+		# This fixes lots of interesting bugs, that happen after game complete.
+	Globals.bosses_defeated = 0
+	Globals.showed_final_events = false
+	Globals.beat_last_boss = false
+	# To be on the safe side...
+	Globals.player_data = PlayerData.new()
+	Globals.overworld_position = null
+	Globals.current_map = null
