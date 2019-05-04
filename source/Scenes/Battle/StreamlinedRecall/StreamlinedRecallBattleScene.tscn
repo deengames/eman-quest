@@ -150,7 +150,6 @@ _sections_unfolded = [ "custom_colors", "custom_constants" ]
 
 [node name="PlayerControls" type="Node2D" parent="." index="2"]
 
-editor/display_folded = true
 position = Vector2( 0, 220 )
 
 [node name="PlayerSprite" type="Sprite" parent="PlayerControls" index="0"]
@@ -159,7 +158,7 @@ position = Vector2( 11.718, -14.4058 )
 texture = ExtResource( 5 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 0, 0, 64, 128 )
+region_rect = Rect2( 64, 0, 64, 64 )
 _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [node name="PlayerHealth" type="TextureProgress" parent="PlayerControls" index="1"]
