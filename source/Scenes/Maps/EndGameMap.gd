@@ -137,7 +137,7 @@ func _show_endgame_events():
 	yield(self._pause(1), "completed")
 	
 	$Umayyah.become_normal()
-	$Jinn.position.y -= 3 * Globals.TILE_HEIGHT
+	$Jinn.position.y -= 2 * Globals.TILE_HEIGHT
 	yield(self._pause(1), "completed")
 	
 	var tween_helper = TweenHelper.new().fade_out(current_scene, $Jinn, 1)
