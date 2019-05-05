@@ -8,7 +8,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 24, 16 )
+extents = Vector2( 28, 16 )
 
 [sub_resource type="Animation" id=2]
 
@@ -84,7 +84,7 @@ tracks/0/keys = {
 "values": [ Rect2( 0, 192, 64, 64 ), Rect2( 64, 192, 64, 64 ), Rect2( 128, 192, 64, 64 ), Rect2( 64, 192, 64, 64 ) ]
 }
 
-[node name="KinematicBody2D" type="KinematicBody2D" index="0"]
+[node name="KinematicBody2D" type="KinematicBody2D"]
 
 input_pickable = false
 collision_layer = 1
@@ -94,7 +94,7 @@ script = ExtResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="." index="0"]
 
-offset = Vector2( 32, 70 )
+offset = Vector2( 32, 32 )
 anchor_mode = 1
 rotating = false
 current = true
@@ -124,12 +124,12 @@ _sections_unfolded = [ "Drag Margin", "Editor", "Limit", "Offset", "Smoothing", 
 texture = ExtResource( 2 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 64, 192, 64, 64 )
+region_rect = Rect2( 64, 0, 64, 64 )
 _sections_unfolded = [ "Offset", "Region" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
 
-position = Vector2( 32, 90 )
+position = Vector2( 32, 52 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 

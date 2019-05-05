@@ -6,7 +6,7 @@
 [ext_resource path="res://Entities/MapWarp.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Entities/MapEntities/Hamza.tscn" type="PackedScene" id=5]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -79,7 +79,7 @@ _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [node name="Start" type="Node2D" parent="Locations" index="0"]
 
-position = Vector2( 807.41, 36.9098 )
+position = Vector2( 813.41, 86.9098 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Exit1" parent="Locations" index="1" instance=ExtResource( 4 )]
