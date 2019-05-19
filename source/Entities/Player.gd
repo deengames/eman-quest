@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 var _cant_fight_from = null
 var CANT_FIGHT_FOR_SECONDS = 5
-var facing = "down"
+var facing = "Down"
 
 var can_move = true
 

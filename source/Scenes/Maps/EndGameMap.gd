@@ -103,12 +103,18 @@ func _on_FinalEventsTrigger_body_entered(body):
 
 
 func _show_endgame_events():
-	Globals.player.freeze()
-	
 	self.remove_child($FinalEventsTrigger)
 	$Jinn.visible = false
 	$Jinn.position = $Umayyah.position
 	$Umayyah.face_down()
+	
+	# https://trello.com/c/TroyNjSK/35-minor-bugs
+	# Freeze forces the player to face down here. Not sure why (default direction?)
+	# Change animation then pause for epsilon time, *then* freeze. DONE.
+	Globals.player._on_facing_new_direction("Up")
+	yield(self._pause(0.01), "completed")
+	
+	Globals.player.freeze()
 	
 	var root = get_tree().get_root()
 	var current_scene = SceneManagement.get_current_scene(root)
@@ -125,6 +131,7 @@ func _show_endgame_events():
 	])
 	yield(dialog_window, "shown_all")
 	dialog_window.queue_free()
+	
 	
 	yield(self._pause(1), "completed")
 	
