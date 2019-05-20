@@ -25,9 +25,13 @@ func _ready():
 	else:
 		player.position = $Locations/Entrance.position
 	
+	if Globals.bosses_defeated == 2:
+		self.remove_child($Dad)
+	
 	if Globals.beat_last_boss:
 		self.remove_child($"Bandit-Intro")
-		_spawn(Mama, $Locations/Mama)
+		var mama = _spawn(Mama, $Locations/Mama)
+		Globals.player.z_index = 9
 
 func show_intro_events():
 	self._showing_intro_events = true

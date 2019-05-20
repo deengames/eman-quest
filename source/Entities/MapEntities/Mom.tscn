@@ -13,7 +13,7 @@ height = 20.0
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 20, 10 )
+extents = Vector2( 25, 30 )
 
 [node name="Node2D" type="Area2D"]
 
@@ -51,7 +51,6 @@ _sections_unfolded = [ "Animation", "Offset", "Region" ]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." index="3"]
 
-visible = false
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
@@ -62,7 +61,7 @@ bounce = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0"]
 
-position = Vector2( 32, 54 )
+position = Vector2( 30, 30 )
 shape = SubResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
