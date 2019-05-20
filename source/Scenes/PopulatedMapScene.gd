@@ -8,6 +8,7 @@ const AudioManager = preload("res://Scripts/AudioManager.gd")
 const AutoTileTilesets = preload("res://Tilesets/AutoTileTilesets.tscn")
 const Boss = preload("res://Entities/Battle/Boss.tscn")
 const MapWarp = preload("res://Entities/MapWarp.tscn")
+const MapWarpScript = preload("res://Entities/MapWarp.gd")
 const Monster = preload("res://Entities/Battle/Monster.tscn")
 const MonsterGenerator = preload("res://Scripts/Generators/MonsterGenerator.gd")
 const Player = preload("res://Entities/Player.tscn")
@@ -74,13 +75,46 @@ func _ready():
 	self._populate_treasure_chests()
 	
 	var player = Player.instance()
+	var player_position
+	var transitions = []
+	
 	# SceneManagement sets player position correct if back to overworld
 	if Globals.transition_used != null and Globals.transition_used.target_position != null:
 		var from = Globals.transition_used
 		
+		# For calculations on walkability just one step below, for some reason, Y is off by -1
+		# Offsetting by +1 here, makes everything work (below in walkable/transition checks)
+		player_position = Vector2(from.target_position.x, from.target_position.y + 1)
+		
+		# Now that we barricaded map exists with transitions, make sure the player
+		# doesn't spawn on one. Find transitions around us and step away.
+		# If you check a plus-shape set of tiles around us, only one is on the map
+		# and not a transition.
+		
+		for child in get_children():
+			if child is MapWarpScript:
+				transitions.append(Vector2(child.position.x / Globals.TILE_WIDTH, child.position.y / Globals.TILE_HEIGHT))
+				
+	# Not sure why this is null on load game. Hmm.
+	if player_position != null:
+		# NB: this fails if MapWarp radius is exactly 32 and the map entrance is at the bottom.
+		# Everything works correctly, except the map warp directly under the player triggers.
+		# A threshold radius of ~7px (25px radius map warps) seems to avoid the problem.
+		# If it becomes too small, we can walk through the middle of two exits sometimes, which is a no-no.
+		if _is_walkable_and_no_transitions(player_position, transitions):
+			player_position = player_position
+		elif _is_walkable_and_no_transitions(Vector2(player_position.x - 1, player_position.y), transitions):
+			player_position = Vector2(player_position.x - 1, player_position.y)
+		elif _is_walkable_and_no_transitions(Vector2(player_position.x + 1, player_position.y), transitions):
+			player_position = Vector2(player_position.x + 1, player_position.y)
+		elif _is_walkable_and_no_transitions(Vector2(player_position.x, player_position.y - 1), transitions):
+			player_position = Vector2(player_position.x, player_position.y - 1)
+		elif _is_walkable_and_no_transitions(Vector2(player_position.x, player_position.y + 1), transitions):
+			player_position = Vector2(player_position.x, player_position.y + 1)
+			
 		player.position = Vector2(
-			from.target_position.x * Globals.TILE_WIDTH,
-			from.target_position.y * Globals.TILE_HEIGHT)
+			player_position.x * Globals.TILE_WIDTH,
+			player_position.y * Globals.TILE_HEIGHT)
 		
 	if self._restoring_state == true and not Globals.won_battle:
 		# Probably reduundant because we now also set this in BattleResultsWindow.gd
@@ -115,6 +149,17 @@ func _ready():
 	if Globals.emit_battle_over_after_fade:
 		Globals.emit_battle_over_after_fade = false
 		Globals.emit_signal("battle_over")
+
+func _is_walkable_and_no_transitions(tile_coords, transitions):
+	if tile_coords.x < 0 or tile_coords.y < 0 or \
+		tile_coords.x >= map.tiles_wide or tile_coords.y >= map.tiles_high:
+			return false
+	
+	for transition in transitions:
+		if tile_coords == transition:
+			return false
+	
+	return true
 
 func _exit_tree():
 	if self.play_audio:
@@ -178,8 +223,6 @@ func _populate_tile_entities(tile_map, entity_tiles):
 
 func _add_transitions(tilemap, tile_ids):
 	for destination in map.transitions:
-		var warp = MapWarp.instance()
-		warp.initialize_from(destination)
 		
 		# In cases like the Cave, we have special tiles that indicate the exit.
 		# If the tileset has such tiles, apply them (after autotiling).
@@ -190,10 +233,26 @@ func _add_transitions(tilemap, tile_ids):
 			
 			if tile_ids.has(exit_type):
 				tilemap.set_cell(coordinates.x, coordinates.y, tile_ids[exit_type])
-
-		warp.position.x = destination.my_position.x * Globals.TILE_WIDTH
-		warp.position.y = destination.my_position.y * Globals.TILE_HEIGHT
-		self.add_child(warp)
+		
+		var warp_x = destination.my_position.x
+		var warp_y = destination.my_position.y
+		_create_warp_at(destination, warp_x, warp_y)
+		
+		# Create a row of warps. That way, you block the exit, no matter what.
+		if map.map_type != "Overworld":
+			if destination.direction == "up" or destination.direction == "down":
+				_create_warp_at(destination, warp_x - 1, warp_y)
+				_create_warp_at(destination, warp_x + 1, warp_y)
+			elif destination.direction == "left" or destination.direction == "right":
+				_create_warp_at(destination, warp_x, warp_y - 1)
+				_create_warp_at(destination, warp_x, warp_y + 1)
+		
+func _create_warp_at(data, x, y):
+	var warp = MapWarp.instance()
+	warp.initialize_from(data)
+	warp.position.x = x * Globals.TILE_WIDTH
+	warp.position.y = y * Globals.TILE_HEIGHT
+	self.add_child(warp)
 
 func _add_monsters():
 	var monster_data = {}
