@@ -94,7 +94,6 @@ func total_defense():
 	total += _get_equipment_modifier(Globals.player_data.weapon, StatType.Defense)
 	total += _get_equipment_modifier(Globals.player_data.armour, StatType.Defense)
 	var grand_total = floor(total * (1.0 + (DEFEND_MULTIPLIER * self._times_defending)))
-	print("{total} with {n} times defending = {grand}".format({total = total, n = self._times_defending, grand = grand_total}))
 	return grand_total
 
 func damage(damage):
