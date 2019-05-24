@@ -4,6 +4,8 @@ const Room = preload("res://Entities/Room.gd")
 const AreaType = preload("res://Scripts/Enums/AreaType.gd")
 const TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 
+const ExtraRooms = 2
+
 ###
 # Generates multiple rooms and connects them together.
 # Forget all that crazy grid stuff we had. Just random walk and make rooms.
@@ -11,6 +13,9 @@ const TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 #
 # This typically generates linear dungeons with no branching-off. That's okay.
 # Around a third of the dungeons double back or have adjacent rooms/paths.
+#
+# As a bonus, we add two more rooms and connect each to a random room (other
+# than the boss room). This usually adds some non-linearity.
 ###
 
 static func generate_layout(num_rooms):
@@ -35,7 +40,10 @@ static func generate_layout(num_rooms):
 	current.area_type = AreaType.ENTRANCE
 	to_return.set_at(x, y, current)
 	var rooms = [current]
-
+	print("Generated a room at " + str(x) + ", " + str(y))
+	
+	
+	# Generate the connected graph
 	while left_to_generate > 0:
 		var next = _pick_unexplored_adjacent(current, to_return)
 		if next != null:
@@ -45,12 +53,27 @@ static func generate_layout(num_rooms):
 			rooms.append(room)
 			left_to_generate -= 1
 			current = room
+			print("Generated a room at " + str(next.x) + ", " + str(next.y))
 		else:
 			# Nothing available; pick random room
 			current = rooms[randi() % len(rooms)]
 	
+	# Last room is the boss room
 	rooms[-1].area_type = AreaType.BOSS
-
+	
+	# Attach more random rooms to any rooms (including each other)
+	var extra_rooms = ExtraRooms
+	while extra_rooms > 0:
+		var attach_to = rooms[randi() % len(rooms)]
+		var next = _pick_unexplored_adjacent(attach_to, to_return)
+		if next != null:
+			var room = Room.new(next.x, next.y)
+			to_return.set_at(next.x, next.y, room)
+			attach_to.connect(room)
+			rooms.append(room)
+			extra_rooms -= 1
+			print("Extra room at " + str(next.x) + ", " + str(next.y))
+			
 	return rooms
 
 static func _pick_unexplored_adjacent(current, grid):
