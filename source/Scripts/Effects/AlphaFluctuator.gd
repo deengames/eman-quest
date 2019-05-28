@@ -24,6 +24,7 @@ func start():
 func stop():
 	self._enabled = false
 
+# target_runtime is fractional seconds
 func run(target_runtime):
 	self._enabled = true
 	self._target_runtime = target_runtime
