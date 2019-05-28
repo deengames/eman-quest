@@ -59,17 +59,19 @@ static func generate_layout(num_rooms):
 	# Last room is the boss room
 	rooms[-1].area_type = AreaType.BOSS
 	
-	# Attach more random rooms to any rooms (including each other)
+	# Attach more random rooms to any rooms (including each other).
+	# They don't connect to the boss room, though.
 	var extra_rooms = ExtraRooms
 	while extra_rooms > 0:
 		var attach_to = rooms[randi() % len(rooms)]
-		var next = _pick_unexplored_adjacent(attach_to, to_return)
-		if next != null:
-			var room = Room.new(next.x, next.y)
-			to_return.set_at(next.x, next.y, room)
-			attach_to.connect(room)
-			rooms.append(room)
-			extra_rooms -= 1
+		if attach_to.area_type != AreaType.BOSS:
+			var next = _pick_unexplored_adjacent(attach_to, to_return)
+			if next != null:
+				var room = Room.new(next.x, next.y)
+				to_return.set_at(next.x, next.y, room)
+				attach_to.connect(room)
+				rooms.append(room)
+				extra_rooms -= 1
 			
 	return rooms
 
