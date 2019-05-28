@@ -106,27 +106,6 @@ var _signal_watcher = load('res://addons/gut/signal_watcher.gd').new()
 # Convenience copy of _utils.DOUBLE_STRATEGY
 var DOUBLE_STRATEGY = null
 
-class DoubleInfo:
-	var path
-	var subpath
-	var strategy
-	var make_partial
-	var extension
-
-	func _init(thing, p2=null, p3=null):
-		strategy = p2
-
-		if(typeof(p2) == TYPE_STRING):
-			strategy = p3
-			subpath = p2
-
-		if(typeof(thing) == TYPE_OBJECT):
-			path = thing.resource_path
-		else:
-			path = thing
-
-		extension = path.get_extension()
-
 var _utils = load('res://addons/gut/utils.gd').new()
 var _lgr = _utils.get_logger()
 
@@ -220,16 +199,6 @@ func _fail_if_not_watching(object):
 func _get_fail_msg_including_emitted_signals(text, object):
 	return str(text," (Signals emitted: ", _signal_watcher.get_signals_emitted(object), ")")
 
-# ------------------------------------------------------------------------------
-# This validates that parameters is an array and generates a specific error
-# and a failure with a specific message
-# ------------------------------------------------------------------------------
-func _fail_if_parameters_not_array(parameters):
-	var invalid = parameters != null and typeof(parameters) != TYPE_ARRAY
-	if(invalid):
-		_lgr.error('The "parameters" parameter must be an array of expected parameter values.')
-		_fail('Cannot compare paramter values because an array was not passed.')
-	return invalid
 # #######################
 # Virtual Methods
 # #######################
@@ -466,7 +435,7 @@ func assert_accessors(obj, property, default, set_to):
 # If provided, property_usage constrains the type of property returned by
 # passing either:
 # EDITOR_PROPERTY for properties defined as: export(int) var some_value
-# VARIABLE_PROPERTY for properties defunded as: var another_value
+# VARIABLE_PROPERTY for properties definded as: var another_value
 # ---------------------------------------------------------------------------
 func _find_object_property(obj, property_name, property_usage=null):
 	var result = null
@@ -580,7 +549,7 @@ func assert_signal_emit_count(object, signal_name, times, text=""):
 			_fail(_get_fail_msg_including_emitted_signals(disp, object))
 
 # ------------------------------------------------------------------------------
-# Assert that the passed in object has the specified signal
+# Assert that the passed in object has the specfied signal
 # ------------------------------------------------------------------------------
 func assert_has_signal(object, signal_name, text=""):
 	var disp = str('Expected object ', object, ' to have signal [', signal_name, ']:  ', text)
@@ -717,15 +686,12 @@ func assert_string_ends_with(text, search, match_case=true):
 # ------------------------------------------------------------------------------
 # Assert that a method was called on an instance of a doubled class.  If
 # parameters are supplied then the params passed in when called must match.
-# TODO make 3rd parameter "param_or_text" and add fourth parameter of "text" and
+# TODO make 3rd paramter "param_or_text" and add fourth parameter of "text" and
 #      then work some magic so this can have a "text" parameter without being
 #      annoying.
 # ------------------------------------------------------------------------------
 func assert_called(inst, method_name, parameters=null):
 	var disp = str('Expected [',method_name,'] to have been called on ',inst)
-
-	if(_fail_if_parameters_not_array(parameters)):
-		return
 
 	if(!_utils.is_double(inst)):
 		_fail('You must pass a doubled instance to assert_called.  Check the wiki for info on using double.')
@@ -745,9 +711,6 @@ func assert_called(inst, method_name, parameters=null):
 func assert_not_called(inst, method_name, parameters=null):
 	var disp = str('Expected [', method_name, '] to NOT have been called on ', inst)
 
-	if(_fail_if_parameters_not_array(parameters)):
-		return
-
 	if(!_utils.is_double(inst)):
 		_fail('You must pass a doubled instance to assert_not_called.  Check the wiki for info on using double.')
 	else:
@@ -765,9 +728,6 @@ func assert_not_called(inst, method_name, parameters=null):
 # ------------------------------------------------------------------------------
 func assert_call_count(inst, method_name, expected_count, parameters=null):
 	var count = gut.get_spy().call_count(inst, method_name, parameters)
-
-	if(_fail_if_parameters_not_array(parameters)):
-		return
 
 	var param_text = ''
 	if(parameters):
@@ -822,7 +782,7 @@ func pending(text=""):
 
 # ------------------------------------------------------------------------------
 # Yield for the time sent in.  The optional message will be printed when
-# Gut detects the yield.  When the time expires the YIELD signal will be
+# Gut detects the yeild.  When the time expires the YIELD signal will be
 # emitted.
 # ------------------------------------------------------------------------------
 func yield_for(time, msg=''):
@@ -889,47 +849,32 @@ func get_summary_text():
 #
 #
 # ------------------------------------------------------------------------------
+func double(thing, p2=null, p3=null):
+	var strategy = p2
+	var subpath = null
 
-# ------------------------------------------------------------------------------
-# ------------------------------------------------------------------------------
-func _smart_double(double_info):
-	var override_strat = _utils.nvl(double_info.strategy, gut.get_doubler().get_strategy())
+	if(typeof(p2) == TYPE_STRING):
+		strategy = p3
+		subpath = p2
+
+	var path = null
+	if(typeof(thing) == TYPE_OBJECT):
+		path = thing.resource_path
+	else:
+		path = thing
+
+	var extension = path.get_extension()
 	var to_return = null
 
-	if(double_info.extension == 'tscn'):
-		if(double_info.make_partial):
-			to_return =  gut.get_doubler().partial_double_scene(double_info.path, override_strat)
+	if(extension == 'tscn'):
+		to_return =  double_scene(path, strategy)
+	elif(extension == 'gd'):
+		if(subpath == null):
+			to_return = double_script(path, strategy)
 		else:
-			to_return =  gut.get_doubler().double_scene(double_info.path, override_strat)
-	elif(double_info.extension == 'gd'):
-		if(double_info.subpath == null):
-			if(double_info.make_partial):
-				to_return = gut.get_doubler().partial_double(double_info.path, override_strat)
-			else:
-				to_return = gut.get_doubler().double(double_info.path, override_strat)
-		else:
-			if(double_info.make_partial):
-				to_return = gut.get_doubler().partial_double_inner(double_info.path, double_info.subpath, override_strat)
-			else:
-				to_return = gut.get_doubler().double_inner(double_info.path, double_info.subpath, override_strat)
+			to_return = double_inner(path, subpath, strategy)
+
 	return to_return
-
-# ------------------------------------------------------------------------------
-# ------------------------------------------------------------------------------
-func double(thing, p2=null, p3=null):
-	var double_info = DoubleInfo.new(thing, p2, p3)
-	double_info.make_partial = false
-
-	return _smart_double(double_info)
-
-# ------------------------------------------------------------------------------
-# ------------------------------------------------------------------------------
-func partial_double(thing, p2=null, p3=null):
-	var double_info = DoubleInfo.new(thing, p2, p3)
-	double_info.make_partial = true
-
-	return _smart_double(double_info)
-
 
 # ------------------------------------------------------------------------------
 # Specifically double a scene
@@ -980,7 +925,7 @@ func simulate(obj, times, delta):
 	gut.simulate(obj, times, delta)
 
 # ------------------------------------------------------------------------------
-# Replace the node at base_node.get_node(path) with with_this.  All references
+# Replace the node at base_node.get_node(path) with with_this.  All refrences
 # to the node via $ and get_node(...) will now return with_this.  with_this will
 # get all the groups that the node that was replaced had.
 #
@@ -996,7 +941,7 @@ func replace_node(base_node, path_or_node, with_this):
 		# didn't look any farther).
 		path = base_node.get_path_to(path_or_node)
 		if(path.get_name_count() == 0):
-			_lgr.error('You passed an object that base_node does not have.  Cannot replace node.')
+			_lgr.error('You passed an objet that base_node does not have.  Cannot replace node.')
 			return
 
 	if(!base_node.has_node(path)):

@@ -97,7 +97,7 @@ class CmdLineParser:
 
 		return to_return
 
-	# returns the value of an option if it was specified, null otherwise.  This
+	# returns the value of an option if it was specfied, null otherwise.  This
 	# used to return the default but that became problemnatic when trying to
 	# punch through the different places where values could be specified.
 	func get_value(option):
@@ -126,9 +126,8 @@ class CmdLineParser:
 			to_return.append(_opts[i].split('=')[0])
 
 		var script_option = to_return.find('-s')
-		if script_option != -1:
-			to_return.remove(script_option + 1)
-			to_return.remove(script_option)
+		to_return.remove(script_option + 1)
+		to_return.remove(script_option)
 
 		while(_used_options.size() > 0):
 			var index = to_return.find(_used_options[0].split("=")[0])
@@ -237,7 +236,7 @@ func parse():
 			elif(t == TYPE_NIL):
 				print(options[i].option_name + ' cannot be processed, it has a nil datatype')
 			else:
-				print(options[i].option_name + ' cannot be processed, it has unknown datatype:' + str(t))
+				print(options[i].option_name + ' cannot be processsed, it has unknown datatype:' + str(t))
 
 	var unused = parser.get_unused_options()
 	if(unused.size() > 0):
