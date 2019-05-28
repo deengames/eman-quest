@@ -20,7 +20,7 @@ func test_generate_generates_maps_and_submaps():
 	for expected in expected_static_maps:
 		assert_true(expected in map_names)
 	
-	var EXPECTED_SUBMAPS_PER_MAP = 4
+	var EXPECTED_SUBMAPS_PER_MAP = 4 + 2 # four original + 2 added/extra
 	
 	for map in map_names:
 		if not map in expected_static_maps:

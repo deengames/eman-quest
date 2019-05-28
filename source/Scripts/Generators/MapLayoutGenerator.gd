@@ -40,7 +40,6 @@ static func generate_layout(num_rooms):
 	current.area_type = AreaType.ENTRANCE
 	to_return.set_at(x, y, current)
 	var rooms = [current]
-	print("Generated a room at " + str(x) + ", " + str(y))
 	
 	
 	# Generate the connected graph
@@ -53,7 +52,6 @@ static func generate_layout(num_rooms):
 			rooms.append(room)
 			left_to_generate -= 1
 			current = room
-			print("Generated a room at " + str(next.x) + ", " + str(next.y))
 		else:
 			# Nothing available; pick random room
 			current = rooms[randi() % len(rooms)]
@@ -72,7 +70,6 @@ static func generate_layout(num_rooms):
 			attach_to.connect(room)
 			rooms.append(room)
 			extra_rooms -= 1
-			print("Extra room at " + str(next.x) + ", " + str(next.y))
 			
 	return rooms
 
