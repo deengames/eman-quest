@@ -3,6 +3,7 @@ extends "StaticMap.gd"
 const Bandit = preload("res://Entities/MapEntities/Bandit/Bandit.tscn")
 const DialogueWindow = preload("res://Scenes/UI/DialogueWindow.tscn")
 const Mama = preload("res://Entities/MapEntities/Mom.tscn")
+const Quest = preload("res://Entities/Quest.gd")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 const map_type = 'Home'
@@ -45,23 +46,13 @@ func show_intro_events():
 	var player = Globals.player
 	player.position = $Locations/Start.position
 	player.freeze()
-	
-	var root = get_tree().get_root()
-	var current_scene = SceneManagement.get_current_scene(root)
-	var dialog_window = DialogueWindow.instance()
-	current_scene.add_child(dialog_window)
-	
-	var viewport = get_viewport_rect().size
-	dialog_window.position = viewport / 4
 		
-	dialog_window.show_texts([
+	_show_texts([
 		["Mama", "AIEEEEEEEEEEEEEEEEEEEEEE!!!!"],
 		["Baba", "Unhand her, you brute!"],
 		["Bandit", "Hehehehe! Shut it, old man!"],
-		["Bandit", "The boss wanted her, and I got her!"],
-	])
-	
-	dialog_window.connect("shown_all", self, "_conclude_intro_events")
+		["Bandit", "The boss wanted her, and I got her!"]
+	], "_conclude_intro_events")
 	
 func _conclude_intro_events():
 	
@@ -75,6 +66,24 @@ func _conclude_intro_events():
 func _bandit_reached():
 	Globals.player.unfreeze()
 	
+	_show_texts([
+		Quest.POST_BOSS_CUTSCENES[0][0]
+	])
+	
+func _show_texts(texts, on_complete_callback = null):
+	var root = get_tree().get_root()
+	var current_scene = SceneManagement.get_current_scene(root)
+	var dialog_window = DialogueWindow.instance()
+	current_scene.add_child(dialog_window)
+	
+	var viewport = get_viewport_rect().size
+	dialog_window.position = viewport / 4
+		
+	dialog_window.show_texts(texts)
+	
+	if on_complete_callback != null:
+		dialog_window.connect("shown_all", self, on_complete_callback)
+
 func _spawn(clazz, location):
 	var instance = clazz.instance()
 	self.add_child(instance)
