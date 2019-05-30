@@ -28,8 +28,7 @@ func _ready():
 	if Globals.bosses_defeated == 2:
 		self.remove_child($Dad)
 	
-	if Globals.beat_last_boss:
-		self.remove_child($"Bandit-Intro")
+	if Globals.bosses_defeated >= 1:
 		var mama = _spawn(Mama, $Locations/Mama)
 		Globals.player.z_index = 9
 

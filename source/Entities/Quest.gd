@@ -165,6 +165,38 @@ const BOSS_EVENTS = [
 	}
 ]
 
+# Hints after beating 0, 1, ... 3 bosses as to where to go next
+const POST_BOSS_CUTSCENES = [
+	# No bosses defeated
+	[
+		["Baba", "That ... thing ... headed towards {map1}! You have to save her!"]
+	],
+	# 1 boss defeated
+	[
+		["Baba", "Alhamdulillah, praise Allah, she is safe!"],
+		["Hero", "Yes, it's a big blessing nobody was hurt. What did that thing want, though?"],
+		["Baba", "And who is this mysterious 'Master' it mentioned?"],
+		["Mama", "It said they're summoning a monster from {map2} ..."],
+		["Hero", "..."],
+		["Baba", "It's dangerous, but you should check it out. We can't let monsters just run rampant."],
+		["Mama", "Be careful!"]
+	],
+	# 2 bosses defeated
+	[
+		["Hero", "I found the bandit that kidnapped Mama. It said something about 'The Master', and {map3}."],
+		["Baba", "Hmm ... this 'Master' sounds like no good. It could be a trap. Be careful ... you are in a prayers."],
+		["Hero", "I will."]
+	],
+	# 3 bosses defeated
+	[
+		["Baba", "Alhamdulillah, I'm okay. But you must stop him before it's too late!"],
+		["Baba", "He said something about '{finalmap},' wherever that is."],
+		["Hero", "Ok Baba, I'll find him and put a stop to this."],
+		["Mama", "My daughter, we are so proud of you! You grew up into such a strong warrior, like our Zulu ancestors."],
+		["Hero", "Thanks, Mama."]
+	]
+]
+
 static func add_quest_content_if_applicable(map, variation):
 	var dungeon_type = map.map_type + "/" + variation
 	var dungeon_number = Globals.world_areas.find(dungeon_type)
