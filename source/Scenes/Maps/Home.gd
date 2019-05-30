@@ -64,11 +64,12 @@ func _conclude_intro_events():
 	_bandit.connect("reached_destination",  self, "_bandit_reached")
 	
 func _bandit_reached():
-	Globals.player.unfreeze()
-	
 	_show_texts([
 		Quest.POST_BOSS_CUTSCENES[0][0]
-	])
+	], "_unfreeze_player")
+	
+func _unfreeze_player():
+	Globals.player.unfreeze()
 	
 func _show_texts(texts, on_complete_callback = null):
 	var root = get_tree().get_root()
