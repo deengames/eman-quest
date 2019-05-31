@@ -3,6 +3,8 @@ extends Node2D
 const AlphaFluctuator = preload("res://Scripts/Effects/AlphaFluctuator.gd")
 const DialogueWindow = preload("res://Scenes/UI/DialogueWindow.tscn")
 const FadeAndColour = preload("res://Scripts/Effects/FadeAndColour.gd")
+const HomeMap = preload("res://Scenes/Maps/Home.tscn")
+const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 signal events_done
@@ -88,7 +90,7 @@ func _process_event(dialog_window, event):
 
 func _on_battle_over():
 	if Globals.won_battle:
-		# Should technically go in pre-battle too, but bug is only here
+		# Should technically go in pre-battle too, but, due to a bug, is only here
 		# Can't put this in DialogWindow, events show multiple of them.
 		Globals.is_dialog_open = true
 		
@@ -103,13 +105,20 @@ func _on_battle_over():
 			if yield_event != null:
 				yield(dialog_window, yield_event)
 				
-		Globals.player.unfreeze()
 		Globals.current_map_scene.unfreeze_monsters()
 		current_scene.remove_child(dialog_window)
-		Globals.is_dialog_open = false
 		
 		# Don't repeat events after subsequent battles
 		Globals.disconnect("battle_over", self, "_on_battle_over")
+		
+		# Go home after boss battle events
+		var tree = current_scene.get_tree()
+
+		SceneFadeManager.fade_out(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
+		yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
+		SceneManagement.change_scene_to(tree, HomeMap.instance())
+		SceneFadeManager.fade_in(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
+				
 
 func _create_dialog_window(current_scene):
 	var dialog_window = DialogueWindow.instance()

@@ -21,8 +21,18 @@ func _ready():
 	# It looks like a Godot bug. Ya know what I'm talkin' about. Traced all the places
 	# where we change the player's position, and none of them are incorrect. Somehow,
 	# even when frozen, she just ends up going to the location specified here. ?????
-	if Globals.pre_battle_position != null:
-		player.position = Vector2(Globals.pre_battle_position[0], Globals.pre_battle_position[1])
+	if Globals.is_dialog_open:
+		# Just came back from a boss battle
+		player.position = Vector2($Dad.position.x, $Dad.position.y + Globals.TILE_HEIGHT)
+		# Undo effects from EventManagement._on_battle_over
+		Globals.is_dialog_open = false
+		# Fix bug where we unfreeze here with open dialog windows
+		Globals.unfreeze_player_in_process = false
+		# Trigger cutscene
+		$Dad.show_cutscene_dialog()
+		
+	elif Globals.pre_battle_position != null:
+		player.position = Vector2(Globals.pre_battle_position[0], Globals.pre_battle_position[1])	
 	else:
 		player.position = $Locations/Entrance.position
 	
