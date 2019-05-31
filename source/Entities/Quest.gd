@@ -100,8 +100,7 @@ const BOSS_EVENTS = [
 				["Hero", "Are you okay? Did they hurt you?"],
 				["Mama", "I'm fine. Don't worry about me, you have to stop them!"],
 				["Mama", "I heard them saying they're summoning a monster from {map2} ..."],
-				["Mama", "Go stop them! I'll be okay to get home by myself."],
-				["Hero", "Okay. InshaAllah (God willing), we will catch them."]
+				["Hero", "Okay. InshaAllah (God willing), we will catch them. Let's get you home."]
 			] }
 		]
 	},
