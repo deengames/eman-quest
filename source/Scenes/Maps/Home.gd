@@ -15,7 +15,7 @@ var _bandit
 
 func _ready():
 	var player = Globals.player
-	
+
 	# https://www.pivotaltracker.com/story/show/164848304
 	# Somehow, setting player position doesn't apply unless we change it here.
 	# It looks like a Godot bug. Ya know what I'm talkin' about. Traced all the places
@@ -30,14 +30,10 @@ func _ready():
 		Globals.unfreeze_player_in_process = false
 		# Trigger cutscene
 		$Dad.show_cutscene_dialog()
-		
 	elif Globals.pre_battle_position != null:
 		player.position = Vector2(Globals.pre_battle_position[0], Globals.pre_battle_position[1])	
 	else:
 		player.position = $Locations/Entrance.position
-	
-	if Globals.bosses_defeated == 2:
-		self.remove_child($Dad)
 	
 	if Globals.bosses_defeated >= 1:
 		var mama = _spawn(Mama, $Locations/Mama)
@@ -85,7 +81,7 @@ func _show_texts(texts, on_complete_callback = null):
 	var root = get_tree().get_root()
 	var current_scene = SceneManagement.get_current_scene(root)
 	var dialog_window = DialogueWindow.instance()
-	current_scene.add_child(dialog_window)
+	current_scene.get_node("CanvasLayer").add_child(dialog_window)
 	
 	var viewport = get_viewport_rect().size
 	dialog_window.position = viewport / 4
