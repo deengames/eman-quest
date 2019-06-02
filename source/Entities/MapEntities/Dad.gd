@@ -4,8 +4,10 @@ const DialogueWindow = preload("res://Scenes/UI/DialogueWindow.tscn")
 const Quest = preload("res://Entities/Quest.gd")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
+var can_talk = true
+
 func _on_Area2D_body_entered(body):
-	if body == Globals.player:
+	if can_talk and body == Globals.player:
 		show_cutscene_dialog()
 
 func show_cutscene_dialog():

@@ -336,6 +336,11 @@ func _spawn_attached_npcs(boss):
 		npc_instance.name = npc
 		self.add_child(npc_instance)
 		
+		# https://trello.com/c/6Ok0apkN/59-you-can-talk-to-dad-when-hes-kidnapped-what
+		# Baba can't talk in-dungeon to say cutscene stuff
+		if npc == "Baba":
+			npc_instance.can_talk = false
+		
 		var npc_position = _find_spot_near_boss(boss, all_npcs)
 		all_npcs.append(npc_position)
 		npc_instance.position = Vector2(npc_position.x * Globals.TILE_WIDTH, npc_position.y * Globals.TILE_HEIGHT)
