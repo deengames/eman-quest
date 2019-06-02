@@ -70,6 +70,8 @@ func _conclude_intro_events():
 	_bandit.connect("reached_destination",  self, "_bandit_reached")
 	
 func _bandit_reached():
+	self.remove_child(_bandit)
+	
 	_show_texts([
 		Quest.POST_BOSS_CUTSCENES[0][0]
 	], "_unfreeze_player")
