@@ -14,7 +14,7 @@ func show_cutscene_dialog():
 	var root = get_tree().get_root()
 	var current_scene = SceneManagement.get_current_scene(root)
 	var dialog_window = DialogueWindow.instance()
-	current_scene.add_child(dialog_window)
+	current_scene.get_node("CanvasLayer").add_child(dialog_window)
 	
 	var viewport = get_viewport_rect().size
 	dialog_window.position = viewport / 4

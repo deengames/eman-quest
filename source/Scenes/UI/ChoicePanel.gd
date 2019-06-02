@@ -6,7 +6,7 @@ signal on_no
 func show_text(text, confirm_text = "Yes", cancel_text = "No"):
 	# Doesn't take into account camera
 	var viewport = get_viewport_rect().size
-	self.position = viewport / 4
+	self.position = viewport / 2
 	self.z_index = 999
 	
 	$Label.text = text

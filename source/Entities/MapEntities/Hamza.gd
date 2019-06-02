@@ -32,7 +32,7 @@ func _on_Area2D_body_entered(body):
 		
 		var dialog_window = DialogueWindow.instance()
 		
-		current_scene.add_child(dialog_window)
+		current_scene.get_node("CanvasLayer").add_child(dialog_window)
 		var viewport = get_viewport_rect().size
 		dialog_window.position = viewport / 4
 	
@@ -45,7 +45,7 @@ func _on_Area2D_body_entered(body):
 		dialog_window.queue_free()
 		
 		var choice_panel = ChoicePanel.instance()
-		current_scene.add_child(choice_panel)
+		current_scene.get_node("CanvasLayer").add_child(choice_panel)
 		
 		choice_panel.connect("on_yes", self, "_train_with_hamza")
 		choice_panel.connect("on_no", self, "_unfreeze_player")

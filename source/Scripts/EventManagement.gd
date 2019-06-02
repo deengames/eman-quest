@@ -35,7 +35,7 @@ func show_prebattle_events(monster):
 				yield(dialog_window, yield_event)
 			
 		Globals.player.unfreeze()
-		current_scene.remove_child(dialog_window)
+		current_scene.get_node("CanvasLayer").remove_child(dialog_window)
 		self.emit_signal("events_done", monster)
 	
 	if monster.events.has("post-fight"):
@@ -106,7 +106,7 @@ func _on_battle_over():
 				yield(dialog_window, yield_event)
 				
 		Globals.current_map_scene.unfreeze_monsters()
-		current_scene.remove_child(dialog_window)
+		current_scene.get_node("CanvasLayer").remove_child(dialog_window)
 		
 		# Don't repeat events after subsequent battles
 		Globals.disconnect("battle_over", self, "_on_battle_over")
@@ -122,5 +122,9 @@ func _on_battle_over():
 
 func _create_dialog_window(current_scene):
 	var dialog_window = DialogueWindow.instance()
-	current_scene.add_child(dialog_window)
+	current_scene.get_node("CanvasLayer").add_child(dialog_window)
+	
+	var viewport = current_scene.get_viewport_rect().size
+	dialog_window.position = viewport / 4
+	
 	return dialog_window

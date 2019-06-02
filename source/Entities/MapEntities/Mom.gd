@@ -21,7 +21,7 @@ func _show_post_game_events():
 	var root = get_tree().get_root()
 	var current_scene = SceneManagement.get_current_scene(root)
 	var dialog_window = DialogueWindow.instance()
-	current_scene.add_child(dialog_window)
+	current_scene.get_node("CanvasLayer").add_child(dialog_window)
 
 	dialog_window.show_texts([
 		["Mama", "You did it! You beat him! My child ..."],

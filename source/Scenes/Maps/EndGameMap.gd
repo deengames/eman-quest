@@ -195,5 +195,5 @@ func _jinn_charges():
 
 func _create_dialog_window(current_scene):
 	var dialog_window = DialogueWindow.instance()
-	current_scene.add_child(dialog_window)
+	current_scene.get_node("CanvasLayer").add_child(dialog_window)
 	return dialog_window
