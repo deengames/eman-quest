@@ -1,7 +1,13 @@
 extends Node2D
 
 const AreaSymbols = preload("res://Scenes/Maps/AreaSymbols.tscn")
+const AreaType = preload("res://Scripts/Enums/AreaType.gd")
+const EndGameMap = preload("res://Scenes/Maps/EndGameMap.tscn")
+const HomeMap = preload("res://Scenes/Maps/Home.tscn")
+const MapDestination = preload("res://Entities/MapDestination.gd")
 const Quest = preload("res://Entities/Quest.gd")
+const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
+const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 const GLOBAL_FONT = preload("res://Theme/Default-24px.tres")
 
@@ -26,7 +32,7 @@ func _ready():
 		var node_name = variation + " " + type
 		
 		var node = _get_by_name(children, node_name.replace(" ", "")).duplicate()
-		node.name = node_name
+		node.name = type + "-" + variation # can't use "/" so use "-" instead, needed on click
 		_move_to_position(node, next)
 		add_child(node)
 		_add_label(node, node_name)
@@ -69,7 +75,7 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 	if (event is InputEventMouseButton and event.pressed) or (OS.has_feature("Android") and event is InputEventMouseMotion):
 		var clicked_on = _get_clicked_on(event.position)
 		if clicked_on != null:
-			print("Clicked on " + clicked_on)
+			_teleport_to(clicked_on)
 
 func _get_clicked_on(position):
 	for child in self.get_children():
@@ -80,3 +86,38 @@ func _get_clicked_on(position):
 				return child.get_name()
 				
 	return null
+
+# Area: SlimeForest, Home, etc.
+func _teleport_to(destination):
+	######## for testing only
+	Globals.current_map = HomeMap.instance()
+	
+	var tree = get_tree()
+	
+	if destination == "Home" or destination == "EndGame":
+		# 100% copy/paste from MapWarp.gd
+		var static_map
+		if destination == "Home":
+			static_map = HomeMap.instance()
+		else:
+			static_map == EndGameMap.instance()
+		
+		SceneFadeManager.fade_out(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
+		yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
+		SceneManagement.change_scene_to(tree, static_map)
+	else:
+		# Find the transition from the overworld. Needed to position.
+		destination = destination.replace("-", "/")
+		
+		var maps = Globals.maps[destination]
+		for submap in maps:
+			if submap.area_type == AreaType.ENTRANCE:
+				for transition in submap.transitions:
+					if transition.target_map == "Overworld":
+						# Swap coordinates. This is a transition BACK to overworld.
+						# Make it a transition INTO this position. Swap my/target positions.
+						# As for the -1; PopulatedMapScene adds +1 to y to fix stuff.
+						var copy = MapDestination.new(null, null, Vector2(transition.my_position.x, transition.my_position.y - 1), null)
+						Globals.transition_used = copy
+						SceneManagement.change_map_to(tree, destination)
+						return
