@@ -107,6 +107,7 @@ func _physics_process(delta):
 				move_and_slide(velocity)
 			elif self.test_move(Transform2D(0, self.position), velocity):
 				self._destination = self.position
+				$AnimationPlayer.stop()
 				
 func _on_Area2D_body_entered(body):
 	if not self._frozen:
