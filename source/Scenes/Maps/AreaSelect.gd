@@ -14,6 +14,7 @@ func _ready():
 	
 	# Duplicate cause otherwise, error: can't add when parent is already something else
 	var home = _get_by_name(children, "Home").duplicate()
+	home.name = "Home"
 	add_child(home)
 	_add_label(home, "Home")
 	
@@ -25,6 +26,7 @@ func _ready():
 		var node_name = variation + " " + type
 		
 		var node = _get_by_name(children, node_name.replace(" ", "")).duplicate()
+		node.name = node_name
 		_move_to_position(node, next)
 		add_child(node)
 		_add_label(node, node_name)
@@ -32,6 +34,7 @@ func _ready():
 	
 	if true:#Globals.bosses_defeated == 3:
 		var end_game = _get_by_name(children, "EndGame").duplicate()
+		end_game.name = "EndGame"
 		_move_to_position(end_game, 4)
 		_add_label(end_game, Quest.FINAL_MAP_NAME)
 		add_child(end_game)
@@ -61,3 +64,19 @@ func _add_label(node, caption):
 	label.align = Label.ALIGN_CENTER
 	label.margin_top = node.position.y + (3 * Globals.TILE_HEIGHT)
 	add_child(label)
+
+func _on_Area2D_input_event(viewport, event, shape_idx):
+	if (event is InputEventMouseButton and event.pressed) or (OS.has_feature("Android") and event is InputEventMouseMotion):
+		var clicked_on = _get_clicked_on(event.position)
+		if clicked_on != null:
+			print("Clicked on " + clicked_on)
+
+func _get_clicked_on(position):
+	for child in self.get_children():
+		if child is TileMap:
+			if position.x >= child.position.x and position.y >= child.position.y and \
+			position.x <= child.position.x + (3 * Globals.TILE_WIDTH) and \
+			position.y <= child.position.y + (3 * Globals.TILE_HEIGHT):
+				return child.get_name()
+				
+	return null
