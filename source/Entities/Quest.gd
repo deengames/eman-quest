@@ -191,7 +191,7 @@ const POST_BOSS_CUTSCENES = [
 		["Baba", "Alhamdulillah, I'm okay. But you must stop him before it's too late!"],
 		["Baba", "He said something about '{finalmap},' wherever that is."],
 		["Hero", "Ok Baba, I'll find him and put a stop to this."],
-		["Mama", "My daughter, we are so proud of you! You grew up into such a strong warrior, like our Zulu ancestors."],
+		["Mama", "My daughter, we are so proud of you! You grew up into such a strong warrior, like our Zulu guardian ancestors."],
 		["Hero", "Thanks, Mama."]
 	]
 ]
