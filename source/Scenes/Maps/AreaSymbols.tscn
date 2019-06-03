@@ -1,0 +1,195 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Tilesets/Indoors.tres" type="TileSet" id=1]
+[ext_resource path="res://Tilesets/Overworld.tres" type="TileSet" id=2]
+[ext_resource path="res://Tilesets/FrostForest.tres" type="TileSet" id=3]
+[ext_resource path="res://Tilesets/DeathForest.tres" type="TileSet" id=4]
+[ext_resource path="res://Tilesets/RiverCave.tres" type="TileSet" id=5]
+[ext_resource path="res://Tilesets/LavaCave.tres" type="TileSet" id=6]
+[ext_resource path="res://Tilesets/CastleDungeon.tres" type="TileSet" id=7]
+[ext_resource path="res://Tilesets/DesertDungeon.tres" type="TileSet" id=8]
+[ext_resource path="res://Tilesets/Cliffs.tres" type="TileSet" id=9]
+
+[node name="Node2D" type="Node2D" index="0"]
+
+[node name="Home" type="TileMap" parent="." index="0"]
+
+mode = 0
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 64, 64 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray( 0, 1, 655360, 1, 1, 589825, 2, 1, 655361, 65536, 1, 524290, 65537, 1, 524289, 65538, 1, 524288, 131072, 1, 720896, 131073, 1, 458753, 131074, 1, 720897 )
+
+[node name="SlimeForest" type="TileMap" parent="." index="1"]
+
+mode = 0
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 64, 64 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray( 0, 0, 0, 1, 1, 0, 2, 5, 0, 65536, 5, 0, 65537, 1, 0, 65538, 1, 0, 131072, 1, 0, 131073, 1, 0, 131074, 0, 0 )
+
+[node name="FrostForest" type="TileMap" parent="." index="2"]
+
+mode = 0
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 64, 64 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray( 0, 2, 0, 1, 1, 0, 2, 2, 0, 65536, 0, 0, 65537, 1, 0, 65538, 0, 0, 131072, 0, 0, 131073, 1, 0, 131074, 0, 0 )
+
+[node name="DeathForest" type="TileMap" parent="." index="3"]
+
+mode = 0
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 64, 64 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray( 0, 1, 0, 1, 0, 0, 2, 2, 0, 65536, 1, 0, 65537, 1, 0, 65538, 0, 0, 131072, 0, 0, 131073, 1, 0, 131074, 0, 0 )
+
+[node name="RiverCave" type="TileMap" parent="." index="4"]
+
+mode = 0
+tile_set = ExtResource( 5 )
+cell_size = Vector2( 64, 64 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray( 0, 0, 458755, 1, 0, 589825, 2, 0, 458756, 65536, 0, 524290, 65537, 0, 0, 65538, 0, 524288, 131072, 0, 524291, 131073, 0, 458753, 131074, 0, 524292 )
+
+[node name="LavaCave" type="TileMap" parent="." index="5"]
+
+mode = 0
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 64, 64 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray( 0, 0, 458755, 1, 0, 589825, 2, 0, 458756, 65536, 0, 524290, 65537, 0, 0, 65538, 0, 524288, 131072, 0, 524291, 131073, 0, 458753, 131074, 0, 524292 )
+
+[node name="CastleDungeon" type="TileMap" parent="." index="6"]
+
+mode = 0
+tile_set = ExtResource( 7 )
+cell_size = Vector2( 64, 64 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray( 0, 3, 65538, 1, 3, 65538, 2, 3, 65538, 65536, 3, 65538, 65537, 1, 0, 65538, 3, 65538, 131072, 4, 65537, 131073, 0, 0, 131074, 4, 65537 )
+
+[node name="DesertDungeon" type="TileMap" parent="." index="7"]
+
+mode = 0
+tile_set = ExtResource( 8 )
+cell_size = Vector2( 64, 64 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray( 0, 4, 2, 1, 4, 2, 2, 4, 2, 65536, 4, 2, 65537, 1, 0, 65538, 4, 2, 131072, 4, 2, 131073, 0, 0, 131074, 4, 2 )
+
+[node name="EndGame" type="TileMap" parent="." index="8"]
+
+mode = 0
+tile_set = ExtResource( 9 )
+cell_size = Vector2( 64, 64 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray( 0, 0, 0, 1, 0, 1, 2, 0, 2, 65536, 0, 131072, 65537, 0, 131073, 65538, 0, 131074, 131072, 1, 262145, 131073, 1, 262145, 131074, 1, 262145 )
+
+
