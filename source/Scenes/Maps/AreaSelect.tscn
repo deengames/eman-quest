@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/Maps/AreaSelect.gd" type="Script" id=1]
+[ext_resource path="res://assets/images/space-background.png" type="Texture" id=2]
 
 [node name="Node2D" type="Node2D" index="0"]
 
@@ -25,5 +26,11 @@ collision_mask = 1
 occluder_light_mask = 1
 format = 1
 tile_data = PoolIntArray(  )
+
+[node name="Sprite" type="Sprite" parent="." index="1"]
+
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset" ]
 
 
