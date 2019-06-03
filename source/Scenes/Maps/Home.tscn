@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/Maps/Home.gd" type="Script" id=1]
 [ext_resource path="res://Tilesets/Indoors.tres" type="TileSet" id=2]
@@ -10,6 +10,11 @@
 
 custom_solver_bias = 0.0
 extents = Vector2( 5, 64 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 64, 86 )
 
 [node name="Node2D" type="Node2D" index="0"]
 
@@ -85,16 +90,22 @@ constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/StaticBody2D" index="0"]
+[node name="Handrail1" type="CollisionShape2D" parent="Objects/StaticBody2D" index="0"]
 
 position = Vector2( 778, 127 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Objects/StaticBody2D" index="1"]
+[node name="Handrail2" type="CollisionShape2D" parent="Objects/StaticBody2D" index="1"]
 
 position = Vector2( 886, 127 )
 shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Bed" type="CollisionShape2D" parent="Objects/StaticBody2D" index="2"]
+
+position = Vector2( 126, 156 )
+shape = SubResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Dad" parent="." index="3" instance=ExtResource( 3 )]
