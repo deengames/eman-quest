@@ -54,6 +54,7 @@ _sections_unfolded = [ "Offset" ]
 [node name="MonsterControls" type="Node2D" parent="." index="1"]
 
 position = Vector2( 708, 192 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="MonsterSprite" type="Sprite" parent="MonsterControls" index="0"]
 
@@ -66,7 +67,6 @@ _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [node name="MonsterHealth" type="TextureProgress" parent="MonsterControls" index="1"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -94,7 +94,7 @@ texture_progress = ExtResource( 4 )
 radial_fill_degrees = 360.0
 radial_center_offset = Vector2( 0, 0 )
 nine_patch_stretch = false
-_sections_unfolded = [ "Focus", "Grow Direction", "Hint", "Margin", "Rect", "Textures" ]
+_sections_unfolded = [ "Focus", "Grow Direction", "Hint", "Margin", "Rect" ]
 
 [node name="Label" type="Label" parent="MonsterControls/MonsterHealth" index="0"]
 
@@ -119,7 +119,7 @@ align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Theme", "custom_colors", "custom_constants", "custom_fonts" ]
+_sections_unfolded = [ "Margin", "Theme", "custom_colors", "custom_constants", "custom_fonts" ]
 
 [node name="NameLabel" type="Label" parent="MonsterControls" index="2"]
 
@@ -150,11 +150,12 @@ _sections_unfolded = [ "custom_colors", "custom_constants" ]
 
 [node name="PlayerControls" type="Node2D" parent="." index="2"]
 
-position = Vector2( 0, 220 )
+position = Vector2( 0, 192 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="PlayerSprite" type="Sprite" parent="PlayerControls" index="0"]
 
-position = Vector2( 11.718, -14.4058 )
+position = Vector2( 10, 39 )
 texture = ExtResource( 5 )
 centered = false
 region_enabled = true
@@ -167,10 +168,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 92.0
-margin_top = 19.0
-margin_right = 242.0
-margin_bottom = 51.0
+margin_left = 90.0
+margin_top = 59.0
+margin_right = 240.0
+margin_bottom = 91.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
