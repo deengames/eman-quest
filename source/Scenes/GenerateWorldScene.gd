@@ -77,6 +77,8 @@ func _generate_world():
 		"village_name": self._generate_village_name(),
 		"boss_type": self._generate_boss_type()
 	}
+	
+	get_tree().change_scene("res://Scenes/Maps/AreaSelect.tscn")
 
 func _generate_subarea_maps(variation, generator_class, num_submaps):
 	var layout = MapLayoutGenerator.generate_layout(num_submaps)
