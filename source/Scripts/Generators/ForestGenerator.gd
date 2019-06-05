@@ -8,6 +8,7 @@ const MapDestination = preload("res://Entities/MapDestination.gd")
 const AreaType = preload("res://Scripts/Enums/AreaType.gd")
 const SpotFinder = preload("res://Scripts/Maps/SpotFinder.gd")
 const StatType = preload("res://Scripts/Enums/StatType.gd")
+const TransitionDistanceChecker = preload("res://Scripts/TransitionDistanceChecker.gd")
 const TreasureChest = preload("res://Entities/TreasureChest.gd")
 const TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 
@@ -112,7 +113,7 @@ func generate(submap, transitions, variation_name):
 	self._tree_map = tile_data[1]
 	
 	map.transitions = transitions
-	map.treasure_chests = self._generate_treasure_chests()
+	map.treasure_chests = self._generate_treasure_chests(transitions)
 	
 	if submap.area_type == AreaType.BOSS:
 		map.bosses = self._generate_boss(variation_name)
@@ -250,7 +251,7 @@ func _generate_clearings(path_points, dirt_map, tree_map):
 		
 		clearings_left -= 1
 
-func _generate_treasure_chests():
+func _generate_treasure_chests(transitions):
 	var num_chests = Globals.randint(_MIN_CHESTS, _MAX_CHESTS)
 	var chests = []
 	var chests_coordinates = []
@@ -260,15 +261,16 @@ func _generate_treasure_chests():
 	while num_chests > 0:
 		var spot = SpotFinder.find_empty_spot(map_width, map_height,
 			self._ground_map, self._tree_map, chests_coordinates)
-			
-		var type = types[randi() % len(types)]
-		var stat = stats[type]
-		var item = EquipmentGenerator.generate(type, stat)
-		var treasure = TreasureChest.new()
-		treasure.initialize(spot[0], spot[1], item)
-		chests.append(treasure)
-		chests_coordinates.append(spot)
-		num_chests -= 1
+		
+		if TransitionDistanceChecker.is_distant_from_transitions(transitions, spot):
+			var type = types[randi() % len(types)]
+			var stat = stats[type]
+			var item = EquipmentGenerator.generate(type, stat)
+			var treasure = TreasureChest.new()
+			treasure.initialize(spot[0], spot[1], item)
+			chests.append(treasure)
+			chests_coordinates.append(spot)
+			num_chests -= 1
 	
 	return chests
 

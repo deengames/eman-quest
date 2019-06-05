@@ -8,6 +8,7 @@ const MapDestination = preload("res://Entities/MapDestination.gd")
 const AreaType = preload("res://Scripts/Enums/AreaType.gd")
 const SpotFinder = preload("res://Scripts/Maps/SpotFinder.gd")
 const StatType = preload("res://Scripts/Enums/StatType.gd")
+const TransitionDistanceChecker = preload("res://Scripts/TransitionDistanceChecker.gd")
 const TreasureChest = preload("res://Entities/TreasureChest.gd")
 const TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 
@@ -91,7 +92,7 @@ func generate(submap, transitions, variation_name):
 	self._ground_map = tile_data[0]
 
 	map.transitions = transitions
-	map.treasure_chests = self._generate_treasure_chests()
+	map.treasure_chests = self._generate_treasure_chests(transitions)
 
 	if submap.area_type == AreaType.BOSS:
 		map.bosses = self._generate_boss(variation_name)
@@ -351,7 +352,7 @@ func _generate_path(point1, point2, ground_map, decoration_map):
 		if ground_map.get_at(from_x, from_y - 2) == "Ceiling":
 			self._set_tile([from_x, from_y - 2], "Wall", ground_map)
 
-func _generate_treasure_chests():
+func _generate_treasure_chests(transitions):
 	var num_chests = Globals.randint(_NUM_CHESTS[0], _NUM_CHESTS[1])
 	var chests = []
 	var chests_coordinates = []
@@ -366,15 +367,16 @@ func _generate_treasure_chests():
 	while num_chests > 0:
 		var spot = SpotFinder.find_empty_spot(map_width, map_height,
 			self._ground_map, empty_map, chests_coordinates)
-
-		var type = types[randi() % len(types)]
-		var stat = stats[type]
-		var item = EquipmentGenerator.generate(type, stat)
-		var treasure = TreasureChest.new()
-		treasure.initialize(spot[0], spot[1], item)
-		chests.append(treasure)
-		chests_coordinates.append(spot)
-		num_chests -= 1
+		
+		if TransitionDistanceChecker.is_distant_from_transitions(transitions, spot):
+			var type = types[randi() % len(types)]
+			var stat = stats[type]
+			var item = EquipmentGenerator.generate(type, stat)
+			var treasure = TreasureChest.new()
+			treasure.initialize(spot[0], spot[1], item)
+			chests.append(treasure)
+			chests_coordinates.append(spot)
+			num_chests -= 1
 
 	return chests
 
