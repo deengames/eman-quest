@@ -38,6 +38,7 @@ var seed_value
 var bosses_defeated = 0
 var showed_final_events = false
 var beat_last_boss = false
+var show_battle_tutorial = true
 # End: persist
 ####
 

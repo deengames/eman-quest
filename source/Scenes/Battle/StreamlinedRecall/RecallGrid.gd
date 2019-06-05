@@ -5,6 +5,7 @@ const RecallTile = preload("res://Scenes/Battle/StreamlinedRecall/RecallTile.tsc
 signal picked_all_tiles
 signal correct_selected
 signal incorrect_selected
+signal showed_tiles
 
 const _WIDTH_IN_TILES = 7 # please extend width, not height
 const _HEIGHT_IN_TILES = 7
@@ -28,7 +29,8 @@ func _ready():
 			var tile = RecallTile.instance()
 			tile.position = Vector2(x * _TILE_WIDTH, y * _TILE_HEIGHT)
 			tile.name = "Tile" + str(x) + "-" + str(y)
-			tile.connect("correct_selected", self, "_on_correct_tile_selected")
+			# Pass the coordinates of the tile, which is used to remove tutorial hands
+			tile.connect("correct_selected", self, "_on_correct_tile_selected", [Vector2(x, y)])
 			tile.connect("incorrect_selected", self, "_on_incorrect_tile_selected")
 			
 			self.add_child(tile)
@@ -76,10 +78,12 @@ func _tile_done_hiding():
 	if ready_tiles == self.num_tiles: # As many tiles as expected, report done hiding
 		for tile in self._tile_controls:
 			tile.is_selectable = true
+	
+	self.emit_signal("showed_tiles")
 
-func _on_correct_tile_selected():
+func _on_correct_tile_selected(tile_coordinates):
 	self.selected_right += 1
-	self.emit_signal("correct_selected")
+	self.emit_signal("correct_selected", tile_coordinates)
 	self._emit_if_done()
 	
 func _on_incorrect_tile_selected():

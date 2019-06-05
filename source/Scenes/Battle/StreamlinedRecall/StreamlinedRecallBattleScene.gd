@@ -1,7 +1,9 @@
 extends Node2D
 
 const BattleResolution = preload("res://Scripts/Battle/BattleResolution.gd")
+const ClickHereHand = preload("res://Scenes/UI/ClickHereHand.tscn")
 const MonsterScaler = preload("res://Scripts/Battle/MonsterScaler.gd")
+const RecallGrid = preload("res://Scenes/Battle/StreamlinedRecall/RecallGrid.gd")
 
 const _MULTIPLIER_BASE = 1.25 # five attacks = 8x (1 + 1.25 + 1.25^2 + ... + 1.25^n)
 const _MONSTER_NUM_TILES = 4
@@ -30,6 +32,10 @@ var _last_action_picked = "" # eg. attack
 var _times_last_action_picked = 0 # eg. 5 consecutive times
 
 var _is_players_turn = false
+
+# Tutorial stuff
+var _correct_tiles = []
+var _tutorial_hands = []
 
 func _ready():
 	
@@ -64,13 +70,14 @@ func _ready():
 	$MonsterControls/MonsterSprite.texture = load("res://assets/images/monsters/" + image_name + ".png")
 	
 	$MonsterControls/NameLabel.text = self._monster_data["type"] + " (level " + str(self._monster_data["level"]) + ")"
-		
+	
 	$PlayerControls/PlayerHealth.max_value = self._player.max_health
 	
 	$RecallGrid.battle_player = self._player
 	$RecallGrid.connect("picked_all_tiles", self, "_on_picked_all_tiles")
 	$RecallGrid.connect("correct_selected", self, "_on_correct_selected")
 	$RecallGrid.connect("incorrect_selected", self, "_on_incorrect_selected")
+	$RecallGrid.connect("showed_tiles", self, "_grid_showed_tiles")
 	
 	if not Features.is_enabled("defend action"):
 		$ActionsPanel/Controls/DefendButton.visible = false
@@ -135,11 +142,6 @@ func _update_health_displays():
 func _on_picked_all_tiles():
 	var num_right = $RecallGrid.selected_right
 	
-#	if Features.is_enabled("multiplier_on_num_right"):
-#		self._multiplier = pow(_MULTIPLIER_BASE, num_right)
-#	else:
-#		self._multiplier = 1
-		
 	$RecallGrid.make_unselectable()
 	self._disable_unusable_action_buttons()
 	
@@ -262,13 +264,30 @@ func _start_next_turn():
 		(not self._is_players_turn and Features.is_enabled("streamlined battles: enemy triggers"))
 	):
 		# Execute
-		var tiles = $RecallGrid.pick_tiles(num_tiles)
-		$RecallGrid.show_tiles(tiles)
+		self._correct_tiles = $RecallGrid.pick_tiles(num_tiles)
+		$RecallGrid.show_tiles(self._correct_tiles)
 	# Monsters turn and streamlined triggers = off
 	elif not self._is_players_turn and not Features.is_enabled("streamlined battles: enemy triggers"):
 		self._resolve_monster_turn()
 
-func _on_correct_selected():
+func _grid_showed_tiles():
+	if Globals.show_battle_tutorial:
+		Globals.show_battle_tutorial = false
+		for tile_coordinates in self._correct_tiles:
+			_add_tutorial_for(tile_coordinates)
+
+func _add_tutorial_for(tile_coordinates):
+	var hand = ClickHereHand.instance()
+	self._tutorial_hands.append(hand)
+	add_child(hand)
+	# Offset by 1/2 tile because the hand is centered at (0, 0)
+	hand.position.x = $RecallGrid.position.x + \
+		(tile_coordinates.x * RecallGrid._TILE_WIDTH) + \
+		(RecallGrid._TILE_WIDTH / 2)
+	hand.position.y = $RecallGrid.position.y + tile_coordinates.y * RecallGrid._TILE_HEIGHT
+	hand.tile_coordinates = tile_coordinates
+
+func _on_correct_selected(tile_coordinates):
 	self._actions_left += 1
 	# Updates actions-left
 	self._update_health_displays()
@@ -278,6 +297,12 @@ func _on_correct_selected():
 		Globals.player_data.add_tech_point()
 		self._update_tech_points_display()
 		self._disable_unusable_skills()
+	
+	# Tutorial: remove hand on clicked tile
+	for hand in _tutorial_hands:
+		if hand.tile_coordinates == tile_coordinates:
+			_tutorial_hands.erase(hand)
+			remove_child(hand)
 
 func _on_incorrect_selected():
 	self._correct_consecutive_tiles_picked = 0
