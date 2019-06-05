@@ -6,7 +6,9 @@ const EndGameMap = preload("res://Scenes/Maps/EndGameMap.tscn")
 const EventManagement = preload("res://Scripts/EventManagement.gd")
 const HomeMap = preload("res://Scenes/Maps/Home.tscn")
 const MapNameLabel = preload("res://Scenes/UI/MapNameLabel.tscn")
+const Player = preload("res://Entities/Player.tscn")
 const PopulatedMapScene = preload("res://Scenes/PopulatedMapScene.tscn")
+const ReferenceChecker = preload("res://Scripts/ReferenceChecker.gd")
 const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
 const StreamlinedRecallBattleScene = preload("res://Scenes/Battle/StreamlinedRecall/StreamlinedRecallBattleScene.tscn")
 const StaticMap = preload("res://Scenes/Maps/StaticMap.gd")
@@ -14,6 +16,18 @@ const TweenHelper = preload("res://Scripts/TweenHelper.gd")
 
 # Polymorphic. Target can be a type (eg. "Forest/Death") or a submap.
 static func change_map_to(tree, target):
+	### I ripped out the overworld. Here's a hack: if we're going there, go to the
+	# area selection screen instead. It's bad, but saves me from reworking kilos
+	# of code to rewire how this all works. Yes, there's some dead code left behind.
+	###
+	if typeof(target) == TYPE_STRING and target == "Overworld":
+		SceneFadeManager.fade_out(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
+		yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
+		tree.change_scene("res://Scenes/Maps/AreaSelect.tscn")
+		# Above disposes player, hack Globals.player to be a non-disposed instance
+		Player.instance()
+		return
+		
 	# battle concluded on final map, which was GCed (null).
 	# Transition_used == null is used to allow us to exit back to the world map from the final map
 	if Globals.current_map_type == "Final" and Globals.transition_used == null:
@@ -81,7 +95,11 @@ static func change_map_to(tree, target):
 				state.resume()
 
 		# pre_battle_position null check: non-null when player is previously freed
-		if Globals.player != null and Globals.pre_battle_position == null:
+		# For the latter two conditions: adding area selection map broke here because
+		# instance is disposed or StaticBody2D
+		# https://trello.com/c/YSlZGwjL/8-area-selection-world-map
+		if Globals.player != null and not ReferenceChecker.is_previously_freed(Globals.player) and \
+		 'freeze' in Globals.player and Globals.pre_battle_position == null:
 			Globals.player.freeze()
 		
 		if Globals.is_testing == false:
