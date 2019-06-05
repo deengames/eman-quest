@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scenes/Maps/EndGameMap.gd" type="Script" id=1]
 [ext_resource path="res://Tilesets/Cliffs.tres" type="TileSet" id=2]
@@ -11,7 +11,17 @@
 custom_solver_bias = 0.0
 extents = Vector2( 80, 32 )
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 160, 32 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 32, 278 )
+
+[node name="Node2D" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -38,6 +48,7 @@ _sections_unfolded = [ "Material" ]
 
 [node name="FinalEventsTrigger" type="Area2D" parent="." index="1"]
 
+editor/display_folded = true
 position = Vector2( 735.549, 532.804 )
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -64,6 +75,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Locations" type="Node2D" parent="." index="4"]
 
+editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -94,6 +106,28 @@ offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="Block Player" type="StaticBody2D" parent="." index="6"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="Block1" type="CollisionShape2D" parent="Block Player" index="0"]
+
+position = Vector2( 864, 0 )
+shape = SubResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Block2" type="CollisionShape2D" parent="Block Player" index="1"]
+
+position = Vector2( 1056, 278 )
+shape = SubResource( 3 )
+_sections_unfolded = [ "Transform" ]
 
 [connection signal="body_entered" from="FinalEventsTrigger" to="." method="_on_FinalEventsTrigger_body_entered"]
 
