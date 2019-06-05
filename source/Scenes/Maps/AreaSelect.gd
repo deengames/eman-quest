@@ -89,9 +89,6 @@ func _get_clicked_on(position):
 
 # Area: SlimeForest, Home, etc.
 func _teleport_to(destination):
-	######## for testing only
-	Globals.current_map = HomeMap.instance()
-	
 	var tree = get_tree()
 	
 	if destination == "Home" or destination == "EndGame":
@@ -100,7 +97,7 @@ func _teleport_to(destination):
 		if destination == "Home":
 			static_map = HomeMap.instance()
 		else:
-			static_map == EndGameMap.instance()
+			static_map = EndGameMap.instance()
 		
 		SceneFadeManager.fade_out(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
 		yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')

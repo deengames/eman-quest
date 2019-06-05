@@ -81,7 +81,8 @@ static func change_map_to(tree, target):
 		
 		var show_map_name = (
 			# Globals.current_map is ull on new game
-			Globals.current_map == null or 
+			Globals.current_map == null or
+			ReferenceChecker.is_previously_freed(Globals.current_map) or
 			# change map type, not change to submap of the same type
 			Globals.current_map.map_type != target_areamap.map_type)
 			
