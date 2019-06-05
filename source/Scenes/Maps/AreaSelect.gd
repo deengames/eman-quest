@@ -38,12 +38,11 @@ func _ready():
 		_add_label(node, node_name)
 		next += 1
 	
-	if true:#Globals.bosses_defeated == 3:
-		var end_game = _get_by_name(children, "EndGame").duplicate()
-		end_game.name = "EndGame"
-		_move_to_position(end_game, 4)
-		_add_label(end_game, Quest.FINAL_MAP_NAME)
-		add_child(end_game)
+	var end_game = _get_by_name(children, "EndGame").duplicate()
+	end_game.name = "EndGame"
+	_move_to_position(end_game, 4)
+	_add_label(end_game, Quest.FINAL_MAP_NAME)
+	add_child(end_game)
 
 func _get_by_name(array, target):
 	for item in array:
