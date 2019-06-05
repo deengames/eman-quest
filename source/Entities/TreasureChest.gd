@@ -27,7 +27,7 @@ func initialize_from(data):
 	self.position.x = data.tile_x * Globals.TILE_WIDTH
 	self.position.y = data.tile_y * Globals.TILE_HEIGHT
 	if data.is_opened:
-		self._consume()
+		self._destroy()
 
 func to_dict():
 	return {
@@ -56,12 +56,17 @@ func open():
 		window.set_text("Found a(n) " + self.contents.equipment_name)
 		get_tree().current_scene.get_node("UI").add_child(window)
 		window.popup_centered()
+		
+		window.connect("popup_hide", self, "_destroy")
 
 func _consume():
 	self.is_opened = true
 	if self.data != null:
 		self.data.is_opened = true
 	self._appear_open()
+
+func _destroy():
+	queue_free()
 
 func _appear_open():
 	self.region_rect.position.x = _CHEST_OPEN_X
