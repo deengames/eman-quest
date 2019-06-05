@@ -33,8 +33,13 @@ func generate_monsters(map):
 			var num_monsters = Globals.randint(NUM_MONSTERS[0], NUM_MONSTERS[1])
 		
 			var occupied_spots = []
+			
 			for t in map.transitions:
 				occupied_spots.append([t.my_position[0], t.my_position[1]])
+			
+			# https://twitter.com/nightblade99/status/1136111638598344704
+			for t in map.treasure_chests:
+				occupied_spots.append([t.tile_x, t.tile_y])
 		
 			for n in num_monsters:
 				var coordinates = SpotFinder.find_empty_isolated_spot(map.tiles_wide,
