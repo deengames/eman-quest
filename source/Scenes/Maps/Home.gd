@@ -14,7 +14,7 @@ var _mama
 var _bandit
 
 func _ready():
-	$TutorialHand.hide()
+	$TutorialArrow.hide()
 	var player = Globals.player
 
 	# https://www.pivotaltracker.com/story/show/164848304
@@ -79,7 +79,7 @@ func _bandit_reached():
 	
 func _unfreeze_player():
 	Globals.player.unfreeze()
-	$TutorialHand.show()
+	$TutorialArrow.show()
 	
 func _show_texts(texts, on_complete_callback = null):
 	var root = get_tree().get_root()
