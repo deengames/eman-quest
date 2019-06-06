@@ -1,11 +1,12 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/Maps/Home.gd" type="Script" id=1]
 [ext_resource path="res://Tilesets/Indoors.tres" type="TileSet" id=2]
 [ext_resource path="res://Entities/MapEntities/Dad.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Entities/MapWarp.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Entities/MapEntities/Hamza.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/UI/ClickHereArrow.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/images/gui/tutorial-mask.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/UI/ClickHereArrow.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -17,7 +18,7 @@ extents = Vector2( 5, 64 )
 custom_solver_bias = 0.0
 extents = Vector2( 64, 86 )
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -182,11 +183,17 @@ _sections_unfolded = [ "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Si
 
 position = Vector2( 398.59, 134.677 )
 
-[node name="TutorialArrow" parent="." index="7" instance=ExtResource( 6 )]
+[node name="TutorialMask" type="Sprite" parent="." index="7"]
 
 position = Vector2( 479.634, 546.014 )
+texture = ExtResource( 6 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." index="8"]
+[node name="TutorialArrow" parent="." index="8" instance=ExtResource( 7 )]
+
+position = Vector2( 479.634, 546.014 )
+_sections_unfolded = [ "Visibility" ]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="9"]
 
 layer = 1
 offset = Vector2( 0, 0 )
