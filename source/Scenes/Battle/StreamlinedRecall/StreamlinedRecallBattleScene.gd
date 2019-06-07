@@ -156,6 +156,11 @@ func _on_picked_all_tiles():
 			self._start_next_turn()
 	else:
 		self._resolve_monster_turn()
+	
+	for arrow in _tutorial_arrows:
+		remove_child(arrow)
+	
+	_tutorial_arrows = []
 
 func _disable_disabled_actions():
 	if "critical" in self._player.disabled_actions:
