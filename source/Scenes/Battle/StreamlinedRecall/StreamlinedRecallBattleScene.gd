@@ -1,7 +1,7 @@
 extends Node2D
 
 const BattleResolution = preload("res://Scripts/Battle/BattleResolution.gd")
-const ClickHereHand = preload("res://Scenes/UI/ClickHereHand.tscn")
+const ClickHereArrow = preload("res://Scenes/UI/ClickHereArrow.tscn")
 const MonsterScaler = preload("res://Scripts/Battle/MonsterScaler.gd")
 const RecallGrid = preload("res://Scenes/Battle/StreamlinedRecall/RecallGrid.gd")
 
@@ -35,7 +35,7 @@ var _is_players_turn = false
 
 # Tutorial stuff
 var _correct_tiles = []
-var _tutorial_hands = []
+var _tutorial_arrows = []
 
 func _ready():
 	
@@ -277,15 +277,15 @@ func _grid_showed_tiles():
 			_add_tutorial_for(tile_coordinates)
 
 func _add_tutorial_for(tile_coordinates):
-	var hand = ClickHereHand.instance()
-	self._tutorial_hands.append(hand)
-	add_child(hand)
-	# Offset by 1/2 tile because the hand is centered at (0, 0)
-	hand.position.x = $RecallGrid.position.x + \
+	var arrow = ClickHereArrow.instance()
+	self._tutorial_arrows.append(arrow)
+	add_child(arrow)
+	# Offset by 1/2 tile because the arrow is centered at (0, 0)
+	arrow.position.x = $RecallGrid.position.x + \
 		(tile_coordinates.x * RecallGrid._TILE_WIDTH) + \
 		(RecallGrid._TILE_WIDTH / 2)
-	hand.position.y = $RecallGrid.position.y + tile_coordinates.y * RecallGrid._TILE_HEIGHT
-	hand.tile_coordinates = tile_coordinates
+	arrow.position.y = $RecallGrid.position.y + (tile_coordinates.y * RecallGrid._TILE_HEIGHT) + (RecallGrid._TILE_HEIGHT / 2)
+	arrow.tile_coordinates = tile_coordinates
 
 func _on_correct_selected(tile_coordinates):
 	self._actions_left += 1
@@ -298,11 +298,11 @@ func _on_correct_selected(tile_coordinates):
 		self._update_tech_points_display()
 		self._disable_unusable_skills()
 	
-	# Tutorial: remove hand on clicked tile
-	for hand in _tutorial_hands:
-		if hand.tile_coordinates == tile_coordinates:
-			_tutorial_hands.erase(hand)
-			remove_child(hand)
+	# Tutorial: remove tutorial indicator on clicked tile
+	for arrow in _tutorial_arrows:
+		if arrow.tile_coordinates == tile_coordinates:
+			_tutorial_arrows.erase(arrow)
+			remove_child(arrow)
 
 func _on_incorrect_selected():
 	self._correct_consecutive_tiles_picked = 0
