@@ -23,6 +23,7 @@ script = ExtResource( 1 )
 
 frames = SubResource( 1 )
 animation = "default"
+frame = 1
 playing = true
 
 [node name="Arrow" type="Sprite" parent="." index="1"]

@@ -2,6 +2,7 @@ extends Node2D
 
 const AreaSymbols = preload("res://Scenes/Maps/AreaSymbols.tscn")
 const AreaType = preload("res://Scripts/Enums/AreaType.gd")
+const ClickHereArrow = preload("res://Scenes/UI/ClickHereArrow.tscn")
 const EndGameMap = preload("res://Scenes/Maps/EndGameMap.tscn")
 const HomeMap = preload("res://Scenes/Maps/Home.tscn")
 const MapDestination = preload("res://Entities/MapDestination.gd")
@@ -25,6 +26,7 @@ func _ready():
 	_add_label(home, "Home")
 	
 	var next = 1
+	
 	for area in Globals.world_areas:
 		var divider = area.find("/")
 		var type = area.substr(0, divider)
@@ -36,6 +38,16 @@ func _ready():
 		_move_to_position(node, next)
 		add_child(node)
 		_add_label(node, node_name)
+		
+		if next == 1 and Globals.show_first_map_tutorial:
+			Globals.show_first_map_tutorial = false
+			var tutorial = ClickHereArrow.instance()
+			add_child(tutorial)
+			tutorial.position = node.position
+			tutorial.position.x += Globals.TILE_WIDTH * 1.5
+			tutorial.position.y += Globals.TILE_HEIGHT * 2
+			tutorial.rotation_degrees = 180
+		
 		next += 1
 	
 	var end_game = _get_by_name(children, "EndGame").duplicate()
