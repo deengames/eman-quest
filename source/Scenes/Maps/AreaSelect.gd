@@ -15,6 +15,8 @@ const GLOBAL_FONT = preload("res://Theme/Default-24px.tres")
 const _CENTER_X = 6
 const _SECOND_ROW_Y = 5
 
+var _transitioning = false
+
 func _ready():
 	var template = AreaSymbols.instance()
 	var children = template.get_children()
@@ -83,9 +85,10 @@ func _add_label(node, caption):
 	add_child(label)
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
-	if (event is InputEventMouseButton and event.pressed) or (OS.has_feature("Android") and event is InputEventMouseMotion):
+	if not _transitioning and (event is InputEventMouseButton and event.pressed) or (OS.has_feature("Android") and event is InputEventMouseMotion):
 		var clicked_on = _get_clicked_on(event.position)
 		if clicked_on != null:
+			_transitioning = true
 			_teleport_to(clicked_on)
 
 func _get_clicked_on(position):
