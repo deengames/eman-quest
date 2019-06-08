@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Frost-Forest.ogg-9e92604d116f0a820689eea3a5aaf666.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/bgs/Frost-Forest.ogg"
+dest_files=[ "res://.import/Frost-Forest.ogg-9e92604d116f0a820689eea3a5aaf666.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

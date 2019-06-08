@@ -12,7 +12,8 @@ var audio_clips = {
 	"quran-intro-2": preload("res://assets/audio/quran-17-24.ogg"),
 	"quran-finale-1": preload("res://assets/audio/quran-14-41.ogg"),
 	"quran-finale-2": preload("res://assets/audio/quran-14-42.ogg"),
-	"slime-forest-bgs": preload("res://assets/audio/bgs/Slime-Forest.ogg")
+	"slime-forest-bgs": preload("res://assets/audio/bgs/Slime-Forest.ogg"),
+	"frost-forest-bgs": preload("res://assets/audio/bgs/Frost-Forest.ogg")
 }
 
 const AudioFilePlayerClass = preload("res://Scenes/AudioFilePlayer.tscn")
