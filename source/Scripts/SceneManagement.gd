@@ -84,7 +84,7 @@ static func change_map_to(tree, target):
 			Globals.current_map == null or
 			ReferenceChecker.is_previously_freed(Globals.current_map) or
 			# change map type, not change to submap of the same type
-			Globals.current_map.map_type != target_areamap.map_type)
+			(Globals.current_map != null and Globals.current_map.map_type != target_areamap.map_type))
 			
 		var populated_map = PopulatedMapScene.instance()
 		populated_map.initialize(target_areamap)

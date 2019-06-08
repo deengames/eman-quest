@@ -49,7 +49,7 @@ func _ready():
 	randomize()
 	
 	var map_type
-	if typeof(Globals.current_map) == TYPE_STRING: # final map
+	if Globals.current_map != null and typeof(Globals.current_map) == TYPE_STRING: # final map
 		map_type = "Final"
 	else:
 		map_type = Globals.current_map.map_type
