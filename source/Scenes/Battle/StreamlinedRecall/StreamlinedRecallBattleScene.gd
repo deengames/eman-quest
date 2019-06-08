@@ -139,28 +139,51 @@ func _update_health_displays():
 	
 	$ActionsPanel/ActionsLabel.text = "Actions: " + str(_actions_left)
 
+func _remove_tutorial_arrows():
+	for arrow in _tutorial_arrows:
+		remove_child(arrow)	
+	
+	_tutorial_arrows = []
+
 func _on_picked_all_tiles():
 	var num_right = $RecallGrid.selected_right
 	
 	$RecallGrid.make_unselectable()
 	self._disable_unusable_action_buttons()
 	
+	# Remove tutorial arrows pointing above tiles to pick
+	_remove_tutorial_arrows()
+	
 	if self._is_players_turn:
 		if num_right > 0:
 			$ActionsPanel.visible = true
 			$ActionsPanel/Controls.visible = true
 			self._disable_disabled_actions()
+			
+			if Globals.show_battle_tutorial:
+				
+				var arrow_target
+				if num_right >= 3:
+					arrow_target = $ActionsPanel/Controls/CriticalButton
+				elif num_right >= 2:
+					arrow_target = $ActionsPanel/Controls/AttackButton
+				else:
+					arrow_target = $ActionsPanel/Controls/DefendButton
+				
+				var arrow = ClickHereArrow.instance()
+				add_child(arrow)
+				var position = arrow_target.get_global_position()
+				arrow.position = position
+				arrow.position.x += 32
+				arrow.position.y += 32
+				_tutorial_arrows.append(arrow)
+				
 		else:
 			$StatusLabel.text = "Missed a turn!"
 			yield(get_tree().create_timer(_MONSTER_TURN_DISPLAY_SECONDS), 'timeout')
 			self._start_next_turn()
 	else:
 		self._resolve_monster_turn()
-	
-	for arrow in _tutorial_arrows:
-		remove_child(arrow)
-	
-	_tutorial_arrows = []
 
 func _disable_disabled_actions():
 	if "critical" in self._player.disabled_actions:
@@ -179,6 +202,9 @@ func _show_battle_end(is_victory):
 	popup.popup_centered()
 
 func _resolve_players_turn(action):
+	# When you click on an action, remove arrow above the action to click on
+	_remove_tutorial_arrows()
+	
 	self._actions_left -= _ACTION_POINTS_COST[action]
 	
 	# Start multiplier based on picking the same action consecutively
@@ -195,6 +221,17 @@ func _resolve_players_turn(action):
 	
 	if self._actions_left == 0: 
 		$NextTurnButton.visible = true
+		
+		# LAST thing we show
+		if Globals.show_battle_tutorial:
+			Globals.show_battle_tutorial = false
+			var arrow = ClickHereArrow.instance()
+			add_child(arrow)
+			var position = $NextTurnButton.get_global_position()
+			arrow.position = position
+			arrow.position.x += 80
+			arrow.position.y += 32
+			_tutorial_arrows.append(arrow)
 
 func _on_player_skill(skill):
 	var tech_points_cost = _SKILL_POINTS_COST[skill]
@@ -235,6 +272,9 @@ func _resolve_monster_turn():
 
 func _on_NextTurnButton_pressed():
 	self._start_next_turn()
+	
+	# Delete first tutorial arrow button on next-turn button
+	_remove_tutorial_arrows()
 
 func _start_next_turn():
 	# Set up next turn
@@ -277,7 +317,6 @@ func _start_next_turn():
 
 func _grid_showed_tiles():
 	if Globals.show_battle_tutorial:
-		Globals.show_battle_tutorial = false
 		for tile_coordinates in self._correct_tiles:
 			_add_tutorial_for(tile_coordinates)
 
