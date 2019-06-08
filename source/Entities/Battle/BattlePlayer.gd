@@ -43,7 +43,7 @@ func _init():
 	var player_data = Globals.player_data
 	self.max_health = player_data.health
 	self.current_health = self._total_health()
-	self.strength = player_data.strength * 100
+	self.strength = player_data.strength
 	self._defense = player_data.defense
 	self.num_actions = player_data.num_actions
 	self.energy = self.max_energy / 2
