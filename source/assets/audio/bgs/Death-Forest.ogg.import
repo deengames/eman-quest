@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Death-Forest.ogg-bd1d37f18fd08622554555c775243b06.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/bgs/Death-Forest.ogg"
+dest_files=[ "res://.import/Death-Forest.ogg-bd1d37f18fd08622554555c775243b06.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
