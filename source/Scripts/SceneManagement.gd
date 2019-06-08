@@ -79,12 +79,16 @@ static func change_map_to(tree, target):
 			else:
 				target_areamap = map_data
 		
-		var show_map_name = (
-			# Globals.current_map is ull on new game
-			Globals.current_map == null or
-			ReferenceChecker.is_previously_freed(Globals.current_map) or
-			# change map type, not change to submap of the same type
-			(Globals.current_map != null and Globals.current_map.map_type != target_areamap.map_type))
+		var show_map_name = false
+		
+		# Globals.current_map is ull on new game
+		if Globals.current_map == null:
+			show_map_name = true
+		elif ReferenceChecker.is_previously_freed(Globals.current_map):
+			show_map_name = true
+		# change map type, not change to submap of the same type
+		elif Globals.current_map != null and Globals.current_map.map_type != target_areamap.map_type:
+			show_map_name = true
 			
 		var populated_map = PopulatedMapScene.instance()
 		populated_map.initialize(target_areamap)

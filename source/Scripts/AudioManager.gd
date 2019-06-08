@@ -15,7 +15,8 @@ var audio_clips = {
 	"slime-forest-bgs": preload("res://assets/audio/bgs/Slime-Forest.ogg"),
 	"frost-forest-bgs": preload("res://assets/audio/bgs/Frost-Forest.ogg"),
 	"death-forest-bgs": preload("res://assets/audio/bgs/Death-Forest.ogg"),
-	"river-cave-bgs": preload("res://assets/audio/bgs/River-Cave.ogg")
+	"river-cave-bgs": preload("res://assets/audio/bgs/River-Cave.ogg"),
+	"lava-cave-bgs": preload("res://assets/audio/bgs/Lava-Cave.ogg")
 }
 
 const AudioFilePlayerClass = preload("res://Scenes/AudioFilePlayer.tscn")
