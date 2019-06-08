@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/River-Cave.ogg-199471d4bbd9dc5c782e61c61a8fd11e.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/bgs/River-Cave.ogg"
+dest_files=[ "res://.import/River-Cave.ogg-199471d4bbd9dc5c782e61c61a8fd11e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
