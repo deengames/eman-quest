@@ -41,6 +41,8 @@ func _ready():
 		Globals.player.z_index = 9
 
 func show_intro_events():
+	Globals.show_first_map_tutorial = true
+	
 	self._showing_intro_events = true
 	
 	_mama = _spawn(Mama, $Locations/Mama)

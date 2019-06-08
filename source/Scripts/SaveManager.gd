@@ -64,6 +64,7 @@ static func save(save_id):
 	save_game.store_line(str(bosses_defeated))
 	save_game.store_line(str(beat_last_boss))
 	save_game.store_line(str(showed_final_events))
+	save_game.store_line(str(Globals.show_battle_tutorial))
 	
 	save_game.close()
 
@@ -89,6 +90,7 @@ static func load(save_id, tree):
 	var bosses_defeated = parse_json(save_game.get_line())
 	var beat_last_boss = _get_line_bool(save_game)
 	var showed_final_events = _get_line_bool(save_game)
+	var show_battle_tutorial = _get_line_bool(save_game)
 	
 	# NB: if we add more stuff to load that's not there, calls
 	# to save_game.get_line() will just return empty-string ("")
@@ -121,6 +123,7 @@ static func load(save_id, tree):
 	Globals.seed_value = seed_value
 	Globals.bosses_defeated = bosses_defeated
 	Globals.beat_last_boss = beat_last_boss
+	Globals.show_battle_tutorial = show_battle_tutorial
 	
 	# Needed to get final map battle => return to map, to work
 	Globals.maps["Final"] = "Final"
