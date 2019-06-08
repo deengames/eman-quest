@@ -8,7 +8,7 @@ const _FADE_TIME_SECONDS = 0.5
 
 var _audio_manager = AudioManager.new()
 
-var _ayaat = ["quran-intro-1", "quran-intro-2"]
+var _ayaat = ["quran-intro-1"]
 var _currently_playing = 0
 var _autostart_game = true # true for new game, false for end-game
 
