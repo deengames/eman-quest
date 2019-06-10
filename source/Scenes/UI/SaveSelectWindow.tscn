@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/UI/SaveSelectWindow.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
 
 [node name="WindowDialog" type="WindowDialog"]
 
@@ -133,6 +134,16 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Margin" ]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ScreenshotSprite" type="Sprite" parent="HBoxContainer/Container2/SaveDetailsPanel" index="1"]
+
+position = Vector2( 18, 140 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset", "Transform", "Visibility" ]
 
 [connection signal="item_selected" from="HBoxContainer/Container/ItemList" to="." method="_on_ItemList_item_selected"]
 
