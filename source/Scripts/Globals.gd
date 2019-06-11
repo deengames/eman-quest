@@ -86,19 +86,27 @@ var emit_battle_over_after_fade = false # trigger Global.battle_over after next 
 # about deeply-nested things and their invariants, so we don't have to mock too much.
 var is_testing = false
 
+var _mouse_down = false # used for press-move to move on PC
+
 func _ready():
 	pass
 	
 # https://docs.godotengine.org/en/3.0/tutorials/inputs/inputevent.html#how-does-it-work
 # Fires if nothing else handled the event, it seems.
 func _unhandled_input(event):
-	if (event is InputEventMouseButton and event.pressed) or (OS.has_feature("Android") and event is InputEventMouseMotion):
+	var was_click = (event is InputEventMouseButton and event.pressed) or (OS.has_feature("Android") and event is InputEventMouseMotion)
+	if was_click or (_mouse_down == true and event is InputEventMouseMotion):
 		var position = get_global_mouse_position()
 		# Clicks seem ... off for some reason. Not sure why. Adjust manually.
 		position.x -= Globals.TILE_WIDTH / 2
 		position.y -= Globals.TILE_HEIGHT
 		Globals.emit_signal("clicked_on_map", position)
-	
+		_mouse_down = true
+	elif event is InputEventMouseButton and not event.pressed:
+		_mouse_down = false
+
+		
+		
 # Returns integer value from min to max inclusive
 # Source: https://godotengine.org/qa/2539/how-would-i-go-about-picking-a-random-number
 func randint(minimum, maximum):
