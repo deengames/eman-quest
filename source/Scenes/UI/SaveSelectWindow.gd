@@ -2,8 +2,6 @@ extends WindowDialog
 
 const SaveManager = preload("res://Scripts/SaveManager.gd")
 
-signal on_load
-
 var _selected_slot = null
 var _save_disabled = false # for titlescreen only
 
@@ -70,4 +68,6 @@ func _screenshot_path(save_id):
 
 func _on_LoadButton_pressed():
 	if _selected_slot != null:
-		emit_signal("on_load", _selected_slot)
+		# Wait just long enough for the scene to display, then generate
+		yield(get_tree().create_timer(0.25), 'timeout')
+		SaveManager.load("save" + str(_selected_slot), get_tree())
