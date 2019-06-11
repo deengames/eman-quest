@@ -204,11 +204,14 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
+text = "Load"
 flat = false
 align = 1
 
 [connection signal="item_selected" from="HBoxContainer/Container/ItemList" to="." method="_on_ItemList_item_selected"]
 
 [connection signal="pressed" from="HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/SaveButton" to="." method="_on_SaveButton_pressed"]
+
+[connection signal="pressed" from="HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/LoadButton" to="." method="_on_LoadButton_pressed"]
 
 
