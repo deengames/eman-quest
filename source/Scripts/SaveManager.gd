@@ -17,6 +17,10 @@ const _SAVE_COMPRESSION_MODE = File.COMPRESSION_DEFLATE
 
 const _MAPS_NOT_TO_SAVE = ["Home", "Final"]
 
+static func save_exists(save_id):
+	var filename = _get_path(save_id)
+	return File.new().file_exists(filename)
+
 static func save(save_id):
 	var maps = {}
 	

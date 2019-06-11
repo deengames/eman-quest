@@ -16,6 +16,12 @@ const WORLD_HEIGHT_IN_TILES = 18 # 1080/64
 
 const WALKABLE_TILES = ['Grass', 'Dirt', 'Ground']
 const SCENE_TRANSITION_TIME_SECONDS = 0.5
+const NUM_SAVES = 10
+
+# Screenshots are saved when we click the save manager button, because we don't
+# want the UI in the screenshot. AND, this is before we know the save slot the 
+# player wants; so, just save this generically, and we can move/use it later.
+const LAST_SCREENSHOT_PATH = "user://screenshot-test.png"
 
 var player # current player instance. Used for collision detection mostly.
 
