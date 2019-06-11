@@ -37,7 +37,7 @@ func _on_ItemList_item_selected(index):
 		label.text = "World: #{seed}\nPlay time: {play_time}\nLevel: {level}" \
 			.format({
 				"seed": str(data["seed_value"]),
-				"play_time": "?:??:??", # stuff it into player_data
+				"play_time": _seconds_to_time(data["player_data"].play_time_seconds),
 				"level": int(data["player_data"].level)
 			})
 		sprite.texture = _get_screenshot_for(index)
@@ -88,3 +88,31 @@ func _on_LoadButton_pressed():
 		# Wait just long enough for the scene to display, then generate
 		yield(get_tree().create_timer(0.25), 'timeout')
 		SaveManager.load("save" + str(_selected_slot), get_tree())
+
+func _seconds_to_time(total_seconds):
+	var seconds = int(total_seconds)
+	var display_seconds = seconds % 60
+	var display_minutes = int(seconds / 60)
+	var display_hours = int(display_minutes / 60)
+	
+	var final_minutes = display_minutes
+	if display_hours > 0:
+		final_minutes = _two_digit(display_minutes)
+	
+	if display_hours > 0:
+		return "{h}:{m}:{s}".format({
+			"h": display_hours,
+			"m": final_minutes,
+			"s": _two_digit(display_seconds)
+		})
+	else:
+		return "{m}:{s}".format({
+			"m": final_minutes,
+			"s": _two_digit(display_seconds)
+		})
+
+func _two_digit(n):
+	if n <= 9:
+		return "0" + str(n)
+	else:
+		return str(n)

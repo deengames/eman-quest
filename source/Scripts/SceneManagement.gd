@@ -87,7 +87,9 @@ static func change_map_to(tree, target):
 		elif ReferenceChecker.is_previously_freed(Globals.current_map):
 			show_map_name = true
 		# change map type, not change to submap of the same type
-		elif Globals.current_map != null and Globals.current_map.map_type != target_areamap.map_type:
+		# Weird random crash bug: Invalid get index 'map_type' (on base: 'Node2D').
+		# Can't fix it (tried so many ways), hence the "map_type in Globals.current_map"
+		elif Globals.current_map != null and "map_type" in Globals.current_map and Globals.current_map.map_type != target_areamap.map_type:
 			show_map_name = true
 			
 		var populated_map = PopulatedMapScene.instance()

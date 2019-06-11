@@ -39,6 +39,7 @@ var equipment = []
 var key_items = []
 
 var tech_points = 0
+var play_time_seconds = 0
 
 func _init():
 	weapon.primary_stat_modifier = 7
@@ -61,7 +62,8 @@ func to_dict():
 		"armour": self.armour.to_dict(),
 		"equipment": DictionaryHelper.array_to_dictionary(self.equipment),
 		"key_items": DictionaryHelper.array_to_dictionary(self.key_items),
-		"tech_points": self.tech_points
+		"tech_points": self.tech_points,
+		"play_time_seconds": self.play_time_seconds
 	}
 
 static func from_dict(dict):
@@ -79,6 +81,7 @@ static func from_dict(dict):
 	to_return.equipment = DictionaryHelper.array_from_dictionary(dict["equipment"])
 	to_return.key_items = DictionaryHelper.array_from_dictionary(dict["key_items"])
 	to_return.tech_points = dict["tech_points"]
+	to_return.play_time_seconds = dict["play_time_seconds"]
 	return to_return
 	
 func gain_xp(xp):
