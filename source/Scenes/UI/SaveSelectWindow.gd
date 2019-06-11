@@ -32,8 +32,14 @@ func _on_ItemList_item_selected(index):
 	$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/LoadButton.visible = save_exists
 	
 	if save_exists:
-		# get data blob based on `index`
-		label.text = "World: #123456789\nPlay time: 0:30:13\nLevel: 7"
+		var data = SaveManager.load_data("save" + str(index))
+		
+		label.text = "World: #{seed}\nPlay time: {play_time}\nLevel: {level}" \
+			.format({
+				"seed": str(data["seed_value"]),
+				"play_time": "?:??:??", # stuff it into player_data
+				"level": int(data["player_data"].level)
+			})
 		sprite.texture = _get_screenshot_for(index)
 	else:
 		label.text = "Empty"
@@ -71,7 +77,8 @@ func _on_SaveButton_pressed():
 		file.store_buffer(bytes)
 		file.close()
 		
-		$HBoxContainer/Container2/SaveDetailsPanel/ScreenshotSprite.texture = _get_screenshot_for(_selected_slot)
+		# Refresh so it LOOKS saved
+		_on_ItemList_item_selected(_selected_slot)
 		
 func _screenshot_path(save_id):
 	return "user://screenshot-save" + str(save_id) + ".png"

@@ -73,33 +73,11 @@ static func save(save_id):
 	save_game.close()
 
 static func load(save_id, tree):
-	var save_game = File.new()
-	var path = _get_path(save_id)
-	
-	if not save_game.file_exists(path):
-		return # Error! We don't have a save to load.
-	
-	save_game.open_compressed(path, File.READ, _SAVE_COMPRESSION_MODE)
-	#save_game.open(path, File.READ)#, _SAVE_COMPRESSION_MODE)
-	
-	var maps_data = parse_json(save_game.get_line())
-	var player_data = parse_json(save_game.get_line())
-	var story_data = parse_json(save_game.get_line())
-	var overworld_position_data = parse_json(save_game.get_line())
-	var current_map_data = parse_json(save_game.get_line())
-	var player_position_data = parse_json(save_game.get_line())
-	var world_areas = parse_json(save_game.get_line())
-	var quest_data = parse_json(save_game.get_line())
-	var seed_value = parse_json(save_game.get_line())
-	var bosses_defeated = parse_json(save_game.get_line())
-	var beat_last_boss = _get_line_bool(save_game)
-	var showed_final_events = _get_line_bool(save_game)
-	var show_battle_tutorial = _get_line_bool(save_game)
+	var data = load_data(save_id)
 	
 	# NB: if we add more stuff to load that's not there, calls
 	# to save_game.get_line() will just return empty-string ("")
-	
-	save_game.close()
+	var maps_data = data["maps_data"]
 	
 	for key in maps_data.keys():
 		# Derp
@@ -110,29 +88,59 @@ static func load(save_id, tree):
 			for data in maps_data[key]:
 				Globals.maps[key].append(AreaMap.from_dict(data))
 	
-	Globals.player_data = PlayerData.from_dict(player_data)
-	Globals.story_data = story_data
-	Globals.overworld_position = DictionaryHelper.dict_to_vector2(overworld_position_data)
+	Globals.player_data = PlayerData.from_dict(data["player_data"])
+	Globals.story_data = data["story_data"]
+	Globals.overworld_position = DictionaryHelper.dict_to_vector2(data["overworld_position_data"])
 	
-	var current_map =  AreaMap.from_dict(current_map_data)
+	var current_map =  AreaMap.from_dict(data["current_map_data"])
 	Globals.current_map = current_map # Required to correctly load
 	Globals.current_map_type = current_map.map_type
 	
 	SceneManagement.change_map_to(tree, current_map)
 	
-	Globals.future_player_position = DictionaryHelper.dict_to_vector2(player_position_data)
+	Globals.future_player_position = DictionaryHelper.dict_to_vector2(data["player_position_data"])
 	
-	Globals.world_areas = world_areas
-	Globals.quest = Quest.from_dict(quest_data)
-	Globals.seed_value = seed_value
-	Globals.bosses_defeated = bosses_defeated
-	Globals.beat_last_boss = beat_last_boss
-	Globals.show_battle_tutorial = show_battle_tutorial
+	Globals.world_areas = data["world_areas"]
+	Globals.quest = Quest.from_dict(data["quest_data"])
+	Globals.seed_value = data["seed_value"]
+	Globals.bosses_defeated = data["bosses_defeated"]
+	Globals.beat_last_boss = data["beat_last_boss"]
+	Globals.show_battle_tutorial = data["show_battle_tutorial"]
 	
 	# Needed to get final map battle => return to map, to work
 	Globals.maps["Final"] = "Final"
 	
-	print("Loaded game #" + str(seed_value))
+	print("Loaded game #" + str(data["seed_value"]))
+
+static func load_data(save_id):
+	var save_game = File.new()
+	var path = _get_path(save_id)
+	
+	if not save_game.file_exists(path):
+		return # Error! We don't have a save to load.
+	
+	save_game.open_compressed(path, File.READ, _SAVE_COMPRESSION_MODE)
+	#save_game.open(path, File.READ)#, _SAVE_COMPRESSION_MODE)
+	
+	var data = {}
+	
+	data["maps_data"] = parse_json(save_game.get_line())
+	data["player_data"] = parse_json(save_game.get_line())
+	data["story_data"] = parse_json(save_game.get_line())
+	data["overworld_position_data"] = parse_json(save_game.get_line())
+	data["current_map_data"] = parse_json(save_game.get_line())
+	data["player_position_data"] = parse_json(save_game.get_line())
+	data["world_areas"] = parse_json(save_game.get_line())
+	data["quest_data"] = parse_json(save_game.get_line())
+	data["seed_value"] = parse_json(save_game.get_line())
+	data["bosses_defeated"] = parse_json(save_game.get_line())
+	data["beat_last_boss"] = _get_line_bool(save_game)
+	data["showed_final_events"] = _get_line_bool(save_game)
+	data["show_battle_tutorial"] = _get_line_bool(save_game)
+	
+	save_game.close()
+	
+	return data
 
 static func _get_line_bool(file):
 	# If that line is blank, this returns false.
