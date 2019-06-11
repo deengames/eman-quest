@@ -149,6 +149,8 @@ func _ready():
 	if Globals.emit_battle_over_after_fade:
 		Globals.emit_battle_over_after_fade = false
 		Globals.emit_signal("battle_over")
+	
+	
 
 func _is_walkable_and_no_transitions(tile_coords, transitions):
 	if tile_coords.x < 0 or tile_coords.y < 0 or \
@@ -442,3 +444,9 @@ func _process(elapsed):
 		stats_button.modulate = Color(1, 1, 1, 1)
 		stats_button.text = "Stats"
 		
+
+func _on_UI_opened_save_manager():
+	freeze_monsters()
+
+func _on_UI_closed_save_manager():
+	unfreeze_monsters()
