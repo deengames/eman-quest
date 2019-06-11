@@ -9,6 +9,9 @@ func _ready():
 	for i in range(Globals.NUM_SAVES):
 		var n = i + 1
 		$HBoxContainer/Container/ItemList.add_item("File " + str(n))
+	
+	$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/SaveButton.hide()
+	$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/LoadButton.hide()
 
 func disable_saving():
 	_save_disabled = true
@@ -23,7 +26,9 @@ func _on_ItemList_item_selected(index):
 	
 	if _save_disabled: # we're loading
 		$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/SaveButton.disabled = not save_exists
-
+	else:
+		$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/SaveButton.show()
+		
 	$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/LoadButton.visible = save_exists
 	
 	if save_exists:
