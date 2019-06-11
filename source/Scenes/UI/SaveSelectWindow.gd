@@ -34,23 +34,26 @@ func _on_ItemList_item_selected(index):
 	if save_exists:
 		# get data blob based on `index`
 		label.text = "World: #123456789\nPlay time: 0:30:13\nLevel: 7"
-		
-		var file = File.new()
-		file.open(_screenshot_path(index), File.READ)
-		var buffer = file.get_buffer(file.get_len())
-		file.close()
-		
-		var image = Image.new()
-		image.load_png_from_buffer(buffer)
-		
-		var image_texture = ImageTexture.new()
-		image_texture.create_from_image(image)
-		
-		sprite.texture = image_texture
+		sprite.texture = _get_screenshot_for(index)
 	else:
 		label.text = "Empty"
 		sprite.texture = null
 		
+func _get_screenshot_for(index):
+
+	var file = File.new()
+	file.open(_screenshot_path(index), File.READ)
+	var buffer = file.get_buffer(file.get_len())
+	file.close()
+	
+	var image = Image.new()
+	image.load_png_from_buffer(buffer)
+	
+	var image_texture = ImageTexture.new()
+	image_texture.create_from_image(image)
+	
+	return image_texture
+
 func _on_SaveButton_pressed():
 	if not _save_disabled and _selected_slot != null:
 		SaveManager.save("save" + str(_selected_slot))
@@ -67,6 +70,8 @@ func _on_SaveButton_pressed():
 		file.open(_screenshot_path(_selected_slot), File.WRITE)
 		file.store_buffer(bytes)
 		file.close()
+		
+		$HBoxContainer/Container2/SaveDetailsPanel/ScreenshotSprite.texture = _get_screenshot_for(_selected_slot)
 		
 func _screenshot_path(save_id):
 	return "user://screenshot-save" + str(save_id) + ".png"
