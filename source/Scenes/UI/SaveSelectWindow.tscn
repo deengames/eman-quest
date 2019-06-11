@@ -137,9 +137,10 @@ __meta__ = {
 [node name="ScreenshotSprite" type="Sprite" parent="HBoxContainer/Container2/SaveDetailsPanel" index="1"]
 
 position = Vector2( 8, 136 )
+scale = Vector2( 0.75, 0.75 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 145, 98, 670, 342 )
+region_rect = Rect2( 0, 0, 890, 456 )
 _sections_unfolded = [ "Offset", "Region", "Transform", "Visibility" ]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Container2/SaveDetailsPanel" index="2"]
