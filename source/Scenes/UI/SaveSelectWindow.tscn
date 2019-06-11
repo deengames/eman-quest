@@ -1,9 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://Scenes/UI/SaveSelectWindow.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
 
-[node name="WindowDialog" type="WindowDialog"]
+[node name="WindowDialog" type="WindowDialog" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -140,10 +139,11 @@ __meta__ = {
 
 [node name="ScreenshotSprite" type="Sprite" parent="HBoxContainer/Container2/SaveDetailsPanel" index="1"]
 
-position = Vector2( 18, 140 )
-texture = ExtResource( 2 )
+position = Vector2( 8, 120 )
 centered = false
-_sections_unfolded = [ "Offset", "Transform", "Visibility" ]
+region_enabled = true
+region_rect = Rect2( 220, 116, 520, 308 )
+_sections_unfolded = [ "Offset", "Region", "Transform", "Visibility" ]
 
 [connection signal="item_selected" from="HBoxContainer/Container/ItemList" to="." method="_on_ItemList_item_selected"]
 
