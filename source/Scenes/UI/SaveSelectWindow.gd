@@ -23,8 +23,10 @@ func _on_ItemList_item_selected(index):
 	var sprite = $HBoxContainer/Container2/SaveDetailsPanel/ScreenshotSprite
 	var save_exists = SaveManager.save_exists("save" + str(index))
 	
-	$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/SaveButton.disabled = not save_exists
-	$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/LoadButton.disabled = not save_exists
+	if _save_disabled: # we're loading
+		$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/SaveButton.disabled = not save_exists
+
+	$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/LoadButton.visible = save_exists
 	
 	if save_exists:
 		# get data blob based on `index`
