@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Castle-Dungeon.ogg-c1ea0393f9df8cba66332cd80fa1264a.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/bgs/Castle-Dungeon.ogg"
+dest_files=[ "res://.import/Castle-Dungeon.ogg-c1ea0393f9df8cba66332cd80fa1264a.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
