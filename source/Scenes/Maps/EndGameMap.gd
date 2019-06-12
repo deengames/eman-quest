@@ -1,5 +1,6 @@
 extends "StaticMap.gd"
 
+const AudioManager = preload("res://Scripts/AudioManager.gd")
 const DialogueWindow = preload("res://Scenes/UI/DialogueWindow.tscn")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 const StreamlinedRecallBattleScene = preload("res://Scenes/Battle/StreamlinedRecall/StreamlinedRecallBattleScene.tscn")
@@ -32,7 +33,7 @@ func _ready():
 	elif Globals.showed_final_events:
 		self.remove_child($Jinn)
 	
-	_audio_bgs.play_sound("waterfall-cliff")
+	_audio_bgs.play_sound("waterfall-cliff", AudioManager.BG_AUDIO_DB_OFFSET)
 	
 
 func _on_FinalEventsTrigger_body_entered(body):

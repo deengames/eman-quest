@@ -53,7 +53,7 @@ func _ready():
 		if map != null and map.map_type != null and map.variation != null:
 			var bgs_key = map.variation.to_lower() + "-" + map.map_type.to_lower() + "-bgs"
 			if self._audio_bgs.audio_clips.has(bgs_key):
-				self._audio_bgs.play_sound(bgs_key)
+				self._audio_bgs.play_sound(bgs_key, AudioManager.BG_AUDIO_DB_OFFSET)
 	
 	var tilemaps = []
 	

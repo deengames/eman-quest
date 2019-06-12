@@ -1,6 +1,7 @@
 extends Node
 
 signal sound_finished
+const BG_AUDIO_DB_OFFSET = -10
 
 ###### SOURCE: https://godot.readthedocs.io/en/3.0/tutorials/3d/fps_tutorial/part_six.html#doc-fps-tutorial-part-six
 # ------------------------------------
@@ -26,15 +27,15 @@ var audio_clips = {
 const AudioFilePlayerClass = preload("res://Scenes/AudioFilePlayer.tscn")
 var audio_instances = []
 
-func play_sound(audio_clip_key, loop_sound=false, sound_position=null):
+func play_sound(audio_clip_key, volume_db = 0):
 	if audio_clips.has(audio_clip_key):
 		var audio_player = AudioFilePlayerClass.instance()
 		
 		Globals.add_child(audio_player)
 		audio_instances.append(audio_player)
 		
-		audio_player.should_loop = loop_sound
-		audio_player.play_sound(audio_clips[audio_clip_key], sound_position)
+		audio_player.should_loop = false
+		audio_player.play_sound(audio_clips[audio_clip_key], volume_db)
 		audio_player.connect("finished", self, "_sound_finished")
 	else:
 		print ("ERROR: cannot play sound {key} that is not defined in audio_clips dictionary!".format({key = audio_clip_key}))

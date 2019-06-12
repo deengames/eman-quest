@@ -1,5 +1,6 @@
 extends "StaticMap.gd"
 
+const AudioManager = preload("res://Scripts/AudioManager.gd")
 const Bandit = preload("res://Entities/MapEntities/Bandit/Bandit.tscn")
 const DialogueWindow = preload("res://Scenes/UI/DialogueWindow.tscn")
 const Mama = preload("res://Entities/MapEntities/Mom.tscn")
@@ -40,7 +41,7 @@ func _ready():
 		var mama = _spawn(Mama, $Locations/Mama)
 		Globals.player.z_index = 9
 	
-	_audio_bgs.play_sound("home")
+	_audio_bgs.play_sound("home", AudioManager.BG_AUDIO_DB_OFFSET)
 
 func show_intro_events():
 	_audio_bgs.clean_up_audio()
