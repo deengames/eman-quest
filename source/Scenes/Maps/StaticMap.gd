@@ -1,5 +1,6 @@
 extends Node2D
 
+const AudioManager = preload("res://Scripts/AudioManager.gd")
 const Player = preload("res://Entities/Player.tscn")
 const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
 
@@ -8,6 +9,7 @@ const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
 ###
 
 const map_type = "" # used in transitions, plays nice with code that looks up map_type.
+var _audio_bgs = AudioManager.new()
 
 func _ready():
 	Globals.current_map = self
@@ -30,3 +32,6 @@ func get_tiles_high():
 # These don't need an implementation
 func show_ui(): pass
 func hide_ui(): pass
+
+func _exit_tree():
+	self._audio_bgs.clean_up_audio()

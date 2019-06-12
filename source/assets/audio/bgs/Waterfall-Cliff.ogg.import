@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Waterfall-Cliff.ogg-1b890a2ce9394b87a2b009bbcab92705.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/bgs/Waterfall-Cliff.ogg"
+dest_files=[ "res://.import/Waterfall-Cliff.ogg-1b890a2ce9394b87a2b009bbcab92705.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

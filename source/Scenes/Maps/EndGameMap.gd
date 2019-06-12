@@ -31,6 +31,9 @@ func _ready():
 		self.remove_child($Umayyah)
 	elif Globals.showed_final_events:
 		self.remove_child($Jinn)
+	
+	_audio_bgs.play_sound("waterfall-cliff")
+	
 
 func _on_FinalEventsTrigger_body_entered(body):
 	var player = Globals.player
