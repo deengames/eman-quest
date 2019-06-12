@@ -39,8 +39,12 @@ func _ready():
 	if Globals.bosses_defeated >= 1:
 		var mama = _spawn(Mama, $Locations/Mama)
 		Globals.player.z_index = 9
+	
+	_audio_bgs.play_sound("home")
 
 func show_intro_events():
+	_audio_bgs.clean_up_audio()
+	
 	Globals.show_first_map_tutorial = true
 	
 	self._showing_intro_events = true
@@ -82,6 +86,7 @@ func _bandit_reached():
 func _unfreeze_player():
 	Globals.player.unfreeze()
 	$TutorialArrow.show()
+	_audio_bgs.play_sound("home")
 	
 func _show_texts(texts, on_complete_callback = null):
 	var root = get_tree().get_root()

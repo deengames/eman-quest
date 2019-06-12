@@ -19,7 +19,8 @@ var audio_clips = {
 	"lava-cave-bgs": preload("res://assets/audio/bgs/Lava-Cave.ogg"),
 	"castle-dungeon-bgs": preload("res://assets/audio/bgs/Castle-Dungeon.ogg"),
 	"desert-dungeon-bgs": preload("res://assets/audio/bgs/Desert-Dungeon.ogg"),
-	"waterfall-cliff": preload("res://assets/audio/bgs/Waterfall-Cliff.ogg")
+	"waterfall-cliff": preload("res://assets/audio/bgs/Waterfall-Cliff.ogg"),
+	"home": preload("res://assets/audio/bgs/Home.ogg")
 }
 
 const AudioFilePlayerClass = preload("res://Scenes/AudioFilePlayer.tscn")
