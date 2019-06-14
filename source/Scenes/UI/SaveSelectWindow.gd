@@ -1,6 +1,7 @@
 extends WindowDialog
 
 const SaveManager = preload("res://Scripts/SaveManager.gd")
+const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
 
 var _selected_slot = null
 var _save_disabled = false # for titlescreen only
@@ -14,8 +15,17 @@ func _ready():
 	$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/LoadButton.hide()
 
 func disable_saving():
+	# From titlescreen we came, and to it we will return on close.
 	_save_disabled = true
 	$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/SaveButton.hide()
+	
+	self.connect("popup_hide", self, "_back_to_titlescreen")
+
+func _back_to_titlescreen():
+	var tree = get_tree()
+	SceneFadeManager.fade_out(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
+	yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
+	tree.change_scene("res://Scenes/Title.tscn")
 
 func _on_ItemList_item_selected(index):
 	_selected_slot = index
