@@ -19,6 +19,8 @@ func _on_KeyItemsButton_pressed():
 	self._show_popup(KeyItemsWindow.instance())
 
 func _show_popup(instance):
+	Globals.player.freeze()
+	instance.connect("popup_hide", self, "_unfreeze_player")
 	self.add_child(instance)
 	instance.popup_centered()
 
@@ -37,13 +39,19 @@ func _on_SaveButton_pressed():
 
 func _closed_save_manager():
 	emit_signal("closed_save_manager")
+	_remove_ui_dialogs()
+	_unfreeze_player()
+
+func _unfreeze_player():
+	Globals.player.unfreeze()
+	_remove_ui_dialogs()
+
+func _remove_ui_dialogs():
 	# Correctly shows UI, but also re-shows dialog manager
 	# le sigh, UNSHOW dialog manager
 	for child in get_children():
 		if child is Popup:
 			remove_child(child)
-			
-	Globals.player.unfreeze()
 
 func _capture_screenshot():
 	# Retrieve the captured image
