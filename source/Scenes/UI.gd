@@ -24,13 +24,14 @@ func _show_popup(instance):
 
 func _on_SaveButton_pressed():
 	Globals.player.freeze()
+	
+	# We save here because it's the only way to get a screenshot without UI elements	
+	_capture_screenshot()
+	
 	var save_picker = SaveSelectWindow.instance()
 	save_picker.connect("popup_hide", self, "_closed_save_manager")
 	add_child(save_picker)
 	save_picker.popup_centered()
-	
-	# We save here because it's the only way to get a screenshot without UI elements	
-	_capture_screenshot()
 	
 	emit_signal("opened_save_manager")
 
