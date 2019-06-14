@@ -96,8 +96,6 @@ static func load(save_id, tree):
 	Globals.current_map = current_map # Required to correctly load
 	Globals.current_map_type = current_map.map_type
 	
-	SceneManagement.change_map_to(tree, current_map)
-	
 	Globals.future_player_position = DictionaryHelper.dict_to_vector2(data["player_position_data"])
 	
 	Globals.world_areas = data["world_areas"]
@@ -109,6 +107,8 @@ static func load(save_id, tree):
 	
 	# Needed to get final map battle => return to map, to work
 	Globals.maps["Final"] = "Final"
+	
+	SceneManagement.change_map_to(tree, current_map)
 	
 	print("Loaded game #" + str(data["seed_value"]))
 

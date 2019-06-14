@@ -96,7 +96,6 @@ func _screenshot_path(save_id):
 func _on_LoadButton_pressed():
 	if _selected_slot != null:
 		# Wait just long enough for the scene to display, then generate
-		yield(get_tree().create_timer(0.25), 'timeout')
 		SaveManager.load("save" + str(_selected_slot), get_tree())
 
 func _seconds_to_time(total_seconds):

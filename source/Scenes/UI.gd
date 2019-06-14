@@ -23,6 +23,7 @@ func _show_popup(instance):
 	instance.popup_centered()
 
 func _on_SaveButton_pressed():
+	Globals.player.freeze()
 	var save_picker = SaveSelectWindow.instance()
 	save_picker.connect("popup_hide", self, "_closed_save_manager")
 	add_child(save_picker)
@@ -35,6 +36,13 @@ func _on_SaveButton_pressed():
 
 func _closed_save_manager():
 	emit_signal("closed_save_manager")
+	# Correctly shows UI, but also re-shows dialog manager
+	# le sigh, UNSHOW dialog manager
+	for child in get_children():
+		if child is Popup:
+			remove_child(child)
+			
+	Globals.player.unfreeze()
 
 func _capture_screenshot():
 	# Retrieve the captured image
