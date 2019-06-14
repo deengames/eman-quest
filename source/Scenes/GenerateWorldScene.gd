@@ -13,6 +13,7 @@ const MapDestination = preload("res://Entities/MapDestination.gd")
 const MapLayoutGenerator = preload("res://Scripts/Generators/MapLayoutGenerator.gd")
 const OverworldGenerator = preload("res://Scripts/Generators/OverworldGenerator.gd")
 const Quest = preload("res://Entities/Quest.gd")
+const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
 
 # Moving to (map.width / 2, map.height - 1) takes us below the bottom-most tile.
 # Moving up one tile takes us directly on the transition; two tiles, now we're talking.
@@ -38,9 +39,9 @@ func _ready():
 	$StartButton.visible = false
 	var game_number = self._print_and_set_seed()
 	
-	# Wait just long enough for the scene to display, then generate
-	if self.delay_to_display:
-		yield(get_tree().create_timer(0.25), 'timeout')
+	var tree = get_tree()
+	SceneFadeManager.fade_in(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
+	yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
 	
 	Globals.quest = Quest.new()
 	self._generate_world()
@@ -48,7 +49,10 @@ func _ready():
 	$StartButton.visible = true
 
 func _start_game():
-	get_tree().change_scene("res://Scenes/QuranScene.tscn")
+	var tree = get_tree()
+	SceneFadeManager.fade_out(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
+	yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
+	tree.change_scene("res://Scenes/QuranScene.tscn")
 	
 func _generate_world():
 	var world_areas = _pick_dungeons_and_variations()

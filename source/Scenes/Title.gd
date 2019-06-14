@@ -8,6 +8,10 @@ var SceneManagement = preload("res://Scripts/SceneManagement.gd")
 var Slime = preload("res://Entities/Battle/Monster.tscn")
 
 func _ready():
+	var tree = get_tree()
+	SceneFadeManager.fade_in(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
+	yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
+	
 	var data = OptionsSaver.load()
 	if data == null:
 		data = {

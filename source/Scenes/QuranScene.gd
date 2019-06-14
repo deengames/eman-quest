@@ -1,6 +1,7 @@
 extends Node2D
 
 const AudioManager = preload("res://Scripts/AudioManager.gd")
+const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 const TweenHelper = preload("res://Scripts/TweenHelper.gd")
 
@@ -15,6 +16,11 @@ var _autostart_game = true # true for new game, false for end-game
 func _ready():
 	_audio_manager.connect("sound_finished", self, "_play_next_ayah")
 	self._display_current_ayah()
+	
+	var tree = get_tree()
+	SceneFadeManager.fade_in(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
+	yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
+	
 
 func set_ayaat(ayaat):
 	self._ayaat = ayaat
@@ -48,8 +54,12 @@ func _on_SkipButton_pressed():
 	self._on_complete()
 	
 func _on_complete():
+	var tree = get_tree()
+	SceneFadeManager.fade_out(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
+	yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
+	
 	if self._autostart_game:
-		SceneManagement.change_scene_to(get_tree(), Globals.maps["Home"])
-		get_tree().current_scene.show_intro_events()
+		SceneManagement.change_scene_to(tree, Globals.maps["Home"])
+		tree.current_scene.show_intro_events()
 	else:
-		get_tree().change_scene("res://Scenes/CreditsScene.tscn")
+		tree.change_scene("res://Scenes/CreditsScene.tscn")
