@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/button-click.ogg-477507aa6c15848672db1988062618cc.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/button-click.ogg"
+dest_files=[ "res://.import/button-click.ogg-477507aa6c15848672db1988062618cc.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

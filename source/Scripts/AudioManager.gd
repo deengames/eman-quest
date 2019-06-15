@@ -9,10 +9,13 @@ const BG_AUDIO_DB_OFFSET = -10
 
 # You will need to provide your own sound files.
 var audio_clips = {
+	# Qur'an audios
 	"quran-intro-1": preload("res://assets/audio/quran-17-23.ogg"),
 	"quran-intro-2": preload("res://assets/audio/quran-17-24.ogg"),
 	"quran-finale-1": preload("res://assets/audio/quran-14-41.ogg"),
 	"quran-finale-2": preload("res://assets/audio/quran-14-42.ogg"),
+	
+	# Dungeon background audios
 	"slime-forest-bgs": preload("res://assets/audio/bgs/Slime-Forest.ogg"),
 	"frost-forest-bgs": preload("res://assets/audio/bgs/Frost-Forest.ogg"),
 	"death-forest-bgs": preload("res://assets/audio/bgs/Death-Forest.ogg"),
@@ -20,8 +23,13 @@ var audio_clips = {
 	"lava-cave-bgs": preload("res://assets/audio/bgs/Lava-Cave.ogg"),
 	"castle-dungeon-bgs": preload("res://assets/audio/bgs/Castle-Dungeon.ogg"),
 	"desert-dungeon-bgs": preload("res://assets/audio/bgs/Desert-Dungeon.ogg"),
+	
+	# Static map background audios
 	"waterfall-cliff": preload("res://assets/audio/bgs/Waterfall-Cliff.ogg"),
-	"home": preload("res://assets/audio/bgs/Home.ogg")
+	"home": preload("res://assets/audio/bgs/Home.ogg"),
+	
+	# SFX
+	"button-click": preload("res://assets/audio/sfx/button-click.ogg")
 }
 
 const AudioFilePlayerClass = preload("res://Scenes/AudioFilePlayer.tscn")
