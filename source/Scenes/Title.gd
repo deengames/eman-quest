@@ -21,15 +21,12 @@ func _ready():
 	Features.set_state("zoom-out maps", data["zoom"])
 	Features.set_state("monsters chase you", data["monsters_chase"])
 	
-	for child in get_children():
-		if child is Button:
-			child.connect("pressed", self, "_play_button_click")
+	AudioManager.new().add_button_noise_to_buttons(self)
 
 func _play_button_click():
 	var audio_player = AudioManager.new()
 	add_child(audio_player)
 	audio_player.play_sound("button-click")
-	print("!")
 
 func _on_newgame_Button_pressed():
 	var tree = get_tree()

@@ -1,6 +1,10 @@
 extends Node
 
 signal sound_finished
+
+const AudioFilePlayerClass = preload("res://Scenes/AudioFilePlayer.tscn")
+var AudioManger = get_script()
+
 const BG_AUDIO_DB_OFFSET = -10
 
 ###### SOURCE: https://godot.readthedocs.io/en/3.0/tutorials/3d/fps_tutorial/part_six.html#doc-fps-tutorial-part-six
@@ -32,8 +36,15 @@ var audio_clips = {
 	"button-click": preload("res://assets/audio/sfx/button-click.ogg")
 }
 
-const AudioFilePlayerClass = preload("res://Scenes/AudioFilePlayer.tscn")
 var audio_instances = []
+
+func add_button_noise_to_buttons(scene):
+	for child in scene.get_children():
+		if child is Button:
+			child.connect("pressed", self, "_play_button_click")
+
+func _play_button_click():
+	play_sound("button-click")
 
 func play_sound(audio_clip_key, volume_db = 0):
 	if audio_clips.has(audio_clip_key):
@@ -49,15 +60,6 @@ func play_sound(audio_clip_key, volume_db = 0):
 		print ("ERROR: cannot play sound {key} that is not defined in audio_clips dictionary!".format({key = audio_clip_key}))
 # ------------------------------------
 
-###
-# If this isn't firing, check that your .ogg doesn't show Loop checked under Import
-# (next to Scene tab, top-right of Godot 3.0 editor).
-# If it does, uncheck and click Reimport.
-###
-func _sound_finished(audio):
-	self.remove_sound(audio)
-	self.emit_signal("sound_finished")
-
 func remove_sound(audio):
 	var index = audio_instances.find(audio)
 	audio_instances.remove(index)
@@ -68,3 +70,12 @@ func clean_up_audio():
 			sound.queue_free()
 		
 	audio_instances.clear()
+
+###
+# If this isn't firing, check that your .ogg doesn't show Loop checked under Import
+# (next to Scene tab, top-right of Godot 3.0 editor).
+# If it does, uncheck and click Reimport.
+###
+func _sound_finished(audio):
+	self.remove_sound(audio)
+	self.emit_signal("sound_finished")
