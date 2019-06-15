@@ -14,6 +14,8 @@ var _currently_playing = 0
 var _autostart_game = true # true for new game, false for end-game
 
 func _ready():
+	AudioManager.new().add_click_noise_to_controls(self)
+	
 	_audio_manager.connect("sound_finished", self, "_play_next_ayah")
 	self._display_current_ayah()
 	

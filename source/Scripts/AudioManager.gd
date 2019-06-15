@@ -38,10 +38,10 @@ var audio_clips = {
 
 var audio_instances = []
 
-func add_button_noise_to_buttons(scene):
-	for child in scene.get_children():
-		if child is Button:
-			child.connect("pressed", self, "_play_button_click")
+func add_click_noise_to_controls(scene):
+	for control in scene.get_children():
+		if control is Button or control is CheckButton:
+			control.connect("pressed", self, "_play_button_click")
 
 func _play_button_click():
 	play_sound("button-click")

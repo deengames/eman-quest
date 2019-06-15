@@ -1,5 +1,6 @@
 extends WindowDialog
 
+const AudioManager = preload("res://Scripts/AudioManager.gd")
 const SaveManager = preload("res://Scripts/SaveManager.gd")
 const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
 
@@ -13,7 +14,8 @@ func _ready():
 	
 	$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/SaveButton.hide()
 	$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/LoadButton.hide()
-
+	AudioManager.new().add_click_noise_to_controls($HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer)
+	
 func disable_saving():
 	# From titlescreen we came, and to it we will return on close.
 	_save_disabled = true

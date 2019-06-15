@@ -150,7 +150,7 @@ func _ready():
 		Globals.emit_battle_over_after_fade = false
 		Globals.emit_signal("battle_over")
 	
-	
+	AudioManager.new().add_click_noise_to_controls($UI)
 
 func _is_walkable_and_no_transitions(tile_coords, transitions):
 	if tile_coords.x < 0 or tile_coords.y < 0 or \

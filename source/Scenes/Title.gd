@@ -21,7 +21,7 @@ func _ready():
 	Features.set_state("zoom-out maps", data["zoom"])
 	Features.set_state("monsters chase you", data["monsters_chase"])
 	
-	AudioManager.new().add_button_noise_to_buttons(self)
+	AudioManager.new().add_click_noise_to_controls(self)
 
 func _play_button_click():
 	var audio_player = AudioManager.new()

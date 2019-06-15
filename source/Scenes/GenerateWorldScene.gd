@@ -2,6 +2,7 @@ extends Node2D
 
 const AreaMap = preload("res://Entities/AreaMap.gd")
 const AreaType = preload("res://Scripts/Enums/AreaType.gd")
+const AudioManager = preload("res://Scripts/AudioManager.gd")
 const Boss = preload("res://Entities/Battle/Boss.gd")
 const CaveGenerator = preload("res://Scripts/Generators/CaveGenerator.gd")
 const DungeonGenerator = preload("res://Scripts/Generators/DungeonGenerator.gd")
@@ -47,6 +48,8 @@ func _ready():
 	self._generate_world()
 	$Status.text = "World #" + str(game_number) + " generated!"
 	$StartButton.visible = true
+	
+	AudioManager.new().add_click_noise_to_controls(self)
 
 func _start_game():
 	var tree = get_tree()

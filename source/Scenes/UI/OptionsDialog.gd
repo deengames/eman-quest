@@ -1,8 +1,10 @@
 extends WindowDialog
 
-var OptionsSaver = preload("res://Scripts/OptionsSaver.gd")
+const AudioManager = preload("res://Scripts/AudioManager.gd")
+const OptionsSaver = preload("res://Scripts/OptionsSaver.gd")
 
 func _ready():
+	AudioManager.new().add_click_noise_to_controls(self)
 	$ZoomOutToggle.pressed = Features.is_enabled("zoom-out maps")
 	$MonstersChaseToggle.pressed = Features.is_enabled("monsters chase you")
 
