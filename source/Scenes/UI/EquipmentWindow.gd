@@ -1,5 +1,7 @@
 extends WindowDialog
 
+const AudioManager = preload("res://Scripts/AudioManager.gd")
+
 # List just takes strings. Keep references to items.
 var _all_items = []
 var _selected_item = null
@@ -10,6 +12,7 @@ func _ready():
 	self._clear_selected_display()
 	self._populate_item_list()
 	$EquipButton.disabled = true
+	AudioManager.new().add_click_noise_to_controls(self)
 
 func _update_equipped_display():
 	$Equipment/CurrentWeapon.text = Globals.player_data.weapon.str()

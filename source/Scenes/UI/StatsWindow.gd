@@ -1,5 +1,7 @@
 extends WindowDialog
 
+const AudioManager = preload("res://Scripts/AudioManager.gd")
+
 var _pointer_base_x = 0
 var _total_time = 0
 
@@ -18,6 +20,8 @@ func _ready():
 	
 	$Equipment/WeaponLabel.text = "Current weapon:\n" + weapon.str()
 	$Equipment/ArmourLabel.text = "Current armour:\n" + armour.str()
+	
+	AudioManager.new().add_click_noise_to_controls($Stats/Buttons)
 
 func _on_UnassignHealthButton_pressed():
 	self._unassign_point("health")

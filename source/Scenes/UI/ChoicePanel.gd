@@ -1,5 +1,7 @@
 extends Node2D
 
+const AudioManager = preload("res://Scripts/AudioManager.gd")
+
 signal on_yes
 signal on_no
 
@@ -12,6 +14,8 @@ func show_text(text, confirm_text = "Yes", cancel_text = "No"):
 	$Label.text = text
 	$YesButton.text = confirm_text
 	$NoButton.text = cancel_text
+	
+	AudioManager.new().add_click_noise_to_controls(self)
 	
 func _on_YesButton_pressed():
 	self.emit_signal("on_yes")
