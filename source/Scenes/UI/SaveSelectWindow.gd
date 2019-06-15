@@ -70,6 +70,8 @@ func _get_screenshot_for(index):
 	var image_texture = ImageTexture.new()
 	image_texture.create_from_image(image)
 	
+	image_texture.flags = 0 # turn off "Filter"
+	
 	return image_texture
 
 func _on_SaveButton_pressed():
