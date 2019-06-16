@@ -103,6 +103,8 @@ flat = false
 align = 1
 _sections_unfolded = [ "Margin" ]
 
+[connection signal="tree_exited" from="." to="." method="_on_Node2D_tree_exited"]
+
 [connection signal="pressed" from="QuitButton" to="." method="_on_QuitButton_pressed"]
 
 

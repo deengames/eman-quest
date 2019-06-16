@@ -1,5 +1,6 @@
 extends Node2D
 
+const AudioManager = preload("res://Scripts/AudioManager.gd")
 const PlayerData = preload("res://Entities/PlayerData.gd")
 const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
 
@@ -9,11 +10,20 @@ const _WAIT_TIME = 1
 const _VISIBLE = Color(1, 1, 1, 1)
 const _INVISIBLE = Color(1, 1, 1, 0)
 
+var _audio
+
 func _ready():
-	$ThanksLabel.text = "Game completed in " + PlayerData.seconds_to_time(Globals.player_data.play_time_seconds) + "\n" + $ThanksLabel.text
-	
 	$CreditsLabel.modulate.a = 0
 	$ThanksLabel.modulate.a = 0
+	
+	var tree = get_tree()
+	SceneFadeManager.fade_in(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
+	yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
+	
+	_audio = AudioManager.new()
+	_audio.play_sound("credits")
+
+	$ThanksLabel.text = "Game completed in " + PlayerData.seconds_to_time(Globals.player_data.play_time_seconds) + "\n" + $ThanksLabel.text
 	
 	yield(get_tree().create_timer(_WAIT_TIME), 'timeout')
 	
@@ -48,4 +58,11 @@ func _clear_globals():
 	Globals.current_map = null
 
 func _on_QuitButton_pressed():
+	var tree = get_tree()
+	SceneFadeManager.fade_out(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
+	yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
+	
 	get_tree().change_scene("res://Scenes/Title.tscn")
+
+func _on_Node2D_tree_exited():
+	_audio.clean_up_audio()

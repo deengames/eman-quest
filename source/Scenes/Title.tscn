@@ -4,7 +4,7 @@
 [ext_resource path="res://Theme/GlobalTheme.tres" type="Theme" id=2]
 [ext_resource path="res://assets/images/Titlescreen.png" type="Texture" id=3]
 
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -109,6 +109,8 @@ _sections_unfolded = [ "custom_colors", "custom_fonts" ]
 texture = ExtResource( 3 )
 centered = false
 _sections_unfolded = [ "Offset" ]
+
+[connection signal="tree_exited" from="." to="." method="_on_Node2D_tree_exited"]
 
 [connection signal="pressed" from="Button" to="." method="_on_newgame_Button_pressed"]
 
