@@ -57,5 +57,10 @@ func _show_post_game_events():
 
 	# Fade in and play ayaat
 	var qs = QuranScene.instance()
-	qs.set_ayaat(["quran-finale-1", "quran-finale-2"])
+	qs.set_ayaat(
+		["quran-finale-1", "quran-finale-2"],
+		[
+			"“Our Lord, forgive me, and my parents, and the believers, on the Day the Reckoning takes place.”",
+			"Do not ever think that God is unaware of what the wrongdoers do. He only defers them until a Day when the sights stare."
+		])
 	SceneManagement.change_scene_to(get_tree(), qs)

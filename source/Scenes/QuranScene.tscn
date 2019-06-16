@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/QuranScene.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/gui/quran-frieze-frame.png" type="Texture" id=2]
 [ext_resource path="res://assets/images/quran-intro-1.png" type="Texture" id=3]
-[ext_resource path="res://assets/images/quran-intro-2.png" type="Texture" id=4]
-[ext_resource path="res://assets/images/quran-finale-1.png" type="Texture" id=5]
-[ext_resource path="res://assets/images/quran-finale-2.png" type="Texture" id=6]
+[ext_resource path="res://assets/images/quran-finale-1.png" type="Texture" id=4]
+[ext_resource path="res://assets/images/quran-finale-2.png" type="Texture" id=5]
 
 [node name="Node2D" type="Node2D" index="0"]
 
@@ -41,26 +40,43 @@ texture = ExtResource( 3 )
 centered = false
 _sections_unfolded = [ "Offset" ]
 
-[node name="quran-intro-2" type="Sprite" parent="." index="2"]
+[node name="quran-finale-1" type="Sprite" parent="." index="2"]
 
 visible = false
 texture = ExtResource( 4 )
 centered = false
 _sections_unfolded = [ "Offset" ]
 
-[node name="quran-finale-1" type="Sprite" parent="." index="3"]
+[node name="quran-finale-2" type="Sprite" parent="." index="3"]
 
 visible = false
 texture = ExtResource( 5 )
 centered = false
 _sections_unfolded = [ "Offset" ]
 
-[node name="quran-finale-2" type="Sprite" parent="." index="4"]
+[node name="Translation" type="Label" parent="." index="4"]
 
-visible = false
-texture = ExtResource( 6 )
-centered = false
-_sections_unfolded = [ "Offset" ]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 32.0
+margin_top = 360.0
+margin_right = 930.0
+margin_bottom = 550.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_colors/font_color = Color( 0.984314, 0.87451, 0.419608, 1 )
+text = "Translation courtesy of Clear Qur'an"
+autowrap = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Margin", "custom_colors" ]
 
 [node name="SkipButton" type="Button" parent="." index="5"]
 
