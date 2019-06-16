@@ -20,7 +20,8 @@ func _on_KeyItemsButton_pressed():
 
 func _show_popup(instance):
 	Globals.player.freeze()
-	instance.connect("popup_hide", self, "_unfreeze_player")
+	instance.connect("popup_hide", self, "_unfreeze_all")
+	get_parent().freeze_monsters()
 	self.add_child(instance)
 	instance.popup_centered()
 
@@ -32,18 +33,18 @@ func _on_SaveButton_pressed():
 	
 	var save_picker = SaveSelectWindow.instance()
 	save_picker.connect("popup_hide", self, "_closed_save_manager")
-	add_child(save_picker)
-	save_picker.popup_centered()
+	_show_popup(save_picker)
 	
 	emit_signal("opened_save_manager")
 
 func _closed_save_manager():
 	emit_signal("closed_save_manager")
 	_remove_ui_dialogs()
-	_unfreeze_player()
+	_unfreeze_all()
 
-func _unfreeze_player():
+func _unfreeze_all():
 	Globals.player.unfreeze()
+	get_parent().unfreeze_monsters()
 	_remove_ui_dialogs()
 
 func _remove_ui_dialogs():
