@@ -61,6 +61,10 @@ func _ready():
 	# Fixes a crash after completing the final battle
 	# https://trello.com/c/4zj0dLpy/95-post-final-battle-crashes
 	Globals.transition_used = null
+	
+	# Fix a myriad of bugs about transitioning maps takes you to the wrong position
+	# https://trello.com/c/Fen3iL5q/93-end-game-transitions-are-messed-up
+	Globals.pre_battle_position = null
 
 func _get_by_name(array, target):
 	for item in array:
