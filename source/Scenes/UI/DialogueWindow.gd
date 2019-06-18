@@ -20,13 +20,13 @@ func _ready():
 	self.z_index = 4096 # always be on top
 	
 	# Center automagically on-screen. If there's a Player entity in this scene.
-	# Sadly, this code is replicated everywhere.
-	#var viewport = get_viewport_rect().size
-	#if Globals.player != null:
-		#var camera_position = Globals.player.get_node("Camera2D").global_position
+	# Sadly, this code is replicated everywhere. This code is used for end-map dialogs,
+	# dialogs, and for Home dialogs.
+	var viewport = get_viewport_rect().size
+	if Globals.player != null:
+		var camera_position = Globals.player.get_node("Camera2D").global_position
 		# Pure magic. This calculation makes no sense to me.
-		# self.position = camera_position - (viewport / 4)
-		#self.position = viewport / 2
+		self.position = viewport / 4
 	
 	# parse all map names. for substituting {map<n>} tokens in text.
 	for map_name in Globals.world_areas:

@@ -10,6 +10,7 @@ const _FADE_TIME_SECONDS = 0.5
 var _audio_manager = AudioManager.new()
 
 var _ayaat = ["quran-intro-1"]
+var _translations = ["Your Lord has commanded that you worship none but Him, and that you be good to your parents. If either of them or both of them reach old age with you, do not say to them a word of disrespect, nor scold them, but say to them kind words."]
 var _currently_playing = 0
 var _autostart_game = true # true for new game, false for end-game
 
@@ -22,10 +23,10 @@ func _ready():
 	var tree = get_tree()
 	SceneFadeManager.fade_in(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
 	yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
-	
 
-func set_ayaat(ayaat):
+func set_ayaat(ayaat, translations):
 	self._ayaat = ayaat
+	self._translations = translations
 	self._autostart_game = false
 	$SkipButton.visible = false
 
@@ -44,12 +45,11 @@ func _display_current_ayah():
 	
 	if self._currently_playing > 0:
 		var current_ayah_image = self.get_node(self._ayaat[self._currently_playing - 1])
-		#TweenHelper.new().fade_out(self, current_ayah_image, _FADE_TIME_SECONDS).start()
 		current_ayah_image.visible = false
 	
 	var next_ayah_image = self.get_node(self._ayaat[self._currently_playing])
 	next_ayah_image.visible = true
-	#TweenHelper.new().fade_in(self, next_ayah_image, _FADE_TIME_SECONDS).start()
+	$Translation.text = _translations[_currently_playing]
 
 func _on_SkipButton_pressed():
 	_audio_manager.clean_up_audio()
