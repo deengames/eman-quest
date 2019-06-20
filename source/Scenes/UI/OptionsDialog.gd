@@ -1,4 +1,4 @@
-extends WindowDialog
+extends PopupPanel
 
 const AudioManager = preload("res://Scripts/AudioManager.gd")
 const OptionsSaver = preload("res://Scripts/OptionsSaver.gd")

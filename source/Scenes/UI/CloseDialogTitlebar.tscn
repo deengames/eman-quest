@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/UI/CloseDialogTitlebar.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 16, 16 )
+
+[node name="Panel" type="Panel"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = -32.0
+margin_right = 400.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 1 )
+_sections_unfolded = [ "Margin" ]
+
+[node name="Area2D" type="Area2D" parent="." index="0"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+
+position = Vector2( 16, 16 )
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Label" type="Label" parent="Area2D" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 6.0
+margin_top = -4.0
+margin_right = 40.0
+margin_bottom = 42.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "X"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Margin" ]
+
+[connection signal="input_event" from="Area2D" to="." method="_on_Area2D_input_event"]
+
+
