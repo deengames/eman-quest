@@ -33,12 +33,14 @@ func _play_button_click():
 	audio_player.play_sound("button-click")
 
 func _on_newgame_Button_pressed():
+	$NewGameButton.disabled = true
 	var tree = get_tree()
 	SceneFadeManager.fade_out(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
 	yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
 	tree.change_scene("res://Scenes/GenerateWorldScene.tscn")
 
 func _on_LoadGameButton_pressed():
+	$LoadGameButton.disabled = true
 	var tree = get_tree()
 	
 	SceneFadeManager.fade_out(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
@@ -48,6 +50,7 @@ func _on_LoadGameButton_pressed():
 
 func _on_Options_pressed():
 	var dialog = OptionsDialog.instance()
+	dialog.popup_exclusive = true
 	self.add_child(dialog)
 	dialog.popup_centered()
 

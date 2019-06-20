@@ -100,6 +100,7 @@ func _screenshot_path(save_id):
 
 func _on_LoadButton_pressed():
 	if _selected_slot != null:
+		$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/LoadButton.disabled = true
 		# disappear without triggering popup_hide, which takes us to the titlescreen
 		self.modulate.a = 0 
 		SaveManager.load("save" + str(_selected_slot), get_tree())
