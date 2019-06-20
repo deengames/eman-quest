@@ -10,10 +10,6 @@ const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 var _audio
 
 func _ready():
-	var tree = get_tree()
-	SceneFadeManager.fade_in(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
-	yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
-	
 	var data = OptionsSaver.load()
 	if data == null:
 		data = {
@@ -22,6 +18,10 @@ func _ready():
 		}
 	Features.set_state("zoom-out maps", data["zoom"])
 	Features.set_state("monsters chase you", data["monsters_chase"])
+	
+	var tree = get_tree()
+	SceneFadeManager.fade_in(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
+	yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
 	
 	_audio = AudioManager.new()
 	_audio.play_sound("title")
