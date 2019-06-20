@@ -103,6 +103,10 @@ func _on_FinalEventsTrigger_body_entered(body):
 	
 	# If respawn here after battle, don't re-trigger battle
 	if player.can_fight():
+		# https://trello.com/c/4zj0dLpy/95-post-final-battle-crashes
+		# Set transition_used to null, indicating to SceneManagement that we need to
+		# spawn here after the battle concludes
+		Globals.transition_used = null
 		SceneManagement.start_battle(body.get_tree(), Globals.quest.final_boss_data)
 
 

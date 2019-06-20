@@ -18,6 +18,11 @@ const _SECOND_ROW_Y = 5
 var _transitioning = false
 
 func _ready():
+	# Fix a bug where: final battle => win => leave => come back spawns you in front
+	# of the final boss location. This is because (somehow) we never reset
+	# Globals.pre_battle_position. This is easy to do, so do it here, in AreaSelect.
+	Globals.pre_battle_position = null
+	
 	var template = AreaSymbols.instance()
 	var children = template.get_children()
 	
