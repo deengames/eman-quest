@@ -14,6 +14,9 @@ func _ready():
 	$EquipButton.disabled = true
 	AudioManager.new().add_click_noise_to_controls(self)
 
+func title(value):
+	$CloseDialogTitlebar.title = value
+
 func _update_equipped_display():
 	$Equipment/CurrentWeapon.text = Globals.player_data.weapon.str()
 	$Equipment/CurrentArmour.text = Globals.player_data.armour.str()

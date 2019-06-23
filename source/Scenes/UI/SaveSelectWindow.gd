@@ -24,6 +24,9 @@ func disable_saving():
 	
 	self.connect("popup_hide", self, "_back_to_titlescreen")
 
+func title(value):
+	$CloseDialogTitlebar.title = value
+
 func _back_to_titlescreen():
 	var tree = get_tree()
 	SceneFadeManager.fade_out(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)

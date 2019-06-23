@@ -5,6 +5,7 @@ const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
 
 func _ready():
 	var window = SaveSelectWindow.instance()
+	window.title("Load Game")
 	window.popup_exclusive = true
 	window.disable_saving()
 	add_child(window)

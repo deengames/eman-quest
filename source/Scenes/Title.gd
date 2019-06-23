@@ -50,6 +50,7 @@ func _on_LoadGameButton_pressed():
 
 func _on_Options_pressed():
 	var dialog = OptionsDialog.instance()
+	dialog.title("Options")
 	dialog.popup_exclusive = true
 	self.add_child(dialog)
 	dialog.popup_centered()

@@ -8,6 +8,9 @@ func _ready():
 	$ZoomOutToggle.pressed = Features.is_enabled("zoom-out maps")
 	$MonstersChaseToggle.pressed = Features.is_enabled("monsters chase you")
 
+func title(value):
+	$CloseDialogTitlebar.title = value
+
 func _on_ZoomOutToggle_toggled(button_pressed):
 	Features.set_state("zoom-out maps", button_pressed)
 	_save_options()

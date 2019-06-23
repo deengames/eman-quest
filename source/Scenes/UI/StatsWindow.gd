@@ -23,6 +23,9 @@ func _ready():
 	
 	AudioManager.new().add_click_noise_to_controls($Stats/Buttons)
 
+func title(value):
+	$CloseDialogTitlebar.title = value
+
 func _on_UnassignHealthButton_pressed():
 	self._unassign_point("health")
 

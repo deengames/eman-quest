@@ -9,6 +9,9 @@ func _ready():
 	self._clear_selected_display()
 	self._populate_item_list()
 
+func title(value):
+	$CloseDialogTitlebar.title = value
+
 func _populate_item_list():
 	$ItemList.clear()
 	self._all_items = []
