@@ -25,7 +25,7 @@ func _ready():
 	$Panel/Title.margin_right = button.margin_right - _PADDING
 
 func set_title(title):
-	$Panel/Title.text = title
+	$Panel/Title.text = title.to_upper()
 
 func get_title():
 	return $Panel/Title.text
