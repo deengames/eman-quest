@@ -6801,5 +6801,5 @@ WindowDialog/fonts/title_font = null
 WindowDialog/icons/close = ExtResource( 10 )
 WindowDialog/icons/close_highlight = ExtResource( 10 )
 WindowDialog/styles/panel = SubResource( 628 )
-_sections_unfolded = [ "Button/styles", "CheckButton", "CheckButton/icons", "EditorFonts/fonts", "ItemList/styles", "Label/constants", "Label/styles", "Panel/styles", "PopupPanel", "PopupPanel/styles", "WindowDialog", "WindowDialog/fonts", "WindowDialog/icons", "WindowDialog/styles" ]
+_sections_unfolded = [ "Button", "Button/styles", "CheckButton", "CheckButton/icons", "EditorFonts/fonts", "ItemList/styles", "Label/constants", "Label/styles", "Panel/styles", "PopupPanel", "PopupPanel/styles", "WindowDialog", "WindowDialog/fonts", "WindowDialog/icons", "WindowDialog/styles" ]
 

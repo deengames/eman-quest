@@ -14,14 +14,14 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 400.0
-margin_bottom = 58.0
+margin_bottom = 50.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-_sections_unfolded = [ "Margin" ]
+_sections_unfolded = [ "Margin", "Visibility" ]
 
 [node name="Label" type="Button" parent="Panel" index="0"]
 
@@ -29,8 +29,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 58.0
-margin_bottom = 58.0
+margin_right = 50.0
+margin_bottom = 50.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
