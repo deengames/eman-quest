@@ -1,10 +1,11 @@
 language: minimal
+env:
+  - GODOT_BINARIES=Godot_v3.0.6-stable_linux_server.64
 before_install:
   - cd source
-  #- wget "https://downloads.tuxfamily.org/godotengine/3.0.6/Godot_v3.0.6-stable_linux_headless.64.zip"
-  - wget "https://downloads.tuxfamily.org/godotengine/3.0.6/Godot_v3.0.6-stable_linux_server.64.zip"
+  - wget "https://downloads.tuxfamily.org/godotengine/3.0.6/$GODOT_BINARIES.zip"
   - sudo apt-get install unzip
-  - unzip Godot_v3.0.6-stable_linux_server.64.zip
-  - chmod +x Godot_v3.0.6-stable_linux_server.64
+  - unzip $GODOT_BINARIES.zip
+  - chmod +x $GODOT_BINARIES
 script:
-  - ./Godot_v3.0.6-stable_linux_server.64 -d -s --path . addons\gut\gut_cmdln.gd
+  - ./$GODOT_BINARIES -d -s --path . addons\gut\gut_cmdln.gd
