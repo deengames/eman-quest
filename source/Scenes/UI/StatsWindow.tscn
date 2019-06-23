@@ -11,7 +11,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 700.0
-margin_bottom = 410.0
+margin_bottom = 470.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -24,9 +24,11 @@ _sections_unfolded = [ "Margin" ]
 
 [node name="Stats" type="Node2D" parent="." index="0"]
 
-position = Vector2( -4, -20 )
+position = Vector2( -4, 40 )
 
 [node name="Labels" type="Node2D" parent="Stats" index="0"]
+
+editor/display_folded = true
 
 [node name="LevelLabel" type="Label" parent="Stats/Labels" index="0"]
 
@@ -374,7 +376,7 @@ _sections_unfolded = [ "Offset" ]
 [node name="Equipment" type="Node2D" parent="." index="1"]
 
 editor/display_folded = true
-position = Vector2( -4, -20 )
+position = Vector2( -4, 40 )
 
 [node name="WeaponLabel" type="Label" parent="Equipment" index="0"]
 

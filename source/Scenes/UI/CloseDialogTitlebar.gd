@@ -3,7 +3,9 @@ extends Node2D
 const _PADDING = 8
 
 # It's magic. You add it to a popup window, and it resizes automatically. Closing
-# it (click the X button) also closes the underlying popup.
+# it (click the X button) also closes the underlying popup. Note that it occupes
+# the top 58 pixels of the parent, because positioning above the parent (at least,
+# with popup instances) causes the click handlers on child controls to just not fire.
 func _ready():
 	var parent = get_parent()
 	
@@ -17,19 +19,14 @@ func _ready():
 	# move button to RHS
 	button.margin_right = $Panel.margin_right
 	button.margin_left = $Panel.margin_right - _BUTTON_SIZE
-	# Position button above parent control
-	# THIS BREAKS INPUT EVENTS
-	# TODO: maybe create a new control that wraps/offsets the parent node and us,
-	# so that we don't have to set a negative y-position.
-	# (make a new control, add us at (0, 0), add parent at (0, 58), offset)
-	self.position.y = -button.margin_bottom
-	print(str(self.position))
 
-func _on_Button_pressed():
-	print("!")
-	var parent = get_parent()
-	parent.remove_child(self)
-	if parent is Popup:
-		parent.emit_signal("popup_hide")
-	
-	parent.get_parent().remove_child(parent)
+func _on_Button_pressed(event):
+	if (event is InputEventMouseButton and event.pressed) or (OS.has_feature("Android") and event is InputEventMouseMotion):
+		var parent = get_parent()
+		parent.remove_child(self)
+		if parent is Popup:
+			parent.emit_signal("popup_hide")
+		
+		var grandparent = parent.get_parent()
+		if grandparent != null:
+			grandparent.remove_child(parent)
