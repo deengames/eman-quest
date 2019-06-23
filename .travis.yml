@@ -6,4 +6,4 @@ before_install:
   - unzip Godot_v3.0.6-stable_linux_headless.64.zip
   - chmod +x Godot_v3.0.6-stable_linux_headless.64
 script:
-  - .\Godot_v3.0.6-stable_linux_headless.64 -d -s --path . addons\gut\gut_cmdln.gd
+  - ./Godot_v3.0.6-stable_linux_headless.64 -d -s --path . addons\gut\gut_cmdln.gd
