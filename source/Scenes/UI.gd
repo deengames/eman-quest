@@ -20,6 +20,7 @@ func _on_KeyItemsButton_pressed():
 
 func _show_popup(instance):
 	Globals.player.freeze()
+	instance.popup_exclusive = true
 	instance.connect("popup_hide", self, "_unfreeze_all")
 	get_parent().freeze_monsters()
 	self.add_child(instance)

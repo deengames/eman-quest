@@ -1,4 +1,4 @@
-extends WindowDialog
+extends PopupPanel
 
 const AudioManager = preload("res://Scripts/AudioManager.gd")
 const PlayerData = preload("res://Entities/PlayerData.gd")

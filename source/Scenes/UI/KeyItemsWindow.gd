@@ -1,4 +1,4 @@
-extends WindowDialog
+extends PopupPanel
 
 # List just takes strings. Keep references to items.
 var _all_items = []

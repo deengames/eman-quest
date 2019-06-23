@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/UI/StatsWindow.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/gui/pointer.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/UI/CloseDialogTitlebar.tscn" type="PackedScene" id=3]
 
-[node name="WindowDialog" type="WindowDialog"]
+[node name="PopupPanel" type="PopupPanel"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -18,12 +19,10 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 popup_exclusive = false
-window_title = ""
-resizable = true
 script = ExtResource( 1 )
 _sections_unfolded = [ "Margin" ]
 
-[node name="Stats" type="Node2D" parent="." index="1"]
+[node name="Stats" type="Node2D" parent="." index="0"]
 
 position = Vector2( -4, -20 )
 
@@ -372,7 +371,7 @@ texture = ExtResource( 2 )
 centered = false
 _sections_unfolded = [ "Offset" ]
 
-[node name="Equipment" type="Node2D" parent="." index="2"]
+[node name="Equipment" type="Node2D" parent="." index="1"]
 
 editor/display_folded = true
 position = Vector2( -4, -20 )
@@ -427,20 +426,6 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[connection signal="pressed" from="Stats/Buttons/UnassignHealthButton" to="." method="_on_UnassignHealthButton_pressed"]
-
-[connection signal="pressed" from="Stats/Buttons/AssignHealthButton" to="." method="_on_AssignHealthButton_pressed"]
-
-[connection signal="pressed" from="Stats/Buttons/UnassignStrengthButton" to="." method="_on_UnassignStrengthButton_pressed"]
-
-[connection signal="pressed" from="Stats/Buttons/AssignStrengthButton" to="." method="_on_AssignStrengthButton_pressed"]
-
-[connection signal="pressed" from="Stats/Buttons/UnassignDefenseButton" to="." method="_on_UnassignDefenseButton_pressed"]
-
-[connection signal="pressed" from="Stats/Buttons/AssignDefenseButton" to="." method="_on_AssignDefenseButton_pressed"]
-
-[connection signal="pressed" from="Stats/Buttons/UnassignActionsButton" to="." method="_on_UnassignActionsButton_pressed"]
-
-[connection signal="pressed" from="Stats/Buttons/AssignActionsButton" to="." method="_on_AssignActionsButton_pressed"]
+[node name="CloseDialogTitlebar" parent="." index="2" instance=ExtResource( 3 )]
 
 
