@@ -73,7 +73,7 @@ const MONSTER_DATA = {
 				"type": "Toxitail",
 				"weight": 60,
 				"health": 80,
-				"strength": 17,
+				"strength": 23,
 				"defense": 20,
 				"turns": 1,
 				"experience points": 17,
