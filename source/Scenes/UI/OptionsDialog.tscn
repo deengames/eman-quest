@@ -19,7 +19,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 popup_exclusive = false
 script = ExtResource( 1 )
-_sections_unfolded = [ "Margin" ]
+_sections_unfolded = [ "Margin", "Theme" ]
 
 [node name="ZoomOutToggle" type="CheckButton" parent="." index="0"]
 
@@ -91,7 +91,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-text = "Zoom:"
+text = "Zoom (100%):"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -103,7 +103,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 84.0
+margin_left = 180.0
 margin_top = 166.0
 margin_right = 690.0
 margin_bottom = 180.0
@@ -125,7 +125,25 @@ editable = true
 tick_count = 8
 ticks_on_borders = false
 focus_mode = 2
-_sections_unfolded = [ "Margin" ]
+_sections_unfolded = [ "Margin", "Theme" ]
+
+[node name="HideErrorsLolWut" type="ColorRect" parent="ZoomSlider" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 60.0
+margin_top = 16.0
+margin_right = 461.0
+margin_bottom = 31.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0.0980392, 0.0862745, 0.141176, 1 )
 
 [connection signal="popup_hide" from="." to="." method="_on_PopupPanel_popup_hide"]
 

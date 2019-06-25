@@ -19,6 +19,7 @@ func _ready():
 	var zoom = min(zoom_x, zoom_y)
 	_target_zoom = zoom
 	$ZoomSlider.value = zoom * 100
+	_update_zoom_label()
 
 func title(value):
 	$CloseDialogTitlebar.title = value
@@ -41,7 +42,13 @@ func _save_options():
 
 func _on_ZoomSlider_value_changed(value):
 	_target_zoom = $ZoomSlider.value / 100
+	_update_zoom_label()
 
+# Apply specified zoom on popup close
 func _on_PopupPanel_popup_hide():
 	var new_size = Vector2(_GAME_WIDTH * _target_zoom, _GAME_HEIGHT * _target_zoom)
 	OS.window_size = new_size
+
+func _update_zoom_label():
+	$ZoomLabel.text = "Zoom (" + str($ZoomSlider.value) + "%):"
+	

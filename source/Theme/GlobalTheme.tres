@@ -1,16 +1,18 @@
-[gd_resource type="Theme" load_steps=640 format=2]
+[gd_resource type="Theme" load_steps=642 format=2]
 
 [ext_resource path="res://assets/images/gui/dialog-skin.png" type="Texture" id=1]
 [ext_resource path="res://Theme/PanelStyle.tres" type="StyleBox" id=2]
 [ext_resource path="res://Theme/Discard/ButtonPressed.tres" type="StyleBox" id=3]
 [ext_resource path="res://Theme/CheckButton-Off.tres" type="Texture" id=4]
 [ext_resource path="res://Theme/CheckButton-On.tres" type="Texture" id=5]
-[ext_resource path="res://Theme/Discard/ButtonFocus.tres" type="StyleBox" id=6]
-[ext_resource path="res://Theme/Discard/ButtonNormal.tres" type="StyleBox" id=7]
-[ext_resource path="res://Theme/Discard/ButtonDisabled.tres" type="StyleBox" id=8]
-[ext_resource path="res://Theme/Discard/ButtonHover.tres" type="StyleBox" id=9]
-[ext_resource path="res://Theme/WindowDialog-Close.tres" type="Texture" id=10]
-[ext_resource path="res://Theme/Default-24px.tres" type="DynamicFont" id=11]
+[ext_resource path="res://assets/images/gui/slider-grabber.png" type="Texture" id=6]
+[ext_resource path="res://assets/images/gui/slider-grabber-highlight.png" type="Texture" id=7]
+[ext_resource path="res://Theme/Discard/ButtonFocus.tres" type="StyleBox" id=8]
+[ext_resource path="res://Theme/Discard/ButtonNormal.tres" type="StyleBox" id=9]
+[ext_resource path="res://Theme/Discard/ButtonDisabled.tres" type="StyleBox" id=10]
+[ext_resource path="res://Theme/Discard/ButtonHover.tres" type="StyleBox" id=11]
+[ext_resource path="res://Theme/WindowDialog-Close.tres" type="Texture" id=12]
+[ext_resource path="res://Theme/Default-24px.tres" type="DynamicFont" id=13]
 
 [sub_resource type="StyleBoxTexture" id=1]
 
@@ -5903,7 +5905,7 @@ _sections_unfolded = [ "Expand Margin", "Margin", "Modulate", "Resource" ]
 
 [resource]
 
-default_font = ExtResource( 11 )
+default_font = ExtResource( 13 )
 BoxContainer/constants/separation = 4
 Button/colors/font_color = Color( 0.79902, 0.807843, 0.827451, 1 )
 Button/colors/font_color_disabled = Color( 1, 1, 1, 0.3 )
@@ -6608,8 +6610,8 @@ HScrollBar/styles/grabber_pressed = SubResource( 594 )
 HScrollBar/styles/scroll = SubResource( 595 )
 HScrollBar/styles/scroll_focus = SubResource( 596 )
 HSeparator/styles/separator = SubResource( 597 )
-HSlider/icons/grabber = SubResource( 236 )
-HSlider/icons/grabber_highlight = SubResource( 237 )
+HSlider/icons/grabber = ExtResource( 6 )
+HSlider/icons/grabber_highlight = ExtResource( 7 )
 HSlider/styles/grabber_area = SubResource( 598 )
 HSlider/styles/slider = SubResource( 599 )
 HSplitContainer/constants/separation = 8
@@ -6639,9 +6641,9 @@ LineEdit/colors/cursor_color = Color( 0.79902, 0.807843, 0.827451, 1 )
 LineEdit/colors/font_color = Color( 0.79902, 0.807843, 0.827451, 1 )
 LineEdit/colors/read_only = Color( 1, 1, 1, 0.3 )
 LineEdit/colors/selection_color = Color( 0.490196, 0.490196, 0.490196, 1 )
-LineEdit/styles/focus = ExtResource( 6 )
-LineEdit/styles/normal = ExtResource( 7 )
-LineEdit/styles/read_only = ExtResource( 8 )
+LineEdit/styles/focus = ExtResource( 8 )
+LineEdit/styles/normal = ExtResource( 9 )
+LineEdit/styles/read_only = ExtResource( 10 )
 LinkButton/colors/font_color = Color( 0.79902, 0.807843, 0.827451, 1 )
 LinkButton/styles/focus = SubResource( 581 )
 MarginContainer/constants/margin_bottom = 0
@@ -6663,10 +6665,10 @@ OptionButton/colors/icon_color_hover = Color( 0.879412, 0.884706, 0.896471, 1 )
 OptionButton/constants/arrow_margin = 4
 OptionButton/constants/modulate_arrow = 1
 OptionButton/icons/arrow = SubResource( 226 )
-OptionButton/styles/disabled = ExtResource( 8 )
-OptionButton/styles/focus = ExtResource( 6 )
-OptionButton/styles/hover = ExtResource( 9 )
-OptionButton/styles/normal = ExtResource( 7 )
+OptionButton/styles/disabled = ExtResource( 10 )
+OptionButton/styles/focus = ExtResource( 8 )
+OptionButton/styles/hover = ExtResource( 11 )
+OptionButton/styles/normal = ExtResource( 9 )
 OptionButton/styles/pressed = ExtResource( 3 )
 Panel/styles/panel = ExtResource( 2 )
 PanelContainer/styles/panel = SubResource( 8 )
@@ -6727,9 +6729,9 @@ TextEdit/colors/caret_color = Color( 1, 1, 1, 0.2 )
 TextEdit/colors/font_color = Color( 0.79902, 0.807843, 0.827451, 1 )
 TextEdit/colors/selection_color = Color( 0.490196, 0.490196, 0.490196, 1 )
 TextEdit/icons/tab = SubResource( 239 )
-TextEdit/styles/focus = ExtResource( 9 )
-TextEdit/styles/normal = ExtResource( 7 )
-TextEdit/styles/read_only = ExtResource( 8 )
+TextEdit/styles/focus = ExtResource( 11 )
+TextEdit/styles/normal = ExtResource( 9 )
+TextEdit/styles/read_only = ExtResource( 10 )
 ToolButton/colors/font_color = Color( 0.79902, 0.807843, 0.827451, 1 )
 ToolButton/colors/font_color_hover = Color( 0.879412, 0.884706, 0.896471, 1 )
 ToolButton/colors/font_color_pressed = Color( 0.411765, 0.611765, 0.909804, 1 )
@@ -6768,7 +6770,7 @@ Tree/styles/button_pressed = SubResource( 614 )
 Tree/styles/cursor = SubResource( 615 )
 Tree/styles/cursor_unfocused = SubResource( 615 )
 Tree/styles/custom_button = SubResource( 616 )
-Tree/styles/custom_button_hover = ExtResource( 7 )
+Tree/styles/custom_button_hover = ExtResource( 9 )
 Tree/styles/custom_button_pressed = SubResource( 617 )
 Tree/styles/selected = SubResource( 603 )
 Tree/styles/selected_focus = SubResource( 604 )
@@ -6798,8 +6800,8 @@ WindowDialog/constants/close_h_ofs = 22
 WindowDialog/constants/close_v_ofs = 20
 WindowDialog/constants/title_height = 24
 WindowDialog/fonts/title_font = null
-WindowDialog/icons/close = ExtResource( 10 )
-WindowDialog/icons/close_highlight = ExtResource( 10 )
+WindowDialog/icons/close = ExtResource( 12 )
+WindowDialog/icons/close_highlight = ExtResource( 12 )
 WindowDialog/styles/panel = SubResource( 628 )
-_sections_unfolded = [ "Button", "Button/styles", "CheckButton", "CheckButton/icons", "EditorFonts/fonts", "ItemList/styles", "Label/constants", "Label/styles", "Panel/styles", "PopupPanel", "PopupPanel/styles", "WindowDialog", "WindowDialog/fonts", "WindowDialog/icons", "WindowDialog/styles" ]
+_sections_unfolded = [ "Button/styles", "CheckButton/constants", "CheckButton/icons", "CheckButton/styles", "EditorFonts/fonts", "HSlider", "HSlider/icons", "HSlider/styles", "ItemList/styles", "Label/constants", "Label/styles", "Panel/styles", "PopupPanel", "PopupPanel/styles", "WindowDialog", "WindowDialog/fonts", "WindowDialog/icons", "WindowDialog/styles" ]
 
