@@ -10,6 +10,7 @@ func _ready():
 	AudioManager.new().add_click_noise_to_controls(self)
 	$MonstersChaseToggle.pressed = Features.is_enabled("monsters chase you")
 	$Zoom/ZoomSlider.value = Globals.zoom
+	$FullScreen.pressed = Globals.is_full_screen
 
 func title(value):
 	$CloseDialogTitlebar.title = value
@@ -22,7 +23,8 @@ func _save_options():
 	var options = {
 		"zoom": Globals.zoom,
 		"monsters_chase": $MonstersChaseToggle.pressed,
-		"is_first_run": false # always false on save
+		"is_first_run": false, # always false because we ran the first run
+		"is_full_screen": Globals.is_full_screen
 	}
 	
 	OptionsSaver.save(options)
@@ -34,10 +36,20 @@ func _on_ZoomSlider_value_changed(value):
 
 # Apply specified zoom on popup close
 func _on_PopupPanel_popup_hide():
-	var percent_zoom = Globals.zoom / 100
-	var new_size = Vector2(_GAME_WIDTH * percent_zoom, _GAME_HEIGHT * percent_zoom)
-	OS.window_size = new_size
+	if not Globals.is_full_screen:
+		var percent_zoom = Globals.zoom / 100
+		var new_size = Vector2(_GAME_WIDTH * percent_zoom, _GAME_HEIGHT * percent_zoom)
+		OS.window_size = new_size
+	
+	OS.window_maximized = Globals.is_full_screen
 
 func _update_zoom_label():
 	$Zoom/ZoomLabel.text = "Zoom (" + str(Globals.zoom) + "%):"
+
+func _on_FullScreen_toggled(button_pressed):
+	Globals.is_full_screen = button_pressed
+	$Zoom/ZoomSlider.editable = not button_pressed
+	if not $Zoom/ZoomSlider.editable:
+		Globals.zoom = 100
+	_save_options()
 	

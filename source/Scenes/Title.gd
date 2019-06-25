@@ -18,7 +18,9 @@ func _ready():
 	if data == null:
 		data = {
 			"zoom": 100,
-			"monsters_chase": Features.is_enabled("monsters chase you")
+			"monsters_chase": Features.is_enabled("monsters chase you"),
+			"is_first_run": true,
+			"is_full_screen": true
 		}
 	
 	var window_size = OS.window_size
@@ -27,6 +29,14 @@ func _ready():
 	OS.window_size = Vector2(_GAME_WIDTH * zoom_percent, _GAME_HEIGHT * zoom_percent)
 	
 	Features.set_state("monsters chase you", data["monsters_chase"])
+	Globals.is_full_screen = data["is_full_screen"]
+	
+	Globals.is_first_run = data["is_first_run"]
+	if Globals.is_first_run:
+		Globals.is_full_screen = true
+		Globals.is_first_run = false
+		_on_Options_pressed()
+		OS.window_maximized = true
 	
 	var tree = get_tree()
 	SceneFadeManager.fade_in(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
