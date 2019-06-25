@@ -40,9 +40,10 @@ func _ready():
 	$StartButton.visible = false
 	var game_number = self._print_and_set_seed()
 	
-	var tree = get_tree()
-	SceneFadeManager.fade_in(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
-	yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
+	if not Globals.is_testing:
+		var tree = get_tree()
+		SceneFadeManager.fade_in(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
+		yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
 	
 	Globals.quest = Quest.new()
 	self._generate_world()

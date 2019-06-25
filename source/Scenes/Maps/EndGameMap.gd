@@ -33,7 +33,8 @@ func _ready():
 	elif Globals.showed_final_events:
 		self.remove_child($Jinn)
 	
-	_audio_bgs.play_sound("waterfall-cliff", AudioManager.BG_AUDIO_DB_OFFSET)
+	if not Globals.is_testing:
+		_audio_bgs.play_sound("waterfall-cliff", AudioManager.BG_AUDIO_DB_OFFSET)
 	
 
 func _on_FinalEventsTrigger_body_entered(body):

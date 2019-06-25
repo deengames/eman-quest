@@ -41,7 +41,8 @@ func _ready():
 		var mama = _spawn(Mama, $Locations/Mama)
 		Globals.player.z_index = 9
 	
-	_audio_bgs.play_sound("home", AudioManager.BG_AUDIO_DB_OFFSET)
+	if not Globals.is_testing:
+		_audio_bgs.play_sound("home", AudioManager.BG_AUDIO_DB_OFFSET)
 
 func show_intro_events():
 	_audio_bgs.clean_up_audio()
