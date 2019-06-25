@@ -3,7 +3,7 @@
 [ext_resource path="res://Scenes/UI/OptionsDialog.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/UI/CloseDialogTitlebar.tscn" type="PackedScene" id=2]
 
-[node name="PopupPanel" type="PopupPanel" index="0"]
+[node name="PopupPanel" type="PopupPanel"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -21,7 +21,9 @@ popup_exclusive = false
 script = ExtResource( 1 )
 _sections_unfolded = [ "Margin", "Theme" ]
 
-[node name="ZoomOutToggle" type="CheckButton" parent="." index="0"]
+[node name="CloseDialogTitlebar" parent="." index="0" instance=ExtResource( 2 )]
+
+[node name="MonstersChaseToggle" type="CheckButton" parent="." index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -42,71 +44,25 @@ toggle_mode = true
 enabled_focus_mode = 2
 shortcut = null
 group = null
-text = "Zoom-out sub-area maps"
-flat = false
-align = 0
-_sections_unfolded = [ "Margin", "custom_fonts" ]
-
-[node name="MonstersChaseToggle" type="CheckButton" parent="." index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 10.0
-margin_top = 99.0
-margin_right = 692.0
-margin_bottom = 141.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = true
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Monsters chase you"
 flat = false
 align = 0
 _sections_unfolded = [ "Margin", "custom_fonts" ]
 
-[node name="CloseDialogTitlebar" parent="." index="2" instance=ExtResource( 2 )]
+[node name="Zoom" type="Node2D" parent="." index="2"]
 
-[node name="ZoomLabel" type="Label" parent="." index="3"]
+position = Vector2( 10, 110 )
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 10.0
-margin_top = 150.0
-margin_right = 74.0
-margin_bottom = 192.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-text = "Zoom (100%):"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "Margin" ]
-
-[node name="ZoomSlider" type="HSlider" parent="." index="4"]
+[node name="ZoomSlider" type="HSlider" parent="Zoom" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 180.0
-margin_top = 166.0
-margin_right = 690.0
-margin_bottom = 180.0
+margin_left = 170.0
+margin_top = 16.0
+margin_right = 680.0
+margin_bottom = 30.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -127,7 +83,7 @@ ticks_on_borders = false
 focus_mode = 2
 _sections_unfolded = [ "Margin", "Theme" ]
 
-[node name="HideErrorsLolWut" type="ColorRect" parent="ZoomSlider" index="0"]
+[node name="HideErrorsLolWut" type="ColorRect" parent="Zoom/ZoomSlider" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -145,12 +101,30 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 0.0980392, 0.0862745, 0.141176, 1 )
 
-[connection signal="popup_hide" from="." to="." method="_on_PopupPanel_popup_hide"]
+[node name="ZoomLabel" type="Label" parent="Zoom" index="1"]
 
-[connection signal="toggled" from="ZoomOutToggle" to="." method="_on_ZoomOutToggle_toggled"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 160.0
+margin_bottom = 42.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Zoom (100%):"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Margin" ]
+
+[connection signal="popup_hide" from="." to="." method="_on_PopupPanel_popup_hide"]
 
 [connection signal="toggled" from="MonstersChaseToggle" to="." method="_on_MonstersChaseToggle_toggled"]
 
-[connection signal="value_changed" from="ZoomSlider" to="." method="_on_ZoomSlider_value_changed"]
+[connection signal="value_changed" from="Zoom/ZoomSlider" to="." method="_on_ZoomSlider_value_changed"]
 
 

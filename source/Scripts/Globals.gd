@@ -46,6 +46,8 @@ var showed_final_events = false
 var beat_last_boss = false
 var show_battle_tutorial = true
 var show_first_map_tutorial = false
+var zoom = 100
+var is_first_run = true
 # End: persist
 ####
 

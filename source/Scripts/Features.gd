@@ -3,7 +3,6 @@ extends Node
 var _feature_map = {
 	### Stuff that's going into production
 	# User-facing
-	"zoom-out maps": false, # toggleable via options menu
 	"monsters chase you": false,
 	# Non-user facing
 	"defend action": true, # Exists in old and new battle engine
@@ -17,7 +16,8 @@ var _feature_map = {
 	"sequence battle triggers": true,
 	"n-back battle triggers": false,
 	"unlimited battle choices": false,
-	"instant actions": true
+	"instant actions": true,
+	"zoom-out maps": false, # no longer toggleable via options menu
 }
 
 func set_state(feature, enabled):

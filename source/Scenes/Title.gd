@@ -7,16 +7,25 @@ const OptionsSaver = preload("res://Scripts/OptionsSaver.gd")
 const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
+var _GAME_WIDTH = ProjectSettings.get_setting("display/window/size/width")
+var _GAME_HEIGHT = ProjectSettings.get_setting("display/window/size/height")
+
 var _audio
 
 func _ready():
 	var data = OptionsSaver.load()
+	
 	if data == null:
 		data = {
-			"zoom": Features.is_enabled("zoom-out maps"),
+			"zoom": 100,
 			"monsters_chase": Features.is_enabled("monsters chase you")
 		}
-	Features.set_state("zoom-out maps", data["zoom"])
+	
+	var window_size = OS.window_size
+	Globals.zoom  = data["zoom"]
+	var zoom_percent = Globals.zoom / 100
+	OS.window_size = Vector2(_GAME_WIDTH * zoom_percent, _GAME_HEIGHT * zoom_percent)
+	
 	Features.set_state("monsters chase you", data["monsters_chase"])
 	
 	var tree = get_tree()
