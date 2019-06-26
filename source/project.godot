@@ -23,6 +23,9 @@ Globals="*res://Scripts/Globals.gd"
 
 window/size/width=960
 window/size/height=576
+window/stretch/mode="viewport"
+window/stretch/aspect="keep"
+window/stretch/shrink="1"
 
 [editor_plugins]
 

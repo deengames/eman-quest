@@ -41,6 +41,34 @@ var key_items = []
 var tech_points = 0
 var play_time_seconds = 0
 
+static func seconds_to_time(total_seconds):
+	var seconds = int(total_seconds)
+	var display_seconds = seconds % 60
+	var display_minutes = int(seconds / 60)
+	var display_hours = int(display_minutes / 60)
+	
+	var final_minutes = display_minutes
+	if display_hours > 0:
+		final_minutes = _two_digit(display_minutes)
+	
+	if display_hours > 0:
+		return "{h}:{m}:{s}".format({
+			"h": display_hours,
+			"m": final_minutes,
+			"s": _two_digit(display_seconds)
+		})
+	else:
+		return "{m}:{s}".format({
+			"m": final_minutes,
+			"s": _two_digit(display_seconds)
+		})
+
+static func _two_digit(n):
+	if n <= 9:
+		return "0" + str(n)
+	else:
+		return str(n)
+
 func _init():
 	weapon.primary_stat_modifier = 7
 	weapon.secondary_stat_modifier = 2

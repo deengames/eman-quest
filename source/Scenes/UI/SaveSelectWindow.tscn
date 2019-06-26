@@ -1,15 +1,16 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/UI/SaveSelectWindow.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/UI/CloseDialogTitlebar.tscn" type="PackedScene" id=2]
 
-[node name="WindowDialog" type="WindowDialog" index="0"]
+[node name="PopupPanel" type="PopupPanel" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 850.0
-margin_bottom = 500.0
+margin_bottom = 510.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -17,21 +18,19 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 popup_exclusive = false
-window_title = "Pick Save Game"
-resizable = false
 script = ExtResource( 1 )
 _sections_unfolded = [ "Margin", "Popup" ]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." index="1"]
+[node name="HBoxContainer" type="HBoxContainer" parent="." index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 8.0
-margin_top = 8.0
+margin_top = 56.0
 margin_right = 700.0
-margin_bottom = 442.0
+margin_bottom = 502.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -47,7 +46,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_bottom = 434.0
+margin_bottom = 446.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -62,7 +61,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 150.0
-margin_bottom = 484.0
+margin_bottom = 446.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
 focus_mode = 2
@@ -85,13 +84,14 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 4.0
 margin_right = 4.0
-margin_bottom = 434.0
+margin_bottom = 446.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+_sections_unfolded = [ "Margin" ]
 
 [node name="SaveDetailsPanel" type="Panel" parent="HBoxContainer/Container2" index="0"]
 
@@ -100,8 +100,8 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 154.0
-margin_right = 838.0
-margin_bottom = 484.0
+margin_right = 830.0
+margin_bottom = 446.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -140,7 +140,7 @@ position = Vector2( 8, 136 )
 scale = Vector2( 0.75, 0.75 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 0, 0, 890, 456 )
+region_rect = Rect2( 0, 0, 882, 388 )
 _sections_unfolded = [ "Offset", "Region", "Transform", "Visibility" ]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Container2/SaveDetailsPanel" index="2"]
@@ -149,10 +149,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 534.0
+margin_left = 526.0
 margin_top = 10.0
-margin_right = 674.0
-margin_bottom = 126.0
+margin_right = 666.0
+margin_bottom = 130.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 1
@@ -169,7 +169,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 140.0
-margin_bottom = 58.0
+margin_bottom = 50.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -191,9 +191,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 62.0
+margin_top = 54.0
 margin_right = 140.0
-margin_bottom = 120.0
+margin_bottom = 104.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -208,6 +208,8 @@ group = null
 text = "Load"
 flat = false
 align = 1
+
+[node name="CloseDialogTitlebar" parent="." index="1" instance=ExtResource( 2 )]
 
 [connection signal="item_selected" from="HBoxContainer/Container/ItemList" to="." method="_on_ItemList_item_selected"]
 

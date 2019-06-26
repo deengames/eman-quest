@@ -1,4 +1,4 @@
-extends WindowDialog
+extends PopupPanel
 
 # List just takes strings. Keep references to items.
 var _all_items = []
@@ -8,6 +8,9 @@ func _ready():
 	self.popup_exclusive = true
 	self._clear_selected_display()
 	self._populate_item_list()
+
+func title(value):
+	$CloseDialogTitlebar.title = value
 
 func _populate_item_list():
 	$ItemList.clear()

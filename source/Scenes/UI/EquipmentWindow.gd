@@ -1,4 +1,4 @@
-extends WindowDialog
+extends PopupPanel
 
 const AudioManager = preload("res://Scripts/AudioManager.gd")
 
@@ -13,6 +13,9 @@ func _ready():
 	self._populate_item_list()
 	$EquipButton.disabled = true
 	AudioManager.new().add_click_noise_to_controls(self)
+
+func title(value):
+	$CloseDialogTitlebar.title = value
 
 func _update_equipped_display():
 	$Equipment/CurrentWeapon.text = Globals.player_data.weapon.str()

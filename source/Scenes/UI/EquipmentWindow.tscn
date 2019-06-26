@@ -1,15 +1,16 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/UI/EquipmentWindow.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/UI/CloseDialogTitlebar.tscn" type="PackedScene" id=2]
 
-[node name="WindowDialog" type="WindowDialog" index="0"]
+[node name="PopupPanel" type="PopupPanel" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 700.0
-margin_bottom = 410.0
+margin_bottom = 470.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -17,12 +18,13 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 popup_exclusive = false
-window_title = ""
-resizable = true
 script = ExtResource( 1 )
 _sections_unfolded = [ "Margin", "custom_styles" ]
 
 [node name="Titles" type="Node2D" parent="." index="0"]
+
+editor/display_folded = true
+position = Vector2( 0, 48 )
 
 [node name="Label" type="Label" parent="Titles" index="0"]
 
@@ -112,7 +114,10 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Margin", "custom_fonts" ]
 
-[node name="Equipment" type="Node2D" parent="." index="2"]
+[node name="Equipment" type="Node2D" parent="." index="1"]
+
+editor/display_folded = true
+position = Vector2( 0, 48 )
 
 [node name="CurrentWeapon" type="Label" parent="Equipment" index="0"]
 
@@ -210,16 +215,16 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Margin", "custom_fonts" ]
 
-[node name="ItemList" type="ItemList" parent="." index="3"]
+[node name="ItemList" type="ItemList" parent="." index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 20.0
-margin_top = 20.0
+margin_top = 68.0
 margin_right = 220.0
-margin_bottom = 315.0
+margin_bottom = 363.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
 focus_mode = 2
@@ -234,16 +239,16 @@ icon_mode = 1
 fixed_icon_size = Vector2( 0, 0 )
 _sections_unfolded = [ "Columns", "Focus", "Icon", "Margin", "custom_fonts", "custom_styles" ]
 
-[node name="EquipButton" type="Button" parent="." index="4"]
+[node name="EquipButton" type="Button" parent="." index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 75.0
-margin_top = 332.0
+margin_top = 380.0
 margin_right = 160.0
-margin_bottom = 390.0
+margin_bottom = 438.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -260,10 +265,6 @@ flat = false
 align = 1
 _sections_unfolded = [ "custom_fonts" ]
 
-[connection signal="item_selected" from="ItemList" to="." method="_on_ItemList_item_selected"]
-
-[connection signal="nothing_selected" from="ItemList" to="." method="_on_ItemList_nothing_selected"]
-
-[connection signal="pressed" from="EquipButton" to="." method="_on_EquipButton_pressed"]
+[node name="CloseDialogTitlebar" parent="." index="4" instance=ExtResource( 2 )]
 
 

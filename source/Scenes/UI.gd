@@ -10,17 +10,19 @@ signal opened_save_manager
 signal closed_save_manager
 
 func _on_StatsButton_pressed():
-	self._show_popup(StatsWindow.instance())
+	self._show_popup(StatsWindow.instance(), "Player Stats")
 	
 func _on_EquipmentButton_pressed():
-	self._show_popup(EquipmentWindow.instance())
+	self._show_popup(EquipmentWindow.instance(), "Equipment")
 
 func _on_KeyItemsButton_pressed():
-	self._show_popup(KeyItemsWindow.instance())
+	self._show_popup(KeyItemsWindow.instance(), "Key Items")
 
-func _show_popup(instance):
+func _show_popup(instance, title):
 	Globals.player.freeze()
+	instance.popup_exclusive = true
 	instance.connect("popup_hide", self, "_unfreeze_all")
+	instance.title(title)
 	get_parent().freeze_monsters()
 	self.add_child(instance)
 	instance.popup_centered()
@@ -33,7 +35,7 @@ func _on_SaveButton_pressed():
 	
 	var save_picker = SaveSelectWindow.instance()
 	save_picker.connect("popup_hide", self, "_closed_save_manager")
-	_show_popup(save_picker)
+	_show_popup(save_picker, "Save/Load Game")
 	
 	emit_signal("opened_save_manager")
 

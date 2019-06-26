@@ -1,5 +1,7 @@
 # Eman Quest
 
+[![Build Status](https://travis-ci.org/deengames/eman-quest.svg?branch=master)](https://travis-ci.org/deengames/eman-quest)
+
 Pronounced "e-maan quest." A different procedurally-generated RPG-lite with memory mechanics for battles. Born as a September 2018 monthly game development experiment.
 
 # Gameplay Goals + Math
