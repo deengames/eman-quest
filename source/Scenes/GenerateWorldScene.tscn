@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/GenerateWorldScene.gd" type="Script" id=1]
-[ext_resource path="res://assets/images/space-background.png" type="Texture" id=2]
+[ext_resource path="res://assets/images/tessallation.png" type="Texture" id=2]
 
 [node name="Node2D" type="Node2D"]
 
@@ -13,7 +13,7 @@ texture = ExtResource( 2 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 960, 576 )
-_sections_unfolded = [ "Offset", "Region" ]
+_sections_unfolded = [ "Offset", "Region", "Visibility" ]
 
 [node name="Status" type="Label" parent="." index="1"]
 
