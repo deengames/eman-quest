@@ -38,7 +38,6 @@ static func save(save_id):
 	
 	maps = to_json(maps)
 	var player_data = to_json(Globals.player_data.to_dict())
-	var story_data = to_json(Globals.story_data)
 	var overworld_position = to_json(DictionaryHelper.vector2_to_dict(Globals.overworld_position))
 	var current_map_data = to_json(Globals.current_map.to_dict())
 	var player_position = to_json(DictionaryHelper.vector2_to_dict(Globals.player.position))
@@ -58,7 +57,6 @@ static func save(save_id):
 	# TODO: instead of the order of lines mattering, next time, just save a dictionary.
 	save_game.store_line(maps)
 	save_game.store_line(player_data)
-	save_game.store_line(story_data)
 	save_game.store_line(overworld_position)
 	save_game.store_line(current_map_data)
 	save_game.store_line(player_position)
@@ -89,7 +87,6 @@ static func load(save_id, tree):
 				Globals.maps[key].append(AreaMap.from_dict(data))
 	
 	Globals.player_data = PlayerData.from_dict(data["player_data"])
-	Globals.story_data = data["story_data"]
 	Globals.overworld_position = DictionaryHelper.dict_to_vector2(data["overworld_position_data"])
 	
 	var current_map =  AreaMap.from_dict(data["current_map_data"])
@@ -126,7 +123,6 @@ static func load_data(save_id):
 	
 	data["maps_data"] = parse_json(save_game.get_line())
 	data["player_data"] = parse_json(save_game.get_line())
-	data["story_data"] = parse_json(save_game.get_line())
 	data["overworld_position_data"] = parse_json(save_game.get_line())
 	data["current_map_data"] = parse_json(save_game.get_line())
 	data["player_position_data"] = parse_json(save_game.get_line())

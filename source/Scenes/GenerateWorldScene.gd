@@ -81,11 +81,6 @@ func _generate_world():
 	var overworld = OverworldGenerator.new().generate(Globals.maps.keys())
 	Globals.maps["Overworld"] = overworld
 	
-	Globals.story_data = {
-		"village_name": self._generate_village_name(),
-		"boss_type": self._generate_boss_type()
-	}
-	
 func _generate_subarea_maps(variation, generator_class, num_submaps):
 	var layout = MapLayoutGenerator.generate_layout(num_submaps)
 	var submaps = []
@@ -111,16 +106,6 @@ func _generate_subarea_maps(variation, generator_class, num_submaps):
 	
 	return submaps
 
-# TODO: delete
-func _generate_village_name():
-	var options = ['Nahr', 'Bahr', 'Shajar', 'Aqram', 'Hira']
-	return options[randi() % len(options)]
-
-# TODO: delete
-func _generate_boss_type():
-	var options = ['snake', 'black dog', 'gargoyle']
-	return options[randi() % len(options)]
-	
 func _generate_transitions(submap, map_width, map_height):
 	var transitions = []
 	var entrance_from_overworld = null

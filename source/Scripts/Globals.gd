@@ -29,7 +29,6 @@ var player # current player instance. Used for collision detection mostly.
 # Start: persist to save game. Set in world generator.
 var maps = {} # eg. "forest/frost" => forest (AreaMap/data class) instance
 var player_data = PlayerData.new() # the actual player data.
-var story_data = {} # set in GenerateWorldScene; boss type, village name, etc.
 # Vector2. come back to these coordinates after leaving the current dungeon. 
 var overworld_position
 var current_map # AreaMap instance
