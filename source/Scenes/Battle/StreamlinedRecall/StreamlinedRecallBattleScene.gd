@@ -137,7 +137,7 @@ func _update_health_displays():
 	$MonsterControls/MonsterHealth.value = monster_health
 	$MonsterControls/MonsterHealth/Label.text = str(monster_health)
 	
-	$ActionsPanel/ActionsLabel.text = "Actions: " + str(_actions_left)
+	$ActionsPanel/ActionsLabel.text = "Action points: " + str(_actions_left)
 
 func _remove_tutorial_arrows():
 	for arrow in _tutorial_arrows:
