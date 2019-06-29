@@ -3,7 +3,7 @@
 [ext_resource path="res://Scenes/UI/EquipmentWindow.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/UI/CloseDialogTitlebar.tscn" type="PackedScene" id=2]
 
-[node name="PopupPanel" type="PopupPanel" index="0"]
+[node name="PopupPanel" type="PopupPanel"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -116,7 +116,6 @@ _sections_unfolded = [ "Margin", "custom_fonts" ]
 
 [node name="Equipment" type="Node2D" parent="." index="1"]
 
-editor/display_folded = true
 position = Vector2( 0, 48 )
 
 [node name="CurrentWeapon" type="Label" parent="Equipment" index="0"]
@@ -266,5 +265,11 @@ align = 1
 _sections_unfolded = [ "custom_fonts" ]
 
 [node name="CloseDialogTitlebar" parent="." index="4" instance=ExtResource( 2 )]
+
+[connection signal="item_selected" from="ItemList" to="." method="_on_ItemList_item_selected"]
+
+[connection signal="nothing_selected" from="ItemList" to="." method="_on_ItemList_nothing_selected"]
+
+[connection signal="pressed" from="EquipButton" to="." method="_on_EquipButton_pressed"]
 
 

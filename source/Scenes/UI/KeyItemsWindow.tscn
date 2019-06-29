@@ -123,4 +123,8 @@ _sections_unfolded = [ "Columns", "Focus", "Icon", "Margin", "custom_fonts", "cu
 
 [node name="CloseDialogTitlebar" parent="." index="3" instance=ExtResource( 2 )]
 
+[connection signal="item_selected" from="ItemList" to="." method="_on_ItemList_item_selected"]
+
+[connection signal="nothing_selected" from="ItemList" to="." method="_on_ItemList_nothing_selected"]
+
 
