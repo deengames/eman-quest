@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Titlescreen.png-2ca6cc61c9b8e01c174720881099a56b.stex"
+path="res://.import/titlescreen-spear.png-e1ff6f5b6c0a79e3bcccedb1fda50025.stex"
 
 [deps]
 
-source_file="res://assets/images/Titlescreen.png"
-dest_files=[ "res://.import/Titlescreen.png-2ca6cc61c9b8e01c174720881099a56b.stex" ]
+source_file="res://assets/images/titlescreen-spear.png"
+dest_files=[ "res://.import/titlescreen-spear.png-e1ff6f5b6c0a79e3bcccedb1fda50025.stex" ]
 
 [params]
 
