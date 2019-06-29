@@ -123,7 +123,7 @@ func _update_health_displays():
 	self._update_monster_health_displays()
 
 func _update_player_health_displays():
-	$YourHpLabel.text = "Hero: " + str(self.player.current_health)
+	$YourHpLabel.text = Globals.PLAYER_NAME + ": " + str(self.player.current_health)
 	$EnergyControls/EnergyLabel.text = str(self.player.energy)
 	$EnergyControls/EnergyBar.value = round(100 * self.player.energy / self.player.max_energy)
 
@@ -164,7 +164,7 @@ func _finish_turn():
 		self._monster_data["next_round_turns"] = self._monster_data["turns"]
 		
 	if self.player.current_health <= 0:
-		self._add_message("Hero dies!")
+		self._add_message(Globals.PLAYER_NAME + " faints!")
 		self._show_battle_end(false)
 		
 	# Round done

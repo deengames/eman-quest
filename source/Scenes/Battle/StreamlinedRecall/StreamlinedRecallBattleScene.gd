@@ -287,7 +287,7 @@ func _start_next_turn():
 	self._correct_consecutive_tiles_picked = 0
 	
 	if self._is_players_turn:
-		$TurnLabel.text = "Player attacks!"
+		$TurnLabel.text = Globals.PLAYER_NAME + " attacks!"
 		num_tiles = self._player.num_actions
 		# Reset turns if they were decremented eg. stunned. Stun ends on YOUR next turn.
 		self._monster_data["next_round_turns"] = self._monster_data["turns"]

@@ -18,6 +18,11 @@ const WALKABLE_TILES = ['Grass', 'Dirt', 'Ground']
 const SCENE_TRANSITION_TIME_SECONDS = 0.5
 const NUM_SAVES = 10
 
+# NOT USED EVERYWHERE. Some constants demand the use of constants ...
+# so in those cases, we can't refer to this, we have to use a hard-coded value
+# eg. Quest.POST_BOSS_CUTSCENES
+const PLAYER_NAME = "Aisha"
+
 # Screenshots are saved when we click the save manager button, because we don't
 # want the UI in the screenshot. AND, this is before we know the save slot the 
 # player wants; so, just save this generically, and we can move/use it later.

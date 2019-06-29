@@ -10,7 +10,7 @@ signal opened_save_manager
 signal closed_save_manager
 
 func _on_StatsButton_pressed():
-	self._show_popup(StatsWindow.instance(), "Player Stats")
+	self._show_popup(StatsWindow.instance(), Globals.PLAYER_NAME + "'s Stats")
 	
 func _on_EquipmentButton_pressed():
 	self._show_popup(EquipmentWindow.instance(), "Equipment")

@@ -80,7 +80,7 @@ var final_boss_data = {
 # This is a limited-context grammar. For current story, we just support a few events:
 # 1) messages (show message boxes with text)
 # 2) run away (flee from player until off-screen)
-const BOSS_EVENTS = [
+const  BOSS_EVENTS = [
 	# First boss
 	{
 		"pre-fight": [
@@ -97,10 +97,10 @@ const BOSS_EVENTS = [
 			] },
 			{ "die": "Bandit-Dungeon1" },
 			{ "messages": [
-				["Hero", "Are you okay? Did they hurt you?"],
+				["Aisha", "Are you okay? Did they hurt you?"],
 				["Mama", "I'm fine. Don't worry about me, you have to stop them!"],
 				["Mama", "I heard them saying they're summoning a monster from {map2} ..."],
-				["Hero", "Okay. InshaAllah (God willing), we will catch them. Let's get you home."]
+				["Aisha", "Okay. InshaAllah (God willing), we will catch them. Let's get you home."]
 			] }
 		]
 	},
@@ -111,8 +111,8 @@ const BOSS_EVENTS = [
 				["Bandit", "I ..."],
 				["Bandit", "I couldn't ... defeat it ..."],
 				["Bandit", "The Master ..."],
-				["Hero", "?!"],
-				["Hero", "The Master what?!"],
+				["Aisha", "?!"],
+				["Aisha", "The Master what?!"],
 				["Bandit", "..."]
 			] }
 		],
@@ -120,7 +120,7 @@ const BOSS_EVENTS = [
 			{ "messages": [
 				["Bandit", "You killed it ... thank you ..."],
 				["Bandit", "The Master ... made us do it ..."],
-				["Hero", "Where is he? I need to save Mama!"],
+				["Aisha", "Where is he? I need to save Mama!"],
 				["Bandit", "I don't ... {map3} ..."],
 				["Bandit", "..."],
 			] },
@@ -132,33 +132,33 @@ const BOSS_EVENTS = [
 		"pre-fight": [
 			{ "messages": [
 				["Umayyah", "Fwahaha, I've been waiting for you!"],
-				["Hero", "Baba! If you hurt him ..."],
+				["Aisha", "Baba! If you hurt him ..."],
 				["Umayyah", "Do as I say and nobody gets hurt!"],
 				["Umayyah", "See that creature over there? You're going to kill it."],
-				["Hero", "..."],
+				["Aisha", "..."],
 				["Baba", "Don't do it!"],
 				["Umayyah", "SILENCE! Do it, child, or he dies."],
-				["Hero", "Baba ... forgive me ..."],
-				["Hero", "I'll do it, just let him go ..."],
+				["Aisha", "Baba ... forgive me ..."],
+				["Aisha", "I'll do it, just let him go ..."],
 				["Umayyah", "Enough talk. The monster, kid."],
-				["Hero", "..."]
+				["Aisha", "..."]
 			] }
 		],
 		"post-fight": [
 			{ "messages": [
 				["Umayyah", "That's a good child. Now hand it over! All of them monster parts!"],
-				["Hero", "..."],
-				["", "Hero gave up the monster parts."],
+				["Aisha", "..."],
+				["", "Aisha" + " gave up the monster parts."],
 				["Umayyah", "At last ... the true power ... !"],
-				["Hero", "Let him go!"],
+				["Aisha", "Let him go!"],
 				["Umayyah", "Fwahaha! Fool, you will all perish! The true power is mine!"]
 			] },
 			{"escape": "Umayyah" },
 			{ "messages": [
-				["Hero", "Baba!"],
+				["Aisha", "Baba!"],
 				["Baba", "I'm ... okay. Hurry, stop him before it's too late!"],
 				["Baba", "He said something about ... {finalmap}, wherever that is."],
-				["Hero", "Ok Baba, I'll find him and put a stop to this."]
+				["Aisha", "Ok Baba, I'll find him and put a stop to this."]
 			] }
 		]
 	}
@@ -168,31 +168,31 @@ const BOSS_EVENTS = [
 const POST_BOSS_CUTSCENES = [
 	# No bosses defeated
 	[
-		["Baba", "That ... thing ... headed towards {map1}! You have to save her!"]
+		["Baba", "That ... thing ... headed towards {map1}! Aisha, you have to save her!"]
 	],
 	# 1 boss defeated
 	[
 		["Baba", "Alhamdulillah, praise Allah, she is safe!"],
-		["Hero", "Yes, it's a big blessing nobody was hurt. What did that thing want, though?"],
+		["Aisha", "Yes, it's a big blessing nobody was hurt. What did that thing want, though?"],
 		["Baba", "And who is this mysterious 'Master' it mentioned?"],
 		["Mama", "It said they're summoning a monster from {map2} ..."],
-		["Hero", "..."],
+		["Aisha", "..."],
 		["Baba", "It's dangerous, but you should check it out. We can't let monsters just run rampant."],
 		["Mama", "Be careful!"]
 	],
 	# 2 bosses defeated
 	[
-		["Hero", "I found the bandit that kidnapped Mama. It said something about 'The Master', and {map3}."],
+		["Aisha", "I found the bandit that kidnapped Mama. It said something about 'The Master', and {map3}."],
 		["Baba", "Hmm ... this 'Master' sounds like no good. It could be a trap. Be careful ... you are in a prayers."],
-		["Hero", "I will."]
+		["Aisha", "I will."]
 	],
 	# 3 bosses defeated
 	[
 		["Baba", "Alhamdulillah, I'm okay. But you must stop him before it's too late!"],
 		["Baba", "He said something about '{finalmap},' wherever that is."],
-		["Hero", "Ok Baba, I'll find him and put a stop to this."],
-		["Mama", "My daughter, we are so proud of you! You grew up into such a strong warrior, like our Zulu guardian ancestors."],
-		["Hero", "Thanks, Mama."]
+		["Aisha", "Ok Baba, I'll find him and put a stop to this."],
+		["Mama", "My daughter, we are so proud of you! You grew up into such a strong warrior, like our Zulu ancestors."],
+		["Aisha", "Thanks, Mama."]
 	]
 ]
 

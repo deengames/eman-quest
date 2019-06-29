@@ -93,8 +93,8 @@ func _on_FinalEventsTrigger_body_entered(body):
 		dialog_window = self._create_dialog_window(current_scene)
 		dialog_window.show_texts([
 			["Mufsid", "You will perish, human!"],
-			["Hero", "What ... are you ... ?"],
-			["Hero", "Ya Allah ... help me to destroy this monster!"]
+			[Globals.PLAYER_NAME, "What ... are you ... ?"],
+			[Globals.PLAYER_NAME, "Ya Allah ... help me to destroy this monster!"]
 		])
 		yield(dialog_window, "shown_all")
 		dialog_window.queue_free()
@@ -135,7 +135,7 @@ func _show_endgame_events():
 		["Mufsid", "..."],
 		["Mufsid", "Pathetic ..."],
 		["Mufsid", "This puny human vessel cannot command the full extent of my powers ..."],
-		["Hero", "..."],
+		[Globals.PLAYER_NAME, "..."],
 		["Mufsid", "I must find another ..."],
 	])
 	yield(dialog_window, "shown_all")
@@ -164,8 +164,8 @@ func _show_endgame_events():
 	dialog_window = self._create_dialog_window(current_scene)
 	dialog_window.show_texts([
 		["Umayyah", "What ... happened? Where am I?"],
-		["Hero", "..."],
-		["Hero", "It looks like you were under the control of a powerful jinn."],
+		[Globals.PLAYER_NAME, "..."],
+		[Globals.PLAYER_NAME, "It looks like you were under the control of a powerful jinn."],
 		["Umayyah", "... The Great Master ... controlled me?"],
 		["Umayyah", "..."]
 	])
@@ -176,9 +176,9 @@ func _show_endgame_events():
 	dialog_window = self._create_dialog_window(current_scene)
 	dialog_window.show_texts([
 		["Umayyah", "Jinns ... it was a mistake to get involved with them."],
-		["Hero", "I hope you learned your lesson. My parents got hurt."],
+		[Globals.PLAYER_NAME, "I hope you learned your lesson. My parents got hurt."],
 		["Umayyah", "I'm sorry ..."],
-		["Hero", "I'd better get home. Baba and Mama are probably worried."]
+		[Globals.PLAYER_NAME, "I'd better get home. Baba and Mama are probably worried."]
 	])
 	yield(dialog_window, "shown_all")
 	dialog_window.queue_free()

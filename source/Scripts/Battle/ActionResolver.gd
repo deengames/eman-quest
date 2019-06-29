@@ -21,7 +21,7 @@ func resolve(action, player, monster_data, multiplier):
 			var damage = max(0, player.total_strength() - monster_data["defense"])
 			damage = ceil(damage * multiplier)
 			monster_data["health"] -= damage
-			return "Hero attacks for " + str(damage) + " damage!"
+			return Globals.PLAYER_NAME + " attacks for " + str(damage) + " damage!"
 		elif action == "critical":
 			var damage = max(0, floor(1.5 * player.total_strength()) - monster_data["defense"])
 			damage = ceil(damage * multiplier)
@@ -32,20 +32,20 @@ func resolve(action, player, monster_data, multiplier):
 			return "Healed " + str(heal_amount) + " health!"
 		elif action == "defend":
 			player.defend() # multiplier is not used
-			return "Hero doubles down on defense!"
+			return Globals.PLAYER_NAME + " doubles down on defense!"
 			
 		elif action == "vampire":
 			var damage = max(0, player.total_strength()) # ignores defense
 			damage = 2 * ceil(damage * multiplier)
 			monster_data["health"] -= damage
 			player.heal_amount(damage)
-			return "Hero hits/absorbs " + str(damage) + "!"
+			return Globals.PLAYER_NAME + " hits/absorbs " + str(damage) + "!"
 		elif action == "bash":
 			monster_data["next_round_turns"] -= 1
 			var damage = max(0, (player.total_strength() * 2) - monster_data["defense"])
 			damage = ceil(damage * multiplier)
 			monster_data["health"] -= damage
-			return "Hero bashes for " + str(damage) + "! " + monster_name + " loses a turn!"
+			return Globals.PLAYER_NAME + " bashes for " + str(damage) + "! " + monster_name + " loses a turn!"
 			
 		elif action == "energy":
 			return "Gained " + str(BattlePlayer.ENERGY_GAIN_PER_ACTION) + " energy!"
