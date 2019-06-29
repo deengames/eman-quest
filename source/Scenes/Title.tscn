@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/images/space-background.png" type="Texture" id=2]
 [ext_resource path="res://Theme/GlobalTheme.tres" type="Theme" id=3]
 [ext_resource path="res://assets/images/Titlescreen.png" type="Texture" id=4]
-[ext_resource path="res://assets/images/jinn-eye-frame1.png" type="Texture" id=5]
+[ext_resource path="res://assets/images/Titlescreen-Shield.png" type="Texture" id=5]
 
 [node name="Node2D" type="Node2D" index="0"]
 
@@ -103,7 +103,7 @@ _sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="Shield" type="Sprite" parent="." index="5"]
 
-position = Vector2( 480, 350 )
+position = Vector2( 520, 370 )
 texture = ExtResource( 5 )
 _sections_unfolded = [ "Offset", "Transform" ]
 
