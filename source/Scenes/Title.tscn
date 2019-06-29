@@ -2,10 +2,10 @@
 
 [ext_resource path="res://Scenes/Title.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/space-background.png" type="Texture" id=2]
-[ext_resource path="res://Theme/GlobalTheme.tres" type="Theme" id=3]
-[ext_resource path="res://assets/images/titlescreen-text.png" type="Texture" id=4]
-[ext_resource path="res://assets/images/titlescreen-spear.png" type="Texture" id=5]
-[ext_resource path="res://assets/images/titlescreen-shield.png" type="Texture" id=6]
+[ext_resource path="res://assets/images/titlescreen-text.png" type="Texture" id=3]
+[ext_resource path="res://assets/images/titlescreen-spear.png" type="Texture" id=4]
+[ext_resource path="res://assets/images/titlescreen-shield.png" type="Texture" id=5]
+[ext_resource path="res://Theme/GlobalTheme.tres" type="Theme" id=6]
 
 [node name="Node2D" type="Node2D" index="0"]
 
@@ -17,16 +17,52 @@ texture = ExtResource( 2 )
 centered = false
 _sections_unfolded = [ "Offset" ]
 
-[node name="NewGameButton" type="Button" parent="." index="1"]
+[node name="TitleText" type="Sprite" parent="." index="1"]
+
+position = Vector2( 480, 125 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Offset", "Transform" ]
+
+[node name="Spear" type="Sprite" parent="." index="2"]
+
+position = Vector2( 485, 184 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Offset", "Transform" ]
+
+[node name="Shield" type="Sprite" parent="." index="3"]
+
+position = Vector2( 546, 110 )
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Offset", "Transform" ]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 70.0
-margin_top = 282.0
-margin_right = 227.0
-margin_bottom = 340.0
+margin_left = 410.0
+margin_top = 283.0
+margin_right = 550.0
+margin_bottom = 465.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_constants/separation = 16
+alignment = 0
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Rect", "Size Flags", "custom_constants" ]
+
+[node name="NewGameButton" type="Button" parent="VBoxContainer" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 140.0
+margin_bottom = 50.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -34,7 +70,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-theme = ExtResource( 3 )
+theme = ExtResource( 6 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -44,16 +80,15 @@ flat = false
 align = 1
 _sections_unfolded = [ "Margin", "Theme", "custom_fonts" ]
 
-[node name="LoadGameButton" type="Button" parent="." index="2"]
+[node name="LoadGameButton" type="Button" parent="VBoxContainer" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 70.0
-margin_top = 361.0
-margin_right = 227.0
-margin_bottom = 419.0
+margin_top = 66.0
+margin_right = 140.0
+margin_bottom = 116.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -70,16 +105,15 @@ flat = false
 align = 1
 _sections_unfolded = [ "Margin", "Theme", "custom_colors", "custom_fonts", "custom_styles" ]
 
-[node name="OptionsButton" type="Button" parent="." index="3"]
+[node name="OptionsButton" type="Button" parent="VBoxContainer" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 70.0
-margin_top = 445.0
-margin_right = 227.0
-margin_bottom = 496.0
+margin_top = 132.0
+margin_right = 140.0
+margin_bottom = 182.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -96,30 +130,12 @@ flat = false
 align = 1
 _sections_unfolded = [ "Margin", "custom_colors", "custom_fonts" ]
 
-[node name="TitleText" type="Sprite" parent="." index="4"]
-
-position = Vector2( 480, 125 )
-texture = ExtResource( 4 )
-_sections_unfolded = [ "Offset", "Transform" ]
-
-[node name="Spear" type="Sprite" parent="." index="5"]
-
-position = Vector2( 485, 184 )
-texture = ExtResource( 5 )
-_sections_unfolded = [ "Offset", "Transform" ]
-
-[node name="Shield" type="Sprite" parent="." index="6"]
-
-position = Vector2( 546, 110 )
-texture = ExtResource( 6 )
-_sections_unfolded = [ "Offset", "Transform" ]
-
 [connection signal="tree_exited" from="." to="." method="_on_Node2D_tree_exited"]
 
-[connection signal="pressed" from="NewGameButton" to="." method="_on_newgame_Button_pressed"]
+[connection signal="pressed" from="VBoxContainer/NewGameButton" to="." method="_on_newgame_Button_pressed"]
 
-[connection signal="pressed" from="LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/LoadGameButton" to="." method="_on_LoadGameButton_pressed"]
 
-[connection signal="pressed" from="OptionsButton" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_Options_pressed"]
 
 
