@@ -1,23 +1,24 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scenes/Title.gd" type="Script" id=1]
 [ext_resource path="res://assets/images/space-background.png" type="Texture" id=2]
 [ext_resource path="res://assets/images/titlescreen-spear.png" type="Texture" id=3]
 [ext_resource path="res://assets/images/titlescreen-shield.png" type="Texture" id=4]
 [ext_resource path="res://Tilesets/Cliffs.tres" type="TileSet" id=5]
-[ext_resource path="res://Entities/MapEntities/Mom.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Entities/MapEntities/Dad.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/images/protagonist.png" type="Texture" id=8]
-[ext_resource path="res://assets/images/monsters/FinalBossHuman.png" type="Texture" id=9]
-[ext_resource path="res://assets/images/monsters/Bandit.png" type="Texture" id=10]
-[ext_resource path="res://assets/images/monsters/ArchMage.png" type="Texture" id=11]
-[ext_resource path="res://assets/images/monsters/Humerus.png" type="Texture" id=12]
-[ext_resource path="res://assets/images/monsters/FreezeFang.png" type="Texture" id=13]
-[ext_resource path="res://assets/images/monsters/QueenSlime.png" type="Texture" id=14]
-[ext_resource path="res://assets/images/titlescreen-text.png" type="Texture" id=15]
-[ext_resource path="res://Entities/MapEntities/Jinn.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Theme/GlobalTheme.tres" type="Theme" id=17]
-[ext_resource path="res://assets/images/dg-logo.png" type="Texture" id=18]
+[ext_resource path="res://assets/images/titlescreen-sky.png" type="Texture" id=6]
+[ext_resource path="res://Entities/MapEntities/Mom.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Entities/MapEntities/Dad.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/images/protagonist.png" type="Texture" id=9]
+[ext_resource path="res://assets/images/monsters/FinalBossHuman.png" type="Texture" id=10]
+[ext_resource path="res://assets/images/monsters/Bandit.png" type="Texture" id=11]
+[ext_resource path="res://assets/images/monsters/ArchMage.png" type="Texture" id=12]
+[ext_resource path="res://assets/images/monsters/Humerus.png" type="Texture" id=13]
+[ext_resource path="res://assets/images/monsters/FreezeFang.png" type="Texture" id=14]
+[ext_resource path="res://assets/images/monsters/QueenSlime.png" type="Texture" id=15]
+[ext_resource path="res://assets/images/titlescreen-text.png" type="Texture" id=16]
+[ext_resource path="res://Entities/MapEntities/Jinn.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Theme/GlobalTheme.tres" type="Theme" id=18]
+[ext_resource path="res://assets/images/dg-logo.png" type="Texture" id=19]
 
 [node name="Node2D" type="Node2D" index="0"]
 
@@ -73,15 +74,19 @@ tile_data = PoolIntArray( 0, 2, 3, 1, 2, 4, 2, 2, 4, 3, 2, 4, 4, 2, 4, 5, 2, 4, 
 
 [node name="V4" type="Node2D" parent="." index="2"]
 
-editor/display_folded = true
-
 [node name="Spear" type="Sprite" parent="V4" index="0"]
 
 position = Vector2( 485, 184 )
 texture = ExtResource( 3 )
 _sections_unfolded = [ "Offset", "Transform" ]
 
-[node name="TileMap" type="TileMap" parent="V4" index="1"]
+[node name="Sky" type="Sprite" parent="V4" index="1"]
+
+texture = ExtResource( 6 )
+centered = false
+_sections_unfolded = [ "Offset", "Rect", "Region", "Theme", "Transform" ]
+
+[node name="TileMap" type="TileMap" parent="V4" index="2"]
 
 mode = 0
 tile_set = ExtResource( 5 )
@@ -99,68 +104,68 @@ collision_layer = 1
 collision_mask = 1
 occluder_light_mask = 1
 format = 1
-tile_data = PoolIntArray( 0, 4, 0, 1, 4, 0, 2, 4, 0, 3, 4, 0, 4, 4, 0, 5, 4, 0, 6, 4, 0, 7, 4, 0, 8, 4, 0, 9, 4, 0, 10, 4, 0, 11, 4, 0, 12, 4, 0, 13, 4, 0, 14, 4, 0, 65536, 4, 0, 65537, 4, 0, 65538, 4, 0, 65539, 4, 0, 65540, 4, 0, 65541, 4, 0, 65542, 4, 0, 65543, 4, 0, 65544, 4, 0, 65545, 4, 0, 65546, 4, 0, 65547, 4, 0, 65548, 4, 0, 65549, 4, 0, 65550, 4, 0, 131072, 4, 0, 131073, 4, 0, 131074, 4, 0, 131075, 4, 0, 131076, 4, 0, 131077, 4, 0, 131078, 4, 0, 131079, 4, 0, 131080, 4, 0, 131081, 4, 0, 131082, 4, 0, 131083, 4, 0, 131084, 4, 0, 131085, 4, 0, 131086, 4, 0, 196608, 4, 0, 196609, 4, 0, 196610, 0, 0, 196611, 0, 1, 196612, 0, 1, 196613, 0, 2, 196614, 4, 0, 196615, 4, 0, 196616, 4, 0, 196617, 4, 0, 196618, 4, 0, 196619, 4, 0, 196620, 4, 0, 196621, 4, 0, 196622, 4, 0, 262144, 0, 0, 262145, 0, 1, 262146, 0, 65537, 262147, 0, 65537, 262148, 0, 65537, 262149, 0, 65537, 262150, 0, 1, 262151, 0, 1, 262152, 0, 2, 262153, 4, 0, 262154, 4, 0, 262155, 0, 0, 262156, 0, 1, 262157, 0, 1, 262158, 0, 2, 327680, 0, 65536, 327681, 0, 65537, 327682, 0, 65537, 327683, 0, 65537, 327684, 0, 65537, 327685, 0, 65537, 327686, 0, 65537, 327687, 0, 65537, 327688, 0, 65537, 327689, 0, 1, 327690, 0, 1, 327691, 0, 65537, 327692, 0, 65537, 327693, 0, 65537, 327694, 0, 65538, 393216, 0, 65536, 393217, 0, 65537, 393218, 0, 65537, 393219, 0, 65537, 393220, 0, 65537, 393221, 0, 65537, 393222, 0, 65537, 393223, 0, 65537, 393224, 0, 65537, 393225, 0, 65537, 393226, 0, 65537, 393227, 0, 65537, 393228, 0, 65537, 393229, 0, 65537, 393230, 0, 65538, 458752, 0, 131072, 458753, 0, 131073, 458754, 0, 131073, 458755, 0, 131073, 458756, 0, 131073, 458757, 0, 131073, 458758, 0, 131073, 458759, 0, 131073, 458760, 0, 131073, 458761, 0, 131073, 458762, 0, 131073, 458763, 0, 131073, 458764, 0, 131073, 458765, 0, 131073, 458766, 0, 131074, 524288, 1, 196608, 524289, 1, 196609, 524290, 1, 196609, 524291, 1, 196609, 524292, 1, 196609, 524293, 1, 196609, 524294, 1, 196609, 524295, 1, 196609, 524296, 1, 196609, 524297, 1, 196609, 524298, 1, 196609, 524299, 1, 196609, 524300, 1, 196609, 524301, 1, 196609, 524302, 1, 196610, 589824, 1, 327680, 589825, 1, 327681, 589826, 1, 327681, 589827, 1, 327681, 589828, 1, 327681, 589829, 1, 327681, 589830, 1, 327681, 589831, 1, 327681, 589832, 1, 327681, 589833, 1, 327681, 589834, 1, 327681, 589835, 1, 327681, 589836, 1, 327681, 589837, 1, 327681, 589838, 1, 327682 )
+tile_data = PoolIntArray( 262144, 0, 393216, 262145, 0, 393217, 262146, 0, 393217, 262147, 0, 393217, 262148, 0, 393217, 262149, 0, 393217, 262150, 0, 393217, 262151, 0, 393217, 262152, 0, 393217, 262153, 0, 393217, 262154, 0, 393217, 262155, 0, 393217, 262156, 0, 393217, 262157, 0, 393217, 262158, 0, 393218, 327680, 0, 65536, 327681, 0, 65537, 327682, 0, 65537, 327683, 0, 65537, 327684, 0, 65537, 327685, 0, 65537, 327686, 0, 65537, 327687, 0, 65537, 327688, 0, 65537, 327689, 0, 65537, 327690, 0, 65537, 327691, 0, 65537, 327692, 0, 65537, 327693, 0, 65537, 327694, 0, 65538, 393216, 0, 65536, 393217, 0, 65537, 393218, 0, 65537, 393219, 0, 65537, 393220, 0, 65537, 393221, 0, 65537, 393222, 0, 65537, 393223, 0, 65537, 393224, 0, 65537, 393225, 0, 65537, 393226, 0, 65537, 393227, 0, 65537, 393228, 0, 65537, 393229, 0, 65537, 393230, 0, 65538, 458752, 0, 131072, 458753, 0, 131073, 458754, 0, 131073, 458755, 0, 131073, 458756, 0, 131073, 458757, 0, 131073, 458758, 0, 131073, 458759, 0, 131073, 458760, 0, 131073, 458761, 0, 131073, 458762, 0, 131073, 458763, 0, 131073, 458764, 0, 131073, 458765, 0, 131073, 458766, 0, 131074, 524288, 1, 196608, 524289, 1, 196609, 524290, 1, 196609, 524291, 1, 196609, 524292, 1, 196609, 524293, 1, 196609, 524294, 1, 196609, 524295, 1, 196609, 524296, 1, 196609, 524297, 1, 196609, 524298, 1, 196609, 524299, 1, 196609, 524300, 1, 196609, 524301, 1, 196609, 524302, 1, 196610, 589824, 1, 327680, 589825, 1, 327681, 589826, 1, 327681, 589827, 1, 327681, 589828, 1, 327681, 589829, 1, 327681, 589830, 1, 327681, 589831, 1, 327681, 589832, 1, 327681, 589833, 1, 327681, 589834, 1, 327681, 589835, 1, 327681, 589836, 1, 327681, 589837, 1, 327681, 589838, 1, 327682 )
 
-[node name="Mama" parent="V4" index="2" instance=ExtResource( 6 )]
+[node name="Mama" parent="V4" index="3" instance=ExtResource( 7 )]
 
 position = Vector2( 220, 310 )
 
-[node name="Baba" parent="V4" index="3" instance=ExtResource( 7 )]
+[node name="Baba" parent="V4" index="4" instance=ExtResource( 8 )]
 
 position = Vector2( 150, 310 )
 
-[node name="Aisha" type="Sprite" parent="V4" index="4"]
+[node name="Aisha" type="Sprite" parent="V4" index="5"]
 
 position = Vector2( 220, 420 )
-texture = ExtResource( 8 )
-region_enabled = true
-region_rect = Rect2( 64, 0, 64, 64 )
-_sections_unfolded = [ "Region" ]
-
-[node name="Mufsid" type="Sprite" parent="V4" index="5"]
-
-position = Vector2( 795.817, 311.525 )
 texture = ExtResource( 9 )
 region_enabled = true
 region_rect = Rect2( 64, 0, 64, 64 )
 _sections_unfolded = [ "Region" ]
 
-[node name="Monster" type="Sprite" parent="V4" index="6"]
+[node name="Mufsid" type="Sprite" parent="V4" index="6"]
 
-position = Vector2( 738.682, 357.778 )
+position = Vector2( 795.817, 311.525 )
 texture = ExtResource( 10 )
 region_enabled = true
 region_rect = Rect2( 64, 0, 64, 64 )
 _sections_unfolded = [ "Region" ]
 
-[node name="Monster2" type="Sprite" parent="V4" index="7"]
+[node name="Monster" type="Sprite" parent="V4" index="7"]
 
-position = Vector2( 835.268, 387.706 )
+position = Vector2( 738.682, 357.778 )
 texture = ExtResource( 11 )
 region_enabled = true
 region_rect = Rect2( 64, 0, 64, 64 )
 _sections_unfolded = [ "Region" ]
 
-[node name="Monster3" type="Sprite" parent="V4" index="8"]
+[node name="Monster2" type="Sprite" parent="V4" index="8"]
 
-position = Vector2( 779.493, 416.274 )
+position = Vector2( 835.268, 387.706 )
 texture = ExtResource( 12 )
 region_enabled = true
 region_rect = Rect2( 64, 0, 64, 64 )
 _sections_unfolded = [ "Region" ]
 
-[node name="Monster4" type="Sprite" parent="V4" index="9"]
+[node name="Monster3" type="Sprite" parent="V4" index="9"]
 
-position = Vector2( 684.267, 450.283 )
+position = Vector2( 779.493, 416.274 )
 texture = ExtResource( 13 )
 region_enabled = true
 region_rect = Rect2( 64, 0, 64, 64 )
 _sections_unfolded = [ "Region" ]
 
-[node name="Monster5" type="Sprite" parent="V4" index="10"]
+[node name="Monster4" type="Sprite" parent="V4" index="10"]
+
+position = Vector2( 684.267, 450.283 )
+texture = ExtResource( 14 )
+region_enabled = true
+region_rect = Rect2( 64, 0, 64, 64 )
+_sections_unfolded = [ "Region" ]
+
+[node name="Monster5" type="Sprite" parent="V4" index="11"]
 
 position = Vector2( 858.395, 459.806 )
-texture = ExtResource( 14 )
+texture = ExtResource( 15 )
 region_enabled = true
 region_rect = Rect2( 64, 0, 64, 64 )
 _sections_unfolded = [ "Region" ]
@@ -168,16 +173,15 @@ _sections_unfolded = [ "Region" ]
 [node name="TitleText" type="Sprite" parent="." index="3"]
 
 position = Vector2( 480, 125 )
-texture = ExtResource( 15 )
+texture = ExtResource( 16 )
 _sections_unfolded = [ "Offset", "Transform" ]
 
-[node name="Jinn" parent="." index="4" instance=ExtResource( 16 )]
+[node name="Jinn" parent="." index="4" instance=ExtResource( 17 )]
 
 position = Vector2( 507, 73 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." index="5"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -211,7 +215,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-theme = ExtResource( 17 )
+theme = ExtResource( 18 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
@@ -275,7 +279,7 @@ _sections_unfolded = [ "Margin", "custom_colors", "custom_fonts" ]
 
 position = Vector2( 480, 530 )
 scale = Vector2( 0.1, 0.1 )
-texture = ExtResource( 18 )
+texture = ExtResource( 19 )
 _sections_unfolded = [ "Offset", "Transform" ]
 
 [connection signal="tree_exited" from="." to="." method="_on_Node2D_tree_exited"]
