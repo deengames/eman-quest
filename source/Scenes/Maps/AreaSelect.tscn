@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/Maps/AreaSelect.gd" type="Script" id=1]
-[ext_resource path="res://assets/images/space-background.png" type="Texture" id=2]
+[ext_resource path="res://assets/images/titlescreen-bg2.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -16,7 +16,9 @@ script = ExtResource( 1 )
 
 texture = ExtResource( 2 )
 centered = false
-_sections_unfolded = [ "Offset" ]
+region_enabled = true
+region_rect = Rect2( 0, 0, 960, 576 )
+_sections_unfolded = [ "Offset", "Region" ]
 
 [node name="Area2D" type="Area2D" parent="." index="1"]
 

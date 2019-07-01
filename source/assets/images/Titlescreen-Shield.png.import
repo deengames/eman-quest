@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/titlescreen-shield.png-73d9319cca81064c8cf250866d3264a1.stex"
+path="res://.import/Titlescreen-Shield.png-c19d23cf4fbf9a970d40fc702460d5a1.stex"
 
 [deps]
 
-source_file="res://assets/images/titlescreen-shield.png"
-dest_files=[ "res://.import/titlescreen-shield.png-73d9319cca81064c8cf250866d3264a1.stex" ]
+source_file="res://assets/images/Titlescreen-Shield.png"
+dest_files=[ "res://.import/Titlescreen-Shield.png-c19d23cf4fbf9a970d40fc702460d5a1.stex" ]
 
 [params]
 
