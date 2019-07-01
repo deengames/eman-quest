@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/titlescreen-sky.png-bf3689170aae5275fdda0286d951789d.stex"
+path="res://.import/titlescreen-bg2.png-ec8c4601c88572b5519b3be0cbf2aaf5.stex"
 
 [deps]
 
-source_file="res://assets/images/titlescreen-sky.png"
-dest_files=[ "res://.import/titlescreen-sky.png-bf3689170aae5275fdda0286d951789d.stex" ]
+source_file="res://assets/images/titlescreen-bg2.png"
+dest_files=[ "res://.import/titlescreen-bg2.png-ec8c4601c88572b5519b3be0cbf2aaf5.stex" ]
 
 [params]
 
