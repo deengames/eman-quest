@@ -112,13 +112,13 @@ func _process_attack(action, monster_data, player, boost_amount, memory_grid):
 		message = "CHOMPS! " + str(damage) + " damage!"
 	elif action == "shock":
 		damage = monster_data["strength"] # pierces defense
-		message = "shocks you for " + str(damage) + "!"
+		message = "shocks Aisha for " + str(damage) + "!"
 		if memory_grid != null: # null on fast-paced battle grid
 			memory_grid.shock(_SHOCK_TURNS)
 	elif action == "freeze":
 		# Shock, but a few tiles only
 		damage = monster_data["strength"] # pierces defense
-		message = "freezes you, piercing your armour! " + str(damage) + " damage!"
+		message = "freezes Aisha, piercing Aisha's armour! " + str(damage) + " damage!"
 		if memory_grid != null: # null on fast-paced battle grid
 			memory_grid.freeze(_SHOCK_TURNS, 5)
 	elif action == "vampire":
@@ -154,13 +154,13 @@ func _process_attack(action, monster_data, player, boost_amount, memory_grid):
 		message = "strikes! Items disabled!"
 		player.disable("items")
 	elif action == "sleep":
-		message = "puts you to sleep!"
+		message = "puts Aisha to sleep!"
 		player.is_asleep = true
 	elif action == "poison":
 		player.poison(_POISONED_TURNS)
-		message = "poisons you!"
+		message = "poisons Aisha!"
 	elif action == "armour break":
-		message = "hits your armour, damaging it!"
+		message = "hits Aisha's armour, damaging it!"
 		player.lower_defense()
 		
 	# Apply custom/override message if it exists
