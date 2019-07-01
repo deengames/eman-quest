@@ -258,12 +258,6 @@ func _resolve_monster_turn():
 		self._update_health_displays() # show health decrease
 		yield(get_tree().create_timer(_MONSTER_TURN_DISPLAY_SECONDS), 'timeout')
 		
-		# times defended, apply poison damage, etc. Emits a signal that shows
-		# a message about poison damage.
-		self._player.reset()
-		# We may have been poisoned, update again.
-		self._update_health_displays()
-		
 	if self._player.current_health <= 0:
 		self._show_battle_end(false)
 		
@@ -287,6 +281,12 @@ func _start_next_turn():
 	self._correct_consecutive_tiles_picked = 0
 	
 	if self._is_players_turn:
+		# times defended, apply poison damage, etc. Emits a signal that shows
+		# a message about poison damage.
+		self._player.reset()
+		# We may have been poisoned, update again.
+		self._update_health_displays()
+		
 		$TurnLabel.text = Globals.PLAYER_NAME + " attacks!"
 		num_tiles = self._player.num_actions
 		# Reset turns if they were decremented eg. stunned. Stun ends on YOUR next turn.
