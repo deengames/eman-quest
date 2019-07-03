@@ -432,7 +432,7 @@ func _process(elapsed):
 	var CYCLE_FAST_MULTIPLIER = 2
 	
 	self._total_time += elapsed
-	var stats_button = $UI/StatsButton
+	var stats_button = $UI/Control/StatsButton
 	
 	if Globals.player_data.unassigned_stats_points > 0:
 		# Guaranteed to be at least 0.5. Goes over 1.0, so it stays solid longer

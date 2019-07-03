@@ -6,7 +6,7 @@
 [ext_resource path="res://addons/paulloz.colorblindness/colorblindness.gd" type="Script" id=4]
 [ext_resource path="res://addons/paulloz.colorblindness/icon.svg" type="Texture" id=5]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -19,7 +19,22 @@ scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 script = ExtResource( 2 )
 
-[node name="StatsButton" type="Button" parent="UI" index="0"]
+[node name="Control" type="Control" parent="UI" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="StatsButton" type="Button" parent="UI/Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -46,7 +61,7 @@ flat = false
 align = 1
 _sections_unfolded = [ "Anchor", "Hint", "Margin", "custom_fonts" ]
 
-[node name="EquipmentButton" type="Button" parent="UI" index="1"]
+[node name="EquipmentButton" type="Button" parent="UI/Control" index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -73,7 +88,7 @@ flat = false
 align = 1
 _sections_unfolded = [ "Hint", "Margin", "custom_fonts" ]
 
-[node name="KeyItemsButton" type="Button" parent="UI" index="2"]
+[node name="KeyItemsButton" type="Button" parent="UI/Control" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -100,7 +115,7 @@ flat = false
 align = 1
 _sections_unfolded = [ "Hint", "Margin", "custom_fonts" ]
 
-[node name="SaveButton" type="Button" parent="UI" index="3"]
+[node name="SaveButton" type="Button" parent="UI/Control" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -164,12 +179,12 @@ Type = 0
 
 [connection signal="opened_save_manager" from="UI" to="." method="_on_UI_opened_save_manager"]
 
-[connection signal="pressed" from="UI/StatsButton" to="UI" method="_on_StatsButton_pressed"]
+[connection signal="pressed" from="UI/Control/StatsButton" to="UI" method="_on_StatsButton_pressed"]
 
-[connection signal="pressed" from="UI/EquipmentButton" to="UI" method="_on_EquipmentButton_pressed"]
+[connection signal="pressed" from="UI/Control/EquipmentButton" to="UI" method="_on_EquipmentButton_pressed"]
 
-[connection signal="pressed" from="UI/KeyItemsButton" to="UI" method="_on_KeyItemsButton_pressed"]
+[connection signal="pressed" from="UI/Control/KeyItemsButton" to="UI" method="_on_KeyItemsButton_pressed"]
 
-[connection signal="pressed" from="UI/SaveButton" to="UI" method="_on_SaveButton_pressed"]
+[connection signal="pressed" from="UI/Control/SaveButton" to="UI" method="_on_SaveButton_pressed"]
 
 
