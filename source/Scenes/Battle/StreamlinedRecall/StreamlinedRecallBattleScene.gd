@@ -412,7 +412,8 @@ func _enable_action_button(button):
 	button.modulate.a = 1
 	
 func _on_poison_damaged(damage):
-	$StatusLabel.text = "Posioned for " + str(damage) + " damage!"
+	var rounds = _player._turns_poisoned
+	$StatusLabel.text = "Posioned for " + str(damage) + " damage! (" + str(rounds) + " rounds left)"
 	yield(get_tree().create_timer(_MONSTER_TURN_DISPLAY_SECONDS), 'timeout')
 
 func _update_tech_points_display():
