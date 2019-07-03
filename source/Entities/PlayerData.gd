@@ -9,7 +9,7 @@ const StatType = preload("res://Scripts/Enums/StatType.gd")
 # Anything persisted here is saved in save-games.
 ###
 
-const STATS_POINTS_TO_RAISE_ACTIONS = 20
+const STATS_POINTS_TO_RAISE_ACTIONS = 10
 # TODO: cost doubles but points don't double, and stats gained
 # don't double. Consider increasing this per level or something.
 const _STATS_POINTS_PER_LEVEL = 5
