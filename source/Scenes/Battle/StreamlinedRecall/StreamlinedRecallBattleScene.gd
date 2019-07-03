@@ -415,6 +415,9 @@ func _on_poison_damaged(damage):
 	var rounds = _player._turns_poisoned
 	$StatusLabel.text = "Posioned for " + str(damage) + " damage! (" + str(rounds) + " rounds left)"
 	yield(get_tree().create_timer(_MONSTER_TURN_DISPLAY_SECONDS), 'timeout')
+	
+	if self._player.current_health <= 0:
+		self._show_battle_end(false)
 
 func _update_tech_points_display():
 	$ActionsPanel/TechPointsLabel.text = "Tech Points: {points}".format({points = int(Globals.player_data.tech_points)})
