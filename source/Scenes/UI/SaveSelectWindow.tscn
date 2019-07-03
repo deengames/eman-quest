@@ -3,7 +3,7 @@
 [ext_resource path="res://Scenes/UI/SaveSelectWindow.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/UI/CloseDialogTitlebar.tscn" type="PackedScene" id=2]
 
-[node name="PopupPanel" type="PopupPanel" index="0"]
+[node name="PopupPanel" type="PopupPanel"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -49,10 +49,12 @@ anchor_bottom = 0.0
 margin_bottom = 446.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
+hint_tooltip = "A list of save games"
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+_sections_unfolded = [ "Hint" ]
 
 [node name="ItemList" type="ItemList" parent="HBoxContainer/Container" index="0"]
 
@@ -122,6 +124,7 @@ margin_right = 525.0
 margin_bottom = 126.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
+hint_tooltip = "The save game's stats"
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -129,7 +132,7 @@ size_flags_vertical = 4
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Margin", "custom_styles" ]
+_sections_unfolded = [ "Hint", "Margin", "custom_styles" ]
 __meta__ = {
 "_edit_lock_": true
 }
@@ -172,6 +175,7 @@ margin_right = 140.0
 margin_bottom = 50.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
+hint_tooltip = "Save, overwriting the selected save game"
 focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
@@ -184,6 +188,7 @@ group = null
 text = "Save"
 flat = false
 align = 1
+_sections_unfolded = [ "Hint" ]
 
 [node name="LoadButton" type="Button" parent="HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer" index="1"]
 
@@ -196,6 +201,7 @@ margin_right = 140.0
 margin_bottom = 104.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
+hint_tooltip = "Load the selected save game"
 focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
@@ -208,6 +214,7 @@ group = null
 text = "Load"
 flat = false
 align = 1
+_sections_unfolded = [ "Hint" ]
 
 [node name="CloseDialogTitlebar" parent="." index="1" instance=ExtResource( 2 )]
 

@@ -6,7 +6,7 @@
 [ext_resource path="res://addons/paulloz.colorblindness/colorblindness.gd" type="Script" id=4]
 [ext_resource path="res://addons/paulloz.colorblindness/icon.svg" type="Texture" id=5]
 
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -31,6 +31,7 @@ margin_right = 96.0
 margin_bottom = 562.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
+hint_tooltip = "View and upgrade character stats"
 focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
@@ -43,7 +44,7 @@ group = null
 text = "Stats"
 flat = false
 align = 1
-_sections_unfolded = [ "Anchor", "Margin", "custom_fonts" ]
+_sections_unfolded = [ "Anchor", "Hint", "Margin", "custom_fonts" ]
 
 [node name="EquipmentButton" type="Button" parent="UI" index="1"]
 
@@ -57,6 +58,7 @@ margin_right = 292.0
 margin_bottom = 562.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
+hint_tooltip = "Change equipment"
 focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
@@ -69,7 +71,7 @@ group = null
 text = "Equipment"
 flat = false
 align = 1
-_sections_unfolded = [ "Margin", "custom_fonts" ]
+_sections_unfolded = [ "Hint", "Margin", "custom_fonts" ]
 
 [node name="KeyItemsButton" type="Button" parent="UI" index="2"]
 
@@ -83,6 +85,7 @@ margin_right = 464.0
 margin_bottom = 562.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
+hint_tooltip = "Look at key items found"
 focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
@@ -95,7 +98,7 @@ group = null
 text = "Key Items"
 flat = false
 align = 1
-_sections_unfolded = [ "Margin", "custom_fonts" ]
+_sections_unfolded = [ "Hint", "Margin", "custom_fonts" ]
 
 [node name="SaveButton" type="Button" parent="UI" index="3"]
 
@@ -109,6 +112,7 @@ margin_right = 560.0
 margin_bottom = 562.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
+hint_tooltip = "Save or load game"
 focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
@@ -121,7 +125,7 @@ group = null
 text = "Save"
 flat = false
 align = 1
-_sections_unfolded = [ "Margin", "custom_fonts" ]
+_sections_unfolded = [ "Hint", "Margin", "custom_fonts" ]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="1"]
 

@@ -28,8 +28,6 @@ position = Vector2( -4, 40 )
 
 [node name="Labels" type="Node2D" parent="Stats" index="0"]
 
-editor/display_folded = true
-
 [node name="LevelLabel" type="Label" parent="Stats/Labels" index="0"]
 
 anchor_left = 0.0
@@ -42,7 +40,8 @@ margin_right = 165.0
 margin_bottom = 63.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 2
+hint_tooltip = "Current level (gain experience to level up)"
+mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
@@ -50,7 +49,7 @@ text = "Level: ???"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
+_sections_unfolded = [ "Hint", "custom_fonts" ]
 
 [node name="ExpLabel" type="Label" parent="Stats/Labels" index="1"]
 
@@ -64,7 +63,8 @@ margin_right = 374.0
 margin_bottom = 100.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 2
+hint_tooltip = "Experience points are gained by defeating enemies"
+mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
@@ -72,7 +72,7 @@ text = "Experience Points: ???"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
+_sections_unfolded = [ "Hint", "custom_fonts" ]
 
 [node name="StatsHeaderLabel" type="Label" parent="Stats/Labels" index="2"]
 
@@ -86,7 +86,8 @@ margin_right = 444.0
 margin_bottom = 145.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 2
+hint_tooltip = "Points you can allocate to increase your stats"
+mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
@@ -94,7 +95,7 @@ text = "Stats                  Points (100 unused)"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
+_sections_unfolded = [ "Hint", "custom_fonts" ]
 
 [node name="StatsLabel" type="Label" parent="Stats/Labels" index="3"]
 
@@ -108,7 +109,8 @@ margin_right = 209.0
 margin_bottom = 445.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 2
+hint_tooltip = "Your current stats"
+mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
@@ -123,7 +125,7 @@ Actions: 3
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "Margin", "custom_fonts" ]
+_sections_unfolded = [ "Hint", "Margin", "custom_fonts" ]
 
 [node name="PointsAssignedLabel" type="Label" parent="Stats/Labels" index="4"]
 
@@ -137,7 +139,7 @@ margin_right = 311.0
 margin_bottom = 408.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 2
+mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
@@ -168,6 +170,7 @@ margin_right = 255.0
 margin_bottom = 201.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
+hint_tooltip = "Decreases total health"
 focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
@@ -180,7 +183,7 @@ group = null
 text = "-"
 flat = false
 align = 1
-_sections_unfolded = [ "Margin", "Rect", "custom_fonts" ]
+_sections_unfolded = [ "Hint", "custom_fonts" ]
 
 [node name="AssignHealthButton" type="Button" parent="Stats/Buttons" index="1"]
 
@@ -194,6 +197,7 @@ margin_right = 352.0
 margin_bottom = 201.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
+hint_tooltip = "Increases total health"
 focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
@@ -206,7 +210,7 @@ group = null
 text = "+"
 flat = false
 align = 1
-_sections_unfolded = [ "Margin", "Rect", "custom_fonts" ]
+_sections_unfolded = [ "Hint", "Margin", "Rect", "custom_fonts" ]
 
 [node name="UnassignStrengthButton" type="Button" parent="Stats/Buttons" index="2"]
 
@@ -220,6 +224,7 @@ margin_right = 254.0
 margin_bottom = 273.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
+hint_tooltip = "Decreases strength (attack damage)"
 focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
@@ -232,7 +237,7 @@ group = null
 text = "-"
 flat = false
 align = 1
-_sections_unfolded = [ "Margin", "Rect", "custom_fonts" ]
+_sections_unfolded = [ "Hint", "Margin", "Rect", "custom_fonts" ]
 
 [node name="AssignStrengthButton" type="Button" parent="Stats/Buttons" index="3"]
 
@@ -246,6 +251,7 @@ margin_right = 352.0
 margin_bottom = 273.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
+hint_tooltip = "Increases strength (attack damage)"
 focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
@@ -258,7 +264,7 @@ group = null
 text = "+"
 flat = false
 align = 1
-_sections_unfolded = [ "Margin", "Rect", "custom_fonts" ]
+_sections_unfolded = [ "Hint", "Margin", "Rect", "custom_fonts" ]
 
 [node name="UnassignDefenseButton" type="Button" parent="Stats/Buttons" index="4"]
 
@@ -272,6 +278,7 @@ margin_right = 255.0
 margin_bottom = 344.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
+hint_tooltip = "Decreases defense (increases damage received)"
 focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
@@ -284,7 +291,7 @@ group = null
 text = "-"
 flat = false
 align = 1
-_sections_unfolded = [ "Margin", "Rect", "custom_fonts" ]
+_sections_unfolded = [ "Hint", "Margin", "Rect", "custom_fonts" ]
 
 [node name="AssignDefenseButton" type="Button" parent="Stats/Buttons" index="5"]
 
@@ -298,6 +305,7 @@ margin_right = 352.0
 margin_bottom = 343.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
+hint_tooltip = "Increases defense (decreases damage received)"
 focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
@@ -310,7 +318,7 @@ group = null
 text = "+"
 flat = false
 align = 1
-_sections_unfolded = [ "Margin", "Rect", "custom_fonts" ]
+_sections_unfolded = [ "Hint", "Margin", "Rect", "custom_fonts" ]
 
 [node name="UnassignActionsButton" type="Button" parent="Stats/Buttons" index="6"]
 
@@ -324,6 +332,7 @@ margin_right = 255.0
 margin_bottom = 417.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
+hint_tooltip = "Decrease action points (10 points per action)"
 focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
@@ -336,7 +345,7 @@ group = null
 text = "-"
 flat = false
 align = 1
-_sections_unfolded = [ "Margin", "Rect", "custom_fonts" ]
+_sections_unfolded = [ "Hint", "Margin", "Rect", "custom_fonts" ]
 
 [node name="AssignActionsButton" type="Button" parent="Stats/Buttons" index="7"]
 
@@ -350,6 +359,7 @@ margin_right = 352.0
 margin_bottom = 417.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
+hint_tooltip = "Increase action points (10 points per action)"
 focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
@@ -362,7 +372,7 @@ group = null
 text = "+"
 flat = false
 align = 1
-_sections_unfolded = [ "Margin", "Rect", "custom_fonts" ]
+_sections_unfolded = [ "Hint", "Margin", "Rect", "custom_fonts" ]
 
 [node name="Pointer" type="Sprite" parent="Stats" index="2"]
 
@@ -387,7 +397,8 @@ margin_right = 702.0
 margin_bottom = 197.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 2
+hint_tooltip = "Currently-equipped weapon"
+mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
@@ -398,7 +409,7 @@ Masamune
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
+_sections_unfolded = [ "Hint", "custom_fonts" ]
 
 [node name="ArmourLabel" type="Label" parent="Equipment" index="1"]
 
@@ -412,7 +423,8 @@ margin_right = 703.0
 margin_bottom = 388.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 2
+hint_tooltip = "Currently-equipped armour"
+mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
@@ -423,7 +435,7 @@ Masamune
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
+_sections_unfolded = [ "Hint", "custom_fonts" ]
 
 [node name="CloseDialogTitlebar" parent="." index="2" instance=ExtResource( 3 )]
 
