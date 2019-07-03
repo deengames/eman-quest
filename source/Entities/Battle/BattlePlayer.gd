@@ -49,14 +49,14 @@ func _init():
 	self.energy = self.max_energy / 2
 
 func heal():
-	var amount = floor(self.max_health * HEAL_PERCENT)
+	var amount = floor(self._total_health() * HEAL_PERCENT)
 	self.heal_amount(amount)
 	return amount
 
 func heal_amount(amount):
 	self.current_health += amount
-	if self.current_health > self.max_health:
-		self.current_health = self.max_health
+	if self.current_health > self._total_health():
+		self.current_health = self._total_health()
 
 func defend():
 	self._times_defending += 1
@@ -67,7 +67,7 @@ func reset():
 	self._times_defending = 0
 	
 	if self._turns_poisoned > 0:
-		var poison_damage = floor(self.max_health * _POISON_DAMAGE_PER_TURN_PERCENT / 100)
+		var poison_damage = floor(self._total_health() * _POISON_DAMAGE_PER_TURN_PERCENT / 100)
 		self.current_health -= poison_damage
 		self._turns_poisoned -= 1
 		self.emit_signal("poison_damaged", poison_damage)

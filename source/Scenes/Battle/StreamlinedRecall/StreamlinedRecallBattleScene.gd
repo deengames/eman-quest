@@ -71,7 +71,7 @@ func _ready():
 	
 	$MonsterControls/NameLabel.text = self._monster_data["type"] + " (level " + str(self._monster_data["level"]) + ")"
 	
-	$PlayerControls/PlayerHealth.max_value = self._player.max_health
+	$PlayerControls/PlayerHealth.max_value = self._player._total_health()
 	
 	$RecallGrid.battle_player = self._player
 	$RecallGrid.connect("picked_all_tiles", self, "_on_picked_all_tiles")
