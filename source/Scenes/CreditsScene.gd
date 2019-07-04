@@ -13,7 +13,8 @@ const _INVISIBLE = Color(1, 1, 1, 0)
 var _audio
 
 func _ready():
-	$CreditsLabel.modulate.a = 0
+	$Credits1.modulate.a = 0
+	$Credits2.modulate.a = 0
 	$ThanksLabel.modulate.a = 0
 	
 	var tree = get_tree()
@@ -23,16 +24,23 @@ func _ready():
 	_audio = AudioManager.new()
 	_audio.play_sound("credits")
 
-	$ThanksLabel.text = "Game completed in " + PlayerData.seconds_to_time(Globals.player_data.play_time_seconds) + "\n" + $ThanksLabel.text
+	$ThanksLabel.text = "Game completed in " + PlayerData.seconds_to_time(Globals.player_data.play_time_seconds) + "\nThanks for playing!"
 	
 	yield(get_tree().create_timer(_WAIT_TIME), 'timeout')
 	
 	# Credits fade in ~3s
 	var tween = Tween.new()
 	self.add_child(tween)
-	tween.interpolate_property($CreditsLabel, "modulate", _INVISIBLE, _VISIBLE, _CREDITS_TIME_SECONDS, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	tween.interpolate_property($Credits1, "modulate", _INVISIBLE, _VISIBLE, _CREDITS_TIME_SECONDS, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	tween.start()
+	
+	yield(get_tree().create_timer(_CREDITS_TIME_SECONDS), 'timeout')
 
+	tween = Tween.new()
+	self.add_child(tween)
+	tween.interpolate_property($Credits2, "modulate", _INVISIBLE, _VISIBLE, _CREDITS_TIME_SECONDS, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	tween.start()
+	
 	yield(get_tree().create_timer(_CREDITS_TIME_SECONDS), 'timeout')
 
 	yield(get_tree().create_timer(_WAIT_TIME), 'timeout')
