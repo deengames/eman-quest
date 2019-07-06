@@ -58,7 +58,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="MonsterSprite" type="Sprite" parent="MonsterControls" index="0"]
 
-position = Vector2( 10, 39 )
+position = Vector2( 10, 55 )
 texture = ExtResource( 2 )
 centered = false
 region_enabled = true
@@ -72,9 +72,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 90.0
-margin_top = 59.0
+margin_top = 75.0
 margin_right = 240.0
-margin_bottom = 91.0
+margin_bottom = 107.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 hint_tooltip = "Monster's health. Monster dies at 0 health."
@@ -157,7 +157,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="PlayerSprite" type="Sprite" parent="PlayerControls" index="0"]
 
-position = Vector2( 10, 39 )
+position = Vector2( 10, 55 )
 texture = ExtResource( 5 )
 centered = false
 region_enabled = true
@@ -171,9 +171,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 90.0
-margin_top = 59.0
+margin_top = 75.0
 margin_right = 240.0
-margin_bottom = 91.0
+margin_bottom = 107.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 hint_tooltip = "Your health. You lose the battle if it reaches 0."
