@@ -10,6 +10,7 @@ func _ready():
 	
 	# Tween starts before display renders, so add a bit of delay before we start
 	yield(tree.create_timer(0.5), 'timeout')
+	$AudioStreamPlayer.play()
 	
 	# Fade in
 	var tween = Tween.new()
@@ -27,3 +28,5 @@ func _ready():
 	add_child(tween)
 	tween.start()
 	yield(tree.create_timer(_FADE_SECONDS), 'timeout')
+	
+	tree.change_scene("res://Scenes/Title.tscn")
