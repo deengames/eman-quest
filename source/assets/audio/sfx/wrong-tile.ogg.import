@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/wrong-tile.ogg-dee2272708454d78bcd0610e3eace634.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/wrong-tile.ogg"
+dest_files=[ "res://.import/wrong-tile.ogg-dee2272708454d78bcd0610e3eace634.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

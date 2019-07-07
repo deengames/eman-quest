@@ -37,7 +37,10 @@ var audio_clips = {
 	"credits": preload("res://assets/audio/bgs/Credits.ogg"),
 	
 	# SFX
-	"button-click": preload("res://assets/audio/sfx/button-click.ogg")
+	"button-click": preload("res://assets/audio/sfx/button-click.ogg"),
+	# Battle
+	"right-tile": preload("res://assets/audio/sfx/right-tile.ogg"),
+	"wrong-tile": preload("res://assets/audio/sfx/wrong-tile.ogg")
 }
 
 var audio_instances = []

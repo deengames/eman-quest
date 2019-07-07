@@ -1,5 +1,6 @@
 extends Node2D
 
+const AudioManager = preload("res://Scripts/AudioManager.gd")
 const BattleResolution = preload("res://Scripts/Battle/BattleResolution.gd")
 const ClickHereArrow = preload("res://Scenes/UI/ClickHereArrow.tscn")
 const MonsterScaler = preload("res://Scripts/Battle/MonsterScaler.gd")
@@ -332,6 +333,7 @@ func _add_tutorial_for(tile_coordinates):
 	arrow.tile_coordinates = tile_coordinates
 
 func _on_correct_selected(tile_coordinates):
+	AudioManager.new().play_sound("right-tile")
 	self._actions_left += 1
 	# Updates actions-left
 	self._update_health_displays()
@@ -349,6 +351,7 @@ func _on_correct_selected(tile_coordinates):
 			remove_child(arrow)
 
 func _on_incorrect_selected():
+	AudioManager.new().play_sound("wrong-tile")
 	self._correct_consecutive_tiles_picked = 0
 
 func _on_AttackButton_pressed():

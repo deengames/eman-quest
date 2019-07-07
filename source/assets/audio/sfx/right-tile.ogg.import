@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/right-tile.ogg-20ed2119153f939285e40934b478e59a.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/right-tile.ogg"
+dest_files=[ "res://.import/right-tile.ogg-20ed2119153f939285e40934b478e59a.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
