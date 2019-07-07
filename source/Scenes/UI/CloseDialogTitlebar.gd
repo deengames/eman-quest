@@ -32,6 +32,8 @@ func get_title():
 
 func _on_Button_pressed(event):
 	if (event is InputEventMouseButton and event.pressed) or (OS.has_feature("Android") and event is InputEventMouseMotion):
+		$AudioStreamPlayer.play()
+		
 		var parent = get_parent()
 		parent.remove_child(self)
 		if parent is Popup:

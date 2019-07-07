@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/UI/CloseDialogTitlebar.gd" type="Script" id=1]
+[ext_resource path="res://assets/audio/sfx/close-button.ogg" type="AudioStream" id=2]
 
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -68,6 +69,15 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Margin" ]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="1"]
+
+stream = ExtResource( 2 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = "Master"
 
 [connection signal="gui_input" from="Panel/XButton" to="." method="_on_Button_pressed"]
 

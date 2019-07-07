@@ -52,6 +52,7 @@ func _play_button_click():
 	audio_player.play_sound("button-click")
 
 func _on_newgame_Button_pressed():
+	_play_button_click()
 	$VBoxContainer/NewGameButton.disabled = true
 	var tree = get_tree()
 	SceneFadeManager.fade_out(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
@@ -59,6 +60,7 @@ func _on_newgame_Button_pressed():
 	tree.change_scene("res://Scenes/GenerateWorldScene.tscn")
 
 func _on_LoadGameButton_pressed():
+	_play_button_click()
 	$VBoxContainer/LoadGameButton.disabled = true
 	var tree = get_tree()
 	
@@ -68,6 +70,7 @@ func _on_LoadGameButton_pressed():
 	tree.change_scene("res://Scenes/LoadingScene.tscn")
 
 func _on_Options_pressed():
+	_play_button_click()
 	var dialog = OptionsDialog.instance()
 	dialog.title("Options")
 	dialog.popup_exclusive = true
