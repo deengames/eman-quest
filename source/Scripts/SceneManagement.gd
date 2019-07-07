@@ -1,6 +1,7 @@
 extends Node
 
 const AreaType = preload("res://Scripts/Enums/AreaType.gd")
+const AudioManager = preload("res://Scripts/AudioManager.gd")
 const Boss = preload("res://Entities/Battle/Boss.gd")
 const EndGameMap = preload("res://Scenes/Maps/EndGameMap.tscn")
 const EventManagement = preload("res://Scripts/EventManagement.gd")
@@ -210,8 +211,12 @@ static func switch_to_battle_if_touched_player(tree, monster, body):
 		
 		if not monster is Boss:
 			monster.freeze()
-			
+		
+		# TODO: potentially different sound for bosses
+		AudioManager.new().play_sound("battle-transition")
+		
 		start_battle(tree, monster.data_object["data"])
+		
 
 static func _show_battle_transition(tree, animation_time_seconds):
 	var camera_tween = Tween.new()

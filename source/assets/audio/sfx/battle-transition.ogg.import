@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/battle-transition.ogg-70dd965d9c0d7b218bf486f1df1ec378.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/battle-transition.ogg"
+dest_files=[ "res://.import/battle-transition.ogg-70dd965d9c0d7b218bf486f1df1ec378.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
