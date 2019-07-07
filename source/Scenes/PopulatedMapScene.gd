@@ -190,11 +190,13 @@ func unfreeze_monsters():
 
 func hide_ui():
 	for child in $UI.get_children():
-		child.visible = false
+		if child is Button:
+			child.visible = false
 
 func show_ui():
 	for child in $UI.get_children():
-		child.visible = true
+		if child is Button:
+			child.visible = true
 			
 func _populate_tiles(tilemap_data, tilemap, tile_ids, entity_tiles):
 	for y in range(0, tilemap_data.height):

@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+const AudioManager = preload("res://Scripts/AudioManager.gd")
 const EquipmentWindow = preload("res://Scenes/UI/EquipmentWindow.tscn")
 const KeyItemsWindow = preload("res://Scenes/UI/KeyItemsWindow.tscn")
 const SaveManager = preload("res://Scripts/SaveManager.gd")
@@ -26,6 +27,7 @@ func _show_popup(instance, title):
 	get_parent().freeze_monsters()
 	self.add_child(instance)
 	instance.popup_centered()
+	_play_button_click()
 
 func _on_SaveButton_pressed():
 	Globals.player.freeze()
@@ -64,3 +66,8 @@ func _capture_screenshot():
 	image.flip_y()
 	
 	image.save_png(Globals.LAST_SCREENSHOT_PATH)
+
+func _play_button_click():
+	var audio_player = AudioManager.new()
+	add_child(audio_player)
+	audio_player.play_sound("button-click")

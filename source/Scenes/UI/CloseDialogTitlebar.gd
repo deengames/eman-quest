@@ -33,6 +33,8 @@ func get_title():
 func _on_Button_pressed(event):
 	if (event is InputEventMouseButton and event.pressed) or (OS.has_feature("Android") and event is InputEventMouseMotion):
 		$AudioStreamPlayer.play()
+		# Yield for the audio play-time
+		yield(get_tree().create_timer(0.2), 'timeout')
 		
 		var parent = get_parent()
 		parent.remove_child(self)
