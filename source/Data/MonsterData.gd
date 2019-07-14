@@ -152,8 +152,8 @@ const MONSTER_DATA = {
 					"poison": 100 
 				}
 			},
-			"Red Scorpion": {
-				"type": "Red Scorpion",
+			"Charspore": {
+				"type": "Charspore",
 				"weight": 40,
 				"health": 80,
 				"strength": 25,

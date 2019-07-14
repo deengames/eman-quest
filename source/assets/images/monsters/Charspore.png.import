@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Crystalite.png-e61a096dfbb3e38251d623fddcffd6f9.stex"
+path="res://.import/Charspore.png-db32939e75efb76b0bc45c7858947eb9.stex"
 
 [deps]
 
-source_file="res://assets/images/monsters/Crystalite.png"
-dest_files=[ "res://.import/Crystalite.png-e61a096dfbb3e38251d623fddcffd6f9.stex" ]
+source_file="res://assets/images/monsters/Charspore.png"
+dest_files=[ "res://.import/Charspore.png-db32939e75efb76b0bc45c7858947eb9.stex" ]
 
 [params]
 
@@ -16,7 +16,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
