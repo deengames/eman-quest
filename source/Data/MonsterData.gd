@@ -207,8 +207,8 @@ const MONSTER_DATA = {
 			}
 		},
 		"Desert": {
-			"Scarab": {
-				"type": "Scarab",
+			"Crystalite": {
+				"type": "Crystalite",
 				"weight": 50,
 				"health": 110,
 				"strength": 21,
