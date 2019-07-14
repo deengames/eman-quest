@@ -122,8 +122,8 @@ const MONSTER_DATA = {
 					"harden": 100 
 				}
 			},
-			"Wing Beak": {
-				"type": "WingBeak",
+			"Eye Rock": {
+				"type": "EyeRock",
 				"weight": 50,
 				"health": 110,
 				"strength": 20,
