@@ -87,8 +87,8 @@ const MONSTER_DATA = {
 					"chomp": "pierces you with its fangs! {damage} damage!"
 				}
 			},
-			"Skelly": {
-				"type": "Skelly",
+			"Eight Eyes": {
+				"type": "EightEyes",
 				"weight": 40,
 				"health": 110,
 				"strength": 28,
@@ -101,7 +101,7 @@ const MONSTER_DATA = {
 					"heal": 100
 				},
 				"skill_messages": {
-					"heal": "regenerates its bones! Healed {amount} health!"
+					"heal": " eats a captured insect! Healed {amount} health!"
 				}
 			}
 		}
@@ -122,7 +122,7 @@ const MONSTER_DATA = {
 					"harden": 100 
 				}
 			},
-			"WingBeak": {
+			"Wing Beak": {
 				"type": "WingBeak",
 				"weight": 50,
 				"health": 110,
@@ -139,7 +139,7 @@ const MONSTER_DATA = {
 		},
 		"Lava": {
 			"Flame Tail": {
-				"type": "Flame Tail",
+				"type": "FlameTail",
 				"weight": 60,
 				"health": 110,
 				"strength": 35,
