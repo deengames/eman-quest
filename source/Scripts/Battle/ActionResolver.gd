@@ -51,7 +51,7 @@ func resolve(action, player, monster_data, multiplier):
 			return "Gained " + str(BattlePlayer.ENERGY_GAIN_PER_ACTION) + " energy!"
 		
 func monster_attacks(monster_data, player, boost_amount, memory_grid):
-	
+	# Returns: {"message" => what happened, "action" => what sound to play}
 	var num_turns = Globals.randint(1, 3)
 	for turn in num_turns:
 		
@@ -94,8 +94,11 @@ func monster_attacks(monster_data, player, boost_amount, memory_grid):
 		
 		if damage > 0:
 			player.damage(damage)
+		
+		if to_use == "attack":
+			to_use = "monster-attack"
 			
-		return message
+		return {"message": message, "action": to_use}
 		
 func _process_attack(action, monster_data, player, boost_amount, memory_grid):
 	var damage = 0

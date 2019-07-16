@@ -253,11 +253,16 @@ func _resolve_action(action, multiplier):
 		self._show_battle_end(true)
 
 func _resolve_monster_turn():
+	# Because playing the attack SFX coincides with clicking next turn, ugh.
+	# Therefore, wait a bit before resolving the monster's turn.
+	yield(get_tree().create_timer(1), "timeout")
+	
 	var num_turns = self._monster_data["next_round_turns"]
 	
 	for i in range(num_turns):
-		var message = self._action_resolver.monster_attacks(self._monster_data, self._player, 0, null)
-		$StatusLabel.text = message
+		var data = self._action_resolver.monster_attacks(self._monster_data, self._player, 0, null)
+		$StatusLabel.text = data["message"]
+		AudioManager.new().play_sound(data["action"])
 		self._update_health_displays() # show health decrease
 		yield(get_tree().create_timer(_MONSTER_TURN_DISPLAY_SECONDS), 'timeout')
 		
