@@ -51,8 +51,18 @@ var audio_clips = {
 	"vampire": preload("res://assets/audio/sfx/battle/vampire.ogg"),
 	"bash": preload("res://assets/audio/sfx/battle/stun.ogg"),
 	
-	"monster-attack": preload("res://assets/audio/sfx/battle/monster-attack.ogg")
-	
+	"monster-attack": preload("res://assets/audio/sfx/battle/monster-attack.ogg"),
+	"roar": preload("res://assets/audio/sfx/battle/roar.ogg"),
+	"howl": preload("res://assets/audio/sfx/battle/howl.ogg"),
+	"freeze": preload("res://assets/audio/sfx/battle/freeze.ogg"),
+	"poison": preload("res://assets/audio/sfx/battle/poison.ogg"),
+	"pierce": preload("res://assets/audio/sfx/battle/pierce.ogg"),
+	"harden": preload("res://assets/audio/sfx/battle/harden.ogg"),
+	"eat": preload("res://assets/audio/sfx/battle/eat.ogg"),
+	"armour-break": preload("res://assets/audio/sfx/battle/armour-break.ogg"),
+	"shield-bash": preload("res://assets/audio/sfx/battle/shield-bash.ogg"),
+	"fireball": preload("res://assets/audio/sfx/battle/fireball.ogg"),
+	"100-needles": preload("res://assets/audio/sfx/battle/100-needles.ogg")
 }
 
 var audio_instances = []
