@@ -94,7 +94,7 @@ const MONSTER_DATA = {
                 }
 			},
 			"Eight Eyes": {
-				"type": "EightEyes",
+				"type": "Eight Eyes",
 				"weight": 40,
 				"health": 110,
 				"strength": 28,
@@ -129,7 +129,7 @@ const MONSTER_DATA = {
 				}
 			},
 			"Eye Rock": {
-				"type": "EyeRock",
+				"type": "Eye Rock",
 				"weight": 50,
 				"health": 110,
 				"strength": 20,
@@ -145,7 +145,7 @@ const MONSTER_DATA = {
 		},
 		"Lava": {
 			"Flame Tail": {
-				"type": "FlameTail",
+				"type": "Flame Tail",
 				"weight": 60,
 				"health": 110,
 				"strength": 35,
