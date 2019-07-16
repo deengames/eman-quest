@@ -51,7 +51,10 @@ const MONSTER_DATA = {
 				# Override skill messages with custom values
 				"skill_messages": {
 					"roar": "howls! Attack up by {amount}!"
-				}
+				},
+                "skill_sounds": {
+                    "roar": "howl"
+                }
 			},
 			"Ice Terrapin": {
 				"type": "Ice Terrapin",
@@ -85,7 +88,10 @@ const MONSTER_DATA = {
 				},
 				"skill_messages": {
 					"chomp": "pierces you with its fangs! {damage} damage!"
-				}
+				},
+                "skill_sounds": {
+                    "roar": "pierce"
+                }
 			},
 			"Eight Eyes": {
 				"type": "EightEyes",
@@ -185,7 +191,10 @@ const MONSTER_DATA = {
 				},
 				"skill_messages": {
 					"chomp": "bashes you with his shield! {damage} damage!"
-				}
+				},
+                "skill_sounds": {
+                    "roar": "shield-bash"
+                }
 			},
 			"Antipode Mage": {
 				"type": "Antipode Mage",
@@ -203,7 +212,10 @@ const MONSTER_DATA = {
 				},
 				"skill_messages": {
 					"chomp": "hurls a fireball at you! {damage} damage!"
-				}
+				},
+                "skill_sounds": {
+                    "roar": "fireball"
+                }
 			}
 		},
 		"Desert": {
@@ -237,7 +249,10 @@ const MONSTER_DATA = {
 				},
 				"skill_messages": {
 					"chomp": "stabs you with a hundred needles! {damage} damage!"
-				}
+				},
+                "skill_sounds": {
+                    "roar": "100-needles"
+                }
 			}
 		}
 	}
