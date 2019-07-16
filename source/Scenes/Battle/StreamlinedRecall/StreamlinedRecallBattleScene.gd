@@ -268,6 +268,7 @@ func _resolve_monster_turn():
 	self._start_next_turn()
 
 func _on_NextTurnButton_pressed():
+	AudioManager.new().play_sound("button-click")
 	self._start_next_turn()
 	
 	# Delete first tutorial arrow button on next-turn button
