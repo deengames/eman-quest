@@ -57,6 +57,7 @@ func monster_attacks(monster_data, player, boost_amount, memory_grid):
 		
 		var use_skill = randi() % 100 <= monster_data["skill_probability"]
 		var to_use = "attack"
+		var audio = to_use
 		
 		if use_skill:
 			
@@ -85,6 +86,11 @@ func monster_attacks(monster_data, player, boost_amount, memory_grid):
 				
 				if skill_roll >= lower_bound and skill_roll < upper_bound:
 					to_use = skill
+					audio = to_use
+					
+					if monster_data.has("skill_sounds") and monster_data.skill_sounds.has(to_use):
+						audio = monster_data.skill_sounds[to_use]
+						
 					break
 				
 		 
@@ -96,9 +102,10 @@ func monster_attacks(monster_data, player, boost_amount, memory_grid):
 			player.damage(damage)
 		
 		if to_use == "attack":
-			to_use = "monster-attack"
+			audio = "monster-attack"
 			
-		return {"message": message, "action": to_use}
+		print ("Returning " + to_use + " and audio=" + audio)
+		return {"message": message, "action": audio}
 		
 func _process_attack(action, monster_data, player, boost_amount, memory_grid):
 	var damage = 0
