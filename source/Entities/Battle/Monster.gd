@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+const ReferenceChecker = preload("res://Scripts/ReferenceChecker.gd")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 const _MOVE_SPEED = 100
@@ -84,7 +85,7 @@ func _pick_destination():
 	var root = get_tree().get_root()
 	var current_map = Globals.current_map
 	# null when you first load/enter a map, second null is player being previously-freed
-	if Features.is_enabled("monsters chase you") and Globals.player != null and Globals.post_fade_position == null:
+	if Features.is_enabled("monsters chase you") and Globals.player != null and not ReferenceChecker.is_previously_freed(Globals.player) and Globals.post_fade_position == null:
 		self._destination = Globals.player.position
 	else:
 		self._destination.x = Globals.randint(0, (current_map.tiles_wide - 1) * Globals.TILE_WIDTH)
