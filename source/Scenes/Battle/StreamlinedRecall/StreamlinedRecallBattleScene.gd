@@ -219,6 +219,7 @@ func _resolve_players_turn(action):
 	# End multiplier
 	
 	self._resolve_action(action, multiplier)
+	AudioManager.new().play_sound(action)
 	
 	if self._actions_left == 0: 
 		$NextTurnButton.visible = true

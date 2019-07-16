@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/100-needles.ogg-c27df034f34912e62c6c6443de707702.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/battle/100-needles.ogg"
+dest_files=[ "res://.import/100-needles.ogg-c27df034f34912e62c6c6443de707702.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

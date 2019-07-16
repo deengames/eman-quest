@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/vampire.ogg-fb9e1495612e3a5f543b18410299a9a1.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/battle/vampire.ogg"
+dest_files=[ "res://.import/vampire.ogg-fb9e1495612e3a5f543b18410299a9a1.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

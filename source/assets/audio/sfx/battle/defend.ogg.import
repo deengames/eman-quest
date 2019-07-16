@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/defend.ogg-6ff64b04489b180f6352c98d8b424bf3.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/battle/defend.ogg"
+dest_files=[ "res://.import/defend.ogg-6ff64b04489b180f6352c98d8b424bf3.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

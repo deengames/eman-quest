@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/poison.ogg-867e0298e8c6ef8c6a5a50c61c6746a5.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/battle/poison.ogg"
+dest_files=[ "res://.import/poison.ogg-867e0298e8c6ef8c6a5a50c61c6746a5.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

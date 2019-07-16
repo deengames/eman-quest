@@ -41,7 +41,15 @@ var audio_clips = {
 	# Battle
 	"right-tile": preload("res://assets/audio/sfx/right-tile.ogg"),
 	"wrong-tile": preload("res://assets/audio/sfx/wrong-tile.ogg"),
-	"battle-transition": preload("res://assets/audio/sfx/battle-transition.ogg")
+	"battle-transition": preload("res://assets/audio/sfx/battle-transition.ogg"),
+
+	# Battle sounds - monster and player
+	"attack": preload("res://assets/audio/sfx/battle/attack.ogg"),
+	"critical": preload("res://assets/audio/sfx/battle/critical.ogg"),
+	"defend": preload("res://assets/audio/sfx/battle/defend.ogg"),
+	"heal": preload("res://assets/audio/sfx/battle/potion.ogg"),
+	"vampire": preload("res://assets/audio/sfx/battle/vampire.ogg"),
+	"stun": preload("res://assets/audio/sfx/battle/stun.ogg")
 }
 
 var audio_instances = []

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/armour-break.ogg-5a91989340b7ef0cf15389fe7b1f7993.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/battle/armour-break.ogg"
+dest_files=[ "res://.import/armour-break.ogg-5a91989340b7ef0cf15389fe7b1f7993.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
