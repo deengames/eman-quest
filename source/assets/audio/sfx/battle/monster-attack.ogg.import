@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/monster-attack.ogg-0f2f4a833da0ec25c83bc51f6299c5ed.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/battle/monster-attack.ogg"
+dest_files=[ "res://.import/monster-attack.ogg-0f2f4a833da0ec25c83bc51f6299c5ed.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
