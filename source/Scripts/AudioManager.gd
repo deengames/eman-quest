@@ -49,7 +49,7 @@ var audio_clips = {
 	"defend": preload("res://assets/audio/sfx/battle/defend.ogg"),
 	"heal": preload("res://assets/audio/sfx/battle/potion.ogg"),
 	"vampire": preload("res://assets/audio/sfx/battle/vampire.ogg"),
-	"stun": preload("res://assets/audio/sfx/battle/stun.ogg")
+	"bash": preload("res://assets/audio/sfx/battle/stun.ogg")
 }
 
 var audio_instances = []

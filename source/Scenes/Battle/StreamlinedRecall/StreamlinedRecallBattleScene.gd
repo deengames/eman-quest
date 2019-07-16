@@ -241,6 +241,7 @@ func _on_player_skill(skill):
 	self._update_tech_points_display()
 	self._resolve_action(skill, 1)
 	self._disable_unusable_skills()
+	AudioManager.new().play_sound(skill)
 	
 # Common to attack/item/etc. and skills
 func _resolve_action(action, multiplier):
