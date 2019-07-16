@@ -27,6 +27,6 @@ func _ready():
 	tween.interpolate_property($Logo, "modulate", Color(1, 1, 1, 1), Color(1, 1, 1, 0), _FADE_SECONDS, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	add_child(tween)
 	tween.start()
-	yield(tree.create_timer(_FADE_SECONDS), 'timeout')
+	yield(tree.create_timer(_FADE_SECONDS + 0.1), 'timeout')
 	
 	tree.change_scene("res://Scenes/Title.tscn")
