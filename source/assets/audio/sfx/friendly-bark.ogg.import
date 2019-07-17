@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/friendly-bark.ogg-bc35a703c03e9005de620fc94efed485.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/friendly-bark.ogg"
+dest_files=[ "res://.import/friendly-bark.ogg-bc35a703c03e9005de620fc94efed485.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

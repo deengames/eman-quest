@@ -41,6 +41,7 @@ var audio_clips = {
 	"open-treasure-chest": preload("res://assets/audio/sfx/open-treasure-chest.ogg"),
 	"save": preload("res://assets/audio/sfx/save.ogg"),
 	"load": preload("res://assets/audio/sfx/load.ogg"),
+	"dog-barking": preload("res://assets/audio/sfx/friendly-bark.ogg"),
 	
 	# Battle
 	"right-tile": preload("res://assets/audio/sfx/right-tile.ogg"),

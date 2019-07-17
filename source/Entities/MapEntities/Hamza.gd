@@ -1,5 +1,6 @@
 extends Node2D
 
+const AudioManager = preload("res://Scripts/AudioManager.gd")
 const ChoicePanel = preload("res://Scenes/UI/ChoicePanel.tscn")
 const DialogueWindow = preload("res://Scenes/UI/DialogueWindow.tscn")
 const SceneManagement = preload("res://Scripts/SceneManagement.gd")
@@ -30,6 +31,8 @@ func _on_Area2D_body_entered(body):
 		var root = get_tree().get_root()
 		var current_scene = SceneManagement.get_current_scene(root)
 		
+		AudioManager.new().play_sound("dog-barking")
+		
 		var dialog_window = DialogueWindow.instance()
 		
 		current_scene.get_node("CanvasLayer").add_child(dialog_window)
@@ -37,8 +40,8 @@ func _on_Area2D_body_entered(body):
 		dialog_window.position = viewport / 4
 	
 		dialog_window.show_texts([
-			[Globals.PLAYER_NAME, "Hamza, you're too old to protect Mama and Baba ..."],
 			["Hamza", "Woof!"],
+			[Globals.PLAYER_NAME, "Hamza, you're too old to protect Mama and Baba ..."],
 			[Globals.PLAYER_NAME, "I'm never too old to play-fight with you though!"]
 		])
 		yield(dialog_window, "shown_all")
