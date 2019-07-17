@@ -68,11 +68,11 @@ var final_boss_data = {
 	
 	"skill_probability": 50,
 	"skills": {
-		"disable attack": 8,
-		"freeze": 5,
-		"poison": 2,
-		"vampire": 1
-	},
+		"freeze": 50,
+		"poison": 20,
+		"armour break": 20,
+        "vampire": 10
+	}
 }
 
 # Number and order of boss events. Null means ignored/nothing.
