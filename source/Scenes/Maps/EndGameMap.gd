@@ -39,6 +39,8 @@ func _ready():
 
 func _on_FinalEventsTrigger_body_entered(body):
 	var player = Globals.player
+	 # not sure why it's true, causes player to walk around during these cutscenes
+	Globals.unfreeze_player_in_process = false
 	
 	if body == player and not Globals.showed_final_events:
 		Globals.showed_final_events = true
