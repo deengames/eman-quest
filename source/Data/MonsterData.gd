@@ -196,7 +196,7 @@ const MONSTER_DATA = {
 					"chomp": "bashes you with his shield! {damage} damage!"
 				},
                 "skill_sounds": {
-                    "roar": "shield-bash"
+                    "chomp": "shield-bash"
                 }
 			},
 			"Antipode Mage": {
@@ -217,7 +217,7 @@ const MONSTER_DATA = {
 					"chomp": "hurls a fireball at you! {damage} damage!"
 				},
                 "skill_sounds": {
-                    "roar": "fireball"
+                    "chomp": "fireball"
                 }
 			}
 		},
@@ -254,7 +254,7 @@ const MONSTER_DATA = {
 					"chomp": "stabs you with a hundred needles! {damage} damage!"
 				},
                 "skill_sounds": {
-                    "roar": "100-needles"
+                    "chomp": "100-needles"
                 }
 			}
 		}

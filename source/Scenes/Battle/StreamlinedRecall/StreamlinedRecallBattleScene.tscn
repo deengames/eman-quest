@@ -62,7 +62,7 @@ position = Vector2( 10, 55 )
 texture = ExtResource( 2 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 0, 0, 64, 64 )
+region_rect = Rect2( 64, 0, 64, 64 )
 _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [node name="MonsterHealth" type="TextureProgress" parent="MonsterControls" index="1"]
