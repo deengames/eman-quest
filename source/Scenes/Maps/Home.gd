@@ -61,7 +61,8 @@ func show_intro_events():
 	var player = Globals.player
 	player.position = $Locations/Start.position
 	player.freeze()
-		
+	
+	AudioManager.new().play_sound("scream")
 	_show_texts([
 		["Mama", "AIEEEEEEEEEEEEEEEEEEEEEE!!!!"],
 		["Baba", "Unhand her, you brute!"],
