@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/open-metal-door.ogg-d40aa9ee7f55e2710691d99f7c83cc32.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/open-metal-door.ogg"
+dest_files=[ "res://.import/open-metal-door.ogg-d40aa9ee7f55e2710691d99f7c83cc32.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

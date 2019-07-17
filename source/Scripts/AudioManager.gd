@@ -42,6 +42,8 @@ var audio_clips = {
 	"save": preload("res://assets/audio/sfx/save.ogg"),
 	"load": preload("res://assets/audio/sfx/load.ogg"),
 	"dog-barking": preload("res://assets/audio/sfx/friendly-bark.ogg"),
+	"open-metal-door": preload("res://assets/audio/sfx/open-metal-door.ogg"),
+	"open-wood-door": preload("res://assets/audio/sfx/open-wood-door.ogg"),
 	
 	# Battle
 	"right-tile": preload("res://assets/audio/sfx/right-tile.ogg"),
