@@ -103,6 +103,8 @@ func monster_attacks(monster_data, player, boost_amount, memory_grid):
 		
 		if to_use == "attack":
 			audio = "monster-attack"
+		
+		audio = audio.replace(' ', '-')
 			
 		print ("Returning " + to_use + " and audio=" + audio)
 		return {"message": message, "action": audio}
