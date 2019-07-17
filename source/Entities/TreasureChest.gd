@@ -1,6 +1,8 @@
 extends Sprite
 
 const _CHEST_OPEN_X = 64
+
+const AudioManager = preload("res://Scripts/AudioManager.gd")
 const Equipment = preload("res://Entities/Equipment.gd")
 const StatusWindow = preload("res://Scenes/UI/StatusWindow.tscn")
 
@@ -51,6 +53,7 @@ func open():
 		Globals.player_data.equipment.append(self.contents)
 		self.contents.roll_modifiers()
 		self._consume()
+		AudioManager.new().play_sound("open-treasure-chest")
 		
 		var window = StatusWindow.instance()
 		window.set_text("Found a(n) " + self.contents.equipment_name)
