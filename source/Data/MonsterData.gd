@@ -89,9 +89,9 @@ const MONSTER_DATA = {
 				"skill_messages": {
 					"chomp": "pierces you with its fangs! {damage} damage!"
 				},
-                "skill_sounds": {
-                    "roar": "pierce"
-                }
+				"skill_sounds": {
+					"chomp": "pierce"
+				}
 			},
 			"Eight Eyes": {
 				"type": "Eight Eyes",
@@ -108,6 +108,9 @@ const MONSTER_DATA = {
 				},
 				"skill_messages": {
 					"heal": " eats a captured insect! Healed {amount} health!"
+				},
+				"skill_sounds": {
+					"heal": "eat"
 				}
 			}
 		}

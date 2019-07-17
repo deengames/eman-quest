@@ -52,6 +52,7 @@ var audio_clips = {
 	"bash": preload("res://assets/audio/sfx/battle/stun.ogg"),
 	
 	"monster-attack": preload("res://assets/audio/sfx/battle/monster-attack.ogg"),
+	"chomp": preload("res://assets/audio/sfx/battle/chomp.ogg"),
 	"roar": preload("res://assets/audio/sfx/battle/roar.ogg"),
 	"howl": preload("res://assets/audio/sfx/battle/howl.ogg"),
 	"freeze": preload("res://assets/audio/sfx/battle/freeze.ogg"),
