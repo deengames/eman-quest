@@ -95,8 +95,11 @@ func _on_SaveButton_pressed():
 		file.store_buffer(bytes)
 		file.close()
 		
+		AudioManager.new().play_sound("save")
+		
 		# Refresh so it LOOKS saved
 		_on_ItemList_item_selected(_selected_slot)
+		
 		
 func _screenshot_path(save_id):
 	return "user://screenshot-save" + str(save_id) + ".png"
@@ -106,4 +109,5 @@ func _on_LoadButton_pressed():
 		$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/LoadButton.disabled = true
 		# disappear without triggering popup_hide, which takes us to the titlescreen
 		self.modulate.a = 0 
+		AudioManager.new().play_sound("load")
 		SaveManager.load("save" + str(_selected_slot), get_tree())
