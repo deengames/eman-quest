@@ -73,7 +73,8 @@ var audio_clips = {
 	"100-needles": preload("res://assets/audio/sfx/battle/100-needles.ogg"),
 	
 	# Event sounds
-	"scream": preload("res://assets/audio/sfx/scream.ogg")
+	"scream": preload("res://assets/audio/sfx/scream.ogg"),
+	"pick-up": preload("res://assets/audio/sfx/pick-up.ogg")
 }
 
 var audio_instances = []
