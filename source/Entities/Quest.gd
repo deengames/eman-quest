@@ -147,8 +147,11 @@ const  BOSS_EVENTS = [
 		"post-fight": [
 			{ "messages": [
 				["Umayyah", "That's a good child. Now hand it over! All of them monster parts!"],
-				["Aisha", "..."],
-				["", "Aisha" + " gave up the monster parts.", "give-items"],
+				["Aisha", "..."]
+			] },
+			{ "audio": "give-items" },
+			{ "messages": [
+				["", "Aisha" + " gave up the monster parts."],
 				["Umayyah", "At last ... the true power ... !"],
 				["Aisha", "Let him go!"],
 				["Umayyah", "Fwahaha! Fool, you will all perish! The true power is mine!"]

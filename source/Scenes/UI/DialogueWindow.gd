@@ -62,7 +62,7 @@ func _input(event):
 				self.visible = false
 				self.emit_signal("shown_all")
 		
-func show_text(speaker, content, audio_key):
+func show_text(speaker, content):
 	self.speaker_name = speaker
 	
 	content = content.replace("{finalmap}", Quest.FINAL_MAP_NAME)
@@ -73,8 +73,6 @@ func show_text(speaker, content, audio_key):
 		content = content.replace(map_token, map_name)
 	
 	self.dialogue = content
-	if audio_key != null:
-		AudioManager.new().play_sound(audio_key)
 
 func set_speaker_name(speaker):
 	$Nametag/NameText.text = speaker
@@ -91,7 +89,4 @@ func get_dialogue():
 func _show_next_text():
 	self._showing_index += 1
 	var data = self._texts[self._showing_index]
-	var audio_key = null
-	if len(data) > 2:
-		audio_key = data[2]
-	self.show_text(data[0], data[1], audio_key)
+	self.show_text(data[0], data[1])

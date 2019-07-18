@@ -1,6 +1,7 @@
 extends Node2D
 
 const AlphaFluctuator = preload("res://Scripts/Effects/AlphaFluctuator.gd")
+const AudioManager = preload("res://Scripts/AudioManager.gd")
 const DialogueWindow = preload("res://Scenes/UI/DialogueWindow.tscn")
 const FadeAndColour = preload("res://Scripts/Effects/FadeAndColour.gd")
 const HomeMap = preload("res://Scenes/Maps/Home.tscn")
@@ -75,6 +76,10 @@ func _process_event(dialog_window, event):
 				effect = FadeAndColour.new(target)
 			else:
 				effect = AlphaFluctuator.new(target)
+			
+			# Play audio
+			if key == "escape":
+				AudioManager.new().play_sound("teleport")
 				
 			SceneManagement.get_current_scene(self._tree.get_root()).add_child(effect)
 			# We can't yield here because we yield elsewhere. This is not done synchronously.
@@ -83,6 +88,9 @@ func _process_event(dialog_window, event):
 			effect.remove_on_done(current_scene, target)
 		else:
 			print("WARNING: Can't find node named {name} to {effect}!".format({name = target_name, effect = key}))
+	elif event.has("audio"):
+		var audio_key = event["audio"]
+		AudioManager.new().play_sound(audio_key)
 	else:
 		print("Not sure how to process event: {e}".format({e = event}))
 		if Globals.enable_assertions == true:
