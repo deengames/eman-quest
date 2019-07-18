@@ -70,7 +70,12 @@ var audio_clips = {
 	"armour-break": preload("res://assets/audio/sfx/battle/armour-break.ogg"),
 	"shield-bash": preload("res://assets/audio/sfx/battle/shield-bash.ogg"),
 	"fireball": preload("res://assets/audio/sfx/battle/fireball.ogg"),
-	"100-needles": preload("res://assets/audio/sfx/battle/100-needles.ogg")
+	"100-needles": preload("res://assets/audio/sfx/battle/100-needles.ogg"),
+	
+	# Event sounds
+	"scream": preload("res://assets/audio/sfx/scream.ogg"),
+	"pick-up": preload("res://assets/audio/sfx/pick-up.ogg"),
+	"give-items": preload("res://assets/audio/sfx/give-items.ogg")
 }
 
 var audio_instances = []

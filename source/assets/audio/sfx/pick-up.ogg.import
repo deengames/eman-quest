@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/pick-up.ogg-9bed7fd588ddcb6ca7ba7ac3b340897f.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/pick-up.ogg"
+dest_files=[ "res://.import/pick-up.ogg-9bed7fd588ddcb6ca7ba7ac3b340897f.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

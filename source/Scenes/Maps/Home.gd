@@ -61,7 +61,8 @@ func show_intro_events():
 	var player = Globals.player
 	player.position = $Locations/Start.position
 	player.freeze()
-		
+	
+	AudioManager.new().play_sound("scream")
 	_show_texts([
 		["Mama", "AIEEEEEEEEEEEEEEEEEEEEEE!!!!"],
 		["Baba", "Unhand her, you brute!"],
@@ -72,10 +73,9 @@ func show_intro_events():
 func _conclude_intro_events():
 	
 	yield(get_tree().create_timer(1), 'timeout')
-	# Play sound here
-	
-	_bandit.run("Down", 4) # run off-screen
 	self.remove_child(_mama)
+	AudioManager.new().play_sound("pick-up")
+	_bandit.run("Down", 4) # run off-screen
 	_bandit.connect("reached_destination",  self, "_bandit_reached")
 	
 func _bandit_reached():

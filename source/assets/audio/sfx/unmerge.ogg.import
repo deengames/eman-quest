@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/unmerge.ogg-7e1395b001b3a5980570ebcf0b8c2f5b.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/unmerge.ogg"
+dest_files=[ "res://.import/unmerge.ogg-7e1395b001b3a5980570ebcf0b8c2f5b.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
