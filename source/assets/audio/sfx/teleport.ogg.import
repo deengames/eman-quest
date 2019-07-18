@@ -11,5 +11,5 @@ dest_files=[ "res://.import/teleport.ogg-d96245b9f66c7a43f04c57265d30a003.oggstr
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

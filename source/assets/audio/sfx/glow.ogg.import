@@ -11,5 +11,5 @@ dest_files=[ "res://.import/glow.ogg-c89ecf284682b7bd9f20617f5e4dd940.oggstr" ]
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

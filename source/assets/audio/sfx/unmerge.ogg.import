@@ -11,5 +11,5 @@ dest_files=[ "res://.import/unmerge.ogg-7e1395b001b3a5980570ebcf0b8c2f5b.oggstr"
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
