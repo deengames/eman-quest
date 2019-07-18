@@ -2,6 +2,7 @@ extends Node2D
 
 signal shown_all
 
+const AudioManager = preload("res://Scripts/AudioManager.gd")
 const Quest = preload("res://Entities/Quest.gd")
 
 var speaker_name setget set_speaker_name, get_speaker_name
@@ -61,7 +62,7 @@ func _input(event):
 				self.visible = false
 				self.emit_signal("shown_all")
 		
-func show_text(speaker, content):
+func show_text(speaker, content, audio_key):
 	self.speaker_name = speaker
 	
 	content = content.replace("{finalmap}", Quest.FINAL_MAP_NAME)
@@ -72,6 +73,8 @@ func show_text(speaker, content):
 		content = content.replace(map_token, map_name)
 	
 	self.dialogue = content
+	if audio_key != null:
+		AudioManager.new().play_sound(audio_key)
 
 func set_speaker_name(speaker):
 	$Nametag/NameText.text = speaker
@@ -88,4 +91,7 @@ func get_dialogue():
 func _show_next_text():
 	self._showing_index += 1
 	var data = self._texts[self._showing_index]
-	self.show_text(data[0], data[1])
+	var audio_key = null
+	if len(data) > 2:
+		audio_key = data[2]
+	self.show_text(data[0], data[1], audio_key)
