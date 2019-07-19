@@ -7,17 +7,20 @@ signal cancel_destination
 signal reached_destination
 signal facing_new_direction
 
+const Footsteps = preload("res://assets/audio/sfx/footstep.ogg")
+
 export var speed = 0 # set by owning component
 const ZERO_VECTOR = Vector2(0, 0)
 
 var previously_facing = ""
 var previously_pressed_key = false
+var _audio_player
 
 func _ready():
-	# Called when the node is added to the scene for the first time.
-	# Initialization here
-	pass
-
+	_audio_player = AudioStreamPlayer.new()
+	_audio_player.stream = Footsteps
+	add_child(_audio_player)
+	
 func _physics_process(delta):
 	if self.get_parent().can_move:
 		self._move_to_keyboard()
@@ -49,12 +52,16 @@ func _move_to_keyboard():
 		previously_facing = new_facing
 	
 	if velocity.x != 0 or velocity.y != 0:
+		if not _audio_player.playing:
+			_audio_player.play()
 		velocity = velocity.normalized() * self.speed
 		velocity = self.get_parent().move_and_slide(velocity, ZERO_VECTOR)
 		self.emit_signal("cancel_destination") # if clicked, cancel that destination
-	elif not pressed_key and previously_pressed_key:
-		self.previously_facing = null
-		# Not moving and not click-move: stop animation
-		self.emit_signal("reached_destination")
+	else:
+		_audio_player.stop()
+		if not pressed_key and previously_pressed_key:
+			self.previously_facing = null
+			# Not moving and not click-move: stop animation
+			self.emit_signal("reached_destination")
 	
 	self.previously_pressed_key = pressed_key

@@ -11,5 +11,5 @@ dest_files=[ "res://.import/footstep.ogg-6d17bd46a39d8f67d0829b5ebe368fed.oggstr
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
