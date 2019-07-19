@@ -215,6 +215,7 @@ func _print_and_set_seed():
 	return seed_value
 
 func _on_Button_pressed():
+	$StartButton.disabled = true
 	var audio_player = AudioManager.new()
 	add_child(audio_player)
 	audio_player.play_sound("button-click")
