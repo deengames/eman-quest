@@ -212,9 +212,6 @@ static func switch_to_battle_if_touched_player(tree, monster, body):
 		if not monster is Boss:
 			monster.freeze()
 		
-		# TODO: potentially different sound for bosses
-		AudioManager.new().play_sound("battle-transition")
-		
 		start_battle(tree, monster.data_object["data"])
 		
 
@@ -234,6 +231,8 @@ static func _show_battle_transition(tree, animation_time_seconds):
 static func start_battle(tree, monster_data):
 	# Transition
 	Globals.player.freeze()
+	
+	AudioManager.new().play_sound("battle-transition")
 	
 	var animation_time_seconds = 0.5
 	var root = tree.get_root()
