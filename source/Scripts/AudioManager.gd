@@ -45,12 +45,12 @@ var audio_clips = {
 	"open-metal-door": preload("res://assets/audio/sfx/open-metal-door.ogg"),
 	"open-wood-door": preload("res://assets/audio/sfx/open-wood-door.ogg"),
 	
-	# Battle
+	# Battle sounds
 	"right-tile": preload("res://assets/audio/sfx/right-tile.ogg"),
 	"wrong-tile": preload("res://assets/audio/sfx/wrong-tile.ogg"),
 	"battle-transition": preload("res://assets/audio/sfx/battle-transition.ogg"),
 
-	# Battle sounds - monster and player
+	# Battle sounds - player
 	"attack": preload("res://assets/audio/sfx/battle/attack.ogg"),
 	"critical": preload("res://assets/audio/sfx/battle/critical.ogg"),
 	"defend": preload("res://assets/audio/sfx/battle/defend.ogg"),
@@ -58,6 +58,7 @@ var audio_clips = {
 	"vampire": preload("res://assets/audio/sfx/battle/vampire.ogg"),
 	"bash": preload("res://assets/audio/sfx/battle/stun.ogg"),
 	
+	# Battle sounds - monster
 	"monster-attack": preload("res://assets/audio/sfx/battle/monster-attack.ogg"),
 	"chomp": preload("res://assets/audio/sfx/battle/chomp.ogg"),
 	"roar": preload("res://assets/audio/sfx/battle/roar.ogg"),
@@ -76,7 +77,9 @@ var audio_clips = {
 	"scream": preload("res://assets/audio/sfx/scream.ogg"),
 	"pick-up": preload("res://assets/audio/sfx/pick-up.ogg"),
 	"give-items": preload("res://assets/audio/sfx/give-items.ogg"),
-	"teleport": preload("res://assets/audio/sfx/teleport.ogg")
+	"teleport": preload("res://assets/audio/sfx/teleport.ogg"),
+	"merge": preload("res://assets/audio/sfx/merge.ogg"),
+	"unmerge": preload("res://assets/audio/sfx/unmerge.ogg")
 }
 
 var audio_instances = []

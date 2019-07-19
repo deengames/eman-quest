@@ -74,6 +74,7 @@ func _on_FinalEventsTrigger_body_entered(body):
 		self._jinn_charges()
 		yield(self._pause(0.5), "completed")
 		$Jinn.visible = false
+		AudioManager.new().play_sound("merge")
 		self._glow_and_pause($Umayyah)
 		
 		# TODO: Lighting-bolt sound / flash screen
@@ -143,7 +144,6 @@ func _show_endgame_events():
 	yield(dialog_window, "shown_all")
 	dialog_window.queue_free()
 	
-	
 	yield(self._pause(1), "completed")
 	
 	# 3s glow; 1s umayyah, 1s jinn, 1s jinn post-move
@@ -151,6 +151,7 @@ func _show_endgame_events():
 	yield(self._pause(1), "completed")
 	
 	$Jinn.visible = true
+	AudioManager.new().play_sound("unmerge")
 	self._glow_and_pause($Jinn)
 	yield(self._pause(1), "completed")
 	
@@ -160,6 +161,7 @@ func _show_endgame_events():
 	
 	var tween_helper = TweenHelper.new().fade_out(current_scene, $Jinn, 1)
 	self.add_child(tween_helper)
+	AudioManager.new().play_sound("teleport")
 	tween_helper.start()
 	yield(self._pause(1), "completed")
 
