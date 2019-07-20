@@ -237,13 +237,26 @@ func _generate_straight_path(point1, point2, ground_map, decoration_map):
 		# horizontal, then vertical
 		self._generate_path([start_x, start_y], [stop_x, start_y], ground_map, decoration_map)
 		self._generate_path([stop_x, start_y], [stop_x, stop_y], ground_map, decoration_map)
-		self._generate_door(start_x + ((stop_x - start_x) / 2), start_y, ground_map, decoration_map)
+
+		self._generate_door(start_x + ((stop_x - start_x) / 2), start_y, ground_map, decoration_map)		
+		# double thickness
+		self._generate_path([start_x, start_y + 1], [stop_x, start_y + 1], ground_map, decoration_map)
+		self._generate_path([stop_x + 1, start_y], [stop_x + 1, stop_y], ground_map, decoration_map)
+		self._generate_door(start_x + ((stop_x - start_x) / 2), start_y + 1, ground_map, decoration_map)
+
 	else:
 		# vertical, then horizontal
 		self._generate_path([start_x, start_y], [start_x, stop_y], ground_map, decoration_map)
 		self._generate_path([start_x, stop_y], [stop_x, stop_y], ground_map, decoration_map)
+		
 		self._generate_door(start_x, start_y + ((stop_y - start_y) / 2), ground_map, decoration_map)
-
+		
+		# double thickness
+		self._generate_path([start_x + 1, start_y], [start_x + 1, stop_y], ground_map, decoration_map)
+		self._generate_path([start_x, stop_y + 1], [stop_x, stop_y + 1], ground_map, decoration_map)
+		
+		self._generate_door(start_x + 1, start_y + ((stop_y - start_y) / 2), ground_map, decoration_map)
+		
 func _find_closest_room_to(room, rooms):
 	var closest_node = rooms[0]
 	var closest_distance = pow(closest_node.position.x - room[0], 2) + pow(closest_node.position.y - room[1], 2)
