@@ -1,8 +1,7 @@
 extends KinematicBody2D
 
 const DialogueWindow = preload("res://Scenes/UI/DialogueWindow.tscn")
-const Quest = preload("res://Entities/Quest.gd")
-const SceneManagement = preload("res://Scripts/SceneManagement.gd")
+var Quest = load("res://Entities/Quest.gd")
 
 var can_talk = true
 

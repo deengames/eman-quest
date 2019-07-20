@@ -94,7 +94,7 @@ func generate(submap, transitions, variation_name):
 	map.transitions = transitions
 	map.treasure_chests = self._generate_treasure_chests(transitions)
 
-	if submap.area_type == AreaType.BOSS:
+	if submap.area_type == AreaType.AREA_TYPE.BOSS:
 		map.bosses = self._generate_boss(variation_name)
 
 	for data in tile_data:
@@ -357,7 +357,7 @@ func _generate_treasure_chests(transitions):
 	var chests = []
 	var chests_coordinates = []
 	var types = ["weapon", "armour"]
-	var stats = {"weapon": StatType.Strength, "armour": StatType.Defense}
+	var stats = {"weapon": StatType.StatType.Strength, "armour": StatType.StatType.Defense}
 
 	######## duplicated in cave generator
 	# Sigh, refactoring. This map has no separate object/wall map. So pass

@@ -8,7 +8,6 @@ const HomeMap = preload("res://Scenes/Maps/Home.tscn")
 const MapDestination = preload("res://Entities/MapDestination.gd")
 const Quest = preload("res://Entities/Quest.gd")
 const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
-const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 const GLOBAL_FONT = preload("res://Theme/Default-24px.tres")
 
@@ -135,7 +134,7 @@ func _teleport_to(destination):
 		
 		var maps = Globals.maps[destination]
 		for submap in maps:
-			if submap.area_type == AreaType.ENTRANCE:
+			if submap.area_type == AreaType.AREA_TYPE.ENTRANCE:
 				for transition in submap.transitions:
 					if transition.target_map == "Overworld":
 						# Swap coordinates. This is a transition BACK to overworld.

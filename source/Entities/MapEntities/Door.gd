@@ -2,7 +2,7 @@ extends Node2D
 
 const AudioManager = preload("res://Scripts/AudioManager.gd")
 
-const DOOR_TYPE = "metal"
+var DOOR_TYPE = "metal"
 	
 func _on_Area2D_body_entered(body):
 	if body == Globals.player:

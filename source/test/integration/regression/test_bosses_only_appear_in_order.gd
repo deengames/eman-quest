@@ -20,7 +20,7 @@ func test_bosses_appear_when_matching_Globals_bosses_defeated():
 	# Find the boss map
 	var second_boss_map = second_map_name_and_variation_areas[0]
 	for map in second_map_name_and_variation_areas:
-		if map.area_type == AreaType.BOSS:
+		if map.area_type == AreaType.AREA_TYPE.BOSS:
 			second_boss_map = map
 			break
 	
@@ -49,7 +49,7 @@ func test_bosses_dont_appear_when_not_matching_Globals_bosses_defeated():
 	# Find the boss map
 	var third_boss_map = third_map_name_and_variation_areas[0]
 	for map in third_map_name_and_variation_areas:
-		if map.area_type == AreaType.BOSS:
+		if map.area_type == AreaType.AREA_TYPE.BOSS:
 			third_boss_map = map
 			break
 	

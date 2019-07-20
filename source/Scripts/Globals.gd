@@ -6,6 +6,8 @@ signal battle_over
 const PlayerData = preload("res://Entities/PlayerData.gd")
 const ReferenceChecker = preload("res://Scripts/ReferenceChecker.gd")
 
+const FINAL_MAP_NAME = "Waterfall Cliff"
+
 const TILE_WIDTH = 64
 const TILE_HEIGHT = 64
 # 1920x1080 / 64x64 => 30/17

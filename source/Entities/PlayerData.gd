@@ -33,8 +33,8 @@ var assigned_points = {
 	"num_actions": int(0) # requires ~20 points to raise it by 1
 }
 
-var weapon = Equipment.new("weapon", "Dagger", StatType.Strength, StatType.Defense)
-var armour = Equipment.new("armour", "Tunic", StatType.Defense, StatType.Health)
+var weapon = Equipment.new("weapon", "Dagger", StatType.StatType.Strength, StatType.StatType.Defense)
+var armour = Equipment.new("armour", "Tunic", StatType.StatType.Defense, StatType.StatType.Health)
 var equipment = []
 var key_items = []
 
@@ -93,24 +93,6 @@ func to_dict():
 		"tech_points": self.tech_points,
 		"play_time_seconds": self.play_time_seconds
 	}
-
-static func from_dict(dict):
-	var to_return = new()
-	to_return.level = dict["level"]
-	to_return.experience_points = dict["experience_points"]
-	to_return.health = dict["health"]
-	to_return.strength = dict["strength"]
-	to_return.defense = dict["defense"]
-	to_return.num_actions = dict["num_actions"]
-	to_return.unassigned_stats_points = dict["unassigned_stats_points"]
-	to_return.assigned_points = dict["assigned_points"]
-	to_return.weapon = Equipment.from_dict(dict["weapon"])
-	to_return.armour = Equipment.from_dict(dict["armour"])
-	to_return.equipment = DictionaryHelper.array_from_dictionary(dict["equipment"])
-	to_return.key_items = DictionaryHelper.array_from_dictionary(dict["key_items"])
-	to_return.tech_points = dict["tech_points"]
-	to_return.play_time_seconds = dict["play_time_seconds"]
-	return to_return
 	
 func gain_xp(xp):
 	var old_xp = self.experience_points

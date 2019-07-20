@@ -1,7 +1,6 @@
 extends KinematicBody2D
 
 const KeyItem = preload("res://Entities/KeyItem.gd")
-const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 var data = {}
 
@@ -56,20 +55,9 @@ func to_dict():
 		"replace_with_npc": self.replace_with_npc
 	}
 
-static func from_dict(dict):
-	var to_return = new()
-	to_return.initialize(dict["x"], dict["y"], dict["data"], KeyItem.from_dict(dict["key_item"]))
-	to_return.is_alive = dict["is_alive"]
-	to_return.data_object = dict["data"]
-	to_return.events = dict["events"]
-	to_return.attach_quest_npcs = dict["attach_quest_npcs"]
-	to_return.replace_with_npc = dict["replace_with_npc"]
-	return to_return
-
-func _on_Area2D_body_entered(body):
-	SceneManagement.switch_to_battle_if_touched_player(get_tree(), self, body)
-
+#func _on_Area2D_body_entered(body):
+#	SceneManagement.switch_to_battle_if_touched_player(get_tree(), self, body)
 
 func _on_WiderArea2D_body_entered(body):
 	if self.events != null:
-		self._on_Area2D_body_entered(body)
+		pass#SceneManagement.switch_to_battle_if_touched_player(get_tree(), self, body)

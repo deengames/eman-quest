@@ -5,7 +5,6 @@ const BattlePlayer = preload("res://Entities/Battle/BattlePlayer.gd")
 const OptionsDialog = preload("res://Scenes/UI/OptionsDialog.tscn")
 const OptionsSaver = preload("res://Scripts/OptionsSaver.gd")
 const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
-const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 var _GAME_WIDTH = ProjectSettings.get_setting("display/window/size/width")
 var _GAME_HEIGHT = ProjectSettings.get_setting("display/window/size/height")

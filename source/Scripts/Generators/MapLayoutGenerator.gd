@@ -4,7 +4,7 @@ const Room = preload("res://Entities/Room.gd")
 const AreaType = preload("res://Scripts/Enums/AreaType.gd")
 const TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 
-const ExtraRooms = 2
+const ExtraRooms = 0
 
 ###
 # Generates multiple rooms and connects them together.
@@ -37,7 +37,7 @@ static func generate_layout(num_rooms):
 	var y = coordinates[1]
 	
 	var current = Room.new(x, y)
-	current.area_type = AreaType.ENTRANCE
+	current.area_type = AreaType.AREA_TYPE.ENTRANCE
 	to_return.set_at(x, y, current)
 	var rooms = [current]
 	
@@ -48,7 +48,7 @@ static func generate_layout(num_rooms):
 		if next != null:
 			var room = Room.new(next.x, next.y)
 			to_return.set_at(next.x, next.y, room)
-			current.connect(room)
+			current.connect_to(room)
 			rooms.append(room)
 			left_to_generate -= 1
 			current = room
@@ -57,19 +57,19 @@ static func generate_layout(num_rooms):
 			current = rooms[randi() % len(rooms)]
 	
 	# Last room is the boss room
-	rooms[-1].area_type = AreaType.BOSS
+	rooms[-1].area_type = AreaType.AREA_TYPE.BOSS
 	
 	# Attach more random rooms to any rooms (including each other).
 	# They don't connect to the boss room, though.
 	var extra_rooms = ExtraRooms
 	while extra_rooms > 0:
 		var attach_to = rooms[randi() % len(rooms)]
-		if attach_to.area_type != AreaType.BOSS:
+		if attach_to.area_type != AreaType.AREA_TYPE.BOSS:
 			var next = _pick_unexplored_adjacent(attach_to, to_return)
 			if next != null:
 				var room = Room.new(next.x, next.y)
 				to_return.set_at(next.x, next.y, room)
-				attach_to.connect(room)
+				attach_to.connect_to(room)
 				rooms.append(room)
 				extra_rooms -= 1
 			

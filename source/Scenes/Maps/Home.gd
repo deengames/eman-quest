@@ -1,11 +1,9 @@
 extends "StaticMap.gd"
 
-const AudioManager = preload("res://Scripts/AudioManager.gd")
 const Bandit = preload("res://Entities/MapEntities/Bandit/Bandit.tscn")
 const DialogueWindow = preload("res://Scenes/UI/DialogueWindow.tscn")
 const Mama = preload("res://Entities/MapEntities/Mom.tscn")
 const Quest = preload("res://Entities/Quest.gd")
-const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 const map_type = 'Home'
 

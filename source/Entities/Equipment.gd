@@ -43,19 +43,19 @@ func to_dict():
 static func _get_random_amount(type, stat_name):
 	var amount = 0
 	
-	if stat_name == StatType.Health:
+	if stat_name == StatType.StatType.Health:
 		amount = Globals.player_data.health
 		# Not less than 10% health boost, no more than 25%
 		return randint(int(amount * _MIN_HEALTH_BOOST_PERCENT), int(amount * _MAX_HEALTH_BOOST_PERCENT))
 	# Weapon/strength or armour/defense, use primary modifier
-	elif stat_name == StatType.Strength and type == "weapon":
+	elif stat_name == StatType.StatType.Strength and type == "weapon":
 		amount = Globals.player_data.weapon.primary_stat_modifier
-	elif stat_name == StatType.Defense and type == "armour":
+	elif stat_name == StatType.StatType.Defense and type == "armour":
 		amount = Globals.player_data.armour.primary_stat_modifier
 	# Weapon/defense or armour/strength, use secondary modifier
-	elif stat_name == StatType.Defense and type == "weapon":
+	elif stat_name == StatType.StatType.Defense and type == "weapon":
 		amount = Globals.player_data.weapon.secondary_stat_modifier
-	elif stat_name == StatType.Strength and type == "armour":
+	elif stat_name == StatType.StatType.Strength and type == "armour":
 		amount = Globals.player_data.armour.secondary_stat_modifier
 	
 	var min_amount = ceil(amount * _MIN_STAT_MULTIPLIER)
@@ -67,16 +67,6 @@ static func _get_random_amount(type, stat_name):
 # Source: https://godotengine.org/qa/2539/how-would-i-go-about-picking-a-random-number
 static func randint(minimum, maximum):
 	return range(minimum, maximum + 1)[randi() % range(minimum, maximum + 1).size()]
-
-static func from_dict(dictionary):
-	var equipment = new(dictionary["type"], dictionary["equipment_name"],
-		dictionary["primary_stat"],
-		dictionary["secondary_stat"])
-	
-	equipment.primary_stat_modifier = dictionary["primary_stat_modifier"]
-	equipment.secondary_stat_modifier = dictionary["secondary_stat_modifier"]
-	
-	return equipment
 
 func str():
 	return (self.equipment_name + "\n" +

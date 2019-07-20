@@ -3,7 +3,6 @@ extends Node2D
 signal shown_all
 
 const AudioManager = preload("res://Scripts/AudioManager.gd")
-const Quest = preload("res://Entities/Quest.gd")
 
 var speaker_name setget set_speaker_name, get_speaker_name
 var dialogue setget set_dialogue, get_dialogue
@@ -65,7 +64,7 @@ func _input(event):
 func show_text(speaker, content):
 	self.speaker_name = speaker
 	
-	content = content.replace("{finalmap}", Quest.FINAL_MAP_NAME)
+	content = content.replace("{finalmap}", Globals.FINAL_MAP_NAME)
 	
 	for i in range(len(self._map_names)):
 		var map_token = "{map" + str(i + 1) + "}"

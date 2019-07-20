@@ -16,13 +16,15 @@ _global_script_class_icons={
 [application]
 
 config/name="Eman Quest"
-run/main_scene="res://Scenes/DeenGamesSplash.tscn"
+run/main_scene="res://Scenes/Title.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 Features="*res://Scripts/Features.gd"
 Globals="*res://Scripts/Globals.gd"
+Statics="*res://Scripts/Statics.gd"
+SceneManagement="*res://Scripts/SceneManagement.gd"
 
 [display]
 

@@ -1,8 +1,6 @@
 extends "StaticMap.gd"
 
-const AudioManager = preload("res://Scripts/AudioManager.gd")
 const DialogueWindow = preload("res://Scenes/UI/DialogueWindow.tscn")
-const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 const StreamlinedRecallBattleScene = preload("res://Scenes/Battle/StreamlinedRecall/StreamlinedRecallBattleScene.tscn")
 const TweenHelper = preload("res://Scripts/TweenHelper.gd")
 

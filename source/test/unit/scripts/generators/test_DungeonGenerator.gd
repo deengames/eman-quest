@@ -11,7 +11,7 @@ func test_generate_doesnt_generate_orphan_doors():
 	seed(804429191)
 	
 	var generator = DungeonGenerator.new()
-	var area_types = [AreaType.NORMAL, AreaType.BOSS, AreaType.ENTRANCE]
+	var area_types = [AreaType.NORMAL, AreaType.AREA_TYPE.BOSS, AreaType.AREA_TYPE.ENTRANCE]
 	
 	while maps_to_generate > 0:
 		maps_to_generate -= 1

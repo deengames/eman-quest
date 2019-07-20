@@ -85,14 +85,14 @@ func lower_defense():
 
 func total_strength():
 	var total = self.strength
-	total += _get_equipment_modifier(Globals.player_data.weapon, StatType.Strength)
-	total += _get_equipment_modifier(Globals.player_data.armour, StatType.Strength)
+	total += _get_equipment_modifier(Globals.player_data.weapon, StatType.StatType.Strength)
+	total += _get_equipment_modifier(Globals.player_data.armour, StatType.StatType.Strength)
 	return total
 	
 func total_defense():
 	var total = self._defense
-	total += _get_equipment_modifier(Globals.player_data.weapon, StatType.Defense)
-	total += _get_equipment_modifier(Globals.player_data.armour, StatType.Defense)
+	total += _get_equipment_modifier(Globals.player_data.weapon, StatType.StatType.Defense)
+	total += _get_equipment_modifier(Globals.player_data.armour, StatType.StatType.Defense)
 	var grand_total = floor(total * (1.0 + (DEFEND_MULTIPLIER * self._times_defending)))
 	return grand_total
 
@@ -129,6 +129,6 @@ func _get_equipment_modifier(equipment, stat_type):
 
 func _total_health():
 	var total = self.max_health
-	total += _get_equipment_modifier(Globals.player_data.weapon, StatType.Health)
-	total += _get_equipment_modifier(Globals.player_data.armour, StatType.Health)
+	total += _get_equipment_modifier(Globals.player_data.weapon, StatType.StatType.Health)
+	total += _get_equipment_modifier(Globals.player_data.armour, StatType.StatType.Health)
 	return total

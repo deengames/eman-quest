@@ -2,7 +2,6 @@ extends Node2D
 
 const AudioManager = preload("res://Scripts/AudioManager.gd")
 const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
-const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 const TweenHelper = preload("res://Scripts/TweenHelper.gd")
 
 const _FADE_TIME_SECONDS = 0.5

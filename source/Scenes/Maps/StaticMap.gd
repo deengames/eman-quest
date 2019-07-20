@@ -8,7 +8,6 @@ const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
 # A static map. Contains instructions to work + common code.
 ###
 
-const map_type = "" # used in transitions, plays nice with code that looks up map_type.
 var _audio_bgs = AudioManager.new()
 
 func _ready():

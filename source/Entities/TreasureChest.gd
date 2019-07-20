@@ -40,12 +40,6 @@ func to_dict():
 		"tile_y": self.tile_y
 	}
 
-static func from_dict(dict):
-	var to_return = new()
-	var contents = Equipment.from_dict(dict["contents"])
-	to_return.initialize(dict["tile_x"], dict["tile_y"], contents)
-	to_return.is_opened = dict["is_opened"]
-	return to_return
 
 func open():
 	if not self.is_opened:

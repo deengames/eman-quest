@@ -14,4 +14,4 @@ func test_generate_layout_attaches_extra_rooms_to_non_boss_rooms():
 		# We know that the last two rooms are extra rooms
 		var extra_rooms = [rooms[-1], rooms[-2]]
 		for room in extra_rooms:
-			assert_ne(room.area_type, AreaType.BOSS)
+			assert_ne(room.area_type, AreaType.AREA_TYPE.BOSS)

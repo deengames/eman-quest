@@ -1,7 +1,6 @@
 extends KinematicBody2D
 
 const ReferenceChecker = preload("res://Scripts/ReferenceChecker.gd")
-const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 const _MOVE_SPEED = 100
 const _CHANGE_DESTINATION_EVERY_N_SECONDS = [1, 2]
@@ -59,19 +58,6 @@ func to_dict():
 		"data": data
 	}
 	return to_return
-
-static func from_dict(dict):
-	if dict == null:
-		return null
-		
-	var to_return = new()
-	var data = dict["data"]
-	to_return.initialize(dict["x"], dict["y"])
-	# needed for loading and re-instantiating on map
-	#to_return.data_object = data
-	to_return.data = data
-	return to_return
-
 
 func _process(delta):
 	if not self._frozen:

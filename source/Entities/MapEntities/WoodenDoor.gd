@@ -1,3 +1,3 @@
 extends "res://Entities/MapEntities/Door.gd"
 
-const DOOR_TYPE = "wood"
+#var DOOR_TYPE = "wood"

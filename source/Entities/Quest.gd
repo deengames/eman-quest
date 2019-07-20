@@ -17,8 +17,6 @@ const NPCS = {
 	"Baba": preload("res://Entities/MapEntities/Dad.tscn")
 }
 
-const FINAL_MAP_NAME = "Waterfall Cliff"
-
 # Number and order of bosses. Eg. [null, {...}, null] means we have to replace
 # the second boss with the data from this array. [{...}] means replace only first boss.
 # Can't be const because we have to set it when we load game.
@@ -208,7 +206,7 @@ static func add_quest_content_if_applicable(map, variation):
 	var replacement_npcs = Globals.quest.replacement_npcs
 	
 	# Add quest boss if there's one specified
-	if map.area_type == AreaType.BOSS:
+	if map.area_type == AreaType.AREA_TYPE.BOSS:
 		# Separate bosses from events. Non-quest-bosses have events/attachments too.
 		if dungeon_number < len(bosses):
 			var quest_boss = bosses[dungeon_number]
@@ -253,12 +251,3 @@ func to_dict():
 		"attach_quest_npcs": self.attach_quest_npcs,
 		"final_boss_data": self.final_boss_data
 	}
-
-static func from_dict(dict):
-	var to_return = new()
-	to_return.bosses = dict["bosses"]
-	to_return.attach_quest_npcs = dict["attach_quest_npcs"]
-	# HACK: always use the freshest data.
-	#to_return.final_boss_data = dict["final_boss_data"]
-	to_return.final_boss_data = new().final_boss_data
-	return to_return

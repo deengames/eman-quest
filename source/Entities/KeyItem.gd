@@ -13,8 +13,3 @@ func to_dict():
 		"item_name": self.item_name,
 		"description": self.description
 	}
-
-static func from_dict(dict):
-	var to_return = new()
-	to_return.initialize(dict["item_name"], dict["description"])
-	return to_return

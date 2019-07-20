@@ -1,7 +1,6 @@
 extends WindowDialog
 
 const ReferenceChecker = preload("res://Scripts/ReferenceChecker.gd")
-const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 func _ready():
 	self.popup_exclusive = true

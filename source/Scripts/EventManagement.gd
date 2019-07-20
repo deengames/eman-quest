@@ -6,7 +6,6 @@ const DialogueWindow = preload("res://Scenes/UI/DialogueWindow.tscn")
 const FadeAndColour = preload("res://Scripts/Effects/FadeAndColour.gd")
 const HomeMap = preload("res://Scenes/Maps/Home.tscn")
 const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
-const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 signal events_done
 

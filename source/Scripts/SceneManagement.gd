@@ -67,7 +67,7 @@ static func change_map_to(tree, target):
 			
 			if typeof(map_data) == TYPE_ARRAY:
 				for map in map_data:
-					if map.area_type == AreaType.ENTRANCE:
+					if map.area_type == AreaType.AREA_TYPE.ENTRANCE:
 						target_areamap = map
 						break
 		else:
@@ -182,7 +182,8 @@ static func change_scene_to(tree, scene_instance):
 	
 	var root = tree.get_root()
 	var current_scene = get_current_scene(root)
-	call_deferred("_free_current_scene", current_scene)
+	#call_deferred("_free_current_scene", current_scene)
+	current_scene.queue_free()
 	
 	current_scene = scene_instance
 	

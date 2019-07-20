@@ -49,25 +49,6 @@ func to_dict():
 		"variation": self.variation
 	}
 
-static func from_dict(dict):
-	var map = new(dict["map_type"], dict["variation"], dict["tileset_path"],
-		dict["tiles_wide"], dict["tiles_high"], dict["area_type"])
-	
-	map.transitions = DictionaryHelper.array_from_dictionary(dict["transitions"])
-	map.tiles_wide = dict["tiles_wide"]
-	map.tiles_high = dict["tiles_high"]
-	map.map_type = dict["map_type"]
-	map.tile_data = DictionaryHelper.array_from_dictionary(dict["tile_data"])
-	map.monsters = DictionaryHelper.dictionary_values_from_dictionary(dict["monsters"])
-	map.treasure_chests = DictionaryHelper.array_from_dictionary(dict["treasure_chests"])
-	map.bosses = DictionaryHelper.dictionary_values_from_dictionary(dict["bosses"])
-	map.tileset_path = dict["tileset_path"]
-	map.entrance_from_overworld = DictionaryHelper.dict_to_vector2(dict["entrance_from_overworld"])
-	map.grid_x = dict["grid_x"]
-	map.grid_y = dict["grid_y"]
-
-	return map
-
 func add_tile_data(tile_data):
 	self.tile_data.append(tile_data)
 

@@ -5,7 +5,6 @@ const DictionaryHelper = preload("res://Scripts/DictionaryHelper.gd")
 const MapDestination = preload("res://Entities/MapDestination.gd")
 const PlayerData = preload("res://Entities/PlayerData.gd")
 const Quest = preload("res://Entities/Quest.gd")
-const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 # When I implemented this, as saves were then, this is what we got:
 # Uncompressed:	7120kb
@@ -80,16 +79,16 @@ static func load(save_id, tree):
 	for key in maps_data.keys():
 		# Derp
 		if key == "Overworld":
-			Globals.maps[key] = AreaMap.from_dict(maps_data[key])
+			Globals.maps[key] = Statics.make_areamap(maps_data[key])
 		else:
 			Globals.maps[key] = []
 			for data in maps_data[key]:
-				Globals.maps[key].append(AreaMap.from_dict(data))
+				Globals.maps[key].append(Statics.make_areamap(data))
 	
 	Globals.player_data = PlayerData.from_dict(data["player_data"])
 	Globals.overworld_position = DictionaryHelper.dict_to_vector2(data["overworld_position_data"])
 	
-	var current_map =  AreaMap.from_dict(data["current_map_data"])
+	var current_map =  Statics.make_areamap(data["current_map_data"])
 	Globals.current_map = current_map # Required to correctly load
 	Globals.current_map_type = current_map.map_type
 	

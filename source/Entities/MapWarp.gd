@@ -1,10 +1,9 @@
 extends Node2D
 
-const EndGameMap = preload("res://Scenes/Maps/EndGameMap.tscn")
-const HomeMap = preload("res://Scenes/Maps/Home.tscn")
-const MapDestination = preload("res://Entities/MapDestination.gd")
+var EndGameMap = load("res://Scenes/Maps/EndGameMap.tscn")
+var HomeMap = load("res://Scenes/Maps/Home.tscn")
+var MapDestination = load("res://Entities/MapDestination.gd")
 const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
-const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 
 ######## TODO: use tileset tiles instead?
 const EntranceImageXPositions = {
