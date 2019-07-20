@@ -59,7 +59,7 @@ func _ready():
 	var end_game = _get_by_name(children, "EndGame").duplicate()
 	end_game.name = "EndGame"
 	_move_to_position(end_game, 4)
-	_add_label(end_game, Quest.FINAL_MAP_NAME)
+	_add_label(end_game, Globals.FINAL_MAP_NAME)
 	add_child(end_game)
 	
 	# Fixes a crash after completing the final battle

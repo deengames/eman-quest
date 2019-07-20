@@ -181,8 +181,8 @@ func _pick_dungeons_and_variations():
 	
 	for variation in ForestVariations:
 		all_types.append(["Forest", variation])
-	for variation in CaveVariations:
-		all_types.append(["Cave", variation])
+	#for variation in CaveVariations:
+	#	all_types.append(["Cave", variation])
 	for variation in DungeonVariations:
 		all_types.append(["Dungeon", variation])
 			
