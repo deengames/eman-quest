@@ -181,8 +181,8 @@ func _pick_dungeons_and_variations():
 	
 	for variation in ForestVariations:
 		all_types.append(["Forest", variation])
-	#for variation in CaveVariations:
-	#	all_types.append(["Cave", variation])
+	for variation in CaveVariations:
+		all_types.append(["Cave", variation])
 	for variation in DungeonVariations:
 		all_types.append(["Dungeon", variation])
 			
@@ -208,7 +208,7 @@ func _print_and_set_seed():
 	# Random seed, BUT print it out so we know what it is.
 	# Without this ... we always get the same seed. Wut?
 	randomize()
-	var seed_value = 2774466350#randi()
+	var seed_value = 2130604731#randi()
 	print("Game #" + str(seed_value))
 	seed(seed_value)
 	Globals.seed_value = seed_value

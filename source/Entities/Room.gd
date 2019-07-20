@@ -16,18 +16,18 @@ func connect_to(room):
 		if room.grid_y < self.grid_y:
 			# Room is above us
 			self.connections["up"] = room
-			connections["down"] = self
+			room.connections["down"] = self
 		else: # room is below us
 			self.connections["down"] = room
-			connections["up"] = self
+			room.connections["up"] = self
 	else:
 		if room.grid_x < self.grid_x:
 			# Room is to the left of us
 			self.connections["left"] = room
-			connections["right"] = self
+			room.connections["right"] = self
 		else: # room is to the right of us
 			self.connections["right"] = room
-			connections["left"] = self
+			room.connections["left"] = self
 
 func to_dict():
 	# I don't know if this is correct. It only saves the current reference, not
