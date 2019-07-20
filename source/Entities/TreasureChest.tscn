@@ -24,7 +24,6 @@ _sections_unfolded = [ "Offset", "Region" ]
 
 [node name="Area2D" type="Area2D" parent="." index="0"]
 
-visible = false
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
