@@ -4,7 +4,7 @@ const Room = preload("res://Entities/Room.gd")
 const AreaType = preload("res://Scripts/Enums/AreaType.gd")
 const TwoDimensionalArray = preload("res://Scripts/TwoDimensionalArray.gd")
 
-const ExtraRooms = 2
+const ExtraRooms = 0
 
 ###
 # Generates multiple rooms and connects them together.
