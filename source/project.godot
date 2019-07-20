@@ -43,5 +43,6 @@ theme/custom_font="res://Theme/Default-24px.tres"
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
 quality/2d/use_pixel_snap=true
 environment/default_environment="res://default_env.tres"
