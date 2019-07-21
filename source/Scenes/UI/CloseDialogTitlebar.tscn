@@ -3,7 +3,7 @@
 [ext_resource path="res://Scenes/UI/CloseDialogTitlebar.gd" type="Script" id=1]
 [ext_resource path="res://assets/audio/sfx/close-button.ogg" type="AudioStream" id=2]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -77,7 +77,7 @@ volume_db = 0.0
 pitch_scale = 1.0
 autoplay = false
 mix_target = 0
-bus = "Master"
+bus = "SFX"
 
 [connection signal="gui_input" from="Panel/XButton" to="." method="_on_Button_pressed"]
 
