@@ -13,6 +13,7 @@ func _ready():
 	$FullScreen.pressed = Globals.is_full_screen
 	$BackgroundAudio/BackgroundAudioSlider.value = Globals.background_volume
 	$SfxAudio/SfxAudioSlider.value = Globals.sfx_volume
+	$TileDisplayTime/TileDisplayTimeSlider.value = Globals.tile_display_multiplier
 
 func title(value):
 	$CloseDialogTitlebar.title = value
@@ -28,7 +29,8 @@ func _save_options():
 		"is_first_run": false, # always false because we ran the first run
 		"is_full_screen": Globals.is_full_screen,
 		"background_volume": Globals.background_volume,
-		"sfx_volume": Globals.sfx_volume
+		"sfx_volume": Globals.sfx_volume,
+		"tile_display_multiplier": Globals.tile_display_multiplier
 	}
 	
 	OptionsSaver.save(options)
@@ -65,4 +67,9 @@ func _on_BackgroundAudioSlider_value_changed(value):
 func _on_SfxAudioSlider_value_changed(value):
 	Globals.sfx_volume = value
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), Globals.sfx_volume)
+	_save_options()
+
+func _on_TileDisplayTimeSlider_value_changed(value):
+	Globals.tile_display_multiplier = value
+	$TileDisplayTime/TileDisplayTimeLabel.text = "Battle: display tiles for " + str(value) + "s"
 	_save_options()

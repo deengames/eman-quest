@@ -142,10 +142,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 60.0
-margin_top = 16.0
-margin_right = 416.0
-margin_bottom = 31.0
+margin_left = 7.0
+margin_top = 15.0
+margin_right = 380.0
+margin_bottom = 30.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -165,7 +165,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 212.0
+margin_right = 231.0
 margin_bottom = 42.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -174,7 +174,7 @@ mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-text = "Background Volume:"
+text = "Background volume:"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -217,10 +217,10 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 1.0
-margin_top = 18.0
-margin_right = 402.0
-margin_bottom = 33.0
+margin_left = 4.0
+margin_top = 16.0
+margin_right = 376.0
+margin_bottom = 31.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -240,7 +240,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 233.0
+margin_right = 252.0
 margin_bottom = 42.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -249,7 +249,7 @@ mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-text = "Sound Effects Volume:"
+text = "Sound effects volume:"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -292,10 +292,85 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 1.0
-margin_top = 18.0
-margin_right = 402.0
-margin_bottom = 33.0
+margin_left = -6.0
+margin_top = 15.0
+margin_right = 381.0
+margin_bottom = 30.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0.0980392, 0.0862745, 0.141176, 1 )
+
+[node name="TileDisplayTime" type="Node2D" parent="." index="6"]
+
+position = Vector2( 16, 243 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="TileDisplayTimeLabel" type="Label" parent="TileDisplayTime" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 279.0
+margin_bottom = 42.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+hint_tooltip = "Zoom the view in or out"
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Battle: display tiles for 1.25s"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Margin", "Mouse" ]
+
+[node name="TileDisplayTimeSlider" type="HSlider" parent="TileDisplayTime" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 325.0
+margin_top = 16.0
+margin_right = 680.0
+margin_bottom = 30.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+hint_tooltip = "Zoom the view in or out"
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 0
+min_value = 1.0
+max_value = 4.0
+step = 0.25
+page = 0.0
+value = 1.0
+exp_edit = false
+rounded = false
+editable = true
+tick_count = 16
+ticks_on_borders = false
+focus_mode = 2
+_sections_unfolded = [ "Margin", "Theme" ]
+
+[node name="HideErrorsLolWut" type="ColorRect" parent="TileDisplayTime/TileDisplayTimeSlider" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -23.0
+margin_top = 16.0
+margin_right = 350.0
+margin_bottom = 31.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -315,5 +390,7 @@ color = Color( 0.0980392, 0.0862745, 0.141176, 1 )
 [connection signal="value_changed" from="BackgroundAudio/BackgroundAudioSlider" to="." method="_on_BackgroundAudioSlider_value_changed"]
 
 [connection signal="value_changed" from="SfxAudio/SfxAudioSlider" to="." method="_on_SfxAudioSlider_value_changed"]
+
+[connection signal="value_changed" from="TileDisplayTime/TileDisplayTimeSlider" to="." method="_on_TileDisplayTimeSlider_value_changed"]
 
 
