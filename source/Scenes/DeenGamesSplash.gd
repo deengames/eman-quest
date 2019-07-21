@@ -20,7 +20,7 @@ func _ready():
 			# ranges from -40 (muted) to 0 (full volume)
 			"background_volume": 0,
 			"sfx_volume": 0,
-			"tile_display_multiplier": 1
+			"tile_display_multiplier": float(1)
 		}
 
 	var window_size = OS.window_size
@@ -36,7 +36,7 @@ func _ready():
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Background"), Globals.background_volume)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), Globals.sfx_volume)
 
-	Globals.tile_display_multiplier = data["tile_display_multiplier"]
+	Globals.tile_display_multiplier = float(data["tile_display_multiplier"])
 
 	var tree = get_tree()
 	

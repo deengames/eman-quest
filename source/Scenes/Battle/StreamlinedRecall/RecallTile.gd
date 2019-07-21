@@ -38,8 +38,6 @@ func show_then_hide():
 	yield(get_tree().create_timer(_DISPLAY_SECONDS), 'timeout')
 	$Cover.visible = false
 	$Contents.region_rect.position.x = _TILE_IMAGE_X["active"]
-	#var random_offset = randf() * 0.25
-	# Add random_offset to _DISPLAY_SECONDS to get random/cool fade
 	yield(get_tree().create_timer(_DISPLAY_SECONDS * Globals.tile_display_multiplier), 'timeout')
 	$Cover.visible = true
 	self._should_be_selected = true

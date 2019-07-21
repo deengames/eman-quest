@@ -14,7 +14,8 @@ func _ready():
 	$BackgroundAudio/BackgroundAudioSlider.value = Globals.background_volume
 	$SfxAudio/SfxAudioSlider.value = Globals.sfx_volume
 	$TileDisplayTime/TileDisplayTimeSlider.value = Globals.tile_display_multiplier
-
+	self._on_TileDisplayTimeSlider_value_changed(Globals.tile_display_multiplier)
+	
 func title(value):
 	$CloseDialogTitlebar.title = value
 
@@ -70,6 +71,6 @@ func _on_SfxAudioSlider_value_changed(value):
 	_save_options()
 
 func _on_TileDisplayTimeSlider_value_changed(value):
-	Globals.tile_display_multiplier = value
+	Globals.tile_display_multiplier = float(value)
 	$TileDisplayTime/TileDisplayTimeLabel.text = "Battle: display tiles for " + str(value) + "s"
 	_save_options()
