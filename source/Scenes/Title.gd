@@ -22,18 +22,19 @@ func _ready():
 			"is_first_run": true,
 			"is_full_screen": true,
 			# ranges from -40 (muted) to 0 (full volume)
-			"background_audio": 0,
-			"sfx_audio": 0
+			"background_volume": 0,
+			"sfx_volume": 0
 		}
 	
 	var window_size = OS.window_size
 	Globals.zoom  = data["zoom"]
 	var zoom_percent = Globals.zoom / 100
 	OS.window_size = Vector2(_GAME_WIDTH * zoom_percent, _GAME_HEIGHT * zoom_percent)
-	data["background_audio"] = 0
-	data["sfx_audio"] = 0
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Background"), data["background_audio"])
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), data["sfx_audio"])
+	
+	Globals.background_volume = data["background_volume"]
+	Globals.sfx_volume = data["sfx_volume"]
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Background"), Globals.background_volume)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), Globals.sfx_volume)
 	
 	Features.set_state("monsters chase you", data["monsters_chase"])
 	Globals.is_full_screen = data["is_full_screen"]

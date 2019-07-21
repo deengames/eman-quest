@@ -48,11 +48,15 @@ var seed_value
 var bosses_defeated = 0
 var showed_final_events = false
 var beat_last_boss = false
+# tutorial
 var show_battle_tutorial = true
 var show_first_map_tutorial = false
+# options
 var zoom = 100 # 25-200
 var is_full_screen = true
 var is_first_run = true
+var background_volume = 0 # -40 to 0
+var sfx_volume = 0 # -40 to 0
 # End: persist
 ####
 

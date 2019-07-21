@@ -90,7 +90,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 160.0
+margin_right = 207.0
 margin_bottom = 42.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -111,7 +111,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 170.0
+margin_left = 255.0
 margin_top = 16.0
 margin_right = 680.0
 margin_bottom = 30.0
@@ -144,8 +144,158 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 60.0
 margin_top = 16.0
-margin_right = 461.0
+margin_right = 416.0
 margin_bottom = 31.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0.0980392, 0.0862745, 0.141176, 1 )
+
+[node name="BackgroundAudio" type="Node2D" parent="." index="4"]
+
+position = Vector2( 16, 155 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="BackgroundAudioLabel" type="Label" parent="BackgroundAudio" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 212.0
+margin_bottom = 42.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+hint_tooltip = "Zoom the view in or out"
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Background Volume:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Margin", "Mouse" ]
+
+[node name="BackgroundAudioSlider" type="HSlider" parent="BackgroundAudio" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 255.0
+margin_top = 16.0
+margin_right = 680.0
+margin_bottom = 30.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+hint_tooltip = "Zoom the view in or out"
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 0
+min_value = -40.0
+max_value = 0.0
+step = 1.0
+page = 0.0
+value = 0.0
+exp_edit = false
+rounded = true
+editable = true
+tick_count = 8
+ticks_on_borders = false
+focus_mode = 2
+_sections_unfolded = [ "Margin", "Theme" ]
+
+[node name="HideErrorsLolWut" type="ColorRect" parent="BackgroundAudio/BackgroundAudioSlider" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1.0
+margin_top = 18.0
+margin_right = 402.0
+margin_bottom = 33.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0.0980392, 0.0862745, 0.141176, 1 )
+
+[node name="SfxAudio" type="Node2D" parent="." index="5"]
+
+position = Vector2( 16, 199 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="SfxAudioLabel" type="Label" parent="SfxAudio" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 233.0
+margin_bottom = 42.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+hint_tooltip = "Zoom the view in or out"
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "Sound Effects Volume:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Margin", "Mouse" ]
+
+[node name="SfxAudioSlider" type="HSlider" parent="SfxAudio" index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 255.0
+margin_top = 16.0
+margin_right = 680.0
+margin_bottom = 30.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+hint_tooltip = "Zoom the view in or out"
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 0
+min_value = -40.0
+max_value = 0.0
+step = 1.0
+page = 0.0
+value = 0.0
+exp_edit = false
+rounded = true
+editable = true
+tick_count = 8
+ticks_on_borders = false
+focus_mode = 2
+_sections_unfolded = [ "Margin", "Theme" ]
+
+[node name="HideErrorsLolWut" type="ColorRect" parent="SfxAudio/SfxAudioSlider" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1.0
+margin_top = 18.0
+margin_right = 402.0
+margin_bottom = 33.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -161,5 +311,9 @@ color = Color( 0.0980392, 0.0862745, 0.141176, 1 )
 [connection signal="toggled" from="FullScreen" to="." method="_on_FullScreen_toggled"]
 
 [connection signal="value_changed" from="Zoom/ZoomSlider" to="." method="_on_ZoomSlider_value_changed"]
+
+[connection signal="value_changed" from="BackgroundAudio/BackgroundAudioSlider" to="." method="_on_BackgroundAudioSlider_value_changed"]
+
+[connection signal="value_changed" from="SfxAudio/SfxAudioSlider" to="." method="_on_SfxAudioSlider_value_changed"]
 
 
