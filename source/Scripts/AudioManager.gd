@@ -5,7 +5,7 @@ signal sound_finished
 const AudioFilePlayerClass = preload("res://Scenes/AudioFilePlayer.tscn")
 var AudioManger = get_script()
 
-const BG_AUDIO_DB_OFFSET = -10
+const BACKGROUND_AUDIOS = ["home", "waterfall-cliff", "title", "credits"]
 
 ###### SOURCE: https://godot.readthedocs.io/en/3.0/tutorials/3d/fps_tutorial/part_six.html#doc-fps-tutorial-part-six
 # ------------------------------------
@@ -95,8 +95,12 @@ func _play_button_click():
 func play_sound(audio_clip_key, volume_db = 0):
 	if audio_clips.has(audio_clip_key):
 		var audio_player = AudioFilePlayerClass.instance()
+		var bus = "SFX"
+		if "bgs" in audio_clip_key or audio_clip_key in BACKGROUND_AUDIOS:
+			bus = "Background"
 		
 		Globals.add_child(audio_player)
+		audio_player.set_bus(bus)
 		audio_instances.append(audio_player)
 		
 		audio_player.should_loop = false
