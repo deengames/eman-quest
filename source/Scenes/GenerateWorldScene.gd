@@ -208,7 +208,7 @@ func _print_and_set_seed():
 	# Random seed, BUT print it out so we know what it is.
 	# Without this ... we always get the same seed. Wut?
 	randomize()
-	var seed_value = 2130604731#randi()
+	var seed_value = randi()
 	print("Game #" + str(seed_value))
 	seed(seed_value)
 	Globals.seed_value = seed_value
