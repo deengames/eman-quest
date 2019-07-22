@@ -364,7 +364,7 @@ func _on_correct_selected(tile_coordinates):
 		label.margin_top = mouse_pos.y
 		var tween = label.get_node("Tween")
 		tween.stop(label)
-		tween.interpolate_property(label, "modulate", Color(1, 1, 1, 1), Color(1, 1, 1, 0), _TP_GAINED_DISPLAY_TIME, Tween.TRANS_LINEAR, Tween.EASE_IN)
+		tween.interpolate_property(label, "modulate", Color(1, 1, 1, 1), Color(1, 1, 1, 0), 2 * _TP_GAINED_DISPLAY_TIME, Tween.TRANS_LINEAR, Tween.EASE_IN)
 		tween.interpolate_property(label, "margin_top", label.margin_top, label.margin_top - 100, _TP_GAINED_DISPLAY_TIME, Tween.TRANS_LINEAR, Tween.EASE_IN)
 		tween.start()
 		
