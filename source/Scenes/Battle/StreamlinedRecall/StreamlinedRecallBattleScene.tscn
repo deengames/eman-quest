@@ -53,6 +53,7 @@ _sections_unfolded = [ "Offset" ]
 
 [node name="MonsterControls" type="Node2D" parent="." index="1"]
 
+editor/display_folded = true
 position = Vector2( 708, 192 )
 _sections_unfolded = [ "Transform" ]
 
@@ -152,6 +153,7 @@ _sections_unfolded = [ "Hint", "Mouse", "custom_colors", "custom_constants" ]
 
 [node name="PlayerControls" type="Node2D" parent="." index="2"]
 
+editor/display_folded = true
 position = Vector2( 0, 192 )
 _sections_unfolded = [ "Transform" ]
 
@@ -311,6 +313,7 @@ _sections_unfolded = [ "Hint", "custom_colors", "custom_fonts" ]
 
 [node name="ActionsPanel" type="Panel" parent="." index="7"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -551,6 +554,40 @@ icon = ExtResource( 12 )
 flat = false
 align = 2
 _sections_unfolded = [ "Hint", "Margin", "custom_fonts" ]
+
+[node name="TechPointGainedLabel" type="Label" parent="." index="8"]
+
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 150.0
+margin_bottom = 42.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_colors/font_color = Color( 0.898039, 0.439216, 0.156863, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 1
+text = "+1 tech point"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Visibility", "custom_colors", "custom_constants", "custom_styles" ]
+
+[node name="Tween" type="Tween" parent="TechPointGainedLabel" index="0"]
+
+repeat = false
+playback_process_mode = 1
+playback_speed = 1.0
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
+_sections_unfolded = [ "playback" ]
 
 [connection signal="pressed" from="NextTurnButton" to="." method="_on_NextTurnButton_pressed"]
 
