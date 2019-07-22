@@ -4,6 +4,7 @@ extends Node2D
 # A class that takes an AreaMap and generates the scene (tiles, enemies, etc.)
 ###
 
+const AlphaFluctuator = preload("res://Scripts/Effects/AlphaFluctuator.gd")
 const AudioManager = preload("res://Scripts/AudioManager.gd")
 const AutoTileTilesets = preload("res://Tilesets/AutoTileTilesets.tscn")
 const Boss = preload("res://Entities/Battle/Boss.tscn")
@@ -452,3 +453,10 @@ func _on_UI_opened_save_manager():
 
 func _on_UI_closed_save_manager():
 	unfreeze_monsters()
+
+func _auto_save():
+	var auto_save = $UI/AutoSave
+	auto_save.modulate.a = 0
+	var af = AlphaFluctuator.new(auto_save, 0.5)
+	add_child(af)
+	af.run(5)
