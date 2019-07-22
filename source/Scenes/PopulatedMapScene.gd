@@ -153,6 +153,13 @@ func _ready():
 	
 	AudioManager.new().add_click_noise_to_controls($UI)
 
+func auto_save():
+	var auto_save = $UI/AutoSave
+	auto_save.modulate.a = 0
+	var af = AlphaFluctuator.new(auto_save, 0.5)
+	add_child(af)
+	af.run(3)
+	
 func _is_walkable_and_no_transitions(tile_coords, transitions):
 	if tile_coords.x < 0 or tile_coords.y < 0 or \
 		tile_coords.x >= map.tiles_wide or tile_coords.y >= map.tiles_high:
@@ -453,10 +460,3 @@ func _on_UI_opened_save_manager():
 
 func _on_UI_closed_save_manager():
 	unfreeze_monsters()
-
-func _auto_save():
-	var auto_save = $UI/AutoSave
-	auto_save.modulate.a = 0
-	var af = AlphaFluctuator.new(auto_save, 0.5)
-	add_child(af)
-	af.run(5)

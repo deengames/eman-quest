@@ -105,7 +105,7 @@ static func load(save_id, tree):
 	# Needed to get final map battle => return to map, to work
 	Globals.maps["Final"] = "Final"
 	
-	SceneManagement.change_map_to(tree, current_map)
+	SceneManagement.change_map_to(tree, current_map, false)
 	
 	print("Loaded game #" + str(data["seed_value"]))
 
