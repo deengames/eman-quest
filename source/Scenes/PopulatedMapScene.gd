@@ -154,7 +154,11 @@ func _ready():
 	
 	AudioManager.new().add_click_noise_to_controls($UI)
 
-func auto_save():
+func schedule_autosave():
+	yield(get_tree().create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), "timeout")
+	self._auto_save()
+	
+func _auto_save():
 	$UI.capture_screenshot()
 	SaveManager.save_with_screenshot("autosave")
 	var auto_save = $UI/AutoSave

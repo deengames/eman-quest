@@ -116,7 +116,7 @@ static func change_map_to(tree, target, auto_save = true):
 		Globals.current_map_scene = populated_map
 		
 		if auto_save:
-			populated_map.auto_save()
+			populated_map.schedule_autosave()
 		
 		if show_map_name:
 			var map_name_label = MapNameLabel.instance()
