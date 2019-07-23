@@ -356,6 +356,7 @@ func _on_correct_selected(tile_coordinates):
 		Globals.player_data.add_tech_point()
 		self._tech_points_this_round += 1
 		$StatusLabel.text = "Gained " + str(self._tech_points_this_round) + " tech points this round!"
+		AudioManager.new().play_sound("tech-point-" + str(self._tech_points_this_round))
 		
 		var mouse_pos = get_global_mouse_position()
 		var label = $TechPointGainedLabel

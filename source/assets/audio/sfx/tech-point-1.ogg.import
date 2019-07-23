@@ -11,5 +11,5 @@ dest_files=[ "res://.import/tech-point-1.ogg-df09a56b6884cecd3285ad1fd147036b.og
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
