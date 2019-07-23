@@ -9,6 +9,8 @@ var _selected_slot = null
 var _save_disabled = false # for titlescreen only
 
 func _ready():
+	$HBoxContainer/Container/ItemList.add_item("AutoSave")
+	
 	for i in range(Globals.NUM_SAVES):
 		var n = i + 1
 		$HBoxContainer/Container/ItemList.add_item("File " + str(n))
@@ -34,13 +36,15 @@ func _back_to_titlescreen():
 	tree.change_scene("res://Scenes/Title.tscn")
 
 func _on_ItemList_item_selected(index):
+	var save_key = _index_to_save_id(index)
+		
 	_selected_slot = index
 
 	var label = $HBoxContainer/Container2/SaveDetailsPanel/StatsLabel
 	var sprite = $HBoxContainer/Container2/SaveDetailsPanel/ScreenshotSprite
-	var save_exists = SaveManager.save_exists("save" + str(index))
+	var save_exists = SaveManager.save_exists(save_key)
 	
-	if _save_disabled: # we're loading
+	if _save_disabled or index == 0: # we're loading, or autosave (can't save over it)
 		$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/SaveButton.disabled = not save_exists
 	else:
 		$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/SaveButton.show()
@@ -48,7 +52,7 @@ func _on_ItemList_item_selected(index):
 	$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/LoadButton.visible = save_exists
 	
 	if save_exists:
-		var data = SaveManager.load_data("save" + str(index))
+		var data = SaveManager.load_data(save_key)
 		
 		label.text = "World: #{seed}\nPlay time: {play_time}\nLevel: {level}" \
 			.format({
@@ -56,15 +60,15 @@ func _on_ItemList_item_selected(index):
 				"play_time": PlayerData.seconds_to_time(data["player_data"].play_time_seconds),
 				"level": int(data["player_data"].level)
 			})
-		sprite.texture = _get_screenshot_for(index)
+		sprite.texture = _get_screenshot_for(save_key)
 	else:
 		label.text = "Empty"
 		sprite.texture = null
 		
-func _get_screenshot_for(index):
+func _get_screenshot_for(save_key):
 
 	var file = File.new()
-	file.open(_screenshot_path(index), File.READ)
+	file.open(Globals.screenshot_path(save_key), File.READ)
 	var buffer = file.get_buffer(file.get_len())
 	file.close()
 	
@@ -80,34 +84,24 @@ func _get_screenshot_for(index):
 
 func _on_SaveButton_pressed():
 	if not _save_disabled and _selected_slot != null:
-		SaveManager.save("save" + str(_selected_slot))
-		
-		# Copy screenshot from last-saved to this slot
-		
-		var last_screenshot_path = Globals.LAST_SCREENSHOT_PATH
-		var file = File.new()
-		file.open(last_screenshot_path, File.READ)
-		var bytes = file.get_buffer(file.get_len())
-		file.close()
-		
-		file = File.new()
-		file.open(_screenshot_path(_selected_slot), File.WRITE)
-		file.store_buffer(bytes)
-		file.close()
+		SaveManager.save_with_screenshot(str(_selected_slot))
 		
 		AudioManager.new().play_sound("save")
 		
 		# Refresh so it LOOKS saved
 		_on_ItemList_item_selected(_selected_slot)
 		
-		
-func _screenshot_path(save_id):
-	return "user://screenshot-save" + str(save_id) + ".png"
-
 func _on_LoadButton_pressed():
 	if _selected_slot != null:
 		$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/LoadButton.disabled = true
 		# disappear without triggering popup_hide, which takes us to the titlescreen
 		self.modulate.a = 0 
 		AudioManager.new().play_sound("load")
-		SaveManager.load("save" + str(_selected_slot), get_tree())
+		var save_id = _index_to_save_id(_selected_slot)
+		SaveManager.load(save_id, get_tree())
+
+func _index_to_save_id(index):
+	var save_id = "save" + str(index)
+	if index == 0:
+		save_id = "autosave"
+	return save_id

@@ -14,6 +14,7 @@ const Monster = preload("res://Entities/Battle/Monster.tscn")
 const MonsterGenerator = preload("res://Scripts/Generators/MonsterGenerator.gd")
 const Player = preload("res://Entities/Player.tscn")
 const Quest = preload("res://Entities/Quest.gd")
+const SaveManager = preload("res://Scripts/SaveManager.gd")
 const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
 const TreasureChest = preload("res://Entities/TreasureChest.tscn")
 const TilesetMapper = preload("res://Scripts/TilesetMapper.gd")
@@ -154,6 +155,8 @@ func _ready():
 	AudioManager.new().add_click_noise_to_controls($UI)
 
 func auto_save():
+	$UI.capture_screenshot()
+	SaveManager.save_with_screenshot("autosave")
 	var auto_save = $UI/AutoSave
 	auto_save.modulate.a = 0
 	var af = AlphaFluctuator.new(auto_save, 0.5)

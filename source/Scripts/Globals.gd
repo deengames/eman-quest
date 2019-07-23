@@ -135,3 +135,6 @@ func show_ui():
 	# Rarely, this is something unusual, like AlphaFluctuator instance
 	if self.current_map_scene != null and not ReferenceChecker.is_previously_freed(self.current_map_scene):
 		self.current_map_scene.show_ui()
+		
+func screenshot_path(save_id):
+	return "user://screenshot-" + save_id + ".png"
