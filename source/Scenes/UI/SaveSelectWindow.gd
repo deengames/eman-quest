@@ -5,6 +5,8 @@ const PlayerData = preload("res://Entities/PlayerData.gd")
 const SaveManager = preload("res://Scripts/SaveManager.gd")
 const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
 
+signal close
+
 var _selected_slot = null
 var _save_disabled = false # for titlescreen only
 
@@ -33,7 +35,8 @@ func _back_to_titlescreen():
 	var tree = get_tree()
 	SceneFadeManager.fade_out(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
 	yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
-	tree.change_scene("res://Scenes/Title.tscn")
+	#tree.change_scene("res://Scenes/Title.tscn")
+	emit_signal("close")
 
 func _on_ItemList_item_selected(index):
 	var save_key = _index_to_save_id(index)

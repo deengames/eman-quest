@@ -11,7 +11,12 @@ func _ready():
 	add_child(window)
 	window.popup_centered()
 	
+	window.connect("close", self, "_back_to_titlescreen")
+	
 	var tree = get_tree()
 	SceneFadeManager.fade_in(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
 	yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
 	
+func _back_to_titlescreen():
+	get_parent().remove_child(self)
+	queue_free()
