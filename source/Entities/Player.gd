@@ -57,6 +57,7 @@ func _process(delta):
 			# Use sine so we start at invisible and oscillate (over 5s) into visibility.
 			$Sprite.modulate.a = 0.5 + ((sin(elapsed_seconds * 4) + 1) / 4)
 	
+	# Time spent hanging around adds to game time
 	Globals.player_data.play_time_seconds += delta
 
 func can_fight():
