@@ -47,11 +47,12 @@ func _on_ItemList_item_selected(index):
 	var sprite = $HBoxContainer/Container2/SaveDetailsPanel/ScreenshotSprite
 	var save_exists = SaveManager.save_exists(save_key)
 	
-	if _save_disabled or index == 0: # we're loading, or autosave (can't save over it)
-		$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/SaveButton.disabled = not save_exists
-	else:
+	# we're loading, or autosave (can't save over it)
+	if not _save_disabled and index > 0:
 		$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/SaveButton.show()
-		
+	else:
+		$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/SaveButton.disabled = not save_exists
+
 	$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/LoadButton.visible = save_exists
 	
 	if save_exists:
