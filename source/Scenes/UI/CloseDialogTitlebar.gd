@@ -31,7 +31,8 @@ func get_title():
 	return $Panel/Title.text
 
 func _on_Button_pressed(event):
-	if (event is InputEventMouseButton and event.pressed) or (OS.has_feature("Android") and event is InputEventMouseMotion):
+	if (not $Panel/XButton.disabled and event is InputEventMouseButton and event.pressed) or (OS.has_feature("Android") and event is InputEventMouseMotion):
+		$Panel/XButton.disabled = true
 		$AudioStreamPlayer.play()
 		# Yield for the audio play-time
 		yield(get_tree().create_timer(0.2), 'timeout')
