@@ -87,7 +87,8 @@ func _get_screenshot_for(save_key):
 
 func _on_SaveButton_pressed():
 	if not _save_disabled and _selected_slot != null:
-		SaveManager.save_with_screenshot(str(_selected_slot))
+		var save_id = _index_to_save_id(_selected_slot)
+		SaveManager.save_with_screenshot(save_id)
 		
 		AudioManager.new().play_sound("save")
 		
