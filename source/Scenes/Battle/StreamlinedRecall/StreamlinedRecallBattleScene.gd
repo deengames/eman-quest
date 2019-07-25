@@ -114,6 +114,10 @@ func _ready():
 	
 	self._start_next_turn()
 
+func _process(delta):
+	# Time in battle adds to game time
+	Globals.player_data.play_time_seconds += delta
+
 func set_monster_data(data):
 	MonsterScaler.scale_monster_data(data)
 	data["next_round_turns"] = data["turns"]
