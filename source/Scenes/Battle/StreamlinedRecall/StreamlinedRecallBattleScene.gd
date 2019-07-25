@@ -356,6 +356,7 @@ func _on_correct_selected(tile_coordinates):
 		Globals.player_data.add_tech_point()
 		self._tech_points_this_round += 1
 		$StatusLabel.text = "Gained " + str(self._tech_points_this_round) + " tech points this round!"
+		AudioManager.new().play_sound("tech-point-" + str(self._tech_points_this_round))
 		
 		var mouse_pos = get_global_mouse_position()
 		var label = $TechPointGainedLabel
@@ -364,7 +365,7 @@ func _on_correct_selected(tile_coordinates):
 		label.margin_top = mouse_pos.y
 		var tween = label.get_node("Tween")
 		tween.stop(label)
-		tween.interpolate_property(label, "modulate", Color(1, 1, 1, 1), Color(1, 1, 1, 0), _TP_GAINED_DISPLAY_TIME, Tween.TRANS_LINEAR, Tween.EASE_IN)
+		tween.interpolate_property(label, "modulate", Color(1, 1, 1, 1), Color(1, 1, 1, 0), 2 * _TP_GAINED_DISPLAY_TIME, Tween.TRANS_LINEAR, Tween.EASE_IN)
 		tween.interpolate_property(label, "margin_top", label.margin_top, label.margin_top - 100, _TP_GAINED_DISPLAY_TIME, Tween.TRANS_LINEAR, Tween.EASE_IN)
 		tween.start()
 		

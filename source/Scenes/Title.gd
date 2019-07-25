@@ -2,6 +2,7 @@ extends Node2D
 
 const AudioManager = preload("res://Scripts/AudioManager.gd")
 const BattlePlayer = preload("res://Entities/Battle/BattlePlayer.gd")
+const LoadingScene = preload("res://Scenes/LoadingScene.tscn")
 const OptionsDialog = preload("res://Scenes/UI/OptionsDialog.tscn")
 const OptionsSaver = preload("res://Scripts/OptionsSaver.gd")
 const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
@@ -46,13 +47,13 @@ func _on_newgame_Button_pressed():
 func _on_LoadGameButton_pressed():
 	_play_button_click()
 	$VBoxContainer/LoadGameButton.disabled = true
-	var tree = get_tree()
-	
-	SceneFadeManager.fade_out(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
-	yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
-	
-	tree.change_scene("res://Scenes/LoadingScene.tscn")
+	var loading_scene = LoadingScene.instance()
+	add_child(loading_scene)
+	loading_scene.connect("tree_exiting", self, "_enable_load")
 
+func _enable_load():
+	$VBoxContainer/LoadGameButton.disabled = false
+	
 func _on_Options_pressed():
 	_play_button_click()
 	var dialog = OptionsDialog.instance()

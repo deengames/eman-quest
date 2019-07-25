@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/tech-point-1.ogg-df09a56b6884cecd3285ad1fd147036b.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/tech-point-1.ogg"
+dest_files=[ "res://.import/tech-point-1.ogg-df09a56b6884cecd3285ad1fd147036b.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

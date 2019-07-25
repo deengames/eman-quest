@@ -4,6 +4,7 @@ extends Node2D
 # A class that takes an AreaMap and generates the scene (tiles, enemies, etc.)
 ###
 
+const AlphaFluctuator = preload("res://Scripts/Effects/AlphaFluctuator.gd")
 const AudioManager = preload("res://Scripts/AudioManager.gd")
 const AutoTileTilesets = preload("res://Tilesets/AutoTileTilesets.tscn")
 const Boss = preload("res://Entities/Battle/Boss.tscn")
@@ -13,6 +14,7 @@ const Monster = preload("res://Entities/Battle/Monster.tscn")
 const MonsterGenerator = preload("res://Scripts/Generators/MonsterGenerator.gd")
 const Player = preload("res://Entities/Player.tscn")
 const Quest = preload("res://Entities/Quest.gd")
+const SaveManager = preload("res://Scripts/SaveManager.gd")
 const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
 const TreasureChest = preload("res://Entities/TreasureChest.tscn")
 const TilesetMapper = preload("res://Scripts/TilesetMapper.gd")
@@ -152,6 +154,19 @@ func _ready():
 	
 	AudioManager.new().add_click_noise_to_controls($UI)
 
+func schedule_autosave():
+	yield(get_tree().create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), "timeout")
+	self._auto_save()
+	
+func _auto_save():
+	$UI.capture_screenshot()
+	SaveManager.save_with_screenshot("autosave")
+	var auto_save = $UI/AutoSave
+	auto_save.modulate.a = 0
+	var af = AlphaFluctuator.new(auto_save, 0.5)
+	add_child(af)
+	af.run(3)
+	
 func _is_walkable_and_no_transitions(tile_coords, transitions):
 	if tile_coords.x < 0 or tile_coords.y < 0 or \
 		tile_coords.x >= map.tiles_wide or tile_coords.y >= map.tiles_high:

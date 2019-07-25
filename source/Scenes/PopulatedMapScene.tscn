@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scenes/PopulatedMapScene.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/UI.gd" type="Script" id=2]
-[ext_resource path="res://addons/paulloz.colorblindness/colorblindness.material" type="Material" id=3]
-[ext_resource path="res://addons/paulloz.colorblindness/colorblindness.gd" type="Script" id=4]
-[ext_resource path="res://addons/paulloz.colorblindness/icon.svg" type="Texture" id=5]
+[ext_resource path="res://assets/images/gui/autosave.png" type="Texture" id=3]
+[ext_resource path="res://addons/paulloz.colorblindness/colorblindness.material" type="Material" id=4]
+[ext_resource path="res://addons/paulloz.colorblindness/colorblindness.gd" type="Script" id=5]
+[ext_resource path="res://addons/paulloz.colorblindness/icon.svg" type="Texture" id=6]
 
 [node name="Node2D" type="Node2D" index="0"]
 
@@ -21,6 +22,7 @@ script = ExtResource( 2 )
 
 [node name="Control" type="Control" parent="UI" index="0"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -142,6 +144,38 @@ flat = false
 align = 1
 _sections_unfolded = [ "Hint", "Margin", "custom_fonts" ]
 
+[node name="AutoSave" type="Sprite" parent="UI" index="1"]
+
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 8, 8 )
+texture = ExtResource( 3 )
+centered = false
+_sections_unfolded = [ "Offset", "Transform", "Visibility" ]
+
+[node name="Label" type="Label" parent="UI/AutoSave" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 42.0
+margin_top = -8.0
+margin_right = 206.0
+margin_bottom = 34.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 1
+text = "Auto-saving ..."
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "custom_colors", "custom_constants" ]
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="1"]
 
 layer = 128
@@ -153,7 +187,7 @@ transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 [node name="Colorblindness" type="ColorRect" parent="CanvasLayer" index="0"]
 
 visible = false
-material = ExtResource( 3 )
+material = ExtResource( 4 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -168,10 +202,10 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 1, 1, 1, 1 )
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 _sections_unfolded = [ "Mouse" ]
 __meta__ = {
-"_editor_icon": ExtResource( 5 )
+"_editor_icon": ExtResource( 6 )
 }
 Type = 0
 

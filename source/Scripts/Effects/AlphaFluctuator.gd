@@ -14,9 +14,11 @@ var _total_time = 0 # will eventually overflow ...
 var _target
 var _target_runtime = 0
 var _remove_on_done = [] # container, child_node
+var _frequency_multiplier
 
-func _init(target):
+func _init(target, frequency_multiplier = 1):
 	self._target = target
+	self._frequency_multiplier = frequency_multiplier
 
 func start():
 	self._enabled = true
@@ -33,11 +35,11 @@ func run(target_runtime):
 		yield()
 		
 func _process(delta):
-	if self._enabled == true:
-		self._total_time += delta
-		self._target.modulate.a = abs(sin(CYCLE_FAST_MULTIPLIER * self._total_time))
+	if _enabled == true:
+		_total_time += delta
+		_target.modulate.a = abs(sin(CYCLE_FAST_MULTIPLIER * _frequency_multiplier * _total_time))
 		
-		if self._total_time >= self._target_runtime:
+		if _total_time >= _target_runtime:
 			self._enabled = false
 			self._target.modulate.a = 0
 			
