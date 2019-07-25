@@ -3,7 +3,7 @@
 [ext_resource path="res://Scenes/UI/CloseDialogTitlebar.gd" type="Script" id=1]
 [ext_resource path="res://assets/audio/sfx/close-button.ogg" type="AudioStream" id=2]
 
-[node name="Node2D" type="Node2D" index="0"]
+[node name="Node2D" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -22,7 +22,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-_sections_unfolded = [ "Margin", "Visibility" ]
+_sections_unfolded = [ "Anchor", "Margin", "Visibility" ]
 
 [node name="XButton" type="Button" parent="Panel" index="0"]
 
