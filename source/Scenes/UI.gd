@@ -11,6 +11,9 @@ signal opened_save_manager
 signal closed_save_manager
 
 func capture_screenshot():
+	# Hide stuff we don't want in our screenshot
+	$AutoSave.modulate.a = 0
+	
 	# Retrieve the captured image
 	var image = get_tree().get_root().get_texture().get_data()
 	
