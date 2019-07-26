@@ -85,3 +85,7 @@ func freeze():
 func unfreeze():
 	self.can_move = true
 	Globals.show_ui()
+
+func stop_footsteps_audio():
+	$MoveToKeyboardComponent.stop_footsteps_audio()
+	$MoveToClick.stop_footsteps_audio()
