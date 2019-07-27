@@ -89,3 +89,4 @@ func unfreeze():
 func stop_footsteps_audio():
 	$MoveToKeyboardComponent.stop_footsteps_audio()
 	$MoveToClick.stop_footsteps_audio()
+	self._on_reached_destination()

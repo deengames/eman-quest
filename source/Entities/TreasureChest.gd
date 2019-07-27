@@ -55,6 +55,8 @@ func open():
 		self._consume()
 		AudioManager.new().play_sound("open-treasure-chest")
 		
+		Globals.player.stop_footsteps_audio()
+		
 		var window = StatusWindow.instance()
 		window.set_text("Found a(n) " + self.contents.equipment_name)
 		get_tree().current_scene.get_node("UI").add_child(window)
