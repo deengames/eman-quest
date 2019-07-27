@@ -362,7 +362,8 @@ func _on_correct_selected(tile_coordinates):
 		# If more than five actions, last sound = +3
 		var sound_index = min(self._tech_points_this_round, 3)
 		$StatusLabel.text = "Gained " + str(self._tech_points_this_round) + " tech points this round!"
-		AudioManager.new().play_sound("tech-point-" + str(sound_index))
+		#AudioManager.new().play_sound("tech-point-" + str(sound_index))
+		AudioManager.new().play_sound("tech-point")
 		
 		var mouse_pos = get_global_mouse_position()
 		var label = $TechPointGainedLabel
