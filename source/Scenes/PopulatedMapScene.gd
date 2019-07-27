@@ -33,6 +33,7 @@ var _restoring_state = false # restoring to previous state after battle
 var _audio_bgs # AudioManager
 
 var _total_time = 0
+var _should_autosave = true # false after boss battles
 
 func initialize(map):
 	self.map = map
@@ -155,8 +156,9 @@ func _ready():
 	AudioManager.new().add_click_noise_to_controls($UI)
 
 func schedule_autosave():
-	yield(get_tree().create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), "timeout")
-	self._auto_save()
+	if _should_autosave:
+		yield(get_tree().create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), "timeout")
+		self._auto_save()
 	
 func _auto_save():
 	$UI.capture_screenshot()
@@ -287,6 +289,7 @@ func _add_monsters():
 				var monsters = monster_data[Globals.current_monster_type]
 				monsters.remove(monsters.find(Globals.current_monster))
 			elif Globals.current_monster.IS_BOSS:
+				_should_autosave = false # if quit/reload, will miss cutscene
 				Globals.current_monster.is_alive = false
 				if Globals.current_monster.replace_with_npc != null:
 					var npc_class = Globals.quest.NPCS[Globals.current_monster.replace_with_npc]
