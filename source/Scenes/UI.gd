@@ -32,11 +32,14 @@ func _on_KeyItemsButton_pressed():
 	self._show_popup(KeyItemsWindow.instance(), "Key Items")
 
 func _show_popup(instance, title):
+	Globals.player.stop_footsteps_audio()
 	Globals.player.freeze()
+	get_parent().freeze_monsters()
+	
 	instance.popup_exclusive = true
 	instance.connect("popup_hide", self, "_unfreeze_all")
 	instance.title(title)
-	get_parent().freeze_monsters()
+	
 	self.add_child(instance)
 	instance.popup_centered()
 	_play_button_click()
