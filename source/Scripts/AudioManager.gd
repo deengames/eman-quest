@@ -50,9 +50,6 @@ var audio_clips = {
 	"wrong-tile": preload("res://assets/audio/sfx/wrong-tile.ogg"),
 	"battle-transition": preload("res://assets/audio/sfx/battle-transition.ogg"),
 	"tech-point": preload("res://assets/audio/sfx/tech-point.ogg"),
-	"tech-point-1": preload("res://assets/audio/sfx/tech-point-1.ogg"),
-	"tech-point-2": preload("res://assets/audio/sfx/tech-point-2.ogg"),
-	"tech-point-3": preload("res://assets/audio/sfx/tech-point-3.ogg"),
 
 	# Battle sounds - player
 	"attack": preload("res://assets/audio/sfx/battle/attack.ogg"),
