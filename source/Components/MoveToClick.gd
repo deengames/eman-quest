@@ -27,6 +27,12 @@ func _physics_process(delta):
 	# Called every frame. Delta is time since last frame.
 	if self.get_parent().can_move:
 		self._move_parent_to_clicked_destintion()
+		
+func stop_footsteps_audio():
+	_audio_player.stop()
+	# cancel destination so we don't try to move again next frame + play audio
+	# Comes into play if you click past a chest, get "stuck" on it, and open it
+	self.cancel_destination()
 
 func _clicked_on_map(position):
 	if self.get_parent().can_move:

@@ -9,6 +9,7 @@ const RecallGrid = preload("res://Scenes/Battle/StreamlinedRecall/RecallGrid.gd"
 const _MULTIPLIER_BASE = 1.25 # five attacks = 8x (1 + 1.25 + 1.25^2 + ... + 1.25^n)
 const _MONSTER_NUM_TILES = 4
 const _MONSTER_TURN_DISPLAY_SECONDS = 2
+const _TP_GAINED_DISPLAY_TIME = 1 # seconds
 
 const _ACTION_POINTS_COST = {
 	"attack": 2,
@@ -37,6 +38,8 @@ var _is_players_turn = false
 # Tutorial stuff
 var _correct_tiles = []
 var _tutorial_arrows = []
+
+var _tech_points_this_round = 0
 
 func _ready():
 	
@@ -110,6 +113,10 @@ func _ready():
 	# Fade done
 	
 	self._start_next_turn()
+
+func _process(delta):
+	# Time in battle adds to game time
+	Globals.player_data.play_time_seconds += delta
 
 func set_monster_data(data):
 	MonsterScaler.scale_monster_data(data)
@@ -288,6 +295,7 @@ func _start_next_turn():
 	self._last_action_picked = ""
 	self._times_last_action_picked = 0
 	self._correct_consecutive_tiles_picked = 0
+	self._tech_points_this_round = 0
 	
 	if self._is_players_turn:
 		# times defended, apply poison damage, etc. Emits a signal that shows
@@ -348,8 +356,25 @@ func _on_correct_selected(tile_coordinates):
 	
 	self._correct_consecutive_tiles_picked += 1
 	if self._correct_consecutive_tiles_picked >= 3:
+		
 		Globals.player_data.add_tech_point()
+		self._tech_points_this_round += 1
+		$StatusLabel.text = "Gained " + str(self._tech_points_this_round) + " tech points this round!"
+		AudioManager.new().play_sound("tech-point")
+		
+		var mouse_pos = get_global_mouse_position()
+		var label = $TechPointGainedLabel
+		label.modulate.a = 1
+		label.margin_left = mouse_pos.x
+		label.margin_top = mouse_pos.y
+		var tween = label.get_node("Tween")
+		tween.stop(label)
+		tween.interpolate_property(label, "modulate", Color(1, 1, 1, 1), Color(1, 1, 1, 0), 2 * _TP_GAINED_DISPLAY_TIME, Tween.TRANS_LINEAR, Tween.EASE_IN)
+		tween.interpolate_property(label, "margin_top", label.margin_top, label.margin_top - 100, _TP_GAINED_DISPLAY_TIME, Tween.TRANS_LINEAR, Tween.EASE_IN)
+		tween.start()
+		
 		self._update_tech_points_display()
+		
 		self._disable_unusable_skills()
 	
 	# Tutorial: remove tutorial indicator on clicked tile
@@ -361,6 +386,7 @@ func _on_correct_selected(tile_coordinates):
 func _on_incorrect_selected():
 	AudioManager.new().play_sound("wrong-tile")
 	self._correct_consecutive_tiles_picked = 0
+	$StatusLabel.text = "" # clear "Tech points this round" display
 
 func _on_AttackButton_pressed():
 	self._resolve_players_turn("attack")

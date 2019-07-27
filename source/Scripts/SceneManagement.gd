@@ -16,7 +16,7 @@ const StaticMap = preload("res://Scenes/Maps/StaticMap.gd")
 const TweenHelper = preload("res://Scripts/TweenHelper.gd")
 
 # Polymorphic. Target can be a type (eg. "Forest/Death") or a submap.
-static func change_map_to(tree, target):
+static func change_map_to(tree, target, auto_save = true):
 	### I ripped out the overworld. Here's a hack: if we're going there, go to the
 	# area selection screen instead. It's bad, but saves me from reworking kilos
 	# of code to rewire how this all works. Yes, there's some dead code left behind.
@@ -115,6 +115,9 @@ static func change_map_to(tree, target):
 		
 		Globals.current_map_scene = populated_map
 		
+		if auto_save:
+			populated_map.schedule_autosave()
+		
 		if show_map_name:
 			var map_name_label = MapNameLabel.instance()
 			map_name_label.show_map_name(target_areamap)
@@ -147,20 +150,7 @@ static func change_map_to(tree, target):
 			timer.connect("timeout", tween_helper, "start")
 			timer.start()
 			current_scene.add_child(timer)
-		
-		if map_type == "Overworld":
-			# Part of a fix for a change introduced for https://www.pivotaltracker.com/story/show/164848304
-			# EndGameMap can't clear Globals.pre_battle_position because that causes a crash
-			# Instead: whenever we go back to the overworld, clear it out if it exists.
-			Globals.pre_battle_position = null
 			
-			if Globals.is_testing == false:
-				var camera = Globals.player.get_node("Camera2D")
-				# zoom of 2 = 50%
-				# TODO: tween
-				camera.zoom.x = 2
-				camera.zoom.y = 2
-	
 # Returns the last child that's not a Tween or CanvasModulate.
 static func get_current_scene(root):
 	var child_count = root.get_child_count()

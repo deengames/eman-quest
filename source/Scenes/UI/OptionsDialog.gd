@@ -11,7 +11,11 @@ func _ready():
 	$MonstersChaseToggle.pressed = Features.is_enabled("monsters chase you")
 	$Zoom/ZoomSlider.value = Globals.zoom
 	$FullScreen.pressed = Globals.is_full_screen
-
+	$BackgroundAudio/BackgroundAudioSlider.value = Globals.background_volume
+	$SfxAudio/SfxAudioSlider.value = Globals.sfx_volume
+	$TileDisplayTime/TileDisplayTimeSlider.value = Globals.tile_display_multiplier
+	self._on_TileDisplayTimeSlider_value_changed(Globals.tile_display_multiplier)
+	
 func title(value):
 	$CloseDialogTitlebar.title = value
 
@@ -24,7 +28,10 @@ func _save_options():
 		"zoom": Globals.zoom,
 		"monsters_chase": $MonstersChaseToggle.pressed,
 		"is_first_run": false, # always false because we ran the first run
-		"is_full_screen": Globals.is_full_screen
+		"is_full_screen": Globals.is_full_screen,
+		"background_volume": Globals.background_volume,
+		"sfx_volume": Globals.sfx_volume,
+		"tile_display_multiplier": Globals.tile_display_multiplier
 	}
 	
 	OptionsSaver.save(options)
@@ -53,3 +60,17 @@ func _on_FullScreen_toggled(button_pressed):
 		Globals.zoom = 100
 	_save_options()
 	
+func _on_BackgroundAudioSlider_value_changed(value):
+	Globals.background_volume = value
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Background"), Globals.background_volume)
+	_save_options()
+
+func _on_SfxAudioSlider_value_changed(value):
+	Globals.sfx_volume = value
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), Globals.sfx_volume)
+	_save_options()
+
+func _on_TileDisplayTimeSlider_value_changed(value):
+	Globals.tile_display_multiplier = float(value)
+	$TileDisplayTime/TileDisplayTimeLabel.text = "Battle: display tiles for " + str(value) + "s"
+	_save_options()

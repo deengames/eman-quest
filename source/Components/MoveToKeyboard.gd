@@ -25,6 +25,9 @@ func _physics_process(delta):
 	if self.get_parent().can_move:
 		self._move_to_keyboard()
 
+func stop_footsteps_audio():
+	_audio_player.stop()
+
 func _move_to_keyboard():
 	var velocity = Vector2(0, 0)
 	var new_facing = self.previously_facing

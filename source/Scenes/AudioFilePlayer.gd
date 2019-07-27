@@ -10,6 +10,9 @@ func _ready():
 	audio_node = $AudioStreamPlayer
 	audio_node.stop()
 	
+func set_bus(bus):
+	audio_node.bus = bus
+	
 func play_sound(audio_stream, volume_db = 0):
 	audio_node.volume_db = volume_db
 	audio_node.stream = audio_stream

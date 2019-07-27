@@ -19,6 +19,22 @@ const _MAPS_NOT_TO_SAVE = ["Home", "Final"]
 static func save_exists(save_id):
 	var filename = _get_path(save_id)
 	return File.new().file_exists(filename)
+	
+static func save_with_screenshot(save_id):
+	save(save_id)
+		
+	# Copy screenshot from last-saved to this slot
+	
+	var last_screenshot_path = Globals.LAST_SCREENSHOT_PATH
+	var file = File.new()
+	file.open(last_screenshot_path, File.READ)
+	var bytes = file.get_buffer(file.get_len())
+	file.close()
+	
+	file = File.new()
+	file.open(Globals.screenshot_path(str(save_id)), File.WRITE)
+	file.store_buffer(bytes)
+	file.close()
 
 static func save(save_id):
 	var maps = {}
@@ -104,7 +120,7 @@ static func load(save_id, tree):
 	# Needed to get final map battle => return to map, to work
 	Globals.maps["Final"] = "Final"
 	
-	SceneManagement.change_map_to(tree, current_map)
+	SceneManagement.change_map_to(tree, current_map, false)
 	
 	print("Loaded game #" + str(data["seed_value"]))
 
@@ -146,4 +162,4 @@ static func _get_line_bool(file):
 		return false
 
 static func _get_path(save_id):
-	return "user://save-" + str(save_id) + ".save"
+	return "user://" + save_id + ".save"

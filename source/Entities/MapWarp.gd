@@ -92,6 +92,7 @@ func _on_Area2D_body_entered(body):
 		Globals.post_fade_position = null
 		
 		Globals.player.freeze()
+		Globals.player.stop_footsteps_audio()
 		
 		var tree = body.get_tree()
 		var target_map = self.map_destination.target_map

@@ -112,12 +112,10 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="Dad" parent="." index="3" instance=ExtResource( 3 )]
 
-position = Vector2( 448, 256 )
+position = Vector2( 509, 239 )
 _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [node name="Locations" type="Node2D" parent="." index="4"]
-
-editor/display_folded = true
 
 [node name="Start" type="Node2D" parent="Locations" index="0"]
 
@@ -156,7 +154,7 @@ position = Vector2( 527.369, 387.729 )
 
 [node name="Mama" type="Node2D" parent="Locations" index="6"]
 
-position = Vector2( 512.66, 259.746 )
+position = Vector2( 573.66, 242.746 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Blackout" type="ColorRect" parent="." index="5"]

@@ -40,7 +40,7 @@ func _ready():
 		Globals.player.z_index = 9
 	
 	if not Globals.is_testing:
-		_audio_bgs.play_sound("home", AudioManager.BG_AUDIO_DB_OFFSET)
+		_audio_bgs.play_sound("home")
 
 func show_intro_events():
 	_audio_bgs.clean_up_audio()

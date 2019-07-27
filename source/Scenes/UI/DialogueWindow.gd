@@ -24,6 +24,7 @@ func _ready():
 	# dialogs, and for Home dialogs.
 	var viewport = get_viewport_rect().size
 	if Globals.player != null:
+		Globals.player.stop_footsteps_audio()
 		var camera_position = Globals.player.get_node("Camera2D").global_position
 		# Pure magic. This calculation makes no sense to me.
 		self.position = viewport / 4

@@ -10,6 +10,18 @@ const StatsWindow = preload("res://Scenes/UI/StatsWindow.tscn")
 signal opened_save_manager
 signal closed_save_manager
 
+func capture_screenshot():
+	# Hide stuff we don't want in our screenshot
+	$AutoSave.modulate.a = 0
+	
+	# Retrieve the captured image
+	var image = get_tree().get_root().get_texture().get_data()
+	
+	# Flip it on the y-axis (because it's flipped)
+	image.flip_y()
+	
+	image.save_png(Globals.LAST_SCREENSHOT_PATH)
+
 func _on_StatsButton_pressed():
 	self._show_popup(StatsWindow.instance(), Globals.PLAYER_NAME + "'s Stats")
 	
@@ -20,11 +32,14 @@ func _on_KeyItemsButton_pressed():
 	self._show_popup(KeyItemsWindow.instance(), "Key Items")
 
 func _show_popup(instance, title):
+	Globals.player.stop_footsteps_audio()
 	Globals.player.freeze()
+	get_parent().freeze_monsters()
+	
 	instance.popup_exclusive = true
 	instance.connect("popup_hide", self, "_unfreeze_all")
 	instance.title(title)
-	get_parent().freeze_monsters()
+	
 	self.add_child(instance)
 	instance.popup_centered()
 	_play_button_click()
@@ -33,7 +48,7 @@ func _on_SaveButton_pressed():
 	Globals.player.freeze()
 	
 	# We save here because it's the only way to get a screenshot without UI elements	
-	_capture_screenshot()
+	capture_screenshot()
 	
 	var save_picker = SaveSelectWindow.instance()
 	save_picker.connect("popup_hide", self, "_closed_save_manager")
@@ -57,15 +72,6 @@ func _remove_ui_dialogs():
 	for child in get_children():
 		if child is Popup:
 			remove_child(child)
-
-func _capture_screenshot():
-	# Retrieve the captured image
-	var image = get_tree().get_root().get_texture().get_data()
-	
-	# Flip it on the y-axis (because it's flipped)
-	image.flip_y()
-	
-	image.save_png(Globals.LAST_SCREENSHOT_PATH)
 
 func _play_button_click():
 	var audio_player = AudioManager.new()

@@ -4,6 +4,7 @@ extends Node2D
 # A class that takes an AreaMap and generates the scene (tiles, enemies, etc.)
 ###
 
+const AlphaFluctuator = preload("res://Scripts/Effects/AlphaFluctuator.gd")
 const AudioManager = preload("res://Scripts/AudioManager.gd")
 const AutoTileTilesets = preload("res://Tilesets/AutoTileTilesets.tscn")
 const Boss = preload("res://Entities/Battle/Boss.tscn")
@@ -13,6 +14,7 @@ const Monster = preload("res://Entities/Battle/Monster.tscn")
 const MonsterGenerator = preload("res://Scripts/Generators/MonsterGenerator.gd")
 const Player = preload("res://Entities/Player.tscn")
 const Quest = preload("res://Entities/Quest.gd")
+const SaveManager = preload("res://Scripts/SaveManager.gd")
 const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
 const TreasureChest = preload("res://Entities/TreasureChest.tscn")
 const TilesetMapper = preload("res://Scripts/TilesetMapper.gd")
@@ -31,6 +33,7 @@ var _restoring_state = false # restoring to previous state after battle
 var _audio_bgs # AudioManager
 
 var _total_time = 0
+var _should_autosave = true # false after boss battles
 
 func initialize(map):
 	self.map = map
@@ -53,7 +56,7 @@ func _ready():
 		if map != null and map.map_type != null and map.variation != null:
 			var bgs_key = map.variation.to_lower() + "-" + map.map_type.to_lower() + "-bgs"
 			if self._audio_bgs.audio_clips.has(bgs_key):
-				self._audio_bgs.play_sound(bgs_key, AudioManager.BG_AUDIO_DB_OFFSET)
+				self._audio_bgs.play_sound(bgs_key)
 	
 	var tilemaps = []
 	
@@ -152,6 +155,20 @@ func _ready():
 	
 	AudioManager.new().add_click_noise_to_controls($UI)
 
+func schedule_autosave():
+	if _should_autosave:
+		yield(get_tree().create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), "timeout")
+		self._auto_save()
+	
+func _auto_save():
+	$UI.capture_screenshot()
+	SaveManager.save_with_screenshot("autosave")
+	var auto_save = $UI/AutoSave
+	auto_save.modulate.a = 0
+	var af = AlphaFluctuator.new(auto_save, 0.5)
+	add_child(af)
+	af.run(3)
+	
 func _is_walkable_and_no_transitions(tile_coords, transitions):
 	if tile_coords.x < 0 or tile_coords.y < 0 or \
 		tile_coords.x >= map.tiles_wide or tile_coords.y >= map.tiles_high:
@@ -189,12 +206,12 @@ func unfreeze_monsters():
 			monster.unfreeze()
 
 func hide_ui():
-	for child in $UI.get_children():
+	for child in $UI/Control.get_children():
 		if child is Button:
 			child.visible = false
 
 func show_ui():
-	for child in $UI.get_children():
+	for child in $UI/Control.get_children():
 		if child is Button:
 			child.visible = true
 			
@@ -272,6 +289,8 @@ func _add_monsters():
 				var monsters = monster_data[Globals.current_monster_type]
 				monsters.remove(monsters.find(Globals.current_monster))
 			elif Globals.current_monster.IS_BOSS:
+				_should_autosave = false # if quit/reload, will miss cutscene
+				hide_ui()
 				Globals.current_monster.is_alive = false
 				if Globals.current_monster.replace_with_npc != null:
 					var npc_class = Globals.quest.NPCS[Globals.current_monster.replace_with_npc]

@@ -50,11 +50,16 @@ var seed_value
 var bosses_defeated = 0
 var showed_final_events = false
 var beat_last_boss = false
+# tutorial
 var show_battle_tutorial = true
 var show_first_map_tutorial = false
+# options
 var zoom = 100 # 25-200
 var is_full_screen = true
 var is_first_run = true
+var background_volume = 0 # -40 to 0
+var sfx_volume = 0 # -40 to 0
+var tile_display_multiplier # 1x-4x (1s-4s)
 # End: persist
 ####
 
@@ -132,3 +137,6 @@ func show_ui():
 	# Rarely, this is something unusual, like AlphaFluctuator instance
 	if self.current_map_scene != null and not ReferenceChecker.is_previously_freed(self.current_map_scene):
 		self.current_map_scene.show_ui()
+		
+func screenshot_path(save_id):
+	return "user://screenshot-" + save_id + ".png"

@@ -51,6 +51,7 @@ func _display_current_ayah():
 	$Translation.text = _translations[_currently_playing]
 
 func _on_SkipButton_pressed():
+	$SkipButton.disabled = true
 	_audio_manager.clean_up_audio()
 	self._on_complete()
 	
