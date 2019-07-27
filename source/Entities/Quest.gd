@@ -159,7 +159,8 @@ const  BOSS_EVENTS = [
 			{"escape": "Umayyah" },
 			{ "messages": [
 				["Aisha", "Baba!"],
-				["Baba", "I'm ... okay. Hurry, stop him before it's too late!"],
+				["Baba", "I'm ... okay. I guess I am too old to go chasing after villains ..."],
+				["Baba", "It's up to you now, daughter. You have to stop him before it's too late."],
 				["Baba", "He said something about ... {finalmap}, wherever that is."],
 				["Aisha", "Ok Baba, I'll find him and put a stop to this."]
 			] }

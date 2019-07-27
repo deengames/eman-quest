@@ -27,6 +27,9 @@ func _physics_process(delta):
 	# Called every frame. Delta is time since last frame.
 	if self.get_parent().can_move:
 		self._move_parent_to_clicked_destintion()
+		
+func stop_footsteps_audio():
+	_audio_player.stop()
 
 func _clicked_on_map(position):
 	if self.get_parent().can_move:
