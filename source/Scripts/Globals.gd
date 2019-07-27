@@ -59,7 +59,7 @@ var is_full_screen = true
 var is_first_run = true
 var background_volume = 0 # -40 to 0
 var sfx_volume = 0 # -40 to 0
-var tile_display_multiplier # 1x-4x (1s-4s)
+var tile_display_multiplier = 1 # 1x-4x (1s-4s)
 # End: persist
 ####
 
