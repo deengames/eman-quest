@@ -206,12 +206,12 @@ func unfreeze_monsters():
 			monster.unfreeze()
 
 func hide_ui():
-	for child in $UI.get_children():
+	for child in $UI/Control.get_children():
 		if child is Button:
 			child.visible = false
 
 func show_ui():
-	for child in $UI.get_children():
+	for child in $UI/Control.get_children():
 		if child is Button:
 			child.visible = true
 			
@@ -290,7 +290,7 @@ func _add_monsters():
 				monsters.remove(monsters.find(Globals.current_monster))
 			elif Globals.current_monster.IS_BOSS:
 				_should_autosave = false # if quit/reload, will miss cutscene
-				Globals.hide_ui()
+				hide_ui()
 				Globals.current_monster.is_alive = false
 				if Globals.current_monster.replace_with_npc != null:
 					var npc_class = Globals.quest.NPCS[Globals.current_monster.replace_with_npc]
