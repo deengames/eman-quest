@@ -1,5 +1,7 @@
 extends Node
 
+const ReferenceChecker = preload("res://Scripts/ReferenceChecker.gd")
+
 # Given an array of entities, return an array where every item is created by
 # calling to_dict on the items in the input array.
 static func array_to_dictionary(array):
@@ -29,7 +31,8 @@ static func dictionary_values_to_dictionary(dict):
 		var a = []
 		
 		for item in dict[key]:
-			a.append(item.to_dict())
+			if not ReferenceChecker.is_previously_freed(item) and "to_dict" in item:
+				a.append(item.to_dict())
 			
 		to_return[key] = a
 	
