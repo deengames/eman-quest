@@ -12,8 +12,9 @@ radius = 30.0
 [sub_resource type="Animation" id=3]
 length = 0.8
 loop = true
+step = 0.2
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -22,14 +23,16 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Rect2( 0, 0, 64, 64 ), Rect2( 64, 0, 64, 64 ), Rect2( 128, 0, 64, 64 ), Rect2( 64, 0, 64, 64 ) ]
+"values": [ 0, 1, 2, 1 ]
 }
 
 [sub_resource type="Animation" id=4]
+resource_name = "Walk Left"
 length = 0.8
 loop = true
+step = 0.2
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -38,14 +41,16 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Rect2( 0, 64, 64, 64 ), Rect2( 64, 64, 64, 64 ), Rect2( 128, 64, 64, 64 ), Rect2( 64, 64, 64, 64 ) ]
+"values": [ 3, 4, 5, 4 ]
 }
 
 [sub_resource type="Animation" id=5]
+resource_name = "Walk Right"
 length = 0.8
 loop = true
+step = 0.2
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -54,14 +59,16 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Rect2( 0, 128, 64, 64 ), Rect2( 64, 128, 64, 64 ), Rect2( 128, 128, 64, 64 ), Rect2( 64, 128, 64, 64 ) ]
+"values": [ 6, 7, 8, 7 ]
 }
 
 [sub_resource type="Animation" id=6]
+resource_name = "Walk Up"
 length = 0.8
 loop = true
+step = 0.2
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -70,7 +77,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Rect2( 0, 192, 64, 64 ), Rect2( 64, 192, 64, 64 ), Rect2( 128, 192, 64, 64 ), Rect2( 64, 192, 64, 64 ) ]
+"values": [ 9, 10, 11, 10 ]
 }
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
@@ -85,7 +92,8 @@ texture = ExtResource( 2 )
 centered = false
 vframes = 4
 hframes = 3
-region_rect = Rect2( 0, 0, 64, 64 )
+frame = 10
+region_rect = Rect2( 128, 0, 64, 64 )
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
