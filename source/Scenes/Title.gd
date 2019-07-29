@@ -13,7 +13,6 @@ var _audio
 func _ready():
 	var data = OptionsSaver.load()
 	
-	Features.set_state("monsters chase you", data["monsters_chase"])
 	Globals.is_full_screen = data["is_full_screen"]
 	
 	Globals.is_first_run = data["is_first_run"]
