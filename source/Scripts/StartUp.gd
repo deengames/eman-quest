@@ -8,7 +8,7 @@ var _GAME_HEIGHT = ProjectSettings.get_setting("display/window/size/height")
 func _ready():
 	print("D1: " + str(File.new().file_exists("user://EmanQuestPreferences.dat")))
 	
-	var data = OptionsSaver.load()
+	var data = OptionsSaver.load_preferences()
 	
 	if data == null:
 		data = {
@@ -21,7 +21,7 @@ func _ready():
 			"tile_display_multiplier": float(1)
 		}
 
-		OptionsSaver.save(data)
+		OptionsSaver.save_preferences(data)
 
 	var window_size = OS.window_size
 	Globals.zoom  = data["zoom"]

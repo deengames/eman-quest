@@ -28,7 +28,7 @@ func _save_options():
 		"tile_display_multiplier": Globals.tile_display_multiplier
 	}
 	
-	OptionsSaver.save(options)
+	OptionsSaver.save_preferences(options)
 
 func _on_ZoomSlider_value_changed(value):
 	Globals.zoom = $Zoom/ZoomSlider.value
