@@ -6,8 +6,6 @@ var _GAME_WIDTH = ProjectSettings.get_setting("display/window/size/width")
 var _GAME_HEIGHT = ProjectSettings.get_setting("display/window/size/height")
 
 func _ready():
-	print("D1: " + str(File.new().file_exists("user://EmanQuestPreferences.dat")))
-	
 	var data = OptionsSaver.load_preferences()
 	
 	if data == null:

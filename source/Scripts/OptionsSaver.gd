@@ -1,7 +1,7 @@
 extends Node
 
 const _SAVE_COMPRESSION_MODE = File.COMPRESSION_DEFLATE  
-const PREFERENCES_FILE_NAME = "user://EmanQuestPreferences.dat"
+const PREFERENCES_FILE_NAME = "user://preferences.dat"
 
 static func save_preferences(data):
 	var serialized_data = to_json(data)

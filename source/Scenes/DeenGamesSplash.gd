@@ -5,7 +5,6 @@ const _SHOW_SECONDS = 3
 
 
 func _ready():
-	print("D2: " + str(File.new().file_exists("user://EmanQuestPreferences.dat")))
 	var tree = get_tree()
 	
 	$Logo.modulate = Color(1, 1, 1, 0)

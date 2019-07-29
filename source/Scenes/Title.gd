@@ -11,9 +11,7 @@ const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 var _audio
 
 func _ready():
-	print("D3: " + str(File.new().file_exists("user://EmanQuestPreferences.dat")))
 	var data = OptionsSaver.load_preferences()
-	return
 	Globals.is_full_screen = data["is_full_screen"]
 	
 	Globals.is_first_run = data["is_first_run"]
