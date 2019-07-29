@@ -14,7 +14,7 @@ static func load():
 	var save_game = File.new()
 	
 	if not save_game.file_exists(PREFERENCES_FILE_NAME):
-		return # Error! We don't have a save to load.
+		return # First run - preferences don't exist yet
 	
 	save_game.open_compressed(PREFERENCES_FILE_NAME, File.READ, _SAVE_COMPRESSION_MODE)
 	

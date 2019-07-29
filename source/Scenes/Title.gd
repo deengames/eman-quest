@@ -11,8 +11,9 @@ const SceneManagement = preload("res://Scripts/SceneManagement.gd")
 var _audio
 
 func _ready():
+	print("D3: " + str(File.new().file_exists("user://EmanQuestPreferences.dat")))
 	var data = OptionsSaver.load()
-	
+	return
 	Globals.is_full_screen = data["is_full_screen"]
 	
 	Globals.is_first_run = data["is_first_run"]
@@ -36,6 +37,7 @@ func _play_button_click():
 	audio_player.play_sound("button-click")
 
 func _on_newgame_Button_pressed():
+	print("D4: " + str(File.new().file_exists("user://EmanQuestPreferences.dat")))
 	_play_button_click()
 	$VBoxContainer/NewGameButton.disabled = true
 	var tree = get_tree()
