@@ -32,6 +32,7 @@ func _ready():
 			# Pass the coordinates of the tile, which is used to remove tutorial hands
 			tile.connect("correct_selected", self, "_on_correct_tile_selected", [Vector2(x, y)])
 			tile.connect("incorrect_selected", self, "_on_incorrect_tile_selected")
+			tile.connect("done_hiding", self, "_tile_done_hiding")
 			
 			self.add_child(tile)
 			self._tile_controls.append(tile)
@@ -55,7 +56,6 @@ func show_tiles(tiles):
 	for tile in tiles:
 		var sprite = self.get_node("Tile" + str(tile.x) + "-" + str(tile.y))
 		sprite.show_then_hide()
-		sprite.connect("done_hiding", self, "_tile_done_hiding")
 
 func reset():
 	self.ready_tiles = 0
