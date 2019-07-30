@@ -209,7 +209,7 @@ static func switch_to_battle_if_touched_player(tree, monster, body):
 
 static func _show_battle_transition(tree, animation_time_seconds):
 	var camera_tween = Tween.new()
-	camera_tween.interpolate_property(Globals.player.get_node("Camera2D"), "zoom", Vector2(1, 1), Vector2(0, 0), animation_time_seconds, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	camera_tween.interpolate_property(Globals.player.get_node("Camera2D"), "zoom", Vector2(1, 1), Vector2(0.1, 0.1), animation_time_seconds, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	
 	var root = tree.get_root()	
 	root.add_child(camera_tween)
