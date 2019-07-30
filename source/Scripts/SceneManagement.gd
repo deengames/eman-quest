@@ -8,6 +8,7 @@ const EventManagement = preload("res://Scripts/EventManagement.gd")
 const HomeMap = preload("res://Scenes/Maps/Home.tscn")
 const MapNameLabel = preload("res://Scenes/UI/MapNameLabel.tscn")
 const Player = preload("res://Entities/Player.tscn")
+const PlayerClass = preload("res://Entities/Player.gd")
 const PopulatedMapScene = preload("res://Scenes/PopulatedMapScene.tscn")
 const ReferenceChecker = preload("res://Scripts/ReferenceChecker.gd")
 const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
@@ -106,8 +107,9 @@ static func change_map_to(tree, target, auto_save = true):
 		# For the latter two conditions: adding area selection map broke here because
 		# instance is disposed or StaticBody2D
 		# https://trello.com/c/YSlZGwjL/8-area-selection-world-map
-		if Globals.player != null and not ReferenceChecker.is_previously_freed(Globals.player) and \
-		 'freeze' in Globals.player and Globals.pre_battle_position == null:
+		if Globals.player != null and not ReferenceChecker.is_previously_freed(Globals.player) \
+		and Globals.player is PlayerClass and Globals.pre_battle_position == null:#\
+		#'freeze' in Globals.player and Globals.pre_battle_position == null:
 			Globals.player.freeze()
 		
 		if Globals.is_testing == false:
