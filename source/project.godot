@@ -37,6 +37,11 @@ enabled=PoolStringArray( "gut", "paulloz.colorblindness" )
 theme/custom="res://Theme/GlobalTheme.tres"
 theme/custom_font="res://Theme/Default-24px.tres"
 
+[logging]
+
+file_logging/enable_file_logging=true
+file_logging/log_path="user://logs/EmanQuest.log"
+
 [rendering]
 
 quality/2d/use_pixel_snap=true
