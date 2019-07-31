@@ -157,7 +157,9 @@ func _ready():
 
 func schedule_autosave():
 	if _should_autosave:
+		print("YIELD starting autosave")
 		yield(get_tree().create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), "timeout")
+		print("YIELD done autosave")
 		self._auto_save()
 	
 func _auto_save():

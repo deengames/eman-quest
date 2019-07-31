@@ -21,7 +21,9 @@ static func _fade(tree, animation_time_seconds, start_colour, end_colour):
 	root.add_child(tween)
 	tween.start()
 	
+	print("YIELD fade start")
 	yield(tween, "tween_completed")
+	print("YIELD fade done")
 	
 	# pre_battle_position: non-null when the player is being freed
 	if Globals.pre_battle_position == null and Globals.post_fade_position != null:
