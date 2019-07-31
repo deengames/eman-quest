@@ -11,7 +11,7 @@ config_version=3
 [application]
 
 config/name="Eman Quest"
-run/main_scene="res://Scenes/DeenGamesSplash.tscn"
+run/main_scene="res://Scenes/Title.tscn"
 config/icon="res://icon.png"
 
 [autoload]

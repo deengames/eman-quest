@@ -11,9 +11,14 @@ static func fade_in(tree, animation_time_seconds):
 	
 static func _fade(tree, animation_time_seconds, start_colour, end_colour):
 	var canvas_modulate = CanvasModulate.new()
+	
 	# Fixes jerky frame between fades; see: https://twitter.com/nightblade99/status/1109278972976623616
 	canvas_modulate.color = start_colour
 	var root = tree.get_root()
+	# fixes a "data is blocked" error
+	call_deferred("_deferred_add", root, canvas_modulate, start_colour, end_colour, animation_time_seconds)
+
+static func _deferred_add(root, canvas_modulate, start_colour, end_colour, animation_time_seconds):
 	root.add_child(canvas_modulate)
 	
 	var tween = Tween.new()
@@ -21,9 +26,7 @@ static func _fade(tree, animation_time_seconds, start_colour, end_colour):
 	root.add_child(tween)
 	tween.start()
 	
-	print("YIELD fade start")
 	yield(tween, "tween_completed")
-	print("YIELD fade done")
 	
 	# pre_battle_position: non-null when the player is being freed
 	if Globals.pre_battle_position == null and Globals.post_fade_position != null:

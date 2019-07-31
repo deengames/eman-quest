@@ -101,15 +101,12 @@ static func change_map_to(tree, target, auto_save = true):
 
 		var state = SceneFadeManager.fade_out(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
 		if not Globals.is_testing:
-			print("YIELD fadeout start")
-			yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
-			print("YIELD fadeout done")
-			if state.is_valid(true):
-				print("still valid, resuming")
+			# THIS IS THE CAUSE OF THE CRASH. Dunno why.
+			# Removing it breaks our position post-battle, but yield(0) works.
+			#yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
+			yield(tree.create_timer(0), 'timeout')
+			if state != null and state.is_valid(true):
 				state.resume()
-				print("resumed")
-			else:
-				print("invalid, ignored")
 
 		# pre_battle_position null check: non-null when player is previously freed
 		# For the latter two conditions: adding area selection map broke here because
@@ -237,9 +234,7 @@ static func start_battle(tree, monster_data):
 	var animation_time_seconds = 0.5
 	var root = tree.get_root()
 	var to_remove = _show_battle_transition(tree, animation_time_seconds) # returns immediately
-	print("YIELD starting battle")
 	yield(tree.create_timer(animation_time_seconds), 'timeout')
-	print("YIELD starting battle; done")
 	for item in to_remove:
 		root.remove_child(item)
 		
