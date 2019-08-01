@@ -59,7 +59,7 @@ func _show_post_game_events():
 	qs.set_ayaat(
 		["quran-finale-1", "quran-finale-2"],
 		[
-			"“Our Lord, forgive me, and my parents, and the believers, on the Day the Reckoning takes place.”",
-			"Do not ever think that God is unaware of what the wrongdoers do. He only defers them until a Day when the sights stare."
+			"“Our Lord, forgive me, and my parents, and the believers, on the Day the Reckoning takes place.” [Qur'an, 14:41]",
+			"Do not ever think that God is unaware of what the wrongdoers do. He only defers them until a Day when the sights stare. [Qur'an, 14:42]"
 		])
 	SceneManagement.change_scene_to(get_tree(), qs)

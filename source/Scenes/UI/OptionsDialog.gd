@@ -8,7 +8,6 @@ var _GAME_HEIGHT = ProjectSettings.get_setting("display/window/size/height")
 
 func _ready():
 	AudioManager.new().add_click_noise_to_controls(self)
-	$MonstersChaseToggle.pressed = Features.is_enabled("monsters chase you")
 	$Zoom/ZoomSlider.value = Globals.zoom
 	$FullScreen.pressed = Globals.is_full_screen
 	$BackgroundAudio/BackgroundAudioSlider.value = Globals.background_volume
@@ -19,14 +18,9 @@ func _ready():
 func title(value):
 	$CloseDialogTitlebar.title = value
 
-func _on_MonstersChaseToggle_toggled(button_pressed):
-	Features.set_state("monsters chase you", button_pressed)
-	_save_options()
-	
 func _save_options():
 	var options = {
 		"zoom": Globals.zoom,
-		"monsters_chase": $MonstersChaseToggle.pressed,
 		"is_first_run": false, # always false because we ran the first run
 		"is_full_screen": Globals.is_full_screen,
 		"background_volume": Globals.background_volume,
@@ -34,7 +28,7 @@ func _save_options():
 		"tile_display_multiplier": Globals.tile_display_multiplier
 	}
 	
-	OptionsSaver.save(options)
+	OptionsSaver.save_preferences(options)
 
 func _on_ZoomSlider_value_changed(value):
 	Globals.zoom = $Zoom/ZoomSlider.value

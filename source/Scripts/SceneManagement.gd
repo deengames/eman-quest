@@ -8,6 +8,7 @@ const EventManagement = preload("res://Scripts/EventManagement.gd")
 const HomeMap = preload("res://Scenes/Maps/Home.tscn")
 const MapNameLabel = preload("res://Scenes/UI/MapNameLabel.tscn")
 const Player = preload("res://Entities/Player.tscn")
+const PlayerClass = preload("res://Entities/Player.gd")
 const PopulatedMapScene = preload("res://Scenes/PopulatedMapScene.tscn")
 const ReferenceChecker = preload("res://Scripts/ReferenceChecker.gd")
 const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
@@ -23,7 +24,9 @@ static func change_map_to(tree, target, auto_save = true):
 	###
 	if typeof(target) == TYPE_STRING and target == "Overworld":
 		SceneFadeManager.fade_out(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
+		print("YIELD MapWarp back to overworld")
 		yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
+		print("YIELD to overworld done")
 		tree.change_scene("res://Scenes/Maps/AreaSelect.tscn")
 		# Above disposes player, hack Globals.player to be a non-disposed instance
 		Player.instance()
@@ -98,16 +101,20 @@ static func change_map_to(tree, target, auto_save = true):
 
 		var state = SceneFadeManager.fade_out(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
 		if not Globals.is_testing:
-			yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
-			if state.is_valid(true):
+			# THIS IS THE CAUSE OF THE CRASH. Dunno why.
+			# Removing it breaks our position post-battle, but yield(0) works.
+			#yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
+			yield(tree.create_timer(0), 'timeout')
+			if state != null and state.is_valid(true):
 				state.resume()
 
 		# pre_battle_position null check: non-null when player is previously freed
 		# For the latter two conditions: adding area selection map broke here because
 		# instance is disposed or StaticBody2D
 		# https://trello.com/c/YSlZGwjL/8-area-selection-world-map
-		if Globals.player != null and not ReferenceChecker.is_previously_freed(Globals.player) and \
-		 'freeze' in Globals.player and Globals.pre_battle_position == null:
+		if Globals.player != null and not ReferenceChecker.is_previously_freed(Globals.player) \
+		and Globals.player is PlayerClass and Globals.pre_battle_position == null:#\
+		#'freeze' in Globals.player and Globals.pre_battle_position == null:
 			Globals.player.freeze()
 		
 		if Globals.is_testing == false:
@@ -208,7 +215,7 @@ static func switch_to_battle_if_touched_player(tree, monster, body):
 
 static func _show_battle_transition(tree, animation_time_seconds):
 	var camera_tween = Tween.new()
-	camera_tween.interpolate_property(Globals.player.get_node("Camera2D"), "zoom", Vector2(1, 1), Vector2(0, 0), animation_time_seconds, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	camera_tween.interpolate_property(Globals.player.get_node("Camera2D"), "zoom", Vector2(1, 1), Vector2(0.1, 0.1), animation_time_seconds, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	
 	var root = tree.get_root()	
 	root.add_child(camera_tween)

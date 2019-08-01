@@ -25,7 +25,6 @@ func _add_item(item):
 	self._all_items.append(item)
 
 func _on_ItemList_nothing_selected():
-	$ItemList.clear()
 	self._selected_item = null
 	self._clear_selected_display()
 

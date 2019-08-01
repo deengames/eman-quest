@@ -71,11 +71,8 @@ func _pick_destination():
 	var root = get_tree().get_root()
 	var current_map = Globals.current_map
 	# null when you first load/enter a map, second null is player being previously-freed
-	if Features.is_enabled("monsters chase you") and Globals.player != null and not ReferenceChecker.is_previously_freed(Globals.player) and Globals.post_fade_position == null:
-		self._destination = Globals.player.position
-	else:
-		self._destination.x = Globals.randint(0, (current_map.tiles_wide - 1) * Globals.TILE_WIDTH)
-		self._destination.y = Globals.randint(0, (current_map.tiles_high - 1) * Globals.TILE_HEIGHT)
+	self._destination.x = Globals.randint(0, (current_map.tiles_wide - 1) * Globals.TILE_WIDTH)
+	self._destination.y = Globals.randint(0, (current_map.tiles_high - 1) * Globals.TILE_HEIGHT)
 
 	self._face_current_direction()
 
@@ -90,7 +87,7 @@ func _physics_process(delta):
 			# This bug also breaks enemies chase you. So, ignore check in that case.
 			var velocity = (self._destination - self.position).normalized() * self._MOVE_SPEED
 			
-			if Features.is_enabled("monsters chase you") or not self.test_move(Transform2D(0, self.position), velocity):
+			if not self.test_move(Transform2D(0, self.position), velocity):
 				move_and_slide(velocity)
 			elif self.test_move(Transform2D(0, self.position), velocity):
 				self._destination = self.position

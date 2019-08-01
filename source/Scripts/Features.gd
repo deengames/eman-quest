@@ -3,7 +3,6 @@ extends Node
 var _feature_map = {
 	### Stuff that's going into production
 	# User-facing
-	"monsters chase you": false,
 	# Non-user facing
 	"defend action": true, # Exists in old and new battle engine
 	"tech_points": true, # points and skills

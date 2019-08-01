@@ -10,9 +10,7 @@ const SceneFadeManager = preload("res://Scripts/Effects/SceneFadeManager.gd")
 var _audio
 
 func _ready():
-	var data = OptionsSaver.load()
-	
-	Features.set_state("monsters chase you", data["monsters_chase"])
+	var data = OptionsSaver.load_preferences()
 	Globals.is_full_screen = data["is_full_screen"]
 	
 	Globals.is_first_run = data["is_first_run"]
@@ -36,6 +34,7 @@ func _play_button_click():
 	audio_player.play_sound("button-click")
 
 func _on_newgame_Button_pressed():
+	print("D4: " + str(File.new().file_exists("user://EmanQuestPreferences.dat")))
 	_play_button_click()
 	$VBoxContainer/NewGameButton.disabled = true
 	var tree = get_tree()

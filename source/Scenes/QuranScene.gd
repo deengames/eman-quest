@@ -9,7 +9,7 @@ const _FADE_TIME_SECONDS = 0.5
 var _audio_manager = AudioManager.new()
 
 var _ayaat = ["quran-intro-1"]
-var _translations = ["Your Lord has commanded that you worship none but Him, and that you be good to your parents. If either of them or both of them reach old age with you, do not say to them a word of disrespect, nor scold them, but say to them kind words."]
+var _translations = ["Your Lord has commanded that you worship none but Him, and that you be good to your parents. If either of them or both of them reach old age with you, do not say to them a word of disrespect, nor scold them, but say to them kind words.\n[Qur'an, 17:23]"]
 var _currently_playing = 0
 var _autostart_game = true # true for new game, false for end-game
 
