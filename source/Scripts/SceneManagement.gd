@@ -24,9 +24,7 @@ static func change_map_to(tree, target, auto_save = true):
 	###
 	if typeof(target) == TYPE_STRING and target == "Overworld":
 		SceneFadeManager.fade_out(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
-		print("YIELD MapWarp back to overworld")
 		yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
-		print("YIELD to overworld done")
 		tree.change_scene("res://Scenes/Maps/AreaSelect.tscn")
 		# Above disposes player, hack Globals.player to be a non-disposed instance
 		Player.instance()
