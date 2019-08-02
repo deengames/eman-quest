@@ -18,7 +18,7 @@ const WORLD_HEIGHT_IN_TILES = 18 # 1080/64
 
 const WALKABLE_TILES = ['Grass', 'Dirt', 'Ground']
 const SCENE_TRANSITION_TIME_SECONDS = 0.5
-const NUM_SAVES = 10
+const NUM_SAVES = 9
 
 # NOT USED EVERYWHERE. Some constants demand the use of constants ...
 # so in those cases, we can't refer to this, we have to use a hard-coded value

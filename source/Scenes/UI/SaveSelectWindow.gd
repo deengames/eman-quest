@@ -11,25 +11,25 @@ var _selected_slot = null
 var _save_disabled = false # for titlescreen only
 
 func _ready():
-	$HBoxContainer/Container/ItemList.add_item("AutoSave")
+	$VBoxContainer/HBoxContainer/Container/ItemList.add_item("AutoSave")
 	
 	for i in range(Globals.NUM_SAVES):
 		var n = i + 1
-		$HBoxContainer/Container/ItemList.add_item("File " + str(n))
+		$VBoxContainer/HBoxContainer/Container/ItemList.add_item("File " + str(n))
 	
-	$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/SaveButton.hide()
-	$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/LoadButton.hide()
-	AudioManager.new().add_click_noise_to_controls($HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer)
+	$VBoxContainer/HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/SaveButton.hide()
+	$VBoxContainer/HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/LoadButton.hide()
+	AudioManager.new().add_click_noise_to_controls($VBoxContainer/HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer)
 	
 func disable_saving():
 	# From titlescreen we came, and to it we will return on close.
 	_save_disabled = true
-	$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/SaveButton.hide()
+	$VBoxContainer/HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/SaveButton.hide()
 	
 	self.connect("popup_hide", self, "_back_to_titlescreen")
 
 func title(value):
-	$CloseDialogTitlebar.title = value
+	$VBoxContainer/Titlebar.title = value
 
 func _back_to_titlescreen():
 	var tree = get_tree()
@@ -43,17 +43,17 @@ func _on_ItemList_item_selected(index):
 		
 	_selected_slot = index
 
-	var label = $HBoxContainer/Container2/SaveDetailsPanel/StatsLabel
-	var sprite = $HBoxContainer/Container2/SaveDetailsPanel/ScreenshotSprite
+	var label = $VBoxContainer/HBoxContainer/Container2/SaveDetailsPanel/StatsLabel
+	var sprite = $VBoxContainer/HBoxContainer/Container2/SaveDetailsPanel/ScreenshotSprite
 	var save_exists = SaveManager.save_exists(save_key)
 	
 	# we're loading, or autosave (can't save over it)
 	if not _save_disabled and index > 0:
-		$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/SaveButton.show()
+		$VBoxContainer/HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/SaveButton.show()
 	else:
-		$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/SaveButton.disabled = not save_exists
+		$VBoxContainer/HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/SaveButton.disabled = not save_exists
 
-	$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/LoadButton.visible = save_exists
+	$VBoxContainer/HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/LoadButton.visible = save_exists
 	
 	if save_exists:
 		var data = SaveManager.load_data(save_key)
@@ -98,7 +98,7 @@ func _on_SaveButton_pressed():
 		
 func _on_LoadButton_pressed():
 	if _selected_slot != null:
-		$HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/LoadButton.disabled = true
+		$VBoxContainer/HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/LoadButton.disabled = true
 		# disappear without triggering popup_hide, which takes us to the titlescreen
 		self.modulate.a = 0 
 		AudioManager.new().play_sound("load")

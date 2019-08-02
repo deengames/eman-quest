@@ -1,227 +1,79 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/UI/SaveSelectWindow.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/UI/CloseDialogTitlebar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/UI/CloseDialogTitlebar2.tscn" type="PackedScene" id=2]
 
 [node name="PopupPanel" type="PopupPanel"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+visible = true
 margin_right = 850.0
 margin_bottom = 510.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-popup_exclusive = false
 script = ExtResource( 1 )
-_sections_unfolded = [ "Margin", "Popup" ]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." index="0"]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 834.0
+margin_bottom = 494.0
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 8.0
-margin_top = 56.0
-margin_right = 700.0
-margin_bottom = 502.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-alignment = 0
-_sections_unfolded = [ "Margin" ]
+[node name="Titlebar" parent="VBoxContainer" instance=ExtResource( 2 )]
+margin_right = 818.0
 
-[node name="Container" type="Container" parent="HBoxContainer" index="0"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 54.0
+margin_right = 818.0
+margin_bottom = 54.0
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_bottom = 446.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
+[node name="Container" type="Control" parent="VBoxContainer/HBoxContainer"]
 hint_tooltip = "A list of save games"
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-_sections_unfolded = [ "Hint" ]
 
-[node name="ItemList" type="ItemList" parent="HBoxContainer/Container" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="ItemList" type="ItemList" parent="VBoxContainer/HBoxContainer/Container"]
 margin_right = 150.0
-margin_bottom = 446.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-items = [  ]
-select_mode = 0
-allow_reselect = false
-icon_mode = 1
-fixed_icon_size = Vector2( 0, 0 )
-_sections_unfolded = [ "Columns", "Margin" ]
+margin_bottom = 424.0
 
-[node name="Container2" type="Container" parent="HBoxContainer" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Container2" type="Control" parent="VBoxContainer/HBoxContainer"]
 margin_left = 4.0
 margin_right = 4.0
-margin_bottom = 446.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-_sections_unfolded = [ "Margin" ]
 
-[node name="SaveDetailsPanel" type="Panel" parent="HBoxContainer/Container2" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="SaveDetailsPanel" type="Panel" parent="VBoxContainer/HBoxContainer/Container2"]
 margin_left = 154.0
-margin_right = 830.0
-margin_bottom = 446.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-_sections_unfolded = [ "Margin" ]
+margin_right = 821.0
+margin_bottom = 429.0
 
-[node name="StatsLabel" type="Label" parent="HBoxContainer/Container2/SaveDetailsPanel" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="StatsLabel" type="Label" parent="VBoxContainer/HBoxContainer/Container2/SaveDetailsPanel"]
 margin_left = 6.0
 margin_top = 10.0
 margin_right = 525.0
 margin_bottom = 126.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 hint_tooltip = "The save game's stats"
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "Hint", "Margin", "custom_styles" ]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="ScreenshotSprite" type="Sprite" parent="HBoxContainer/Container2/SaveDetailsPanel" index="1"]
-
+[node name="ScreenshotSprite" type="Sprite" parent="VBoxContainer/HBoxContainer/Container2/SaveDetailsPanel"]
 position = Vector2( 8, 136 )
 scale = Vector2( 0.75, 0.75 )
 centered = false
 region_enabled = true
-region_rect = Rect2( 0, 0, 882, 388 )
-_sections_unfolded = [ "Offset", "Region", "Transform", "Visibility" ]
+region_rect = Rect2( 0, 0, 870, 384 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Container2/SaveDetailsPanel" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Container2/SaveDetailsPanel"]
 margin_left = 526.0
 margin_top = 10.0
 margin_right = 666.0
 margin_bottom = 130.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-alignment = 0
-_sections_unfolded = [ "Margin" ]
 
-[node name="SaveButton" type="Button" parent="HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="SaveButton" type="Button" parent="VBoxContainer/HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer"]
 margin_right = 140.0
 margin_bottom = 50.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 hint_tooltip = "Save, overwriting the selected save game"
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Save"
-flat = false
-align = 1
-_sections_unfolded = [ "Hint" ]
 
-[node name="LoadButton" type="Button" parent="HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="LoadButton" type="Button" parent="VBoxContainer/HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer"]
 margin_top = 54.0
 margin_right = 140.0
 margin_bottom = 104.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 hint_tooltip = "Load the selected save game"
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Load"
-flat = false
-align = 1
-_sections_unfolded = [ "Hint" ]
-
-[node name="CloseDialogTitlebar" parent="." index="1" instance=ExtResource( 2 )]
-
-[connection signal="item_selected" from="HBoxContainer/Container/ItemList" to="." method="_on_ItemList_item_selected"]
-
-[connection signal="pressed" from="HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/SaveButton" to="." method="_on_SaveButton_pressed"]
-
-[connection signal="pressed" from="HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/LoadButton" to="." method="_on_LoadButton_pressed"]
-
-
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer/Container/ItemList" to="." method="_on_ItemList_item_selected"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/SaveButton" to="." method="_on_SaveButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/Container2/SaveDetailsPanel/VBoxContainer/LoadButton" to="." method="_on_LoadButton_pressed"]

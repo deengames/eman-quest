@@ -1,18 +1,13 @@
 extends HBoxContainer
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var title = "" setget set_title, get_title
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func set_title(title):
+	$Title.text = title.to_upper()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
+func get_title():
+	return $Panel/Title.text
+	
 func _on_Button_pressed():
 	if not $Button.disabled:# and event is InputEventMouseButton and event.pressed) or (OS.has_feature("Android") and event is InputEventMouseMotion):
 		$Button.disabled = true
