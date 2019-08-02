@@ -56,7 +56,6 @@ text = "New Game"
 margin_top = 66.0
 margin_right = 140.0
 margin_bottom = 116.0
-disabled = true
 text = "Load"
 
 [node name="OptionsButton" type="Button" parent="VBoxContainer"]
