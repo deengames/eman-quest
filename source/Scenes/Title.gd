@@ -34,7 +34,6 @@ func _play_button_click():
 	audio_player.play_sound("button-click")
 
 func _on_newgame_Button_pressed():
-	print("D4: " + str(File.new().file_exists("user://EmanQuestPreferences.dat")))
 	_play_button_click()
 	$VBoxContainer/NewGameButton.disabled = true
 	var tree = get_tree()
@@ -44,7 +43,6 @@ func _on_newgame_Button_pressed():
 
 func _on_LoadGameButton_pressed():
 	_play_button_click()
-	$VBoxContainer/LoadGameButton.disabled = true
 	var loading_scene = LoadingScene.instance()
 	add_child(loading_scene)
 	loading_scene.connect("tree_exiting", self, "_enable_load")

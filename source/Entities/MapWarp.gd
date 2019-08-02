@@ -113,9 +113,7 @@ func _on_Area2D_body_entered(body):
 					static_map = HomeMap.instance()
 				
 				SceneFadeManager.fade_out(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
-				print("YIELD MapWarp start")
 				yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
-				print("YIELD MapWarp done")
 				SceneManagement.change_scene_to(get_tree(), static_map)
 				Globals.player.unfreeze()
 			else:
