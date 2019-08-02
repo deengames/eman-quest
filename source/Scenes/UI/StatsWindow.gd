@@ -6,25 +6,25 @@ var _pointer_base_x = 0
 var _total_time = 0
 
 func _ready():
-	self._pointer_base_x = $Stats/Pointer.position.x
+	self._pointer_base_x = $VBoxContainer/HBoxContainer/Stats/Pointer.position.x
 	self.popup_exclusive = true
 	self._update_stats_display()
 	
-	$Stats/Labels/LevelLabel.text = "Level: " + str(Globals.player_data.level)
+	$VBoxContainer/HBoxContainer/Stats/Labels/LevelLabel.text = "Level: " + str(Globals.player_data.level)
 	
-	$Stats/Labels/ExpLabel.text = "XP: " + (str(Globals.player_data.experience_points) +
+	$VBoxContainer/HBoxContainer/Stats/Labels/ExpLabel.text = "XP: " + (str(Globals.player_data.experience_points) +
 		"/" + str(Globals.player_data.get_next_level_xp()))
 		
 	var weapon = Globals.player_data.weapon
 	var armour = Globals.player_data.armour
 	
-	$Equipment/WeaponLabel.text = "Current weapon:\n" + weapon.str()
-	$Equipment/ArmourLabel.text = "Current armour:\n" + armour.str()
+	$VBoxContainer/HBoxContainer/Equipment/WeaponLabel.text = "Current weapon:\n" + weapon.str()
+	$VBoxContainer/HBoxContainer/Equipment/ArmourLabel.text = "Current armour:\n" + armour.str()
 	
-	AudioManager.new().add_click_noise_to_controls($Stats/Buttons)
+	AudioManager.new().add_click_noise_to_controls($VBoxContainer/HBoxContainer/Stats/Buttons)
 
 func title(value):
-	$CloseDialogTitlebar.title = value
+	$VBoxContainer/CloseDialogTitlebar.title = value
 
 func _on_UnassignHealthButton_pressed():
 	self._unassign_point("health")
@@ -76,17 +76,17 @@ func _unassign_point(type):
 	self._update_stats_display()
 	
 func _update_stats_display():
-	$Stats/Labels/StatsHeaderLabel.text = ("Stats                  Points" +
+	$VBoxContainer/HBoxContainer/Stats/Labels/StatsHeaderLabel.text = ("Stats                  Points" +
 	" (" + str(Globals.player_data.unassigned_stats_points) +
 	" unused)")
 	
-	$Stats/Labels/StatsLabel.text = ("Health: " + str(Globals.player_data.health) + "\n\n" +
+	$VBoxContainer/HBoxContainer/Stats/Labels/StatsLabel.text = ("Health: " + str(Globals.player_data.health) + "\n\n" +
 		"Strength: " + str(Globals.player_data.strength) + "\n\n" + 
 		"Defense: " + str(Globals.player_data.defense) + "\n\n" +
 		"Actions: " + str(Globals.player_data.num_actions) + "\n\n"
 	)
 	
-	$Stats/Labels/PointsAssignedLabel.text = (str(Globals.player_data.assigned_points["health"]) + "\n\n" +
+	$VBoxContainer/HBoxContainer/Stats/Labels/PointsAssignedLabel.text = (str(Globals.player_data.assigned_points["health"]) + "\n\n" +
 		str(Globals.player_data.assigned_points["strength"]) + "\n\n" +
 		str(Globals.player_data.assigned_points["defense"]) + "\n\n" +
 		str(Globals.player_data.assigned_points["num_actions"])
@@ -95,7 +95,7 @@ func _update_stats_display():
 func _process(delta):
 	if Globals.player_data.unassigned_stats_points > 0:
 		self._total_time += delta
-		$Stats/Pointer.visible = true
-		$Stats/Pointer.position.x = self._pointer_base_x + (24 * cos(self._total_time * 4))
+		$VBoxContainer/HBoxContainer/Stats/Pointer.visible = true
+		$VBoxContainer/HBoxContainer/Stats/Pointer.position.x = self._pointer_base_x + (24 * cos(self._total_time * 4))
 	else:
-		$Stats/Pointer.visible = false
+		$VBoxContainer/HBoxContainer/Stats/Pointer.visible = false

@@ -1,6 +1,6 @@
 extends HBoxContainer
 
-var title = "" setget set_title, get_title
+export var title = "" setget set_title, get_title
 
 func set_title(title):
 	$Title.text = title.to_upper()
