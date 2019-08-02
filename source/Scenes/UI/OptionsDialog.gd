@@ -8,15 +8,15 @@ var _GAME_HEIGHT = ProjectSettings.get_setting("display/window/size/height")
 
 func _ready():
 	AudioManager.new().add_click_noise_to_controls(self)
-	$Zoom/ZoomSlider.value = Globals.zoom
-	$FullScreen.pressed = Globals.is_full_screen
-	$BackgroundAudio/BackgroundAudioSlider.value = Globals.background_volume
-	$SfxAudio/SfxAudioSlider.value = Globals.sfx_volume
-	$TileDisplayTime/TileDisplayTimeSlider.value = Globals.tile_display_multiplier
+	$VBoxContainer/Zoom/ZoomSlider.value = Globals.zoom
+	$VBoxContainer/Container/FullScreen.pressed = Globals.is_full_screen
+	$VBoxContainer/BackgroundAudio/BackgroundAudioSlider.value = Globals.background_volume
+	$VBoxContainer/SfxAudio/SfxAudioSlider.value = Globals.sfx_volume
+	$VBoxContainer/TileDisplayTime/TileDisplayTimeSlider.value = Globals.tile_display_multiplier
 	self._on_TileDisplayTimeSlider_value_changed(Globals.tile_display_multiplier)
 	
 func title(value):
-	$CloseDialogTitlebar.title = value
+	$VBoxContainer/CloseDialogTitlebar.title = value
 
 func _save_options():
 	var options = {
@@ -31,7 +31,7 @@ func _save_options():
 	OptionsSaver.save_preferences(options)
 
 func _on_ZoomSlider_value_changed(value):
-	Globals.zoom = $Zoom/ZoomSlider.value
+	Globals.zoom = $VBoxContainer/Zoom/ZoomSlider.value
 	_update_zoom_label()
 	_save_options()
 
@@ -45,12 +45,12 @@ func _on_PopupPanel_popup_hide():
 	OS.window_maximized = Globals.is_full_screen
 
 func _update_zoom_label():
-	$Zoom/ZoomLabel.text = "Zoom (" + str(Globals.zoom) + "%):"
+	$VBoxContainer/Zoom/ZoomLabel.text = "Zoom (" + str(Globals.zoom) + "%):"
 
 func _on_FullScreen_toggled(button_pressed):
 	Globals.is_full_screen = button_pressed
-	$Zoom/ZoomSlider.editable = not button_pressed
-	if not $Zoom/ZoomSlider.editable:
+	$VBoxContainer/Zoom/ZoomSlider.editable = not button_pressed
+	if not $VBoxContainer/Zoom/ZoomSlider.editable:
 		Globals.zoom = 100
 	_save_options()
 	
@@ -66,5 +66,5 @@ func _on_SfxAudioSlider_value_changed(value):
 
 func _on_TileDisplayTimeSlider_value_changed(value):
 	Globals.tile_display_multiplier = float(value)
-	$TileDisplayTime/TileDisplayTimeLabel.text = "Battle: display tiles for " + str(value) + "s"
+	$VBoxContainer/TileDisplayTime/TileDisplayTimeLabel.text = "Battle: display tiles for " + str(value) + "s"
 	_save_options()

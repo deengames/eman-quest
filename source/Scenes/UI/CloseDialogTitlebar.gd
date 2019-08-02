@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 const _PADDING = 8
 
@@ -9,6 +9,7 @@ var title = "" setget set_title, get_title
 # the top 58 pixels of the parent, because positioning above the parent (at least,
 # with popup instances) causes the click handlers on child controls to just not fire.
 func _ready():
+	return
 	var parent = get_parent()
 	
 	if "margin_right" in parent:

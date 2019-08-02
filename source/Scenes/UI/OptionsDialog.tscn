@@ -1,366 +1,147 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/UI/OptionsDialog.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/UI/CloseDialogTitlebar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/UI/CloseDialogTitlebar2.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/UI/CloseDialogTitlebar.tscn" type="PackedScene" id=3]
 
-[node name="PopupPanel" type="PopupPanel" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="PopupPanel" type="PopupPanel"]
+visible = true
 margin_right = 700.0
 margin_bottom = 500.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-popup_exclusive = false
 script = ExtResource( 1 )
-_sections_unfolded = [ "Margin", "Theme" ]
 
-[node name="CloseDialogTitlebar" parent="." index="0" instance=ExtResource( 2 )]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 684.0
+margin_bottom = 484.0
 
-[node name="FullScreen" type="CheckButton" parent="." index="2"]
+[node name="VBoxContainer" parent="VBoxContainer" instance=ExtResource( 2 )]
+margin_right = 668.0
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 10.0
-margin_top = 59.0
-margin_right = 692.0
-margin_bottom = 101.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-hint_tooltip = "Toggle full-screen mode"
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = true
-pressed = true
-enabled_focus_mode = 2
-shortcut = null
-group = null
-text = "Full screen"
-flat = false
-align = 0
-_sections_unfolded = [ "Hint", "Margin", "custom_fonts" ]
+[node name="CloseDialogTitlebar" parent="VBoxContainer" instance=ExtResource( 3 )]
+visible = false
+margin_right = 313.0
 
-[node name="Zoom" type="Node2D" parent="." index="3"]
+[node name="Container" type="VBoxContainer" parent="VBoxContainer"]
+editor/display_folded = true
+margin_top = 54.0
+margin_right = 668.0
+margin_bottom = 96.0
 
-position = Vector2( 16, 110 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="ZoomLabel" type="Label" parent="Zoom" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 207.0
+[node name="FullScreen" type="CheckButton" parent="VBoxContainer/Container"]
+margin_right = 668.0
 margin_bottom = 42.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
+pressed = true
+text = "Full screen"
+
+[node name="Zoom" type="VBoxContainer" parent="VBoxContainer"]
+margin_top = 100.0
+margin_right = 668.0
+margin_bottom = 150.0
+
+[node name="ZoomLabel" type="Label" parent="VBoxContainer/Zoom"]
+margin_right = 668.0
+margin_bottom = 42.0
 hint_tooltip = "Zoom the view in or out"
 mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 text = "Zoom (100%):"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "Margin", "Mouse" ]
 
-[node name="ZoomSlider" type="HSlider" parent="Zoom" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 255.0
-margin_top = 16.0
-margin_right = 680.0
-margin_bottom = 30.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
+[node name="ZoomSlider" type="HSlider" parent="VBoxContainer/Zoom"]
+margin_top = 46.0
+margin_right = 668.0
+margin_bottom = 50.0
 hint_tooltip = "Zoom the view in or out"
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 0
 min_value = 50.0
 max_value = 200.0
 step = 25.0
-page = 0.0
 value = 100.0
-exp_edit = false
 rounded = true
-editable = true
 tick_count = 8
-ticks_on_borders = false
-focus_mode = 2
-_sections_unfolded = [ "Margin", "Theme" ]
 
-[node name="HideErrorsLolWut" type="ColorRect" parent="Zoom/ZoomSlider" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="HideErrorsLolWut" type="ColorRect" parent="VBoxContainer/Zoom/ZoomSlider"]
 margin_left = 7.0
 margin_top = 15.0
 margin_right = 380.0
 margin_bottom = 30.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 color = Color( 0.0980392, 0.0862745, 0.141176, 1 )
 
-[node name="BackgroundAudio" type="Node2D" parent="." index="4"]
+[node name="BackgroundAudio" type="VBoxContainer" parent="VBoxContainer"]
+margin_top = 154.0
+margin_right = 668.0
+margin_bottom = 204.0
 
-position = Vector2( 16, 155 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="BackgroundAudioLabel" type="Label" parent="BackgroundAudio" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 231.0
+[node name="BackgroundAudioLabel" type="Label" parent="VBoxContainer/BackgroundAudio"]
+margin_right = 668.0
 margin_bottom = 42.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 hint_tooltip = "Zoom the view in or out"
 mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 text = "Background volume:"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "Margin", "Mouse" ]
 
-[node name="BackgroundAudioSlider" type="HSlider" parent="BackgroundAudio" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 255.0
-margin_top = 16.0
-margin_right = 680.0
-margin_bottom = 30.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
+[node name="BackgroundAudioSlider" type="HSlider" parent="VBoxContainer/BackgroundAudio"]
+margin_top = 46.0
+margin_right = 668.0
+margin_bottom = 50.0
 hint_tooltip = "Zoom the view in or out"
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 0
 min_value = -50.0
 max_value = 0.0
-step = 1.0
-page = 0.0
-value = 0.0
-exp_edit = false
 rounded = true
-editable = true
 tick_count = 8
-ticks_on_borders = false
-focus_mode = 2
-_sections_unfolded = [ "Margin", "Theme" ]
+ticks_on_borders = true
 
-[node name="HideErrorsLolWut" type="ColorRect" parent="BackgroundAudio/BackgroundAudioSlider" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="HideErrorsLolWut" type="ColorRect" parent="VBoxContainer/BackgroundAudio/BackgroundAudioSlider"]
 margin_left = 4.0
 margin_top = 16.0
 margin_right = 376.0
 margin_bottom = 31.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 color = Color( 0.0980392, 0.0862745, 0.141176, 1 )
 
-[node name="SfxAudio" type="Node2D" parent="." index="5"]
+[node name="SfxAudio" type="VBoxContainer" parent="VBoxContainer"]
+margin_top = 208.0
+margin_right = 668.0
+margin_bottom = 258.0
 
-position = Vector2( 16, 199 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="SfxAudioLabel" type="Label" parent="SfxAudio" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 252.0
+[node name="SfxAudioLabel" type="Label" parent="VBoxContainer/SfxAudio"]
+margin_right = 668.0
 margin_bottom = 42.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 hint_tooltip = "Zoom the view in or out"
 mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 text = "Sound effects volume:"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "Margin", "Mouse" ]
 
-[node name="SfxAudioSlider" type="HSlider" parent="SfxAudio" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 255.0
-margin_top = 16.0
-margin_right = 680.0
-margin_bottom = 30.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
+[node name="SfxAudioSlider" type="HSlider" parent="VBoxContainer/SfxAudio"]
+margin_top = 46.0
+margin_right = 668.0
+margin_bottom = 50.0
 hint_tooltip = "Zoom the view in or out"
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 0
 min_value = -50.0
 max_value = 0.0
-step = 1.0
-page = 0.0
-value = 0.0
-exp_edit = false
 rounded = true
-editable = true
 tick_count = 8
-ticks_on_borders = false
-focus_mode = 2
-_sections_unfolded = [ "Margin", "Theme" ]
 
-[node name="HideErrorsLolWut" type="ColorRect" parent="SfxAudio/SfxAudioSlider" index="0"]
+[node name="TileDisplayTime" type="VBoxContainer" parent="VBoxContainer"]
+margin_top = 262.0
+margin_right = 668.0
+margin_bottom = 312.0
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = -6.0
-margin_top = 15.0
-margin_right = 381.0
-margin_bottom = 30.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-color = Color( 0.0980392, 0.0862745, 0.141176, 1 )
-
-[node name="TileDisplayTime" type="Node2D" parent="." index="6"]
-
-position = Vector2( 16, 243 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="TileDisplayTimeLabel" type="Label" parent="TileDisplayTime" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 279.0
+[node name="TileDisplayTimeLabel" type="Label" parent="VBoxContainer/TileDisplayTime"]
+margin_right = 668.0
 margin_bottom = 42.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 hint_tooltip = "Zoom the view in or out"
 mouse_filter = 1
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 text = "Battle: display tiles for 1.25s"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "Margin", "Mouse" ]
 
-[node name="TileDisplayTimeSlider" type="HSlider" parent="TileDisplayTime" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 325.0
-margin_top = 16.0
-margin_right = 680.0
-margin_bottom = 30.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
+[node name="TileDisplayTimeSlider" type="HSlider" parent="VBoxContainer/TileDisplayTime"]
+margin_top = 46.0
+margin_right = 668.0
+margin_bottom = 50.0
 hint_tooltip = "Zoom the view in or out"
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 0
 min_value = 1.0
 max_value = 4.0
 step = 0.25
-page = 0.0
 value = 1.0
-exp_edit = false
-rounded = false
-editable = true
 tick_count = 16
-ticks_on_borders = false
-focus_mode = 2
-_sections_unfolded = [ "Margin", "Theme" ]
-
-[node name="HideErrorsLolWut" type="ColorRect" parent="TileDisplayTime/TileDisplayTimeSlider" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = -23.0
-margin_top = 16.0
-margin_right = 350.0
-margin_bottom = 31.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-color = Color( 0.0980392, 0.0862745, 0.141176, 1 )
-
 [connection signal="popup_hide" from="." to="." method="_on_PopupPanel_popup_hide"]
-
-[connection signal="toggled" from="FullScreen" to="." method="_on_FullScreen_toggled"]
-
-[connection signal="value_changed" from="Zoom/ZoomSlider" to="." method="_on_ZoomSlider_value_changed"]
-
-[connection signal="value_changed" from="BackgroundAudio/BackgroundAudioSlider" to="." method="_on_BackgroundAudioSlider_value_changed"]
-
-[connection signal="value_changed" from="SfxAudio/SfxAudioSlider" to="." method="_on_SfxAudioSlider_value_changed"]
-
-[connection signal="value_changed" from="TileDisplayTime/TileDisplayTimeSlider" to="." method="_on_TileDisplayTimeSlider_value_changed"]
-
-
+[connection signal="value_changed" from="VBoxContainer/Zoom/ZoomSlider" to="." method="_on_ZoomSlider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/BackgroundAudio/BackgroundAudioSlider" to="." method="_on_BackgroundAudioSlider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/SfxAudio/SfxAudioSlider" to="." method="_on_SfxAudioSlider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/TileDisplayTime/TileDisplayTimeSlider" to="." method="_on_TileDisplayTimeSlider_value_changed"]
