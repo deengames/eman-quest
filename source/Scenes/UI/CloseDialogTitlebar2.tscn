@@ -9,7 +9,7 @@ margin_bottom = 50.0
 script = ExtResource( 1 )
 
 [node name="Title" type="Label" parent="."]
-margin_right = 277.0
+margin_right = 259.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
 size_flags_vertical = 2
@@ -17,9 +17,10 @@ text = "OPTIONS"
 align = 1
 
 [node name="Button" type="Button" parent="."]
-margin_left = 281.0
+margin_left = 263.0
 margin_right = 313.0
 margin_bottom = 50.0
+rect_min_size = Vector2( 50, 50 )
 size_flags_horizontal = 0
 text = "X"
 
