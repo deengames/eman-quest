@@ -70,7 +70,11 @@ func _move_parent_to_clicked_destintion():
 			self.get_parent().move_and_slide(velocity)
 			if not _audio_player.playing:
 				_audio_player.play()
-
-		else:
+		# 3) typically,  you click, you reach, we emit here, done.
+		# BUT, if the user is just click-holding, they should still move.
+		# SO, make sure Globals.mouse_down is false before stopping.
+		elif Globals.mouse_down:
+			self.destination = get_global_mouse_position()
+		elif not Globals.mouse_down:
 			self.emit_signal("reached_destination")
 			_audio_player.stop()
