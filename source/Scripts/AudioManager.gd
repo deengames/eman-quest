@@ -99,7 +99,7 @@ func play_sound(audio_clip_key, volume_db = 0):
 	if audio_clips.has(audio_clip_key):
 		var audio_player = AudioFilePlayerClass.instance()
 		var bus = "SFX"
-		if "bgs" in audio_clip_key or audio_clip_key in BACKGROUND_AUDIOS:
+		if "bgs" in audio_clip_key or audio_clip_key in BACKGROUND_AUDIOS or audio_clip_key == "credits":
 			bus = "Background"
 		
 		Globals.add_child(audio_player)
