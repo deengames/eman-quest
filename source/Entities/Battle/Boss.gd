@@ -55,9 +55,9 @@ func to_dict():
 		"replace_with_npc": self.replace_with_npc
 	}
 
-#func _on_Area2D_body_entered(body):
-#	SceneManagement.switch_to_battle_if_touched_player(get_tree(), self, body)
+func _on_Area2D_body_entered(body):
+	SceneManagement.switch_to_battle_if_touched_player(get_tree(), self, body)
 
 func _on_WiderArea2D_body_entered(body):
 	if self.events != null:
-		pass#SceneManagement.switch_to_battle_if_touched_player(get_tree(), self, body)
+		SceneManagement.switch_to_battle_if_touched_player(get_tree(), self, body)
