@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Eman Quest"
-run/main_scene="res://Scenes/Title.tscn"
+run/main_scene="res://Scenes/DeenGamesSplash.tscn"
 config/icon="res://icon.png"
 
 [autoload]
