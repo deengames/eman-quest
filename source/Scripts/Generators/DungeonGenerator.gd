@@ -30,6 +30,9 @@ const _BOSS_DATA = {
 		"skill_messages": {
 			"chomp": "hurls a fireball at you! {damage} damage!"
 		},
+		"skill_sounds": {
+			"chomp": "fireball"
+		},
 		"drops": {
 			"name": "Cloak Scrap",
 			"description": "A scrap of a mage's cloak, it bends in odd ways"
