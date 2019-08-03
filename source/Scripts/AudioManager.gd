@@ -89,6 +89,8 @@ func add_click_noise_to_controls(scene):
 	for control in scene.get_children():
 		if control is Button or control is CheckButton:
 			control.connect("pressed", self, "_play_button_click")
+		elif len(control.get_children()) > 0:
+			add_click_noise_to_controls(control)
 
 func _play_button_click():
 	play_sound("button-click")
