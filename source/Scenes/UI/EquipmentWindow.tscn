@@ -42,6 +42,7 @@ hint_tooltip = "Equip the selected equipment instead of the current equipment"
 text = "Equip"
 
 [node name="Control" type="Control" parent="VBoxContainer/HBoxContainer"]
+margin_left = 81.0
 margin_right = 81.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -49,39 +50,39 @@ size_flags_vertical = 0
 [node name="Titles" type="Control" parent="VBoxContainer/HBoxContainer/Control"]
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Control/Titles"]
-margin_left = 337.0
+margin_left = 237.0
 margin_top = 8.0
-margin_right = 466.0
+margin_right = 366.0
 margin_bottom = 50.0
 text = "Current"
 
 [node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/Control/Titles"]
-margin_left = 525.0
+margin_left = 425.0
 margin_top = 8.0
-margin_right = 640.0
+margin_right = 540.0
 margin_bottom = 50.0
 text = "Selected"
 
 [node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/Control/Titles"]
-margin_left = 228.0
+margin_left = 128.0
 margin_top = 65.0
-margin_right = 329.0
+margin_right = 229.0
 margin_bottom = 107.0
 text = "Weapon"
 
 [node name="Label4" type="Label" parent="VBoxContainer/HBoxContainer/Control/Titles"]
-margin_left = 228.0
+margin_left = 128.0
 margin_top = 231.0
-margin_right = 326.0
+margin_right = 226.0
 margin_bottom = 273.0
 text = "Armour"
 
 [node name="Equipment" type="Control" parent="VBoxContainer/HBoxContainer/Control"]
 
 [node name="CurrentWeapon" type="Label" parent="VBoxContainer/HBoxContainer/Control/Equipment"]
-margin_left = 340.0
+margin_left = 240.0
 margin_top = 66.0
-margin_right = 548.0
+margin_right = 448.0
 margin_bottom = 182.0
 hint_tooltip = "Your currently equipped weapon"
 mouse_filter = 1
@@ -90,9 +91,9 @@ text = "Broken Yo-Yo
 +3 def"
 
 [node name="CurrentArmour" type="Label" parent="VBoxContainer/HBoxContainer/Control/Equipment"]
-margin_left = 337.0
+margin_left = 237.0
 margin_top = 231.0
-margin_right = 548.0
+margin_right = 448.0
 margin_bottom = 347.0
 hint_tooltip = "Your currently equipped armour"
 mouse_filter = 1
@@ -101,9 +102,9 @@ text = "Ancient Cloth
 +3 def"
 
 [node name="SelectedWeapon" type="Label" parent="VBoxContainer/HBoxContainer/Control/Equipment"]
-margin_left = 525.0
+margin_left = 425.0
 margin_top = 66.0
-margin_right = 690.0
+margin_right = 590.0
 margin_bottom = 182.0
 hint_tooltip = "Stats of the selected weapon (if selected)"
 mouse_filter = 1
@@ -112,9 +113,9 @@ text = "Broken Yo-Yo
 +3 def"
 
 [node name="SelectedArmour" type="Label" parent="VBoxContainer/HBoxContainer/Control/Equipment"]
-margin_left = 525.0
+margin_left = 425.0
 margin_top = 231.0
-margin_right = 690.0
+margin_right = 590.0
 margin_bottom = 347.0
 hint_tooltip = "Stats of the selected armour (if selected)"
 mouse_filter = 1
