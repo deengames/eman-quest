@@ -1,131 +1,59 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/UI/KeyItemsWindow.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/UI/CloseDialogTitlebar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/UI/CloseDialogTitlebar2.tscn" type="PackedScene" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
-
-content_margin_left = -1.0
-content_margin_right = -1.0
-content_margin_top = -1.0
-content_margin_bottom = -1.0
 bg_color = Color( 0, 0.752941, 1, 1 )
-draw_center = true
-border_width_left = 0
-border_width_top = 0
-border_width_right = 0
-border_width_bottom = 0
-border_color = Color( 0.8, 0.8, 0.8, 1 )
-border_blend = false
-corner_radius_top_left = 0
-corner_radius_top_right = 0
-corner_radius_bottom_right = 0
-corner_radius_bottom_left = 0
-corner_detail = 8
-expand_margin_left = 0.0
-expand_margin_right = 0.0
-expand_margin_top = 0.0
-expand_margin_bottom = 0.0
-shadow_color = Color( 0, 0, 0, 0.6 )
-shadow_size = 0
-anti_aliasing = true
-anti_aliasing_size = 1
-_sections_unfolded = [ "Border", "Corner Radius" ]
 
 [node name="PopupPanel" type="PopupPanel"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+visible = true
 margin_right = 700.0
 margin_bottom = 300.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-popup_exclusive = false
 script = ExtResource( 1 )
-_sections_unfolded = [ "Margin" ]
 
-[node name="ItemName" type="Label" parent="." index="0"]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 684.0
+margin_bottom = 565.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 275.0
-margin_top = 74.0
-margin_right = 665.0
-margin_bottom = 116.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
+[node name="CloseDialogTitlebar" parent="VBoxContainer" instance=ExtResource( 2 )]
+margin_right = 668.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 54.0
+margin_right = 668.0
+margin_bottom = 549.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ItemList" type="ItemList" parent="VBoxContainer/HBoxContainer"]
+margin_right = 210.0
+margin_bottom = 495.0
+rect_min_size = Vector2( 210, 0 )
+hint_tooltip = "Key items found so far"
+custom_styles/selected_focus = SubResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 214.0
+margin_right = 668.0
+margin_bottom = 495.0
+size_flags_horizontal = 3
+
+[node name="ItemName" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 454.0
+margin_bottom = 42.0
 text = "Item Name"
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
 
-[node name="Description" type="Label" parent="." index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 280.0
-margin_top = 140.0
-margin_right = 680.0
-margin_bottom = 270.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
+[node name="Description" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 46.0
+margin_right = 454.0
+margin_bottom = 162.0
 text = "The long-winded description of the quest/key item goes here. Well, maybe not that long-winded ..."
 autowrap = true
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "Margin", "custom_fonts" ]
-
-[node name="ItemList" type="ItemList" parent="." index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 20.0
-margin_top = 68.0
-margin_right = 260.0
-margin_bottom = 270.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-hint_tooltip = "Key items found so far"
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_styles/selected_focus = SubResource( 1 )
-items = [  ]
-select_mode = 0
-allow_reselect = false
-icon_mode = 1
-fixed_icon_size = Vector2( 0, 0 )
-_sections_unfolded = [ "Columns", "Hint", "Icon", "Margin", "custom_fonts", "custom_styles" ]
-
-[node name="CloseDialogTitlebar" parent="." index="3" instance=ExtResource( 2 )]
-
-[connection signal="item_selected" from="ItemList" to="." method="_on_ItemList_item_selected"]
-
-[connection signal="nothing_selected" from="ItemList" to="." method="_on_ItemList_nothing_selected"]
-
-
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer/ItemList" to="." method="_on_ItemList_item_selected"]
+[connection signal="nothing_selected" from="VBoxContainer/HBoxContainer/ItemList" to="." method="_on_ItemList_nothing_selected"]
