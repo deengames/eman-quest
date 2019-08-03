@@ -11,18 +11,18 @@ func _ready():
 	self._update_equipped_display()
 	self._clear_selected_display()
 	self._populate_item_list()
-	$EquipButton.disabled = true
+	$VBoxContainer/HBoxContainer/VBoxContainer/EquipButton.disabled = true
 	AudioManager.new().add_click_noise_to_controls(self)
 
 func title(value):
-	$CloseDialogTitlebar.title = value
+	$VBoxContainer/CloseDialogTitlebar.title = value
 
 func _update_equipped_display():
-	$Equipment/CurrentWeapon.text = Globals.player_data.weapon.str()
-	$Equipment/CurrentArmour.text = Globals.player_data.armour.str()
+	$VBoxContainer/HBoxContainer/Control/Equipment/CurrentWeapon.text = Globals.player_data.weapon.str()
+	$VBoxContainer/HBoxContainer/Control/Equipment/CurrentArmour.text = Globals.player_data.armour.str()
 
 func _populate_item_list():
-	$ItemList.clear()
+	$VBoxContainer/HBoxContainer/VBoxContainer/ItemList.clear()
 	self._all_items = []
 	
 	_add_item(Globals.player_data.weapon)
@@ -35,16 +35,16 @@ func _add_item(equipment):
 	var name = equipment.equipment_name
 	if equipment == Globals.player_data.weapon or equipment == Globals.player_data.armour:
 		name = "*" + name
-	$ItemList.add_item(name)
+	$VBoxContainer/HBoxContainer/VBoxContainer/ItemList.add_item(name)
 	self._all_items.append(equipment)
 
 func _on_ItemList_nothing_selected():
 	# Unselect item. Probably a Godot bug that it still looks selected.
 	# Bug opened: https://github.com/godotengine/godot/issues/26895
 	for i in range(len(self._all_items)):
-		$ItemList.unselect(i)
+		$VBoxContainer/HBoxContainer/VBoxContainer/ItemList.unselect(i)
 		
-	$EquipButton.disabled = true
+	$VBoxContainer/HBoxContainer/VBoxContainer/EquipButton.disabled = true
 	self._selected_item = null
 	self._clear_selected_display()
 	
@@ -53,13 +53,13 @@ func _on_ItemList_item_selected(index):
 	var item = self._all_items[index]
 	
 	if item.type == "weapon":
-		$Equipment/SelectedWeapon.text = item.str()
-		$Equipment/SelectedArmour.text = ""
+		$VBoxContainer/HBoxContainer/Control/Equipment/SelectedWeapon.text = item.str()
+		$VBoxContainer/HBoxContainer/Control/Equipment/SelectedArmour.text = ""
 	elif item.type == "armour":
-		$Equipment/SelectedWeapon.text = ""
-		$Equipment/SelectedArmour.text = item.str()
+		$VBoxContainer/HBoxContainer/Control/Equipment/SelectedWeapon.text = ""
+		$VBoxContainer/HBoxContainer/Control/Equipment/SelectedArmour.text = item.str()
 	
-	$EquipButton.disabled = false
+	$VBoxContainer/HBoxContainer/VBoxContainer/EquipButton.disabled = false
 	self._selected_item = item
 	
 func _on_EquipButton_pressed():
@@ -77,11 +77,11 @@ func _on_EquipButton_pressed():
 		Globals.player_data.equipment.remove(index)
 		self._selected_item = null
 		
-		$EquipButton.disabled = true
+		$VBoxContainer/HBoxContainer/VBoxContainer/EquipButton.disabled = true
 		self._clear_selected_display()
 		self._update_equipped_display()
 		self._populate_item_list()
 
 func _clear_selected_display():
-	$Equipment/SelectedWeapon.text = ""
-	$Equipment/SelectedArmour.text = ""
+	$VBoxContainer/HBoxContainer/Control/Equipment/SelectedWeapon.text = ""
+	$VBoxContainer/HBoxContainer/Control/Equipment/SelectedArmour.text = ""
