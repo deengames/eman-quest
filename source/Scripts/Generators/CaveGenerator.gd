@@ -93,7 +93,9 @@ func generate(submap, transitions, variation_name):
 		# distance is within N tiles. Wandering the entire breadth of the dungeon is madness.
 		
 		# https://www.pivotaltracker.com/story/show/163078635
-		# Also, make sure we're on a 3x3 square of land
+		# Also, make sure we're on a 5x5 square of land. 3x3 was okay, except in caves,
+		# where you may end up on auto-tiles and look like you're in the water/lava.
+		# See: https://trello.com/c/i3YUqZSW/187-bosses-can-still-spawn-on-lava
 		
 		# BUG: what if there's a chest there?
 		var max_distance = 5 * 5
@@ -105,9 +107,8 @@ func generate(submap, transitions, variation_name):
 		
 		for y in range(self.map_height):
 			for x in range(self.map_width):
-				if _is_ground(x, y) and _is_ground(x + 1, y) and _is_ground(x + 1, y + 1) and \
-				_is_ground(x, y + 1) and _is_ground(x - 1, y + 1) and _is_ground(x - 1, y) and \
-				_is_ground(x - 1, y - 1) and _is_ground(x, y - 1) and _is_ground(x + 1, y - 1):
+				
+				if _is_5x5_area_clear_around(x, y):
 					var current_distance = sqrt(pow(x - entrance[0], 2) + pow(y - entrance[1], 2))
 					if current_distance > distance and current_distance <= max_distance:
 						farthest = [x, y]
@@ -329,6 +330,14 @@ func _is_clear_around(tilemap, x, y, empty_tile_definition):
 		tilemap.get_at(x - 1, y + 1) == empty_tile_definition and tilemap.get_at(x - 1, y) == empty_tile_definition and
 		tilemap.get_at(x - 1, y - 1) == empty_tile_definition)
 
+func _is_5x5_area_clear_around(center_x, center_y):
+	for y in range(center_y - 2, center_y + 2):
+		for x in range(center_x - 2, center_x + 2):
+			if not _is_ground(x, y):
+				return false
+	
+	return true
+	
 ############# TODO: DRY
 # Almost common with OverworldGenerator
 func _fill_with(tile_name, map_array):
