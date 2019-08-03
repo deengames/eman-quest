@@ -32,7 +32,7 @@ func resolve(action, player, monster_data, multiplier):
 			return "Healed " + str(heal_amount) + " health!"
 		elif action == "defend":
 			player.defend() # multiplier is not used
-			return Globals.PLAYER_NAME + " doubles down on defense!"
+			return Globals.PLAYER_NAME + " doubles down on defense! (" + str(player.times_defending) + "x)"
 			
 		elif action == "vampire":
 			var damage = max(0, player.total_strength()) # ignores defense

@@ -36,7 +36,7 @@ var disabled_actions = []
 var is_asleep = false
 
 var _defense = 0
-var _times_defending = 0
+var times_defending = 0
 var _turns_poisoned = 0
 
 func _init():
@@ -59,12 +59,12 @@ func heal_amount(amount):
 		self.current_health = self._total_health()
 
 func defend():
-	self._times_defending += 1
+	self.times_defending += 1
 
 func reset():
 	self.energy += _ENERGY_PER_TURN
 	self.energy = min(self.energy, self.max_energy)
-	self._times_defending = 0
+	self.times_defending = 0
 	
 	if self._turns_poisoned > 0:
 		var poison_damage = floor(self._total_health() * _POISON_DAMAGE_PER_TURN_PERCENT / 100)
@@ -93,7 +93,7 @@ func total_defense():
 	var total = self._defense
 	total += _get_equipment_modifier(Globals.player_data.weapon, StatType.StatType.Defense)
 	total += _get_equipment_modifier(Globals.player_data.armour, StatType.StatType.Defense)
-	var grand_total = floor(total * (1.0 + (DEFEND_MULTIPLIER * self._times_defending)))
+	var grand_total = floor(total * (1.0 + (DEFEND_MULTIPLIER * self.times_defending)))
 	return grand_total
 
 func damage(damage):
