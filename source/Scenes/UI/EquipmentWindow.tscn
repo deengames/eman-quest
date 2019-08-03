@@ -14,75 +14,76 @@ margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="CloseDialogTitlebar" parent="VBoxContainer" instance=ExtResource( 2 )]
-margin_right = 148.0
+margin_right = 184.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 54.0
-margin_right = 148.0
+margin_right = 184.0
 margin_bottom = 108.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-margin_right = 77.0
+margin_right = 180.0
 margin_bottom = 54.0
+rect_min_size = Vector2( 180, 0 )
 size_flags_vertical = 3
 
 [node name="ItemList" type="ItemList" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_right = 77.0
+margin_right = 180.0
 hint_tooltip = "Equipment found so far"
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="EquipButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 margin_top = 4.0
-margin_right = 77.0
+margin_right = 180.0
 margin_bottom = 54.0
 hint_tooltip = "Equip the selected equipment instead of the current equipment"
 text = "Equip"
 
 [node name="Control" type="Control" parent="VBoxContainer/HBoxContainer"]
-margin_left = 81.0
-margin_right = 81.0
+margin_left = 184.0
+margin_right = 184.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="Titles" type="Control" parent="VBoxContainer/HBoxContainer/Control"]
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Control/Titles"]
-margin_left = 237.0
+margin_left = 137.0
 margin_top = 8.0
-margin_right = 366.0
+margin_right = 266.0
 margin_bottom = 50.0
 text = "Current"
 
 [node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/Control/Titles"]
-margin_left = 425.0
+margin_left = 325.0
 margin_top = 8.0
-margin_right = 540.0
+margin_right = 440.0
 margin_bottom = 50.0
 text = "Selected"
 
 [node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/Control/Titles"]
-margin_left = 128.0
+margin_left = 28.0
 margin_top = 65.0
-margin_right = 229.0
+margin_right = 129.0
 margin_bottom = 107.0
 text = "Weapon"
 
 [node name="Label4" type="Label" parent="VBoxContainer/HBoxContainer/Control/Titles"]
-margin_left = 128.0
+margin_left = 28.0
 margin_top = 231.0
-margin_right = 226.0
+margin_right = 126.0
 margin_bottom = 273.0
 text = "Armour"
 
 [node name="Equipment" type="Control" parent="VBoxContainer/HBoxContainer/Control"]
 
 [node name="CurrentWeapon" type="Label" parent="VBoxContainer/HBoxContainer/Control/Equipment"]
-margin_left = 240.0
+margin_left = 140.0
 margin_top = 66.0
-margin_right = 448.0
+margin_right = 348.0
 margin_bottom = 182.0
 hint_tooltip = "Your currently equipped weapon"
 mouse_filter = 1
@@ -91,9 +92,9 @@ text = "Broken Yo-Yo
 +3 def"
 
 [node name="CurrentArmour" type="Label" parent="VBoxContainer/HBoxContainer/Control/Equipment"]
-margin_left = 237.0
+margin_left = 137.0
 margin_top = 231.0
-margin_right = 448.0
+margin_right = 348.0
 margin_bottom = 347.0
 hint_tooltip = "Your currently equipped armour"
 mouse_filter = 1
@@ -102,9 +103,9 @@ text = "Ancient Cloth
 +3 def"
 
 [node name="SelectedWeapon" type="Label" parent="VBoxContainer/HBoxContainer/Control/Equipment"]
-margin_left = 425.0
+margin_left = 325.0
 margin_top = 66.0
-margin_right = 590.0
+margin_right = 490.0
 margin_bottom = 182.0
 hint_tooltip = "Stats of the selected weapon (if selected)"
 mouse_filter = 1
@@ -113,9 +114,9 @@ text = "Broken Yo-Yo
 +3 def"
 
 [node name="SelectedArmour" type="Label" parent="VBoxContainer/HBoxContainer/Control/Equipment"]
-margin_left = 425.0
+margin_left = 325.0
 margin_top = 231.0
-margin_right = 590.0
+margin_right = 490.0
 margin_bottom = 347.0
 hint_tooltip = "Stats of the selected armour (if selected)"
 mouse_filter = 1
