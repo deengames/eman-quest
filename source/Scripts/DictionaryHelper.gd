@@ -14,8 +14,7 @@ static func array_from_dictionary(array):
 	var to_return = []
 	
 	for item in array:
-		var type = load(item["filename"])
-		var value = type.from_dict(item)
+		var value = instantiate(item)
 		to_return.append(value)
 	
 	return to_return
@@ -42,8 +41,7 @@ static func dictionary_values_from_dictionary(dict):
 		var a = []
 		
 		for item in dict[key]:
-			var type = load(item["filename"])
-			var value = type.from_dict(item)
+			var value = instantiate(item)
 			a.append(value)
 			
 		to_return[key] = a
@@ -71,4 +69,18 @@ static func str_or_obj_to_dict(item):
 		return item
 	else:
 		return item.to_dict()
-		
+
+static func instantiate(item:Dictionary):
+	# Given a name like "res://entities/MapDestination.gd", extract
+	# the "MapDestination" part and call Statics.make_MapDestination
+	# Reflection to create a new instance from a type/file name
+	var start = item["filename"].find_last('/') + 1
+	var stop = item["filename"].find_last('.gd')
+	var type_name = item["filename"].substr(start, stop - start)
+	var method = "make_" + type_name
+	
+	#var value = type.from_dict(item)
+	# We have a name like make_MapDestination, call it on Statics
+	var ref = funcref(Statics, method)
+	var value = ref.call_func(item)
+	return value

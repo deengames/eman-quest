@@ -95,23 +95,23 @@ static func load(save_id, tree):
 	for key in maps_data.keys():
 		# Derp
 		if key == "Overworld":
-			Globals.maps[key] = Statics.make_areamap(maps_data[key])
+			Globals.maps[key] = Statics.make_AreaMap(maps_data[key])
 		else:
 			Globals.maps[key] = []
 			for data in maps_data[key]:
-				Globals.maps[key].append(Statics.make_areamap(data))
+				Globals.maps[key].append(Statics.make_AreaMap(data))
 	
-	Globals.player_data = PlayerData.from_dict(data["player_data"])
+	Globals.player_data = Statics.make_PlayerData(data["player_data"])
 	Globals.overworld_position = DictionaryHelper.dict_to_vector2(data["overworld_position_data"])
 	
-	var current_map =  Statics.make_areamap(data["current_map_data"])
+	var current_map =  Statics.make_AreaMap(data["current_map_data"])
 	Globals.current_map = current_map # Required to correctly load
 	Globals.current_map_type = current_map.map_type
 	
 	Globals.future_player_position = DictionaryHelper.dict_to_vector2(data["player_position_data"])
 	
 	Globals.world_areas = data["world_areas"]
-	Globals.quest = Quest.from_dict(data["quest_data"])
+	Globals.quest = Statics.make_Quest(data["quest_data"])
 	Globals.seed_value = data["seed_value"]
 	Globals.bosses_defeated = data["bosses_defeated"]
 	Globals.beat_last_boss = data["beat_last_boss"]
