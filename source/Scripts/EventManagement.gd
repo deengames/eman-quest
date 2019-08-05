@@ -125,7 +125,12 @@ func _on_battle_over():
 		yield(tree.create_timer(Globals.SCENE_TRANSITION_TIME_SECONDS), 'timeout')
 		SceneManagement.change_scene_to(tree, HomeMap.instance())
 		SceneFadeManager.fade_in(tree, Globals.SCENE_TRANSITION_TIME_SECONDS)
-				
+	else:
+		# https://trello.com/c/BuppN3OS/197-fight-a-boss-lose-fight-a-monster-win-post-boss-victory-events-play
+		# Fight boss, lose, fight monster, win: shouldn't trigger post-boss-win evnets
+		Globals.disconnect("battle_over", self, "_on_battle_over")
+		# Also shouldn't grant spoils on next win! Only bosses do that!
+		Globals.battle_spoils = null
 
 func _create_dialog_window(current_scene):
 	var dialog_window = DialogueWindow.instance()
