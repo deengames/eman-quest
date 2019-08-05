@@ -274,6 +274,9 @@ func _find_closest_room_to(room, rooms):
 
 # Must have two adjacent wall tiles. This allows corner doors, too.
 func _generate_door(x, y, ground_map, decoration_map):
+	# Detection is really broken. Just, don't do it. Players noticed.
+	# https://trello.com/c/fuvVO6DW/196-doors-appear-in-dungeons-but-are-useless-just-dont-spawn-them
+	return
 	var adjacent_ground = self._count_ground_tiles_around(ground_map, x, y)
 	
 	if adjacent_ground == 2:
