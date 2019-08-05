@@ -409,8 +409,6 @@ func _find_spot_near_boss(boss, blocked_coordinates):
 	# Realistically, we can't do that; pick any empty spot adjacent to the boss.
 	for tx in range(boss_tile_x - 1, boss_tile_x + 2):
 		for ty in range(boss_tile_y - 1, boss_tile_y + 2):
-			if tx == boss_tile_x and ty == boss_tile_y - 1:
-				print("(" + str(tx) + ", " + str(ty) + "), blocked=" + str(blocked_coordinates) + " walk=" + ground_tilemap.get_at(tx, ty) + " and boss=(" + str(boss_tile_x) + ", " + str(boss_tile_y) + ")")
 			
 			if tx >= 0 and tx < self.map.tiles_wide and ty >= 0 and ty < self.map.tiles_high and \
 				ground_tilemap.get_at(tx, ty) in Globals.WALKABLE_TILES and \
