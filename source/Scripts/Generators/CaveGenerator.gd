@@ -93,26 +93,19 @@ func generate(submap, transitions, variation_name):
 		# distance is within N tiles. Wandering the entire breadth of the dungeon is madness.
 		
 		# https://www.pivotaltracker.com/story/show/163078635
-		# Also, make sure we're on a 5x5 square of land. 3x3 was okay, except in caves,
+		# Also, make sure we're on a 7x7 square of land. 3x3 was okay, except in caves,
 		# where you may end up on auto-tiles and look like you're in the water/lava.
 		# See: https://trello.com/c/i3YUqZSW/187-bosses-can-still-spawn-on-lava
 		
 		# BUG: what if there's a chest there?
-		var max_distance = 5 * 5
 		
 		var entrance_transition = transitions[0]
 		var entrance = [entrance_transition.my_position.x, entrance_transition.my_position.y]
-		var farthest = [entrance_transition.my_position.x, entrance_transition.my_position.y]
-		var distance = 0
 		
-		for y in range(self.map_height):
-			for x in range(self.map_width):
-				
-				if _is_5x5_area_clear_around(x, y):
-					var current_distance = sqrt(pow(x - entrance[0], 2) + pow(y - entrance[1], 2))
-					if current_distance > distance and current_distance <= max_distance:
-						farthest = [x, y]
-						distance = current_distance
+		# 7x7 is a lot to ask; if we didn't find one, redo with 5x5, which is well-tested and works
+		var farthest = _find_clear_area(entrance, 3) # r3 = 7d
+		if farthest == null:
+			farthest = _find_clear_area(entrance ,2) # r2 = 5d
 		
 		map.bosses = self._generate_boss(variation_name, farthest)
 
@@ -120,6 +113,24 @@ func generate(submap, transitions, variation_name):
 		map.add_tile_data(data)
 
 	return map
+
+func _find_clear_area(entrance, radius):
+	var to_return = null
+	var max_distance = 5 * 5
+	var distance = 0
+	
+	for y in range(self.map_height):
+		for x in range(self.map_width):
+			if _is_area_clear_around(x, y, radius):
+				var current_distance = sqrt(pow(x - entrance[0], 2) + pow(y - entrance[1], 2))
+				if current_distance > distance and current_distance <= max_distance:
+					# Offset by -1, -1 so that the feet of the boss are on the center.
+					# In other cases, he may look like he's in lava.
+					# See: https://trello.com/c/3MoEnZZS/200-hey-skellyman-stop-standing-in-lava
+					to_return = [x - 1, y - 1]
+					distance = current_distance
+	
+	return to_return
 
 func _is_ground(x, y):
 	return self._ground_tilemap.get_at(x, y) == "Ground"
@@ -262,7 +273,9 @@ func _generate_treasure_chests(transitions):
 		var spot = SpotFinder.find_empty_spot(map_width, map_height,
 			self._ground_tilemap, empty_map, chests_coordinates)
 		
-		if TransitionDistanceChecker.is_distant_from_transitions(transitions, spot):
+		# Look for a 5x5 clear area so the treasure chest doesn't look like it's on lava
+		# after applying auto-tiles. See: https://trello.com/c/j693NyBd/199-treasure-chests-spawn-on-lava
+		if _is_area_clear_around(spot[0], spot[1], 2) and TransitionDistanceChecker.is_distant_from_transitions(transitions, spot):
 			var type = types[randi() % len(types)]
 			var stat = stats[type]
 			var item = EquipmentGenerator.generate(type, stat)
@@ -330,12 +343,16 @@ func _is_clear_around(tilemap, x, y, empty_tile_definition):
 		tilemap.get_at(x - 1, y + 1) == empty_tile_definition and tilemap.get_at(x - 1, y) == empty_tile_definition and
 		tilemap.get_at(x - 1, y - 1) == empty_tile_definition)
 
-func _is_5x5_area_clear_around(center_x, center_y):
-	for y in range(center_y - 2, center_y + 2):
-		for x in range(center_x - 2, center_x + 2):
+# Checking a 3x3 area for bosses isn't enough, because autotiles shrink that to 1x1.
+# Turns out, even 5x5 may not be enough; so go with 7x7, with the chance of breaking
+# if we can't find a suitably-sized area in some maps.
+func _is_area_clear_around(center_x, center_y, radius):
+	# range is exclusive so add +1 to end value
+	for y in range(center_y - radius, center_y + radius + 1):
+		for x in range(center_x - radius, center_x + radius + 1):
 			if not _is_ground(x, y):
 				return false
-	
+				
 	return true
 	
 ############# TODO: DRY
